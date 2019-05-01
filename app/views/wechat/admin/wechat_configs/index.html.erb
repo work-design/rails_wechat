@@ -1,0 +1,84 @@
+<%= render 'filter' %>
+
+<table class="ui bottom attached selectable table">
+  <thead>
+    <tr>
+      <th><%= WechatConfig.human_attribute_name(:id) %></th>
+      <th><%= WechatConfig.human_attribute_name(:environment) %></th>
+      <th><%= WechatConfig.human_attribute_name(:account) %></th>
+      <th><%= WechatConfig.human_attribute_name(:enabled) %></th>
+      <th>
+        <p><%= WechatConfig.human_attribute_name(:appid) %></p>
+        <p><%= WechatConfig.human_attribute_name(:secret) %></p>
+        <p><%= WechatConfig.human_attribute_name(:token) %></p>
+      </th>
+      <th>
+        <p><%= WechatConfig.human_attribute_name(:corpid) %></p>
+        <p><%= WechatConfig.human_attribute_name(:corpsecret) %></p>
+        <p><%= WechatConfig.human_attribute_name(:agentid) %></p>
+      </th>
+      <th>
+        <p><%= WechatConfig.human_attribute_name(:encrypt_mode) %></p>
+        <p><%= WechatConfig.human_attribute_name(:encoding_aes_key) %></p>
+      </th>
+      <th>
+        <p>><%= WechatConfig.human_attribute_name(:access_token) %></p>
+        <p><%= WechatConfig.human_attribute_name(:jsapi_ticket) %></p>
+      </th>
+      <th><%= WechatConfig.human_attribute_name(:skip_verify_ssl) %></th>
+      <th><%= WechatConfig.human_attribute_name(:timeout) %></th>
+      <th><%= WechatConfig.human_attribute_name(:trusted_domain_fullname) %></th>
+      <th><%= WechatConfig.human_attribute_name(:created_at) %></th>
+      <th>
+        <%= link_to new_admin_wechat_config_path, remote: true, class: 'ui mini green button' do %>
+          <i class="fas fa-plus"></i><% t('.new') %>
+        <% end %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @wechat_configs.each do |wechat_config| %>
+    <tr>
+      <td><%= wechat_config.id %></td>
+      <td><%= wechat_config.environment %></td>
+      <td><%= wechat_config.account %></td>
+      <td><%= wechat_config.enabled %></td>
+      <td>
+        <p><%= wechat_config.appid %></p>
+        <p><%= wechat_config.secret %></p>
+        <p><%= wechat_config.token %></p>
+      </td>
+      <td>
+        <p><%= wechat_config.corpid %></p>
+        <p><%= wechat_config.corpsecret %></p>
+        <p><%= wechat_config.agentid %></p>
+      </td>
+      <td>
+        <p><%= wechat_config.encrypt_mode %></p>
+        <p><%= wechat_config.encoding_aes_key %></p>
+      </td>
+      <td>
+        <p><%= wechat_config.access_token %></p>
+        <p><%= wechat_config.jsapi_ticket %></p>
+      </td>
+      <td><%= wechat_config.skip_verify_ssl %></td>
+      <td><%= wechat_config.timeout %></td>
+      <td><%= wechat_config.trusted_domain_fullname %></td>
+      <td><time><%= wechat_config.created_at.to_s(:rfc822) %></time></td>
+      <td>
+        <%= link_to admin_wechat_config_path(wechat_config), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-eye"></i>
+        <% end %>
+        <%= link_to edit_admin_wechat_config_path(wechat_config), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        <%= link_to admin_wechat_config_path(wechat_config), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @wechat_configs %>

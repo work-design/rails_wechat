@@ -1,0 +1,80 @@
+<table class="ui very basic large table">
+  <thead>
+    <tr>
+      <th class="six wide">
+        <%= link_to t('.edit'), edit_admin_wechat_config_path(@wechat_config), class: 'ui mini blue right floated button', remote: true %>
+      </th>
+      <th class="ten wide"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:environment) %></td>
+      <td><%= @wechat_config.environment %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:account) %></td>
+      <td><%= @wechat_config.account %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:enabled) %></td>
+      <td><%= @wechat_config.enabled %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:appid) %></td>
+      <td><%= @wechat_config.appid %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:secret) %></td>
+      <td><%= @wechat_config.secret %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:corpid) %></td>
+      <td><%= @wechat_config.corpid %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:corpsecret) %></td>
+      <td><%= @wechat_config.corpsecret %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:agentid) %></td>
+      <td><%= @wechat_config.agentid %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:encrypt_mode) %></td>
+      <td><%= @wechat_config.encrypt_mode %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:encoding_aes_key) %></td>
+      <td><%= @wechat_config.encoding_aes_key %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:token) %></td>
+      <td><%= @wechat_config.token %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:access_token) %></td>
+      <td><%= @wechat_config.access_token %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:jsapi_ticket) %></td>
+      <td><%= @wechat_config.jsapi_ticket %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:skip_verify_ssl) %></td>
+      <td><%= @wechat_config.skip_verify_ssl %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:timeout) %></td>
+      <td><%= @wechat_config.timeout %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:trusted_domain_fullname) %></td>
+      <td><%= @wechat_config.trusted_domain_fullname %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:created_at) %></td>
+      <td><%= @wechat_config.created_at %></td>
+    </tr>
+  </tbody>
+</table>

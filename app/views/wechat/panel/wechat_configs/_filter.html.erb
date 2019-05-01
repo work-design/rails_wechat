@@ -1,0 +1,8 @@
+<div class="ui top attached segment">
+  <%= search_form_with model: WechatConfig.new do |f| %>
+    <div class="fields">
+      <%= f.text_field :name %>
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
