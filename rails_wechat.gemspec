@@ -1,31 +1,23 @@
-$:.push File.expand_path("lib", __dir__)
+$:.push File.expand_path('lib', __dir__)
+require 'rails_wechat/version'
 
-# Maintain your gem's version:
-require "rails_wechat/version"
+Gem::Specification.new do |s|
+  s.name = 'rails_wechat'
+  s.version = RailsWechat::VERSION
+  s.authors = ['qinmingyuan']
+  s.email = ['mingyuan0715@foxmail.com']
+  s.homepage = 'https://github.com/work-design/rails_wechat'
+  s.summary = 'Summary of RailsWechat.'
+  s.description = 'Description of RailsWechat.'
+  s.license = 'LGPL-3.0'
 
-# Describe your gem and declare its dependencies:
-Gem::Specification.new do |spec|
-  spec.name        = "rails_wechat"
-  spec.version     = RailsWechat::VERSION
-  spec.authors     = ["qinmingyuan"]
-  spec.email       = ["mingyuan0715@foxmail.com"]
-  spec.homepage    = "TODO"
-  spec.summary     = "TODO: Summary of RailsWechat."
-  spec.description = "TODO: Description of RailsWechat."
-  spec.license     = "MIT"
+  s.files = Dir[
+    '{app,config,db,lib}/**/*',
+    'LICENSE',
+    'Rakefile',
+    'README.md'
+  ]
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
-
-  spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
-
-  spec.add_dependency "rails", "~> 6.0.0.rc1"
-
-  spec.add_development_dependency "sqlite3"
+  s.add_dependency 'rails', '~> 6.0.0.rc1'
+  s.add_development_dependency 'sqlite3'
 end
