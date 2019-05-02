@@ -1,0 +1,46 @@
+<div class="ui top attached segment">
+  <%= render 'filter' %>
+</div>
+
+<table class="ui bottom attached selectable table">
+  <thead>
+    <tr>
+      <th><%= WechatMenu.human_attribute_name(:id) %></th>
+      <th><%= WechatMenu.human_attribute_name(:menu_type) %></th>
+      <th><%= WechatMenu.human_attribute_name(:name) %></th>
+      <th><%= WechatMenu.human_attribute_name(:value) %></th>
+      <th><%= WechatMenu.human_attribute_name(:appid) %></th>
+      <th><%= WechatMenu.human_attribute_name(:pagepath) %></th>
+      <th>
+        <%= link_to new_admin_wechat_menu_path, remote: true, class: 'ui mini green button' do %>
+          <i class="fas fa-plus"></i><% t('.new') %>
+        <% end %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @wechat_menus.each do |wechat_menu| %>
+    <tr>
+      <td><%= wechat_menu.id %></td>
+      <td><%= wechat_menu.menu_type %></td>
+      <td><%= wechat_menu.name %></td>
+      <td><%= wechat_menu.value %></td>
+      <td><%= wechat_menu.appid %></td>
+      <td><%= wechat_menu.pagepath %></td>
+      <td>
+        <%= link_to admin_wechat_menu_path(wechat_menu), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-eye"></i>
+        <% end %>
+        <%= link_to edit_admin_wechat_menu_path(wechat_menu), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        <%= link_to admin_wechat_menu_path(wechat_menu), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @wechat_menus %>

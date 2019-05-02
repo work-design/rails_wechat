@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   end
 
   scope :admin, module: 'wechat/admin', as: :admin do
-    resources :wechat_configs
+    resources :wechat_configs do
+      resources :wechat_menus
+    end
   end
 
 end
