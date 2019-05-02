@@ -1,5 +1,6 @@
 zh:
-  enum:
-    wechat_menu:
-      type:
-        click_menu: 点击事件
+  activerecord:
+    enum:
+      wechat_menu:
+        type:
+          ClickMenu: 点击事件

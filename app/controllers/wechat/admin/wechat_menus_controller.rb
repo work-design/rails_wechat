@@ -27,6 +27,11 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
       end
     end
   end
+  
+  def sync
+    r= Wechat.api(@wechat_config.account).menu_create @wechat_config.menu
+    redirect_to admin_wechat_config_wechat_menus_url(@wechat_config), notice: r.to_s
+  end
 
   def show
   end

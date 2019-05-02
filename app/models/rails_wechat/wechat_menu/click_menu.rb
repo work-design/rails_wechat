@@ -5,7 +5,11 @@ module RailsWechat::WechatMenu::ClickMenu
   end
   
   def as_json
-  
+    {
+      type: menu_type,
+      name: name,
+      key: value
+    }
   end
 
 end

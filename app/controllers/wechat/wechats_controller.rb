@@ -23,5 +23,11 @@ class Wechat::WechatsController < ApplicationController
       request.reply.text '签到成功'
     end
   end
+
+  on :click, with: 'join' do |request, key|
+    wechat_user = WechatUser.find_by(uid: request[:FromUserName])
+    
+    request.reply.text "注册新用户: #{join_url(uid: request[:FromUserName])}"
+  end
   
 end

@@ -1,6 +1,8 @@
 module RailsWechat::WechatConfig
   extend ActiveSupport::Concern
   included do
+    has_many :wechat_menus, dependent: :destroy
+    
     validates :environment, presence: true
     validates :account, presence: true, uniqueness: { scope: [:environment] }
     validates :token, presence: true
@@ -16,6 +18,12 @@ module RailsWechat::WechatConfig
         hash
       end
     end
+  end
+  
+  def menu
+    {
+      button: self.wechat_menus.as_json
+    }
   end
 
   def build_config_hash
