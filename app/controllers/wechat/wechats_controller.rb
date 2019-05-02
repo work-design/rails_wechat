@@ -7,7 +7,7 @@ class Wechat::WechatsController < ApplicationController
 
   on :text, with: '工作计划' do |request, content|
     @wechat_user = WechatUser.find_or_create_by(uid: request[:FromUserName])
-    r = @wechat_user.wechat_feedbacks.build(body: content)
+    r = @wechat_user.wechat_feedbacks.create(body: content)
     request.reply.text "工作计划提交成功，你的票号为： #{r.position}"
   end
 
