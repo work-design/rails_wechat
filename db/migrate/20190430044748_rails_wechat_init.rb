@@ -59,5 +59,14 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.string :pagepath
       t.timestamps
     end
+    
+    create_table :wechat_feedbacks do |t|
+      t.references :wechat_user
+      t.text :body
+      t.integer :position, default: 1
+      t.date :feedback_on
+      t.timestamps
+    end
+    
   end
 end

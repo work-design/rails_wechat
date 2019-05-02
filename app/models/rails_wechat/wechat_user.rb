@@ -1,0 +1,7 @@
+module RailsWechat::WechatUser
+  extend ActiveSupport::Concern
+  included do
+    has_many :wechat_feedbacks, dependent: :delete_all
+  end
+  
+end
