@@ -3,37 +3,37 @@
 <table class="ui bottom attached selectable table">
   <thead>
     <tr>
-      <th><%= WechatConfig.human_attribute_name(:id) %></th>
-      <th>
+      <th class="one wide"><%= WechatConfig.human_attribute_name(:id) %></th>
+      <th class="two wide">
         <p><%= WechatConfig.human_attribute_name(:environment) %></p>
         <p><%= WechatConfig.human_attribute_name(:account) %></p>
         <p><%= WechatConfig.human_attribute_name(:enabled) %></p>
       </th>
-      <th>
+      <th class="three wide">
         <p><%= WechatConfig.human_attribute_name(:appid) %></p>
         <p><%= WechatConfig.human_attribute_name(:secret) %></p>
         <p><%= WechatConfig.human_attribute_name(:token) %></p>
       </th>
-      <th>
+      <th class="two wide">
         <p><%= WechatConfig.human_attribute_name(:corpid) %></p>
         <p><%= WechatConfig.human_attribute_name(:corpsecret) %></p>
         <p><%= WechatConfig.human_attribute_name(:agentid) %></p>
       </th>
-      <th>
+      <th class="two wide">
         <p><%= WechatConfig.human_attribute_name(:encrypt_mode) %></p>
         <p><%= WechatConfig.human_attribute_name(:encoding_aes_key) %></p>
       </th>
-      <th>
+      <th class="two wide">
         <p><%= WechatConfig.human_attribute_name(:access_token) %></p>
         <p><%= WechatConfig.human_attribute_name(:jsapi_ticket) %></p>
       </th>
-      <th>
+      <th class="one wide">
         <p><%= WechatConfig.human_attribute_name(:skip_verify_ssl) %></p>
         <p><%= WechatConfig.human_attribute_name(:trusted_domain_fullname) %></p>
       </th>
-      <th><%= WechatConfig.human_attribute_name(:timeout) %></th>
-      <th><%= WechatConfig.human_attribute_name(:created_at) %></th>
-      <th>
+      <th class="one wide"><%= WechatConfig.human_attribute_name(:timeout) %></th>
+      <th class="one wide"><%= WechatConfig.human_attribute_name(:created_at) %></th>
+      <th class="one wide">
         <%= link_to new_admin_wechat_config_path, remote: true, class: 'ui mini green button' do %>
           <i class="fas fa-plus"></i><% t('.new') %>
         <% end %>
