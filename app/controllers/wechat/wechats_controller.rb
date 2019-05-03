@@ -2,7 +2,21 @@ class Wechat::WechatsController < ApplicationController
   wechat_responder account_from_request: Proc.new{ |request| request.params[:id] }
 
   on :text do |request, content|
-    request.reply.text "echo: #{content}" # Just echo
+    @wechat_user = WechatUser.init_wechat_user(request)
+  
+    if content.match? /施工作业C票|配电一种票|低压停电票/
+      r = @wechat_user.wechat_feedbacks.create(body: content)
+      msg = "工作计划提交成功，你的票号为： #{r.position}"
+    else
+      msg = '请按标准模板填写！'
+    end
+    
+    request.reply.text msg
+  end
+  
+  on :text, with: '帮助' do |request, content|
+    msg = "项目名称：10kv台子线擂鼓台7号改造。\n工作内容：电杆组立，金具组装，导线展放。\n计划工作时间：5月4日 08.00分-5月4日19.00分\n申请施工作业C票号 1份，配电一种票号   0份，低压停电票号  0份。"
+    request.reply.text msg
   end
   
   on :text, with: '注册' do |request, content|
@@ -16,12 +30,6 @@ class Wechat::WechatsController < ApplicationController
     ]
   
     request.reply.news result_msg
-  end
-
-  on :text, with: /^(\d+)条新闻$/ do |request, content|
-    @wechat_user = WechatUser.init_wechat_user(request)
-    r = @wechat_user.wechat_feedbacks.create(body: content)
-    request.reply.text "工作计划提交成功，你的票号为： #{r.position}"
   end
 
   on :event, with: 'subscribe' do |request, content|
