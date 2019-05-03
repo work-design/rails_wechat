@@ -10,6 +10,18 @@ class Wechat::WechatsController < ApplicationController
     r = @wechat_user.wechat_feedbacks.create(body: content)
     request.reply.text "工作计划提交成功，你的票号为： #{r.position}"
   end
+  
+  on :text, with: '注册' do |request, content|
+    result_msg = [
+      {
+        title: '请注册',
+        description: '注册信息',
+        url: join_url(uid: request[:FromUserName])
+      }
+    ]
+  
+    request.reply.news result_msg
+  end
 
   on :event, with: 'subscribe' do |request, content|
     result_msg = [{
