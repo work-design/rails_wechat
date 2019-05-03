@@ -12,6 +12,7 @@ class Wechat::WechatsController < ApplicationController
   end
   
   on :text, with: '注册' do |request, content|
+    @wechat_user = WechatUser.init_wechat_user(request)
     result_msg = [
       {
         title: '请注册',
