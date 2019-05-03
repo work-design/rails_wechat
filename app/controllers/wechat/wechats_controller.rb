@@ -6,7 +6,7 @@ class Wechat::WechatsController < ApplicationController
   end
 
   on :text, with: '工作计划' do |request, content|
-    @wechat_user = WechatUser.find_or_create_by(uid: request[:FromUserName])
+    @wechat_user = WechatUser.init_wechat_user(request)
     r = @wechat_user.wechat_feedbacks.create(body: content)
     request.reply.text "工作计划提交成功，你的票号为： #{r.position}"
   end
@@ -16,7 +16,7 @@ class Wechat::WechatsController < ApplicationController
       {
         title: '请注册',
         description: '注册信息',
-        url: join_url(uid: request[:FromUserName])
+        url: join_url(oauth_user_id: @wechat_user.id)
       }
     ]
   
@@ -43,19 +43,17 @@ class Wechat::WechatsController < ApplicationController
   end
 
   on :click, with: 'join' do |request, key|
+    @wechat_user = WechatUser.init_wechat_user(request)
+  
     result_msg = [
       {
         title: '请注册',
         description: '注册信息',
-        url: join_url(uid: request[:FromUserName])
+        url: join_url(oauth_user_id: @wechat_user.id)
       }
     ]
     
     request.reply.news result_msg
-  end
-  
-  def init_wechat_user(request)
-    wechat_user = WechatUser.find_or_create_by(uid: request[:FromUserName])
   end
   
 end
