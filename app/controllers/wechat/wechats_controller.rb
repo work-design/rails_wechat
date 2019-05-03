@@ -3,8 +3,10 @@ class Wechat::WechatsController < ApplicationController
 
   on :text do |request, content|
     @wechat_user = WechatUser.init_wechat_user(request)
-  
-    if content.match? /施工作业C票|配电一种票|低压停电票/
+    
+    if @wechat_user.user.nil? || @wechat_user.user.disabled?
+      msg = '你没有权限！'
+    elsif content.match? /施工作业C票|配电一种票|低压停电票/
       piao = []
       if content.match? /施工作业C票/
         r = @wechat_user.wechat_feedbacks.create(body: content, kind: 'kind_a')
