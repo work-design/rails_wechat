@@ -15,7 +15,7 @@ module RailsWechat::WechatFeedback
   end
   
   def number_str
-    self.month.to_s + self.position.to_s
+    self.month.to_s + self.position.to_s.rjust(4, '0')
   end
   
 end

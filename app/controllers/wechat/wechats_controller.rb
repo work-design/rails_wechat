@@ -9,10 +9,14 @@ class Wechat::WechatsController < ApplicationController
       if content.match? /施工作业C票/
         r = @wechat_user.wechat_feedbacks.create(body: content, kind: 'kind_a')
         piao << "施工作业C票：#{r.number_str}"
-      elsif content.match? /配电一种票/
+      end
+      
+      if content.match? /配电一种票/
         r = @wechat_user.wechat_feedbacks.create(body: content, kind: 'kind_b')
         piao << "配电一种票：#{r.number_str}"
-      elsif content.match? /低压停电票/
+      end
+      
+      if content.match? /低压停电票/
         r = @wechat_user.wechat_feedbacks.create(body: content, kind: 'kind_c')
         piao << "低压停电票：#{r.number_str}"
       end
@@ -26,7 +30,7 @@ class Wechat::WechatsController < ApplicationController
   end
   
   on :text, with: '帮助' do |request, content|
-    msg = "项目名称：10kv台子线擂鼓台7号改造。\n工作内容：电杆组立，金具组装，导线展放。\n计划工作时间：5月4日 08.00分-5月4日19.00分\n申请施工作业C票号 1份，配电一种票号   0份，低压停电票号  0份。"
+    msg = "项目名称：10kv台子线擂鼓台7号改造。\n工作内容：电杆组立，金具组装，导线展放。\n计划工作时间：5月4日 08.00分-5月4日19.00分\n申请施工作业C票号 1份，配电一种票号  1份，低压停电票号  1份。"
     request.reply.text msg
   end
   
