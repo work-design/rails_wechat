@@ -4,12 +4,6 @@ class Wechat::WechatsController < ApplicationController
   on :text do |request, content|
     request.reply.text "echo: #{content}" # Just echo
   end
-
-  on :text, with: /工作计划/ do |request, content|
-    @wechat_user = WechatUser.init_wechat_user(request)
-    r = @wechat_user.wechat_feedbacks.create(body: content)
-    request.reply.text "工作计划提交成功，你的票号为： #{r.position}"
-  end
   
   on :text, with: '注册' do |request, content|
     @wechat_user = WechatUser.init_wechat_user(request)
@@ -22,6 +16,12 @@ class Wechat::WechatsController < ApplicationController
     ]
   
     request.reply.news result_msg
+  end
+
+  on :text, with: /工作计划/ do |request, content|
+    @wechat_user = WechatUser.init_wechat_user(request)
+    r = @wechat_user.wechat_feedbacks.create(body: content)
+    request.reply.text "工作计划提交成功，你的票号为： #{r.position}"
   end
 
   on :event, with: 'subscribe' do |request, content|
