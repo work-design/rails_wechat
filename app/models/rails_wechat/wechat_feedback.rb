@@ -2,7 +2,7 @@ module RailsWechat::WechatFeedback
   extend ActiveSupport::Concern
   included do
     attribute :feedback_on, :date, default: -> { Date.today }
-    attribute :month, :string, defualt: -> { Date.today.strftime('%Y%m') }
+    attribute :month, :string, default: -> { Date.today.strftime('%Y%m') }
     acts_as_list scope: [:month, :kind]
     
     belongs_to :wechat_user
