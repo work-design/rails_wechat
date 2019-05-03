@@ -65,6 +65,8 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.text :body
       t.integer :position, default: 1
       t.date :feedback_on
+      t.string :kind
+      t.string :month
       t.timestamps
     end
     

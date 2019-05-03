@@ -5,8 +5,19 @@ class Wechat::WechatsController < ApplicationController
     @wechat_user = WechatUser.init_wechat_user(request)
   
     if content.match? /施工作业C票|配电一种票|低压停电票/
-      r = @wechat_user.wechat_feedbacks.create(body: content)
-      msg = "工作计划提交成功，你的票号为： #{r.position}"
+      piao = []
+      if content.match? /施工作业C票/
+        r = @wechat_user.wechat_feedbacks.create(body: content, kind: 'kind_a')
+        piao << "施工作业C票：#{r.number_str}"
+      elsif content.match? /配电一种票/
+        r = @wechat_user.wechat_feedbacks.create(body: content, kind: 'kind_b')
+        piao << "配电一种票：#{r.number_str}"
+      elsif content.match? /低压停电票/
+        r = @wechat_user.wechat_feedbacks.create(body: content, kind: 'kind_c')
+        piao << "低压停电票：#{r.number_str}"
+      end
+      
+      msg = "工作计划提交成功，你的票号为： #{piao.join(', ')}"
     else
       msg = '请按标准模板填写！'
     end
