@@ -23,8 +23,8 @@ class Wechat::WechatsController < ApplicationController
       
       msg = "工作计划提交成功，你的票号为： #{piao.join(', ')}"
     else
-      msg = '请按标准模板填写！'
-      msg << "项目名称：10kv台子线擂鼓台7号改造。\n工作内容：电杆组立，金具组装，导线展放。\n计划工作时间：5月4日 08.00分-5月4日19.00分\n申请施工作业C票号 1份，配电一种票号  1份，低压停电票号  1份。"
+      msg = "请按标准模板填写！\n"
+      msg << "项目名称：xxx。\n工作内容：xxx。\n计划工作时间：xx月xx日xx时xx分-xx月xx日xx时xx分\n申请施工作业C票号1份，配电一种票号1份，低压停电票号1份。"
     end
     
     request.reply.text msg
