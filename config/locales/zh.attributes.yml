@@ -1,0 +1,10 @@
+zh:
+  activerecord:
+    attributes:
+      wechat_config:
+        environment: 环境
+        account: 账号
+        enabled: 启用
+      wechat_feedback:
+        body: 内容
+        feedback_on: 反馈日期
