@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :wechat_menus do
         post :sync, on: :collection
       end
+      resources :wechat_responses
     end
   end
 

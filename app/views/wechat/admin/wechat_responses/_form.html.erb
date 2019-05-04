@@ -1,0 +1,6 @@
+<%= form_with model: [:admin, @wechat_config, @wechat_response] do |f| %>
+  <%= render 'shared/error_messages', target: @wechat_response %>
+  <%= f.text_field :regexp %>
+  <%= f.text_field :response %>
+  <%= f.submit %>
+<% end %>

@@ -7,12 +7,6 @@ module RailsWechat::WechatFeedback
     
     belongs_to :wechat_user
     belongs_to :wechat_config
-    
-    enum kind: {
-      kind_a: 'kind_a',
-      kind_b: 'kind_b',
-      kind_c: 'kind_c'
-    }
   end
   
   def number_str

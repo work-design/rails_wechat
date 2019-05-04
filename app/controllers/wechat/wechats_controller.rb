@@ -9,19 +9,11 @@ class Wechat::WechatsController < ApplicationController
       msg = '你没有权限！'
     elsif content.match? /施工作业C票|配电一种票|低压停电票/
       piao = []
-      if content.match? /施工作业C票/
-        r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: 'kind_a')
-        piao << "施工作业C票：#{r.number_str}"
-      end
-      
-      if content.match? /配电一种票/
-        r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: 'kind_b')
-        piao << "配电一种票：#{r.number_str}"
-      end
-      
-      if content.match? /低压停电票/
-        r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: 'kind_c')
-        piao << "低压停电票：#{r.number_str}"
+      @wechat_config.wechat_responses.each do |wr|
+        if content.match? Regexp.new(wr.regexp)
+          r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: wr.regexp)
+          piao << "#{wr.regexp}：#{r.number_str}"
+        end
       end
       
       msg = "工作计划提交成功，你的票号为： #{piao.join(', ')}"
