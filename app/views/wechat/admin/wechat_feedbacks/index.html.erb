@@ -10,7 +10,11 @@
       <th><%= WechatFeedback.human_attribute_name(:body) %></th>
       <th><%= WechatFeedback.human_attribute_name(:feedback_on) %></th>
       <th><%= WechatFeedback.human_attribute_name(:kind) %></th>
-      <th></th>
+      <th>
+        <%= link_to find_data_list_table_lists_path('FeedbackDailyExport', params.permit(:date).merge(date: Date.today)), class: 'ui mini blue button', remote: true do %>
+          <i class="file excel icon"></i><%= t('.export') %>
+        <% end %>
+      </th>
     </tr>
   </thead>
   <tbody>
