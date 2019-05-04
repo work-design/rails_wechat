@@ -41,7 +41,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.boolean :skip_verify_ssl, default: true
       t.integer :timeout, default: 20
       t.string :trusted_domain_fullname
-
+      t.string :help, limit: 1024
       t.timestamps null: false
     end
 

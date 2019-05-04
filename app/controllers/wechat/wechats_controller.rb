@@ -7,7 +7,7 @@ class Wechat::WechatsController < ApplicationController
     
     if @wechat_user.user.nil? || @wechat_user.user.disabled?
       msg = '你没有权限！'
-    elsif content.match? /施工作业C票|配电一种票|低压停电票/
+    elsif content.match? Regexp.new(@wechat_config.regexps)
       piao = []
       @wechat_config.wechat_responses.each do |wr|
         if content.match? Regexp.new(wr.regexp)
@@ -18,8 +18,7 @@ class Wechat::WechatsController < ApplicationController
       
       msg = "工作计划提交成功，你的票号为： #{piao.join(', ')}"
     else
-      msg = "请按标准模板填写！\n"
-      msg << "项目名称：xxx。\n工作内容：xxx。\n计划工作时间：xx月xx日xx时xx分-xx月xx日xx时xx分\n申请施工作业C票号1份，配电一种票号1份，低压停电票号1份。"
+      msg = @wechat_config.help
     end
     
     request.reply.text msg

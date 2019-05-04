@@ -79,7 +79,7 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
       :skip_verify_ssl,
       :timeout,
       :trusted_domain_fullname,
-      :created_at
+      :help
     )
   end
 

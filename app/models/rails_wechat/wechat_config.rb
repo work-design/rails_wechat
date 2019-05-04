@@ -27,6 +27,10 @@ module RailsWechat::WechatConfig
       button: self.wechat_menus.as_json
     }
   end
+  
+  def regexps
+    wechat_responses.map(&:regexp).join('|')
+  end
 
   def build_config_hash
     self.as_json(except: [:environment, :account, :created_at, :updated_at, :enabled])
