@@ -80,6 +80,9 @@
         <%= link_to admin_wechat_config_wechat_responses_path(wechat_config), data: { tooltip: '应答语' }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-reply-all"></i>
         <% end %>
+        <%= link_to admin_wechat_config_wechat_feedbacks_path(wechat_config), data: { tooltip: '用户反馈' }, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-comments"></i>
+        <% end %>
         <%= link_to admin_wechat_config_path(wechat_config), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>
         <% end %>
