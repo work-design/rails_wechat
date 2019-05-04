@@ -15,12 +15,12 @@ class Wechat::WechatsController < ApplicationController
       end
       
       if content.match? /配电一种票/
-        r = @wechat_user.wechat_feedbacks.create(body: content, kind: 'kind_b')
+        r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: 'kind_b')
         piao << "配电一种票：#{r.number_str}"
       end
       
       if content.match? /低压停电票/
-        r = @wechat_user.wechat_feedbacks.create(body: content, kind: 'kind_c')
+        r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: 'kind_c')
         piao << "低压停电票：#{r.number_str}"
       end
       

@@ -2,6 +2,8 @@ module RailsWechat::WechatConfig
   extend ActiveSupport::Concern
   included do
     has_many :wechat_menus, dependent: :destroy
+    has_many :wechat_responses, dependent: :destroy
+    has_many :wechat_feedbacks, dependent: :nullify
     
     validates :environment, presence: true
     validates :account, presence: true, uniqueness: { scope: [:environment] }
