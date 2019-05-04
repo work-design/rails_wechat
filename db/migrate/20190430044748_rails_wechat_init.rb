@@ -61,6 +61,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     end
 
     create_table :wechat_feedbacks do |t|
+      t.references :wechat_config
       t.references :wechat_user
       t.text :body
       t.integer :position, default: 1

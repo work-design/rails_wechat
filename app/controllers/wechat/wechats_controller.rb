@@ -1,15 +1,16 @@
 class Wechat::WechatsController < ApplicationController
   wechat_responder account_from_request: Proc.new{ |request| request.params[:id] }
-
+  before_action :set_wechat_config, only: [:create]
+  
   on :text do |request, content|
-    @wechat_user = WechatUser.init_wechat_user(request)
+    set_wechat_user(request)
     
     if @wechat_user.user.nil? || @wechat_user.user.disabled?
       msg = '你没有权限！'
     elsif content.match? /施工作业C票|配电一种票|低压停电票/
       piao = []
       if content.match? /施工作业C票/
-        r = @wechat_user.wechat_feedbacks.create(body: content, kind: 'kind_a')
+        r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: 'kind_a')
         piao << "施工作业C票：#{r.number_str}"
       end
       
@@ -33,7 +34,7 @@ class Wechat::WechatsController < ApplicationController
   end
   
   on :text, with: '注册' do |request, content|
-    @wechat_user = WechatUser.init_wechat_user(request)
+    @wechat_user = set_wechat_user(request)
     result_msg = [
       {
         title: '请注册',
@@ -65,7 +66,7 @@ class Wechat::WechatsController < ApplicationController
   end
 
   on :click, with: 'join' do |request, key|
-    @wechat_user = WechatUser.init_wechat_user(request)
+    @wechat_user = set_wechat_user(request)
   
     result_msg = [
       {
@@ -76,6 +77,18 @@ class Wechat::WechatsController < ApplicationController
     ]
     
     request.reply.news result_msg
+  end
+  
+  private
+  def set_wechat_config
+    @wechat_config = WechatConfig.find_by account: params[:id]
+  end
+  
+  def set_wechat_user(request)
+    @wechat_user = WechatUser.find_or_initialize_by(uid: request[:FromUserName])
+    @wechat_user.app_id = @wechat_config.appid
+    @wechat_user.save
+    @wechat_user
   end
   
 end

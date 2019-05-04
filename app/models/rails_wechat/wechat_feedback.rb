@@ -6,6 +6,7 @@ module RailsWechat::WechatFeedback
     acts_as_list scope: [:month, :kind]
     
     belongs_to :wechat_user
+    belongs_to :wechat_config
     
     enum kind: {
       kind_a: 'kind_a',
