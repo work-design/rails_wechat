@@ -6,7 +6,8 @@
   <thead>
     <tr>
       <th><%= WechatResponse.human_attribute_name(:id) %></th>
-      <th><%= WechatResponse.human_attribute_name(:regexp) %></th>
+      <th><%= WechatResponse.human_attribute_name(:type) %></th>
+      <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
       <th><%= WechatResponse.human_attribute_name(:response) %></th>
       <th>
         <%= link_to new_panel_wechat_config_wechat_response_path(@wechat_config), remote: true, class: 'ui mini green button' do %>
@@ -19,7 +20,13 @@
   <% @wechat_responses.each do |wechat_response| %>
     <tr>
       <td><%= wechat_response.id %></td>
-      <td><%= wechat_response.regexp %></td>
+      <td><%= wechat_response.type_i18n %></td>
+      <td>
+        <%= wechat_response.match_value %>
+        <% if wechat_response.is_a?(ScanResponse) %>
+          <%= image_tag wechat_response.qrcode_file, class: 'ui small image' %>
+        <% end %>
+      </td>
       <td><%= wechat_response.response %></td>
       <td>
         <%= link_to panel_wechat_config_wechat_response_path(@wechat_config, wechat_response), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>

@@ -46,17 +46,16 @@ class Wechat::WechatsController < ApplicationController
       description: '查看数据'
     }]
 
-    if message[:EventKey] == 'qrscene_1'
-      message.reply.text '签到成功'
+    key = message[:EventKey].to_s.delete_prefix('qrscene_')
+    if key
+      message.reply.text get_response(key)
     else
       message.reply.news(result_msg)
     end
   end
 
   on :event, with: 'scan' do |message|
-    if message[:EventKey] == '1'
-      message.reply.text '签到成功'
-    end
+    message.reply.text get_response(message[:EventKey])
   end
 
   on :click, with: 'join' do |message, key|
@@ -76,6 +75,11 @@ class Wechat::WechatsController < ApplicationController
   private
   def set_wechat_config
     @wechat_config = WechatConfig.find_by account: params[:id]
+  end
+  
+  def get_response(key)
+    res = @wechat_config.wechat_responses.where(type: 'ScanResponse').find_by(match_value: key)
+    res.response
   end
   
   def set_wechat_user(message)

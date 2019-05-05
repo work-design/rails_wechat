@@ -1,0 +1,12 @@
+<div class="ui modal" id="modal">
+  <i class="close icon"></i>
+  <div class="ui header blue">
+    <%= t('.new') %>
+  </div>
+
+  <div class="content">
+    <%= form_with model: @wechat_response, scope: :wechat_response, url: panel_wechat_config_wechat_responses_path(@wechat_config) do |f| %>
+      <%= render partial: 'form', locals: { f: f } %>
+    <% end %>
+  </div>
+</div>

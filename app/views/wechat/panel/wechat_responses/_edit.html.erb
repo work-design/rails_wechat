@@ -1,0 +1,12 @@
+<div class="ui modal" id="modal">
+  <i class="fas fa-times close icon"></i>
+  <div class="ui header blue">
+    <%= t('.edit') %>
+  </div>
+
+  <div class="content">
+    <%= form_with model: @wechat_response, scope: :wechat_response, url: panel_wechat_config_wechat_response_path(@wechat_config, @wechat_response) do |f| %>
+      <%= render partial: 'form', locals: { f: f } %>
+    <% end %>
+  </div>
+</div>

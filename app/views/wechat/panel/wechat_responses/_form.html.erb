@@ -1,6 +1,5 @@
-<%= form_with model: [:panel, @wechat_config, @wechat_response] do |f| %>
-  <%= render 'shared/error_messages', target: @wechat_response %>
-  <%= f.text_field :regexp %>
-  <%= f.text_field :response %>
-  <%= f.submit %>
-<% end %>
+<%= render 'shared/error_messages', target: @wechat_response %>
+<%= f.select :type, options_for_select(WechatResponse.options_i18n(:type), @wechat_response.type) %>
+<%= f.text_field :match_value %>
+<%= f.text_field :response %>
+<%= f.submit %>

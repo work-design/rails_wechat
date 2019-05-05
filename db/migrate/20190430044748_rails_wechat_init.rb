@@ -71,6 +71,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     create_table :wechat_responses do |t|
       t.references :wechat_config
       t.string :type
+      t.string :name
       t.string :match_value
       t.string :qrcode_ticket
       t.string :qrcode_url

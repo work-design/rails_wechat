@@ -52,6 +52,11 @@ class Wechat::Panel::WechatResponsesController < Wechat::Panel::BaseController
     end
   end
 
+  def sync
+    r= Wechat.api(@wechat_config.account).menu_create @wechat_config.menu
+    redirect_to panel_wechat_config_wechat_menus_url(@wechat_config), notice: r.to_s
+  end
+
   def destroy
     @wechat_response.destroy
     redirect_to panel_wechat_config_wechat_responses_url(@wechat_config)
@@ -64,7 +69,8 @@ class Wechat::Panel::WechatResponsesController < Wechat::Panel::BaseController
 
   def wechat_response_params
     params.fetch(:wechat_response, {}).permit(
-      :regexp,
+      :type,
+      :match_value,
       :response
     )
   end
