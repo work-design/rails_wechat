@@ -1,4 +1,4 @@
-class Wechat::Admin::WechatFeedbacksController < Wechat::Admin::BaseController
+class Wechat::Panel::WechatFeedbacksController < Wechat::Panel::BaseController
   before_action :set_wechat_config
   before_action :set_wechat_feedback, only: [:show, :edit, :update, :destroy]
 
@@ -18,13 +18,13 @@ class Wechat::Admin::WechatFeedbacksController < Wechat::Admin::BaseController
     respond_to do |format|
       if @wechat_feedback.save
         format.html.phone
-        format.html { redirect_to admin_wechat_config_wechat_feedbacks_url(@wechat_config) }
-        format.js { redirect_to admin_wechat_config_wechat_feedbacks_url(@wechat_config) }
+        format.html { redirect_to panel_wechat_config_wechat_feedbacks_url(@wechat_config) }
+        format.js { redirect_to panel_wechat_config_wechat_feedbacks_url(@wechat_config) }
         format.json { render :show }
       else
         format.html.phone { render :edit }
         format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_wechat_feedbacks_url }
+        format.js { redirect_back fallback_location: panel_wechat_feedbacks_url }
         format.json { render :show }
       end
     end
@@ -32,7 +32,7 @@ class Wechat::Admin::WechatFeedbacksController < Wechat::Admin::BaseController
 
   def destroy
     @wechat_feedback.destroy
-    redirect_to admin_wechat_config_wechat_feedbacks_url(@wechat_config)
+    redirect_to panel_wechat_config_wechat_feedbacks_url(@wechat_config)
   end
 
   private

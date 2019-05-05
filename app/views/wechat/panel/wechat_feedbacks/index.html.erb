@@ -23,22 +23,22 @@
       <td><%= wechat_feedback.id %></td>
       <td>
         <% if wechat_feedback.wechat_user.user %>
-          <%= link_to wechat_feedback.wechat_user.user.name, admin_user_path(wechat_feedback.wechat_user.user_id) %>
+          <%= link_to wechat_feedback.wechat_user.user.name, panel_user_path(wechat_feedback.wechat_user.user_id) %>
         <% else %>
-          <%= link_to wechat_feedback.wechat_user.name, admin_user_path(wechat_feedback.wechat_user.name) %>
+          <%= link_to wechat_feedback.wechat_user.name, panel_user_path(wechat_feedback.wechat_user.name) %>
         <% end %>
       </td>
       <td><%= wechat_feedback.body %></td>
       <td><%= wechat_feedback.feedback_on %></td>
       <td><%= wechat_feedback.kind %></td>
       <td>
-        <%= link_to admin_wechat_config_wechat_feedback_path(@wechat_config, wechat_feedback), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to panel_wechat_config_wechat_feedback_path(@wechat_config, wechat_feedback), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>
         <% end %>
-        <%= link_to edit_admin_wechat_config_wechat_feedback_path(@wechat_config, wechat_feedback), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to edit_panel_wechat_config_wechat_feedback_path(@wechat_config, wechat_feedback), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to admin_wechat_config_wechat_feedback_path(@wechat_config, wechat_feedback), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
+        <%= link_to panel_wechat_config_wechat_feedback_path(@wechat_config, wechat_feedback), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>

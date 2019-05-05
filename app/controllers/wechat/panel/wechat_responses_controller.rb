@@ -1,4 +1,4 @@
-class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
+class Wechat::Panel::WechatResponsesController < Wechat::Panel::BaseController
   before_action :set_wechat_config
   before_action :set_wechat_response, only: [:show, :edit, :update, :destroy]
 
@@ -16,13 +16,13 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
     respond_to do |format|
       if @wechat_response.save
         format.html.phone
-        format.html { redirect_to admin_wechat_config_wechat_responses_url(@wechat_config) }
-        format.js { redirect_to admin_wechat_config_wechat_responses_url(@wechat_config) }
+        format.html { redirect_to panel_wechat_config_wechat_responses_url(@wechat_config) }
+        format.js { redirect_to panel_wechat_config_wechat_responses_url(@wechat_config) }
         format.json { render :show }
       else
         format.html.phone { render :new }
         format.html { render :new }
-        format.js { redirect_to admin_wechat_config_wechat_responses_url(@wechat_config) }
+        format.js { redirect_to panel_wechat_config_wechat_responses_url(@wechat_config) }
         format.json { render :show }
       end
     end
@@ -40,13 +40,13 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
     respond_to do |format|
       if @wechat_response.save
         format.html.phone
-        format.html { redirect_to admin_wechat_config_wechat_responses_url(@wechat_config) }
-        format.js { redirect_to admin_wechat_config_wechat_responses_url(@wechat_config) }
+        format.html { redirect_to panel_wechat_config_wechat_responses_url(@wechat_config) }
+        format.js { redirect_to panel_wechat_config_wechat_responses_url(@wechat_config) }
         format.json { render :show }
       else
         format.html.phone { render :edit }
         format.html { render :edit }
-        format.js { redirect_to admin_wechat_config_wechat_responses_url(@wechat_config) }
+        format.js { redirect_to panel_wechat_config_wechat_responses_url(@wechat_config) }
         format.json { render :show }
       end
     end
@@ -54,7 +54,7 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
 
   def destroy
     @wechat_response.destroy
-    redirect_to admin_wechat_config_wechat_responses_url(@wechat_config)
+    redirect_to panel_wechat_config_wechat_responses_url(@wechat_config)
   end
 
   private
