@@ -3,6 +3,8 @@ module RailsWechat::WechatConfig
   included do
     attribute :environment, :string, default: -> { Rails.env }
     attribute :help, :string, default: ''
+    attribute :help_without_user, :string, default: '请注册后使用'
+    attribute :help_user_disabled, :string, default: '你没有权限'
     
     has_many :wechat_menus, dependent: :destroy
     has_many :wechat_responses, dependent: :destroy
@@ -31,8 +33,8 @@ module RailsWechat::WechatConfig
     }
   end
   
-  def regexps
-    wechat_responses.map(&:regexp).join('|')
+  def match_values
+    wechat_responses.map(&:match_value).join('|')
   end
 
   def build_config_hash

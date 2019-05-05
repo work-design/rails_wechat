@@ -74,7 +74,9 @@ class Wechat::Panel::WechatConfigsController < Wechat::Panel::BaseController
       :encoding_aes_key,
       :token,
       :timeout,
-      :help
+      :help,
+      :help_without_user,
+      :help_user_disabled
     )
   end
 

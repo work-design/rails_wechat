@@ -61,6 +61,14 @@
       <td><%= simple_format @wechat_config.help %></td>
     </tr>
     <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:help_without_user) %></td>
+      <td><%= simple_format @wechat_config.help_without_user %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:help_user_disabled) %></td>
+      <td><%= simple_format @wechat_config.help_user_disabled %></td>
+    </tr>
+    <tr>
       <td class="right aligned"><%= WechatConfig.human_attribute_name(:created_at) %></td>
       <td><%= @wechat_config.created_at %></td>
     </tr>

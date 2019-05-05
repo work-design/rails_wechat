@@ -3,7 +3,8 @@ module RailsWechat
   class Engine < ::Rails::Engine
     
     config.autoload_paths += Dir[
-      "#{config.root}/app/models/wechat_menu"
+      "#{config.root}/app/models/wechat_menu",
+      "#{config.root}/app/models/wechat_response"
     ]
     
     config.generators do |g|
