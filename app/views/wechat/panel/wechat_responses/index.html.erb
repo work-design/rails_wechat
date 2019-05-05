@@ -17,6 +17,7 @@
     <tr>
       <th><%= WechatResponse.human_attribute_name(:id) %></th>
       <th><%= WechatResponse.human_attribute_name(:type) %></th>
+      <th><%= WechatResponse.human_attribute_name(:name) %></th>
       <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
       <th><%= WechatResponse.human_attribute_name(:response) %></th>
       <th>
@@ -31,6 +32,7 @@
     <tr>
       <td><%= wechat_response.id %></td>
       <td><%= wechat_response.type_i18n %></td>
+      <td><%= wechat_response.name %></td>
       <td>
         <%= wechat_response.match_value %>
         <% if wechat_response.is_a?(ScanResponse) %>

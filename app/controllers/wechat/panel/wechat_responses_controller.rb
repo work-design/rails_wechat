@@ -70,8 +70,10 @@ class Wechat::Panel::WechatResponsesController < Wechat::Panel::BaseController
   def wechat_response_params
     params.fetch(:wechat_response, {}).permit(
       :type,
+      :name,
       :match_value,
-      :response
+      :response,
+      :expire_seconds
     )
   end
 

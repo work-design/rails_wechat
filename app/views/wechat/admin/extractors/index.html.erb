@@ -1,0 +1,42 @@
+<div class="ui top attached segment">
+  <%= render 'filter' %>
+</div>
+
+<table class="ui bottom attached selectable table">
+  <thead>
+    <tr>
+      <th><%= Extractor.human_attribute_name(:id) %></th>
+      <th><%= Extractor.human_attribute_name(:name) %></th>
+      <th><%= Extractor.human_attribute_name(:item_separator) %></th>
+      <th><%= Extractor.human_attribute_name(:value_separator) %></th>
+      <th>
+        <%= link_to new_admin_extractor_path, remote: true, class: 'ui mini green button' do %>
+          <i class="fas fa-plus"></i><% t('.new') %>
+        <% end %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @extractors.each do |extractor| %>
+    <tr>
+      <td><%= extractor.id %></td>
+      <td><%= extractor.name %></td>
+      <td><%= extractor.item_separator %></td>
+      <td><%= extractor.value_separator %></td>
+      <td>
+        <%= link_to admin_extractor_path(extractor), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-eye"></i>
+        <% end %>
+        <%= link_to edit_admin_extractor_path(extractor), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        <%= link_to admin_extractor_path(extractor), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @extractors %>

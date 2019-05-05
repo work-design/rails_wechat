@@ -1,0 +1,7 @@
+<%= form_with model: [:admin, @extractor] do |f| %>
+  <%= render 'shared/error_messages', target: @extractor %>
+  <%= f.text_field :name %>
+  <%= f.text_area :item_separator %>
+  <%= f.text_field :value_separator %>
+  <%= f.submit %>
+<% end %>

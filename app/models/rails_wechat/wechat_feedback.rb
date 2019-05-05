@@ -7,10 +7,17 @@ module RailsWechat::WechatFeedback
     
     belongs_to :wechat_user
     belongs_to :wechat_config
+    has_many :extractions, as: :extractable
   end
   
   def number_str
     self.month.to_s + self.position.to_s.rjust(4, '0')
+  end
+  
+  def do_extract
+    wechat_config.extractors.each do |i|
+      i.scan(scan_regexp)
+    end
   end
   
 end

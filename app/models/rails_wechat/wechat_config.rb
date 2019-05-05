@@ -10,6 +10,8 @@ module RailsWechat::WechatConfig
     has_many :wechat_responses, dependent: :destroy
     has_many :wechat_feedbacks, dependent: :nullify
     
+    has_many :extractors
+    
     validates :environment, presence: true
     validates :account, presence: true, uniqueness: { scope: [:environment] }
     validates :token, presence: true

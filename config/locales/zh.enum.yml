@@ -7,5 +7,5 @@ zh:
       wechat_response:
         type:
           TextResponse: 文字
-          ScanResponse: 扫码
+          PersistScanResponse: 扫码
           TempScanResponse: 临时二维码

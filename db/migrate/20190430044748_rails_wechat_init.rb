@@ -57,6 +57,18 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
+    create_table :wechat_responses do |t|
+      t.references :wechat_config
+      t.string :type
+      t.string :name
+      t.string :match_value
+      t.integer :expire_seconds
+      t.string :qrcode_ticket
+      t.string :qrcode_url
+      t.string :response
+      t.timestamps
+    end
+    
     create_table :wechat_feedbacks do |t|
       t.references :wechat_config
       t.references :wechat_user
@@ -68,14 +80,19 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.timestamps
     end
     
-    create_table :wechat_responses do |t|
+    create_table :extractors do |t|
       t.references :wechat_config
-      t.string :type
       t.string :name
-      t.string :match_value
-      t.string :qrcode_ticket
-      t.string :qrcode_url
-      t.string :response
+      t.string :value_separator
+      t.string :item_separator
+      t.timestamps
+    end
+    
+    create_table :extractions do |t|
+      t.references :extractor
+      t.references :extractable, polymorphic: true
+      t.string :name
+      t.string :matched
       t.timestamps
     end
     
