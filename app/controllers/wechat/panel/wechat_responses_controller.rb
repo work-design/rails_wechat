@@ -58,12 +58,8 @@ class Wechat::Panel::WechatResponsesController < Wechat::Panel::BaseController
   end
 
   private
-  def set_wechat_config
-    @wechat_config = WechatConfig.find params[:wechat_config_id]
-  end
-  
   def set_wechat_response
-    @wechat_response = WechatResponse.find(params[:id])
+    @wechat_response = @wechat_config.wechat_responses.find(params[:id])
   end
 
   def wechat_response_params

@@ -63,12 +63,8 @@ class Wechat::Panel::WechatMenusController < Wechat::Panel::BaseController
   end
 
   private
-  def set_wechat_config
-    @wechat_config = WechatConfig.find params[:wechat_config_id]
-  end
-  
   def set_wechat_menu
-    @wechat_menu = WechatMenu.find(params[:id])
+    @wechat_menu = @wechat_config.wechat_menus.find(params[:id])
   end
 
   def wechat_menu_params

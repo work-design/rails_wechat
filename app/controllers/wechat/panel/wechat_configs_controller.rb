@@ -60,7 +60,7 @@ class Wechat::Panel::WechatConfigsController < Wechat::Panel::BaseController
   def set_wechat_config
     @wechat_config = current_organ.wechat_configs.find(params[:id])
   end
-
+  
   def wechat_config_params
     params.fetch(:wechat_config, {}).permit(
       :environment,

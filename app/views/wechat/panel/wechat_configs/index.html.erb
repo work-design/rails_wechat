@@ -44,6 +44,15 @@
       <td><%= wechat_config.enabled %></td>
       <td><time><%= wechat_config.created_at.to_s(:rfc822) %></time></td>
       <td>
+        <%= link_to panel_wechat_config_wechat_menus_path(wechat_config), data: { tooltip: '菜单' }, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-bars"></i>
+        <% end %>
+        <%= link_to panel_wechat_config_wechat_responses_path(wechat_config), data: { tooltip: '应答语' }, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-reply-all"></i>
+        <% end %>
+        <%= link_to panel_wechat_config_wechat_feedbacks_path(wechat_config), data: { tooltip: '用户反馈' }, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-comments"></i>
+        <% end %>
         <%= link_to panel_wechat_config_path(wechat_config), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>
         <% end %>

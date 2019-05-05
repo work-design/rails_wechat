@@ -36,12 +36,8 @@ class Wechat::Panel::WechatFeedbacksController < Wechat::Panel::BaseController
   end
 
   private
-  def set_wechat_config
-    @wechat_config = WechatConfig.find params[:wechat_config_id]
-  end
-  
   def set_wechat_feedback
-    @wechat_feedback = WechatFeedback.find(params[:id])
+    @wechat_feedback = @wechat_config.wechat_feedbacks.find(params[:id])
   end
 
   def wechat_feedback_params
