@@ -63,7 +63,6 @@ class Wechat::Panel::WechatConfigsController < Wechat::Panel::BaseController
   
   def wechat_config_params
     params.fetch(:wechat_config, {}).permit(
-      :environment,
       :account,
       :enabled,
       :appid,
@@ -74,12 +73,8 @@ class Wechat::Panel::WechatConfigsController < Wechat::Panel::BaseController
       :encrypt_mode,
       :encoding_aes_key,
       :token,
-      :access_token,
-      :jsapi_ticket,
-      :skip_verify_ssl,
       :timeout,
-      :trusted_domain_fullname,
-      :created_at
+      :help
     )
   end
 

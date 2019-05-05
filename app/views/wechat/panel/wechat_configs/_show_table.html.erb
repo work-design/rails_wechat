@@ -53,24 +53,12 @@
       <td><%= @wechat_config.token %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= WechatConfig.human_attribute_name(:access_token) %></td>
-      <td><%= @wechat_config.access_token %></td>
-    </tr>
-    <tr>
-      <td class="right aligned"><%= WechatConfig.human_attribute_name(:jsapi_ticket) %></td>
-      <td><%= @wechat_config.jsapi_ticket %></td>
-    </tr>
-    <tr>
-      <td class="right aligned"><%= WechatConfig.human_attribute_name(:skip_verify_ssl) %></td>
-      <td><%= @wechat_config.skip_verify_ssl %></td>
-    </tr>
-    <tr>
       <td class="right aligned"><%= WechatConfig.human_attribute_name(:timeout) %></td>
       <td><%= @wechat_config.timeout %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= WechatConfig.human_attribute_name(:trusted_domain_fullname) %></td>
-      <td><%= @wechat_config.trusted_domain_fullname %></td>
+      <td class="right aligned"><%= WechatConfig.human_attribute_name(:help) %></td>
+      <td><%= simple_format @wechat_config.help %></td>
     </tr>
     <tr>
       <td class="right aligned"><%= WechatConfig.human_attribute_name(:created_at) %></td>

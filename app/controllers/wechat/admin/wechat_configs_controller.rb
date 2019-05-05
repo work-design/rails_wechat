@@ -78,8 +78,7 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
       :jsapi_ticket,
       :skip_verify_ssl,
       :timeout,
-      :trusted_domain_fullname,
-      :help
+      :trusted_domain_fullname
     )
   end
 
