@@ -34,7 +34,7 @@ module RailsWechat::WechatConfig
   end
   
   def match_values
-    wechat_responses.map(&:match_value).join('|')
+    wechat_responses.where(type: ['TextResponse']).map(&:match_value).join('|')
   end
 
   def build_config_hash

@@ -13,8 +13,8 @@ class Wechat::WechatsController < ApplicationController
       res = []
       @wechat_config.wechat_responses.each do |wr|
         if content.match? Regexp.new(wr.match_value)
-          r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: wr.match_values)
-          #res << "#{wr.regexp}：#{r.number_str}"
+          r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: wr.match_value)
+          #res << "#{wr.match_value}：#{r.number_str}"
           res << wr.response
         end
       end
