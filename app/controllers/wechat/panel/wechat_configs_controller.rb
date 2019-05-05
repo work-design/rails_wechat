@@ -1,12 +1,36 @@
 class Wechat::Panel::WechatConfigsController < Wechat::Panel::BaseController
   before_action :set_wechat_config, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @wechat_configs = current_organ.wechat_configs
+  end
+
+  def new
+    @wechat_config = WechatConfig.new
+  end
+
+  def create
+    @wechat_config = WechatConfig.new(wechat_config_params)
+  
+    respond_to do |format|
+      if @wechat_config.save
+        format.html.phone
+        format.html { redirect_to panel_wechat_configs_url }
+        format.js { redirect_back fallback_location: panel_wechat_configs_url }
+        format.json { render :show }
+      else
+        format.html.phone { render :new }
+        format.html { render :new }
+        format.js { redirect_back fallback_location: panel_wechat_configs_url }
+        format.json { render :show }
+      end
+    end
+  end
+  
   def show
-    @wechat_config = current_organ.wechat_config
   end
 
   def edit
-    @wechat_config = current_organ.wechat_config
   end
 
   def update
@@ -15,13 +39,13 @@ class Wechat::Panel::WechatConfigsController < Wechat::Panel::BaseController
     respond_to do |format|
       if @wechat_config.save
         format.html.phone
-        format.html { redirect_to admin_wechat_configs_url }
-        format.js { redirect_back fallback_location: admin_wechat_configs_url }
+        format.html { redirect_to panel_wechat_configs_url }
+        format.js { redirect_back fallback_location: panel_wechat_configs_url }
         format.json { render :show }
       else
         format.html.phone { render :edit }
         format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_wechat_configs_url }
+        format.js { redirect_back fallback_location: panel_wechat_configs_url }
         format.json { render :show }
       end
     end
@@ -29,12 +53,12 @@ class Wechat::Panel::WechatConfigsController < Wechat::Panel::BaseController
 
   def destroy
     @wechat_config.destroy
-    redirect_to admin_wechat_configs_url
+    redirect_to panel_wechat_configs_url
   end
 
   private
   def set_wechat_config
-    @wechat_config = WechatConfig.find(params[:id])
+    @wechat_config = current_organ.wechat_configs.find(params[:id])
   end
 
   def wechat_config_params

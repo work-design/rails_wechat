@@ -11,11 +11,8 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     
     
     create_table :wechat_configs do |t|
-      # config environment, typical values: production, development or test
-      t.string :environment, null: false, default: 'development'
-      # account name
+      t.string :environment
       t.string :account, null: false
-      # whether this config is activated
       t.boolean :enabled, default: true
 
       # public account

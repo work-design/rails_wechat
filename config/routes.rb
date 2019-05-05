@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   scope :panel, module: 'wechat/panel', as: 'panel' do
-    resource :wechat_config, excetp: [:new, :create]
+    resources :wechat_configs
   end
 
   scope :admin, module: 'wechat/admin', as: :admin do
