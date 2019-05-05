@@ -2,6 +2,7 @@ module RailsWechat::WechatConfig
   extend ActiveSupport::Concern
   included do
     attribute :environment, :string, default: -> { Rails.env }
+    attribute :help, :string, default: ''
     
     has_many :wechat_menus, dependent: :destroy
     has_many :wechat_responses, dependent: :destroy

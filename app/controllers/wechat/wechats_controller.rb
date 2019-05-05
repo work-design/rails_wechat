@@ -1,73 +1,76 @@
 class Wechat::WechatsController < ApplicationController
-  wechat_responder account_from_request: Proc.new{ |request| request.params[:id] }
+  wechat_responder account_from_message: Proc.new{ |request| request.params[:id] }
   before_action :set_wechat_config, only: [:create]
   
-  on :text do |request, content|
-    set_wechat_user(request)
+  on :text do |message, content|
+    set_wechat_user(message)
     
-    if @wechat_user.user.nil? || @wechat_user.user.disabled?
+    if @wechat_user.user.nil?
       msg = '你没有权限！'
+    elsif @wechat_user.user.disabled?
+      msg = 'meiyouquanxian'
     elsif content.match? Regexp.new(@wechat_config.regexps)
-      piao = []
+      res = []
       @wechat_config.wechat_responses.each do |wr|
         if content.match? Regexp.new(wr.regexp)
           r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: wr.regexp)
-          piao << "#{wr.regexp}：#{r.number_str}"
+          #res << "#{wr.regexp}：#{r.number_str}"
+          res << wr.response
         end
       end
       
-      msg = "工作计划提交成功，你的票号为： #{piao.join(', ')}"
+      msg = "工作计划提交成功，你的票号为： #{res.join(', ')}"
     else
       msg = @wechat_config.help
     end
     
-    request.reply.text msg
+    message.reply.text msg
   end
   
-  on :text, with: '注册' do |request, content|
-    @wechat_user = set_wechat_user(request)
+  on :text, with: '注册' do |message, content|
+    @wechat_user = set_wechat_user(message)
     result_msg = [
       {
         title: '请注册',
         description: '注册信息',
-        url: join_url(oauth_user_id: @wechat_user.id)
+        url: join_url(uid: @wechat_user.uid)
       }
     ]
   
-    request.reply.news result_msg
+    message.reply.news result_msg
   end
 
-  on :event, with: 'subscribe' do |request, content|
+  on :event, with: 'subscribe' do |message, content|
     result_msg = [{
       title: '欢迎关注',
       description: '查看数据'
     }]
 
-    if request[:EventKey] == 'qrscene_1'
-      request.reply.text '签到成功'
+    if message[:EventKey] == 'qrscene_1'
+      message.reply.text '签到成功'
     else
-      request.reply.news(result_msg)
+      message.reply.news(result_msg)
     end
   end
 
-  on :event, with: 'scan' do |request|
-    if request[:EventKey] == '1'
-      request.reply.text '签到成功'
+  on :event, with: 'scan' do |message|
+    if message[:EventKey] == '1'
+      message.reply.text '签到成功'
     end
   end
 
-  on :click, with: 'join' do |request, key|
-    @wechat_user = set_wechat_user(request)
+  on :click, with: 'join' do |message, key|
+    @wechat_user = set_wechat_user(message)
   
     result_msg = [
       {
         title: '请注册',
         description: '注册信息',
-        url: join_url(oauth_user_id: @wechat_user.id)
+        url: join_url(uid: @wechat_user.uid)
       }
     ]
     
-    request.reply.news result_msg
+    message.reply.news result_msg
   end
   
   private
@@ -75,8 +78,8 @@ class Wechat::WechatsController < ApplicationController
     @wechat_config = WechatConfig.find_by account: params[:id]
   end
   
-  def set_wechat_user(request)
-    @wechat_user = WechatUser.find_or_initialize_by(uid: request[:FromUserName])
+  def set_wechat_user(message)
+    @wechat_user = WechatUser.find_or_initialize_by(uid: message[:FromUserName])
     @wechat_user.app_id = @wechat_config.appid
     @wechat_user.save
     @wechat_user
