@@ -4,3 +4,12 @@ zh:
       wechat_configs:
         index:
           title: 微信设置
+      wechat_feedbacks:
+        index:
+          title: 反馈
+      wechat_menus:
+        index:
+          title: 目录
+      wechat_responses:
+        index:
+          title: 回复设置
