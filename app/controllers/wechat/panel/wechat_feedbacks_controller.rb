@@ -3,7 +3,7 @@ class Wechat::Panel::WechatFeedbacksController < Wechat::Panel::BaseController
   before_action :set_wechat_feedback, only: [:show, :edit, :update, :destroy]
 
   def index
-    @wechat_feedbacks = @wechat_config.wechat_feedbacks.page(params[:page])
+    @wechat_feedbacks = @wechat_config.wechat_feedbacks.order(id: :desc).page(params[:page])
   end
 
   def show

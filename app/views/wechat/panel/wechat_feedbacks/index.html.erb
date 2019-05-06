@@ -15,13 +15,13 @@
 <table class="ui bottom attached selectable table">
   <thead>
     <tr>
-      <th><%= WechatFeedback.human_attribute_name(:id) %></th>
-      <th><%= WechatFeedback.human_attribute_name(:wechat_user_id) %></th>
-      <th><%= WechatFeedback.human_attribute_name(:body) %></th>
-      <th><%= WechatFeedback.human_attribute_name(:extractions) %></th>
-      <th><%= WechatFeedback.human_attribute_name(:feedback_on) %></th>
-      <th><%= WechatFeedback.human_attribute_name(:kind) %></th>
-      <th>
+      <th class="one wide"><%= WechatFeedback.human_attribute_name(:id) %></th>
+      <th class="one wide"><%= WechatFeedback.human_attribute_name(:wechat_user_id) %></th>
+      <th class="five wide"><%= WechatFeedback.human_attribute_name(:body) %></th>
+      <th class="five wide"><%= WechatFeedback.human_attribute_name(:extractions) %></th>
+      <th class="two wide"><%= WechatFeedback.human_attribute_name(:feedback_on) %></th>
+      <th class="one wide"><%= WechatFeedback.human_attribute_name(:kind) %></th>
+      <th class="one wide">
         <%= link_to find_data_list_table_lists_path('FeedbackDailyExport', params.permit(:date).merge(date: Date.today)), class: 'ui mini blue button', remote: true do %>
           <i class="file excel icon"></i><%= t('.export') %>
         <% end %>
