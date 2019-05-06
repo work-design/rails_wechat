@@ -59,6 +59,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
 
     create_table :wechat_responses do |t|
       t.references :wechat_config
+      t.references :effective, polymorphic: true
       t.string :type
       t.string :name
       t.string :match_value
