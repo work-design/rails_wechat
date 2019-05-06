@@ -83,8 +83,9 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     create_table :extractors do |t|
       t.references :wechat_config
       t.string :name
-      t.string :value_separator
-      t.string :item_separator
+      t.string :direction
+      t.string :match_value
+      t.string :separator
       t.timestamps
     end
     

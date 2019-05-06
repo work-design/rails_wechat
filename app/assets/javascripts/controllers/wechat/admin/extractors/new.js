@@ -1,0 +1,1 @@
+$('#extractor_direction').dropdown();

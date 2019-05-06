@@ -15,8 +15,21 @@ module RailsWechat::WechatFeedback
   end
   
   def do_extract
-    wechat_config.extractors.each do |i|
-      i.scan(scan_regexp)
+    wechat_config.extractors.map do |extractor|
+      r = body.scan(extractor.scan_regexp)
+      next if r.blank?
+      matched = r.map do |c|
+        if extractor.prefix?
+          c.delete_prefix(extractor.match_value)
+        elsif extractor.suffix?
+          c.delete_sufffix(extractor.match_value)
+        end
+      end
+      ex = self.extractions.find_or_initialize_by(extractor_id: extractor.id)
+      ex.name = extractor.name
+      ex.matched = matched.join(', ')
+      ex.save
+      ex
     end
   end
   

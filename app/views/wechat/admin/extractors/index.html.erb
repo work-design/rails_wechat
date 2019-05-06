@@ -7,8 +7,9 @@
     <tr>
       <th><%= Extractor.human_attribute_name(:id) %></th>
       <th><%= Extractor.human_attribute_name(:name) %></th>
-      <th><%= Extractor.human_attribute_name(:item_separator) %></th>
-      <th><%= Extractor.human_attribute_name(:value_separator) %></th>
+      <th><%= Extractor.human_attribute_name(:separator) %></th>
+      <th><%= Extractor.human_attribute_name(:match_value) %></th>
+      <th><%= Extractor.human_attribute_name(:direction) %></th>
       <th>
         <%= link_to new_admin_extractor_path, remote: true, class: 'ui mini green button' do %>
           <i class="fas fa-plus"></i><% t('.new') %>
@@ -21,8 +22,9 @@
     <tr>
       <td><%= extractor.id %></td>
       <td><%= extractor.name %></td>
-      <td><%= extractor.item_separator %></td>
-      <td><%= extractor.value_separator %></td>
+      <td><%= extractor.separator %></td>
+      <td><%= extractor.match_value %></td>
+      <td><%= extractor.direction_i18n %></td>
       <td>
         <%= link_to admin_extractor_path(extractor), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>
