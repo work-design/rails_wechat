@@ -3,6 +3,6 @@
 <%= f.text_field :name %>
 <%= f.text_field :match_value %>
 <%= f.text_field :response %>
-<%= f.time_select :start_at, default: '8:00' %>
-<%= f.time_select :finish_at, default: '18:00' %>
+<%= f.time_select :start_at, default: '0:00'.to_time %>
+<%= f.time_select :finish_at, default: '24:00'.to_time %>
 <%= f.submit %>

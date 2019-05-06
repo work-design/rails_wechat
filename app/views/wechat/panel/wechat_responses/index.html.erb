@@ -21,6 +21,10 @@
       <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
       <th><%= WechatResponse.human_attribute_name(:response) %></th>
       <th>
+        <p><%= WechatResponse.human_attribute_name(:start_at) %></p>
+        <p><%= WechatResponse.human_attribute_name(:finish_at) %></p>
+      </th>
+      <th>
         <%= link_to new_panel_wechat_config_wechat_response_path(@wechat_config), remote: true, class: 'ui mini green button' do %>
           <i class="fas fa-plus"></i><% t('.new') %>
         <% end %>
@@ -40,6 +44,10 @@
         <% end %>
       </td>
       <td><%= wechat_response.response %></td>
+      <td>
+        <p><%= wechat_response.start_at.to_s(:time) %></p>
+        <p><%= wechat_response.finish_at.to_s(:time) %></p>
+      </td>
       <td>
         <%= link_to panel_wechat_config_wechat_response_path(@wechat_config, wechat_response), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>
