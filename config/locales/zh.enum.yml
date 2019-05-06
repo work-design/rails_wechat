@@ -9,7 +9,3 @@ zh:
           TextResponse: 文字
           PersistScanResponse: 扫码
           TempScanResponse: 临时二维码
-      extractor:
-        direction:
-          prefix: 前缀
-          suffix: 后缀

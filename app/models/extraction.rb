@@ -1,5 +1,3 @@
 class Extraction < ApplicationRecord
-  belongs_to :extractor
-  belongs_to :extractable, polymorphic: true
-  
+  include RailsWechat::Extraction
 end unless defined? Extraction

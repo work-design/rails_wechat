@@ -1,8 +1,8 @@
 <%= form_with model: [:admin, @extractor] do |f| %>
   <%= render 'shared/error_messages', target: @extractor %>
   <%= f.text_field :name %>
-  <%= f.text_area :separator %>
-  <%= f.text_field :match_value %>
-  <%= f.select :direction, options_for_select(Extractor.options_i18n(:direction), @extractor.direction) %>
+  <%= f.text_field :prefix %>
+  <%= f.text_area :suffix %>
+  <%= f.check_box :more %>
   <%= f.submit %>
 <% end %>

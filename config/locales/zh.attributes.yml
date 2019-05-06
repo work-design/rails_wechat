@@ -8,3 +8,7 @@ zh:
       wechat_feedback:
         body: 内容
         feedback_on: 反馈日期
+      extractor:
+        prefix: 前缀
+        suffix: 后缀
+        more: 尽可能多的匹配

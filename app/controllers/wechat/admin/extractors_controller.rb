@@ -64,9 +64,9 @@ class Wechat::Admin::ExtractorsController < Wechat::Admin::BaseController
   def extractor_params
     params.fetch(:extractor, {}).permit(
       :name,
-      :separator,
-      :match_value,
-      :direction
+      :prefix,
+      :suffix,
+      :more
     )
   end
 
