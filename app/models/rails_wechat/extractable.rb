@@ -14,18 +14,5 @@ module RailsWechat::Extractable
       end
     end
   end
-
-  def do_extract
-    wechat_config.extractors.map do |extractor|
-      matched = body.scan(extractor.scan_regexp)
-      next if matched.blank?
-
-      ex = self.extractions.find_or_initialize_by(extractor_id: extractor.id)
-      ex.name = extractor.name
-      ex.matched = matched.join(', ')
-      ex.save
-      ex
-    end
-  end
   
 end

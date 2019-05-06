@@ -18,6 +18,7 @@
       <th><%= WechatFeedback.human_attribute_name(:id) %></th>
       <th><%= WechatFeedback.human_attribute_name(:wechat_user_id) %></th>
       <th><%= WechatFeedback.human_attribute_name(:body) %></th>
+      <th><%= WechatFeedback.human_attribute_name(:extractions) %></th>
       <th><%= WechatFeedback.human_attribute_name(:feedback_on) %></th>
       <th><%= WechatFeedback.human_attribute_name(:kind) %></th>
       <th>
@@ -39,6 +40,16 @@
         <% end %>
       </td>
       <td><%= wechat_feedback.body %></td>
+      <td>
+        <table class="ui very basic table">
+        <% wechat_feedback.extractions.each do |ex| %>
+          <tr>
+            <td><%= ex.name %></td>
+            <td><%= ex.matched %></td>
+          </tr>
+        <% end %>
+        </table>
+      </td>
       <td><%= wechat_feedback.feedback_on %></td>
       <td><%= wechat_feedback.kind %></td>
       <td>
