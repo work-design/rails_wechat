@@ -12,11 +12,15 @@ class Wechat::WechatsController < ApplicationController
     elsif content.match? Regexp.new(@wechat_config.match_values)
       wf = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content)
       res = @wechat_config.text_responses.map do |wr|
-        if content.match? Regexp.new(wr.match_value)
-          ri = wf.response_items.create(wechat_response_id: wr.id)
-          ri.respond_text
+        if content.match?(Regexp.new(wr.match_value))
+          if wr.effective?
+            ri = wf.response_items.create(wechat_response_id: wr.id)
+            ri.respond_text
+          else
+            wr.invalid_response.presence
+          end
         end
-      end
+      end.compact
       
       msg = "#{@wechat_config.help_feedback}#{res.join(', ')}"
     else

@@ -17,8 +17,8 @@ module RailsWechat::WechatResponse
     end
   end
   
-  def response_text
-    wr.response
+  def effective?(time = Time.now)
+    time > start_at.change(Date.today.parts) && time < finish_at.change(Date.today.parts)
   end
 
   def invoke_effect(wechat_user)

@@ -17,7 +17,7 @@ module RailsWechat::ResponseItem
   end
   
   def respond_text
-    "#{wechat_response.response}#{number_str}"
+    "#{wechat_response.valid_response}#{number_str}"
   end
   
   def number_str
