@@ -24,6 +24,11 @@ module RailsWechat
     initializer 'rails_wechat.assets.precompile' do |app|
       app.config.assets.precompile += ['rails_wechat_manifest.js']
     end
+
+    initializer 'rails_wechat.zeitwerk.preload' do |app|
+      Rails.autoloaders.main.preload "#{config.root}/app/models/wechat_response/persist_scan_response.rb"
+      Rails.autoloaders.main.preload "#{config.root}/app/models/wechat_response/temp_scan_response.rb"
+    end
     
   end
 end

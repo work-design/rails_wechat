@@ -11,7 +11,7 @@ class Wechat::WechatsController < ApplicationController
       msg = @wechat_config.help_user_disabled
     elsif content.match? Regexp.new(@wechat_config.match_values)
       res = []
-      @wechat_config.wechat_responses.each do |wr|
+      @wechat_config.text_responses.each do |wr|
         if content.match? Regexp.new(wr.match_value)
           r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: wr.match_value)
           res << "#{wr.match_value}：#{r.number_str}"
@@ -78,7 +78,8 @@ class Wechat::WechatsController < ApplicationController
   end
   
   def get_response(key)
-    res = @wechat_config.wechat_responses.where(type: 'ScanResponse').find_by(match_value: key)
+    res = @wechat_config.scan_responses.find_by(match_value: key)
+    res.invoke_effect(@wechat_user)
     res.response
   end
   

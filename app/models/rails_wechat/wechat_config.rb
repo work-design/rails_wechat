@@ -8,6 +8,8 @@ module RailsWechat::WechatConfig
     attribute :help_feedback, :string, default: '你的反馈已收到'
     
     has_many :wechat_menus, dependent: :destroy
+    has_many :text_responses, dependent: :destroy
+    has_many :scan_responses, dependent: :destroy
     has_many :wechat_responses, dependent: :destroy
     has_many :wechat_feedbacks, dependent: :nullify
     
