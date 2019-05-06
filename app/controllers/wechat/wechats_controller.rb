@@ -10,12 +10,11 @@ class Wechat::WechatsController < ApplicationController
     elsif @wechat_user.user.disabled?
       msg = @wechat_config.help_user_disabled
     elsif content.match? Regexp.new(@wechat_config.match_values)
-      res = []
-      @wechat_config.text_responses.each do |wr|
+      wf = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content)
+      res = @wechat_config.text_responses.each do |wr|
         if content.match? Regexp.new(wr.match_value)
-          r = @wechat_user.wechat_feedbacks.create(wechat_config_id: @wechat_config.id, body: content, kind: wr.match_value)
-          res << "#{wr.match_value}：#{r.number_str}"
-          #res << wr.response
+          ri = wf.response_items.create
+          ri.respond_text
         end
       end
       

@@ -6,12 +6,17 @@ module RailsWechat::WechatResponse
     
     belongs_to :wechat_config
     belongs_to :effective, polymorphic: true, optional: true
+    has_many :response_items, dependent: :nullify
     
     validates :match_value, presence: true
     
     before_validation do
       self.match_value ||= "#{effective_type}_#{effective_id}"
     end
+  end
+  
+  def response_text
+    wr.response
   end
 
   def invoke_effect(wechat_user)

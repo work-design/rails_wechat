@@ -20,7 +20,7 @@
       <th class="five wide"><%= WechatFeedback.human_attribute_name(:body) %></th>
       <th class="five wide"><%= WechatFeedback.human_attribute_name(:extractions) %></th>
       <th class="two wide"><%= WechatFeedback.human_attribute_name(:feedback_on) %></th>
-      <th class="one wide"><%= WechatFeedback.human_attribute_name(:kind) %></th>
+      <th class="one wide"><%= WechatFeedback.human_attribute_name(:response_items) %></th>
       <th class="one wide">
         <%= link_to find_data_list_table_lists_path('FeedbackDailyExport', params.permit(:date).merge(date: Date.today)), class: 'ui mini blue button', remote: true do %>
           <i class="file excel icon"></i><%= t('.export') %>
@@ -51,7 +51,7 @@
         </table>
       </td>
       <td><%= wechat_feedback.feedback_on %></td>
-      <td><%= wechat_feedback.kind %></td>
+      <td></td>
       <td>
         <%= link_to panel_wechat_config_wechat_feedback_path(@wechat_config, wechat_feedback), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>
