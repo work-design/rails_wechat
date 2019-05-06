@@ -67,6 +67,8 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.string :qrcode_ticket
       t.string :qrcode_url
       t.string :response
+      t.time :start_at
+      t.time :finish_at
       t.timestamps
     end
     

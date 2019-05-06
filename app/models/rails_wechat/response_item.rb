@@ -5,7 +5,7 @@ module RailsWechat::ResponseItem
     attribute :respond_on, :date, default: -> { Date.today }
     attribute :respond_in, :string, default: -> { Date.today.strftime('%Y%m') }
     
-    acts_as_list scope: [:wechat_config_id, :wechat_respond_id, :respond_in]
+    acts_as_list scope: [:wechat_respond_id, :respond_in]
     
     belongs_to :wechat_response
     belongs_to :wechat_feedback
