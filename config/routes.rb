@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   scope :panel, module: 'wechat/panel', as: 'panel' do
     resources :wechat_configs do
+      get 'help' => :edit_help, on: :member
       resources :wechat_menus do
         post :sync, on: :collection
       end

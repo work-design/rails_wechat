@@ -1,0 +1,8 @@
+<%= form_with model: [:panel, @wechat_config] do |f| %>
+  <%= render 'shared/error_messages', target: @wechat_config %>
+  <%= f.text_area :help %>
+  <%= f.text_field :help_without_user %>
+  <%= f.text_field :help_user_disabled %>
+  <%= f.text_field :help_feedback %>
+  <%= f.submit %>
+<% end %>

@@ -19,7 +19,7 @@ class Wechat::WechatsController < ApplicationController
         end
       end
       
-      msg = "工作计划提交成功，你的票号为： #{res.join(', ')}"
+      msg = "#{@wechat_config.help_feedback}#{res.join(', ')}"
     else
       msg = @wechat_config.help
     end

@@ -1,5 +1,5 @@
 class Wechat::Panel::WechatConfigsController < Wechat::Panel::BaseController
-  before_action :set_wechat_config, only: [:show, :edit, :update, :destroy]
+  before_action :set_wechat_config, only: [:show, :edit, :edit_help, :update, :destroy]
 
   def index
     @wechat_configs = current_organ.wechat_configs
@@ -31,6 +31,10 @@ class Wechat::Panel::WechatConfigsController < Wechat::Panel::BaseController
   end
 
   def edit
+  end
+  
+  def edit_help
+  
   end
 
   def update
@@ -76,7 +80,8 @@ class Wechat::Panel::WechatConfigsController < Wechat::Panel::BaseController
       :timeout,
       :help,
       :help_without_user,
-      :help_user_disabled
+      :help_user_disabled,
+      :help_feedback
     )
   end
 
