@@ -2,7 +2,8 @@
 <%= f.select :type, options_for_select(WechatResponse.options_i18n(:type), @wechat_response.type) %>
 <%= f.text_field :name %>
 <%= f.text_field :match_value %>
-<%= f.text_field :response %>
+<%= f.text_field :valid_response %>
+<%= f.text_field :invalid_response %>
 <%= f.time_select :start_at, default: '0:00'.to_time %>
-<%= f.time_select :finish_at, default: '24:00'.to_time %>
+<%= f.time_select :finish_at, default: '23:59'.to_time %>
 <%= f.submit %>

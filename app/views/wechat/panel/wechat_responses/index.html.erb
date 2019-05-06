@@ -19,7 +19,10 @@
       <th><%= WechatResponse.human_attribute_name(:type) %></th>
       <th><%= WechatResponse.human_attribute_name(:name) %></th>
       <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
-      <th><%= WechatResponse.human_attribute_name(:response) %></th>
+      <th>
+        <p class="ui green text"><%= WechatResponse.human_attribute_name(:valid_response) %></p>
+        <p class="ui red text"><%= WechatResponse.human_attribute_name(:invalid_response) %></p>
+      </th>
       <th>
         <p><%= WechatResponse.human_attribute_name(:start_at) %></p>
         <p><%= WechatResponse.human_attribute_name(:finish_at) %></p>
@@ -43,7 +46,10 @@
           <%= image_tag wechat_response.qrcode_file, class: 'ui small image' %>
         <% end %>
       </td>
-      <td><%= wechat_response.response %></td>
+      <td>
+        <p class="ui green text"><%= wechat_response.valid_response %></p>
+        <p class="ui red text"><%= wechat_response.invalid_response %></p>
+      </td>
       <td>
         <p><%= wechat_response.start_at.to_s(:time) %></p>
         <p><%= wechat_response.finish_at.to_s(:time) %></p>

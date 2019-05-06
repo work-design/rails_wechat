@@ -72,10 +72,11 @@ class Wechat::Panel::WechatResponsesController < Wechat::Panel::BaseController
       :type,
       :name,
       :match_value,
-      :response,
       :expire_seconds,
       :start_at,
-      :finish_at
+      :finish_at,
+      :valid_response,
+      :invalid_response
     )
   end
 

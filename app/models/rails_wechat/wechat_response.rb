@@ -3,6 +3,8 @@ module RailsWechat::WechatResponse
   included do
     attribute :type, :string, default: 'TextResponse'
     attribute :match_value, :string
+    attribute :start_at, :time, default: -> { '0:00'.to_time }
+    attribute :finish_at, :time, default: -> { '23:59'.to_time }
     
     belongs_to :wechat_config
     belongs_to :effective, polymorphic: true, optional: true
