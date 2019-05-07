@@ -21,7 +21,7 @@
       <th class="five wide"><%= WechatFeedback.human_attribute_name(:extractions) %></th>
       <th class="five wide"><%= WechatFeedback.human_attribute_name(:response_items) %></th>
       <th class="two wide">
-        <%= link_to find_data_list_table_lists_path('FeedbackDailyExport', params.permit(:date).merge(date: Date.today)), class: 'ui mini blue button', remote: true do %>
+        <%= link_to find_data_list_table_lists_path('FeedbackDailyExport', params.permit('feedback_on-gte', 'feedback_on-lte')), class: 'ui mini blue button', remote: true do %>
           <i class="file excel icon"></i><%= t('.export') %>
         <% end %>
       </th>
