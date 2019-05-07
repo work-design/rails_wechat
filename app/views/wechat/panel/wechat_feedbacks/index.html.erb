@@ -38,7 +38,7 @@
           <%= link_to wechat_feedback.wechat_user.name, admin_oauth_user_path(wechat_feedback.wechat_user_id) %>
         <% end %>
       </td>
-      <td><%= wechat_feedback.feedback_on %></td>
+      <td><time><%= wechat_feedback.created_at.to_s(:rfc822) %></time></td>
       <td>
         <table class="ui very basic table">
         <% wechat_feedback.extractions.each do |ex| %>
