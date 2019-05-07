@@ -12,9 +12,9 @@
       <td class="right aligned"><%= WechatFeedback.human_attribute_name(:wechat_user_id) %></td>
       <td>
         <% if @wechat_feedback.wechat_user.user %>
-          <%= link_to @wechat_feedback.wechat_user.user.name, panel_user_path(@wechat_feedback.wechat_user.user_id) %>
+          <%= link_to @wechat_feedback.wechat_user.user.name, admin_user_path(@wechat_feedback.wechat_user.user_id) %>
         <% else %>
-          <%= link_to @wechat_feedback.wechat_user.name, panel_user_path(@wechat_feedback.wechat_user.name) %>
+          <%= link_to @wechat_feedback.wechat_user.name, admin_user_path(@wechat_feedback.wechat_user.name) %>
         <% end %>
       </td>
     </tr>
@@ -25,10 +25,6 @@
     <tr>
       <td class="right aligned"><%= WechatFeedback.human_attribute_name(:feedback_on) %></td>
       <td><%= @wechat_feedback.feedback_on %></td>
-    </tr>
-    <tr>
-      <td class="right aligned"><%= WechatFeedback.human_attribute_name(:kind) %></td>
-      <td><%= @wechat_feedback.kind %></td>
     </tr>
   </tbody>
 </table>
