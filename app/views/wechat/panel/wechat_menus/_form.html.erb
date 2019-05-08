@@ -1,9 +1,7 @@
-<%= form_with model: [:panel, @wechat_config, @wechat_menu] do |f| %>
-  <%= render 'shared/error_messages', target: @wechat_menu %>
-  <%= f.select :type, options_for_select(WechatMenu.options_i18n(:type), @wechat_menu.type) %>
-  <%= f.text_field :name, required: true %>
-  <%= f.text_field :value, required: true %>
-  <%= f.text_field :appid %>
-  <%= f.text_field :pagepath %>
-  <%= f.submit %>
-<% end %>
+<%= render 'shared/error_messages', target: @wechat_menu %>
+<%= f.select :type, options_for_select(WechatMenu.options_i18n(:type), @wechat_menu.type) %>
+<%= f.text_field :name, required: true %>
+<%= f.text_field :value, required: true %>
+<%= f.text_field :appid %>
+<%= f.text_field :pagepath %>
+<%= f.submit %>

@@ -9,7 +9,7 @@ class Wechat::My::WechatUsersController < Wechat::My::BaseController
 
   def update
     if @wechat_user.update(wechat_user_params)
-      redirect_to wechat_users_url, notice: 'Wechat user was successfully updated.'
+      redirect_to wechat_users_url
     else
       render :edit
     end
@@ -17,7 +17,7 @@ class Wechat::My::WechatUsersController < Wechat::My::BaseController
 
   def destroy
     @wechat_user.destroy
-    redirect_to wechat_users_url, notice: 'Wechat user was successfully destroyed.'
+    redirect_to wechat_users_url
   end
 
   private
