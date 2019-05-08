@@ -2,6 +2,10 @@ zh:
   activerecord:
     attributes:
       wechat_config:
+        appid: 开发者ID(AppID)
+        secret: 开发者密码(AppSecret)
+        token: 令牌(Token)
+        encoding_aes_key: 消息加解密密钥(EncodingAESKey)
         environment: 环境
         account: 账号
         enabled: 启用
