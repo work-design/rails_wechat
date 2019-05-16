@@ -36,7 +36,7 @@ class Wechat::WechatsController < ApplicationController
       {
         title: '请注册',
         description: '注册信息',
-        url: sign_url(oauth_user_id: @wechat_user.id)
+        url: sign_url(uid: @wechat_user.uid)
       }
     ]
   
@@ -67,7 +67,7 @@ class Wechat::WechatsController < ApplicationController
       {
         title: '请注册',
         description: '注册信息',
-        url: sign_url(oauth_user_id: @wechat_user.id)
+        url: sign_url(uid: @wechat_user.uid)
       }
     ]
     
