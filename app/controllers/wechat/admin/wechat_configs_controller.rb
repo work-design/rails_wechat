@@ -2,7 +2,9 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
   before_action :set_wechat_config, only: [:show, :edit, :edit_help, :update, :destroy]
 
   def index
-    @wechat_configs = current_organ.wechat_configs
+    q_params = {}
+    q_params.merge! default_params
+    @wechat_configs = WechatConfig.default_where(q_params)
   end
 
   def new
@@ -66,7 +68,7 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
   end
   
   def wechat_config_params
-    params.fetch(:wechat_config, {}).permit(
+    p = params.fetch(:wechat_config, {}).permit(
       :account,
       :enabled,
       :appid,
@@ -83,6 +85,7 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
       :help_user_disabled,
       :help_feedback
     )
+    p.merge! default_params
   end
 
 end
