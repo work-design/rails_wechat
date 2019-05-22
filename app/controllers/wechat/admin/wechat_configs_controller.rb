@@ -1,8 +1,8 @@
-class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
-  before_action :set_wechat_config, only: [:show, :edit, :update, :destroy]
+class Wechat::Panel::WechatConfigsController < Wechat::Panel::BaseController
+  before_action :set_wechat_config, only: [:show, :edit, :edit_help, :update, :destroy]
 
   def index
-    @wechat_configs = WechatConfig.page(params[:page])
+    @wechat_configs = current_organ.wechat_configs
   end
 
   def new
@@ -11,26 +11,30 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
 
   def create
     @wechat_config = WechatConfig.new(wechat_config_params)
-
+  
     respond_to do |format|
       if @wechat_config.save
         format.html.phone
-        format.html { redirect_to admin_wechat_configs_url }
-        format.js { redirect_back fallback_location: admin_wechat_configs_url }
+        format.html { redirect_to panel_wechat_configs_url }
+        format.js { redirect_back fallback_location: panel_wechat_configs_url }
         format.json { render :show }
       else
         format.html.phone { render :new }
         format.html { render :new }
-        format.js { redirect_back fallback_location: admin_wechat_configs_url }
+        format.js { redirect_back fallback_location: panel_wechat_configs_url }
         format.json { render :show }
       end
     end
   end
-
+  
   def show
   end
 
   def edit
+  end
+  
+  def edit_help
+  
   end
 
   def update
@@ -39,13 +43,13 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
     respond_to do |format|
       if @wechat_config.save
         format.html.phone
-        format.html { redirect_to admin_wechat_configs_url }
-        format.js { redirect_back fallback_location: admin_wechat_configs_url }
+        format.html { redirect_to panel_wechat_configs_url }
+        format.js { redirect_back fallback_location: panel_wechat_configs_url }
         format.json { render :show }
       else
         format.html.phone { render :edit }
         format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_wechat_configs_url }
+        format.js { redirect_back fallback_location: panel_wechat_configs_url }
         format.json { render :show }
       end
     end
@@ -53,17 +57,16 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
 
   def destroy
     @wechat_config.destroy
-    redirect_to admin_wechat_configs_url
+    redirect_to panel_wechat_configs_url
   end
 
   private
   def set_wechat_config
-    @wechat_config = WechatConfig.find(params[:id])
+    @wechat_config = current_organ.wechat_configs.find(params[:id])
   end
-
+  
   def wechat_config_params
     params.fetch(:wechat_config, {}).permit(
-      :environment,
       :account,
       :enabled,
       :appid,
@@ -74,11 +77,11 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
       :encrypt_mode,
       :encoding_aes_key,
       :token,
-      :access_token,
-      :jsapi_ticket,
-      :skip_verify_ssl,
       :timeout,
-      :trusted_domain_fullname
+      :help,
+      :help_without_user,
+      :help_user_disabled,
+      :help_feedback
     )
   end
 

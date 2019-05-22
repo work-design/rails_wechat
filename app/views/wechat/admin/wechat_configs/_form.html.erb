@@ -1,22 +1,13 @@
-<%= form_with model: [:admin, @wechat_config] do |f| %>
+<%= form_with model: [:panel, @wechat_config] do |f| %>
   <%= render 'shared/error_messages', target: @wechat_config %>
-  <%= f.text_field :environment, required: true %>
   <%= f.text_field :account %>
-  <%= f.check_box :enabled %>
   <%= f.text_field :appid %>
   <%= f.text_field :secret %>
   <%= f.text_field :token %>
+  <%= f.text_field :encoding_aes_key %>
   <h4 class="ui dividing center aligned header">Corp</h4>
   <%= f.text_field :corpid %>
   <%= f.text_field :corpsecret %>
   <%= f.text_field :agentid %>
-  <%= f.check_box :encrypt_mode %>
-  <%= f.text_field :encoding_aes_key %>
-  <%= f.text_field :access_token %>
-  <%= f.text_field :jsapi_ticket %>
-  <%= f.check_box :skip_verify_ssl %>
-  <%= f.number_field :timeout %>
-  <%= f.text_field :trusted_domain_fullname %>
-  <%= f.text_area :help %>
   <%= f.submit %>
 <% end %>

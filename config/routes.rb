@@ -20,10 +20,6 @@ Rails.application.routes.draw do
       end
       resources :wechat_feedbacks, except: [:new, :create]
     end
-  end
-
-  scope :admin, module: 'wechat/admin', as: :admin do
-    resources :wechat_configs
     resources :extractors
   end
 
