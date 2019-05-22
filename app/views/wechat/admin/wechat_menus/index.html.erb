@@ -1,8 +1,8 @@
 <% content_for :breadcrumb do %>
   <div class="ui basic segment breadcrumb">
-    <%= link_to t('wechat.panel.wechat_configs.index.title'), panel_wechat_configs_path, class: 'section' %>
+    <%= link_to t('wechat.admin.wechat_configs.index.title'), admin_wechat_configs_path, class: 'section' %>
     <i class="fas fa-angle-right divider"></i>
-    <%= link_to @wechat_config.account, panel_wechat_configs_path(id: @wechat_config.id), class: 'section' %>
+    <%= link_to @wechat_config.account, admin_wechat_configs_path(id: @wechat_config.id), class: 'section' %>
     <i class="fas fa-angle-right divider"></i>
     <div class="section"><%= t('.title') %></div>
   </div>
@@ -22,10 +22,10 @@
       <th><%= WechatMenu.human_attribute_name(:appid) %></th>
       <th><%= WechatMenu.human_attribute_name(:pagepath) %></th>
       <th>
-        <%= link_to sync_panel_wechat_config_wechat_menus_path(@wechat_config), method: :post, class: 'ui mini green button' do %>
+        <%= link_to sync_admin_wechat_config_wechat_menus_path(@wechat_config), method: :post, class: 'ui mini green button' do %>
           <i class="fas fa-sync"></i><% t('.sync') %>
         <% end %>
-        <%= link_to new_panel_wechat_config_wechat_menu_path(@wechat_config), remote: true, class: 'ui mini green button' do %>
+        <%= link_to new_admin_wechat_config_wechat_menu_path(@wechat_config), remote: true, class: 'ui mini green button' do %>
           <i class="fas fa-plus"></i><% t('.new') %>
         <% end %>
       </th>
@@ -41,10 +41,10 @@
       <td><%= wechat_menu.appid %></td>
       <td><%= wechat_menu.pagepath %></td>
       <td>
-        <%= link_to edit_panel_wechat_config_wechat_menu_path(@wechat_config, wechat_menu), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to edit_admin_wechat_config_wechat_menu_path(@wechat_config, wechat_menu), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to panel_wechat_config_wechat_menu_path(@wechat_config, wechat_menu), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_wechat_config_wechat_menu_path(@wechat_config, wechat_menu), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>

@@ -1,6 +1,6 @@
 zh:
   wechat:
-    panel:
+    admin:
       wechat_configs:
         index:
           title: 微信设置

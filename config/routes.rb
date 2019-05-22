@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   scope :my, module: 'wechat/my', as: :my do
   end
 
-  scope :panel, module: 'wechat/panel', as: 'panel' do
+  scope :admin, module: 'wechat/admin', as: 'admin' do
     resources :wechat_configs do
       get 'help' => :edit_help, on: :member
       resources :wechat_menus do

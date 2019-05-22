@@ -1,4 +1,4 @@
-class Wechat::Panel::BaseController < PanelController
+class Wechat::Admin::BaseController < AdminController
   
   private
   def set_wechat_config
