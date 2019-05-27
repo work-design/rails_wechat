@@ -6,6 +6,8 @@ module RailsWechat::WechatConfig
     attribute :help_without_user, :string, default: '请注册后使用'
     attribute :help_user_disabled, :string, default: '你没有权限'
     attribute :help_feedback, :string, default: '你的反馈已收到'
+    attribute :access_token, :string, default: './access_token'
+    attribute :jsapi_ticket, :string, default: './jsapi_ticket'
     
     has_many :wechat_menus, dependent: :destroy
     has_many :text_responses, dependent: :destroy
