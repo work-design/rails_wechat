@@ -8,6 +8,8 @@ module RailsWechat::WechatConfig
     attribute :help_feedback, :string, default: '你的反馈已收到'
     attribute :access_token, :string, default: './access_token'
     attribute :jsapi_ticket, :string, default: './jsapi_ticket'
+    attribute :corpid, :string, default: nil
+    attribute :corpsecret, :string, default: nil
     
     has_many :wechat_menus, dependent: :destroy
     has_many :text_responses, dependent: :destroy

@@ -30,7 +30,7 @@ module Wechat
     end
 
     private_class_method def self.loading_config!
-      configs = config_from_file || config_from_environment
+      configs = config_from_file
       configs.merge!(config_from_db)
 
       configs.symbolize_keys!
@@ -68,8 +68,7 @@ module Wechat
         return {}
       end
 
-      environment = defined?(::Rails) ? Rails.env.to_s : ENV['RAILS_ENV'] || 'development'
-      WechatConfig.get_all_configs(environment)
+      WechatConfig.get_all_configs(Rails.env)
     end
 
     private_class_method def self.config_from_file
@@ -117,23 +116,6 @@ module Wechat
         end
         configs
       end
-    end
-
-    private_class_method def self.config_from_environment
-      value = { appid: ENV['WECHAT_APPID'],
-        secret: ENV['WECHAT_SECRET'],
-        corpid: ENV['WECHAT_CORPID'],
-        corpsecret: ENV['WECHAT_CORPSECRET'],
-        agentid: ENV['WECHAT_AGENTID'],
-        token: ENV['WECHAT_TOKEN'],
-        access_token: ENV['WECHAT_ACCESS_TOKEN'],
-        encrypt_mode: ENV['WECHAT_ENCRYPT_MODE'],
-        timeout: ENV['WECHAT_TIMEOUT'],
-        skip_verify_ssl: ENV['WECHAT_SKIP_VERIFY_SSL'],
-        encoding_aes_key: ENV['WECHAT_ENCODING_AES_KEY'],
-        jsapi_ticket: ENV['WECHAT_JSAPI_TICKET'],
-        trusted_domain_fullname: ENV['WECHAT_TRUSTED_DOMAIN_FULLNAME'] }
-      {default: value}
     end
 
     private_class_method def self.class_exists?(class_name)
