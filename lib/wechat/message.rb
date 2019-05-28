@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Wechat
   class Message
     class << self
@@ -208,23 +210,28 @@ module Wechat
     end
 
     TO_JSON_KEY_MAP = {
-      'TextCard'         => 'textcard',
-      'Markdown'         => 'markdown',
-      'ToUserName'       => 'touser',
-      'ToPartyName'     => 'toparty',
-      'ToWxName'         => 'towxname',
-      'MediaId'          => 'media_id',
-      'MpNews'           => 'mpnews',
-      'ThumbMediaId'     => 'thumb_media_id',
-      'TemplateId'       => 'template_id',
-      'FormId'           => 'form_id',
+      'TextCard' => 'textcard',
+      'Markdown' => 'markdown',
+      'ToUserName' => 'touser',
+      'ToPartyName' => 'toparty',
+      'ToWxName' => 'towxname',
+      'MediaId' => 'media_id',
+      'MpNews' => 'mpnews',
+      'ThumbMediaId' => 'thumb_media_id',
+      'TemplateId' => 'template_id',
+      'FormId' => 'form_id',
       'ContentSourceUrl' => 'content_source_url',
-      'ShowCoverPic'     => 'show_cover_pic'
+      'ShowCoverPic' => 'show_cover_pic'
     }.freeze
 
-    TO_JSON_ALLOWED = %w[touser toparty msgtype content image voice video file textcard markdown
-                         music news articles template agentid filter
-                         send_ignore_reprint mpnews towxname].freeze
+    TO_JSON_ALLOWED = [
+      'touser',
+      'toparty',
+      'msgtype',
+      'content', 'image', 'voice', 'video', 'file', 'textcard', 'markdown', 'music', 'news', 'articles',
+      'template', 'agentid', 'filter',
+      'send_ignore_reprint', 'mpnews', 'towxname',
+    ].freeze
 
     def to_json
       keep_camel_case_key = message_hash[:MsgType] == 'template'
