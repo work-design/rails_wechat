@@ -10,6 +10,7 @@ module RailsWechat::WechatConfig
     attribute :jsapi_ticket, :string, default: './jsapi_ticket'
     attribute :corpid, :string, default: nil
     attribute :corpsecret, :string, default: nil
+    attribute :type, :string
     
     has_many :wechat_menus, dependent: :destroy
     has_many :text_responses, dependent: :destroy

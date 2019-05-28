@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Wechat
   module Concern
     module Common
-      WXA_BASE    = 'https://api.weixin.qq.com/wxa/'.freeze
-      API_BASE    = 'https://api.weixin.qq.com/cgi-bin/'.freeze
-      OAUTH2_BASE = 'https://api.weixin.qq.com/sns/'.freeze
-      DATACUBE_BASE = 'https://api.weixin.qq.com/datacube/'.freeze
+      WXA_BASE = 'https://api.weixin.qq.com/wxa/'
+      API_BASE = 'https://api.weixin.qq.com/cgi-bin/'
+      OAUTH2_BASE = 'https://api.weixin.qq.com/sns/'
+      DATACUBE_BASE = 'https://api.weixin.qq.com/datacube/'
 
       def initialize(appid, secret, token_file, timeout, skip_verify_ssl, jsapi_ticket_file)
         @client = HttpClient.new(API_BASE, timeout, skip_verify_ssl)
