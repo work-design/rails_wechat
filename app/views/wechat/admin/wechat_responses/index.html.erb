@@ -43,7 +43,7 @@
       <td>
         <%= wechat_response.match_value %>
         <% if wechat_response.is_a?(ScanResponse) %>
-          <%= image_tag wechat_response.qrcode_file, class: 'ui small image' %>
+          <%= image_tag wechat_response.qrcode_file, class: 'ui small image' if wechat_response.qrcode_file.attached? %>
         <% end %>
       </td>
       <td>
