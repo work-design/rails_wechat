@@ -172,8 +172,7 @@ module Wechat
         end
       end
 
-      update(MsgType: 'news', ArticleCount: items.count,
-             Articles: items.collect { |item| camelize_hash_keys(item) })
+      update(MsgType: 'news', ArticleCount: items.count, Articles: items.collect { |item| camelize_hash_keys(item) })
     end
 
     def mpnews(collection, &_block)
