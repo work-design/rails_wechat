@@ -1,6 +1,5 @@
 class Wechat::WechatsController < ApplicationController
-  wechat_responder account_from_message: Proc.new{ |request| request.params[:id] }
-  before_action :set_wechat_config, only: [:create]
+  include Wechat::Responder
   
   on :text do |message, content|
     set_wechat_user(message)
@@ -26,7 +25,7 @@ class Wechat::WechatsController < ApplicationController
     else
       msg = @wechat_config.help
     end
-    
+
     message.reply.text msg
   end
   
@@ -75,10 +74,6 @@ class Wechat::WechatsController < ApplicationController
   end
   
   private
-  def set_wechat_config
-    @wechat_config = WechatConfig.find_by account: params[:id]
-  end
-  
   def get_response(message)
     set_wechat_user(message)
     key = message[:EventKey].to_s.delete_prefix('qrscene_')

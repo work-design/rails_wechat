@@ -21,8 +21,8 @@ module Wechat
 
     def self.config(account = :default)
       account = :default if account.nil?
-      @configs ||= loading_config!
-      @configs[account.to_sym] || raise("Wechat configuration for #{account} is missing.")
+      r = WechatConfig.valid.find_by(account: account)
+      r || raise("Wechat configuration for #{account} is missing.")
     end
 
     def self.reload_config!

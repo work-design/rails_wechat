@@ -1,6 +1,7 @@
 module Wechat
   class Message
     class << self
+      
       def from_hash(message_hash)
         new(message_hash)
       end
@@ -69,7 +70,7 @@ module Wechat
     end
 
     def session
-      return nil unless Wechat.config.have_session_class
+      return nil unless defined?(WechatSession)
       @message_hash[:WechatSession] ||= WechatSession.find_or_initialize_session(underscore_hash_keys(message_hash))
     end
 

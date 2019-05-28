@@ -19,21 +19,14 @@ module RailsWechat::WechatConfig
     
     has_many :extractors
     
+    scope :valid, -> { where(enabled: true, environment: Rails.env.to_s) }
+    
     validates :environment, presence: true
     validates :account, presence: true, uniqueness: { scope: [:environment] }
     validates :token, presence: true
     validates :encoding_aes_key, presence: { if: :encrypt_mode? }
 
     validate :app_config_is_valid
-  end
-
-  class_methods do
-    def get_all_configs(environment)
-      WechatConfig.where(environment: environment, enabled: true).inject({}) do |hash, config|
-        hash[config.account] = config.build_config_hash
-        hash
-      end
-    end
   end
   
   def menu

@@ -49,4 +49,6 @@ module Wechat
   end
 end
 
-ActionView::Base.send :include, Wechat::Helpers if defined? ActionView::Base
+ActiveSupport.on_load :action_view do
+  include Wechat::Helpers
+end
