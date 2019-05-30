@@ -9,11 +9,11 @@ module Wechat
 
     API_BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'.freeze
 
-    def initialize(appid, secret, token_file, agentid, timeout, skip_verify_ssl, jsapi_ticket_file)
+    def initialize(appid, secret, agentid, timeout, skip_verify_ssl)
       @client = HttpClient.new(API_BASE, timeout, skip_verify_ssl)
-      @access_token = Token::CorpAccessToken.new(@client, appid, secret, token_file)
+      @access_token = Token::CorpAccessToken.new(@client, appid, secret)
       @agentid = agentid
-      @jsapi_ticket = Ticket::CorpJsapiTicket.new(@client, @access_token, jsapi_ticket_file)
+      @jsapi_ticket = Ticket::CorpJsapiTicket.new(@client, @access_token)
     end
 
     def agent_list

@@ -4,12 +4,11 @@ require 'securerandom'
 module Wechat
   module Ticket
     class JsapiBase
-      attr_reader :client, :access_token, :jsapi_ticket_file, :access_ticket, :ticket_life_in_seconds, :got_ticket_at
+      attr_reader :client, :access_token, :access_ticket, :ticket_life_in_seconds, :got_ticket_at
 
-      def initialize(client, access_token, jsapi_ticket_file)
+      def initialize(client, access_token)
         @client = client
         @access_token = access_token
-        @jsapi_ticket_file = jsapi_ticket_file
         @random_generator = Random.new
       end
 

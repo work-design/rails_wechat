@@ -30,10 +30,11 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
 
       # app token
       t.string :token, null: false
-      # path to access token storage file
-      t.string :access_token, null: false
-      # path to jsapi ticket storage file
-      t.string :jsapi_ticket, null: false
+      
+      t.string :access_token
+      t.datetime :access_token_expires_at
+      t.string :jsapi_ticket
+      t.datetime :jsapi_ticket_expires_at
       # set to false if RestClient::SSLCertificateNotVerified is thrown
       t.boolean :skip_verify_ssl, default: true
       t.integer :timeout, default: 20
