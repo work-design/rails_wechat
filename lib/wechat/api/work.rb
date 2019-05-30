@@ -1,13 +1,10 @@
-require 'wechat/api_base'
 require 'wechat/http_client'
 require 'wechat/token/corp_access_token'
 require 'wechat/ticket/corp_jsapi_ticket'
 
-module Wechat
-  class CorpApi < ApiBase
-    attr_reader :agentid
-
-    API_BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'.freeze
+module Wechat::Api
+  class Work < Base
+    API_BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
     def initialize(appid, secret, agentid, timeout, skip_verify_ssl)
       @client = HttpClient.new(API_BASE, timeout, skip_verify_ssl)
@@ -42,7 +39,7 @@ module Wechat
     end
 
     def convert_to_openid(userid)
-      post 'user/convert_to_openid', JSON.generate(userid: userid, agentid: agentid)
+      post 'user/convert_to_openid', JSON.generate(userid: userid, agentid: @agentid)
     end
 
     def invite_user(userid)
@@ -134,44 +131,44 @@ module Wechat
     end
 
     def menu
-      get 'menu/get', params: { agentid: agentid }
+      get 'menu/get', params: { agentid: @agentid }
     end
 
     def menu_delete
-      get 'menu/delete', params: { agentid: agentid }
+      get 'menu/delete', params: { agentid: @agentid }
     end
 
     def menu_create(menu)
       # 微信不接受7bit escaped json(eg \uxxxx), 中文必须UTF-8编码, 这可能是个安全漏洞
-      post 'menu/create', JSON.generate(menu), params: { agentid: agentid }
+      post 'menu/create', JSON.generate(menu), params: { agentid: @agentid }
     end
 
     def material_count
-      get 'material/get_count', params: { agentid: agentid }
+      get 'material/get_count', params: { agentid: @agentid }
     end
 
     def material_list(type, offset, count)
-      post 'material/batchget', JSON.generate(type: type, agentid: agentid, offset: offset, count: count)
+      post 'material/batchget', JSON.generate(type: type, agentid: @agentid, offset: offset, count: count)
     end
 
     def material(media_id)
-      get 'material/get', params: { media_id: media_id, agentid: agentid }, as: :file
+      get 'material/get', params: { media_id: media_id, agentid: @agentid }, as: :file
     end
 
     def material_add(type, file)
-      post_file 'material/add_material', file, params: { type: type, agentid: agentid }
+      post_file 'material/add_material', file, params: { type: type, agentid: @agentid }
     end
 
     def material_delete(media_id)
-      get 'material/del', params: { media_id: media_id, agentid: agentid }
+      get 'material/del', params: { media_id: media_id, agentid: @agentid }
     end
 
     def message_send(userid, message)
-      post 'message/send', Message.to(userid).text(message).agent_id(agentid).to_json, content_type: :json
+      post 'message/send', Message.to(userid).text(message).agent_id(@agentid).to_json, content_type: :json
     end
 
     def custom_message_send(message)
-      post 'message/send', message.is_a?(Wechat::Message) ? message.agent_id(agentid).to_json : JSON.generate(message.merge(agent_id: agentid)), content_type: :json
+      post 'message/send', message.is_a?(Wechat::Message) ? message.agent_id(@agentid).to_json : JSON.generate(message.merge(agent_id: @agentid)), content_type: :json
     end
   end
 end

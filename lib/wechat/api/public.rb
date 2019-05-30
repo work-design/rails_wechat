@@ -4,9 +4,8 @@ require 'wechat/token/public_access_token'
 require 'wechat/ticket/public_jsapi_ticket'
 require 'wechat/concern/common'
 
-module Wechat
-  class Api < ApiBase
-    include Concern::Common
+module Wechat::Api
+  class Public < Common
 
     def template_message_send(message)
       post 'message/template/send', message.to_json, content_type: :json
