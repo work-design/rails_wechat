@@ -1,14 +1,15 @@
-class Wechat::Api::Common < Wechat::Api::Base
+# frozen_string_literal: true
 
+class Wechat::Api::Common < Wechat::Api::Base
   WXA_BASE = 'https://api.weixin.qq.com/wxa/'
   API_BASE = 'https://api.weixin.qq.com/cgi-bin/'
   OAUTH2_BASE = 'https://api.weixin.qq.com/sns/'
   DATACUBE_BASE = 'https://api.weixin.qq.com/datacube/'
   
-  def initialize(appid, secret, timeout, skip_verify_ssl)
+  def initialize(app, timeout, skip_verify_ssl)
     @client = Wechat::HttpClient.new(API_BASE, timeout, skip_verify_ssl)
-    @access_token = Wechat::Token::PublicAccessToken.new(@client, appid, secret)
-    @jsapi_ticket = Wechat::Ticket::PublicJsapiTicket.new(@client, appid, @access_token)
+    @access_token = Wechat::Token::PublicAccessToken.new(@client, app)
+    @jsapi_ticket = Wechat::Ticket::PublicJsapiTicket.new(@client, app, @access_token)
   end
   
   def groups

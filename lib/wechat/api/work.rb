@@ -1,16 +1,14 @@
-require 'wechat/http_client'
-require 'wechat/token/corp_access_token'
-require 'wechat/ticket/corp_jsapi_ticket'
+# frozen_string_literal: true
 
 module Wechat::Api
   class Work < Base
     API_BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
-    def initialize(appid, secret, agentid, timeout, skip_verify_ssl)
+    def initialize(app, timeout, skip_verify_ssl)
       @client = Wechat::HttpClient.new(API_BASE, timeout, skip_verify_ssl)
-      @access_token = Wechat::Token::CorpAccessToken.new(@client, appid, secret)
-      @agentid = agentid
-      @jsapi_ticket = Wechat::Ticket::CorpJsapiTicket.new(@client, appid, @access_token)
+      @access_token = Wechat::Token::CorpAccessToken.new(@client, app)
+      @agentid = app.agentid
+      @jsapi_ticket = Wechat::Ticket::CorpJsapiTicket.new(@client, app, @access_token)
     end
 
     def agent_list

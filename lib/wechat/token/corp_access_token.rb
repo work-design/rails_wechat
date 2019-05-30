@@ -7,7 +7,7 @@ module Wechat
     class CorpAccessToken < AccessTokenBase
       
       def refresh
-        data = client.get('gettoken', params: { corpid: appid, corpsecret: secret })
+        data = @client.get('gettoken', params: { corpid: @app.appid, corpsecret: @app.secret })
         write_token_to_store(data)
       end
       

@@ -3,13 +3,10 @@
 module Wechat
   module Token
     class AccessTokenBase
-      attr_reader :client, :appid, :secret, :access_token
-
-      def initialize(client, appid, secret)
-        @appid = appid
-        @secret = secret
+      
+      def initialize(client, app)
         @client = client
-        @wechat_config = WechatConfig.where(environment: Rails.env.to_s).find_by(appid: @appid)
+        @wechat_config = app
       end
 
       def token

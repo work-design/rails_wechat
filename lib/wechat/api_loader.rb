@@ -3,15 +3,15 @@ module Wechat
     
     def self.with(options)
       account = options[:account] || :default
-      c = ApiLoader.config(account)
+      app = ApiLoader.config(account)
 
-      case c.kind
+      case app.kind
       when 'Public'
-        Wechat::Api::Public.new(c.appid, c.secret, c.timeout, c.skip_verify_ssl)
+        Wechat::Api::Public.new(app, app.timeout, app.skip_verify_ssl)
       when 'Program'
-        Wechat::Api::Program.new(c.appid, c.secret, c.timeout, c.skip_verify_ssl)
+        Wechat::Api::Program.new(app, app.timeout,app.skip_verify_ssl)
       when 'Work'
-        Wechat::Api::Work.new(c.corpid, c.corpsecret, c.agentid, c.timeout, c.skip_verify_ssl)
+        Wechat::Api::Work.new(app, app.timeout, app.skip_verify_ssl)
       else
         raise "Need create ~/.wechat.yml with wechat appid and secret or running at rails root folder so wechat can read config/wechat.yml"
       end
@@ -21,8 +21,8 @@ module Wechat
 
     def self.config(account = :default)
       account = :default if account.nil?
-      r = WechatConfig.valid.find_by(account: account)
-      r || raise("Wechat configuration for #{account} is missing.")
+      app = WechatConfig.valid.find_by(account: account)
+      app || raise("Wechat configuration for #{account} is missing.")
     end
 
     def self.reload_config!

@@ -1,4 +1,6 @@
 module Wechat::Api;end
+require_relative 'http_client'
+
 require_relative 'token/access_token_base'
 require_relative 'token/corp_access_token'
 require_relative 'token/public_access_token'

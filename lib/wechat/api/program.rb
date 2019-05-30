@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Wechat::Api
   class Program < Common
