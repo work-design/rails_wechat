@@ -9,7 +9,7 @@ module Wechat
         wx_class = (type == 'mp') ? Wechat::MpApi : Wechat::Api
         wx_class.new(c.appid, c.secret, c.timeout, c.skip_verify_ssl)
       elsif c.corpid && c.corpsecret
-        Wechat::CorpApi.new(c.corpid, c.corpsecret, c.agentid, c.timeout, c.skip_verify_ssl)
+        Wechat::Api::Work.new(c.corpid, c.corpsecret, c.agentid, c.timeout, c.skip_verify_ssl)
       else
         raise "Need create ~/.wechat.yml with wechat appid and secret or running at rails root folder so wechat can read config/wechat.yml"
       end
