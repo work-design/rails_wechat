@@ -7,10 +7,10 @@ module Wechat::Api
     API_BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
     def initialize(appid, secret, agentid, timeout, skip_verify_ssl)
-      @client = HttpClient.new(API_BASE, timeout, skip_verify_ssl)
-      @access_token = Token::CorpAccessToken.new(@client, appid, secret)
+      @client = Wechat::HttpClient.new(API_BASE, timeout, skip_verify_ssl)
+      @access_token = Wechat::Token::CorpAccessToken.new(@client, appid, secret)
       @agentid = agentid
-      @jsapi_ticket = Ticket::CorpJsapiTicket.new(@client, @access_token)
+      @jsapi_ticket = Wechat::Ticket::CorpJsapiTicket.new(@client, appid, @access_token)
     end
 
     def agent_list

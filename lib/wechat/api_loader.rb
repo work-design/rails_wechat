@@ -1,14 +1,16 @@
 module Wechat
   module ApiLoader
+    
     def self.with(options)
       account = options[:account] || :default
       c = ApiLoader.config(account)
 
-      type = options[:type] || c.type
-      if c.appid && c.secret
-        wx_class = (type == 'mp') ? Wechat::MpApi : Wechat::Api
-        wx_class.new(c.appid, c.secret, c.timeout, c.skip_verify_ssl)
-      elsif c.corpid && c.corpsecret
+      case c.kind
+      when 'Public'
+        Wechat::Api::Public.new(c.appid, c.secret, c.timeout, c.skip_verify_ssl)
+      when 'Program'
+        Wechat::Api::Program.new(c.appid, c.secret, c.timeout, c.skip_verify_ssl)
+      when 'Work'
         Wechat::Api::Work.new(c.corpid, c.corpsecret, c.agentid, c.timeout, c.skip_verify_ssl)
       else
         raise "Need create ~/.wechat.yml with wechat appid and secret or running at rails root folder so wechat can read config/wechat.yml"

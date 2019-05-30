@@ -1,4 +1,4 @@
-class Wechat::Api::Common
+class Wechat::Api::Common < Wechat::Api::Base
 
   WXA_BASE = 'https://api.weixin.qq.com/wxa/'
   API_BASE = 'https://api.weixin.qq.com/cgi-bin/'
@@ -6,9 +6,9 @@ class Wechat::Api::Common
   DATACUBE_BASE = 'https://api.weixin.qq.com/datacube/'
   
   def initialize(appid, secret, timeout, skip_verify_ssl)
-    @client = HttpClient.new(API_BASE, timeout, skip_verify_ssl)
-    @access_token = Token::PublicAccessToken.new(@client, appid, secret)
-    @jsapi_ticket = Ticket::PublicJsapiTicket.new(@client, appid, @access_token)
+    @client = Wechat::HttpClient.new(API_BASE, timeout, skip_verify_ssl)
+    @access_token = Wechat::Token::PublicAccessToken.new(@client, appid, secret)
+    @jsapi_ticket = Wechat::Ticket::PublicJsapiTicket.new(@client, appid, @access_token)
   end
   
   def groups
