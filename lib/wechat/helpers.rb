@@ -1,6 +1,7 @@
 module Wechat
   module Helpers
-    def wechat_config_js(config_options = {})
+    
+    def wechat_raw_config_js(config_options = {})
       account = config_options[:account]
 
       # Get domain_name, api and app_id
@@ -26,7 +27,7 @@ module Wechat
       page_url = page_url.split('#').first if is_ios?
       js_hash = api.jsapi_ticket.signature(page_url)
 
-      config_js = <<-WECHAT_CONFIG_JS
+      <<-WECHAT_CONFIG_JS
 wx.config({
   debug: #{config_options[:debug]},
   appId: "#{app_id}",
@@ -36,14 +37,18 @@ wx.config({
   jsApiList: ['#{config_options[:api].join("','")}']
 });
 WECHAT_CONFIG_JS
+    end
+
+    def wechat_config_js(config_options = {})
+      config_js = wechat_raw_config_js(config_options)
       javascript_tag config_js, type: 'application/javascript'
     end
 
     private
-
     def is_ios?
       controller.request.user_agent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
     end
+    
   end
 end
 
