@@ -15,20 +15,14 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.string :account, null: false
       t.boolean :enabled, default: true
 
-      # public account
       t.string :appid
       t.string :secret
-
-      # corp account
-      t.string :corpid
-      t.string :corpsecret
       t.integer :agentid
 
       # when encrypt_mode is true, encoding_aes_key must be specified
       t.boolean :encrypt_mode
       t.string :encoding_aes_key
 
-      # app token
       t.string :token, null: false
       
       t.string :access_token
@@ -40,7 +34,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.integer :timeout, default: 20
       t.string :trusted_domain_fullname
       t.string :help, limit: 1024
-      t.timestamps null: false
+      t.timestamps
     end
 
     add_index :wechat_configs, [:environment, :account], unique: true, length: {environment: 20, account: 100}

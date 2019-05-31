@@ -6,8 +6,8 @@ class Wechat::Api::Common < Wechat::Api::Base
   OAUTH2_BASE = 'https://api.weixin.qq.com/sns/'
   DATACUBE_BASE = 'https://api.weixin.qq.com/datacube/'
   
-  def initialize(app, timeout, skip_verify_ssl)
-    @client = Wechat::HttpClient.new(API_BASE, timeout, skip_verify_ssl)
+  def initialize(app)
+    @client = Wechat::HttpClient.new(API_BASE)
     @access_token = Wechat::Token::PublicAccessToken.new(@client, app)
     @jsapi_ticket = Wechat::Ticket::PublicJsapiTicket.new(@client, app, @access_token)
   end

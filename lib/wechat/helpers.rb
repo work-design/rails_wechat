@@ -17,12 +17,13 @@ module Wechat
         app_id = config.corpid || config.appid
       end
 
-      page_url = if domain_name
-                   "#{domain_name}#{controller.request.original_fullpath}"
-                 else
-                   controller.request.original_url
-                 end
-      page_url = page_url.split('#').first if is_ios? 
+      if domain_name
+        page_url = "#{domain_name}#{controller.request.original_fullpath}"
+      else
+        page_url = controller.request.original_url
+      end
+      
+      page_url = page_url.split('#').first if is_ios?
       js_hash = api.jsapi_ticket.signature(page_url)
 
       config_js = <<-WECHAT_CONFIG_JS
@@ -44,4 +45,8 @@ WECHAT_CONFIG_JS
       controller.request.user_agent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
     end
   end
+end
+
+ActiveSupport.on_load :action_view do
+  include Wechat::Helpers
 end

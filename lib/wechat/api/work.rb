@@ -4,8 +4,8 @@ module Wechat::Api
   class Work < Base
     API_BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
-    def initialize(app, timeout, skip_verify_ssl)
-      @client = Wechat::HttpClient.new(API_BASE, timeout, skip_verify_ssl)
+    def initialize(app)
+      @client = Wechat::HttpClient.new(API_BASE)
       @access_token = Wechat::Token::CorpAccessToken.new(@client, app)
       @agentid = app.agentid
       @jsapi_ticket = Wechat::Ticket::CorpJsapiTicket.new(@client, app, @access_token)

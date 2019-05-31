@@ -51,47 +51,31 @@ module Wechat
                    Content: content, Digest: digest, ShowCoverPic: show_cover_pic }.reject { |_k, v| v.nil? }
       end
     end
-
-    attr_reader :message_hash
-
+    
     def initialize(message_hash)
       @message_hash = message_hash || {}
     end
 
     def [](key)
-      message_hash[key]
+      @message_hash[key]
     end
 
     def reply
       Message.new(
-        ToUserName: message_hash[:FromUserName],
-        FromUserName: message_hash[:ToUserName],
-        CreateTime: Time.now.to_i,
-        WechatSession: session
+        ToUserName: @message_hash[:FromUserName],
+        FromUserName: @message_hash[:ToUserName],
+        CreateTime: Time.now.to_i
       )
-    end
-
-    def session
-      return nil unless defined?(WechatSession)
-      @message_hash[:WechatSession] ||= WechatSession.find_or_initialize_session(underscore_hash_keys(message_hash))
-    end
-
-    def save_session
-      ws = message_hash.delete(:WechatSession)
-      ws.try(:save_session, underscore_hash_keys(message_hash))
-      @message_hash[:WechatSession] = ws
     end
 
     def as(type)
       case type
       when :text
-        message_hash[:Content]
-
+        @message_hash[:Content]
       when :image, :voice, :video
-        Wechat.api.media(message_hash[:MediaId])
-
+        Wechat.api.media(@message_hash[:MediaId])
       when :location
-        message_hash.slice(:Location_X, :Location_Y, :Scale, :Label).each_with_object({}) do |value, results|
+        @message_hash.slice(:Location_X, :Location_Y, :Scale, :Label).each_with_object({}) do |value, results|
           results[value[0].to_s.underscore.to_sym] = value[1]
         end
       else
@@ -202,10 +186,7 @@ module Wechat
     end
 
     def to_xml
-      ws = message_hash.delete(:WechatSession)
-      xml = message_hash.to_xml(root: 'xml', children: 'item', skip_instruct: true, skip_types: true)
-      @message_hash[:WechatSession] = ws
-      xml
+      @message_hash.to_xml(root: 'xml', children: 'item', skip_instruct: true, skip_types: true)
     end
 
     TO_JSON_KEY_MAP = {
@@ -233,8 +214,8 @@ module Wechat
     ].freeze
 
     def to_json
-      keep_camel_case_key = message_hash[:MsgType] == 'template'
-      json_hash = deep_recursive(message_hash) do |key, value|
+      keep_camel_case_key = @message_hash[:MsgType] == 'template'
+      json_hash = deep_recursive(@message_hash) do |key, value|
         key = key.to_s
         [(TO_JSON_KEY_MAP[key] || (keep_camel_case_key ? key : key.downcase)), value]
       end
@@ -257,7 +238,7 @@ module Wechat
     end
 
     def save_to!(model_class)
-      model = model_class.new(underscore_hash_keys(message_hash))
+      model = model_class.new(underscore_hash_keys(@message_hash))
       model.save!
       self
     end
@@ -273,7 +254,7 @@ module Wechat
     end
 
     def update(fields = {})
-      message_hash.merge!(fields)
+      @message_hash.merge!(fields)
       self
     end
 
@@ -287,9 +268,10 @@ module Wechat
           value = value.collect { |item| item.is_a?(Hash) ? deep_recursive(item, &block) : item }
         end
 
-        key, value = yield(key, value) unless key == :WechatSession
+        key, value = yield(key, value)
         memo.merge!(key => value)
       end
     end
+    
   end
 end

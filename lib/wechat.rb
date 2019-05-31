@@ -20,33 +20,40 @@ module Wechat
       super "#{errmsg}(#{error_code})"
     end
   end
+  
 
-  def self.config(account = :default)
-    ApiLoader.config(account)
+  def self.config(account)
+    app = WechatConfig.valid.find_by(account: account)
+    app || raise("Wechat configuration for #{account} is missing.")
   end
 
   def self.api(account = :default)
-    @wechat_apis ||= {}
-    @wechat_apis[account.to_sym] ||= ApiLoader.with(account: account)
-  end
+    return @api if defined? @api
+    app = ApiLoader.config(account)
 
-  def self.reload_config!
-    ApiLoader.reload_config!
+    case app.type
+    when 'WechatPublic'
+      @api = Wechat::Api::Public.new(app)
+    when 'WechatProgram'
+      @api = Wechat::Api::Program.new(app)
+    when 'WechatWork'
+      @api = Wechat::Api::Work.new(app)
+    else
+      raise 'Account is missing'
+    end
   end
 
   def self.decrypt(encrypted_data, session_key, iv)
     cipher = OpenSSL::Cipher.new('AES-128-CBC')
     cipher.decrypt
 
-    cipher.key     = Base64.decode64(session_key)
-    cipher.iv      = Base64.decode64(iv)
+    cipher.key = Base64.decode64(session_key)
+    cipher.iv = Base64.decode64(iv)
     decrypted_data = Base64.decode64(encrypted_data)
     JSON.parse(cipher.update(decrypted_data) + cipher.final)
   rescue Exception => e
-    { 'errcode': 41003, 'errmsg': e.message }
+    { errcode: 41003, errmsg: e.message }
   end
 end
 
-ActiveSupport.on_load :action_view do
-  include Wechat::Helpers
-end
+

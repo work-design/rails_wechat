@@ -3,25 +3,28 @@ require 'http'
 module Wechat
   class HttpClient
 
-    def initialize(base, timeout, skip_verify_ssl)
+    def initialize(base)
       @base = base
-      @httprb = HTTP.timeout(connect: timeout, write: timeout, read: timeout)
+      
+      timeout = RailsWechat.config.timeout
+      
+      @http = HTTP.timeout(connect: timeout, write: timeout, read: timeout)
       @ssl_context = OpenSSL::SSL::SSLContext.new
       @ssl_context.ssl_version = :TLSv1
-      @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_NONE if skip_verify_ssl
+      @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_NONE if RailsWechat.config.skip_verify_ssl
     end
 
     def get(path, get_header = {})
       request(path, get_header) do |url, header|
         params = header.delete(:params)
-        @httprb.headers(header).get(url, params: params, ssl_context: @ssl_context)
+        @http.headers(header).get(url, params: params, ssl_context: @ssl_context)
       end
     end
 
     def post(path, payload, post_header = {})
       request(path, post_header) do |url, header|
         params = header.delete(:params)
-        @httprb.headers(header).post(url, params: params, body: payload, ssl_context: @ssl_context)
+        @http.headers(header).post(url, params: params, body: payload, ssl_context: @ssl_context)
       end
     end
 
@@ -29,11 +32,12 @@ module Wechat
       request(path, post_header) do |url, header|
         params = header.delete(:params)
         form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file)
-        @httprb.headers(header)
-          .post(url, params: params,
-                     form: { media: form_file,
-                             hack: 'X' }, # Existing here for http-form_data 1.0.1 handle single param improperly
-                     ssl_context: @ssl_context)
+        @http.headers(header).post(
+          url,
+          params: params,
+          form: { media: form_file, hack: 'X' }, # Existing here for http-form_data 1.0.1 handle single param improperly
+          ssl_context: @ssl_context
+        )
       end
     end
 
@@ -94,7 +98,6 @@ module Wechat
         file.write(response.body)
         file.close
         data = file
-
       when :json
         data = JSON.parse response.body.to_s.gsub(/[\u0000-\u001f]+/, '')
       when :xml

@@ -5,14 +5,9 @@ module Wechat
   module Responder
     extend ActiveSupport::Concern
     include Wechat::ControllerApi
-    include Cipher
 
     included do
-      if respond_to?(:verify_authenticity_token)
-        skip_before_action :verify_authenticity_token
-      else
-        skip_before_action :verify_authenticity_token, raise: false
-      end
+      skip_before_action :verify_authenticity_token, raise: false
 
       before_action :set_wechat_config, only: [:show, :create]
       before_action :verify_signature, only: [:show, :create]
@@ -163,7 +158,7 @@ module Wechat
 
     def show
       if @wechat_config.corpid.present?
-        echostr, _corp_id = unpack(decrypt(Base64.decode64(params[:echostr]), @wechat_config.encoding_aes_key))
+        echostr, _corp_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(params[:echostr]), @wechat_config.encoding_aes_key))
         render plain: echostr
       else
         render plain: params[:echostr]
@@ -208,7 +203,7 @@ module Wechat
       data = request_content
 
       if @wechat_config.encrypt_mode && request_encrypt_content.present?
-        content, @we_app_id = unpack(decrypt(Base64.decode64(request_encrypt_content), @wechat_config.encoding_aes_key))
+        content, @we_app_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(request_encrypt_content), @wechat_config.encoding_aes_key))
         data = Hash.from_xml(content)
       end
 
@@ -238,10 +233,14 @@ module Wechat
     end
 
     def process_response(response)
-      msg = response[:MsgType] == 'success' ? 'success' : response.to_xml
+      if response[:MsgType] == 'success'
+        msg = 'success'
+      else
+        msg = response.to_xml
+      end
 
       if @wechat_config.encrypt_mode
-        encrypt = Base64.strict_encode64(encrypt(pack(msg, @we_app_id), @wechat_config.encoding_aes_key))
+        encrypt = Base64.strict_encode64(Cipher.encrypt(Cipher.pack(msg, @we_app_id), @wechat_config.encoding_aes_key))
         msg = gen_msg(encrypt, params[:timestamp], params[:nonce])
       end
 
@@ -251,7 +250,8 @@ module Wechat
     def gen_msg(encrypt, timestamp, nonce)
       msg_sign = Signature.hexdigest(@wechat_config.token, timestamp, nonce, encrypt)
 
-      { Encrypt: encrypt,
+      {
+        Encrypt: encrypt,
         MsgSignature: msg_sign,
         TimeStamp: timestamp,
         Nonce: nonce
@@ -265,5 +265,6 @@ module Wechat
     def request_content
       params[:xml].nil? ? Hash.from_xml(request.raw_post) : { 'xml' => params[:xml] }
     end
+    
   end
 end

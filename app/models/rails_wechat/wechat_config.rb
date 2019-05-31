@@ -2,15 +2,17 @@ module RailsWechat::WechatConfig
   extend ActiveSupport::Concern
   included do
     attribute :environment, :string, default: -> { Rails.env }
+    attribute :account, :string
+    attribute :appid, :string
+    attribute :secret, :string
+    attribute :agentid, :string
     attribute :help, :string, default: ''
     attribute :help_without_user, :string, default: '请注册后使用'
     attribute :help_user_disabled, :string, default: '你没有权限'
     attribute :help_feedback, :string, default: '你的反馈已收到'
     attribute :access_token, :string
     attribute :jsapi_ticket, :string
-    attribute :corpid, :string, default: nil
-    attribute :corpsecret, :string, default: nil
-    attribute :kind, :string, default: 'Public'
+    attribute :type, :string, default: 'WechatPublic'
     
     has_many :wechat_menus, dependent: :destroy
     has_many :text_responses, dependent: :destroy
@@ -26,8 +28,8 @@ module RailsWechat::WechatConfig
     validates :account, presence: true, uniqueness: { scope: [:environment] }
     validates :token, presence: true
     validates :encoding_aes_key, presence: { if: :encrypt_mode? }
-
-    validate :app_config_is_valid
+    validates :appid, presence: true
+    validates :secret, presence: true
   end
   
   def menu
@@ -48,30 +50,6 @@ module RailsWechat::WechatConfig
   
   def match_values
     text_responses.map(&:match_value).join('|')
-  end
-
-  def build_config_hash
-    self.as_json(except: [:environment, :account, :created_at, :updated_at, :enabled])
-  end
-
-  private
-  def app_config_is_valid
-    if self[:appid].present?
-      # public account
-      if self[:secret].blank?
-        errors.add(:secret, 'cannot be nil when appid is set')
-      end
-    elsif self[:corpid].present?
-      # corp account
-      if self[:corpsecret].blank?
-        errors.add(:corpsecret, 'cannot be nil when corpid is set')
-      end
-      if self[:agentid].blank?
-        errors.add(:agentid, 'cannot be nil when corpid is set')
-      end
-    else
-      errors[:base] << 'Either appid or corpid must be set'
-    end
   end
   
 end

@@ -92,5 +92,6 @@ module Wechat
         "https://open.weixin.qq.com/connect/oauth2/authorize?#{oauth2_params.to_query}#wechat_redirect"
       end
     end
+    
   end
 end

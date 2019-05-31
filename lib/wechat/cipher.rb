@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 module Wechat
   module Cipher
     BLOCK_SIZE = 32
-    CIPHER = 'AES-256-CBC'.freeze
-
+    CIPHER = 'AES-256-CBC'
+    extend self
+    
     def encrypt(plain, encoding_aes_key)
       cipher = OpenSSL::Cipher.new(CIPHER)
       cipher.encrypt
@@ -28,7 +31,6 @@ module Wechat
       decode_padding(plain)
     end
 
-    # app_id or corp_id
     def pack(content, app_id)
       random = SecureRandom.hex(8)
       text = content.force_encoding('ASCII-8BIT')
@@ -47,7 +49,6 @@ module Wechat
     end
 
     private
-
     def encode_padding(data)
       length = data.bytes.length
       amount_to_pad = BLOCK_SIZE - (length % BLOCK_SIZE)
@@ -62,5 +63,6 @@ module Wechat
       pad = 0 if pad < 1 || pad > BLOCK_SIZE
       plain[0...(plain.length - pad)]
     end
+    
   end
 end
