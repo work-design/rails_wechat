@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'openssl/cipher'
+require 'base64'
+
 module Wechat
   module Cipher
     BLOCK_SIZE = 32
@@ -29,6 +32,18 @@ module Wechat
 
       plain = cipher.update(msg) + cipher.final
       decode_padding(plain)
+    end
+
+    def program_decrypt(encrypted_data, session_key, iv)
+      cipher = OpenSSL::Cipher.new('AES-128-CBC')
+      cipher.decrypt
+  
+      cipher.key = Base64.decode64(session_key)
+      cipher.iv = Base64.decode64(iv)
+      decrypted_data = Base64.decode64(encrypted_data)
+      JSON.parse(cipher.update(decrypted_data) + cipher.final)
+    rescue Exception => e
+      { errcode: 41003, errmsg: e.message }
     end
 
     def pack(content, app_id)

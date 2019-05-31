@@ -2,34 +2,12 @@ module Wechat
   module ControllerApi
     extend ActiveSupport::Concern
 
-    module ClassMethods
-      attr_accessor :wechat_api_client, :wechat_cfg_account, :token, :appid, :corpid, :agentid, :encrypt_mode, :timeout,
-                    :skip_verify_ssl, :encoding_aes_key, :trusted_domain_fullname, :oauth2_cookie_duration
-    end
-
-    def wechat(account = nil)
-      # Make sure user can continue access wechat at instance level similar to class level
-      self.class.wechat(account)
-    end
-
     def wechat_oauth2(scope = 'snsapi_base', page_url = nil, account = nil, &block)
-      # ensure wechat initialization
-      self.class.corpid || self.class.appid || self.class.wechat
-
-      api = wechat(account)
-      if account
-        config = Wechat.config(account)
-        appid = config.corpid || config.appid
-        is_crop_account = !!config.corpid
-      else
-        appid = self.class.corpid || self.class.appid
-        is_crop_account = !!self.class.corpid
-      end
-
-      raise 'Can not get corpid or appid, so please configure it first to using wechat_oauth2' if appid.blank?
-
+      api = Wechat.api(account)
+      app = Wechat.config(account)
+      
       oauth2_params = {
-        appid: appid,
+        appid: app.appid,
         redirect_uri: page_url || generate_redirect_uri(account),
         scope: scope,
         response_type: 'code',
@@ -41,7 +19,6 @@ module Wechat
     end
 
     private
-
     def wechat_public_oauth2(oauth2_params, account = nil)
       openid  = cookies.signed_or_encrypted[:we_openid]
       unionid = cookies.signed_or_encrypted[:we_unionid]
@@ -75,13 +52,9 @@ module Wechat
     end
 
     def generate_redirect_uri(account = nil)
-      domain_name = if account
-        Wechat.config(account).trusted_domain_fullname
-      else
-        self.class.trusted_domain_fullname
-      end
+      domain_name = Wechat.config(account).trusted_domain_fullname
       page_url = domain_name ? "#{domain_name}#{request.original_fullpath}" : request.original_url
-      safe_query = request.query_parameters.reject { |k, _| %w(code state access_token).include? k }.to_query
+      safe_query = request.query_parameters.except('code', 'state', 'access_token').to_query
       page_url.sub(request.query_string, safe_query)
     end
 
