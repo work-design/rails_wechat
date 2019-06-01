@@ -24,15 +24,15 @@ class Wechat::Message::Base
   ].freeze
   
   def initialize(body)
-    @body ||= {}
+    @message_hash ||= {}
   end
 
   def [](key)
-    @body[key]
+    @message_hash[key]
   end
 
   def to_xml
-    @body.to_xml(root: 'xml', children: 'item', skip_instruct: true, skip_types: true)
+    @message_hash.to_xml(root: 'xml', children: 'item', skip_instruct: true, skip_types: true)
   end
   
   def to_json
@@ -61,7 +61,7 @@ class Wechat::Message::Base
 
   def save_to_db!
     model = WechatFeedback.new
-    model.body = @body
+    model.body = @message_hash
     model.save!
     self
   end
@@ -94,7 +94,7 @@ class Wechat::Message::Base
   
   private
   def update(fields = {})
-    @body.merge!(fields)
+    @message_hash.merge!(fields)
     self
   end
   

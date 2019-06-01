@@ -18,7 +18,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
 
       t.string :appid
       t.string :secret
-      t.integer :agentid
+      t.string :agentid
 
       # when encrypt_mode is true, encoding_aes_key must be specified
       t.boolean :encrypt_mode
@@ -30,10 +30,6 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.datetime :access_token_expires_at
       t.string :jsapi_ticket
       t.datetime :jsapi_ticket_expires_at
-      # set to false if RestClient::SSLCertificateNotVerified is thrown
-      t.boolean :skip_verify_ssl, default: true
-      t.integer :timeout, default: 20
-      t.string :trusted_domain_fullname
       t.string :help, limit: 1024
       t.timestamps
     end

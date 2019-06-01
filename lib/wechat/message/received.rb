@@ -14,18 +14,22 @@ module Wechat::Message
     ].freeze
 
 
-    def initialize(app, params)
+    def initialize(app, message_body)
       @app = app
+      @message_body = message_body
       post_xml
       super(params)
     end
 
     def post_xml
-      request_content = params[:xml].nil? ? Hash.from_xml(request.raw_post) : { 'xml' => params[:xml] }
-      data = request_content.dig('xml', 'Encrypt')
-  
-      if @wechat_config.encrypt_mode && request_encrypt_content.present?
-        content, @we_app_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(request_encrypt_content), @wechat_config.encoding_aes_key))
+      data = Hash.from_xml(@message_body)
+      @message_hash = data.fetch('xml', {})
+      encrypt_data = @message_hash.fetch('Encrypt')
+      binding.pry
+      
+      if @app.encrypt_mode && encrypt_data.present?
+        content, @we_app_id = Wechat::Cipher.unpack(Wechat::Cipher.decrypt(Base64.decode64(encrypt_data), @app.encoding_aes_key))
+        binding.pry
         data = Hash.from_xml(content)
       end
   

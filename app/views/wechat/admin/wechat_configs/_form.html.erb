@@ -1,13 +1,9 @@
-<%= form_with model: [:admin, @wechat_config] do |f| %>
-  <%= render 'shared/error_messages', target: @wechat_config %>
-  <%= f.text_field :account %>
-  <%= f.text_field :appid %>
-  <%= f.text_field :secret %>
-  <%= f.text_field :token %>
-  <%= f.text_field :encoding_aes_key %>
-  <h4 class="ui dividing center aligned header">Corp</h4>
-  <%= f.text_field :corpid %>
-  <%= f.text_field :corpsecret %>
-  <%= f.text_field :agentid %>
-  <%= f.submit %>
-<% end %>
+<%= render 'shared/error_messages', target: @wechat_config %>
+<%= f.select :type, options_for_select(WechatConfig.options_i18n(:type), @wechat_config.type) %>
+<%= f.text_field :account %>
+<%= f.text_field :appid %>
+<%= f.text_field :secret %>
+<%= f.check_box :encrypt_mode %>
+<h4 class="ui dividing center aligned header">Corp</h4>
+<%= f.text_field :agentid %>
+<%= f.submit %>

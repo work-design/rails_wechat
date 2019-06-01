@@ -6,6 +6,8 @@ module RailsWechat::WechatConfig
     attribute :appid, :string
     attribute :secret, :string
     attribute :agentid, :string
+    attribute :token, :string, default: -> { SecureRandom.hex }
+    attribute :encoding_aes_key, :string, default: -> { SecureRandom.alphanumeric(43) }
     attribute :help, :string, default: ''
     attribute :help_without_user, :string, default: '请注册后使用'
     attribute :help_user_disabled, :string, default: '你没有权限'

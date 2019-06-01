@@ -69,17 +69,13 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
   
   def wechat_config_params
     p = params.fetch(:wechat_config, {}).permit(
+      :type,
       :account,
       :enabled,
       :appid,
       :secret,
-      :corpid,
-      :corpsecret,
       :agentid,
       :encrypt_mode,
-      :encoding_aes_key,
-      :token,
-      :timeout,
       :help,
       :help_without_user,
       :help_user_disabled,

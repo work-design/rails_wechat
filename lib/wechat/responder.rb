@@ -25,7 +25,8 @@ module Wechat
     end
 
     def create
-      received = Wechat::Message::Received.new(@app, request.body)
+      received = Wechat::Message::Received.new(@wechat_config, request.raw_post)
+      binding.pry
       replied = received.reply
 
       if respond.respond_to? :to_xml
@@ -45,7 +46,7 @@ module Wechat
     def verify_signature
       if @wechat_config
         msg_encrypt = nil
-        msg_encrypt = params[:echostr] || request_encrypt_content if @wechat_config.encrypt_mode
+        #msg_encrypt = params[:echostr] || request_encrypt_content if @wechat_config.encrypt_mode
         signature = params[:signature] || params[:msg_signature]
 
         forbidden = (signature != Signature.hexdigest(@wechat_config.token, params[:timestamp], params[:nonce], msg_encrypt))
