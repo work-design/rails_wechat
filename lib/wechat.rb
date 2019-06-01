@@ -1,6 +1,5 @@
 require 'wechat/api'
 require 'wechat/helpers'
-require 'action_controller/wechat_responder'
 
 module Wechat
   autoload :Message, 'wechat/message'

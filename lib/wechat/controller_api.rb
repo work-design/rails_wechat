@@ -2,7 +2,7 @@ module Wechat
   module ControllerApi
     extend ActiveSupport::Concern
 
-    def wechat_oauth2(scope = 'snsapi_base', page_url = nil, account = nil, &block)
+    def wechat_oauth2(account, scope = 'snsapi_base', page_url = nil, &block)
       api = Wechat.api(account)
       app = Wechat.config(account)
       
@@ -20,7 +20,7 @@ module Wechat
 
     private
     def wechat_public_oauth2(oauth2_params, account = nil)
-      openid  = cookies.signed_or_encrypted[:we_openid]
+      openid = cookies.signed_or_encrypted[:we_openid]
       unionid = cookies.signed_or_encrypted[:we_unionid]
       we_token = cookies.signed_or_encrypted[:we_access_token]
       if openid.present?
