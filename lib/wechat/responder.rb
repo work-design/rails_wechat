@@ -4,7 +4,6 @@ require 'wechat/signature'
 module Wechat
   module Responder
     extend ActiveSupport::Concern
-    include Wechat::ControllerApi
     
     WITH_TYPE = [:text, :event, :click, :view, :scan, :batch_job].freeze
     MUST_WITH = [:click, :view, :scan, :batch_job].freeze
@@ -26,11 +25,11 @@ module Wechat
     end
 
     def create
-      message = Wechat::Message::Received.from_hash(post_xml)
-      respond = run_responder(message)
+      received = Wechat::Message::Received.new(@wechat_config, xx)
+      replied = received.reply
 
       if respond.respond_to? :to_xml
-        render plain: process_response(respond)
+        render plain: replied.to_xml
       else
         head :ok, content_type: 'text/html'
       end
@@ -57,22 +56,6 @@ module Wechat
       render plain: 'Forbidden', status: 403 if forbidden
     end
 
-    def post_xml
-      request_content = params[:xml].nil? ? Hash.from_xml(request.raw_post) : { 'xml' => params[:xml] }
-      data = request_content.dig('xml', 'Encrypt')
-
-      if @wechat_config.encrypt_mode && request_encrypt_content.present?
-        content, @we_app_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(request_encrypt_content), @wechat_config.encoding_aes_key))
-        data = Hash.from_xml(content)
-      end
-
-      data_hash = data.fetch('xml', {})
-      data_hash = data_hash.to_unsafe_hash if data_hash.instance_of?(ActionController::Parameters)
-      HashWithIndifferentAccess.new(data_hash).tap do |msg|
-        msg[:Event].downcase! if msg[:Event]
-      end
-    end
-
     def run_responder(message)
       self.class.responder_for(message) do |responder, *args|
         responder ||= self.class.user_defined_responders(:fallback).first
@@ -88,32 +71,42 @@ module Wechat
         end
       end
     end
-
-    def process_response(response)
-      if response[:MsgType] == 'success'
-        msg = 'success'
-      else
-        msg = response.to_xml
-      end
-
-      if @wechat_config.encrypt_mode
-        encrypt = Base64.strict_encode64(Cipher.encrypt(Cipher.pack(msg, @we_app_id), @wechat_config.encoding_aes_key))
-        msg = generate_msg(encrypt, params[:timestamp], params[:nonce])
-      end
-
-      msg
-    end
-
-    def generate_msg(encrypt, timestamp, nonce)
-      msg_sign = Signature.hexdigest(@wechat_config.token, timestamp, nonce, encrypt)
-
-      {
-        Encrypt: encrypt,
-        MsgSignature: msg_sign,
-        TimeStamp: timestamp,
-        Nonce: nonce
-      }.to_xml(root: 'xml', children: 'item', skip_instruct: true, skip_types: true)
-    end
     
+
+    module ClassMethods
+  
+      def on(msg_type, event: nil, with: nil, &block)
+        raise 'Unknown message type' unless MESSAGE_TYPE.include?(message_type)
+        config = { msg_type: msg_type }
+        config[:proc] = block if block_given?
+    
+        if with.present?
+          unless WITH_TYPE.include?(message_type)
+            warn "Only #{WITH_TYPE.join(', ')} can having :with parameters", uplevel: 1
+          end
+      
+          case with
+          when String
+            config[:with_string] = with
+          when Regexp
+            config[:with_regexp] = with
+          else
+            raise 'With is only support String or Regexp!'
+          end
+        else
+          raise "Message type #{MUST_WITH.join(', ')} must specify :with parameters" if MUST_WITH.include?(message_type)
+        end
+    
+        if msg_type == :event
+          config[:event] = event
+        end
+    
+        @configs << config
+        config
+      end
+
+    end
+
+
   end
 end

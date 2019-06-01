@@ -1,8 +1,8 @@
 class Wechat::WechatsController < ApplicationController
   include Wechat::Responder
   
-  on :text do |message, content|
-    set_wechat_user(message)
+  on :text do |received, content|
+    set_wechat_user(received)
     
     if @wechat_user.user.nil?
       msg = @wechat_config.help_without_user
@@ -26,10 +26,10 @@ class Wechat::WechatsController < ApplicationController
       msg = @wechat_config.help
     end
 
-    message.reply.text msg
+    received.reply.text msg
   end
   
-  on :text, with: '注册' do |message, content|
+  on :text, with: '注册' do |received, content|
     @wechat_user = set_wechat_user(message)
     result_msg = [
       {
@@ -38,8 +38,8 @@ class Wechat::WechatsController < ApplicationController
         url: sign_url(uid: @wechat_user.uid)
       }
     ]
-  
-    message.reply.news result_msg
+
+    received.reply.news result_msg
   end
 
   on :event, with: 'subscribe' do |message, content|
