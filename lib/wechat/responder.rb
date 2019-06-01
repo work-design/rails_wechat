@@ -25,7 +25,7 @@ module Wechat
     end
 
     def create
-      received = Wechat::Message::Received.new(@wechat_config, xx)
+      received = Wechat::Message::Received.new(@app, request.body)
       replied = received.reply
 
       if respond.respond_to? :to_xml
@@ -71,7 +71,6 @@ module Wechat
         end
       end
     end
-    
 
     module ClassMethods
   

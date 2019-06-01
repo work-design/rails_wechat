@@ -9,3 +9,8 @@ zh:
           TextResponse: 文字
           PersistScanResponse: 永久二维码
           TempScanResponse: 临时二维码
+      wechat_config:
+        type:
+          WechatPublic: 微信公众号
+          WechatWork: 企业微信
+          WechatProgram: 小程序

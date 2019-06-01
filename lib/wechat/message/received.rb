@@ -1,9 +1,11 @@
 module Wechat::Message
-  class Received
+  class Received < Base
     # see: https://mp.weixin.qq.com/wiki?id=mp1421140453
     MSG_TYPE = [
       'text', 'image', 'voice', 'video', 'shortvideo', 'location', 'link', 'event' # 消息类型
     ].freeze
+    # see: https://mp.weixin.qq.com/wiki?id=mp1421140454
+    # see: https://work.weixin.qq.com/api/doc#90000/90135/90240
     EVENT = [
       'subscribe', 'unsubscribe', 'LOCATION', # 公众号与企业微信通用
       'CLICK', 'VIEW', 'SCAN',  # 公众号使用
@@ -15,7 +17,7 @@ module Wechat::Message
     def initialize(app, params)
       @app = app
       post_xml
-      super
+      super(params)
     end
 
     def post_xml

@@ -11,6 +11,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     
     
     create_table :wechat_configs do |t|
+      t.string :type
       t.string :environment
       t.string :account, null: false
       t.boolean :enabled, default: true

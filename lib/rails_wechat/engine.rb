@@ -4,7 +4,8 @@ module RailsWechat
     
     config.autoload_paths += Dir[
       "#{config.root}/app/models/wechat_menu",
-      "#{config.root}/app/models/wechat_response"
+      "#{config.root}/app/models/wechat_response",
+      "#{config.root}/app/models/wechat_config"
     ]
     
     config.generators do |g|
