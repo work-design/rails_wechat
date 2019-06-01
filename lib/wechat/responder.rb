@@ -26,16 +26,15 @@ module Wechat
 
     def create
       received = Wechat::Message::Received.new(@wechat_config, request.raw_post)
-      binding.pry
-      replied = received.reply
-
-      if respond.respond_to? :to_xml
+      replied = received.reply.text 'ririr'
+      
+      if replied.respond_to? :to_xml
         render plain: replied.to_xml
       else
         head :ok, content_type: 'text/html'
       end
       
-      ActiveSupport::Notifications.instrument 'wechat.responder.after_create', request: request_msg, response: response_msg
+      ActiveSupport::Notifications.instrument 'wechat.responder.after_create', request: received.to_xml, response: replied.to_xml
     end
 
     private

@@ -6,7 +6,10 @@ module Wechat::Message
     def to(openid_or_userid)
       update(ToUserName: openid_or_userid)
     end
- 
+    
+    def initialize(params)
+      @message_hash = params
+    end
   
     # 公众号消息类型
     # see: https://mp.weixin.qq.com/wiki?id=mp1421140543
@@ -25,10 +28,10 @@ module Wechat::Message
     def video(media_id, **options)
       options.slice!(:title, :description)
       options.transform_keys! { |k| k.to_s.camelize.to_sym }
-      
+
       update(
         MsgType: 'video',
-        Video: { MediaId: media_id }.merge! options
+        Video: { MediaId: media_id }.merge!(options)
       )
     end
     
@@ -38,7 +41,7 @@ module Wechat::Message
       options.merge! MusicURL: r[:music_url] if r[:music_ul]
       update(
         MsgType: 'music',
-        Music: { ThumbMediaId: thumb_media_id }.merge! options
+        Music: { ThumbMediaId: thumb_media_id }.merge!(options)
       )
     end
 

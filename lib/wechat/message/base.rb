@@ -23,7 +23,7 @@ class Wechat::Message::Base
     'send_ignore_reprint', 'mpnews', 'towxname',
   ].freeze
   
-  def initialize(body)
+  def initialize
     @message_hash ||= {}
   end
 
@@ -81,7 +81,7 @@ class Wechat::Message::Base
     msg
   end
 
-  def encrypt(encrypt, timestamp, nonce)
+  def do_encrypt(encrypt, timestamp, nonce)
     msg_sign = Signature.hexdigest(@wechat_config.token, timestamp, nonce, encrypt)
   
     {

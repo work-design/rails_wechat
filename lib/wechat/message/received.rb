@@ -18,26 +18,20 @@ module Wechat::Message
       @app = app
       @message_body = message_body
       post_xml
-      super(params)
     end
 
     def post_xml
-      data = Hash.from_xml(@message_body)
-      @message_hash = data.fetch('xml', {})
-      encrypt_data = @message_hash.fetch('Encrypt')
-      binding.pry
+      data = Hash.from_xml(@message_body).fetch('xml', {})
+      encrypt_data = data.fetch('Encrypt')
       
-      if @app.encrypt_mode && encrypt_data.present?
-        content, @we_app_id = Wechat::Cipher.unpack(Wechat::Cipher.decrypt(Base64.decode64(encrypt_data), @app.encoding_aes_key))
-        binding.pry
-        data = Hash.from_xml(content)
+      if encrypt_data.present?
+        r = Base64.decode64(encrypt_data)
+        r = Wechat::Cipher.decrypt(r, @app.encoding_aes_key)
+        content, @we_app_id = Wechat::Cipher.unpack(r)
+
+        data = Hash.from_xml(content).fetch('xml', {})
       end
-  
-      data_hash = data.fetch('xml', {})
-      data_hash = data_hash.to_unsafe_hash if data_hash.instance_of?(ActionController::Parameters)
-      HashWithIndifferentAccess.new(data_hash).tap do |msg|
-        msg[:Event].downcase! if msg[:Event]
-      end
+      @message_hash = data.with_indifferent_access
     end
 
     def as(type)
@@ -57,8 +51,8 @@ module Wechat::Message
 
     def reply
       Replied.new(
-        ToUserName: @message_hash[:FromUserName],
-        FromUserName: @message_hash[:ToUserName],
+        ToUserName: @message_hash['FromUserName'],
+        FromUserName: @message_hash['ToUserName'],
         CreateTime: Time.now.to_i
       )
     end
