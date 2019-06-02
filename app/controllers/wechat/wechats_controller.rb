@@ -55,11 +55,11 @@ class Wechat::WechatsController < ApplicationController
     end
   end
 
-  on :event, with: 'scan' do |message|
+  on :event, event: 'SCAN' do |message|
     message.reply.text get_response(message)
   end
 
-  on :click, with: 'join' do |message, key|
+  on :event, event: 'click', with: 'join' do |message, key|
     @wechat_user = set_wechat_user(message)
   
     result_msg = [

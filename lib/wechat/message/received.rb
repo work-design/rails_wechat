@@ -12,8 +12,7 @@ module Wechat::Message
       'click', 'view',  # 企业微信使用
       'scancode_push', 'scancode_waitmsg', 'pic_sysphoto', 'pic_photo_or_album', 'pic_weixin', 'location_select', 'enter_agent', 'batch_job_result'  # 企业微信使用
     ].freeze
-
-
+    
     def initialize(app, message_body)
       @app = app
       @message_body = message_body
@@ -55,11 +54,6 @@ module Wechat::Message
         FromUserName: @message_hash['ToUserName'],
         CreateTime: Time.now.to_i
       )
-    end
-    
-    
-    def response
-    
     end
     
   end

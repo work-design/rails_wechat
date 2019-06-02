@@ -4,7 +4,9 @@ require 'wechat/signature'
 module Wechat
   module Responder
     extend ActiveSupport::Concern
-    
+    MSG_TYPE = [
+      :text, :image, :voice, :video, :shortvideo, :location, :link, :event # 消息类型
+    ].freeze
     WITH_TYPE = [:text, :event, :click, :view, :scan, :batch_job].freeze
     MUST_WITH = [:click, :view, :scan, :batch_job].freeze
     
@@ -75,12 +77,13 @@ module Wechat
     module ClassMethods
   
       def on(msg_type, event: nil, with: nil, &block)
-        raise 'Unknown message type' unless MESSAGE_TYPE.include?(message_type)
+        @configs ||= []
+        raise 'Unknown message type' unless MSG_TYPE.include?(msg_type)
         config = { msg_type: msg_type }
         config[:proc] = block if block_given?
     
         if with.present?
-          unless WITH_TYPE.include?(message_type)
+          unless WITH_TYPE.include?(msg_type)
             warn "Only #{WITH_TYPE.join(', ')} can having :with parameters", uplevel: 1
           end
       
@@ -93,7 +96,7 @@ module Wechat
             raise 'With is only support String or Regexp!'
           end
         else
-          raise "Message type #{MUST_WITH.join(', ')} must specify :with parameters" if MUST_WITH.include?(message_type)
+          raise "Message type #{MUST_WITH.join(', ')} must specify :with parameters" if MUST_WITH.include?(msg_type)
         end
     
         if msg_type == :event
