@@ -32,7 +32,7 @@ module Wechat::Message
 
     def post_xml
       data = Hash.from_xml(@message_body).fetch('xml', {})
-      encrypt_data = data.fetch('Encrypt')
+      encrypt_data = data.fetch('Encrypt', nil)
       
       if encrypt_data.present?
         r = Base64.decode64(encrypt_data)
@@ -49,7 +49,7 @@ module Wechat::Message
       when 'text'
         @content = @message_hash['Content']
       when 'image', 'voice', 'video', 'shortvideo'
-        @content = @api.media(@message_hash['MediaId'])
+        @content = @message_hash.slice('MediaId')
       when 'location'
         @content = @message_hash.slice('Location_X', 'Location_Y', 'Scale', 'Label')
       when 'event'
