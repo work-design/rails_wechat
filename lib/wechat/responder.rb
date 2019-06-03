@@ -27,8 +27,8 @@ module Wechat
     end
 
     def create
-      received = Wechat::Message::Received.new(@wechat_config, request.raw_post)
-      replied = received.reply.text 'ririr'
+      received = Wechat::Message::Received.from_controller(self)
+      replied = received.response
       
       if replied.respond_to? :to_xml
         render plain: replied.to_xml
@@ -58,24 +58,9 @@ module Wechat
       render plain: 'Forbidden', status: 403 if forbidden
     end
 
-    def run_responder(message)
-      self.class.responder_for(message) do |responder, *args|
-        responder ||= self.class.user_defined_responders(:fallback).first
-
-        next if responder.nil?
-        case
-        when responder[:respond]
-          request.reply.text responder[:respond]
-        when responder[:proc]
-          responder[:proc].call(message, *args)
-        else
-          next
-        end
-      end
-    end
-
     module ClassMethods
-  
+      attr_reader :configs
+      
       def on(msg_type, event: nil, with: nil, &block)
         @configs ||= []
         raise 'Unknown message type' unless MSG_TYPE.include?(msg_type)
@@ -99,7 +84,7 @@ module Wechat
           raise "Message type #{MUST_WITH.join(', ')} must specify :with parameters" if MUST_WITH.include?(msg_type)
         end
     
-        if msg_type == :event
+        if msg_type == :event && event
           config[:event] = event
         end
     

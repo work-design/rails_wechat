@@ -13,10 +13,21 @@ module Wechat::Message
       'scancode_push', 'scancode_waitmsg', 'pic_sysphoto', 'pic_photo_or_album', 'pic_weixin', 'location_select', 'enter_agent', 'batch_job_result'  # 企业微信使用
     ].freeze
     
-    def initialize(app, message_body)
+    def self.from_controller(controller)
+      app = controller.instance_variable_get(:@wechat_config)
+      new(app, controller.request.raw_post, controller.class.configs)
+    end
+    
+    def initialize(app, message_body, rules)
       @app = app
       @message_body = message_body
+      @rules = rules
+      @content = nil
+      @api = Wechat.app_api(@app)
+
       post_xml
+      parse_content
+      binding.pry
     end
 
     def post_xml
@@ -33,18 +44,23 @@ module Wechat::Message
       @message_hash = data.with_indifferent_access
     end
 
-    def as(type)
-      case type
-      when :text
-        @message_hash[:Content]
-      when :image, :voice, :video
-        Wechat.api.media(@message_hash[:MediaId])
-      when :location
-        @message_hash.slice(:Location_X, :Location_Y, :Scale, :Label).each_with_object({}) do |value, results|
-          results[value[0].to_s.underscore.to_sym] = value[1]
+    def parse_content
+      case @message_hash['MsgType']
+      when 'text'
+        @content = @message_hash['Content']
+      when 'image', 'voice', 'video', 'shortvideo'
+        @content = @api.media(@message_hash['MediaId'])
+      when 'location'
+        @content = @message_hash.slice('Location_X', 'Location_Y', 'Scale', 'Label')
+      when 'event'
+        case @message_hash['Event']
+        when 'LOCATION'
+          @content = @message_hash.slice('Event', 'Latitude', 'Longitude', 'Precision')
+        else
+          @content = @message_hash.slice('Event', 'EventKey', 'Ticket')
         end
       else
-        raise "Don't know how to parse message as #{type}"
+        warn "Don't know how to parse message as #{@message_hash['MsgType']}", uplevel: 1
       end
     end
 
@@ -54,6 +70,10 @@ module Wechat::Message
         FromUserName: @message_hash['ToUserName'],
         CreateTime: Time.now.to_i
       )
+    end
+    
+    def response
+    
     end
     
   end

@@ -1,5 +1,6 @@
 require 'wechat/api'
 require 'wechat/helpers'
+require 'wechat/errors'
 
 module Wechat
   autoload :Message, 'wechat/message'
@@ -13,7 +14,10 @@ module Wechat
 
   def self.api(account = :default)
     app = config(account)
-
+    app_api(app)
+  end
+  
+  def self.app_api(app)
     case app.type
     when 'WechatPublic'
       Wechat::Api::Public.new(app)
