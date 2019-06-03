@@ -11,7 +11,7 @@ module Wechat
       def initialize(client, appid, access_token)
         @client = client
         @access_token = access_token
-        @wechat_config = WechatConfig.where(environment: Rails.env.to_s).find_by(appid: @appid)
+        @app = WechatConfig.where(environment: Rails.env.to_s).find_by(appid: @appid)
         @random_generator = Random.new
       end
 
