@@ -36,7 +36,7 @@ module Wechat
         head :ok, content_type: 'text/html'
       end
       
-      ActiveSupport::Notifications.instrument 'wechat.responder.after_create', request: received.to_xml, response: replied.to_xml
+      ActiveSupport::Notifications.instrument 'wechat.responder.after_create', request: received.to_xml, response: replied&.to_xml
     end
 
     private
