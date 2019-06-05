@@ -27,7 +27,6 @@ module Wechat::Message
 
       post_xml
       parse_content
-      binding.pry
     end
 
     def post_xml
