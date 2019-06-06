@@ -7,10 +7,10 @@ module Wechat
     MSG_TYPE = [
       :text, :image, :voice, :video, :shortvideo, :location, :link, :event # 消息类型
     ].freeze
-    WITH_TYPE = [:text, :event, :click, :view, :scan, :batch_job].freeze
-    MUST_WITH = [:click, :view, :scan, :batch_job].freeze
+    WITH_TYPE = [:text, :event].freeze
     
     included do
+      delegate :url_helpers, to: 'Rails.application.routes'
       skip_before_action :verify_authenticity_token, raise: false
 
       before_action :set_wechat_config, only: [:show, :create]
@@ -66,6 +66,14 @@ module Wechat
         raise 'Unknown message type' unless MSG_TYPE.include?(msg_type)
         config = { msg_type: msg_type }
         config[:proc] = block if block_given?
+
+        if msg_type == :event
+          if event
+            config[:event] = event
+          else
+            raise 'Must appoint event type'
+          end
+        end
     
         if with.present?
           unless WITH_TYPE.include?(msg_type)
@@ -73,19 +81,11 @@ module Wechat
           end
       
           case with
-          when String
-            config[:with_string] = with
-          when Regexp
-            config[:with_regexp] = with
+          when String, Regexp
+            config[:with] = with
           else
             raise 'With is only support String or Regexp!'
           end
-        else
-          raise "Message type #{MUST_WITH.join(', ')} must specify :with parameters" if MUST_WITH.include?(msg_type)
-        end
-    
-        if msg_type == :event && event
-          config[:event] = event
         end
     
         @configs << config

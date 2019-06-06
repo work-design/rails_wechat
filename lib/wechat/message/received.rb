@@ -17,7 +17,8 @@ module Wechat::Message
       app = controller.instance_variable_get(:@wechat_config)
       new(app, controller.request.raw_post, controller.class.configs)
     end
-    
+
+    attr_reader :app
     def initialize(app, message_body, rules)
       @app = app
       @message_body = message_body
@@ -47,6 +48,7 @@ module Wechat::Message
       case @message_hash['MsgType']
       when 'text'
         @content = @message_hash['Content']
+        @with = @content
       when 'image', 'voice', 'video', 'shortvideo'
         @content = @message_hash.slice('MediaId')
       when 'location'
@@ -57,6 +59,7 @@ module Wechat::Message
           @content = @message_hash.slice('Event', 'Latitude', 'Longitude', 'Precision')
         else
           @content = @message_hash.slice('Event', 'EventKey', 'Ticket')
+          @with = @message_hash['EventKey']
         end
       else
         warn "Don't know how to parse message as #{@message_hash['MsgType']}", uplevel: 1
@@ -72,7 +75,25 @@ module Wechat::Message
     end
     
     def response
-    
+      filtered = @rules.find do |rule|
+        next unless rule[:msg_type].to_s == @message_hash['MsgType']
+        
+        if rule[:msg_type] == :event
+          next unless rule[:event].underscore == @message_hash['Event'].underscore
+        end
+
+        if rule[:with]
+          @with.match? rule[:with]
+        else
+          true
+        end
+      end
+      
+      if filtered
+        filtered[:proc].call(self, @content)
+      else
+        {}
+      end
     end
     
   end
