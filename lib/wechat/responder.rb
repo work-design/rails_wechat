@@ -10,7 +10,7 @@ module Wechat
     WITH_TYPE = [:text, :event].freeze
     
     included do
-      delegate :url_helpers, to: 'Rails.application.routes'
+      delegate :url_helpers, to: '_routes'
       skip_before_action :verify_authenticity_token, raise: false
 
       before_action :set_wechat_config, only: [:show, :create]
