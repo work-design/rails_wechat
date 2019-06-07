@@ -64,7 +64,7 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
 
   private
   def set_wechat_config
-    @wechat_config = current_organ.wechat_configs.find(params[:id])
+    @wechat_config = WechatConfig.where(default_params).find(params[:id])
   end
   
   def wechat_config_params
