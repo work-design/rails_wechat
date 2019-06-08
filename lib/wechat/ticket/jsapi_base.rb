@@ -8,10 +8,10 @@ module Wechat
     class JsapiBase
       attr_reader :client, :access_token, :access_ticket, :ticket_life_in_seconds, :got_ticket_at
 
-      def initialize(client, appid, access_token)
+      def initialize(client, app, access_token)
         @client = client
+        @app = app
         @access_token = access_token
-        @app = WechatConfig.where(environment: Rails.env.to_s).find_by(appid: @appid)
         @random_generator = Random.new
       end
 
