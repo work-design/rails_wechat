@@ -8,8 +8,8 @@ class Wechat::Api::Common < Wechat::Api::Base
   
   def initialize(app)
     @client = Wechat::HttpClient.new(API_BASE)
-    @access_token = Wechat::Token::PublicAccessToken.new(@client, app)
-    @jsapi_ticket = Wechat::Ticket::PublicJsapiTicket.new(@client, app, @access_token)
+    @access_token = Wechat::AccessToken::Public.new(@client, app)
+    @jsapi_ticket = Wechat::JsapiTicket::Public.new(@client, app, @access_token)
   end
   
   def groups

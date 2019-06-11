@@ -5,13 +5,13 @@ module Wechat
 end
 require_relative 'http_client'
 
-require_relative 'token/access_token_base'
-require_relative 'token/corp_access_token'
-require_relative 'token/public_access_token'
+require_relative 'access_token/base'
+require_relative 'access_token/work'
+require_relative 'access_token/public'
 
-require_relative 'ticket/corp_jsapi_ticket'
-require_relative 'ticket/jsapi_base'
-require_relative 'ticket/public_jsapi_ticket'
+require_relative 'jsapi_ticket/base'
+require_relative 'jsapi_ticket/work'
+require_relative 'jsapi_ticket/public'
 
 require_relative 'api/base'
 require_relative 'api/common'

@@ -6,9 +6,9 @@ module Wechat::Api
 
     def initialize(app)
       @client = Wechat::HttpClient.new(API_BASE)
-      @access_token = Wechat::Token::CorpAccessToken.new(@client, app)
+      @access_token = Wechat::AccessToken::Work.new(@client, app)
       @agentid = app.agentid
-      @jsapi_ticket = Wechat::Ticket::CorpJsapiTicket.new(@client, app, @access_token)
+      @jsapi_ticket = Wechat::JsapiTicket::Work.new(@client, app, @access_token)
     end
 
     def agent_list

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Wechat
-  module Token
-    class AccessTokenBase
+  module AccessToken
+    class Base
       
       def initialize(client, app)
         @client = client

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'wechat/token/access_token_base'
+require_relative 'base'
 
 module Wechat
-  module Token
-    class CorpAccessToken < AccessTokenBase
+  module AccessToken
+    class Work < Base
       
       def refresh
         data = @client.get('gettoken', params: { corpid: @app.appid, corpsecret: @app.secret })
