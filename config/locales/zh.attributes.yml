@@ -7,9 +7,13 @@ zh:
         token: 令牌(Token)
         encrypt_mode: 消息加解密方式
         encoding_aes_key: 消息加解密密钥(EncodingAESKey)
-        environment: 环境
-        account: 账号
         enabled: 启用
+        agentid: 企业微信应用ID(AgentId)
+        url: 服务器地址(URL)
+        help: 帮助
+        help_without_user: 未注册提示
+        help_user_disabled: 用户被禁提示
+        help_feedback: 收到反馈后提示
       wechat_feedback:
         body: 内容
         feedback_on: 反馈日期

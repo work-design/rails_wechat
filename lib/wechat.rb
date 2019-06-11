@@ -8,12 +8,12 @@ module Wechat
   autoload :Cipher, 'wechat/cipher'
   autoload :ControllerApi, 'wechat/controller_api'
   
-  def self.config(account)
-    WechatConfig.valid.find_by(account: account)
+  def self.config(id)
+    WechatConfig.valid.find(id)
   end
 
-  def self.api(account = :default)
-    app = config(account)
+  def self.api(id)
+    app = config(id)
     app_api(app)
   end
   

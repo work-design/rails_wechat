@@ -40,7 +40,7 @@ module Wechat
 
     private
     def set_wechat_config
-      @wechat_config = WechatConfig.valid.find_by(account: params[:id])
+      @wechat_config = WechatConfig.valid.find(params[:id])
     end
 
     def verify_signature

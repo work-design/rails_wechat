@@ -1,5 +1,5 @@
 class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
-  before_action :set_wechat_config, only: [:show, :edit, :edit_help, :update, :destroy]
+  before_action :set_wechat_config, only: [:show, :info, :edit, :edit_help, :update, :destroy]
 
   def index
     q_params = {}
@@ -30,6 +30,10 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
   end
   
   def show
+  end
+  
+  def info
+  
   end
 
   def edit
@@ -70,7 +74,6 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
   def wechat_config_params
     p = params.fetch(:wechat_config, {}).permit(
       :type,
-      :account,
       :enabled,
       :appid,
       :secret,

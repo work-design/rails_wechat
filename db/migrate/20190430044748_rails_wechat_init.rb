@@ -1,19 +1,8 @@
 class RailsWechatInit < ActiveRecord::Migration[6.0]
   def change
     
-    create_table :wechat_sessions do |t|
-      t.string :openid, null: false
-      t.jsonb :hash_store, default: {}
-      t.timestamps null: false
-    end
-    
-    add_index :wechat_sessions, :openid, unique: true
-    
-    
     create_table :wechat_configs do |t|
       t.string :type
-      t.string :environment
-      t.string :account, null: false
       t.boolean :enabled, default: true
 
       t.string :appid
@@ -24,7 +13,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.boolean :encrypt_mode
       t.string :encoding_aes_key
 
-      t.string :token, null: false
+      t.string :token
       
       t.string :access_token
       t.datetime :access_token_expires_at
@@ -33,9 +22,6 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.string :help, limit: 1024
       t.timestamps
     end
-
-    add_index :wechat_configs, [:environment, :account], unique: true, length: {environment: 20, account: 100}
-    
     
     create_table :wechat_menus do |t|
       t.references :wechat_config

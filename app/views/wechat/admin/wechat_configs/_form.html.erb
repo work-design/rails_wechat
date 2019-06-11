@@ -1,9 +1,8 @@
 <%= render 'shared/error_messages', target: @wechat_config %>
 <%= f.select :type, options_for_select(WechatConfig.options_i18n(:type), @wechat_config.type) %>
-<%= f.text_field :account %>
 <%= f.text_field :appid %>
 <%= f.text_field :secret %>
 <%= f.check_box :encrypt_mode %>
-<h4 class="ui dividing center aligned header">Corp</h4>
+<h4 class="ui dividing center aligned header">企业微信</h4>
 <%= f.text_field :agentid %>
 <%= f.submit %>

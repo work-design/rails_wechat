@@ -14,3 +14,6 @@ zh:
           WechatPublic: 微信公众号
           WechatWork: 企业微信
           WechatProgram: 小程序
+        encrypt_mode:
+          true: 安全模式（推荐）
+          false: 明文模式

@@ -1,8 +1,10 @@
 module RailsWechat::WechatConfig
   extend ActiveSupport::Concern
   included do
-    attribute :environment, :string, default: -> { Rails.env }
-    attribute :account, :string
+    delegate :url_helpers, to: 'Rails.application.routes'
+    
+    attribute :enabled, :boolean, default: true
+    attribute :encrypt_mode, :boolean, default: true
     attribute :appid, :string
     attribute :secret, :string
     attribute :agentid, :string
@@ -24,14 +26,16 @@ module RailsWechat::WechatConfig
     
     has_many :extractors
     
-    scope :valid, -> { where(enabled: true, environment: Rails.env.to_s) }
+    scope :valid, -> { where(enabled: true) }
     
-    validates :environment, presence: true
-    validates :account, presence: true, uniqueness: { scope: [:environment] }
     validates :token, presence: true
     validates :encoding_aes_key, presence: { if: :encrypt_mode? }
     validates :appid, presence: true
     validates :secret, presence: true
+  end
+  
+  def url
+    url_helpers.wechat_url(self.id)
   end
   
   def menu
