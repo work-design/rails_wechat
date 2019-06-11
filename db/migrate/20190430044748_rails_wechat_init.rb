@@ -3,7 +3,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     
     create_table :wechat_configs do |t|
       t.string :type
-      t.boolean :enabled, default: true
+      t.boolean :enabled
 
       t.string :appid
       t.string :secret
