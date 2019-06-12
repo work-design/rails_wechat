@@ -9,7 +9,7 @@ module RailsWechat::WechatConfig
     attribute :secret, :string
     attribute :agentid, :string
     attribute :token, :string, default: -> { SecureRandom.hex }
-    attribute :encoding_aes_key, :string, default: -> { SecureRandom.alphanumeric(43) }
+    attribute :encoding_aes_key, :string
     attribute :help, :string, default: ''
     attribute :help_without_user, :string, default: '请注册后使用'
     attribute :help_user_disabled, :string, default: '你没有权限'
@@ -28,10 +28,12 @@ module RailsWechat::WechatConfig
     
     scope :valid, -> { where(enabled: true) }
     
-    validates :token, presence: true
-    validates :encoding_aes_key, presence: { if: :encrypt_mode? }
     validates :appid, presence: true
     validates :secret, presence: true
+    validates :token, presence: true
+    before_validation do
+      self.encoding_aes_key ||= SecureRandom.alphanumeric(43) if encrypt_mode
+    end
   end
   
   def url

@@ -4,7 +4,7 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
   def index
     q_params = {}
     q_params.merge! default_params
-    @wechat_configs = WechatConfig.default_where(q_params)
+    @wechat_configs = WechatConfig.default_where(q_params).order(id: :asc)
   end
 
   def new
