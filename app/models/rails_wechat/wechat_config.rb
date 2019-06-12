@@ -4,6 +4,7 @@ module RailsWechat::WechatConfig
     delegate :url_helpers, to: 'Rails.application.routes'
     
     attribute :enabled, :boolean, default: true
+    attribute :primary, :boolean, default: false
     attribute :encrypt_mode, :boolean, default: true
     attribute :appid, :string
     attribute :secret, :string
@@ -28,12 +29,15 @@ module RailsWechat::WechatConfig
     
     scope :valid, -> { where(enabled: true) }
     
+    validates :name, presence: true
     validates :appid, presence: true
     validates :secret, presence: true
     validates :token, presence: true
+
     before_validation do
       self.encoding_aes_key ||= SecureRandom.alphanumeric(43) if encrypt_mode
     end
+    after_update :set_primary, if: -> { self.primary? && saved_change_to_primary? }
   end
   
   def url
@@ -54,6 +58,10 @@ module RailsWechat::WechatConfig
   def jsapi_ticket_valid?
     return false unless jsapi_ticket_expires_at.acts_like?(:time)
     jsapi_ticket_expires_at > Time.current
+  end
+
+  def set_primary
+    self.class.base_class.unscoped.where.not(id: self.id).where(organ_id: self.organ_id).update_all(primary: false)
   end
   
   def match_values

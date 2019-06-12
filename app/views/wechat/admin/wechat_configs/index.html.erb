@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th><%= WechatConfig.human_attribute_name(:type) %></th>
+      <th><%= WechatConfig.human_attribute_name(:name) %></th>
       <th>
         <p><%= WechatConfig.human_attribute_name(:appid) %></p>
         <p><%= WechatConfig.human_attribute_name(:secret) %></p>
@@ -18,7 +19,10 @@
         <p><%= WechatConfig.human_attribute_name(:help_user_disabled) %></p>
         <p><%= WechatConfig.human_attribute_name(:help_feedback) %></p>
       </th>
-      <th><%= WechatConfig.human_attribute_name(:enabled) %></th>
+      <th>
+        <p><%= WechatConfig.human_attribute_name(:enabled) %></p>
+        <p><%= WechatConfig.human_attribute_name(:primary) %></p>
+      </th>
       <th></th>
       <th>
         <%= link_to new_admin_wechat_config_path, remote: true, class: 'ui mini green button' do %>
@@ -31,6 +35,7 @@
   <% @wechat_configs.each do |wechat_config| %>
     <tr>
       <td><%= wechat_config.type_i18n %></td>
+      <td><%= wechat_config.name %></td>
       <td>
         <p><%= wechat_config.appid %></p>
         <p><%= wechat_config.secret %></p>
@@ -54,15 +59,18 @@
         <div class="ui toggle checkbox">
           <%= check_box_tag '[wechat_config]enabled', nil, wechat_config.enabled, data: { method: :patch, remote: true, url: admin_wechat_config_path(wechat_config), submit: true }, id: nil %>
         </div>
+        <div class="ui toggle checkbox <%= active_assert(wechat_config.primary, expected: 'disabled', unexpected: '') %>">
+          <%= check_box_tag '[wechat_config]primary', nil, wechat_config.primary, data: { method: :patch, remote: true, url: admin_wechat_config_path(wechat_config), submit: true }, id: nil %>
+        </div>
       </td>
       <td>
-        <%= link_to admin_wechat_config_wechat_menus_path(wechat_config), data: { tooltip: '菜单' }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_wechat_config_wechat_menus_path(wechat_config), data: { tooltip: t('wechat.admin.wechat_menus.index.title') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-bars"></i>
         <% end %>
-        <%= link_to admin_wechat_config_wechat_responses_path(wechat_config), data: { tooltip: '应答语' }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_wechat_config_wechat_responses_path(wechat_config), data: { tooltip: t('wechat.admin.wechat_responses.index.title') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-reply-all"></i>
         <% end %>
-        <%= link_to admin_wechat_config_wechat_feedbacks_path(wechat_config), data: { tooltip: '用户反馈' }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_wechat_config_wechat_feedbacks_path(wechat_config), data: { tooltip: t('wechat.admin.wechat_feedbacks.index.title') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-comments"></i>
         <% end %>
       </td>

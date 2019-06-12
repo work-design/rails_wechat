@@ -2,8 +2,10 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
   def change
     
     create_table :wechat_configs do |t|
+      t.string :name
       t.string :type
       t.boolean :enabled
+      t.boolean :primary
 
       t.string :appid
       t.string :secret

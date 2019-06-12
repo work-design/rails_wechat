@@ -1,5 +1,6 @@
 <%= render 'shared/error_messages', target: @wechat_config %>
 <%= f.select :type, options_for_select(WechatConfig.options_i18n(:type), @wechat_config.type) %>
+<%= f.text_field :name %>
 <%= f.text_field :appid %>
 <%= f.text_field :secret %>
 <%= f.check_box :encrypt_mode %>

@@ -2,7 +2,7 @@
   <div class="ui basic segment breadcrumb">
     <%= link_to t('wechat.admin.wechat_configs.index.title'), admin_wechat_configs_path, class: 'section' %>
     <i class="fas fa-angle-right divider"></i>
-    <%= link_to @wechat_config.account, admin_wechat_configs_path(id: @wechat_config.id), class: 'section' %>
+    <%= link_to @wechat_config.name, admin_wechat_configs_path(id: @wechat_config.id), class: 'section' %>
     <i class="fas fa-angle-right divider"></i>
     <div class="section"><%= t('.title') %></div>
   </div>
