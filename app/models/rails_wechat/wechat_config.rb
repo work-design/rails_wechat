@@ -38,7 +38,7 @@ module RailsWechat::WechatConfig
     before_validation do
       self.encoding_aes_key ||= SecureRandom.alphanumeric(43) if encrypt_mode
     end
-    after_update :set_primary, if: -> { self.primary? && saved_change_to_primary? }
+    after_save :set_primary, if: -> { self.primary? && saved_change_to_primary? }
   end
   
   def url

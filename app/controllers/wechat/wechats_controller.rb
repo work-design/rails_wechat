@@ -78,7 +78,7 @@ class Wechat::WechatsController < ApplicationController
     wechat_user = get_wechat_user(received)
     key = received[:EventKey].to_s.delete_prefix('qrscene_')
     res = received.app.scan_responses.find_by(match_value: key)
-    res.invoke_effect(wechat_user)
+    res.invoke_effect(wechat_user) if res
   end
   
   def self.get_wechat_user(received)
