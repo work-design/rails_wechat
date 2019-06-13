@@ -8,6 +8,7 @@ zh:
         encrypt_mode: 消息加解密方式
         encoding_aes_key: 消息加解密密钥(EncodingAESKey)
         enabled: 启用
+        primary: 主账号
         agentid: 企业微信应用ID(AgentId)
         url: 服务器地址(URL)
         help: 帮助
