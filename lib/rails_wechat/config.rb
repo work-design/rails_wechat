@@ -1,6 +1,5 @@
 module RailsWechat
   include ActiveSupport::Configurable
-  config_accessor :default_admin_emails
 
   configure do |config|
     config.app_controller = 'ApplicationController'
