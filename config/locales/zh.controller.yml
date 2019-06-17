@@ -10,7 +10,7 @@ zh:
           title: 反馈
       wechat_menus:
         index:
-          title: 目录
+          title: 菜单
       wechat_responses:
         index:
           title: 回复设置
