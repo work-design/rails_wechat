@@ -4,6 +4,8 @@ zh:
       wechat_menu:
         type:
           ClickMenu: 点击事件
+          ViewMenu: 链接
+          MiniProgramMenu: 小程序
       wechat_response:
         type:
           TextResponse: 文字

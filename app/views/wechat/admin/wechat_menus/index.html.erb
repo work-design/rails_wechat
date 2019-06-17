@@ -15,7 +15,6 @@
 <table class="ui bottom attached selectable table">
   <thead>
     <tr>
-      <th><%= WechatMenu.human_attribute_name(:id) %></th>
       <th><%= WechatMenu.human_attribute_name(:menu_type) %></th>
       <th><%= WechatMenu.human_attribute_name(:name) %></th>
       <th><%= WechatMenu.human_attribute_name(:value) %></th>
@@ -34,8 +33,7 @@
   <tbody>
   <% @wechat_menus.each do |wechat_menu| %>
     <tr>
-      <td><%= wechat_menu.id %></td>
-      <td><%= wechat_menu.menu_type %></td>
+      <td><%= wechat_menu.menu_type_i18n %></td>
       <td><%= wechat_menu.name %></td>
       <td><%= wechat_menu.value %></td>
       <td><%= wechat_menu.appid %></td>
