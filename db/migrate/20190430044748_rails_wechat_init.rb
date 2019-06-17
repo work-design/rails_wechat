@@ -34,6 +34,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.string :value
       t.string :appid
       t.string :pagepath
+      t.integer :position
       t.timestamps
     end
 

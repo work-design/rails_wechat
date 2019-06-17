@@ -27,20 +27,29 @@
         <%= link_to new_admin_wechat_config_wechat_menu_path(@wechat_config), remote: true, class: 'ui mini green button' do %>
           <i class="fas fa-plus"></i><% t('.new') %>
         <% end %>
+        <%= link_to new_parent_admin_wechat_config_wechat_menus_path(@wechat_config), remote: true, class: 'ui mini green button' do %>
+          <i class="fas fa-plus"></i><% t('.new_parent') %>
+        <% end %>
       </th>
     </tr>
   </thead>
   <tbody>
   <% @wechat_menus.each do |wechat_menu| %>
     <tr>
-      <td><%= wechat_menu.menu_type_i18n %></td>
+      <td><%= wechat_menu.type_i18n %></td>
       <td><%= wechat_menu.name %></td>
       <td><%= wechat_menu.value %></td>
       <td><%= wechat_menu.appid %></td>
       <td><%= wechat_menu.pagepath %></td>
       <td>
-        <%= link_to edit_admin_wechat_config_wechat_menu_path(@wechat_config, wechat_menu), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
-          <i class="fas fa-pencil-alt"></i>
+        <% if wechat_menu.type == 'ParentMenu' %>
+          <%= link_to edit_parent_admin_wechat_config_wechat_menu_path(@wechat_config, wechat_menu), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+            <i class="fas fa-pencil-alt"></i>
+          <% end %>
+        <% else %>
+          <%= link_to edit_admin_wechat_config_wechat_menu_path(@wechat_config, wechat_menu), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+            <i class="fas fa-pencil-alt"></i>
+          <% end %>
         <% end %>
         <%= link_to admin_wechat_config_wechat_menu_path(@wechat_config, wechat_menu), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-trash-alt"></i>

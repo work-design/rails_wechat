@@ -47,7 +47,7 @@ module RailsWechat::WechatConfig
   
   def menu
     {
-      button: self.wechat_menus.as_json
+      button: self.wechat_menus.where(parent_id: nil).as_json
     }
   end
   

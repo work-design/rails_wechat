@@ -3,6 +3,7 @@ zh:
     enum:
       wechat_menu:
         type:
+          ParentMenu: 一级目录
           ClickMenu: 点击事件
           ViewMenu: 链接
           MiniProgramMenu: 小程序

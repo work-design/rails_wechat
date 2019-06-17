@@ -1,9 +1,10 @@
 class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
   before_action :set_wechat_config
-  before_action :set_wechat_menu, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_wechat_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
+  before_action :prepare_form, only: [:new, :create, :edit, :update]
+  
   def index
-    @wechat_menus = @wechat_config.wechat_menus.page(params[:page])
+    @wechat_menus = @wechat_config.wechat_menus.order(parent_id: :desc, id: :asc).page(params[:page])
   end
 
   def new
@@ -39,6 +40,9 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
   def edit
   end
 
+  def edit_parent
+  end
+
   def update
     @wechat_menu.assign_attributes(wechat_menu_params)
 
@@ -66,9 +70,14 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
   def set_wechat_menu
     @wechat_menu = @wechat_config.wechat_menus.find(params[:id])
   end
+  
+  def prepare_form
+    @parents = @wechat_config.wechat_menus.where(type: 'ParentMenu', parent_id: nil)
+  end
 
   def wechat_menu_params
     params.fetch(:wechat_menu, {}).permit(
+      :parent_id,
       :type,
       :name,
       :value,

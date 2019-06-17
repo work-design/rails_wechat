@@ -14,7 +14,11 @@ Rails.application.routes.draw do
       get 'help' => :edit_help, on: :member
       get :info, on: :member
       resources :wechat_menus do
-        post :sync, on: :collection
+        collection do
+          get :new_parent
+          post :sync
+        end
+        get :edit_parent, on: :member
       end
       resources :wechat_responses do
         post :sync, on: :member
