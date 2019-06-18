@@ -1,13 +1,13 @@
 class Wechat::WechatsController < ApplicationController
   include Wechat::Responder
 
-  on :text, with: '注册' do |received|
+  on :text, with: '绑定' do |received|
     wechat_user = get_wechat_user(received)
     result_msg = [
       {
-        title: '请注册',
-        description: '注册信息',
-        url: _routes.url_helpers.sign_url(uid: wechat_user.uid)
+        title: '请绑定',
+        description: '绑定信息',
+        url: _routes.url_helpers.bind_my_oauth_users_url(uid: wechat_user.uid)
       }
     ]
   
@@ -59,14 +59,14 @@ class Wechat::WechatsController < ApplicationController
     received.reply.text get_response(received)
   end
 
-  on :event, event: 'click', with: 'join' do |received|
+  on :event, event: 'click', with: 'bind' do |received|
     wechat_user = get_wechat_user(received)
   
     result_msg = [
       {
-        title: '请注册',
-        description: '注册信息',
-        url: _routes.url_helpers.sign_url(uid: wechat_user.uid)
+        title: '请绑定',
+        description: '绑定信息',
+        url: _routes.url_helpers.bind_my_oauth_users_url(uid: wechat_user.uid)
       }
     ]
     
