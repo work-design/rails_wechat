@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
     resources :wechat_menus do
       collection do
+        get :default
         get :new_parent
         post :sync
       end

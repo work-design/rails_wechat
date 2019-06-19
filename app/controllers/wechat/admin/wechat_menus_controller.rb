@@ -3,6 +3,15 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
   before_action :set_wechat_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
   before_action :prepare_form, only: [:new, :create, :edit, :update]
   
+  def default
+    q_params = {}
+    q_params.merge! wechat_config_id: nil
+  
+    @wechat_menus = WechatMenu.where(q_params).order(parent_id: :desc, id: :asc).page(params[:page])
+    
+    render 'index'
+  end
+  
   def index
     q_params = {}
     q_params.merge! wechat_config_id: [params[:wechat_config_id], nil].uniq
@@ -11,7 +20,7 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
   end
 
   def new
-    @wechat_menu = WechatMenu.new
+    @wechat_menu = WechatMenu.new(wechat_config_id: params[:wechat_config_id])
   end
 
   def create

@@ -6,7 +6,7 @@
 
   <div class="content">
     <%= form_with model: @wechat_menu, scope: :wechat_menu, url: admin_wechat_menu_path(@wechat_menu) do |f| %>
-      <%= f.hidden_field :wechat_config_id, value: params[:wechat_config_id] %>
+      <%= f.hidden_field :wechat_config_id %>
       <%= f.text_field :name, required: true %>
       <%= f.submit %>
     <% end %>

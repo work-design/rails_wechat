@@ -19,6 +19,7 @@ module RailsWechat::WechatConfig
     attribute :jsapi_ticket, :string
     attribute :type, :string, default: 'WechatPublic'
     
+    belongs_to :organ, optional: true
     has_many :wechat_menus, dependent: :destroy
     has_many :text_responses, dependent: :destroy
     has_many :scan_responses, dependent: :destroy
@@ -47,8 +48,25 @@ module RailsWechat::WechatConfig
   
   def menu
     {
-      button: self.wechat_menus.where(parent_id: nil).as_json
+      button: default_menus + within_menus
     }
+  end
+  
+  def default_menus
+    if organ
+      limit = 3 - organ.limit_wechat_menu
+    else
+      limit = 3
+    end
+    WechatMenu.where(parent_id: nil).limit(limit).as_json
+  end
+  
+  def within_menus
+    if organ
+      self.wechat_menus.limit(organ.limit_wechat_menu).where(parent_id: nil).as_json
+    else
+      self.wechat_menus.where(parent_id: nil).as_json
+    end
   end
   
   def access_token_valid?
