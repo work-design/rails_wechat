@@ -26,3 +26,8 @@ zh:
         prefix: 前缀
         suffix: 后缀
         more: 尽可能多的匹配
+      wechat_menu:
+        menu_type: 菜单类型
+        value: 值
+        appid: 小程序APPID
+        pagepath: 小程序路径

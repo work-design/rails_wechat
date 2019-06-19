@@ -64,7 +64,7 @@
         </div>
       </td>
       <td>
-        <%= link_to admin_wechat_config_wechat_menus_path(wechat_config), data: { tooltip: t('wechat.admin.wechat_menus.index.title') }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_wechat_menus_path(wechat_config_id: wechat_config.id), data: { tooltip: t('wechat.admin.wechat_menus.index.title') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-bars"></i>
         <% end %>
         <%= link_to admin_wechat_config_wechat_responses_path(wechat_config), data: { tooltip: t('wechat.admin.wechat_responses.index.title') }, class: 'ui mini circular icon button' do %>
