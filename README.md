@@ -14,7 +14,8 @@
 
 如果你只是在Rails里使用微信公众号功能，强烈建议直接使用本 gem，并配合经过我改造后的 [omniauth-wechat-oauth2](https://github.com/qinmingyuan/omniauth-wechat-oauth2) 使用。
 
-
+## 使用
+* 仅支持UI数据库配置公众号；
 
 ## License
-The gem is available as open source under the terms of the [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0).
+License采用 [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0).
