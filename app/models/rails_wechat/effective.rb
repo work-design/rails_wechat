@@ -12,12 +12,11 @@ module RailsWechat::Effective
     WechatQrcodeJob.perform_later(self)
   end
   
-  def default_params
-    { organ_id: nil }
+  def wechat_config
+    WechatConfig.where(organ_id: nil).primary
   end
 
   def qrcode
-    wechat_config = WechatConfig.where(default_params).primary
     unless wechat_response
       create_wechat_response(type: 'TempScanResponse', wechat_config_id: wechat_config.id) if wechat_config
     end

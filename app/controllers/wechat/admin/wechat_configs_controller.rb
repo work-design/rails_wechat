@@ -6,6 +6,14 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
     q_params.merge! default_params
     @wechat_configs = WechatConfig.default_where(q_params).order(id: :asc)
   end
+  
+  def own
+    q_params = {}
+    q_params.merge! organ_id: nil
+    
+    @wechat_configs = WechatConfig.default_where(q_params, { organ_id: { allow: [nil] }}).order(id: :asc)
+    render 'index'
+  end
 
   def new
     @wechat_config = WechatConfig.new
