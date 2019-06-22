@@ -61,7 +61,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.datetime :respond_at
       t.date :respond_on
       t.string :respond_in
-      t.integer :position, default: 1
+      t.integer :position
       t.timestamps
     end
     
@@ -69,7 +69,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.references :wechat_config
       t.references :wechat_user
       t.text :body
-      t.integer :position, default: 1
+      t.integer :position
       t.date :feedback_on
       t.string :kind
       t.string :month

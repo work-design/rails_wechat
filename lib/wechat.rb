@@ -8,11 +8,18 @@ module Wechat
   autoload :Cipher, 'wechat/cipher'
   autoload :ControllerApi, 'wechat/controller_api'
   
-  def self.config(id)
-    WechatConfig.valid.find(id)
+  def self.config(id = nil)
+    if id
+      r = WechatConfig.valid.find(id)
+    else
+      r = WechatConfig.default
+    end
+    return r if r
+    
+    raise 'Can not find wechat config'
   end
 
-  def self.api(id)
+  def self.api(id = nil)
     app = config(id)
     app_api(app)
   end

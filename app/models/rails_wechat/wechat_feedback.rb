@@ -1,7 +1,10 @@
 module RailsWechat::WechatFeedback
   extend ActiveSupport::Concern
   included do
+    
     attribute :feedback_on, :date, default: -> { Date.today }
+    attribute :position, :integer, default: 1
+    
     acts_as_list scope: [:wechat_config_id, :feedback_on]
     
     belongs_to :wechat_user

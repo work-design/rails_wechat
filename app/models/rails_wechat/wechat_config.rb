@@ -3,6 +3,7 @@ module RailsWechat::WechatConfig
   included do
     delegate :url_helpers, to: 'Rails.application.routes'
     
+    attribute :organ_id, :integer
     attribute :enabled, :boolean, default: true
     attribute :primary, :boolean, default: false
     attribute :encrypt_mode, :boolean, default: true
@@ -85,6 +86,18 @@ module RailsWechat::WechatConfig
   
   def match_values
     text_responses.map(&:match_value).join('|')
+  end
+  
+  class_methods do
+    
+    def default
+      q = {}
+      if column_names.include?('organ_id')
+        q.merge! organ_id: nil
+      end
+      where(q).valid.find_by(primary: true)
+    end
+    
   end
   
 end
