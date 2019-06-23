@@ -4,12 +4,7 @@ module Wechat
     def wechat_raw_config_js(wechat_config_id: nil, debug: false, apis: [])
       app = Wechat.config(wechat_config_id)
       api = Wechat.api(wechat_config_id)
-
-      if app.trusted_domain_fullname
-        page_url = "#{app.trusted_domain_fullname}#{controller.request.original_fullpath}"
-      else
-        page_url = controller.request.original_url
-      end
+      page_url = controller.request.original_url
       page_url.delete_suffix!('#')
       
       js_hash = api.jsapi_ticket.signature(page_url)

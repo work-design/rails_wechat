@@ -81,7 +81,12 @@ module RailsWechat::WechatConfig
   end
 
   def set_primary
-    self.class.base_class.unscoped.where.not(id: self.id).where(organ_id: self.organ_id).update_all(primary: false)
+    q = {}
+    if self.class.column_names.include?('organ_id')
+      q.merge! organ_id: self.organ_id
+    end
+    
+    self.class.base_class.unscoped.where.not(id: self.id).where(q).update_all(primary: false)
   end
   
   def match_values
