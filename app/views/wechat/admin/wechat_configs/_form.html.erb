@@ -9,4 +9,6 @@
 <%= f.text_field :key %>
 <h4 class="ui dividing center aligned header">企业微信</h4>
 <%= f.text_field :agentid %>
+<h4 class="ui dividing center aligned header">其他</h4>
+<%= f.collection_select :extractor_ids, @extractors, :id, :name, {}, { multiple: true } %>
 <%= f.submit %>

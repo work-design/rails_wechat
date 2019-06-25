@@ -2,7 +2,9 @@ class Wechat::Admin::ExtractorsController < Wechat::Admin::BaseController
   before_action :set_extractor, only: [:show, :edit, :update, :destroy]
 
   def index
-    @extractors = Extractor.page(params[:page])
+    q_params = {}
+    q_params.merge! default_params
+    @extractors = Extractor.default_where(q_params).page(params[:page])
   end
 
   def new
@@ -62,12 +64,13 @@ class Wechat::Admin::ExtractorsController < Wechat::Admin::BaseController
   end
 
   def extractor_params
-    params.fetch(:extractor, {}).permit(
+    p = params.fetch(:extractor, {}).permit(
       :name,
       :prefix,
       :suffix,
       :more
     )
+    p.merge! default_params
   end
 
 end

@@ -1,6 +1,7 @@
 class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
   before_action :set_wechat_config, only: [:show, :info, :edit, :edit_help, :update, :destroy]
-
+  before_action :prepare_form, only: [:new, :create, :edit, :update]
+  
   def index
     q_params = {}
     q_params.merge! default_params
@@ -79,6 +80,14 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
     @wechat_config = WechatConfig.where(default_params).find(params[:id])
   end
   
+  def prepare_form
+    q = { organ_id: nil }
+    if current_organ
+      q.merge! organ_id: [current_organ.id, nil]
+    end
+    @extractors = Extractor.default_where(q)
+  end
+  
   def wechat_config_params
     p = params.fetch(:wechat_config, {}).permit(
       :type,
@@ -94,7 +103,8 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
       :help,
       :help_without_user,
       :help_user_disabled,
-      :help_feedback
+      :help_feedback,
+      extractor_ids: []
     )
     p.merge! default_params
   end

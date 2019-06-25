@@ -12,10 +12,10 @@ module RailsWechat::WechatConfig
     attribute :agentid, :string
     attribute :token, :string, default: -> { SecureRandom.hex }
     attribute :encoding_aes_key, :string
-    attribute :help, :string, default: ''
-    attribute :help_without_user, :string, default: '请注册后使用'
-    attribute :help_user_disabled, :string, default: '你没有权限'
-    attribute :help_feedback, :string, default: '你的反馈已收到'
+    attribute :help, :string, default: ''  # 默认帮助
+    attribute :help_without_user, :string, default: '请注册后使用'  # 未注册用户提示
+    attribute :help_user_disabled, :string, default: '你没有权限'  # 被禁用用户提示
+    attribute :help_feedback, :string, default: '你的反馈已收到'  # 正常发送反馈内容回复
     attribute :access_token, :string
     attribute :jsapi_ticket, :string
     attribute :type, :string, default: 'WechatPublic'
@@ -27,7 +27,8 @@ module RailsWechat::WechatConfig
     has_many :wechat_responses, dependent: :destroy
     has_many :wechat_feedbacks, dependent: :nullify
     
-    has_many :extractors
+    has_many :wechat_config_extractors, dependent: :delete_all
+    has_many :extractors, through: :wechat_config_extractors
     
     scope :valid, -> { where(enabled: true) }
     scope :primary, -> { find_by(primary: true) }

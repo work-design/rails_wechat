@@ -14,3 +14,6 @@ zh:
       wechat_responses:
         index:
           title: 回复设置
+      extractors:
+        index:
+          title: 解析回复内容

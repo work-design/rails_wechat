@@ -79,7 +79,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     end
     
     create_table :extractors do |t|
-      t.references :wechat_config
+      t.references :organ  # for SaaS
       t.string :name
       t.string :prefix
       t.string :suffix
@@ -92,6 +92,12 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.references :extractable, polymorphic: true
       t.string :name
       t.string :matched
+      t.timestamps
+    end
+    
+    create_table :wechat_config_extractors do |t|
+      t.references :extractor
+      t.references :wechat_config
       t.timestamps
     end
     
