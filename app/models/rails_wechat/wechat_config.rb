@@ -33,7 +33,7 @@ module RailsWechat::WechatConfig
     scope :primary, -> { find_by(primary: true) }
     
     validates :name, presence: true
-    validates :appid, presence: true
+    validates :appid, presence: true, uniqueness: true
     validates :secret, presence: true
     validates :token, presence: true
 

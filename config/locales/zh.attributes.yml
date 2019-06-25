@@ -2,15 +2,17 @@ zh:
   activerecord:
     attributes:
       wechat_config:
-        appid: 开发者ID(AppID)
-        secret: 开发者密码(AppSecret)
-        token: 令牌(Token)
+        appid: 开发者ID（AppID）
+        secret: 开发者密码（AppSecret）
+        token: 令牌（Token）
         encrypt_mode: 消息加解密方式
-        encoding_aes_key: 消息加解密密钥(EncodingAESKey)
+        mch_id: 商户号（微信支付）
+        key: KEY（微信支付）
+        encoding_aes_key: 消息加解密密钥（EncodingAESKey）
         enabled: 启用
         primary: 主账号
-        agentid: 企业微信应用ID(AgentId)
-        url: 服务器地址(URL)
+        agentid: 企业微信应用ID（AgentId）
+        url: 服务器地址（URL）
         help: 帮助
         help_without_user: 未注册提示
         help_user_disabled: 用户被禁提示

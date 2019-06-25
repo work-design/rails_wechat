@@ -4,6 +4,9 @@
 <%= f.text_field :appid %>
 <%= f.text_field :secret %>
 <%= f.check_box :encrypt_mode %>
+<h4 class="ui dividing center aligned header">微信支付</h4>
+<%= f.text_field :mch_id %>
+<%= f.text_field :key %>
 <h4 class="ui dividing center aligned header">企业微信</h4>
 <%= f.text_field :agentid %>
 <%= f.submit %>

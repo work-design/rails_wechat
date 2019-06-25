@@ -88,6 +88,8 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
       :appid,
       :secret,
       :agentid,
+      :mch_id,
+      :key,
       :encrypt_mode,
       :help,
       :help_without_user,

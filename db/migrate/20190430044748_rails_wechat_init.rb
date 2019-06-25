@@ -9,13 +9,15 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
 
       t.string :appid
       t.string :secret
-      t.string :agentid
+      t.string :token
+
+      t.string :agentid  # 企业微信所用
+      t.string :mch_id  # 支付专用、商户号
+      t.string :key  # 支付专用
 
       # when encrypt_mode is true, encoding_aes_key must be specified
       t.boolean :encrypt_mode
       t.string :encoding_aes_key
-
-      t.string :token
       
       t.string :access_token
       t.datetime :access_token_expires_at
