@@ -15,7 +15,6 @@
 <table class="ui bottom attached selectable table">
   <thead>
     <tr>
-      <th class="one wide"><%= WechatFeedback.human_attribute_name(:id) %></th>
       <th class="one wide"><%= WechatFeedback.human_attribute_name(:wechat_user_id) %></th>
       <th class="two wide"><%= WechatFeedback.human_attribute_name(:feedback_on) %></th>
       <th class="five wide"><%= WechatFeedback.human_attribute_name(:extractions) %></th>
@@ -30,7 +29,6 @@
   <tbody>
   <% @wechat_feedbacks.each do |wechat_feedback| %>
     <tr>
-      <td><%= wechat_feedback.id %></td>
       <td>
         <% if wechat_feedback.wechat_user.user %>
           <%= link_to wechat_feedback.wechat_user.user.name, admin_user_path(wechat_feedback.wechat_user.user_id) %>

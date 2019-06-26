@@ -16,7 +16,6 @@
   <thead>
     <tr>
       <th><%= WechatResponse.human_attribute_name(:type) %></th>
-      <th><%= WechatResponse.human_attribute_name(:name) %></th>
       <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
       <th>
         <p class="ui green text"><%= WechatResponse.human_attribute_name(:valid_response) %></p>
@@ -38,7 +37,6 @@
   <% @wechat_responses.each do |wechat_response| %>
     <tr>
       <td><%= wechat_response.type_i18n %></td>
-      <td><%= wechat_response.name %></td>
       <td>
         <%= wechat_response.match_value %>
         <% if wechat_response.is_a?(ScanResponse) %>

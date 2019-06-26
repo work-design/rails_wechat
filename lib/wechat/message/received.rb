@@ -43,6 +43,14 @@ module Wechat::Message
       end
       @message_hash = data.with_indifferent_access
     end
+    
+    def wechat_user
+      return @wechat_user if defined? @wechat_user
+      @wechat_user = WechatUser.find_or_initialize_by(uid: @message_hash[:FromUserName])
+      @wechat_user.app_id = received.app.appid
+      @wechat_user.save
+      @wechat_user
+    end
 
     def parse_content
       case @message_hash['MsgType']
@@ -94,6 +102,12 @@ module Wechat::Message
       else
         {}
       end
+    end
+
+    def qr_response
+      key = @message_hash[:EventKey].to_s.delete_prefix('qrscene_')
+      res = app.scan_responses.find_by(match_value: key)
+      res.invoke_effect(wechat_user) if res
     end
     
   end

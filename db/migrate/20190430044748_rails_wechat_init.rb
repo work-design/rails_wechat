@@ -44,7 +44,6 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.references :wechat_config
       t.references :effective, polymorphic: true
       t.string :type
-      t.string :name
       t.string :match_value
       t.integer :expire_seconds
       t.string :qrcode_ticket
@@ -67,9 +66,10 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.timestamps
     end
     
-    create_table :wechat_feedbacks do |t|
+    create_table :wechat_requests do |t|
       t.references :wechat_config
       t.references :wechat_user
+      t.string :type
       t.text :body
       t.integer :position
       t.date :feedback_on
