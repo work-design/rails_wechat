@@ -13,7 +13,11 @@ module RailsWechat::Effective
   end
   
   def wechat_config
-    WechatConfig.where(organ_id: nil).primary
+    if WechatConfig.column_names.include?('organ_id')
+      WechatConfig.find_by(organ_id: nil, primary: true)
+    else
+      WechatConfig.find_by(primary: true)
+    end
   end
 
   def qrcode

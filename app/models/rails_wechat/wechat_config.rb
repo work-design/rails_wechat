@@ -31,7 +31,6 @@ module RailsWechat::WechatConfig
     has_many :extractors, through: :wechat_config_extractors
     
     scope :valid, -> { where(enabled: true) }
-    scope :primary, -> { find_by(primary: true) }
     
     validates :name, presence: true
     validates :appid, presence: true, uniqueness: true

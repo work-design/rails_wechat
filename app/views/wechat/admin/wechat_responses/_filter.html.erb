@@ -2,5 +2,16 @@
   <div class="fields">
     <%= f.text_field :name %>
     <%= f.submit %>
+    <%= link_to t('.clear'), filter_params(only: [:name]), class: 'ui button' %>
   </div>
 <% end %>
+<div class="ui divider"></div>
+<dl>
+  <dt><%= WechatResponse.human_attribute_name(:type) %></dt>
+  <dd>
+    <%= link_to t('.all'), filter_params(except: [:type]), class: active_params(type: '', active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
+    <% WechatResponse.options_i18n(:type).each do |text, value| %>
+      <%= link_to text, filter_params(type: value), class: active_params(type: value, active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
+    <% end %>
+  </dd>
+</dl>
