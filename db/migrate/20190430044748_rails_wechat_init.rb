@@ -67,7 +67,6 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.references :wechat_response
       t.references :wechat_request
       t.references :wechat_user
-      t.datetime :respond_at
       t.date :respond_on
       t.string :respond_in
       t.integer :position
