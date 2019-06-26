@@ -57,7 +57,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     
     create_table :response_items do |t|
       t.references :wechat_response
-      t.references :wechat_feedback
+      t.references :wechat_request
       t.references :wechat_user
       t.datetime :respond_at
       t.date :respond_on

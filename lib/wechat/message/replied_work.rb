@@ -4,7 +4,6 @@ class Wechat::Message::RepliedWork
     update(AgentId: agentid)
   end
   
-  
   def textcard(title, description, url, btntxt = nil)
     data = {
       title: title,

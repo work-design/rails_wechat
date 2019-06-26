@@ -8,5 +8,4 @@ class Wechat::Message::RepliedKf
     end
   end
 
-
 end

@@ -56,11 +56,12 @@ class Wechat::Message::Base
     when 'template'
       json_hash = { 'touser' => json_hash['touser'] }.merge!(json_hash['template'])
     end
-    JSON.generate(json_hash)
+    
+    json_hash.to_json
   end
 
   def save_to_db!
-    model = WechatFeedback.new
+    model = WechatRequest.new
     model.body = @message_hash
     model.save!
     self

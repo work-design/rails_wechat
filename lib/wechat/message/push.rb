@@ -1,6 +1,5 @@
 class Wechat::Message::Push
   
-  
   TEMPLATE_KEYS = [
     'template_id',
     'form_id',
@@ -17,8 +16,6 @@ class Wechat::Message::Push
     template_fields = opts.symbolize_keys.slice(*TEMPLATE_KEYS)
     update(MsgType: 'template', Template: template_fields)
   end
-  
-  
   
   def to(to_users = '', towxname: nil, send_ignore_reprint: 0)
     if towxname.present?

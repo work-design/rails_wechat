@@ -14,8 +14,6 @@ class Wechat::WechatsController < ApplicationController
   end
 
   on :text do |received, content|
-    
-    
     if received.wechat_user.user.nil?
       msg = received.app.help_without_user
     elsif received.wechat_user.user.disabled?
@@ -48,13 +46,11 @@ class Wechat::WechatsController < ApplicationController
   end
 
   on :event, event: 'click', with: 'bind' do |received|
-    wechat_user = get_wechat_user(received)
-  
     result_msg = [
       {
         title: '请绑定',
         description: '绑定信息',
-        url: _routes.url_helpers.bind_my_oauth_users_url(uid: wechat_user.uid)
+        url: _routes.url_helpers.bind_my_oauth_users_url(uid: received.wechat_user.uid)
       }
     ]
     
