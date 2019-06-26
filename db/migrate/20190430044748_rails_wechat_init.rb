@@ -60,10 +60,6 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.references :wechat_user
       t.string :type
       t.text :body
-      t.integer :position
-      t.date :feedback_on
-      t.string :kind
-      t.string :month
       t.timestamps
     end
     

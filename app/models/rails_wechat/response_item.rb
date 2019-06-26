@@ -9,11 +9,11 @@ module RailsWechat::ResponseItem
     acts_as_list scope: [:wechat_response_id, :respond_in]
     
     belongs_to :wechat_response
-    belongs_to :wechat_feedback
+    belongs_to :wechat_request
     belongs_to :wechat_user
     
     before_validation do
-      self.wechat_user ||= wechat_feedback.wechat_user
+      self.wechat_user ||= wechat_request.wechat_user
     end
   end
   

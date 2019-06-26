@@ -4,8 +4,8 @@ class Wechat::Admin::WechatFeedbacksController < Wechat::Admin::BaseController
 
   def index
     q_params = {}
-    q_params.merge! params.permit('feedback_on-gte', 'feedback_on-lte')
-    @wechat_feedbacks = @wechat_config.wechat_feedbacks.default_where(q_params).order(id: :desc).page(params[:page])
+    q_params.merge! params.permit('created_at-gte', 'created_at-lte')
+    @wechat_feedbacks = @wechat_config.wechat_requests.default_where(q_params).order(id: :desc).page(params[:page])
   end
 
   def show

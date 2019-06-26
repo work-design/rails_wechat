@@ -2,21 +2,13 @@ module RailsWechat::WechatFeedback
   extend ActiveSupport::Concern
   included do
     
-    attribute :feedback_on, :date, default: -> { Date.today }
-    attribute :position, :integer, default: 1
-    
-    acts_as_list scope: [:wechat_config_id, :feedback_on]
     
     belongs_to :wechat_user
     belongs_to :wechat_config
-    has_many :response_items, dependent: :destroy
-    has_many :extractions, as: :extractable
+    has_many :response_items, dependent: :destroy  # 自动response的具体信息
+    has_many :extractions, as: :extractable  # 解析 request body 内容，主要针对文字
 
     after_save_commit :do_extract, if: -> { saved_change_to_body? }
-  end
-  
-  def number_str
-    self.feedback_on.strftime('%Y%m%d') + self.position.to_s.rjust(4, '0')
   end
   
   def do_extract
