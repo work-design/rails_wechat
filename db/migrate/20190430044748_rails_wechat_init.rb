@@ -54,18 +54,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.time :finish_at
       t.timestamps
     end
-    
-    create_table :response_items do |t|
-      t.references :wechat_response
-      t.references :wechat_request
-      t.references :wechat_user
-      t.datetime :respond_at
-      t.date :respond_on
-      t.string :respond_in
-      t.integer :position
-      t.timestamps
-    end
-    
+
     create_table :wechat_requests do |t|
       t.references :wechat_config
       t.references :wechat_user
@@ -75,6 +64,17 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.date :feedback_on
       t.string :kind
       t.string :month
+      t.timestamps
+    end
+    
+    create_table :response_items do |t|
+      t.references :wechat_response
+      t.references :wechat_request
+      t.references :wechat_user
+      t.datetime :respond_at
+      t.date :respond_on
+      t.string :respond_in
+      t.integer :position
       t.timestamps
     end
     
