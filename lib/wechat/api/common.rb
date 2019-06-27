@@ -82,7 +82,7 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def message_mass_sendall(message)
-    message = Wechat::Message::Replied.new(message)
+    message = Wechat::Message::Push.new(message)
     post 'message/mass/sendall', message.to_json
   end
   
