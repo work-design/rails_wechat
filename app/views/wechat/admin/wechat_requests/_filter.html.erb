@@ -1,0 +1,7 @@
+<%= search_form_with model: WechatRequest.new do |f| %>
+  <div class="fields">
+    <%= f.date_field 'created_at-gte', value: params['created_at-gte'] %>
+    <%= f.date_field 'created_at-lte', value: params['created_at-lte'] %>
+    <%= f.submit %>
+  </div>
+<% end %>

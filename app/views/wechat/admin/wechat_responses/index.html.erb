@@ -18,12 +18,12 @@
       <th><%= WechatResponse.human_attribute_name(:type) %></th>
       <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
       <th>
-        <p class="ui green text"><%= WechatResponse.human_attribute_name(:valid_response) %></p>
-        <p class="ui red text"><%= WechatResponse.human_attribute_name(:invalid_response) %></p>
-      </th>
-      <th>
         <p><%= WechatResponse.human_attribute_name(:start_at) %></p>
         <p><%= WechatResponse.human_attribute_name(:finish_at) %></p>
+      </th>
+      <th>
+        <p class="ui green text"><%= WechatResponse.human_attribute_name(:valid_response) %></p>
+        <p class="ui red text"><%= WechatResponse.human_attribute_name(:invalid_response) %></p>
       </th>
       <th><%= WechatResponse.human_attribute_name(:created_at) %></th>
       <th>
@@ -44,12 +44,12 @@
         <% end %>
       </td>
       <td>
-        <p class="ui green text"><%= wechat_response.valid_response %></p>
-        <p class="ui red text"><%= wechat_response.invalid_response %></p>
-      </td>
-      <td>
         <p><%= wechat_response.start_at.to_s(:time) %></p>
         <p><%= wechat_response.finish_at.to_s(:time) %></p>
+      </td>
+      <td>
+        <p class="ui green text"><%= wechat_response.valid_response %></p>
+        <p class="ui red text"><%= wechat_response.invalid_response %></p>
       </td>
       <td><time><%= wechat_response.created_at.to_s(:rfc822) %></time></td>
       <td>

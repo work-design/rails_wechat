@@ -5,9 +5,9 @@ zh:
         index:
           title: 微信设置
           info: 如何设置
-      wechat_feedbacks:
+      wechat_requests:
         index:
-          title: 反馈
+          title: 用户消息
       wechat_menus:
         index:
           title: 菜单

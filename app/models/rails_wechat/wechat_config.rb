@@ -25,7 +25,7 @@ module RailsWechat::WechatConfig
     has_many :text_responses, dependent: :destroy
     has_many :scan_responses, dependent: :destroy
     has_many :wechat_responses, dependent: :destroy
-    has_many :wechat_feedbacks, dependent: :nullify
+    has_many :wechat_requests, dependent: :nullify
     
     has_many :wechat_config_extractors, dependent: :delete_all
     has_many :extractors, through: :wechat_config_extractors

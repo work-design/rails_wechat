@@ -1,7 +1,0 @@
-<%= search_form_with model: WechatFeedback.new do |f| %>
-  <div class="fields">
-    <%= f.date_field 'feedback_on-gte', value: params['feedback_on-gte'] %>
-    <%= f.date_field 'feedback_on-lte', value: params['feedback_on-lte'] %>
-    <%= f.submit %>
-  </div>
-<% end %>

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       resources :wechat_responses do
         post :sync, on: :member
       end
-      resources :wechat_feedbacks, except: [:new, :create]
+      resources :wechat_requests, except: [:new, :create]
     end
     resources :wechat_menus do
       collection do
