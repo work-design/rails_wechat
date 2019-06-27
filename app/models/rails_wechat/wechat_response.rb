@@ -12,21 +12,16 @@ module RailsWechat::WechatResponse
     
     before_validation do
       self.match_value ||= "#{effective_type}_#{effective_id}"
+      self.expire_at = Time.current + expire_seconds if expire_seconds
     end
   end
 
   def effective?(time = Time.now)
-    time > expire_at
-  end
-  
-  def expire_at
-    Time.current + expire_seconds if expire_seconds
+    time < expire_at
   end
 
   def invoke_effect(request_from)
     effective.invoke_effect(request_from) if effective
   end
-  
-  
   
 end

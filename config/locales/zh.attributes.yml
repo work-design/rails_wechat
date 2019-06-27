@@ -17,13 +17,13 @@ zh:
         help_without_user: 未注册提示
         help_user_disabled: 用户被禁提示
         help_feedback: 收到反馈后提示
-      wechat_feedback:
+      wechat_request:
         body: 内容
         feedback_on: 反馈日期
       wechat_response:
         match_value: 匹配关键词
-        valid_response: 有效应答语
-        invalid_response: 无效应答语
+        qrcode: 二维码
+        expire_at: 过期时间
       extractor:
         prefix: 前缀
         suffix: 后缀
@@ -34,3 +34,6 @@ zh:
         value: 值
         appid: 小程序APPID
         pagepath: 小程序路径
+      ticket:
+        valid_response: 有效应答语
+        invalid_response: 无效应答语
