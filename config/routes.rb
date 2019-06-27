@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get :edit_parent, on: :member
     end
     resources :extractors
+    resources :tickets
   end
 
 end

@@ -45,9 +45,10 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.references :effective, polymorphic: true
       t.string :type
       t.string :match_value
-      t.integer :expire_seconds
       t.string :qrcode_ticket
       t.string :qrcode_url
+      t.integer :expire_seconds
+      t.datetime :expire_at
       t.timestamps
     end
 
@@ -60,7 +61,8 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     end
     
     create_table :tickets do |t|
-      t.references :organ_id  # For SaaS
+      t.references :organ  # For SaaS
+      t.string :match_value
       t.integer :serial_start
       t.time :start_at
       t.time :finish_at

@@ -16,15 +16,9 @@
   <thead>
     <tr>
       <th><%= WechatResponse.human_attribute_name(:type) %></th>
+      <th><%= WechatResponse.human_attribute_name(:qrcode) %></th>
       <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
-      <th>
-        <p><%= WechatResponse.human_attribute_name(:start_at) %></p>
-        <p><%= WechatResponse.human_attribute_name(:finish_at) %></p>
-      </th>
-      <th>
-        <p class="ui green text"><%= WechatResponse.human_attribute_name(:valid_response) %></p>
-        <p class="ui red text"><%= WechatResponse.human_attribute_name(:invalid_response) %></p>
-      </th>
+      <th><%= WechatResponse.human_attribute_name(:expire_at) %></th>
       <th><%= WechatResponse.human_attribute_name(:created_at) %></th>
       <th>
         <%= link_to new_admin_wechat_config_wechat_response_path(@wechat_config), remote: true, class: 'ui mini green button' do %>
@@ -38,19 +32,12 @@
     <tr>
       <td><%= wechat_response.type_i18n %></td>
       <td>
-        <%= wechat_response.match_value %>
         <% if wechat_response.is_a?(ScanResponse) %>
           <%= image_tag wechat_response.qrcode_file, class: 'ui small image' if wechat_response.qrcode_file.attached? %>
         <% end %>
       </td>
-      <td>
-        <p><%= wechat_response.start_at.to_s(:time) %></p>
-        <p><%= wechat_response.finish_at.to_s(:time) %></p>
-      </td>
-      <td>
-        <p class="ui green text"><%= wechat_response.valid_response %></p>
-        <p class="ui red text"><%= wechat_response.invalid_response %></p>
-      </td>
+      <td><%= wechat_response.match_value %></td>
+      <td><time><%= wechat_response.expire_at.to_s(:rfc822) if wechat_response.expire_at %></time></td>
       <td><time><%= wechat_response.created_at.to_s(:rfc822) %></time></td>
       <td>
         <%= link_to admin_wechat_config_wechat_response_path(@wechat_config, wechat_response), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>

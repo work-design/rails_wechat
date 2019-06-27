@@ -28,8 +28,8 @@ module RailsWechat
     end
 
     initializer 'rails_wechat.zeitwerk.preload' do |app|
-      Rails.autoloaders.main.preload "#{config.root}/app/models/wechat_response/persist_scan_response.rb"
-      Rails.autoloaders.main.preload "#{config.root}/app/models/wechat_response/temp_scan_response.rb"
+      Rails.autoloaders.main&.preload "#{config.root}/app/models/wechat_response/persist_scan_response.rb"
+      Rails.autoloaders.main&.preload "#{config.root}/app/models/wechat_response/temp_scan_response.rb"
     end
     
   end
