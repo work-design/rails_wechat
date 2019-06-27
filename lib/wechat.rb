@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'wechat/api'
 require 'wechat/helpers'
 require 'wechat/errors'
