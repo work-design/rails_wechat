@@ -1,11 +1,11 @@
-module RailsWechat::ResponseItem
+module RailsWechat::TicketItem
   extend ActiveSupport::Concern
   included do
     attribute :serial_number, :integer
     
     acts_as_list column: 'serial_number', scope: [:wechat_response_id]
     
-    belongs_to :wechat_response
+    belongs_to :ticket
     belongs_to :wechat_request
     belongs_to :wechat_user
     

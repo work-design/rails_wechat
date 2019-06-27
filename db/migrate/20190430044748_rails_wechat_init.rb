@@ -48,11 +48,6 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.integer :expire_seconds
       t.string :qrcode_ticket
       t.string :qrcode_url
-      t.string :valid_response
-      t.string :invalid_response
-      t.time :start_at
-      t.time :finish_at
-      t.integer :serial_start
       t.timestamps
     end
 
@@ -64,8 +59,18 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.timestamps
     end
     
-    create_table :response_items do |t|
-      t.references :wechat_response
+    create_table :tickets do |t|
+      t.references :organ_id  # For SaaS
+      t.integer :serial_start
+      t.time :start_at
+      t.time :finish_at
+      t.string :valid_response
+      t.string :invalid_response
+      t.timestamps
+    end
+    
+    create_table :ticket_items do |t|
+      t.references :ticket
       t.references :wechat_request
       t.references :wechat_user
       t.integer :serial_number
