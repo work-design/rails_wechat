@@ -82,12 +82,23 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def message_mass_sendall(message)
-    message = Wechat::Message::Push.new(message)
-    post 'message/mass/sendall', message.to_json
+    message = { content: message } if message.is_a? String
+    
+    push = Wechat::Message::Push::Public.new(message)
+    post 'message/mass/sendall', push.to_json
+  end
+  
+  def message_mass_send(message, *openid)
+    message = { content: message } if message.is_a? String
+  
+    push = Wechat::Message::Push::Public.new(message)
+    push.to(openid)
+    
+    post 'message/mass/send', push.to_json
   end
   
   def message_mass_delete(msg_id)
-    post 'message/mass/delete', JSON.generate(msg_id: msg_id)
+    post 'message/mass/delete', { msg_id: msg_id }.to_json
   end
   
   def message_mass_preview(message)
@@ -95,7 +106,7 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def message_mass_get(msg_id)
-    post 'message/mass/get', JSON.generate(msg_id: msg_id)
+    post 'message/mass/get', { msg_id: msg_id }.to_json
   end
   
   def wxa_get_wxacode(path, width = 430)
@@ -116,16 +127,16 @@ class Wechat::Api::Common < Wechat::Api::Base
   
   def menu_create(menu)
     # 微信不接受7bit escaped json(eg \uxxxx), 中文必须UTF-8编码, 这可能是个安全漏洞
-    post 'menu/create', JSON.generate(menu)
+    post 'menu/create', menu.to_json
   end
   
   def menu_addconditional(menu)
     # Wechat not accept 7bit escaped json(eg \uxxxx), must using UTF-8, possible security vulnerability?
-    post 'menu/addconditional', JSON.generate(menu)
+    post 'menu/addconditional', menu.to_json
   end
   
   def menu_trymatch(user_id)
-    post 'menu/trymatch', JSON.generate(user_id: user_id)
+    post 'menu/trymatch', { user_id: user_id }.to_json
   end
   
   def menu_delconditional(menuid)

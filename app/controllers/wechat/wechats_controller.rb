@@ -24,7 +24,7 @@ class Wechat::WechatsController < ApplicationController
     else
       msg = received.app.help
     end
-    binding.pry
+
     received.reply.text msg
   end
  
