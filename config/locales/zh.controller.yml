@@ -17,3 +17,6 @@ zh:
       extractors:
         index:
           title: 解析回复内容
+      tickets:
+        index:
+          title: 自动票号

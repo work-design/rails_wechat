@@ -18,8 +18,9 @@ zh:
         help_user_disabled: 用户被禁提示
         help_feedback: 收到反馈后提示
       wechat_request:
+        wechat_user_id: 微信用户
         body: 内容
-        feedback_on: 反馈日期
+        extractions: 内容解析
       wechat_response:
         match_value: 匹配关键词
         qrcode: 二维码

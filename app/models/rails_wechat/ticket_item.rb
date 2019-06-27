@@ -3,8 +3,6 @@ module RailsWechat::TicketItem
   included do
     attribute :serial_number, :integer
     
-    acts_as_list column: 'serial_number', scope: [:wechat_response_id]
-    
     belongs_to :ticket
     belongs_to :wechat_request
     belongs_to :wechat_user
@@ -15,11 +13,7 @@ module RailsWechat::TicketItem
   end
   
   def respond_text
-    "#{wechat_response.valid_response}#{number_str}"
-  end
-  
-  def number_str
-    self.created_at.to_s + self.serial_number.to_s.rjust(4, '0')
+    "#{ticket.valid_response}#{serial_number}"
   end
   
 end
