@@ -15,7 +15,11 @@ module Wechat::Message
     attr_reader :msgtype
     def initialize(msg = {})
       @message_hash = Hash(msg).with_indifferent_access
+      
+      @message_hash['msgtype'] = 'text' if @message_hash['msgtype'].blank?
+      
       @msgtype = @message_hash['msgtype'].to_s
+      restore
     end
     
     def restore
@@ -23,11 +27,6 @@ module Wechat::Message
       when 'text', 'markdown'
         @message_hash[msgtype] = { content: @message_hash.delete('content') }
       end
-    end
-    
-    def template(opts = {})
-      template_fields = opts.symbolize_keys.slice(*TEMPLATE_KEYS)
-      update(MsgType: 'template', Template: template_fields)
     end
     
   end

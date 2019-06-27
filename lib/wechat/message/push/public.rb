@@ -7,7 +7,6 @@ module Wechat::Message
       'wxcard'  # card_id
     ].freeze
 
-
     # see: https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1481187827_i0l21
     def to_mass(tag_id = nil, **options)
       if tag_id
@@ -18,7 +17,13 @@ module Wechat::Message
     end
 
     def to(*openid, **options)
+      openid = openid[0] if openid.size == 1
       update(touser: openid, **options)
+    end
+
+    def template(opts = {})
+      template_fields = opts.symbolize_keys.slice(*TEMPLATE_KEYS)
+      update(MsgType: 'template', Template: template_fields)
     end
     
   end
