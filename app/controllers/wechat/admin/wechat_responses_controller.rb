@@ -3,7 +3,11 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
   before_action :set_wechat_response, only: [:show, :edit, :update, :destroy]
 
   def index
-    @wechat_responses = @wechat_config.wechat_responses.page(params[:page])
+    q_params = {
+      type: ['TextResponse', 'PersistScanResponse']
+    }
+    q_params.merge! params.permit(:type)
+    @wechat_responses = @wechat_config.wechat_responses.default_where(q_params).page(params[:page])
   end
 
   def new
