@@ -29,7 +29,12 @@ module RailsWechat::Ticket
     end_at = now.next_month.beginning_of_month - 1.day
     serial_init = serial_start.presence || (now.strftime('%Y%m') + '0001').to_i
     if now < end_at
-      self.ticket_items.default_where('created_at-gte': begin_at).order(serial_number: :desc).first&.serial_number || serial_init
+      last_item = self.ticket_items.default_where('created_at-gte': begin_at).order(serial_number: :desc).first
+      if last_item
+        last_item.serial_number + 1
+      else
+        serial_init
+      end
     else
       (now.next_month.strftime('%Y%m') + '0001').to_i
     end
