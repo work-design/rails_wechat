@@ -53,7 +53,7 @@ class Wechat::Api::Common < Wechat::Api::Base
     post 'user/info/updateremark', JSON.generate(openid: openid, remark: remark)
   end
   
-  def qrcode_create_scene(scene_id_or_str, expire_seconds = 604800)
+  def qrcode_create_scene(scene_id_or_str, expire_seconds = 2592000)
     case scene_id_or_str
     when 0.class
       post 'qrcode/create', JSON.generate(expire_seconds: expire_seconds,
