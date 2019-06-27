@@ -52,6 +52,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.string :invalid_response
       t.time :start_at
       t.time :finish_at
+      t.integer :serial_start
       t.timestamps
     end
 
@@ -67,9 +68,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.references :wechat_response
       t.references :wechat_request
       t.references :wechat_user
-      t.date :respond_on
-      t.string :respond_in
-      t.integer :position
+      t.integer :serial_number
       t.timestamps
     end
     

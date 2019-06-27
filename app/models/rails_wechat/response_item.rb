@@ -1,11 +1,9 @@
 module RailsWechat::ResponseItem
   extend ActiveSupport::Concern
   included do
-    attribute :respond_on, :date, default: -> { Date.today }
-    attribute :respond_in, :string, default: -> { Date.today.strftime('%Y%m') }
-    attribute :position, :integer, default: 1
+    attribute :serial_number, :integer
     
-    acts_as_list scope: [:wechat_response_id, :respond_in]
+    acts_as_list column: 'serial_number', scope: [:wechat_response_id]
     
     belongs_to :wechat_response
     belongs_to :wechat_request
@@ -21,7 +19,7 @@ module RailsWechat::ResponseItem
   end
   
   def number_str
-    self.respond_in.to_s + self.position.to_s.rjust(4, '0')
+    self.created_at.to_s + self.serial_number.to_s.rjust(4, '0')
   end
   
 end

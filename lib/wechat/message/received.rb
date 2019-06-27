@@ -47,7 +47,7 @@ module Wechat::Message
     def wechat_user
       return @wechat_user if defined? @wechat_user
       @wechat_user = WechatUser.find_or_initialize_by(uid: @message_hash[:FromUserName])
-      @wechat_user.app_id = received.app.appid
+      @wechat_user.app_id = app.appid
       @wechat_user.save
       @wechat_user
     end

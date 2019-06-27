@@ -1,8 +1,6 @@
-module RailsWechat::WechatFeedback
+module RailsWechat::WechatRequest
   extend ActiveSupport::Concern
   included do
-    
-    
     belongs_to :wechat_user
     belongs_to :wechat_config
     has_many :response_items, dependent: :destroy  # 自动response的具体信息
@@ -25,7 +23,7 @@ module RailsWechat::WechatFeedback
   end
   
   def response
-    ''
+    "你的反馈已收到"
   end
   
 end
