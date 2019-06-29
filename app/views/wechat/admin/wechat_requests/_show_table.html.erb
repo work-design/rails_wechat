@@ -2,29 +2,25 @@
   <thead>
     <tr>
       <th class="six wide">
-        <%= link_to t('.edit'), edit_admin_wechat_config_wechat_feedback_path(@wechat_config, @wechat_feedback), class: 'ui mini blue right floated button', remote: true %>
+        <%= link_to t('.edit'), edit_admin_wechat_config_wechat_request_path(@wechat_config, @wechat_request), class: 'ui mini blue right floated button', remote: true %>
       </th>
       <th class="ten wide"></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td class="right aligned"><%= WechatFeedback.human_attribute_name(:wechat_user_id) %></td>
+      <td class="right aligned"><%= WechatRequest.human_attribute_name(:wechat_user_id) %></td>
       <td>
-        <% if @wechat_feedback.wechat_user.user %>
-          <%= link_to @wechat_feedback.wechat_user.user.name, admin_user_path(@wechat_feedback.wechat_user.user_id) %>
+        <% if @wechat_request.wechat_user.user %>
+          <%= link_to @wechat_request.wechat_user.user.name, admin_user_path(@wechat_request.wechat_user.user_id) %>
         <% else %>
-          <%= link_to @wechat_feedback.wechat_user.name, admin_user_path(@wechat_feedback.wechat_user.name) %>
+          <%= link_to @wechat_request.wechat_user.name, admin_user_path(@wechat_request.wechat_user.name) %>
         <% end %>
       </td>
     </tr>
     <tr>
-      <td class="right aligned"><%= WechatFeedback.human_attribute_name(:body) %></td>
-      <td><%= @wechat_feedback.body %></td>
-    </tr>
-    <tr>
-      <td class="right aligned"><%= WechatFeedback.human_attribute_name(:feedback_on) %></td>
-      <td><%= @wechat_feedback.feedback_on %></td>
+      <td class="right aligned"><%= WechatRequest.human_attribute_name(:body) %></td>
+      <td><%= @wechat_request.body %></td>
     </tr>
   </tbody>
 </table>
