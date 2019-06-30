@@ -36,7 +36,13 @@ module RailsWechat::Ticket
         serial_init
       end
     else
-      (now.next_month.strftime('%Y%m') + '0001').to_i
+      serial_init = (now.next_month.strftime('%Y%m') + '0001').to_i
+      last_item = self.ticket_items.default_where('created_at-gte': end_at).order(serial_number: :desc).first
+      if last_item
+        last_item.serial_number + 1
+      else
+        serial_init
+      end
     end
   end
 
