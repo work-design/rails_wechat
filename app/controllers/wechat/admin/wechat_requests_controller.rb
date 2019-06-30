@@ -5,6 +5,9 @@ class Wechat::Admin::WechatRequestsController < Wechat::Admin::BaseController
   def index
     q_params = {}
     q_params.merge! params.permit('created_at-gte', 'created_at-lte')
+    if q_params['created_at-lte']
+      q_params['created_at-lte'] = q_params['created_at-lte'].to_time.end_of_day
+    end
     @wechat_requests = @wechat_config.wechat_requests.default_where(q_params).order(id: :desc).page(params[:page])
   end
 

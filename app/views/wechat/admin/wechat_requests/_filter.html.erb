@@ -3,5 +3,6 @@
     <%= f.date_field 'created_at-gte', value: params['created_at-gte'] %>
     <%= f.date_field 'created_at-lte', value: params['created_at-lte'] %>
     <%= f.submit %>
+    <%= link_to t('.clear'), filter_params(except: ['created_at-gte', 'created_at-lte']), class: 'ui button' %>
   </div>
 <% end %>
