@@ -20,7 +20,7 @@
     </tr>
     <tr>
       <td class="right aligned"><%= WechatRequest.human_attribute_name(:body) %></td>
-      <td><%= @wechat_request.body %></td>
+      <td><%= simple_format @wechat_request.body %></td>
     </tr>
   </tbody>
 </table>
