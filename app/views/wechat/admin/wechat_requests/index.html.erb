@@ -20,7 +20,7 @@
       <th class="five wide"><%= WechatRequest.human_attribute_name(:ticket_items) %></th>
       <th class="two wide"><%= WechatRequest.human_attribute_name(:created_at) %></th>
       <th class="two wide">
-        <%= link_to find_data_list_table_lists_path('RequestDailyExport', params.permit('request_on-gte', 'request_on-lte')), class: 'ui mini blue button', remote: true do %>
+        <%= link_to find_data_list_table_lists_path('RequestDailyExport', params.permit('created_at-gte', 'created_at-lte')), class: 'ui mini blue button', remote: true do %>
           <i class="file excel icon"></i><%= t('.export') %>
         <% end %>
       </th>
