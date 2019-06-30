@@ -1,7 +1,7 @@
 module RailsWechat::WechatRequest::TextRequest
   
   def response
-    res = "您的反馈已收到, 编号为：#{id}"
+    res = "请按标准模板填写"
     return res unless body.match? Regexp.new(wechat_config.match_values)
     res = wechat_config.text_responses.map do |wr|
       if body.match?(Regexp.new(wr.match_value))
