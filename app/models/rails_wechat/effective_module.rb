@@ -17,7 +17,9 @@ module RailsWechat::EffectiveModule
   end
 
   def qrcode
-    unless wechat_response
+    if wechat_response
+      wechat_response
+    else
       create_wechat_response(type: 'TempScanResponse', wechat_config_id: wechat_config.id) if wechat_config
     end
   end
