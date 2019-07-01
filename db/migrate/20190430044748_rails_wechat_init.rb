@@ -102,5 +102,13 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.timestamps
     end
     
+    create_table :wechat_tags do |t|
+      t.references :organ
+      t.string :name
+      t.string :tag_id
+      t.integer :tag_count
+      t.timestamps
+    end
+    
   end
 end

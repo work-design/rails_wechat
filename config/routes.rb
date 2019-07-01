@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     end
     resources :extractors
     resources :tickets
+    resources :wechat_tags
   end
 
 end

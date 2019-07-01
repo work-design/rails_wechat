@@ -81,10 +81,12 @@ class Wechat::Api::Common < Wechat::Api::Base
     post 'shorturl', JSON.generate(action: 'long2short', long_url: long_url)
   end
   
-  def message_mass_sendall(message)
+  def message_mass_sendall(message, tag_id = nil)
     message = { content: message } if message.is_a? String
     
     push = Wechat::Message::Push::Public.new(message)
+    push.to_mass(tag_id)
+    
     post 'message/mass/sendall', push.to_json
   end
   
@@ -176,7 +178,7 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def tag_create(tag_name)
-    post 'tags/create', JSON.generate(tag: { name: tag_name })
+    post 'tags/create', { tag: { name: tag_name } }.to_json
   end
   
   def tag_update(tagid, new_tag_name)

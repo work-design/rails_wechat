@@ -93,6 +93,10 @@ module RailsWechat::WechatConfig
     text_responses.map(&:match_value).join('|')
   end
   
+  def api
+    Wechat.app_api(self)
+  end
+  
   class_methods do
     
     def default

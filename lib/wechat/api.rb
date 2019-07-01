@@ -1,8 +1,3 @@
-module Wechat
-  module Api
-  
-  end
-end
 require_relative 'http_client'
 
 require_relative 'access_token/base'

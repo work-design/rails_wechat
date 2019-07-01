@@ -1,0 +1,28 @@
+<table class="ui very basic large table">
+  <thead>
+    <tr>
+      <th class="six wide">
+        <%= link_to t('.edit'), edit_admin_wechat_tag_path(@wechat_tag), class: 'ui mini blue right floated button', remote: true %>
+      </th>
+      <th class="ten wide"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="right aligned"><%= WechatTag.human_attribute_name(:name) %></td>
+      <td><%= @wechat_tag.name %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatTag.human_attribute_name(:tag_id) %></td>
+      <td><%= @wechat_tag.tag_id %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatTag.human_attribute_name(:tag_name) %></td>
+      <td><%= @wechat_tag.tag_name %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatTag.human_attribute_name(:tag_count) %></td>
+      <td><%= @wechat_tag.tag_count %></td>
+    </tr>
+  </tbody>
+</table>
