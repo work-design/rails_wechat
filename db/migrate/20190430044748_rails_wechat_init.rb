@@ -103,16 +103,10 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     end
     
     create_table :wechat_tags do |t|
-      t.references :organ
+      t.references :wechat_config
       t.string :name
       t.string :code
       t.string :tag_id
-      t.timestamps
-    end
-    
-    create_table :wechat_config_tags do |t|
-      t.references :wechat_config
-      t.references :wechat_tag
       t.integer :count
       t.timestamps
     end

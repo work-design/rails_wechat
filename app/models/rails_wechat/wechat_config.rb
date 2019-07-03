@@ -103,7 +103,7 @@ module RailsWechat::WechatConfig
   def sync_wechat_tags
     tags = api.tags
     tags.fetch('tags', []).each do |tag|
-      wechat_tag = wechat_tags.find_or_initialize_by(tag_id: tag['id'], name: tag['name'])
+      wechat_tag = ::WechatTag.find_or_initialize_by(tag_id: tag['id'], name: tag['name'])
       wct = wechat_config_tags.build
       wct.wechat_tag = wechat_tag
       wct.count = tag['count']

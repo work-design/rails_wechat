@@ -3,10 +3,7 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
 
   def index
     q_params = {}
-    q_params.merge! organ_ancestors_params
-    if q_params[:organ_id]
-      q_params[:organ_id] = Array(q_params[:organ_id]) + [nil]
-    end
+    q_params.merge! params.permit(:name)
     @wechat_tags = WechatTag.default_where(q_params).page(params[:page])
   end
 
@@ -67,11 +64,10 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
   end
 
   def wechat_tag_params
-    p = params.fetch(:wechat_tag, {}).permit(
+    params.fetch(:wechat_tag, {}).permit(
       :name,
-      :tag_name
+      :code
     )
-    p.merge! default_params
   end
 
 end

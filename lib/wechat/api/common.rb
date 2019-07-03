@@ -182,11 +182,11 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def tag_update(tagid, new_tag_name)
-    post 'tags/update', JSON.generate(tag: { id: tagid, name: new_tag_name })
+    post 'tags/update', { tag: { id: tagid, name: new_tag_name } }.to_json
   end
   
   def tag_delete(tagid)
-    post 'tags/delete', JSON.generate(tag: { id: tagid })
+    post 'tags/delete', { tag: { id: tagid } }.to_json
   end
   
   def tag_add_user(tagid, openids)
