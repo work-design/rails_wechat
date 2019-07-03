@@ -27,6 +27,9 @@ module RailsWechat::WechatConfig
     has_many :wechat_responses, dependent: :destroy
     has_many :wechat_requests, dependent: :nullify
     
+    has_many :wechat_config_tags, dependent: :delete_all
+    has_many :wechat_tags, through: :wechat_config_tags
+    
     has_many :wechat_config_extractors, dependent: :delete_all
     has_many :extractors, through: :wechat_config_extractors
     
@@ -95,6 +98,21 @@ module RailsWechat::WechatConfig
   
   def api
     Wechat.app_api(self)
+  end
+
+  def sync_wechat_tags
+    tags = api.tags
+    tags.fetch('tags', []).each do |tag|
+      wechat_tag = wechat_tags.find_or_initialize_by(tag_id: tag['id'], name: tag['name'])
+      wct = wechat_config_tags.build
+      wct.wechat_tag = wechat_tag
+      wct.count = tag['count']
+      
+      self.class.transaction do
+        wechat_tag.save!
+        wct.save!
+      end
+    end
   end
   
   class_methods do
