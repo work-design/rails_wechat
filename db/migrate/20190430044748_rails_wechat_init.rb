@@ -24,6 +24,9 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.string :jsapi_ticket
       t.datetime :jsapi_ticket_expires_at
       t.string :help, limit: 1024
+      t.string :help_without_user
+      t.string :help_user_disabled
+      t.string :help_feedback
       t.timestamps
     end
     

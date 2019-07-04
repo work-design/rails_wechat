@@ -13,7 +13,7 @@ module RailsWechat::WechatApp
     attribute :token, :string, default: -> { SecureRandom.hex }
     attribute :encoding_aes_key, :string
     attribute :help, :string, default: ''  # 默认帮助
-    attribute :help_without_user, :string, default: '请注册后使用'  # 未注册用户提示
+    attribute :help_without_user, :string, default: '请绑定账号，输入"绑定"根据提示操作'  # 未注册用户提示
     attribute :help_user_disabled, :string, default: '你没有权限'  # 被禁用用户提示
     attribute :help_feedback, :string, default: '你的反馈已收到'  # 正常发送反馈内容回复
     attribute :access_token, :string
@@ -104,14 +104,8 @@ module RailsWechat::WechatApp
     tags = api.tags
     tags.fetch('tags', []).each do |tag|
       wechat_tag = ::WechatTag.find_or_initialize_by(tag_id: tag['id'], name: tag['name'])
-      wct = wechat_app_tags.build
-      wct.wechat_tag = wechat_tag
-      wct.count = tag['count']
-      
-      self.class.transaction do
-        wechat_tag.save!
-        wct.save!
-      end
+      wechat_tag.count = tag['count']
+      wechat_tag.save
     end
   end
   
