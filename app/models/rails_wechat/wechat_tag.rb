@@ -2,6 +2,7 @@ module RailsWechat::WechatTag
   extend ActiveSupport::Concern
   included do
     attribute :name, :string
+    attribute :count, :integer, default: 0
     
     belongs_to :wechat_tag_default, optional: true
     belongs_to :wechat_app

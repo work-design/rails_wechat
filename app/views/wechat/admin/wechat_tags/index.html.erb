@@ -7,6 +7,7 @@
     <tr>
       <th><%= WechatTag.human_attribute_name(:name) %></th>
       <th><%= WechatTag.human_attribute_name(:tag_id) %></th>
+      <th><%= WechatTag.human_attribute_name(:count) %></th>
       <th>
         <%= link_to new_admin_wechat_app_wechat_tag_path(@wechat_app), remote: true, class: 'ui mini green button' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
@@ -21,6 +22,7 @@
   <% @wechat_tag_defaults.each do |wechat_tag_default| %>
     <tr>
       <td><%= wechat_tag_default.name %></td>
+      <td></td>
       <td>
         <div class="ui toggle checkbox">
           <% if @wechat_tag_default_ids.include?(wechat_tag_default.id) %>
@@ -37,6 +39,7 @@
     <tr>
       <td><%= wechat_tag.name %></td>
       <td><%= wechat_tag.tag_id %></td>
+      <td><%= wechat_tag.count %></td>
       <td>
         <%= link_to admin_wechat_app_wechat_tag_path(@wechat_app, wechat_tag), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>
