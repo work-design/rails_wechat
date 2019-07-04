@@ -101,8 +101,9 @@ module RailsWechat::WechatApp
   def sync_wechat_tags
     tags = api.tags
     tags.fetch('tags', []).each do |tag|
-      wechat_tag = ::WechatTag.find_or_initialize_by(tag_id: tag['id'], name: tag['name'])
+      wechat_tag = wechat_tags.find_or_initialize_by(name: tag['name'])
       wechat_tag.count = tag['count']
+      wechat_tag.tag_id = tag['id']
       wechat_tag.save
     end
   end

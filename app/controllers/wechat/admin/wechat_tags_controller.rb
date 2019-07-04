@@ -32,6 +32,11 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
       end
     end
   end
+  
+  def sync
+    @wechat_app.sync_wechat_tags
+    redirect_to admin_wechat_app_wechat_tags_url(@wechat_app)
+  end
 
   def show
   end

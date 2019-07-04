@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       end
       resources :wechat_requests, except: [:new, :create]
       resources :wechat_tags do
+        post :sync, on: :collection
         delete '' => :destroy, on: :collection
       end
     end
