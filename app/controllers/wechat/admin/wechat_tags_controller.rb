@@ -1,29 +1,33 @@
 class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
-  before_action :set_wechat_tag, only: [:show, :edit, :update, :destroy]
+  before_action :set_wechat_app
+  before_action :set_wechat_tag, only: [:show, :edit, :update]
 
   def index
     q_params = {}
     q_params.merge! params.permit(:name)
-    @wechat_tags = WechatTag.default_where(q_params).page(params[:page])
+    
+    @wechat_tag_defaults = WechatTagDefault.all
+    @wechat_tag_default_ids = @wechat_app.wechat_tags.where.not(wechat_tag_default_id: nil).pluck(:wechat_tag_default_id)
+    @wechat_tags = @wechat_app.wechat_tags.where(wechat_tag_default_id: nil).default_where(q_params).page(params[:page])
   end
 
   def new
-    @wechat_tag = WechatTag.new
+    @wechat_tag = @wechat_app.wechat_tags.build
   end
 
   def create
-    @wechat_tag = WechatTag.new(wechat_tag_params)
+    @wechat_tag = @wechat_app.wechat_tags.build(wechat_tag_params)
 
     respond_to do |format|
       if @wechat_tag.save
         format.html.phone
-        format.html { redirect_to admin_wechat_tags_url }
-        format.js { redirect_back fallback_location: admin_wechat_tags_url }
+        format.html { redirect_to admin_wechat_app_wechat_tags_url(@wechat_app) }
+        format.js { redirect_back fallback_location: admin_wechat_app_wechat_tags_url(@wechat_app) }
         format.json { render :show }
       else
         format.html.phone { render :new }
         format.html { render :new }
-        format.js { redirect_back fallback_location: admin_wechat_tags_url }
+        format.js { redirect_back fallback_location: admin_wechat_app_wechat_tags_url(@wechat_app) }
         format.json { render :show }
       end
     end
@@ -41,32 +45,37 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
     respond_to do |format|
       if @wechat_tag.save
         format.html.phone
-        format.html { redirect_to admin_wechat_tags_url }
-        format.js { redirect_back fallback_location: admin_wechat_tags_url }
+        format.html { redirect_to admin_wechat_app_wechat_tags_url(@wechat_app) }
+        format.js { redirect_back fallback_location: admin_wechat_app_wechat_tags_url(@wechat_app) }
         format.json { render :show }
       else
         format.html.phone { render :edit }
         format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_wechat_tags_url }
+        format.js { redirect_back fallback_location: admin_wechat_app_wechat_tags_url(@wechat_app) }
         format.json { render :show }
       end
     end
   end
 
   def destroy
+    if params[:wechat_tag_default_id].present?
+      @wechat_tag = @wechat_app.wechat_tags.find_by(wechat_tag_default_id: params[:wechat_tag_default_id])
+    else
+      set_wechat_tag
+    end
     @wechat_tag.destroy
-    redirect_to admin_wechat_tags_url
+    redirect_to admin_wechat_app_wechat_tags_url(@wechat_app)
   end
 
   private
   def set_wechat_tag
-    @wechat_tag = WechatTag.find(params[:id])
+    @wechat_tag = @wechat_app.wechat_tags.find(params[:id])
   end
 
   def wechat_tag_params
     params.fetch(:wechat_tag, {}).permit(
       :name,
-      :code
+      :wechat_tag_default_id
     )
   end
 

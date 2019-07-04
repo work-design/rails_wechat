@@ -26,9 +26,7 @@ module RailsWechat::WechatApp
     has_many :scan_responses, dependent: :destroy
     has_many :wechat_responses, dependent: :destroy
     has_many :wechat_requests, dependent: :nullify
-    
-    has_many :wechat_app_tags, dependent: :delete_all
-    has_many :wechat_tags, through: :wechat_app_tags
+    has_many :wechat_tags, dependent: :delete_all
     
     has_many :wechat_app_extractors, dependent: :delete_all
     has_many :extractors, through: :wechat_app_extractors

@@ -18,7 +18,9 @@ Rails.application.routes.draw do
         post :sync, on: :member
       end
       resources :wechat_requests, except: [:new, :create]
-      resources :wechat_tags
+      resources :wechat_tags do
+        delete '' => :destroy, on: :collection
+      end
     end
     resources :wechat_menus do
       collection do

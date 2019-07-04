@@ -1,3 +1,3 @@
-class WechatConfigTag < ApplicationRecord
-  include RailsWechat::WechatConfigTag
-end unless defined? WechatConfigTag
+class WechatTagDefault < ApplicationRecord
+  include RailsWechat::WechatTagDefault
+end unless defined? WechatTagDefault

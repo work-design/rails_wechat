@@ -21,3 +21,6 @@ zh:
         encrypt_mode:
           true: 安全模式（推荐）
           false: 明文模式
+      wechat_tag_default:
+        default_type:
+          WechatUser: 微信已绑定用户
