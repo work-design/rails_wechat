@@ -32,8 +32,8 @@ module Wechat::Message
         msg = response.to_xml
       end
     
-      if @wechat_config.encrypt_mode
-        _encrypt = Base64.strict_encode64(Cipher.encrypt(Cipher.pack(msg, @we_app_id), @wechat_config.encoding_aes_key))
+      if @wechat_app.encrypt_mode
+        _encrypt = Base64.strict_encode64(Cipher.encrypt(Cipher.pack(msg, @we_app_id), @wechat_app.encoding_aes_key))
         msg = encrypt(_encrypt, params[:timestamp], params[:nonce])
       end
     
@@ -41,7 +41,7 @@ module Wechat::Message
     end
   
     def do_encrypt(encrypt, timestamp, nonce)
-      msg_sign = Signature.hexdigest(@wechat_config.token, timestamp, nonce, encrypt)
+      msg_sign = Signature.hexdigest(@wechat_app.token, timestamp, nonce, encrypt)
     
       {
         Encrypt: encrypt,

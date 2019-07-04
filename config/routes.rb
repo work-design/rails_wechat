@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   scope :admin, module: 'wechat/admin', as: 'admin' do
-    resources :wechat_configs do
+    resources :wechat_apps do
       get :own, on: :collection
       get 'help' => :edit_help, on: :member
       get :info, on: :member
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         post :sync, on: :member
       end
       resources :wechat_requests, except: [:new, :create]
+      resources :wechat_tags
     end
     resources :wechat_menus do
       collection do
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
     end
     resources :extractors
     resources :tickets
-    resources :wechat_tags
+    resources :wechat_tag_defaults
   end
 
 end

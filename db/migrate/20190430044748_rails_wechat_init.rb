@@ -1,7 +1,7 @@
 class RailsWechatInit < ActiveRecord::Migration[6.0]
   def change
     
-    create_table :wechat_configs do |t|
+    create_table :wechat_apps do |t|
       t.string :name
       t.string :type
       t.boolean :enabled
@@ -28,7 +28,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     end
     
     create_table :wechat_menus do |t|
-      t.references :wechat_config
+      t.references :wechat_app
       t.references :parent
       t.string :type
       t.string :menu_type
@@ -41,7 +41,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     end
 
     create_table :wechat_responses do |t|
-      t.references :wechat_config
+      t.references :wechat_app
       t.references :effective, polymorphic: true
       t.string :type
       t.string :match_value
@@ -53,7 +53,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     end
 
     create_table :wechat_requests do |t|
-      t.references :wechat_config
+      t.references :wechat_app
       t.references :wechat_user
       t.string :type
       t.text :body
@@ -96,18 +96,24 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.timestamps
     end
     
-    create_table :wechat_config_extractors do |t|
+    create_table :wechat_app_extractors do |t|
       t.references :extractor
-      t.references :wechat_config
+      t.references :wechat_app
       t.timestamps
     end
     
     create_table :wechat_tags do |t|
-      t.references :wechat_config
+      t.references :wechat_app
+      t.references :wechat_tag_default
       t.string :name
-      t.string :code
       t.string :tag_id
       t.integer :count
+      t.timestamps
+    end
+    
+    create_table :wechat_tag_defaults do |t|
+      t.string :name
+      t.string :default_type
       t.timestamps
     end
     

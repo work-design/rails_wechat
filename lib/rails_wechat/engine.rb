@@ -6,7 +6,7 @@ module RailsWechat
       "#{config.root}/app/models/wechat_menu",
       "#{config.root}/app/models/wechat_request",
       "#{config.root}/app/models/wechat_response",
-      "#{config.root}/app/models/wechat_config"
+      "#{config.root}/app/models/wechat_app"
     ]
     
     config.generators do |g|

@@ -1,0 +1,56 @@
+<table class="ui very basic large table">
+  <thead>
+    <tr>
+      <th class="six wide">
+        <%= link_to t('.edit'), edit_admin_wechat_app_path(@wechat_app), class: 'ui mini blue right floated button', remote: true %>
+      </th>
+      <th class="ten wide"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:enabled) %></td>
+      <td><%= @wechat_app.enabled %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:appid) %></td>
+      <td><%= @wechat_app.appid %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:secret) %></td>
+      <td><%= @wechat_app.secret %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:agentid) %></td>
+      <td><%= @wechat_app.agentid %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:encrypt_mode) %></td>
+      <td><%= @wechat_app.encrypt_mode %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:encoding_aes_key) %></td>
+      <td><%= @wechat_app.encoding_aes_key %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:token) %></td>
+      <td><%= @wechat_app.token %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:help) %></td>
+      <td><%= simple_format @wechat_app.help %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:help_without_user) %></td>
+      <td><%= simple_format @wechat_app.help_without_user %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:help_user_disabled) %></td>
+      <td><%= simple_format @wechat_app.help_user_disabled %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:created_at) %></td>
+      <td><%= @wechat_app.created_at %></td>
+    </tr>
+  </tbody>
+</table>

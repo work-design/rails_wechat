@@ -1,11 +1,11 @@
 class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
-  before_action :set_wechat_config
+  before_action :set_wechat_app
   before_action :set_wechat_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
   before_action :prepare_form, only: [:new, :create, :edit, :update]
   
   def default
     q_params = {}
-    q_params.merge! wechat_config_id: nil
+    q_params.merge! wechat_app_id: nil
   
     @wechat_menus = WechatMenu.where(q_params).order(parent_id: :desc, id: :asc).page(params[:page])
     
@@ -14,13 +14,13 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
   
   def index
     q_params = {}
-    q_params.merge! wechat_config_id: [params[:wechat_config_id], nil].uniq
+    q_params.merge! wechat_app_id: [params[:wechat_app_id], nil].uniq
     
     @wechat_menus = WechatMenu.where(q_params).order(parent_id: :desc, id: :asc).page(params[:page])
   end
 
   def new
-    @wechat_menu = WechatMenu.new(wechat_config_id: params[:wechat_config_id])
+    @wechat_menu = WechatMenu.new(wechat_app_id: params[:wechat_app_id])
   end
 
   def create
@@ -29,21 +29,21 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
     respond_to do |format|
       if @wechat_menu.save
         format.html.phone
-        format.html { redirect_to admin_wechat_menus_url(wechat_config_id: @wechat_menu.wechat_config_id) }
-        format.js { redirect_to admin_wechat_menus_url(wechat_config_id: @wechat_menu.wechat_config_id) }
+        format.html { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
+        format.js { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
         format.json { render :show }
       else
         format.html.phone { render :new }
         format.html { render :new }
-        format.js { redirect_to admin_wechat_menus_url(wechat_config_id: @wechat_menu.wechat_config_id) }
+        format.js { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
         format.json { render :show }
       end
     end
   end
   
   def sync
-    r = Wechat.api(@wechat_config.id).menu_create @wechat_config.menu
-    redirect_to admin_wechat_menus_url(wechat_config_id: @wechat_menu.wechat_config_id), notice: r.to_s
+    r = Wechat.api(@wechat_app.id).menu_create @wechat_app.menu
+    redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id), notice: r.to_s
   end
 
   def show
@@ -61,13 +61,13 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
     respond_to do |format|
       if @wechat_menu.save
         format.html.phone
-        format.html { redirect_to admin_wechat_menus_url(wechat_config_id: @wechat_menu.wechat_config_id) }
-        format.js { redirect_to admin_wechat_menus_url(wechat_config_id: @wechat_menu.wechat_config_id) }
+        format.html { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
+        format.js { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
         format.json { render :show }
       else
         format.html.phone { render :edit }
         format.html { render :edit }
-        format.js { redirect_to admin_wechat_menus_url(wechat_config_id: @wechat_menu.wechat_config_id) }
+        format.js { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
         format.json { render :show }
       end
     end
@@ -75,12 +75,12 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
 
   def destroy
     @wechat_menu.destroy
-    redirect_to admin_wechat_menus_url(wechat_config_id: @wechat_menu.wechat_config_id)
+    redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id)
   end
 
   private
-  def set_wechat_config
-    @wechat_config = WechatConfig.where(default_params).find_by id: params[:wechat_config_id]
+  def set_wechat_app
+    @wechat_app = WechatApp.where(default_params).find_by id: params[:wechat_app_id]
   end
   
   def set_wechat_menu
@@ -91,12 +91,12 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
     @types = WechatMenu.options_i18n(:type)
     @types.reject! { |_, v| v == :ParentMenu }
     
-    @parents = WechatMenu.where(type: 'ParentMenu', parent_id: nil, wechat_config_id: params[:wechat_config_id])
+    @parents = WechatMenu.where(type: 'ParentMenu', parent_id: nil, wechat_app_id: params[:wechat_app_id])
   end
 
   def wechat_menu_params
     params.fetch(:wechat_menu, {}).permit(
-      :wechat_config_id,
+      :wechat_app_id,
       :parent_id,
       :type,
       :name,

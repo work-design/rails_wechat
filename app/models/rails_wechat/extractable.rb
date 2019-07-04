@@ -5,7 +5,7 @@ module RailsWechat::Extractable
   end
 
   def test_extract
-    wechat_config.extractors.map do |extractor|
+    wechat_app.extractors.map do |extractor|
       matched = body.scan(extractor.scan_regexp)
       if matched.blank?
         next

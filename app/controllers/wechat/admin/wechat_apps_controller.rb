@@ -1,39 +1,39 @@
-class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
-  before_action :set_wechat_config, only: [:show, :info, :edit, :edit_help, :update, :destroy]
+class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
+  before_action :set_wechat_app, only: [:show, :info, :edit, :edit_help, :update, :destroy]
   before_action :prepare_form, only: [:new, :create, :edit, :update]
   
   def index
     q_params = {}
     q_params.merge! default_params
     q_params.merge! params.permit(:id)
-    @wechat_configs = WechatConfig.default_where(q_params).order(id: :asc)
+    @wechat_apps = WechatApp.default_where(q_params).order(id: :asc)
   end
   
   def own
     q_params = {}
     q_params.merge! organ_id: nil
     
-    @wechat_configs = WechatConfig.default_where(q_params, { organ_id: { allow: [nil] }}).order(id: :asc)
+    @wechat_apps = WechatApp.default_where(q_params, { organ_id: { allow: [nil] }}).order(id: :asc)
     render 'index'
   end
 
   def new
-    @wechat_config = WechatConfig.new
+    @wechat_app = WechatApp.new
   end
 
   def create
-    @wechat_config = WechatConfig.new(wechat_config_params)
+    @wechat_app = WechatApp.new(wechat_app_params)
   
     respond_to do |format|
-      if @wechat_config.save
+      if @wechat_app.save
         format.html.phone
-        format.html { redirect_to admin_wechat_configs_url }
-        format.js { redirect_back fallback_location: admin_wechat_configs_url }
+        format.html { redirect_to admin_wechat_apps_url }
+        format.js { redirect_back fallback_location: admin_wechat_apps_url }
         format.json { render :show }
       else
         format.html.phone { render :new }
         format.html { render :new }
-        format.js { redirect_back fallback_location: admin_wechat_configs_url }
+        format.js { redirect_back fallback_location: admin_wechat_apps_url }
         format.json { render :show }
       end
     end
@@ -54,31 +54,31 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
   end
 
   def update
-    @wechat_config.assign_attributes(wechat_config_params)
+    @wechat_app.assign_attributes(wechat_app_params)
 
     respond_to do |format|
-      if @wechat_config.save
+      if @wechat_app.save
         format.html.phone
-        format.html { redirect_to admin_wechat_configs_url }
-        format.js { redirect_back fallback_location: admin_wechat_configs_url }
+        format.html { redirect_to admin_wechat_apps_url }
+        format.js { redirect_back fallback_location: admin_wechat_apps_url }
         format.json { render :show }
       else
         format.html.phone { render :edit }
         format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_wechat_configs_url }
+        format.js { redirect_back fallback_location: admin_wechat_apps_url }
         format.json { render :show }
       end
     end
   end
 
   def destroy
-    @wechat_config.destroy
-    redirect_to admin_wechat_configs_url
+    @wechat_app.destroy
+    redirect_to admin_wechat_apps_url
   end
 
   private
-  def set_wechat_config
-    @wechat_config = WechatConfig.where(default_params).find(params[:id])
+  def set_wechat_app
+    @wechat_app = WechatApp.where(default_params).find(params[:id])
   end
   
   def prepare_form
@@ -89,8 +89,8 @@ class Wechat::Admin::WechatConfigsController < Wechat::Admin::BaseController
     @extractors = Extractor.default_where(q)
   end
   
-  def wechat_config_params
-    p = params.fetch(:wechat_config, {}).permit(
+  def wechat_app_params
+    p = params.fetch(:wechat_app, {}).permit(
       :type,
       :name,
       :enabled,

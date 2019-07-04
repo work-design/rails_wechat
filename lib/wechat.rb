@@ -12,9 +12,9 @@ module Wechat
   
   def self.config(id = nil)
     if id
-      r = WechatConfig.valid.find(id)
+      r = WechatApp.valid.find(id)
     else
-      r = WechatConfig.default
+      r = WechatApp.default
     end
     return r if r
     

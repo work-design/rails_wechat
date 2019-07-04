@@ -1,4 +1,4 @@
-module RailsWechat::WechatConfig
+module RailsWechat::WechatApp
   extend ActiveSupport::Concern
   included do
     delegate :url_helpers, to: 'Rails.application.routes'
@@ -27,11 +27,11 @@ module RailsWechat::WechatConfig
     has_many :wechat_responses, dependent: :destroy
     has_many :wechat_requests, dependent: :nullify
     
-    has_many :wechat_config_tags, dependent: :delete_all
-    has_many :wechat_tags, through: :wechat_config_tags
+    has_many :wechat_app_tags, dependent: :delete_all
+    has_many :wechat_tags, through: :wechat_app_tags
     
-    has_many :wechat_config_extractors, dependent: :delete_all
-    has_many :extractors, through: :wechat_config_extractors
+    has_many :wechat_app_extractors, dependent: :delete_all
+    has_many :extractors, through: :wechat_app_extractors
     
     scope :valid, -> { where(enabled: true) }
     
@@ -104,7 +104,7 @@ module RailsWechat::WechatConfig
     tags = api.tags
     tags.fetch('tags', []).each do |tag|
       wechat_tag = ::WechatTag.find_or_initialize_by(tag_id: tag['id'], name: tag['name'])
-      wct = wechat_config_tags.build
+      wct = wechat_app_tags.build
       wct.wechat_tag = wechat_tag
       wct.count = tag['count']
       

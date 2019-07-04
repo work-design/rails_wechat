@@ -1,5 +1,5 @@
 class Wechat::Admin::WechatRequestsController < Wechat::Admin::BaseController
-  before_action :set_wechat_config
+  before_action :set_wechat_app
   before_action :set_wechat_request, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -8,7 +8,7 @@ class Wechat::Admin::WechatRequestsController < Wechat::Admin::BaseController
     if q_params['created_at-lte']
       q_params['created_at-lte'] = q_params['created_at-lte'].to_time.end_of_day
     end
-    @wechat_requests = @wechat_config.wechat_requests.default_where(q_params).order(id: :desc).page(params[:page])
+    @wechat_requests = @wechat_app.wechat_requests.default_where(q_params).order(id: :desc).page(params[:page])
   end
 
   def show
@@ -20,8 +20,8 @@ class Wechat::Admin::WechatRequestsController < Wechat::Admin::BaseController
     respond_to do |format|
       if @wechat_request.save
         format.html.phone
-        format.html { redirect_to admin_wechat_config_wechat_requests_url(@wechat_config) }
-        format.js { redirect_to admin_wechat_config_wechat_requests_url(@wechat_config) }
+        format.html { redirect_to admin_wechat_app_wechat_requests_url(@wechat_app) }
+        format.js { redirect_to admin_wechat_app_wechat_requests_url(@wechat_app) }
         format.json { render :show }
       else
         format.html.phone { render :edit }
@@ -34,12 +34,12 @@ class Wechat::Admin::WechatRequestsController < Wechat::Admin::BaseController
 
   def destroy
     @wechat_request.destroy
-    redirect_to admin_wechat_config_wechat_requests_url(@wechat_config)
+    redirect_to admin_wechat_app_wechat_requests_url(@wechat_app)
   end
 
   private
   def set_wechat_request
-    @wechat_request = @wechat_config.wechat_requests.find(params[:id])
+    @wechat_request = @wechat_app.wechat_requests.find(params[:id])
   end
 
 end

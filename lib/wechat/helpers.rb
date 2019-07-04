@@ -1,9 +1,9 @@
 module Wechat
   module Helpers
     
-    def wechat_raw_config_js(wechat_config_id: nil, debug: false, apis: [])
-      app = Wechat.config(wechat_config_id)
-      api = Wechat.api(wechat_config_id)
+    def wechat_raw_config_js(wechat_app_id: nil, debug: false, apis: [])
+      app = Wechat.config(wechat_app_id)
+      api = Wechat.api(wechat_app_id)
       page_url = controller.request.original_url
       page_url.delete_suffix!('#')
       
@@ -21,8 +21,8 @@ wx.config({
 WECHAT_CONFIG_JS
     end
 
-    def wechat_config_js(wechat_config_id: nil, debug: false, apis: [])
-      config_js = wechat_raw_config_js(wechat_config_id: wechat_config_id, debug: debug, apis: apis)
+    def wechat_config_js(wechat_app_id: nil, debug: false, apis: [])
+      config_js = wechat_raw_config_js(wechat_app_id: wechat_app_id, debug: debug, apis: apis)
       javascript_tag config_js, type: 'application/javascript'
     end
     

@@ -12,13 +12,13 @@ module Wechat
     included do
       skip_before_action :verify_authenticity_token, raise: false
 
-      before_action :set_wechat_config, only: [:show, :create]
+      before_action :set_wechat_app, only: [:show, :create]
       before_action :verify_signature, only: [:show, :create]
     end
     
     def show
-      if @wechat_config.is_a?(WechatWork)
-        echostr, _corp_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(params[:echostr]), @wechat_config.encoding_aes_key))
+      if @wechat_app.is_a?(WechatWork)
+        echostr, _corp_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(params[:echostr]), @wechat_app.encoding_aes_key))
         render plain: echostr
       else
         render plain: params[:echostr]
@@ -39,17 +39,17 @@ module Wechat
     end
 
     private
-    def set_wechat_config
-      @wechat_config = WechatConfig.valid.find(params[:id])
+    def set_wechat_app
+      @wechat_app = WechatApp.valid.find(params[:id])
     end
 
     def verify_signature
-      if @wechat_config
+      if @wechat_app
         msg_encrypt = nil
-        #msg_encrypt = params[:echostr] || request_encrypt_content if @wechat_config.encrypt_mode
+        #msg_encrypt = params[:echostr] || request_encrypt_content if @wechat_app.encrypt_mode
         signature = params[:signature] || params[:msg_signature]
 
-        forbidden = (signature != Signature.hexdigest(@wechat_config.token, params[:timestamp], params[:nonce], msg_encrypt))
+        forbidden = (signature != Signature.hexdigest(@wechat_app.token, params[:timestamp], params[:nonce], msg_encrypt))
       else
         forbidden = true
       end

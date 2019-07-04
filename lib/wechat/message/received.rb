@@ -14,7 +14,7 @@ module Wechat::Message
     ].freeze
     
     def self.from_controller(controller)
-      app = controller.instance_variable_get(:@wechat_config)
+      app = controller.instance_variable_get(:@wechat_app)
       new(app, controller.request.raw_post, controller.class.configs)
     end
 

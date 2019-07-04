@@ -1,4 +1,4 @@
-module RailsWechat::WechatConfig::WechatWork
+module RailsWechat::WechatApp::WechatWork
   extend ActiveSupport::Concern
   
   included do

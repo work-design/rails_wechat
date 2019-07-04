@@ -8,11 +8,11 @@ module RailsWechat::EffectiveModule
     WechatQrcodeJob.perform_later(self)
   end
   
-  def wechat_config
-    if WechatConfig.column_names.include?('organ_id')
-      WechatConfig.find_by(organ_id: nil, primary: true)
+  def wechat_app
+    if WechatApp.column_names.include?('organ_id')
+      WechatApp.find_by(organ_id: nil, primary: true)
     else
-      WechatConfig.find_by(primary: true)
+      WechatApp.find_by(primary: true)
     end
   end
 
@@ -20,7 +20,7 @@ module RailsWechat::EffectiveModule
     if wechat_response
       wechat_response
     else
-      create_wechat_response(type: 'TempScanResponse', wechat_config_id: wechat_config.id) if wechat_config
+      create_wechat_response(type: 'TempScanResponse', wechat_app_id: wechat_config.id) if wechat_config
     end
   end
 

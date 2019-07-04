@@ -4,10 +4,10 @@ module RailsWechat::Organ
   included do
     attribute :limit_wechat, :integer, default: 1
     attribute :limit_wechat_menu, :integer, default: 1
-    has_many :wechat_configs, dependent: :destroy
+    has_many :wechat_apps, dependent: :destroy
     has_many :wechat_tags, dependent: :destroy
     
-    validates :limit_wechat_menu, inclusion: { in: [1, 2] }
+    validates :limit_wechat_menu, inclusion: { in: [1, 2, 3] }
   end
   
 end

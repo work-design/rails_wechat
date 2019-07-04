@@ -6,7 +6,7 @@ module RailsWechat::WechatResponse::TempScanResponse
   
   def commit_to_wechat
     unless self.qrcode_ticket
-      r = Wechat.api(wechat_config.id).qrcode_create_scene self.match_value, expire_seconds
+      r = Wechat.api(wechat_app.id).qrcode_create_scene self.match_value, expire_seconds
       self.update(qrcode_ticket: r['ticket'], qrcode_url: r['url'])
     end
   end

@@ -5,7 +5,7 @@ module RailsWechat::WechatResponse
     attribute :match_value, :string
     attribute :expire_at, :datetime
     
-    belongs_to :wechat_config
+    belongs_to :wechat_app
     belongs_to :effective, polymorphic: true, optional: true
     
     validates :match_value, presence: true

@@ -1,2 +1,2 @@
-$('#wechat_config_type').dropdown();
-$('#wechat_config_extractor_ids').dropdown();
+$('#wechat_app_type').dropdown();
+$('#wechat_app_extractor_ids').dropdown();

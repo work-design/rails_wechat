@@ -46,18 +46,18 @@ module RailsWechat::Ticket
     end
   end
 
-  def wechat_config
-    if WechatConfig.column_names.include?('organ_id')
-      WechatConfig.find_by(organ_id: self.organ_id, primary: true)
+  def wechat_app
+    if WechatApp.column_names.include?('organ_id')
+      WechatApp.find_by(organ_id: self.organ_id, primary: true)
     else
-      WechatConfig.find_by(primary: true)
+      WechatApp.find_by(primary: true)
     end
   end
 
   def sync_to_wechat_response
     return unless wechat_config
     wechat_response || build_wechat_response
-    wechat_response.assign_attributes(type: 'TextResponse', wechat_config_id: wechat_config.id, match_value: match_value)
+    wechat_response.assign_attributes(type: 'TextResponse', wechat_app_id: wechat_config.id, match_value: match_value)
     wechat_response.save
   end
   

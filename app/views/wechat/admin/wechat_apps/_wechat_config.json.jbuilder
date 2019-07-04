@@ -1,4 +1,4 @@
-json.extract! wechat_config,
+json.extract! wechat_app,
               :id,
               :environment,
               :account,
