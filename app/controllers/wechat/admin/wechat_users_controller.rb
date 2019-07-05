@@ -10,6 +10,7 @@ class Wechat::Admin::WechatUsersController < Wechat::Admin::BaseController
   end
 
   def edit
+    @wechat_tags = @wechat_app.wechat_tags
   end
 
   def update
@@ -17,12 +18,10 @@ class Wechat::Admin::WechatUsersController < Wechat::Admin::BaseController
 
     respond_to do |format|
       if @wechat_user.save
-        format.html.phone
-        format.html { redirect_to admin_wechat_users_url }
-        format.js { redirect_back fallback_location: admin_wechat_users_url }
+        format.html { redirect_to admin_wechat_app_wechat_users_url(@wechat_app) }
+        format.js { redirect_to admin_wechat_app_wechat_users_url(@wechat_app) }
         format.json { render :show }
       else
-        format.html.phone { render :edit }
         format.html { render :edit }
         format.js { redirect_back fallback_location: admin_wechat_users_url }
         format.json { render :show }
@@ -46,7 +45,8 @@ class Wechat::Admin::WechatUsersController < Wechat::Admin::BaseController
       :uid,
       :unionid,
       :account_id,
-      :user_id
+      :user_id,
+      wechat_tag_ids: []
     )
   end
 
