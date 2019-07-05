@@ -71,14 +71,14 @@ module Wechat
     end
 
     def parse_response(response, as)
-      content_type = response.headers[:content_type]
+      content_type = response.content_type.mime_type
       parse_as = {
-        %r{^application\/json} => :json,
-        %r{^image\/.*}         => :file,
-        %r{^audio\/.*}         => :file,
-        %r{^voice\/.*}         => :file,
-        %r{^text\/html}        => :xml,
-        %r{^text\/plain}       => :probably_json
+        /^application\/json/ => :json,
+        /^image\/.*/ => :file,
+        /^audio\/.*/ => :file,
+        /^voice\/.*/ => :file,
+        /^text\/html/  => :xml,
+        /^text\/plain/ => :probably_json
       }.each_with_object([]) { |match, memo| memo << match[1] if content_type =~ match[0] }.first || as || :text
 
       # try to parse response as json, fallback to user-specified format or text if failed

@@ -31,8 +31,9 @@ module Wechat::Api
       post 'media/uploadnews', mpnews_message.to_json
     end
   
-    def clear_quota
-      post 'clear_quota', JSON.generate(appid: Wechat.config[:appid])
+    # see: https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433744592
+    def clear_quota(appid)
+      post 'clear_quota', { appid: appid }.to_json
     end
   
     protected
@@ -62,5 +63,5 @@ module Wechat::Api
       retry unless (tries -= 1).zero?
     end
     
-  end 
+  end
 end

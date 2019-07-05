@@ -20,7 +20,7 @@ module RailsWechat::EffectiveModule
     if wechat_response
       wechat_response
     else
-      create_wechat_response(type: 'TempScanResponse', wechat_app_id: wechat_config.id) if wechat_config
+      create_wechat_response(type: 'TempScanResponse', wechat_app_id: wechat_app.id) if wechat_app
     end
   end
 

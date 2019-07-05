@@ -1,4 +1,4 @@
-class WechatConfigExtractor < ApplicationRecord
-  include RailsWechat::WechatConfigExtractor
-end unless defined? WechatConfigExtractor
+class WechatAppExtractor < ApplicationRecord
+  include RailsWechat::WechatAppExtractor
+end unless defined? WechatAppExtractor
 

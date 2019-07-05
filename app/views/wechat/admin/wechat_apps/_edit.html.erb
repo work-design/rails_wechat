@@ -5,7 +5,7 @@
   </div>
 
   <div class="content">
-    <%= form_with model: @wechat_app, scope: :wechat_config, url: admin_wechat_config_path(@wechat_config) do |f| %>
+    <%= form_with model: @wechat_app, scope: :wechat_app, url: admin_wechat_app_path(@wechat_app) do |f| %>
       <%= render partial: 'form', locals: { f: f } %>
     <% end %>
   </div>
