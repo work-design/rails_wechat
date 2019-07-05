@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         post :sync, on: :collection
         delete '' => :destroy, on: :collection
       end
+      resources :wechat_users
     end
     resources :wechat_menus do
       collection do

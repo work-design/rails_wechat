@@ -31,6 +31,8 @@ module RailsWechat::WechatApp
     has_many :wechat_app_extractors, dependent: :delete_all
     has_many :extractors, through: :wechat_app_extractors
     
+    has_many :wechat_users, foreign_key: :app_id, primary_key: :appid
+    
     scope :valid, -> { where(enabled: true) }
     
     validates :name, presence: true

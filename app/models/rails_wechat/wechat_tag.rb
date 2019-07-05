@@ -7,6 +7,8 @@ module RailsWechat::WechatTag
     
     belongs_to :wechat_tag_default, optional: true
     belongs_to :wechat_app
+    has_many :wechat_user_tags, dependent: :destroy
+    has_many :wechat_users, through: :wechat_user_tags
     
     validates :name, uniqueness: { scope: :wechat_app_id }
     

@@ -1,0 +1,34 @@
+<div class="ui top attached segment">
+  <%= render 'filter' %>
+</div>
+
+<table class="ui bottom attached selectable table">
+  <thead>
+    <tr>
+      <th><%= WechatUser.human_attribute_name(:name) %></th>
+      <th><%= WechatUser.human_attribute_name(:uid) %></th>
+      <th><%= WechatUser.human_attribute_name(:unionid) %></th>
+      <th><%= WechatUser.human_attribute_name(:account_id) %></th>
+      <th><%= WechatUser.human_attribute_name(:user_id) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @wechat_users.each do |wechat_user| %>
+    <tr>
+      <td><%= wechat_user.name %></td>
+      <td><%= wechat_user.uid %></td>
+      <td><%= wechat_user.unionid %></td>
+      <td><%= wechat_user.account_id %></td>
+      <td><%= wechat_user.user_id %></td>
+      <td>
+        <%= link_to edit_admin_wechat_app_wechat_user_path(@wechat_app, wechat_user), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @wechat_users %>
