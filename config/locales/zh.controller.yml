@@ -16,7 +16,7 @@ zh:
           title: 回复设置
       wechat_tags:
         index:
-          title: 微信标签
+          title: 用户标签
       extractors:
         index:
           title: 解析回复内容

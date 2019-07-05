@@ -7,7 +7,7 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
     q_params.merge! params.permit(:name)
     
     @wechat_tag_defaults = WechatTagDefault.all
-    @wechat_tag_default_ids = @wechat_app.wechat_tags.where.not(wechat_tag_default_id: nil).pluck(:wechat_tag_default_id)
+    @default_wechat_tags = @wechat_app.wechat_tags.where.not(wechat_tag_default_id: nil)
     @wechat_tags = @wechat_app.wechat_tags.where(wechat_tag_default_id: nil).default_where(q_params).page(params[:page])
   end
 

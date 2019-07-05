@@ -20,12 +20,20 @@
   </thead>
   <tbody>
   <% @wechat_tag_defaults.each do |wechat_tag_default| %>
+    <% wechat_tag = @default_wechat_tags.find { |i| i.wechat_tag_default_id == wechat_tag_default.id } %>
     <tr>
-      <td><%= wechat_tag_default.name %></td>
-      <td></td>
+      <td>
+        <%= wechat_tag_default.name %>
+        <% if wechat_tag %>
+          <span class="ui grey text"><%= wechat_tag.name %></span>
+        <% end %>
+      </td>
+      <td>
+        <%= wechat_tag.tag_id if wechat_tag %>
+      </td>
       <td>
         <div class="ui toggle checkbox">
-          <% if @wechat_tag_default_ids.include?(wechat_tag_default.id) %>
+          <% if @default_wechat_tags.pluck(:wechat_tag_default_id).include?(wechat_tag_default.id) %>
             <%= check_box_tag 'wechat_tag_default_id', wechat_tag_default.id, true, data: { method: :delete, remote: true, url: admin_wechat_app_wechat_tags_path(@wechat_app), submit: true }, id: nil %>
           <% else %>
             <%= check_box_tag '[wechat_tag]wechat_tag_default_id', wechat_tag_default.id, false, data: { method: :post, remote: true, url: admin_wechat_app_wechat_tags_path(@wechat_app), submit: true }, id: nil %>
