@@ -32,7 +32,6 @@ module RailsWechat::WechatTag
   
   def can_destroy?
     SYS_TAG.include?(tag_id)
-    
   end
 
 end

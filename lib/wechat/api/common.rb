@@ -193,16 +193,16 @@ class Wechat::Api::Common < Wechat::Api::Base
     post 'tags/delete', { tag: { id: tagid } }.to_json
   end
   
-  def tag_add_user(tagid, openids)
-    post 'tags/members/batchtagging', JSON.generate(openid_list: openids, tagid: tagid)
+  def tag_add_user(tagid, *openids)
+    post 'tags/members/batchtagging', { openid_list: openids, tagid: tagid }.to_json
   end
   
-  def tag_del_user(tagid, openids)
-    post 'tags/members/batchuntagging', JSON.generate(openid_list: openids, tagid: tagid)
+  def tag_del_user(tagid, *openids)
+    post 'tags/members/batchuntagging', { openid_list: openids, tagid: tagid }.to_json
   end
   
   def tag(tagid, next_openid = '')
-    post 'user/tag/get', JSON.generate(tagid: tagid, next_openid: next_openid)
+    post 'user/tag/get', { tagid: tagid, next_openid: next_openid }.to_json
   end
   
   def getusersummary(begin_date, end_date)
