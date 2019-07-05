@@ -17,6 +17,9 @@ zh:
       wechat_tags:
         index:
           title: 用户标签
+      wechat_users:
+        index:
+          title: 微信用户
       extractors:
         index:
           title: 解析回复内容
