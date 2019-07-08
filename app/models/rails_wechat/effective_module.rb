@@ -17,15 +17,21 @@ module RailsWechat::EffectiveModule
   end
 
   def qrcode
+    if wechat_app
+      wa = wechat_app
+    else
+      wa = backup_wechat_app
+    end
     if wechat_response
       wechat_response
     else
-      create_wechat_response(type: 'TempScanResponse', wechat_app_id: wechat_app.id) if wechat_app
+      create_wechat_response(type: 'TempScanResponse', wechat_app_id: wa.id) if wa
     end
   end
   
   def backup_wechat_app
-  
+    app_id = Rails.application.credentials.dig(:wechat, Rails.env.to_sym, :appid)
+    WechatApp.find_by(appid: app_id)
   end
 
   def qrcode_url
