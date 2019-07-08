@@ -18,11 +18,4 @@ module RailsWechat::WechatUser
     self.wechat_user_tags.create(tag_id: tag.id)
   end
   
-  def compute_tags
-    # 家长
-    if user.proteges.count > 0
-      self.wechat_user_tags.create(tag_id: x)
-    end
-  end
-  
 end
