@@ -8,7 +8,7 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
     
     @wechat_tag_defaults = WechatTagDefault.all
     @default_wechat_tags = @wechat_app.wechat_tags.where.not(wechat_tag_default_id: nil)
-    @wechat_tags = @wechat_app.wechat_tags.where(wechat_tag_default_id: nil).default_where(q_params).page(params[:page])
+    @wechat_tags = @wechat_app.wechat_tags.where(wechat_tag_default_id: nil).default_where(q_params).order(id: :asc).page(params[:page])
   end
 
   def new
