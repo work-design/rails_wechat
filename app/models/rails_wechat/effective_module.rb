@@ -23,6 +23,10 @@ module RailsWechat::EffectiveModule
       create_wechat_response(type: 'TempScanResponse', wechat_app_id: wechat_app.id) if wechat_app
     end
   end
+  
+  def backup_wechat_app
+  
+  end
 
   def qrcode_url
     wechat_response&.qrcode_file_url

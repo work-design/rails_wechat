@@ -78,7 +78,7 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def shorturl(long_url)
-    post 'shorturl', JSON.generate(action: 'long2short', long_url: long_url)
+    post 'shorturl', { action: 'long2short', long_url: long_url }.to_json
   end
   
   def message_mass_sendall(message, tag_id = nil)
