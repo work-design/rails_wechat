@@ -177,16 +177,16 @@ class Wechat::Api::Common < Wechat::Api::Base
     get 'tags/get'
   end
   
-  def tag_create(tag_name)
-    post 'tags/create', { tag: { name: tag_name } }.to_json
+  def tag_create(tag_name, tag_id = nil)
+    if tag_id.present?
+      post 'tags/update', { tag: { id: tag_id, name: tag_name } }.to_json
+    else
+      post 'tags/create', { tag: { name: tag_name } }.to_json
+    end
   rescue Wechat::ResponseError => e
     if e.error_code == 45157
       { 'tag' => tags['tags'].find { |i| i['name'] == tag_name } }
     end
-  end
-  
-  def tag_update(tagid, new_tag_name)
-    post 'tags/update', { tag: { id: tagid, name: new_tag_name } }.to_json
   end
   
   def tag_delete(tagid)

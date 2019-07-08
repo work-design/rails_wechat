@@ -1,4 +1,6 @@
-<div class="ui top attached segment">
+<%= render 'wechat_nav_user' %>
+
+<div class="ui attached segment">
   <%= render 'filter' %>
 </div>
 
@@ -42,6 +44,11 @@
             <%= check_box_tag '[wechat_tag]wechat_tag_default_id', wechat_tag_default.id, false, data: { method: :post, remote: true, url: admin_wechat_app_wechat_tags_path(@wechat_app), submit: true }, id: nil %>
           <% end %>
         </div>
+        <% if wechat_tag %>
+          <%= link_to edit_admin_wechat_app_wechat_tag_path(@wechat_app, wechat_tag), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+            <i class="fas fa-pencil-alt"></i>
+          <% end %>
+        <% end %>
       </td>
     </tr>
   <% end %>
