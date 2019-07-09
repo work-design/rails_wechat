@@ -36,10 +36,10 @@
       <td><%= wechat_tag.wechat_user_tags_count if wechat_tag %></td>
       <td>
         <div class="ui toggle checkbox">
-          <% if @default_wechat_tags.pluck(:tagging_id).include?(wechat_tag_default.id) %>
-            <%= check_box_tag '[wechat_tag]tagging_id', wechat_tag_default.id, true, data: { method: :delete, remote: true, url: admin_wechat_app_wechat_tags_path(@wechat_app), submit: true }, id: nil %>
+          <% if wechat_tag %>
+            <%= check_box_tag '', nil, true, data: { method: :delete, remote: true, url: admin_wechat_app_wechat_tag_path(@wechat_app, wechat_tag), submit: true }, id: nil %>
           <% else %>
-            <%= check_box_tag '[wechat_tag]tagging_id', wechat_tag_default.id, false, data: { method: :post, remote: true, url: admin_wechat_app_wechat_tags_path(@wechat_app), submit: true }, id: nil %>
+            <%= check_box_tag '[wechat_tag]tagging_id', wechat_tag_default.id, false, data: { method: :post, remote: true, url: admin_wechat_app_wechat_tags_path(@wechat_app), params: '[wechat_tag]tagging_type=WechatTagDefault', submit: true }, id: nil %>
           <% end %>
         </div>
       </td>

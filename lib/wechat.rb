@@ -28,7 +28,7 @@ module Wechat
   
   def self.app_api(app)
     case app.type
-    when 'WechatPublic'
+    when 'WechatPublic', 'WechatRead'
       Wechat::Api::Public.new(app)
     when 'WechatProgram'
       Wechat::Api::Program.new(app)

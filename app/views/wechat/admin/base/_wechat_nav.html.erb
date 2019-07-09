@@ -5,7 +5,7 @@
     <i class="dropdown icon"></i>
   </a>
   <div class="<%= active_helper(modules: 'wechat/admin', active_class: 'menu content active', item_class: 'menu content') %>">
-    <%= link_to '微信设置', admin_wechat_configs_path, class: active_helper(controllers: 'wechat_configs') %>
+    <%= link_to '微信设置', admin_wechat_apps_path, class: active_helper(controllers: 'wechat_apps') %>
     <%= link_to '票号申请', admin_tickets_path, class: active_helper(controllers: 'tickets') %>
   </div>
 </div>
