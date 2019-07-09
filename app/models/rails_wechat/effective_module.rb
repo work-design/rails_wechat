@@ -9,8 +9,14 @@ module RailsWechat::EffectiveModule
   end
   
   def wechat_app
+    if self.respond_to? :organ_id
+      _organ_id = organ_id
+    else
+      _organ_id = nil
+    end
+    
     if WechatApp.column_names.include?('organ_id')
-      WechatApp.find_by(organ_id: nil, primary: true)
+      WechatApp.find_by(organ_id: _organ_id, primary: true)
     else
       WechatApp.find_by(primary: true)
     end
