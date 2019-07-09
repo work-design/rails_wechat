@@ -1,13 +1,14 @@
 class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
   before_action :set_wechat_app
-  before_action :set_wechat_tag, only: [:show, :edit, :update, :destroy]
+  before_action :set_wechat_tag, only: [:show, :edit, :update]
 
   def index
     q_params = {}
     q_params.merge! params.permit(:name)
     
-    @wechat_tags = @wechat_app.wechat_tags.default_where(q_params).order(tagging_type: :desc, id: :asc).page(params[:page])
-    @wechat_tag_defaults = WechatTagDefault.where.not(id: @wechat_tags.where(tagging_type: 'WechatTagDefault').pluck(:tagging_id))
+    @wechat_tags = @wechat_app.wechat_tags.where.not(tagging_type: 'WechatTagDefault').default_where(q_params).order(id: :asc).page(params[:page])
+    @default_wechat_tags = @wechat_app.wechat_tags.where(tagging_type: 'WechatTagDefault').default_where(q_params).order(tagging_id: :asc)
+    @wechat_tag_defaults = WechatTagDefault.all
   end
 
   def new
@@ -62,7 +63,11 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
   end
 
   def destroy
-    @wechat_tag.destroy
+    if wechat_tag_params[:tagging_id].present?
+      @wechat_tag = @wechat_app.wechat_tags.find_by(tagging_type: wechat_tag_params[:tagging_type], tagging_id: wechat_tag_params[:tagging_id])
+    else
+      set_wechat_tag
+    end
     redirect_to admin_wechat_app_wechat_tags_url(@wechat_app)
   end
 

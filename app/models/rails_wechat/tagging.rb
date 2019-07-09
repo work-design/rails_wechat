@@ -4,8 +4,6 @@ module RailsWechat::Tagging
     attribute :name, :string
     
     has_one :wechat_tag, as: :tagging, dependent: :destroy
-    has_many :wechat_tags, as: :tagging, dependent: :nullify
-    
     after_save_commit :sync_wechat_tag, if: -> { saved_change_to_name? }
   end
 
