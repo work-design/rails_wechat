@@ -35,6 +35,15 @@ zh:
         value: 值
         appid: 小程序APPID
         pagepath: 小程序路径
+      wechat_tag:
+        tag_id: 标签ID
+        count: 微信用户数
+        wechat_user_tags_count: 系统用户数
+      wechat_user:
+        uid: 微信OpenID
+        unionid: 微信开放平台UnionID
+        account_id: 账号
+        user_id: 用户
       ticket:
         valid_response: 有效应答语
         invalid_response: 无效应答语

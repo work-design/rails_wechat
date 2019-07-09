@@ -113,7 +113,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     
     create_table :wechat_tags do |t|
       t.references :wechat_app
-      t.references :wechat_tag_default
+      t.references :tagging, polymorphic: true
       t.string :name
       t.string :tag_id
       t.integer :count

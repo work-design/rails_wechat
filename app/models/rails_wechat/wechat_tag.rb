@@ -4,8 +4,9 @@ module RailsWechat::WechatTag
   included do
     attribute :name, :string
     attribute :count, :integer, default: 0
+    attribute :wechat_user_tags_count, :integer, default: 0
     
-    belongs_to :wechat_tag_default, optional: true
+    belongs_to :tagging, polymorphic: true,  optional: true
     belongs_to :wechat_app
     has_many :wechat_user_tags, dependent: :destroy
     has_many :wechat_users, through: :wechat_user_tags
@@ -18,7 +19,7 @@ module RailsWechat::WechatTag
   end
   
   def sync_name
-    self.name = wechat_tag_default.name if wechat_tag_default
+    self.name = tagging.name if tagging
   end
   
   def sync_to_wechat

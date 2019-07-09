@@ -7,8 +7,8 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
     q_params.merge! params.permit(:name)
     
     @wechat_tag_defaults = WechatTagDefault.all
-    @default_wechat_tags = @wechat_app.wechat_tags.where.not(wechat_tag_default_id: nil)
-    @wechat_tags = @wechat_app.wechat_tags.where(wechat_tag_default_id: nil).default_where(q_params).order(id: :asc).page(params[:page])
+    @default_wechat_tags = @wechat_app.wechat_tags.where(tagging_type: 'WechatTagDefault').where.not(tagging_id: nil)
+    @wechat_tags = @wechat_app.wechat_tags.where(tagging_id: nil).default_where(q_params).order(id: :asc).page(params[:page])
   end
 
   def new
@@ -63,8 +63,8 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
   end
 
   def destroy
-    if params[:wechat_tag_default_id].present?
-      @wechat_tag = @wechat_app.wechat_tags.find_by(wechat_tag_default_id: params[:wechat_tag_default_id])
+    if wechat_tag_params[:tagging_id].present?
+      @wechat_tag = @wechat_app.wechat_tags.find_by(tagging_type: wechat_tag_params[:tagging_type], tagging_id: wechat_tag_params[:tagging_id])
     else
       set_wechat_tag
     end
@@ -78,10 +78,12 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
   end
 
   def wechat_tag_params
-    params.fetch(:wechat_tag, {}).permit(
+    p = params.fetch(:wechat_tag, {}).permit(
       :name,
-      :wechat_tag_default_id
+      :tagging_id
     )
+    p.merge! tagging_type: 'WechatTagDefault' if params[:tagging_type].blank?
+    p
   end
 
 end
