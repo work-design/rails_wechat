@@ -6,7 +6,7 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
     q_params = {}
     q_params.merge! params.permit(:name)
     
-    @wechat_tags = @wechat_app.wechat_tags.default_where(q_params).order(id: :asc).page(params[:page])
+    @wechat_tags = @wechat_app.wechat_tags.default_where(q_params).order(tagging_type: :desc, id: :asc).page(params[:page])
     @wechat_tag_defaults = WechatTagDefault.where.not(id: @wechat_tags.where(tagging_type: 'WechatTagDefault').pluck(:tagging_id))
   end
 

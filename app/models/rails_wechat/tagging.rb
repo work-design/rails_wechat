@@ -3,12 +3,16 @@ module RailsWechat::Tagging
   included do
     attribute :name, :string
     
-    has_one :wechat_tag, as: :tagging, dependent: :nullify
+    has_one :wechat_tag, as: :tagging, dependent: :destroy
     has_many :wechat_tags, as: :tagging, dependent: :nullify
+    
+    after_save_commit :sync_wechat_tag, if: -> { saved_change_to_name? }
   end
 
-  def wechat_tag
-    super || create_wechat_tag(wechat_app_id: wechat_app.id)
+  def sync_wechat_tag
+    wt = wechat_tag || build_wechat_tag(wechat_app_id: wechat_app.id)
+    wt.name = self.name
+    wt.save
   end
   
   def wechat_app
