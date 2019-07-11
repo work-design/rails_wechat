@@ -8,7 +8,9 @@ module RailsWechat::Tagging
   end
 
   def sync_wechat_tag
-    wt = wechat_tag || build_wechat_tag(wechat_app_id: wechat_app.id)
+    _wechat_app = wechat_app
+    return unless _wechat_app
+    wt = wechat_tag || build_wechat_tag(wechat_app_id: _wechat_app.id)
     wt.name = self.name
     wt.save
   end
