@@ -153,8 +153,8 @@ class Wechat::Api::Common < Wechat::Api::Base
     get 'material/get_materialcount'
   end
   
-  def material_list(type, offset, count)
-    post 'material/batchget_material', JSON.generate(type: type, offset: offset, count: count)
+  def material_list(type = 'news', offset = 0, count = 20)
+    post 'material/batchget_material', { type: type, offset: offset, count: count }.to_json
   end
   
   def material_add(type, file)

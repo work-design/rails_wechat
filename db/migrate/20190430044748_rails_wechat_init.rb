@@ -104,12 +104,6 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.references :wechat_app
       t.timestamps
     end
-
-    create_table :wechat_tag_defaults do |t|
-      t.string :name
-      t.string :default_type
-      t.timestamps
-    end
     
     create_table :wechat_tags do |t|
       t.references :wechat_app
@@ -123,6 +117,20 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     
     create_table :wechat_user_tags do |t|
       t.references :wechat_user
+      t.references :wechat_tag
+      t.timestamps
+    end
+    
+    create_table :wechat_messages do |t|
+      t.references :wechat_app
+      t.string :type
+      t.string :value
+      t.jsonb :body
+      t.timestamps
+    end
+    
+    create_table :wechat_message_tags do |t|
+      t.references :wechat_message
       t.references :wechat_tag
       t.timestamps
     end

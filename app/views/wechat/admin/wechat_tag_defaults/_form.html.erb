@@ -1,6 +1,0 @@
-<%= form_with model: [:admin, @wechat_tag_default] do |f| %>
-  <%= render 'shared/error_messages', target: @wechat_tag_default %>
-  <%= f.text_field :name %>
-  <%= f.select :default_type, options_for_select(WechatTagDefault.options_i18n(:default_type), @wechat_tag_default.default_type) %>
-  <%= f.submit %>
-<% end %>

@@ -25,6 +25,7 @@ module RailsWechat::WechatTag
   
   def sync_to_wechat
     r = wechat_app.api.tag_create(self.name, self.tag_id)
+    return unless r
     tag = r['tag']
     self.tag_id = tag['id']
     self.save

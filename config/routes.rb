@@ -33,7 +33,6 @@ Rails.application.routes.draw do
     end
     resources :extractors
     resources :tickets
-    resources :wechat_tag_defaults
     resources :accounts, only: [] do
       get :qrcode, on: :member
     end

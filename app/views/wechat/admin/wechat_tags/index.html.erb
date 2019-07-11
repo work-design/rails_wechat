@@ -39,7 +39,7 @@
           <% if wechat_tag %>
             <%= check_box_tag '', nil, true, data: { method: :delete, remote: true, url: admin_wechat_app_wechat_tag_path(@wechat_app, wechat_tag), submit: true }, id: nil %>
           <% else %>
-            <%= check_box_tag '[wechat_tag]tagging_id', wechat_tag_default.id, false, data: { method: :post, remote: true, url: admin_wechat_app_wechat_tags_path(@wechat_app), params: '[wechat_tag]tagging_type=WechatTagDefault', submit: true }, id: nil %>
+            <%= check_box_tag '[wechat_tag]tagging_id', wechat_tag_default.id, false, data: { method: :post, remote: true, url: admin_wechat_app_wechat_tags_path(@wechat_app), params: '[wechat_tag]tagging_type=UserTag', submit: true }, id: nil %>
           <% end %>
         </div>
       </td>
