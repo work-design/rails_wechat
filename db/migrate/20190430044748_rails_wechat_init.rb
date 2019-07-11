@@ -123,6 +123,7 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
     
     create_table :wechat_messages do |t|
       t.references :wechat_app
+      t.references :messaging, polymorphic: true
       t.string :type
       t.string :value
       t.jsonb :body
