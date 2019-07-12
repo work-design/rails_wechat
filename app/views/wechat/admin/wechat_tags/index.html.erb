@@ -22,30 +22,6 @@
     </tr>
   </thead>
   <tbody>
-  <% @wechat_tag_defaults.each do |wechat_tag_default| %>
-    <% wechat_tag = @default_wechat_tags.find { |i| i.tagging_id == wechat_tag_default.id } %>
-    <tr>
-      <td>
-        <%= wechat_tag_default.name %>
-        <% if wechat_tag %>
-          <span class="ui grey text">(<%= wechat_tag.name %>)</span>
-        <% end %>
-      </td>
-      <td><%= wechat_tag.tag_id if wechat_tag %></td>
-      <td><%= wechat_tag.count if wechat_tag %></td>
-      <td><%= wechat_tag.wechat_user_tags_count if wechat_tag %></td>
-      <td>
-        <div class="ui toggle checkbox">
-          <% if wechat_tag %>
-            <%= check_box_tag '', nil, true, data: { method: :delete, remote: true, url: admin_wechat_app_wechat_tag_path(@wechat_app, wechat_tag), submit: true }, id: nil %>
-          <% else %>
-            <%= check_box_tag '[wechat_tag]tagging_id', wechat_tag_default.id, false, data: { method: :post, remote: true, url: admin_wechat_app_wechat_tags_path(@wechat_app), params: '[wechat_tag]tagging_type=UserTag', submit: true }, id: nil %>
-          <% end %>
-        </div>
-      </td>
-      <td></td>
-    </tr>
-  <% end %>
   <% @wechat_tags.each do |wechat_tag| %>
     <tr>
       <td><%= wechat_tag.name %></td>
