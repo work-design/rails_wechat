@@ -1,9 +1,8 @@
-module RailsWechat::Tagging
+module RailsWechat::UserTag
   extend ActiveSupport::Concern
+  
   included do
-    attribute :name, :string
-    
-    has_one :wechat_tag, as: :tagging, dependent: :destroy
+    has_many :wechat_tags, dependent: :destroy
     after_save_commit :sync_wechat_tag, if: -> { saved_change_to_name? }
   end
 
