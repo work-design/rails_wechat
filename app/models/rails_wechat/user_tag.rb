@@ -3,7 +3,11 @@ module RailsWechat::UserTag
   
   included do
     has_many :wechat_tags, dependent: :destroy
-    after_save_commit :sync_wechat_tag, if: -> { saved_change_to_name? }
+    after_save_commit :sync_wechat_tag_later, if: -> { saved_change_to_name? }
+  end
+  
+  def sync_wechat_tag_later
+    WechatTagJob.perform_later(self)
   end
 
   def sync_wechat_tag
