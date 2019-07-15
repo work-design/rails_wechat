@@ -3,7 +3,9 @@ class Wechat::Admin::WechatUsersController < Wechat::Admin::BaseController
   before_action :set_wechat_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @wechat_users = @wechat_app.wechat_users.page(params[:page])
+    q_params = {}
+    q_params.merge! params.permit('wechat_user_tags.wechat_tag_id')
+    @wechat_users = @wechat_app.wechat_users.default_where(q_params).page(params[:page])
   end
 
   def show
