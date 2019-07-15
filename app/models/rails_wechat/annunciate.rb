@@ -17,4 +17,8 @@ module RailsWechat::Annunciate
     end
   end
   
+  def body
+    annunciation.body
+  end
+  
 end
