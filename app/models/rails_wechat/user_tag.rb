@@ -13,7 +13,7 @@ module RailsWechat::UserTag
   def sync_wechat_tag
     _wechat_app = wechat_app
     return unless _wechat_app
-    wt = wechat_tag || build_wechat_tag(wechat_app_id: _wechat_app.id)
+    wt = wechat_tags.find_or_initialize_by(wechat_app_id: _wechat_app.id)
     wt.name = self.name
     wt.save
   end
