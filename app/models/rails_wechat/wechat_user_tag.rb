@@ -2,7 +2,8 @@ module RailsWechat::WechatUserTag
   extend ActiveSupport::Concern
   included do
     belongs_to :wechat_user
-    belongs_to :wechat_tag
+    belongs_to :wechat_tag, counter_cache: true
+    belongs_to :user_tagged, optional: true
     
     after_create_commit :sync_to_wechat
     after_destroy_commit :remove_from_wechat
