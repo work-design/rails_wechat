@@ -8,7 +8,7 @@ module RailsWechat::UserTagged
 
   def sync_to_wechat_user_tag
     user.oauth_users.where(type: 'WechatUser').each do |wechat_user|
-      wechat_tag = wechat_tags.where(wechat_app_id: wechat_user.wechat_app.id) if wechat_user.wechat_app
+      wechat_tag = wechat_tags.where(wechat_app_id: wechat_user.wechat_app&.id)
       next unless wechat_tag
       
       wut = wechat_user.wechat_user_tags.build(wechat_tag_id: wechat_tag.id)
