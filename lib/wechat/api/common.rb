@@ -81,7 +81,7 @@ class Wechat::Api::Common < Wechat::Api::Base
     post 'shorturl', { action: 'long2short', long_url: long_url }.to_json
   end
   
-  def message_mass_sendall(message, *tag_id)
+  def message_mass_sendall(message, tag_id)
     message = { content: message } if message.is_a? String
     
     push = Wechat::Message::Push::Public.new(message)

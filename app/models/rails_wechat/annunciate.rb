@@ -10,10 +10,16 @@ module RailsWechat::Annunciate
   end
 
   def to_wechat
-    apps = WechatPublic.valid.where(organ_id: annunciation.organ_id)
-    apps.map do |app|
-      tag_ids = app.wechat_tags.where(user_tag_id: user_tag_id).pluck(:tag_id)
-      app.api.message_mass_sendall(body, *tag_ids) if tag_ids.present?
+    app = WechatPublic.valid.find_by(organ_id: annunciation.organ_id, primary: true)
+    
+    return unless app
+    
+    tag_ids = app.wechat_tags.where(user_tag_id: user_tag_id).pluck(:tag_id)
+    if tag_ids.present?
+      api = app.api
+      tag_ids.each do |tag_id|
+        api.message_mass_sendall(body, tag_id)
+      end
     end
   end
   
