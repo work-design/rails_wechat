@@ -19,6 +19,8 @@ wx.config({
   jsApiList: ['#{apis.join("','")}']
 });
 WECHAT_CONFIG_JS
+    rescue
+      
     end
 
     def wechat_config_js(wechat_app_id: nil, debug: false, apis: [])
