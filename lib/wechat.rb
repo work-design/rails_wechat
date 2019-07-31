@@ -18,7 +18,7 @@ module Wechat
     end
     return r if r
     
-    raise 'Can not find wechat config'
+    raise AppNotFound, 'Can not find wechat config'
   end
 
   def self.api(id = nil)
