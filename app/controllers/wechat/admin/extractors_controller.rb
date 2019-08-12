@@ -70,7 +70,7 @@ class Wechat::Admin::ExtractorsController < Wechat::Admin::BaseController
       :suffix,
       :more
     )
-    p.merge! default_params
+    p.merge! default_form_params
   end
 
 end

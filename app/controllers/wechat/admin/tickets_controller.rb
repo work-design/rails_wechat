@@ -72,7 +72,7 @@ class Wechat::Admin::TicketsController < Wechat::Admin::BaseController
       :valid_response,
       :invalid_response
     )
-    p.merge! default_params
+    p.merge! default_form_params
   end
 
 end

@@ -107,7 +107,7 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
       :help_feedback,
       extractor_ids: []
     )
-    p.merge! default_params
+    p.merge! default_form_params
   end
 
 end
