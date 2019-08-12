@@ -11,9 +11,9 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
   
   def own
     q_params = {}
-    q_params.merge! organ_id: nil
+    q_params.merge! organ_id: nil, allow: { organ_id: nil }
     
-    @wechat_apps = WechatApp.default_where(q_params, { organ_id: { allow: [nil] }}).order(id: :asc)
+    @wechat_apps = WechatApp.default_where(q_params).order(id: :asc)
     render 'index'
   end
 
