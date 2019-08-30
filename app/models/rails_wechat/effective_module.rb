@@ -23,13 +23,11 @@ module RailsWechat::EffectiveModule
   end
 
   def qrcode
-    if wechat_app
-      wa = wechat_app
-    else
-      wa = backup_wechat_app
-    end
+    wa = wechat_app
+    wa = backup_wechat_app if wa.nil?
+    
     if wechat_response
-      wechat_response
+      wechat_response.effective? ? wechat_response : wechat_response.refresh
     else
       create_wechat_response(type: 'TempScanResponse', wechat_app_id: wa.id) if wa
     end
@@ -41,7 +39,7 @@ module RailsWechat::EffectiveModule
   end
 
   def qrcode_url
-    wechat_response&.qrcode_file_url
+    qrcode.qrcode_file_url
   end
   
 end
