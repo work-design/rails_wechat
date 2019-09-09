@@ -27,3 +27,6 @@
 
 ## License
 License采用 [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0).
+
+## 致谢
+[wechat](https://github.com/Eric-Guo/wechat) 及其 [作者](https://github.com/Eric-Guo)
