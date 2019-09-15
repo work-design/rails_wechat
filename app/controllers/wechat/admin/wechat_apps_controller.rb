@@ -23,19 +23,9 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
 
   def create
     @wechat_app = WechatApp.new(wechat_app_params)
-  
-    respond_to do |format|
-      if @wechat_app.save
-        format.html.phone
-        format.html { redirect_to admin_wechat_apps_url }
-        format.js { redirect_back fallback_location: admin_wechat_apps_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_back fallback_location: admin_wechat_apps_url }
-        format.json { render :show }
-      end
+
+    unless @wechat_app.save
+      render :new, locals: { model: @wechat_app }, status: :unprocessable_entity
     end
   end
   
@@ -56,24 +46,13 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
   def update
     @wechat_app.assign_attributes(wechat_app_params)
 
-    respond_to do |format|
-      if @wechat_app.save
-        format.html.phone
-        format.html { redirect_to admin_wechat_apps_url }
-        format.js { redirect_back fallback_location: admin_wechat_apps_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_wechat_apps_url }
-        format.json { render :show }
-      end
+    unless @wechat_app.save
+      render :edit, locals: { model: @wechat_app }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @wechat_app.destroy
-    redirect_to admin_wechat_apps_url
   end
 
   private

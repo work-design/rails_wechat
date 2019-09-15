@@ -17,18 +17,8 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
   def create
     @wechat_response = @wechat_app.wechat_responses.build(wechat_response_params)
 
-    respond_to do |format|
-      if @wechat_response.save
-        format.html.phone
-        format.html { redirect_to admin_wechat_app_wechat_responses_url(@wechat_app) }
-        format.js { redirect_to admin_wechat_app_wechat_responses_url(@wechat_app) }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_to admin_wechat_app_wechat_responses_url(@wechat_app) }
-        format.json { render :show }
-      end
+    unless @wechat_response.save
+      render :new, locals: { model: @wechat_response }, status: :unprocessable_entity
     end
   end
 
@@ -41,18 +31,8 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
   def update
     @wechat_response.assign_attributes(wechat_response_params)
 
-    respond_to do |format|
-      if @wechat_response.save
-        format.html.phone
-        format.html { redirect_to admin_wechat_app_wechat_responses_url(@wechat_app) }
-        format.js { redirect_to admin_wechat_app_wechat_responses_url(@wechat_app) }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_to admin_wechat_app_wechat_responses_url(@wechat_app) }
-        format.json { render :show }
-      end
+    unless @wechat_response.save
+      render :edit, locals: { model: @wechat_response }, status: :unprocessable_entity
     end
   end
 
@@ -63,7 +43,6 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
 
   def destroy
     @wechat_response.destroy
-    redirect_to admin_wechat_app_wechat_responses_url(@wechat_app)
   end
 
   private

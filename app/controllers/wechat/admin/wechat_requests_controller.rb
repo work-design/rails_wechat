@@ -17,24 +17,13 @@ class Wechat::Admin::WechatRequestsController < Wechat::Admin::BaseController
   def update
     @wechat_request.assign_attributes(wechat_request_params)
 
-    respond_to do |format|
-      if @wechat_request.save
-        format.html.phone
-        format.html { redirect_to admin_wechat_app_wechat_requests_url(@wechat_app) }
-        format.js { redirect_to admin_wechat_app_wechat_requests_url(@wechat_app) }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_wechat_requests_url }
-        format.json { render :show }
-      end
+    unless @wechat_request.save
+      render :update, locals: { model: @wechat_request }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @wechat_request.destroy
-    redirect_to admin_wechat_app_wechat_requests_url(@wechat_app)
   end
 
   private

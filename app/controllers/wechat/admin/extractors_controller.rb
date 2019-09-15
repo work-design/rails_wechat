@@ -14,18 +14,8 @@ class Wechat::Admin::ExtractorsController < Wechat::Admin::BaseController
   def create
     @extractor = Extractor.new(extractor_params)
 
-    respond_to do |format|
-      if @extractor.save
-        format.html.phone
-        format.html { redirect_to admin_extractors_url }
-        format.js { redirect_back fallback_location: admin_extractors_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_back fallback_location: admin_extractors_url }
-        format.json { render :show }
-      end
+    unless @extractor.save
+      render :new, locals: { model: @extractor }, status: :unprocessable_entity
     end
   end
 
@@ -38,24 +28,13 @@ class Wechat::Admin::ExtractorsController < Wechat::Admin::BaseController
   def update
     @extractor.assign_attributes(extractor_params)
 
-    respond_to do |format|
-      if @extractor.save
-        format.html.phone
-        format.html { redirect_to admin_extractors_url }
-        format.js { redirect_back fallback_location: admin_extractors_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_extractors_url }
-        format.json { render :show }
-      end
+    unless @extractor.save
+      render :edit, locals: { model: @extractor }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @extractor.destroy
-    redirect_to admin_extractors_url
   end
 
   private

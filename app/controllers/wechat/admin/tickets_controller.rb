@@ -14,18 +14,8 @@ class Wechat::Admin::TicketsController < Wechat::Admin::BaseController
   def create
     @ticket = Ticket.new(ticket_params)
 
-    respond_to do |format|
-      if @ticket.save
-        format.html.phone
-        format.html { redirect_to admin_tickets_url }
-        format.js { redirect_back fallback_location: admin_tickets_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_back fallback_location: admin_tickets_url }
-        format.json { render :show }
-      end
+    unless @ticket.save
+      render :new, locals: { model: @ticket }, status: :unprocessable_entity
     end
   end
 
@@ -38,24 +28,13 @@ class Wechat::Admin::TicketsController < Wechat::Admin::BaseController
   def update
     @ticket.assign_attributes(ticket_params)
 
-    respond_to do |format|
-      if @ticket.save
-        format.html.phone
-        format.html { redirect_to admin_tickets_url }
-        format.js { redirect_back fallback_location: admin_tickets_url }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_tickets_url }
-        format.json { render :show }
-      end
+    unless @ticket.save
+      render :edit, locals: { model: @ticket }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @ticket.destroy
-    redirect_to admin_tickets_url
   end
 
   private

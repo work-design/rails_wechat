@@ -16,18 +16,8 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
   def create
     @wechat_tag = @wechat_app.wechat_tags.build(wechat_tag_params)
 
-    respond_to do |format|
-      if @wechat_tag.save
-        format.html.phone
-        format.html { redirect_to admin_wechat_app_wechat_tags_url(@wechat_app) }
-        format.js { redirect_back fallback_location: admin_wechat_app_wechat_tags_url(@wechat_app) }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_back fallback_location: admin_wechat_app_wechat_tags_url(@wechat_app) }
-        format.json { render :show }
-      end
+    unless @wechat_tag.save
+      render :new, locals: { model: @wechat_tag }, status: :unprocessable_entity
     end
   end
   
@@ -45,24 +35,13 @@ class Wechat::Admin::WechatTagsController < Wechat::Admin::BaseController
   def update
     @wechat_tag.assign_attributes(wechat_tag_params)
 
-    respond_to do |format|
-      if @wechat_tag.save
-        format.html.phone
-        format.html { redirect_to admin_wechat_app_wechat_tags_url(@wechat_app) }
-        format.js { redirect_back fallback_location: admin_wechat_app_wechat_tags_url(@wechat_app) }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_wechat_app_wechat_tags_url(@wechat_app) }
-        format.json { render :show }
-      end
+    unless @wechat_tag.save
+      render :edit, locals: { model: @wechat_tag }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @wechat_tag.destroy
-    redirect_to admin_wechat_app_wechat_tags_url(@wechat_app)
   end
 
   private

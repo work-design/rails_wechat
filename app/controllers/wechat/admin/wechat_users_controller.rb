@@ -18,22 +18,13 @@ class Wechat::Admin::WechatUsersController < Wechat::Admin::BaseController
   def update
     @wechat_user.assign_attributes(wechat_user_params)
 
-    respond_to do |format|
-      if @wechat_user.save
-        format.html { redirect_to admin_wechat_app_wechat_users_url(@wechat_app) }
-        format.js { redirect_to admin_wechat_app_wechat_users_url(@wechat_app) }
-        format.json { render :show }
-      else
-        format.html { render :edit }
-        format.js { redirect_back fallback_location: admin_wechat_users_url }
-        format.json { render :show }
-      end
+    unless @wechat_user.save
+      render :edit, locals: { model: @wechat_user }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @wechat_user.destroy
-    redirect_to admin_wechat_users_url
   end
 
   private

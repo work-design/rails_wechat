@@ -26,18 +26,8 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
   def create
     @wechat_menu = WechatMenu.new(wechat_menu_params)
 
-    respond_to do |format|
-      if @wechat_menu.save
-        format.html.phone
-        format.html { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
-        format.js { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
-        format.json { render :show }
-      else
-        format.html.phone { render :new }
-        format.html { render :new }
-        format.js { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
-        format.json { render :show }
-      end
+    unless @wechat_menu.save
+      render :new, locals: { model: @wechat_menu }, status: :unprocessable_entity
     end
   end
   
@@ -58,24 +48,13 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
   def update
     @wechat_menu.assign_attributes(wechat_menu_params)
 
-    respond_to do |format|
-      if @wechat_menu.save
-        format.html.phone
-        format.html { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
-        format.js { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
-        format.json { render :show }
-      else
-        format.html.phone { render :edit }
-        format.html { render :edit }
-        format.js { redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id) }
-        format.json { render :show }
-      end
+    unless @wechat_menu.save
+      render :edit, locals: { model: @wechat_menu }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @wechat_menu.destroy
-    redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id)
   end
 
   private
