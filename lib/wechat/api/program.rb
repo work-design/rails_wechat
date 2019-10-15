@@ -29,8 +29,8 @@ module Wechat::Api
 
     def jscode2session(code)
       params = {
-        appid: access_token.appid,
-        secret: access_token.secret,
+        appid: app.appid,
+        secret: app.secret,
         js_code: code,
         grant_type: 'authorization_code'
       }

@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
     'README.md'
   ]
 
-  s.add_dependency 'rails', '~> 6.0.0.rc1'
-  s.add_dependency 'http', '~> 4.1'
+  s.add_dependency 'rails', '~> 6.0.0'
+  s.add_dependency 'http'
   s.add_dependency 'rails_auth'
   s.add_development_dependency 'sqlite3'
 end

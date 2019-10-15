@@ -1,6 +1,6 @@
 module Wechat::Api
   class Base
-    attr_reader :access_token, :client, :jsapi_ticket
+    attr_reader :app, :client, :access_token, :jsapi_ticket
     MP_BASE = 'https://mp.weixin.qq.com/cgi-bin/'.freeze
     
     def callbackip
