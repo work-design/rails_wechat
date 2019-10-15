@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :wechats, only: [:show, :update] do
       post '' => :create, on: :member
     end
+    resources :wechat_program_users
   end
 
   scope :my, module: 'wechat/my', as: :my do
