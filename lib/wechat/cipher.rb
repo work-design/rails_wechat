@@ -41,6 +41,7 @@ module Wechat
       cipher.key = Base64.decode64(session_key)
       cipher.iv = Base64.decode64(iv)
       decrypted_data = Base64.decode64(encrypted_data)
+      
       JSON.parse(cipher.update(decrypted_data) + cipher.final)
     rescue Exception => e
       { errcode: 41003, errmsg: e.message }

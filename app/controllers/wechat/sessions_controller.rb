@@ -1,5 +1,5 @@
 class Wechat::SessionsController < Wechat::BaseController
-  before_action :set_wechat_app, only: [:create]
+  before_action :set_wechat_app, only: [:create, :bind_mobile]
   
   def create
     info = @wechat_app.api.jscode2session(session_params)
@@ -37,6 +37,7 @@ class Wechat::SessionsController < Wechat::BaseController
       session = authorization.user.sessions.find_by!(session_key: info.fetch(:session_key), authorization: authorization)
     end
     render_created(token: Auth.encode(token: session.token))
+    
   end
 
   def userinfo
@@ -49,20 +50,15 @@ class Wechat::SessionsController < Wechat::BaseController
       country: userinfo_params[:country],
       avatar_url: userinfo_params[:avatarUrl]
     )
-    render_ok
   end
 
   def bind_mobile
-    appid = Figaro.env.WECHAT_WEAPP_APP_ID
     session_key = current_session.session_key
-
-    if ENV['WX_API_DEBUG'].present?
-      user_phone_number_data = { 'purePhoneNumber' => '13500000000' }
-    else
-      user_phone_number_data = WxAPI.api_session.get_phone_number(params[:encrypted_data], params[:iv], session_key, appid)
-    end
+    
+    user_phone_number_data = @wechat_app.get_phone_number(params[:encrypted_data], params[:iv], session_key)
+    
+    
     current_user.update! mobile: user_phone_number_data['purePhoneNumber']
-    render_ok
   end
 
   private
@@ -71,10 +67,23 @@ class Wechat::SessionsController < Wechat::BaseController
   end
   
   def session_params
-    params.permit(:code, :encrypted_data, :iv)
+    params.permit(
+      :code,
+      :encrypted_data,
+      :iv
+    )
   end
 
   def userinfo_params
-    params.require(:userInfo).permit(:nickName, :gender, :language, :city, :province, :country, :avatarUrl)
+    params.require(:userInfo).permit(
+      :nickName,
+      :gender,
+      :language,
+      :city,
+      :province,
+      :country,
+      :avatarUrl
+    )
   end
+  
 end
