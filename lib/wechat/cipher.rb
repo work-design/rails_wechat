@@ -34,7 +34,7 @@ module Wechat
       decode_padding(plain)
     end
 
-    def program_decrypt(encrypted_data, session_key, iv)
+    def program_decrypt(encrypted_data, iv, session_key)
       cipher = OpenSSL::Cipher.new('AES-128-CBC')
       cipher.decrypt
   

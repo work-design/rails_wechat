@@ -1,14 +1,16 @@
 class Wechat::WechatProgramUsersController < Wechat::BaseController
-  before_action :set_wechat_app, only: [:create, :bind_mobile]
+  before_action :set_wechat_app, only: [:create]
   
   def create
     info = @wechat_app.api.jscode2session(session_params[:code])
     @wechat_program_user = WechatProgramUser.find_or_initialize_by(uid: info['openid'])
+    @wechat_program_user.app_id = params[:appid]
     union_id = info['unionId']
 
+    binding.pry
     @wechat_program_user.save
     
-    render json: { token: @wechat_program_user.auth_token }
+    render json: { token: @wechat_program_user.auth_token(info['session_key']) }
   end
 
   def userinfo
@@ -23,13 +25,13 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
     )
   end
 
-  def bind_mobile
-    session_key = current_session.session_key
-    
-    user_phone_number_data = @wechat_app.get_phone_number(params[:encrypted_data], params[:iv], session_key)
-    
-    
-    current_user.update! mobile: user_phone_number_data['purePhoneNumber']
+  def mobile
+    session_key = current_authorized_token.session_key
+    @wechat_app = WechatApp.find_by(appid: current_authorized_token.oauth_user.app_id)
+    phone_number = @wechat_app.get_phone_number(params[:encrypted_data], params[:iv], session_key)
+
+    @account = Account.find_by(identity: phone_number) || Account.create_with_identity(phone_number)
+    @account.join
   end
 
   private
