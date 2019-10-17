@@ -6,9 +6,12 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
     @wechat_program_user = WechatProgramUser.find_or_initialize_by(uid: info['openid'])
     @wechat_program_user.app_id = params[:appid]
     union_id = info['unionId']
-
-    binding.pry
-    @wechat_program_user.save
+    
+    begin
+      @wechat_program_user.save
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique
+      @wechat_program_user = WechatProgramUser.find_by(uid: info['openid'])
+    end
     
     render json: { token: @wechat_program_user.auth_token(info['session_key']) }
   end
