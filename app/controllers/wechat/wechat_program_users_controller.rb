@@ -1,5 +1,6 @@
 class Wechat::WechatProgramUsersController < Wechat::BaseController
   before_action :set_wechat_app, only: [:create]
+  before_action :set_wechat_program_user, only: [:info, :mobile]
   
   def create
     info = @wechat_app.api.jscode2session(session_params[:code])
@@ -16,7 +17,7 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
     render json: { token: @wechat_program_user.auth_token(info['session_key']) }
   end
 
-  def userinfo
+  def info
     current_user.profile.update!(
       nick_name: userinfo_params[:nickName],
       gender: userinfo_params[:gender],
@@ -30,8 +31,6 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
 
   def mobile
     session_key = current_authorized_token.session_key
-    @wechat_app = WechatApp.find_by(appid: current_authorized_token.oauth_user.app_id)
-    phone_number = @wechat_app.get_phone_number(params[:encrypted_data], params[:iv], session_key)
 
     @account = Account.find_by(identity: phone_number) || Account.create_with_identity(phone_number)
     current_authorized_token.update(account_id: @account.id)
@@ -41,6 +40,10 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
   private
   def set_wechat_app
     @wechat_app = WechatApp.find_by(appid: params[:appid])
+  end
+  
+  def set_wechat_program_user
+    @wechat_program_user = current_authorized_token.oauth_user
   end
   
   def session_params
