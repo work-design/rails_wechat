@@ -5,7 +5,10 @@ Rails.application.routes.draw do
       post '' => :create, on: :member
     end
     resources :wechat_program_users do
-      post :mobile, on: :collection
+      collection do
+        post :mobile
+        post :info
+      end
     end
   end
 
