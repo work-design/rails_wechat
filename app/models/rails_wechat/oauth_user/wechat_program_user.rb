@@ -15,11 +15,8 @@ module RailsWechat::OauthUser::WechatProgramUser
   def sync_to_user
     if user
       user.name ||= self.name
-      user.avatar.url_sync self.avatar_url unless user.avatar.attached?
       user.save
     end
-  rescue
-    
   end
   
 end
