@@ -34,10 +34,13 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
   def mobile
     session_key = current_authorized_token.session_key
     phone_number = @wechat_program_user.get_phone_number(params[:encrypted_data], params[:iv], session_key)
-    
-    @account = Account.find_by(identity: phone_number) || Account.create_with_identity(phone_number)
-    current_authorized_token.update(account_id: @account.id)
-    @account.join
+    if phone_number
+      @account = Account.find_by(identity: phone_number) || Account.create_with_identity(phone_number)
+      current_authorized_token.update(account_id: @account.id)
+      @account.join
+    else
+      current_authorized_token.destroy
+    end
   end
 
   private
