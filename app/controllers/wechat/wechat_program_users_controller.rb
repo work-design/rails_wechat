@@ -1,6 +1,7 @@
 class Wechat::WechatProgramUsersController < Wechat::BaseController
   before_action :set_wechat_app, only: [:create]
   before_action :set_wechat_program_user, only: [:info, :mobile]
+  skip_before_action :verify_authenticity_token
   
   def create
     info = @wechat_app.api.jscode2session(session_params[:code])
