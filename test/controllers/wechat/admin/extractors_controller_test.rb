@@ -2,7 +2,7 @@ require 'test_helper'
 class Wechat::Admin::ExtractorsControllerTest < ActionDispatch::IntegrationTest
  
   setup do
-    @wechat_admin_extractor = create wechat_admin_extractors
+    @extractor = create :extractor
   end
 
   test 'index ok' do
@@ -17,30 +17,30 @@ class Wechat::Admin::ExtractorsControllerTest < ActionDispatch::IntegrationTest
 
   test 'create ok' do
     assert_difference('Extractor.count') do
-      post admin_extractors_url, params: { #{singular_table_name}: { #{attributes_string} } }
+      post admin_extractors_url, params: { extractor: { name: 'test' } }
     end
 
     assert_redirected_to wechat_admin_extractor_url(Extractor.last)
   end
 
   test 'show ok' do
-    get admin_extractor_url(@wechat_admin_extractor)
+    get admin_extractor_url(@extractor)
     assert_response :success
   end
 
   test 'edit ok' do
-    get edit_admin_extractor_url(@wechat_admin_extractor)
+    get edit_admin_extractor_url(@extractor)
     assert_response :success
   end
 
   test 'update ok' do
-    patch admin_extractor_url(@wechat_admin_extractor), params: { #{singular_table_name}: { #{attributes_string} } }
+    patch admin_extractor_url(@extractor), params: { extractor: { name: 'test' } }
     assert_response :success
   end
 
   test 'destroy ok' do
     assert_difference('Extractor.count', -1) do
-      delete admin_extractor_url(@wechat_admin_extractor)
+      delete admin_extractor_url(@extractor)
     end
 
     assert_response :success
