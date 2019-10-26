@@ -34,6 +34,8 @@ module RailsWechat::WechatTag
   
   def remove_from_wechat
     wechat_app.api.tag_delete(self.tag_id)
+  rescue Wechat::ResponseError => e
+    logger.info e.message
   end
   
   def can_destroy?

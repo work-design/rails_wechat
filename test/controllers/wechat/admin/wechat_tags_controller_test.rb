@@ -42,7 +42,8 @@ class Wechat::Admin::WechatTagsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('WechatTag.count', -1) do
       delete admin_wechat_app_wechat_tag_url(@wechat_tag.wechat_app, @wechat_tag), xhr: true
     end
-
+    
     assert_response :success
   end
+  
 end
