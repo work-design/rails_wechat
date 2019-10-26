@@ -55,7 +55,7 @@ module RailsWechat::Ticket
   end
 
   def sync_to_wechat_response
-    return unless wechat_config
+    return unless wechat_app
     wechat_response || build_wechat_response
     wechat_response.assign_attributes(type: 'TextResponse', wechat_app_id: wechat_config.id, match_value: match_value)
     wechat_response.save
