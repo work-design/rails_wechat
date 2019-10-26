@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th class="six wide">
-        <%= link_to t('.edit'), edit_admin_wechat_tag_path(@wechat_tag), class: 'ui mini blue right floated button', remote: true %>
+        <%= link_to t('.edit'), edit_admin_wechat_app_wechat_tag_path(@wechat_app, @wechat_tag), class: 'ui mini blue right floated button', remote: true %>
       </th>
       <th class="ten wide"></th>
     </tr>
@@ -17,12 +17,8 @@
       <td><%= @wechat_tag.tag_id %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= WechatTag.human_attribute_name(:tag_name) %></td>
-      <td><%= @wechat_tag.tag_name %></td>
-    </tr>
-    <tr>
-      <td class="right aligned"><%= WechatTag.human_attribute_name(:tag_count) %></td>
-      <td><%= @wechat_tag.tag_count %></td>
+      <td class="right aligned"><%= WechatTag.human_attribute_name(:count) %></td>
+      <td><%= @wechat_tag.count %></td>
     </tr>
   </tbody>
 </table>

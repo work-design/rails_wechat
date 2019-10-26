@@ -1,48 +1,48 @@
 require 'test_helper'
-
 class Wechat::Admin::WechatTagsControllerTest < ActionDispatch::IntegrationTest
+
   setup do
-    @wechat_admin_wechat_tag = create wechat_admin_wechat_tags
+    @wechat_tag = create :wechat_tag
   end
 
   test 'index ok' do
-    get admin_wechat_tags_url
+    get admin_wechat_app_wechat_tags_url(@wechat_tag.wechat_app)
     assert_response :success
   end
 
   test 'new ok' do
-    get new_admin_wechat_tag_url
+    get new_admin_wechat_app_wechat_tag_url(@wechat_tag.wechat_app), xhr: true
     assert_response :success
   end
 
   test 'create ok' do
     assert_difference('WechatTag.count') do
-      post admin_wechat_tags_url, params: { #{singular_table_name}: { #{attributes_string} } }
+      post admin_wechat_app_wechat_tags_url(@wechat_tag.wechat_app), params: { wechat_tag: { tag_id: 1, name: 'test' } }, xhr: true
     end
 
-    assert_redirected_to wechat_admin_wechat_tag_url(WechatTag.last)
+    assert_response :success
   end
 
   test 'show ok' do
-    get admin_wechat_tag_url(@wechat_admin_wechat_tag)
+    get admin_wechat_app_wechat_tag_url(@wechat_tag.wechat_app, @wechat_tag), xhr: true
     assert_response :success
   end
 
   test 'edit ok' do
-    get edit_admin_wechat_tag_url(@wechat_admin_wechat_tag)
+    get edit_admin_wechat_app_wechat_tag_url(@wechat_tag.wechat_app, @wechat_tag), xhr: true
     assert_response :success
   end
 
   test 'update ok' do
-    patch admin_wechat_tag_url(@wechat_admin_wechat_tag), params: { #{singular_table_name}: { #{attributes_string} } }
-    assert_redirected_to wechat_admin_wechat_tag_url(@#{singular_table_name})
+    patch admin_wechat_app_wechat_tag_url(@wechat_tag.wechat_app, @wechat_tag), params: { wechat_tag: { tag_id: 1, name: 'test' } }, xhr: true
+    assert_response :success
   end
 
   test 'destroy ok' do
     assert_difference('WechatTag.count', -1) do
-      delete admin_wechat_tag_url(@wechat_admin_wechat_tag)
+      delete admin_wechat_app_wechat_tag_url(@wechat_tag.wechat_app, @wechat_tag), xhr: true
     end
 
-    assert_redirected_to admin_wechat_tags_url
+    assert_response :success
   end
 end
