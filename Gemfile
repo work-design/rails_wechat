@@ -11,6 +11,7 @@ gem 'rails_com', github: 'work-design/rails_com'
 gem 'jbuilder'
 
 gem 'kaminari'
+gem 'acts_as_list'
 
 gem 'pry-rails'
 gem 'awesome_print'

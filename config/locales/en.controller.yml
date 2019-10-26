@@ -1,0 +1,28 @@
+en:
+  wechat:
+    admin:
+      wechat_apps:
+        index:
+          title: 微信设置
+          info: 如何设置
+      wechat_requests:
+        index:
+          title: 用户消息
+      wechat_menus:
+        index:
+          title: 菜单
+      wechat_responses:
+        index:
+          title: 回复设置
+      wechat_tags:
+        index:
+          title: 用户标签
+      wechat_users:
+        index:
+          title: 微信用户
+      extractors:
+        index:
+          title: 解析回复内容
+      tickets:
+        index:
+          title: 自动票号
