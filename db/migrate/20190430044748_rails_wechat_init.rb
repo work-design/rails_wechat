@@ -125,7 +125,11 @@ class RailsWechatInit < ActiveRecord::Migration[6.0]
       t.references :messaging, polymorphic: true
       t.string :type
       t.string :value
-      t.jsonb :body
+      if connection.adapter_name == 'PostgreSQL'
+        t.jsonb :body
+      else
+        t.json :body
+      end
       t.timestamps
     end
     

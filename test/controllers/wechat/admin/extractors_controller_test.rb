@@ -1,6 +1,6 @@
 require 'test_helper'
-
 class Wechat::Admin::ExtractorsControllerTest < ActionDispatch::IntegrationTest
+ 
   setup do
     @wechat_admin_extractor = create wechat_admin_extractors
   end
@@ -35,7 +35,7 @@ class Wechat::Admin::ExtractorsControllerTest < ActionDispatch::IntegrationTest
 
   test 'update ok' do
     patch admin_extractor_url(@wechat_admin_extractor), params: { #{singular_table_name}: { #{attributes_string} } }
-    assert_redirected_to wechat_admin_extractor_url(@#{singular_table_name})
+    assert_response :success
   end
 
   test 'destroy ok' do
@@ -43,6 +43,6 @@ class Wechat::Admin::ExtractorsControllerTest < ActionDispatch::IntegrationTest
       delete admin_extractor_url(@wechat_admin_extractor)
     end
 
-    assert_redirected_to admin_extractors_url
+    assert_response :success
   end
 end
