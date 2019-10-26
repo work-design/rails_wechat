@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th class="six wide">
-        <%= link_to t('.edit'), edit_admin_wechat_response_path(@wechat_response), class: 'ui mini blue right floated button', remote: true %>
+        <%= link_to t('.edit'), edit_admin_wechat_app_wechat_response_path(@wechat_app, @wechat_response), remote: true, class: 'ui mini blue right floated button' %>
       </th>
       <th class="ten wide"></th>
     </tr>
@@ -11,10 +11,6 @@
     <tr>
       <td class="right aligned"><%= WechatResponse.human_attribute_name(:match_value) %></td>
       <td><%= @wechat_response.match_value %></td>
-    </tr>
-    <tr>
-      <td class="right aligned"><%= WechatResponse.human_attribute_name(:response) %></td>
-      <td><%= @wechat_response.response %></td>
     </tr>
   </tbody>
 </table>
