@@ -27,9 +27,6 @@ module RailsWechat
     initializer 'rails_wechat.zeitwerk.preload' do |app|
       Rails.autoloaders.main&.preload "#{config.root}/app/models/wechat_response/persist_scan_response.rb"
       Rails.autoloaders.main&.preload "#{config.root}/app/models/wechat_response/temp_scan_response.rb"
-      ActiveRecord::Tasks::DatabaseTasks.migrations_paths += [
-        "#{config.root}/test/migrate"
-      ]
     end
     
   end
