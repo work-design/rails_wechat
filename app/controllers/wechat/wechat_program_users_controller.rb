@@ -1,5 +1,6 @@
 class Wechat::WechatProgramUsersController < Wechat::BaseController
   before_action :set_wechat_app, only: [:create]
+  before_action :require_authorized_token, only: [:info, :mobile]
   before_action :set_wechat_program_user, only: [:info, :mobile]
   skip_before_action :verify_authenticity_token
   
