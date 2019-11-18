@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 81de8353a76e74ecead293a1ab9ad9e803fae60c
+  revision: a09ff9a7e387b6607d529c08555219b963fbf759
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
