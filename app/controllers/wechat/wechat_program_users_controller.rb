@@ -6,7 +6,7 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
   
   def create
     info = @wechat_app.api.jscode2session(session_params[:code])
-    @wechat_program_user = WechatProgramUser.create_or_find_by!(uid: info['openid']) do |wechat_program_user|
+    @wechat_program_user = WechatProgramUser.create_or_find_by(uid: info['openid']) do |wechat_program_user|
       wechat_program_user.app_id = params[:appid]
       wechat_program_user.unionid = info['unionId']
     end
