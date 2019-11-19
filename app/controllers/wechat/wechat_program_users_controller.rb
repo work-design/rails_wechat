@@ -6,14 +6,9 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
   
   def create
     info = @wechat_app.api.jscode2session(session_params[:code])
-    @wechat_program_user = WechatProgramUser.find_or_initialize_by(uid: info['openid'])
-    @wechat_program_user.app_id = params[:appid]
-    @wechat_program_user.unionid = info['unionId']
-    
-    begin
-      @wechat_program_user.save!
-    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique
-      @wechat_program_user = WechatProgramUser.find_by(uid: info['openid'])
+    @wechat_program_user = WechatProgramUser.create_or_find_by!(uid: info['openid']) do |wechat_program_user|
+      wechat_program_user.app_id = params[:appid]
+      wechat_program_user.unionid = info['unionId']
     end
     
     render json: { token: @wechat_program_user.auth_token(info['session_key']) }
