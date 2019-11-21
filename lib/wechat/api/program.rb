@@ -5,7 +5,7 @@ module Wechat::Api
     
     # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/sec-check/security.msgSecCheck.html
     def msg_sec_check(content)
-      post 'msg_sec_check', content: content, base: WXA_BASE
+      post 'msg_sec_check', { content: content }, base: WXA_BASE
     end
     
     def template_message_send(message)
@@ -13,7 +13,7 @@ module Wechat::Api
     end
 
     def list_template_library(offset: 0, count: 20)
-      post 'wxopen/template/library/list', offset: offset, count: count, base: WXA_BASE
+      post 'wxopen/template/library/list', { offset: offset, count: count }, base: WXA_BASE
     end
 
     def list_template_library_keywords(id)

@@ -9,7 +9,7 @@ module Wechat
       @http.with(ssl: RailsWechat.config.httpx_ssl)
     end
 
-    def get(path, headers: {}, params: {}, base: '')
+    def get(path, headers: {}, params: {}, base: @base)
       headers['Accept'] ||= 'application/json'
       
       request(path, base: base) do |url|
@@ -17,7 +17,7 @@ module Wechat
       end
     end
 
-    def post(path, payload, headers: {}, params: {}, base: '')
+    def post(path, payload, headers: {}, params: {}, base: @base)
       headers['Accept'] ||= 'application/json'
       
       request(path, base: base) do |url|
@@ -25,7 +25,7 @@ module Wechat
       end
     end
 
-    def post_file(path, file, headers: {}, params: {}, base: '')
+    def post_file(path, file, headers: {}, params: {}, base: @base)
       headers['Accept'] ||= 'application/json'
       
       request(path, base: base) do |url|
