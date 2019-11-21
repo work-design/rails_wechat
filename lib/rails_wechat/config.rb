@@ -4,8 +4,10 @@ module RailsWechat
   configure do |config|
     config.app_controller = 'ApplicationController'
     config.admin_controller = 'AdminController'
-    config.timeout = 20
-    config.skip_verify_ssl = true
+    config.httpx_timeout = {}
+    config.httpx_ssl = {
+      verify_mode: OpenSSL::SSL::VERIFY_NONE
+    }
   end
 
 end

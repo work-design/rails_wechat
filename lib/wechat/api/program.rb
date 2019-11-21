@@ -5,31 +5,31 @@ module Wechat::Api
     
     # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/sec-check/security.msgSecCheck.html
     def msg_sec_check(content)
-      post 'msg_sec_check', { content: content }.to_json
+      post 'msg_sec_check', content: content, base: WXA_BASE
     end
     
     def template_message_send(message)
-      post 'message/wxopen/template/send', message.to_json, content_type: :json
+      post 'message/wxopen/template/send', message, headers: { content_type: :json }
     end
 
     def list_template_library(offset: 0, count: 20)
-      post 'wxopen/template/library/list', { offset: offset, count: count }.to_json, base: WXA_BASE
+      post 'wxopen/template/library/list', offset: offset, count: count, base: WXA_BASE
     end
 
     def list_template_library_keywords(id)
-      post 'wxopen/template/library/get', { id: id }.to_json
+      post 'wxopen/template/library/get', id: id
     end
 
     def add_message_template(id, keyword_id_list)
-      post 'wxopen/template/add', JSON.generate(id: id, keyword_id_list: keyword_id_list)
+      post 'wxopen/template/add', id: id, keyword_id_list: keyword_id_list
     end
 
     def list_message_template(offset: 0, count: 20)
-      post 'wxopen/template/list', JSON.generate(offset: offset, count: count)
+      post 'wxopen/template/list', offset: offset, count: count
     end
 
     def del_message_template(template_id)
-      post 'wxopen/template/del', JSON.generate(template_id: template_id)
+      post 'wxopen/template/del', template_id: template_id
     end
 
     def jscode2session(code)

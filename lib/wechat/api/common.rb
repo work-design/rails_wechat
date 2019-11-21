@@ -18,20 +18,21 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def group_create(group_name)
-    post 'groups/create', JSON.generate(group: { name: group_name })
+    post 'groups/create', group: { name: group_name }
   end
   
   def group_update(groupid, new_group_name)
-    post 'groups/update', JSON.generate(group: { id: groupid, name: new_group_name })
+    post 'groups/update', group: { id: groupid, name: new_group_name }
   end
   
   def group_delete(groupid)
-    post 'groups/delete', JSON.generate(group: { id: groupid })
+    post 'groups/delete', group: { id: groupid }
   end
   
   def users(nextid = nil)
-    params = { params: { next_openid: nextid } } if nextid.present?
-    get('user/get', params || {})
+    params = {}
+    params.merge! next_openid: nextid if nextid.present?
+    get 'user/get', params: params
   end
   
   def user(openid)
@@ -39,47 +40,41 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def user_batchget(openids, lang = 'zh-CN')
-    post 'user/info/batchget', JSON.generate(user_list: openids.collect { |v| { openid: v, lang: lang } })
+    post 'user/info/batchget', user_list: openids.collect { |v| { openid: v, lang: lang } }
   end
   
   def user_group(openid)
-    post 'groups/getid', JSON.generate(openid: openid)
+    post 'groups/getid', openid: openid
   end
   
   def user_change_group(openid, to_groupid)
-    post 'groups/members/update', JSON.generate(openid: openid, to_groupid: to_groupid)
+    post 'groups/members/update', openid: openid, to_groupid: to_groupid
   end
   
   def user_update_remark(openid, remark)
-    post 'user/info/updateremark', JSON.generate(openid: openid, remark: remark)
+    post 'user/info/updateremark', openid: openid, remark: remark
   end
   
   def qrcode_create_scene(scene_id_or_str, expire_seconds = 2592000)
     case scene_id_or_str
     when 0.class
-      post 'qrcode/create', JSON.generate(expire_seconds: expire_seconds,
-                                          action_name: 'QR_SCENE',
-                                          action_info: { scene: { scene_id: scene_id_or_str } })
+      post 'qrcode/create', expire_seconds: expire_seconds, action_name: 'QR_SCENE', action_info: { scene: { scene_id: scene_id_or_str } }
     else
-      post 'qrcode/create', JSON.generate(expire_seconds: expire_seconds,
-                                          action_name: 'QR_STR_SCENE',
-                                          action_info: { scene: { scene_str: scene_id_or_str } })
+      post 'qrcode/create', expire_seconds: expire_seconds, action_name: 'QR_STR_SCENE', action_info: { scene: { scene_str: scene_id_or_str } }
     end
   end
   
   def qrcode_create_limit_scene(scene_id_or_str)
     case scene_id_or_str
     when 0.class
-      post 'qrcode/create', JSON.generate(action_name: 'QR_LIMIT_SCENE',
-                                          action_info: { scene: { scene_id: scene_id_or_str } })
+      post 'qrcode/create', action_name: 'QR_LIMIT_SCENE', action_info: { scene: { scene_id: scene_id_or_str } }
     else
-      post 'qrcode/create', JSON.generate(action_name: 'QR_LIMIT_STR_SCENE',
-                                          action_info: { scene: { scene_str: scene_id_or_str } })
+      post 'qrcode/create', action_name: 'QR_LIMIT_STR_SCENE', action_info: { scene: { scene_str: scene_id_or_str } }
     end
   end
   
   def shorturl(long_url)
-    post 'shorturl', { action: 'long2short', long_url: long_url }.to_json
+    post 'shorturl', action: 'long2short', long_url: long_url
   end
   
   def message_mass_sendall(message, tag_id)
@@ -88,7 +83,7 @@ class Wechat::Api::Common < Wechat::Api::Base
     push = Wechat::Message::Push::Public.new(message)
     push.to_mass(tag_id)
     
-    post 'message/mass/sendall', push.to_json
+    post 'message/mass/sendall', push
   end
   
   def message_mass_send(message, *openid)
@@ -97,27 +92,27 @@ class Wechat::Api::Common < Wechat::Api::Base
     push = Wechat::Message::Push::Public.new(message)
     push.to(openid)
     
-    post 'message/mass/send', push.to_json
+    post 'message/mass/send', push
   end
   
   def message_mass_delete(msg_id)
-    post 'message/mass/delete', { msg_id: msg_id }.to_json
+    post 'message/mass/delete', msg_id: msg_id
   end
   
   def message_mass_preview(message)
-    post 'message/mass/preview', message.to_json
+    post 'message/mass/preview', message
   end
   
   def message_mass_get(msg_id)
-    post 'message/mass/get', { msg_id: msg_id }.to_json
+    post 'message/mass/get', msg_id: msg_id
   end
   
   def wxa_get_wxacode(path, width = 430)
-    post 'getwxacode', { path: path, width: width }.to_json, base: WXA_BASE
+    post 'getwxacode', path: path, width: width, base: WXA_BASE
   end
   
   def wxa_create_qrcode(path, width = 430)
-    post 'wxaapp/createwxaqrcode', { path: path, width: width }.to_json
+    post 'wxaapp/createwxaqrcode', path: path, width: width
   end
   
   def menu
@@ -130,20 +125,20 @@ class Wechat::Api::Common < Wechat::Api::Base
   
   def menu_create(menu)
     # 微信不接受7bit escaped json(eg \uxxxx), 中文必须UTF-8编码, 这可能是个安全漏洞
-    post 'menu/create', menu.to_json
+    post 'menu/create', menu
   end
   
   def menu_addconditional(menu)
     # Wechat not accept 7bit escaped json(eg \uxxxx), must using UTF-8, possible security vulnerability?
-    post 'menu/addconditional', menu.to_json
+    post 'menu/addconditional', menu
   end
   
   def menu_trymatch(user_id)
-    post 'menu/trymatch', { user_id: user_id }.to_json
+    post 'menu/trymatch', user_id: user_id
   end
   
   def menu_delconditional(menuid)
-    post 'menu/delconditional', JSON.generate(menuid: menuid)
+    post 'menu/delconditional', menuid: menuid
   end
   
   def material(media_id)
@@ -155,7 +150,7 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def material_list(type = 'news', offset = 0, count = 20)
-    post 'material/batchget_material', { type: type, offset: offset, count: count }.to_json
+    post 'material/batchget_material', type: type, offset: offset, count: count
   end
   
   def material_add(type, file)
@@ -163,11 +158,11 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def material_delete(media_id)
-    post 'material/del_material', { media_id: media_id }.to_json
+    post 'material/del_material', media_id: media_id
   end
   
   def custom_message_send(message)
-    post 'message/custom/send', message.is_a?(Wechat::Message) ? message.to_json : JSON.generate(message), content_type: :json
+    post 'message/custom/send', message, headers: { content_type: :json }
   end
   
   def customservice_getonlinekflist
@@ -196,27 +191,27 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def tag_delete(tagid)
-    post 'tags/delete', { tag: { id: tagid } }.to_json
+    post 'tags/delete', tag: { id: tagid }
   end
   
   def tag_add_user(tagid, *openids)
-    post 'tags/members/batchtagging', { openid_list: openids, tagid: tagid }.to_json
+    post 'tags/members/batchtagging', openid_list: openids, tagid: tagid
   end
   
   def tag_del_user(tagid, *openids)
-    post 'tags/members/batchuntagging', { openid_list: openids, tagid: tagid }.to_json
+    post 'tags/members/batchuntagging', openid_list: openids, tagid: tagid
   end
   
   def tag(tagid, next_openid = '')
-    post 'user/tag/get', { tagid: tagid, next_openid: next_openid }.to_json
+    post 'user/tag/get', tagid: tagid, next_openid: next_openid
   end
   
   def getusersummary(begin_date, end_date)
-    post 'getusersummary', JSON.generate(begin_date: begin_date, end_date: end_date), base: DATACUBE_BASE
+    post 'getusersummary', begin_date: begin_date, end_date: end_date, base: DATACUBE_BASE
   end
   
   def getusercumulate(begin_date, end_date)
-    post 'getusercumulate', JSON.generate(begin_date: begin_date, end_date: end_date), base: DATACUBE_BASE
+    post 'getusercumulate', begin_date: begin_date, end_date: end_date, base: DATACUBE_BASE
   end
   
   def web_access_token(code)
@@ -226,11 +221,11 @@ class Wechat::Api::Common < Wechat::Api::Base
       code: code,
       grant_type: 'authorization_code'
     }
-    client.get 'oauth2/access_token', params: params, base: OAUTH2_BASE
+    get 'oauth2/access_token', params: params, base: OAUTH2_BASE
   end
   
   def web_auth_access_token(web_access_token, openid)
-    client.get 'auth', params: { access_token: web_access_token, openid: openid }, base: OAUTH2_BASE
+    get 'auth', params: { access_token: web_access_token, openid: openid }, base: OAUTH2_BASE
   end
   
   def web_refresh_access_token(user_refresh_token)
@@ -239,11 +234,10 @@ class Wechat::Api::Common < Wechat::Api::Base
       grant_type: 'refresh_token',
       refresh_token: user_refresh_token
     }
-    client.get 'oauth2/refresh_token', params: params, base: OAUTH2_BASE
+    get 'oauth2/refresh_token', params: params, base: OAUTH2_BASE
   end
   
   def web_userinfo(web_access_token, openid, lang = 'zh_CN')
-    client.get 'userinfo', params: { access_token: web_access_token, openid: openid, lang: lang }, base: OAUTH2_BASE
+    get 'userinfo', params: { access_token: web_access_token, openid: openid, lang: lang }, base: OAUTH2_BASE
   end
-
 end

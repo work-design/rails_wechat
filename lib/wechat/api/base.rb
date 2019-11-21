@@ -37,21 +37,22 @@ module Wechat::Api
     end
   
     protected
-    def get(path, headers = {})
-      with_access_token(headers[:params]) do |params|
-        client.get path, headers.merge(params: params)
+    def get(path, params: {}, headers: {}, base: nil, as: nil)
+      binding.pry
+      with_access_token(params) do |params|
+        client.get path, headers: headers, params: params, base: base, as: as
       end
     end
   
-    def post(path, payload, headers = {})
-      with_access_token(headers[:params]) do |params|
-        client.post path, payload, headers.merge(params: params)
+    def post(path, payload, params: {}, headers: {}, base: nil)
+      with_access_token(params) do |params|
+        client.post path, payload, headers: headers, params: params, base: base
       end
     end
   
-    def post_file(path, file, headers = {})
+    def post_file(path, file, params: {}, headers: {}, base: nil)
       with_access_token(headers[:params]) do |params|
-        client.post_file path, file, headers.merge(params: params)
+        client.post_file path, file, headers: headers, params: params, base: base
       end
     end
   

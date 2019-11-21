@@ -20,12 +20,7 @@ module Wechat::Api
     end
 
     def checkin(useridlist, starttime = Time.now.beginning_of_day, endtime = Time.now.end_of_day, opencheckindatatype = 3)
-      post 'checkin/getcheckindata', JSON.generate(
-        opencheckindatatype: opencheckindatatype,
-        starttime: starttime.to_i,
-        endtime: endtime.to_i,
-        useridlist: useridlist
-      )
+      post 'checkin/getcheckindata', opencheckindatatype: opencheckindatatype, starttime: starttime.to_i, endtime: endtime.to_i, useridlist: useridlist
     end
 
     def user(userid)
@@ -37,11 +32,11 @@ module Wechat::Api
     end
 
     def convert_to_openid(userid)
-      post 'user/convert_to_openid', JSON.generate(userid: userid, agentid: @agentid)
+      post 'user/convert_to_openid', userid: userid, agentid: @agentid
     end
 
     def invite_user(userid)
-      post 'invite/send', JSON.generate(userid: userid)
+      post 'invite/send', userid: userid
     end
 
     def user_auth_success(userid)
@@ -49,7 +44,7 @@ module Wechat::Api
     end
 
     def user_create(user)
-      post 'user/create', JSON.generate(user)
+      post 'user/create', user
     end
 
     def user_delete(userid)
@@ -57,7 +52,7 @@ module Wechat::Api
     end
 
     def user_batchdelete(useridlist)
-      post 'user/batchdelete', JSON.generate(useridlist: useridlist)
+      post 'user/batchdelete', useridlist: useridlist
     end
 
     def batch_job_result(jobid)
@@ -65,19 +60,19 @@ module Wechat::Api
     end
 
     def batch_replaceparty(media_id)
-      post 'batch/replaceparty', JSON.generate(media_id: media_id)
+      post 'batch/replaceparty', media_id: media_id
     end
 
     def batch_syncuser(media_id)
-      post 'batch/syncuser', JSON.generate(media_id: media_id)
+      post 'batch/syncuser', media_id: media_id
     end
 
     def batch_replaceuser(media_id)
-      post 'batch/replaceuser', JSON.generate(media_id: media_id)
+      post 'batch/replaceuser', media_id: media_id
     end
 
     def department_create(name, parentid)
-      post 'department/create', JSON.generate(name: name, parentid: parentid)
+      post 'department/create', name: name, parentid: parentid
     end
 
     def department_delete(departmentid)
@@ -85,7 +80,7 @@ module Wechat::Api
     end
 
     def department_update(departmentid, name = nil, parentid = nil, order = nil)
-      post 'department/update', JSON.generate({ id: departmentid, name: name, parentid: parentid, order: order }.reject { |_k, v| v.nil? })
+      post 'department/update', { id: departmentid, name: name, parentid: parentid, order: order }.reject { |_k, v| v.nil? }
     end
 
     def department(departmentid = 1)
@@ -101,11 +96,11 @@ module Wechat::Api
     end
 
     def tag_create(tagname, tagid = nil)
-      post 'tag/create', JSON.generate(tagname: tagname, tagid: tagid)
+      post 'tag/create', tagname: tagname, tagid: tagid
     end
 
     def tag_update(tagid, tagname)
-      post 'tag/update', JSON.generate(tagid: tagid, tagname: tagname)
+      post 'tag/update', tagid: tagid, tagname: tagname
     end
 
     def tag_delete(tagid)
@@ -121,11 +116,11 @@ module Wechat::Api
     end
 
     def tag_add_user(tagid, userids = nil, departmentids = nil)
-      post 'tag/addtagusers', JSON.generate(tagid: tagid, userlist: userids, partylist: departmentids)
+      post 'tag/addtagusers', tagid: tagid, userlist: userids, partylist: departmentids
     end
 
     def tag_del_user(tagid, userids = nil, departmentids = nil)
-      post 'tag/deltagusers', JSON.generate(tagid: tagid, userlist: userids, partylist: departmentids)
+      post 'tag/deltagusers', tagid: tagid, userlist: userids, partylist: departmentids
     end
 
     def menu
@@ -138,7 +133,7 @@ module Wechat::Api
 
     def menu_create(menu)
       # 微信不接受7bit escaped json(eg \uxxxx), 中文必须UTF-8编码, 这可能是个安全漏洞
-      post 'menu/create', JSON.generate(menu), params: { agentid: @agentid }
+      post 'menu/create', menu, params: { agentid: @agentid }
     end
 
     def material_count
@@ -146,7 +141,7 @@ module Wechat::Api
     end
 
     def material_list(type, offset, count)
-      post 'material/batchget', JSON.generate(type: type, agentid: @agentid, offset: offset, count: count)
+      post 'material/batchget', type: type, agentid: @agentid, offset: offset, count: count
     end
 
     def material(media_id)
@@ -162,11 +157,11 @@ module Wechat::Api
     end
 
     def message_send(userid, message)
-      post 'message/send', Message.to(userid).text(message).agent_id(@agentid).to_json, content_type: :json
+      post 'message/send', Message.to(userid).text(message).agent_id(@agentid).to_json, headers: { content_type: :json }
     end
 
     def custom_message_send(message)
-      post 'message/send', message.is_a?(Wechat::Message) ? message.agent_id(@agentid).to_json : JSON.generate(message.merge(agent_id: @agentid)), content_type: :json
+      post 'message/send', message.is_a?(Wechat::Message) ? message.agent_id(@agentid).as_json : message.merge(agent_id: @agentid), headers: { content_type: :json }
     end
   end
 end

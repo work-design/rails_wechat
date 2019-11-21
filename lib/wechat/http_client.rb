@@ -5,19 +5,15 @@ module Wechat
 
     def initialize(base)
       @base = base
-      timeout = RailsWechat.config.timeout
-      
-      @http = HTTPX.timeout(connect: timeout, write: timeout, read: timeout)
-      @ssl_context = OpenSSL::SSL::SSLContext.new
-      @ssl_context.ssl_version = :TLSv1
-      @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_NONE if RailsWechat.config.skip_verify_ssl
+      @http = HTTPX.timeout(**RailsWechat.config.httpx_timeout)
+      @http.with(ssl: RailsWechat.config.httpx_ssl)
     end
 
     def get(path, headers: {}, params: {}, base: '')
       headers['Accept'] ||= 'application/json'
       
       request(path, base: base) do |url|
-        @http.headers(headers).get(url, params: params, ssl_context: @ssl_context)
+        @http.headers(headers).get(url, params: params)
       end
     end
 
@@ -25,7 +21,7 @@ module Wechat
       headers['Accept'] ||= 'application/json'
       
       request(path, base: base) do |url|
-        @http.headers(headers).post(url, params: params, body: payload, ssl_context: @ssl_context)
+        @http.headers(headers).post(url, params: params, body: payload)
       end
     end
 
@@ -37,8 +33,7 @@ module Wechat
         @http.headers(headers).post(
           url,
           params: params,
-          form: { media: form_file, hack: 'X' }, # Existing here for http-form_data 1.0.1 handle single param improperly
-          ssl_context: @ssl_context
+          form: { media: form_file, hack: 'X' } # Existing here for http-form_data 1.0.1 handle single param improperly
         )
       end
     end
