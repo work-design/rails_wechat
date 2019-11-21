@@ -43,7 +43,7 @@ module Wechat
       response = yield("#{base}#{path}")
 
       raise "Request not OK, response status #{response.status}" if response.status != 200
-      parse_response(response, as || :json) do |parse_as, data|
+      parse_response(response, as) do |parse_as, data|
         break data unless parse_as == :json && data['errcode'].present?
 
         case data['errcode']
@@ -57,8 +57,10 @@ module Wechat
           raise AccessTokenExpiredError
         # 40029, invalid code for mp # GH-225
         # 43004, require subscribe hint # GH-214
-        else
+        when 2
           raise ResponseError.new(data['errcode'], data['errmsg'])
+        else
+          data
         end
       end
     end
