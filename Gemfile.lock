@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/qinmingyuan/default_form.git
-  revision: 7c651e529a93297d4a8661458d08776ae1ca5cf7
+  revision: f43338053e7958022b4dce9b8f0e44bc3257bea5
   specs:
     default_form (1.5.0)
       rails (>= 5.2, <= 6.1)
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: e759fc2dd4df419e30bb0c4c5ba86cf8e6694bba
+  revision: a44a683b2f59f0b6cce756ca50b7b2dfa7185577
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: f44dbc0202b99bf2ab5f7b501ad2954fee0b7b4e
+  revision: 2b57bd65810dbcce719de5a2ba38883fe8a61b0c
   specs:
     rails_com (1.2.9)
       default_form (~> 1.5)
@@ -28,7 +28,7 @@ PATH
   remote: .
   specs:
     rails_wechat (0.1.0)
-      http
+      httpx
       rails (~> 6.0.0)
       rails_auth
 
@@ -92,8 +92,6 @@ GEM
       zeitwerk (~> 2.2)
     acts_as_list (1.0.0)
       activerecord (>= 4.2)
-    addressable (2.7.0)
-      public_suffix (>= 2.0.2, < 5.0)
     awesome_print (1.8.0)
     bcrypt (3.1.13)
     builder (3.2.3)
@@ -102,31 +100,15 @@ GEM
     crass (1.0.5)
     default_where (2.2.0)
       activerecord (>= 4.0.0)
-    domain_name (0.5.20190701)
-      unf (>= 0.0.5, < 1.0.0)
     erubi (1.9.0)
     factory_bot (5.1.1)
       activesupport (>= 4.2.0)
     factory_bot_rails (5.1.1)
       factory_bot (~> 5.1.0)
       railties (>= 4.2.0)
-    ffi (1.11.2)
-    ffi-compiler (1.0.1)
-      ffi (>= 1.0.0)
-      rake
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     http-2-next (0.1.1)
-    http (4.2.0)
-      addressable (~> 2.3)
-      http-cookie (~> 1.0)
-      http-form_data (~> 2.0)
-      http-parser (~> 1.2.0)
-    http-cookie (1.0.3)
-      domain_name (~> 0.5)
-    http-form_data (2.1.1)
-    http-parser (1.2.1)
-      ffi-compiler (>= 1.0, < 2.0)
     httpx (0.6.0)
       http-2-next (>= 0.1.1)
       timers
@@ -167,7 +149,6 @@ GEM
       method_source (~> 0.9.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    public_suffix (4.0.1)
     puma (4.3.0)
       nio4r (~> 2.0)
     rack (2.0.7)
@@ -218,9 +199,6 @@ GEM
     timers (4.3.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.6)
     webpacker (4.2.0)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)

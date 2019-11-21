@@ -1,38 +1,40 @@
-require 'http'
+require 'httpx'
 
 module Wechat
   class HttpClient
 
     def initialize(base)
       @base = base
-      
       timeout = RailsWechat.config.timeout
       
-      @http = HTTP.timeout(connect: timeout, write: timeout, read: timeout)
+      @http = HTTPX.timeout(connect: timeout, write: timeout, read: timeout)
       @ssl_context = OpenSSL::SSL::SSLContext.new
       @ssl_context.ssl_version = :TLSv1
       @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_NONE if RailsWechat.config.skip_verify_ssl
     end
 
-    def get(path, get_header = {})
-      request(path, get_header) do |url, header|
-        params = header.delete(:params)
-        @http.headers(header).get(url, params: params, ssl_context: @ssl_context)
+    def get(path, headers: {}, params: {}, base: '')
+      headers['Accept'] ||= 'application/json'
+      
+      request(path, base: base) do |url|
+        @http.headers(headers).get(url, params: params, ssl_context: @ssl_context)
       end
     end
 
-    def post(path, payload, post_header = {})
-      request(path, post_header) do |url, header|
-        params = header.delete(:params)
-        @http.headers(header).post(url, params: params, body: payload, ssl_context: @ssl_context)
+    def post(path, payload, headers: {}, params: {}, base: '')
+      headers['Accept'] ||= 'application/json'
+      
+      request(path, base: base) do |url|
+        @http.headers(headers).post(url, params: params, body: payload, ssl_context: @ssl_context)
       end
     end
 
-    def post_file(path, file, post_header = {})
-      request(path, post_header) do |url, header|
-        params = header.delete(:params)
+    def post_file(path, file, headers: {}, params: {}, base: '')
+      headers['Accept'] ||= 'application/json'
+      
+      request(path, base: base) do |url|
         form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file)
-        @http.headers(header).post(
+        @http.headers(headers).post(
           url,
           params: params,
           form: { media: form_file, hack: 'X' }, # Existing here for http-form_data 1.0.1 handle single param improperly
@@ -42,12 +44,8 @@ module Wechat
     end
 
     private
-
-    def request(path, header = {}, &_block)
-      url_base = header.delete(:base) || @base
-      as = header.delete(:as)
-      header['Accept'] ||= 'application/json'
-      response = yield("#{url_base}#{path}", header)
+    def request(path, base: @base, as: :json, &_block)
+      response = yield("#{base}#{path}")
 
       raise "Request not OK, response status #{response.status}" if response.status != 200
       parse_response(response, as || :json) do |parse_as, data|

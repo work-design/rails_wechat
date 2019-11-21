@@ -3,16 +3,21 @@
 module Wechat::Api
   class Program < Common
     
+    # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/sec-check/security.msgSecCheck.html
+    def msg_sec_check(content)
+      post 'msg_sec_check', { content: content }.to_json
+    end
+    
     def template_message_send(message)
       post 'message/wxopen/template/send', message.to_json, content_type: :json
     end
 
     def list_template_library(offset: 0, count: 20)
-      post 'wxopen/template/library/list', JSON.generate(offset: offset, count: count)
+      post 'wxopen/template/library/list', { offset: offset, count: count }.to_json, base: WXA_BASE
     end
 
     def list_template_library_keywords(id)
-      post 'wxopen/template/library/get', JSON.generate(id: id)
+      post 'wxopen/template/library/get', { id: id }.to_json
     end
 
     def add_message_template(id, keyword_id_list)

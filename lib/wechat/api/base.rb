@@ -62,6 +62,5 @@ module Wechat::Api
       access_token.refresh
       retry unless (tries -= 1).zero?
     end
-    
   end
 end

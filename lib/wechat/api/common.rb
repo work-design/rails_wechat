@@ -113,11 +113,11 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def wxa_get_wxacode(path, width = 430)
-    post 'getwxacode', JSON.generate(path: path, width: width), base: WXA_BASE
+    post 'getwxacode', { path: path, width: width }.to_json, base: WXA_BASE
   end
   
   def wxa_create_qrcode(path, width = 430)
-    post 'wxaapp/createwxaqrcode', JSON.generate(path: path, width: width)
+    post 'wxaapp/createwxaqrcode', { path: path, width: width }.to_json
   end
   
   def menu
@@ -163,7 +163,7 @@ class Wechat::Api::Common < Wechat::Api::Base
   end
   
   def material_delete(media_id)
-    post 'material/del_material', JSON.generate(media_id: media_id)
+    post 'material/del_material', { media_id: media_id }.to_json
   end
   
   def custom_message_send(message)
