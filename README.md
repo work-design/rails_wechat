@@ -24,6 +24,12 @@
 
 ## 使用
 * 仅支持UI数据库配置公众号；
+* 调用api
+```ruby
+# 或 wechat_app = WechatApp.find params[:id]
+wechat_app = WechatApp.default
+wechat_app.api.msg_sec_check('test data')
+```
 
 ## 许可证
 许可证采用 [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0)
