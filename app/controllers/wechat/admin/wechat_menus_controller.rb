@@ -59,7 +59,7 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
 
   private
   def set_wechat_app
-    @wechat_app = WechatApp.where(default_params).find_by id: params[:wechat_app_id]
+    @wechat_app = WechatApp.default_where(default_params).find_by id: params[:wechat_app_id]
   end
   
   def set_wechat_menu

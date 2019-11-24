@@ -62,7 +62,7 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
   
   def prepare_form
     q = { organ_id: nil }
-    if defined? current_organ
+    if defined?(current_organ) && current_organ
       q.merge! organ_id: [current_organ.id, nil]
     end
     @extractors = Extractor.default_where(q)
