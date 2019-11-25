@@ -19,7 +19,9 @@ module Wechat
 
       protected
       def write_token_to_store(token_hash)
-        raise Wechat::InvalidCredentialError unless token_hash.is_a?(Hash) && token_hash['access_token']
+        unless token_hash.is_a?(Hash) && token_hash['access_token']
+          raise Wechat::InvalidCredentialError, token_hash['errmsg']
+        end
         
         if @app
           @app.access_token = token_hash['access_token']
