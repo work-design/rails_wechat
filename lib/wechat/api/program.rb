@@ -32,16 +32,7 @@ module Wechat::Api
       post 'wxopen/template/del', template_id: template_id
     end
 
-    def jscode2session(code)
-      params = {
-        appid: app.appid,
-        secret: app.secret,
-        js_code: code,
-        grant_type: 'authorization_code'
-      }
-
-      client.get 'jscode2session', params: params, base: OAUTH2_BASE
-    end
+    
     
   end
 end
