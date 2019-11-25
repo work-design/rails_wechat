@@ -16,8 +16,8 @@ module RailsWechat::WechatTag
     validates :name, uniqueness: { scope: :wechat_app_id }
     
     before_create :sync_name
-    after_create :sync_to_wechat, if: -> { tag_id.blank? }
-    after_update :sync_to_wechat, if: -> { saved_change_to_name? }
+    before_create :sync_to_wechat, if: -> { tag_id.blank? }
+    before_update :sync_to_wechat, if: -> { name_changed? }
     after_destroy_commit :remove_from_wechat, if: -> { tag_id.present? }
   end
   
@@ -30,7 +30,6 @@ module RailsWechat::WechatTag
     return unless r
     tag = r['tag']
     self.tag_id = tag['id']
-    self.save
   end
   
   def remove_from_wechat
