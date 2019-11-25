@@ -10,18 +10,17 @@ module Wechat::Api
   
     def tag_create(tag_name, tag_id = nil)
       if tag_id.present?
-        r = post 'tags/update', { tag: { id: tag_id, name: tag_name } }.to_json
-        if r['errcode'] == 0
-          { 'tag' => { 'id' => tag_id, 'name' => tag_name } }
-        else
-          r
-        end
+        r = post 'tags/update', { tag: { id: tag_id, name: tag_name } }
       else
-        post 'tags/create', { tag: { name: tag_name } }.to_json
+        r = post 'tags/create', { tag: { name: tag_name } }
       end
-    rescue Wechat::ResponseError => e
-      if e.error_code == 45157
+
+      if r['errcode'] == 0
+        { 'tag' => { 'id' => tag_id, 'name' => tag_name } }
+      elsif r['errcode'] == 45157
         { 'tag' => tags['tags'].find { |i| i['name'] == tag_name } }
+      else
+        r
       end
     end
   
