@@ -39,7 +39,33 @@ module Wechat::Api
     def tag(tagid, next_openid = '')
       post 'user/tag/get', tagid: tagid, next_openid: next_openid
     end
-    
+
+    def menu
+      get 'menu/get'
+    end
+
+    def menu_delete
+      get 'menu/delete'
+    end
+
+    def menu_create(menu)
+      # 微信不接受7bit escaped json(eg \uxxxx), 中文必须UTF-8编码, 这可能是个安全漏洞
+      post 'menu/create', menu
+    end
+
+    def menu_addconditional(menu)
+      # Wechat not accept 7bit escaped json(eg \uxxxx), must using UTF-8, possible security vulnerability?
+      post 'menu/addconditional', menu
+    end
+
+    def menu_trymatch(user_id)
+      post 'menu/trymatch', user_id: user_id
+    end
+
+    def menu_delconditional(menuid)
+      post 'menu/delconditional', menuid: menuid
+    end
+
     def template_message_send(message)
       post 'message/template/send', message, headers: { content_type: :json }
     end

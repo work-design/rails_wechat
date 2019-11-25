@@ -94,33 +94,7 @@ class Wechat::Api::Common < Wechat::Api::Base
   def wxa_create_qrcode(path, width = 430)
     post 'wxaapp/createwxaqrcode', path: path, width: width
   end
-  
-  def menu
-    get 'menu/get'
-  end
-  
-  def menu_delete
-    get 'menu/delete'
-  end
-  
-  def menu_create(menu)
-    # 微信不接受7bit escaped json(eg \uxxxx), 中文必须UTF-8编码, 这可能是个安全漏洞
-    post 'menu/create', menu
-  end
-  
-  def menu_addconditional(menu)
-    # Wechat not accept 7bit escaped json(eg \uxxxx), must using UTF-8, possible security vulnerability?
-    post 'menu/addconditional', menu
-  end
-  
-  def menu_trymatch(user_id)
-    post 'menu/trymatch', user_id: user_id
-  end
-  
-  def menu_delconditional(menuid)
-    post 'menu/delconditional', menuid: menuid
-  end
-  
+
   def material(media_id)
     get 'material/get', params: { media_id: media_id }, as: :file
   end
