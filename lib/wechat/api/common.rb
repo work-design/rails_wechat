@@ -4,6 +4,7 @@ class Wechat::Api::Common < Wechat::Api::Base
   WXA_BASE = 'https://api.weixin.qq.com/wxa/'
   API_BASE = 'https://api.weixin.qq.com/cgi-bin/'
   DATACUBE_BASE = 'https://api.weixin.qq.com/datacube/'
+  SNS_BASE = 'https://api.weixin.qq.com/sns/'
   
   def initialize(app)
     @client = Wechat::HttpClient.new(API_BASE)
@@ -11,23 +12,7 @@ class Wechat::Api::Common < Wechat::Api::Base
     @access_token = Wechat::AccessToken::Public.new(@client, app)
     @jsapi_ticket = Wechat::JsapiTicket::Public.new(@client, app, @access_token)
   end
-  
-  def groups
-    get 'groups/get'
-  end
-  
-  def group_create(group_name)
-    post 'groups/create', group: { name: group_name }
-  end
-  
-  def group_update(groupid, new_group_name)
-    post 'groups/update', group: { id: groupid, name: new_group_name }
-  end
-  
-  def group_delete(groupid)
-    post 'groups/delete', group: { id: groupid }
-  end
-  
+
   def users(nextid = nil)
     params = {}
     params.merge! next_openid: nextid if nextid.present?
@@ -106,10 +91,6 @@ class Wechat::Api::Common < Wechat::Api::Base
     post 'message/mass/get', msg_id: msg_id
   end
   
-  def wxa_get_wxacode(path, width = 430)
-    post 'getwxacode', path: path, width: width, base: WXA_BASE
-  end
-  
   def wxa_create_qrcode(path, width = 430)
     post 'wxaapp/createwxaqrcode', path: path, width: width
   end
@@ -168,43 +149,6 @@ class Wechat::Api::Common < Wechat::Api::Base
     get 'customservice/getonlinekflist'
   end
   
-  def tags
-    get 'tags/get'
-  end
-  
-  def tag_create(tag_name, tag_id = nil)
-    if tag_id.present?
-      r = post 'tags/update', { tag: { id: tag_id, name: tag_name } }.to_json
-      if r['errcode'] == 0
-        { 'tag' => { 'id' => tag_id, 'name' => tag_name } }
-      else
-        r
-      end
-    else
-      post 'tags/create', { tag: { name: tag_name } }.to_json
-    end
-  rescue Wechat::ResponseError => e
-    if e.error_code == 45157
-      { 'tag' => tags['tags'].find { |i| i['name'] == tag_name } }
-    end
-  end
-  
-  def tag_delete(tagid)
-    post 'tags/delete', tag: { id: tagid }
-  end
-  
-  def tag_add_user(tagid, *openids)
-    post 'tags/members/batchtagging', openid_list: openids, tagid: tagid
-  end
-  
-  def tag_del_user(tagid, *openids)
-    post 'tags/members/batchuntagging', openid_list: openids, tagid: tagid
-  end
-  
-  def tag(tagid, next_openid = '')
-    post 'user/tag/get', tagid: tagid, next_openid: next_openid
-  end
-  
   def getusersummary(begin_date, end_date)
     post 'getusersummary', begin_date: begin_date, end_date: end_date, base: DATACUBE_BASE
   end
@@ -212,6 +156,32 @@ class Wechat::Api::Common < Wechat::Api::Base
   def getusercumulate(begin_date, end_date)
     post 'getusercumulate', begin_date: begin_date, end_date: end_date, base: DATACUBE_BASE
   end
-  
+
+  def web_access_token(code)
+    params = {
+      appid: access_token.appid,
+      secret: access_token.secret,
+      code: code,
+      grant_type: 'authorization_code'
+    }
+    get 'oauth2/access_token', params: params, base: SNS_BASE
+  end
+
+  def web_auth_access_token(web_access_token, openid)
+    get 'auth', params: { access_token: web_access_token, openid: openid }, base: SNS_BASE
+  end
+
+  def web_refresh_access_token(user_refresh_token)
+    params = {
+      appid: access_token.appid,
+      grant_type: 'refresh_token',
+      refresh_token: user_refresh_token
+    }
+    get 'oauth2/refresh_token', params: params, base: SNS_BASE
+  end
+
+  def web_userinfo(web_access_token, openid, lang = 'zh_CN')
+    get 'userinfo', params: { access_token: web_access_token, openid: openid, lang: lang }, base: SNS_BASE
+  end
   
 end

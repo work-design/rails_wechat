@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Wechat::Api
   class Base
     attr_reader :app, :client, :access_token, :jsapi_ticket
-    MP_BASE = 'https://mp.weixin.qq.com/cgi-bin/'.freeze
+    MP_BASE = 'https://mp.weixin.qq.com/cgi-bin/'
     
     def callbackip
       get 'getcallbackip'
@@ -28,7 +30,7 @@ module Wechat::Api
     end
   
     def media_uploadnews(mpnews_message)
-      post 'media/uploadnews', mpnews_message.to_json
+      post 'media/uploadnews', mpnews_message
     end
   
     # see: https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433744592

@@ -9,26 +9,26 @@ module Wechat
       @http.with(ssl: RailsWechat.config.httpx_ssl)
     end
 
-    def get(path, headers: {}, params: {}, base: @base)
+    def get(path, headers: {}, params: {}, **options)
       headers['Accept'] ||= 'application/json'
       
-      request(path, base: base) do |url|
+      request(path, **options) do |url|
         @http.headers(headers).get(url, params: params)
       end
     end
 
-    def post(path, payload, headers: {}, params: {}, base: @base)
+    def post(path, payload, headers: {}, params: {}, **options)
       headers['Accept'] ||= 'application/json'
       
-      request(path, base: base) do |url|
+      request(path, **options) do |url|
         @http.headers(headers).post(url, params: params, body: payload)
       end
     end
 
-    def post_file(path, file, headers: {}, params: {}, base: @base)
+    def post_file(path, file, headers: {}, params: {}, **options)
       headers['Accept'] ||= 'application/json'
       
-      request(path, base: base) do |url|
+      request(path, **options) do |url|
         form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file)
         @http.headers(headers).post(
           url,
@@ -39,11 +39,14 @@ module Wechat
     end
 
     private
-    def request(path, base: @base, as: :json, &_block)
-      response = yield("#{base}#{path}")
+    def request(path, **options, &_block)
+      options[:base] ||= @base
+      options[:as] ||= :json
+  
+      response = yield("#{options[:base]}#{path}")
 
       raise "Request not OK, response status #{response.status}" if response.status != 200
-      parse_response(response, as) do |parse_as, data|
+      parse_response(response, options[:as]) do |parse_as, data|
         break data unless parse_as == :json && data['errcode'].present?
 
         case data['errcode']
