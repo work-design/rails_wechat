@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 4ad70da642c5287c623a6f895eab6b2720431387
+  revision: decd6a5ab2943143d92f306552610064351fae09
   specs:
     rails_com (1.2.9)
       default_form (~> 1.5)
