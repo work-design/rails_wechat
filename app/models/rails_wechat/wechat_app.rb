@@ -4,20 +4,24 @@ module RailsWechat::WechatApp
     delegate :url_helpers, to: 'Rails.application.routes'
     
     attribute :type, :string, default: 'WechatPublic'
+    attribute :name, :string
     attribute :enabled, :boolean, default: true
     attribute :primary, :boolean, default: false
-    attribute :encrypt_mode, :boolean, default: true
     attribute :appid, :string
     attribute :secret, :string
-    attribute :agentid, :string
     attribute :token, :string, default: -> { SecureRandom.hex }
+    attribute :agentid, :string, comment: '企业微信所用'
+    attribute :mch_id, :string, comment: '支付专用、商户号'
+    attribute :key, :string, comment: '支付专用'
+    attribute :encrypt_mode, :boolean, default: true
     attribute :encoding_aes_key, :string
-    attribute :help, :string, default: ''  # 默认帮助
-    attribute :help_without_user, :string, default: '请绑定账号，输入"绑定"根据提示操作'  # 未注册用户提示
-    attribute :help_user_disabled, :string, default: '你没有权限'  # 被禁用用户提示
-    attribute :help_feedback, :string, default: '你的反馈已收到'  # 正常发送反馈内容回复
+    attribute :help, :string, limit: 1024, default: '', comment: '默认帮助'
+    attribute :help_without_user, :string, default: '请绑定账号，输入"绑定"根据提示操作', comment: '未注册用户提示'
+    attribute :help_feedback, :string, default: '你的反馈已收到', comment: '正常发送反馈内容回复'
     attribute :access_token, :string
+    attribute :access_token_expires_at, :datetime
     attribute :jsapi_ticket, :string
+    attribute :jsapi_ticket_expires_at, :datetime
     
     belongs_to :organ, optional: true
     has_many :wechat_menus, dependent: :destroy
