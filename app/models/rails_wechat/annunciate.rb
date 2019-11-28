@@ -1,7 +1,7 @@
 module RailsWechat::Annunciate
   extend ActiveSupport::Concern
+  
   included do
-    
     after_create_commit :to_wechat_later
   end
   

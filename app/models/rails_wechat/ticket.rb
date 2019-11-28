@@ -5,7 +5,10 @@ module RailsWechat::Ticket
     attribute :serial_start, :integer
     attribute :start_at, :time, default: -> { '0:00'.to_time }
     attribute :finish_at, :time, default: -> { '23:59'.to_time }
-    
+    attribute :valid_response, :string
+    attribute :invalid_response, :string
+
+    belongs_to :organ, optional: true
     has_one :wechat_response, as: :effective
     has_many :ticket_items, dependent: :nullify
     after_save :sync_to_wechat_response, if: -> { saved_change_to_match_value? }

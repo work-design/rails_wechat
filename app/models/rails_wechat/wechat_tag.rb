@@ -5,11 +5,11 @@ module RailsWechat::WechatTag
     attribute :name, :string
     attribute :count, :integer, default: 0
     attribute :wechat_user_tags_count, :integer, default: 0
-    attribute :tagging_type, :string, default: ''
     attribute :tag_id, :integer
     
     belongs_to :tagging, polymorphic: true, optional: true
     belongs_to :wechat_app
+    belongs_to :user_tag, optional: true
     has_many :wechat_user_tags, dependent: :destroy
     has_many :wechat_users, through: :wechat_user_tags
     

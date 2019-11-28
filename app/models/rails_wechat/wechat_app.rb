@@ -3,7 +3,7 @@ module RailsWechat::WechatApp
   included do
     delegate :url_helpers, to: 'Rails.application.routes'
     
-    attribute :organ_id, :integer
+    attribute :type, :string, default: 'WechatPublic'
     attribute :enabled, :boolean, default: true
     attribute :primary, :boolean, default: false
     attribute :encrypt_mode, :boolean, default: true
@@ -18,7 +18,6 @@ module RailsWechat::WechatApp
     attribute :help_feedback, :string, default: '你的反馈已收到'  # 正常发送反馈内容回复
     attribute :access_token, :string
     attribute :jsapi_ticket, :string
-    attribute :type, :string, default: 'WechatPublic'
     
     belongs_to :organ, optional: true
     has_many :wechat_menus, dependent: :destroy

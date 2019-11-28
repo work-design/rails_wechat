@@ -3,7 +3,10 @@ module RailsWechat::WechatResponse
   included do
     attribute :type, :string, default: 'TextResponse'
     attribute :match_value, :string
+    attribute :expire_seconds, :integer
     attribute :expire_at, :datetime
+    attribute :qrcode_ticket, :string
+    attribute :qrcode_url, :string
     
     belongs_to :wechat_app
     belongs_to :effective, polymorphic: true, optional: true
