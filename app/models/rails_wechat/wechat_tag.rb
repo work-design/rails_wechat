@@ -30,11 +30,13 @@ module RailsWechat::WechatTag
     return unless r
     tag = r['tag']
     self.tag_id = tag['id']
+  rescue Wechat::WechatError => e
+    logger.info e.message
   end
   
   def remove_from_wechat
     wechat_app.api.tag_delete(self.tag_id)
-  rescue Wechat::ResponseError => e
+  rescue Wechat::WechatError => e
     logger.info e.message
   end
   

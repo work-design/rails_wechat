@@ -35,7 +35,7 @@
         <%= link_to edit_admin_wechat_app_wechat_tag_path(@wechat_app, wechat_tag), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to admin_wechat_app_wechat_tag_path(@wechat_app, wechat_tag), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_wechat_app_wechat_tag_path(@wechat_app, wechat_tag), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>
