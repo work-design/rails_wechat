@@ -1,7 +1,7 @@
 require 'rails_com'
 module RailsWechat
   class Engine < ::Rails::Engine
-    
+
     config.autoload_paths += Dir[
       "#{config.root}/app/models/wechat_menu",
       "#{config.root}/app/models/wechat_request",
@@ -9,7 +9,7 @@ module RailsWechat
       "#{config.root}/app/models/wechat_app",
       "#{config.root}/app/models/oauth_user"
     ]
-    
+
     config.generators do |g|
       g.rails = {
         assets: false,
@@ -24,10 +24,5 @@ module RailsWechat
       g.templates.unshift File.expand_path('lib/templates', RailsCom::Engine.root)
     end
 
-    initializer 'rails_wechat.zeitwerk.preload' do |app|
-      Rails.autoloaders.main&.preload "#{config.root}/app/models/wechat_response/persist_scan_response.rb"
-      Rails.autoloaders.main&.preload "#{config.root}/app/models/wechat_response/temp_scan_response.rb"
-    end
-    
   end
 end
