@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/qinmingyuan/default_form.git
-  revision: d14d8d17e90b26bb7b69f6860966d660a73e63cf
+  revision: 7ce6c56a820f09850a2a7a162715b4cfddbcbb2f
   specs:
     default_form (1.5.0)
       rails_com (~> 1.2)
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: ae8ae25e8c5ef881ff124fe2b324b7d98a8c3345
+  revision: 854f81522c4981c4766697ffd0b7394b24f6461b
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -107,9 +107,9 @@ GEM
       railties (>= 4.2.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    http-2-next (0.1.1)
-    httpx (0.6.0)
-      http-2-next (>= 0.1.1)
+    http-2-next (0.1.2)
+    httpx (0.6.2)
+      http-2-next (>= 0.1.2)
       timers
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
@@ -128,7 +128,7 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
-    loofah (2.3.1)
+    loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -141,14 +141,14 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.13.0)
     nio4r (2.5.2)
-    nokogiri (1.10.5)
+    nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    puma (4.3.0)
+    puma (4.3.1)
       nio4r (~> 2.0)
     rack (2.0.7)
     rack-proxy (0.6.5)
@@ -205,7 +205,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
-    zeitwerk (2.2.1)
+    zeitwerk (2.2.2)
 
 PLATFORMS
   ruby
