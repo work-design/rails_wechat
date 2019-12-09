@@ -33,6 +33,7 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
     phone_number = @wechat_program_user.get_phone_number(params[:encrypted_data], params[:iv], session_key)
     if phone_number
       @account = Account.find_by(identity: phone_number) || Account.create_with_identity(phone_number)
+      @account.confirmed = true
       current_authorized_token.update(account_id: @account.id)
       @wechat_program_user.update(account_id: @account.id)
       @account.join(name: @wechat_program_user.name)
