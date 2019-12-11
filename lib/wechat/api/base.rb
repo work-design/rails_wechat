@@ -3,12 +3,13 @@
 class Wechat::Api::Base
   MP_BASE = 'https://mp.weixin.qq.com/cgi-bin/'
   WXA_BASE = 'https://api.weixin.qq.com/wxa/'
-  WXAAPI = 'https://api.weixin.qq.com/wxaapi'
+  WXAAPI = 'https://api.weixin.qq.com/wxaapi/'
   API_BASE = 'https://api.weixin.qq.com/cgi-bin/'
   DATACUBE_BASE = 'https://api.weixin.qq.com/datacube/'
   SNS_BASE = 'https://api.weixin.qq.com/sns/'
   
   attr_reader :app, :client, :access_token, :jsapi_ticket
+
   def initialize(app)
     @client = Wechat::HttpClient.new(API_BASE)
     @app = app
