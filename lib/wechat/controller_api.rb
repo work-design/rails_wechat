@@ -1,6 +1,5 @@
 module Wechat
   module ControllerApi
-    extend ActiveSupport::Concern
 
     def wechat_oauth2(account, scope = 'snsapi_base', page_url = nil, &block)
       api = Wechat.api(account)
