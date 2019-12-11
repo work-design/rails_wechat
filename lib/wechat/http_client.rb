@@ -11,7 +11,6 @@ module Wechat
 
     def get(path, headers: {}, params: {}, **options)
       headers['Accept'] ||= 'application/json'
-      
       @base = options[:base] if options[:base]
       url = @base + path
 
@@ -21,30 +20,32 @@ module Wechat
 
     def post(path, payload, headers: {}, params: {}, **options)
       headers['Accept'] ||= 'application/json'
-      
-      response =  @http.headers(headers).post(url, params: params, body: payload)
+      @base = options[:base] if options[:base]
+      url = @base + path
+
+      response = @http.headers(headers).post(url, params: params, body: payload)
       parse_response(response, parse_as)
     end
 
     def post_file(path, file, headers: {}, params: {}, **options)
       headers['Accept'] ||= 'application/json'
-      
+      @base = options[:base] if options[:base]
+      url = @base + path
+
       form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file)
       response = @http.headers(headers).post(
         url,
         params: params,
         form: { media: form_file, hack: 'X' } # Existing here for http-form_data 1.0.1 handle single param improperly
       )
-    
       parse_response(response, parse_as)
     end
 
     private
     def parse_response(response, parse_as)
       raise "Request not OK, response status #{response.status}" if response.status != 200
-      
+
       content_type = MiniMime.lookup_by_content_type(response.content_type.mime_type).extension
-      
       if content_type.binary?
         parse_as = :file
       else
@@ -58,13 +59,11 @@ module Wechat
         data.write(response.body)
         data.close
         data
-      when :html
+      when :html, :xml
         data = Hash.from_xml(response.body.to_s)
       else
         data = JSON.parse response.body.to_s.gsub(/[\u0000-\u001f]+/, '')
       end
-      
-      break data unless parse_as == :json && data['errcode'].present?
 
       case data['errcode']
       when 0 # for request didn't expect results
@@ -83,6 +82,6 @@ module Wechat
         data
       end
     end
-    
+
   end
 end
