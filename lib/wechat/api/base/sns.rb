@@ -1,4 +1,4 @@
-module Wechat::Api::Xxx::Sns
+module Wechat::Api::Base::Sns
 
   def web_access_token(code)
     params = {

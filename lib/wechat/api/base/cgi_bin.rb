@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Wechat::Api::Common
+module Wechat::Api::Base::CgiBin
 
   def users(nextid = nil)
     params = {}
