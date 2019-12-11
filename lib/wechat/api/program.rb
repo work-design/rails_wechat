@@ -8,7 +8,7 @@ class Wechat::Api::Program < Wechat::Api::Base
   end
 
   # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/template-message/templateMessage.getTemplateList.html
-  def list_message_template(offset: 0, count: 20)
+  def list_message_template
     r = get 'newtmpl/gettemplate', base: WXAAPI
     r['data']
   end
