@@ -15,5 +15,6 @@ gem 'kaminari'
 gem 'acts_as_list'
 
 gem 'pry-rails'
+gem 'pry-stack_explorer'
 gem 'awesome_print'
 gem 'sdoc'

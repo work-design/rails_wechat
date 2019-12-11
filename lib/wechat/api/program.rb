@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Wechat::Api::Program < Wechat::Api::Base
-
+  WXAAPI = 'https://api.weixin.qq.com/wxaapi/'
   # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/sec-check/security.msgSecCheck.html
   def msg_sec_check(content)
     post 'msg_sec_check', { content: content }, base: WXA_BASE
@@ -9,7 +9,7 @@ class Wechat::Api::Program < Wechat::Api::Base
 
   # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/template-message/templateMessage.getTemplateList.html
   def list_message_template(offset: 0, count: 20)
-    post 'newtmpl/gettemplate', offset: offset, count: count, base: WXAAPI
+    get 'newtmpl/gettemplate', base: WXAAPI
   end
 
   def get_wxacode(path, width = 430)

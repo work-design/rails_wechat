@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-require 'wechat/api/work/agent'
 
 class Wechat::Api::Work < Wechat::Api::Base
+  require 'wechat/api/work/agent'
   include Wechat::Api::Work::Agent
   API_BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
