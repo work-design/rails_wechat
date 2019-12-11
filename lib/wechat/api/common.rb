@@ -2,6 +2,7 @@
 
 class Wechat::Api::Common < Wechat::Api::Base
   WXA_BASE = 'https://api.weixin.qq.com/wxa/'
+  WXAAPI = 'https://api.weixin.qq.com/wxaapi'
   API_BASE = 'https://api.weixin.qq.com/cgi-bin/'
   DATACUBE_BASE = 'https://api.weixin.qq.com/datacube/'
   SNS_BASE = 'https://api.weixin.qq.com/sns/'

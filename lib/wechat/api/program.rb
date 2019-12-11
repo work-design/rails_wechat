@@ -22,9 +22,10 @@ class Wechat::Api::Program < Wechat::Api::Common
   def add_message_template(id, keyword_id_list)
     post 'wxopen/template/add', id: id, keyword_id_list: keyword_id_list
   end
-
+  
+  # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/template-message/templateMessage.getTemplateList.html
   def list_message_template(offset: 0, count: 20)
-    post 'wxopen/template/list', offset: offset, count: count
+    post 'newtmpl/gettemplate', offset: offset, count: count, base: WXAAPI
   end
 
   def del_message_template(template_id)

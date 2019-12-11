@@ -33,9 +33,9 @@ module Wechat::Api
       post 'media/uploadnews', mpnews_message
     end
   
-    # see: https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433744592
-    def clear_quota(appid)
-      post 'clear_quota', { appid: appid }.to_json
+    # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/API_Call_Limits.html
+    def clear_quota
+      post 'clear_quota', appid: app.appid
     end
   
     protected
@@ -58,7 +58,7 @@ module Wechat::Api
     end
   
     def with_access_token(params = {}, tries = 2)
-      yield(params.merge(access_token: access_token.token))
+      yield(params.merge!(access_token: access_token.token))
     rescue Wechat::AccessTokenExpiredError
       access_token.refresh
       retry unless (tries -= 1).zero?

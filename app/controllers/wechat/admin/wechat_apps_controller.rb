@@ -1,6 +1,9 @@
 class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
   before_action :set_wechat_app, only: [:show, :info, :edit, :edit_help, :update, :destroy]
   before_action :prepare_form, only: [:new, :create, :edit, :update]
+  after_action do
+    binding.pry
+  end
   
   def index
     q_params = {}
