@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   scope :my, module: 'wechat/my', as: :my do
   end
 
-  scope :admin, module: 'wechat/admin', as: 'admin' do
+  scope :admin, module: 'wechat/admin', as: :admin do
     resources :wechat_apps do
       get :own, on: :collection
       get 'help' => :edit_help, on: :member
@@ -36,6 +36,12 @@ Rails.application.routes.draw do
         post :sync
       end
       get :edit_parent, on: :member
+    end
+    resources :wechat_templates do
+      collection do
+        get :default
+        post :sync
+      end
     end
     resources :extractors
     resources :tickets

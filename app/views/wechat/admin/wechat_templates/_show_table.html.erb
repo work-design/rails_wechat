@@ -1,0 +1,32 @@
+<table class="ui very basic large table">
+  <thead>
+    <tr>
+      <th class="six wide">
+        <%= link_to t('.edit'), edit_admin_wechat_template_path(@wechat_template), class: 'ui mini blue right floated button', remote: true %>
+      </th>
+      <th class="ten wide"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="right aligned"><%= WechatTemplate.human_attribute_name(:template_id) %></td>
+      <td><%= @wechat_template.template_id %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatTemplate.human_attribute_name(:title) %></td>
+      <td><%= @wechat_template.title %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatTemplate.human_attribute_name(:content) %></td>
+      <td><%= @wechat_template.content %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatTemplate.human_attribute_name(:example) %></td>
+      <td><%= @wechat_template.example %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatTemplate.human_attribute_name(:template_type) %></td>
+      <td><%= @wechat_template.template_type %></td>
+    </tr>
+  </tbody>
+</table>

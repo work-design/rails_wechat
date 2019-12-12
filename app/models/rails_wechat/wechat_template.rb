@@ -7,6 +7,8 @@ module RailsWechat::WechatTemplate
     attribute :content, :string
     attribute :example, :string
     attribute :template_type, :integer
+    
+    belongs_to :wechat_app, optional: true
   end
 
 end

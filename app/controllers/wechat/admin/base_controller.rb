@@ -1,4 +1,4 @@
-class Wechat::Admin::BaseController < AdminController
+class Wechat::Admin::BaseController < RailsWechat.config.admin_controller.constantize
   
   private
   def set_wechat_app

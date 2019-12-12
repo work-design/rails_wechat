@@ -31,6 +31,7 @@ module RailsWechat::WechatApp
     has_many :wechat_responses, dependent: :destroy
     has_many :wechat_requests, dependent: :nullify
     has_many :wechat_tags, dependent: :delete_all
+    has_many :wechat_templates, dependent: :destroy
     
     has_many :wechat_app_extractors, dependent: :delete_all
     has_many :extractors, through: :wechat_app_extractors
@@ -111,6 +112,16 @@ module RailsWechat::WechatApp
       wechat_tag.count = tag['count']
       wechat_tag.tag_id = tag['id']
       wechat_tag.save
+    end
+  end
+  
+  def sync_wechat_templates
+    templates = api.templates
+    templates.each do |template|
+      wechat_template = wechat_templates.find_or_initialize_by(template_id: template['priTmplId'])
+      wechat_template.template_type = template['type']
+      wechat_template.assign_attributes template.slice('title', 'content', 'example')
+      wechat_template.save
     end
   end
   
