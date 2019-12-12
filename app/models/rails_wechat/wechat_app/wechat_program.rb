@@ -4,5 +4,9 @@ module RailsWechat::WechatApp::WechatProgram
   included do
   
   end
+  
+  def api
+    Wechat::Api::Program.new(self)
+  end
 
 end

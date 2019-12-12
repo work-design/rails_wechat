@@ -7,5 +7,8 @@ module RailsWechat::WechatApp::WechatWork
     alias_attribute :corpsecret, :secret
   end
 
-
+  def api
+    Wechat::Api::Work.new(self)
+  end
+  
 end

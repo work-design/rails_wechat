@@ -24,7 +24,7 @@ class Wechat::Message::Received < Wechat::Message::Base
     @message_body = message_body
     @rules = rules
     @content = nil
-    @api = Wechat.app_api(@app)
+    @api = @app.api
 
     post_xml
     parse_content

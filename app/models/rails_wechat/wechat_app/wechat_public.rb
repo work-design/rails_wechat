@@ -3,5 +3,9 @@ module RailsWechat::WechatApp::WechatPublic
   included do
   
   end
+  
+  def api
+    Wechat::Api::Public.new(self)
+  end
 
 end

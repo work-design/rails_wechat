@@ -1,3 +1,4 @@
+
 require 'wechat/http_client'
 
 require 'wechat/access_token/base'

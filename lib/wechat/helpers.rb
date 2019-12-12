@@ -1,8 +1,12 @@
 module Wechat::Helpers
   
   def wechat_raw_config_js(wechat_app_id: nil, debug: false, apis: [])
-    app = Wechat.config(wechat_app_id)
-    api = Wechat.api(wechat_app_id)
+    if wechat_app_id
+      app = WechatApp.valid.find(wechat_app_id)
+    else
+      app = WechatApp.default
+    end
+    api = app.api
     page_url = controller.request.original_url
     page_url.delete_suffix!('#')
     

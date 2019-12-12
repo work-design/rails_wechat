@@ -10,5 +10,9 @@ module RailsWechat::WechatTemplate
     
     belongs_to :wechat_app, optional: true
   end
+  
+  def data_keys
+    content.gsub(/(?<={{)\w+(?=.DATA}})/).to_a
+  end
 
 end
