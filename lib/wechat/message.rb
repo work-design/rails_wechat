@@ -8,6 +8,7 @@ require 'wechat/message/mass/work'
 
 require 'wechat/message/template'
 require 'wechat/message/template/public'
+require 'wechat/message/template/program'
 
 require 'wechat/message/received'
 

@@ -11,6 +11,10 @@ module RailsWechat::WechatTemplate
     belongs_to :wechat_app, optional: true
   end
   
+  def messager
+    wechat_app.template_messager(self)
+  end
+  
   def data_keys
     content.gsub(/(?<={{)\w+(?=.DATA}})/).to_a
   end

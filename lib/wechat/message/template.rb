@@ -11,25 +11,16 @@ class Wechat::Message::Template < Wechat::Message::Base
     'data'
   ].freeze
   
-  attr_reader :msgtype
-  def initialize(app, msg = {})
-    super
+  attr_reader :template
+  def initialize(app, template, msg = {})
+    super(app)
     
-    @message_hash['msgtype'] = 'text' if @message_hash['msgtype'].blank?
-    
-    @msgtype = @message_hash['msgtype'].to_s
-    restore
+    @template = template
   end
   
   def do_send
   
   end
   
-  def restore
-    case msgtype
-    when 'text', 'markdown'
-      @message_hash[msgtype] = { content: @message_hash.delete('content') }
-    end
-  end
   
 end

@@ -12,10 +12,6 @@ class Wechat::Api::Program < Wechat::Api::Base
     r = get 'newtmpl/gettemplate', base: WXAAPI
     r['data']
   end
-  
-  def template_send
-    post 'message/subscribe/send', {}, base: API_BASE
-  end
 
   def get_wxacode(path, width = 430)
     post 'getwxacode', path: path, width: width, base: WXA_BASE

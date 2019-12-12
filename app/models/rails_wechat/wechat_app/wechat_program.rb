@@ -9,4 +9,8 @@ module RailsWechat::WechatApp::WechatProgram
     Wechat::Api::Program.new(self)
   end
 
+  def template_messager(template)
+    Wechat::Message::Template::Program.new(self, template)
+  end
+
 end
