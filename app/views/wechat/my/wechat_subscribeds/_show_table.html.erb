@@ -1,0 +1,24 @@
+<table class="ui very basic large table">
+  <thead>
+    <tr>
+      <th class="six wide">
+        <%= link_to t('.edit'), edit_my_wechat_subscribed_path(@wechat_subscribed), class: 'ui mini blue right floated button', remote: true %>
+      </th>
+      <th class="ten wide"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="right aligned"><%= WechatSubscribed.human_attribute_name(:wechat_template) %></td>
+      <td><%= @wechat_subscribed.wechat_template %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatSubscribed.human_attribute_name(:status) %></td>
+      <td><%= @wechat_subscribed.status %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatSubscribed.human_attribute_name(:sending_at) %></td>
+      <td><%= @wechat_subscribed.sending_at %></td>
+    </tr>
+  </tbody>
+</table>

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   scope :my, module: 'wechat/my', as: :my do
+    resources :wechat_subscribeds
   end
 
   scope :admin, module: 'wechat/admin', as: :admin do
