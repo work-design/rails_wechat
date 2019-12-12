@@ -26,3 +26,6 @@ zh:
       tickets:
         index:
           title: 自动票号
+      wechat_templates:
+        index:
+          title: 消息模板

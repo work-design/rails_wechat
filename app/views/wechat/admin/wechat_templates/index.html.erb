@@ -7,8 +7,10 @@
     <tr>
       <th><%= WechatTemplate.human_attribute_name(:template_id) %></th>
       <th><%= WechatTemplate.human_attribute_name(:title) %></th>
-      <th><%= WechatTemplate.human_attribute_name(:content) %></th>
-      <th><%= WechatTemplate.human_attribute_name(:example) %></th>
+      <th>
+        <p><%= WechatTemplate.human_attribute_name(:content) %></p>
+        <p><%= WechatTemplate.human_attribute_name(:example) %></p>
+      </th>
       <th><%= WechatTemplate.human_attribute_name(:template_type) %></th>
       <th>
         <%= link_to new_admin_wechat_template_path, remote: true, class: 'ui mini green button' do %>
@@ -22,8 +24,10 @@
     <tr>
       <td><%= wechat_template.template_id %></td>
       <td><%= wechat_template.title %></td>
-      <td><%= wechat_template.content %></td>
-      <td><%= wechat_template.example %></td>
+      <td>
+        <p><%= wechat_template.content %></p>
+        <p class="grey text"><p><%= wechat_template.example %></p></p>
+      </td>
       <td><%= wechat_template.template_type %></td>
       <td>
         <%= link_to admin_wechat_template_path(wechat_template), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>

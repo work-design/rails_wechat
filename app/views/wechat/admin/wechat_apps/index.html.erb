@@ -80,6 +80,9 @@
         <%= link_to admin_wechat_app_wechat_tags_path(wechat_app), data: { tooltip: t('wechat.admin.wechat_tags.index.title') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-user-tag"></i>
         <% end %>
+        <%= link_to admin_wechat_templates_path(wechat_app_id: wechat_app.id), data: { tooltip: t('wechat.admin.wechat_templates.index.title') }, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-inbox"></i>
+        <% end %>
       </td>
       <td>
         <%= link_to info_admin_wechat_app_path(wechat_app), data: { tooltip: t('.info') }, remote: true, class: 'ui mini circular icon button' do %>
