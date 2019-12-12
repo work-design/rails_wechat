@@ -1,5 +1,4 @@
-module Wechat::Message
-  class Replied::Work < Replied
+class Wechat::Message::Replied::Work < Wechat::Message::Replied
   
-  end
+
 end

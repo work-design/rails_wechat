@@ -69,7 +69,7 @@ class Wechat::Api::Public < Wechat::Api::Base
     post 'message/template/send', message, headers: { content_type: :json }
   end
 
-  def list_message_template
+  def templates
     get 'template/get_all_private_template'
   end
 
