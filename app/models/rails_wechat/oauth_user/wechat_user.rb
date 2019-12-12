@@ -2,6 +2,12 @@ module RailsAuth::OauthUser::WechatUser
   extend ActiveSupport::Concern
   included do
     attribute :provider, :string, default: 'wechat'
+    belongs_to :wechat_app, foreign_key: :app_id, primary_key: :appid
+
+    has_many :wechat_requests, dependent: :delete_all
+    has_many :ticket_items, dependent: :delete_all
+    has_many :wechat_user_tags, dependent: :destroy
+    has_many :wechat_tags, through: :wechat_user_tags
   end
 
   def sync_user_info
