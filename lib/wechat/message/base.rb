@@ -1,6 +1,7 @@
 class Wechat::Message::Base
 
   attr_reader :message_hash
+  
   def initialize(msg = {})
     @message_hash = msg
   end

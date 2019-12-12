@@ -96,13 +96,13 @@ module RailsWechat::WechatApp
     
     self.class.base_class.unscoped.where.not(id: self.id).where(q).update_all(primary: false)
   end
-  
+
   def match_values
     text_responses.map(&:match_value).join('|')
   end
-  
+
   def api
-    Wechat.app_api(self)
+    Wechat::Api::Public.new(self)
   end
 
   def sync_wechat_tags
@@ -114,7 +114,7 @@ module RailsWechat::WechatApp
       wechat_tag.save
     end
   end
-  
+ 
   def sync_wechat_templates
     templates = api.templates
     templates.each do |template|
@@ -124,9 +124,9 @@ module RailsWechat::WechatApp
       wechat_template.save
     end
   end
-  
+
   class_methods do
-    
+
     def default
       q = {}
       if column_names.include?('organ_id')
@@ -134,7 +134,7 @@ module RailsWechat::WechatApp
       end
       where(q).valid.find_by(primary: true)
     end
-    
+
   end
-  
+
 end

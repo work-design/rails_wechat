@@ -1,5 +1,6 @@
 module RailsWechat::UserTagged
   extend ActiveSupport::Concern
+
   included do
     has_many :wechat_user_tags
     has_many :wechat_tags, foreign_key: :user_tag_id, primary_key: :user_tag_id
@@ -15,5 +16,5 @@ module RailsWechat::UserTagged
       wut.save
     end
   end
-  
+
 end
