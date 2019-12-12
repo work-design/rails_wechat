@@ -4,8 +4,5 @@ module RailsWechat::WechatApp::WechatPublic
   
   end
   
-  def api
-    Wechat::Api::Public.new(self)
-  end
 
 end

@@ -1,5 +1,4 @@
 class Wechat::Message::Push < Wechat::Message::Base
-  
   TEMPLATE_KEYS = [
     'template_id',
     'form_id',
@@ -13,13 +12,17 @@ class Wechat::Message::Push < Wechat::Message::Base
   ].freeze
   
   attr_reader :msgtype
-  def initialize(msg = {})
-    @message_hash = Hash(msg).with_indifferent_access
+  def initialize(app, msg = {})
+    super
     
     @message_hash['msgtype'] = 'text' if @message_hash['msgtype'].blank?
     
     @msgtype = @message_hash['msgtype'].to_s
     restore
+  end
+  
+  def do_send
+  
   end
   
   def restore

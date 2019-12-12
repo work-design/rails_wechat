@@ -50,24 +50,6 @@ module Wechat::Api::Base::CgiBin
     post 'shorturl', action: 'long2short', long_url: long_url
   end
 
-  def message_mass_sendall(message, tag_id)
-    message = { content: message } if message.is_a? String
-    
-    push = Wechat::Message::Push::Public.new(message)
-    push.to_mass(tag_id)
-    
-    post 'message/mass/sendall', push
-  end
-
-  def message_mass_send(message, *openid)
-    message = { content: message } if message.is_a? String
-  
-    push = Wechat::Message::Push::Public.new(message)
-    push.to(openid)
-    
-    post 'message/mass/send', push
-  end
-
   def message_mass_delete(msg_id)
     post 'message/mass/delete', msg_id: msg_id
   end

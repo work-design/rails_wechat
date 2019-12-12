@@ -1,8 +1,9 @@
 class Wechat::Message::Base
 
-  attr_reader :message_hash
+  attr_reader :message_hash, :api
   
-  def initialize(msg = {})
+  def initialize(app, msg = {})
+    @api = app.api
     @message_hash = msg
   end
 
