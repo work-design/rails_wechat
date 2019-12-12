@@ -31,6 +31,7 @@ class Wechat::Message::Mass::Public < Wechat::Message::Mass
   end
 
   def content(msgtype, body)
+    @message_hash.merge! msgtype: msgtype
     @message_hash[msgtype] = {
       MSG_TYPE[msgtype.to_sym] => body
     }

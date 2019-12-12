@@ -8,10 +8,10 @@ class Wechat::Message::Mass::Work < Wechat::Message::Mass
     file: 'media_id',
     video: ['media_id', 'title', 'description'],
     textcard: ['title', 'description', 'url', 'btntxt'],
-    news: ['articles'[], 'title', 'url', 'description', 'picurl'],
-    mpnews:  ['articles'[], 'title', 'thumb_media_id', 'content', 'author', 'content_source_url', 'digest'],
+    news: ['articles', 'title', 'url', 'description', 'picurl'],
+    mpnews:  ['articles', 'title', 'thumb_media_id', 'content', 'author', 'content_source_url', 'digest'],
     miniprogram_notice: ['title', 'description', 'url', 'btntxt'],
-    taskcard: ['title', 'description', 'url', 'btntxt'] 
+    taskcard: ['title', 'description', 'url', 'btntxt']
   }.freeze
 
   def restore
