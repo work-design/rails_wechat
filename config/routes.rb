@@ -10,6 +10,9 @@ Rails.application.routes.draw do
         post :info
       end
     end
+    controller :wechat do
+      post 'wechat/auth' => :auth
+    end
   end
 
   scope :my, module: 'wechat/my', as: :my do
