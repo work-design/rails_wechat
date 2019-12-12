@@ -105,8 +105,12 @@ module RailsWechat::WechatApp
     Wechat::Api::Public.new(self)
   end
   
-  def message_sender
-    Wechat::Message::Push::Public.new(self)
+  def mass_messager
+    Wechat::Message::Mass::Public.new(self)
+  end
+  
+  def template_messager
+    Wechat::Message::Template::Public.new(self)
   end
 
   def sync_wechat_tags

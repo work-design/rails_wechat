@@ -1,4 +1,4 @@
-class Wechat::Message::Push < Wechat::Message::Base
+class Wechat::Message::Template < Wechat::Message::Base
   TEMPLATE_KEYS = [
     'template_id',
     'form_id',
