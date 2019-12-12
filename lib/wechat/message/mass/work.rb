@@ -1,15 +1,18 @@
-class Wechat::Message::Push::Work < Wechat::Message::Push
+class Wechat::Message::Mass::Work < Wechat::Message::Mass
   # see: https://work.weixin.qq.com/api/doc#90000/90135/90236/消息类型
-  MSG_TYPE = [
-    'text', 'markdown',  # content
-    'voice', 'image', 'file',  # media_id
-    'video',  # media_id, title*, description*
-    'textcard',  # title, description, url, btntxt*
-    'news',  # articles[], title, url, description*, picurl*
-    'mpnews', # articles[], title, thumb_media_id, content, author*, content_source_url*, digest*
-    'miniprogram_notice',
-    'taskcard'
-  ].freeze
+  MSG_TYPE = {
+    text: 'content',
+    markdown: 'content',
+    voice: 'media_id',
+    image: 'media_id',
+    file: 'media_id',
+    video: ['media_id', 'title', 'description'],
+    textcard: ['title', 'description', 'url', 'btntxt'],
+    news: ['articles'[], 'title', 'url', 'description', 'picurl'],
+    mpnews:  ['articles'[], 'title', 'thumb_media_id', 'content', 'author', 'content_source_url', 'digest'],
+    miniprogram_notice: ['title', 'description', 'url', 'btntxt'],
+    taskcard: ['title', 'description', 'url', 'btntxt'] 
+  }.freeze
 
   def restore
     case msgtype

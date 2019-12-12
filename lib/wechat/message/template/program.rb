@@ -1,5 +1,5 @@
-class Wechat::Message::Push::Program < Wechat::Message::Push
-    
+class Wechat::Message::Template::Program < Wechat::Message::Template
+  
   def to(*openid, **options)
     openid = openid[0] if openid.size == 1
     @message_hash.merge!(touser: openid, **options)

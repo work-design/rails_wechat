@@ -6,6 +6,7 @@ module RailsWechat::WechatMessage
     attribute :body, :json
     
     belongs_to :wechat_app
+    belongs_to :wechat_template, optional: true
     belongs_to :messaging, polymorphic: true
   end
 

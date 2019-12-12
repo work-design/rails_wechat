@@ -2,9 +2,12 @@
 module Wechat::Message; end
 require 'wechat/message/base'
 
-require 'wechat/message/push'
-require 'wechat/message/push/public'
-require 'wechat/message/push/work'
+require 'wechat/message/mass'
+require 'wechat/message/mass/public'
+require 'wechat/message/mass/work'
+
+require 'wechat/message/template'
+require 'wechat/message/template/public'
 
 require 'wechat/message/received'
 

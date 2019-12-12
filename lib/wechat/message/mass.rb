@@ -1,12 +1,10 @@
 class Wechat::Message::Mass < Wechat::Message::Base
   
-  
   attr_reader :msgtype
+  
   def initialize(app, msg = {})
     super
-    
-    @message_hash['msgtype'] = 'text' if @message_hash['msgtype'].blank?
-    
+    @send_to = nil
     @msgtype = @message_hash['msgtype'].to_s
     restore
   end
