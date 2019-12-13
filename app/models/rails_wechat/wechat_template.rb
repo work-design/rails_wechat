@@ -11,8 +11,8 @@ module RailsWechat::WechatTemplate
     belongs_to :wechat_app, optional: true
   end
   
-  def messager
-    wechat_app.template_messager(self)
+  def messenger
+    wechat_app.template_messenger(self)
   end
   
   def data_keys

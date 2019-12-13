@@ -105,11 +105,11 @@ module RailsWechat::WechatApp
     Wechat::Api::Public.new(self)
   end
   
-  def mass_messager
+  def mass_messenger
     Wechat::Message::Mass::Public.new(self)
   end
 
-  def template_messager(template)
+  def template_messenger(template)
     Wechat::Message::Template::Public.new(self, template)
   end
 
