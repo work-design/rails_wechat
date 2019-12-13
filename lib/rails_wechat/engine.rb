@@ -15,6 +15,7 @@ module RailsWechat
         assets: false,
         stylesheets: false,
         helper: false,
+        system_tests: false,
         jbuilder: true
       }
       g.test_unit = {
