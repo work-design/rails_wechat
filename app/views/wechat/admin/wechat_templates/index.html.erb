@@ -16,6 +16,11 @@
         <%= link_to new_admin_wechat_template_path, remote: true, class: 'ui mini green button' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
+        <% if params[:wechat_app_id] %>
+          <%= link_to sync_admin_wechat_templates_path(wechat_app_id: params[:wechat_app_id]), method: :post, class: 'ui mini green button' do %>
+            <i class="fas fa-sync"></i><% t('.sync') %>
+          <% end %>
+        <% end %>
       </th>
     </tr>
   </thead>

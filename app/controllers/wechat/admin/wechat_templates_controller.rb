@@ -1,4 +1,5 @@
 class Wechat::Admin::WechatTemplatesController < Wechat::Admin::BaseController
+  before_action :set_wechat_app, only: [:sync]
   before_action :set_wechat_template, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -18,8 +19,8 @@ class Wechat::Admin::WechatTemplatesController < Wechat::Admin::BaseController
   end
 
   def sync
-    r = @wechat_app.api.templates
-    redirect_to admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app_id), notice: r.to_s
+    r = @wechat_app.sync_wechat_templates
+    redirect_to admin_wechat_templates_url(wechat_app_id: params[:wechat_app_id]), notice: r.to_s
   end
 
   def show
