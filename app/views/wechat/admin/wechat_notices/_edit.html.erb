@@ -7,6 +7,9 @@
   <div class="content">
     <%= form_with model: [:admin, @wechat_template, @wechat_notice] do |f| %>
       <%= render partial: 'form', locals: { f: f } %>
+      <% @wechat_template.data_keys.each do |key| %>
+        <%= f.select "[mappings][#{key}]", options_for_select(@wechat_notice.notify_setting) %>
+      <% end %>
       <%= f.submit %>
   <% end %>
   </div>

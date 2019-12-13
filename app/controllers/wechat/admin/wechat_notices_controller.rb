@@ -48,7 +48,8 @@ class Wechat::Admin::WechatNoticesController < Wechat::Admin::BaseController
   def wechat_notice_params
     params.fetch(:wechat_notice, {}).permit(
       :notifiable_type,
-      :code
+      :code,
+      mappings: {}
     )
   end
 
