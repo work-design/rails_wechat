@@ -46,6 +46,7 @@ Rails.application.routes.draw do
         get :default
         post :sync
       end
+      resources :wechat_notices
     end
     resources :extractors
     resources :tickets

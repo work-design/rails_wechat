@@ -1,0 +1,20 @@
+<table class="ui very basic large table">
+  <thead>
+    <tr>
+      <th class="six wide">
+        <%= link_to t('.edit'), edit_admin_wechat_notice_path(@wechat_notice), class: 'ui mini blue right floated button', remote: true %>
+      </th>
+      <th class="ten wide"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="right aligned"><%= WechatNotice.human_attribute_name(:notifiable_type) %></td>
+      <td><%= @wechat_notice.notifiable_type %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= WechatNotice.human_attribute_name(:code) %></td>
+      <td><%= @wechat_notice.code %></td>
+    </tr>
+  </tbody>
+</table>

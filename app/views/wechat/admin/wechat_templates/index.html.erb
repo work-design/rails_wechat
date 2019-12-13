@@ -33,7 +33,7 @@
         <%= link_to admin_wechat_template_path(wechat_template), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>
         <% end %>
-        <%= link_to edit_admin_wechat_template_path(wechat_template), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_wechat_template_wechat_notices_path(wechat_template), data: { tooltip: t('.edit') }, class: 'ui mini circular icon button' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
         <%= link_to admin_wechat_template_path(wechat_template), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, remote: true, class: 'ui mini circular icon button' do %>

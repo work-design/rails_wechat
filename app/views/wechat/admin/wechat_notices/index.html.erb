@@ -1,0 +1,35 @@
+<div class="ui top attached segment">
+  <%= render 'filter' %>
+</div>
+
+<table class="ui bottom attached selectable table">
+  <thead>
+    <tr>
+      <th><%= WechatNotice.human_attribute_name(:notifiable_type) %></th>
+      <th><%= WechatNotice.human_attribute_name(:code) %></th>
+      <th>
+        <%= link_to new_admin_wechat_template_wechat_notice_path(@wechat_template), remote: true, class: 'ui mini green button' do %>
+          <i class="fas fa-plus"></i><%= t('.new') %>
+        <% end %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @wechat_notices.each do |wechat_notice| %>
+    <tr>
+      <td><%= wechat_notice.notifiable_type %></td>
+      <td><%= wechat_notice.code %></td>
+      <td>
+        <%= link_to edit_admin_wechat_template_wechat_notice_path(@wechat_template, wechat_notice), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        <%= link_to admin_wechat_template_wechat_notice_path(@wechat_template, wechat_notice), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @wechat_notices %>

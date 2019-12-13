@@ -1,5 +1,6 @@
-module RailsAuth::OauthUser::WechatUser
+module RailsWechat::OauthUser::WechatUser
   extend ActiveSupport::Concern
+
   included do
     attribute :provider, :string, default: 'wechat'
     belongs_to :wechat_app, foreign_key: :app_id, primary_key: :appid

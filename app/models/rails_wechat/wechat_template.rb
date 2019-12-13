@@ -9,6 +9,7 @@ module RailsWechat::WechatTemplate
     attribute :template_type, :integer
     
     belongs_to :wechat_app, optional: true
+    has_many :wechat_notices, dependent: :delete_all
   end
   
   def messenger
