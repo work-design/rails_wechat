@@ -3,6 +3,7 @@
 module Wechat
   module AccessToken
     class Base
+      attr_reader :client
       
       def initialize(client, app)
         @client = client

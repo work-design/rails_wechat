@@ -14,7 +14,7 @@ class Wechat::Api::Program < Wechat::Api::Base
   end
 
   def get_wxacode(path, width = 430)
-    post 'getwxacode', path: path, width: width, base: WXA_BASE
+    post 'getwxacode', { path: path, width: width }, base: WXA_BASE
   end
 
   # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html

@@ -10,8 +10,8 @@ class Wechat::HttpClient
 
   def get(path, headers: {}, params: {}, **options)
     headers['Accept'] ||= 'application/json'
-    @base = options[:base] if options[:base]
-    url = @base + path
+    base = options[:base].presence || @base
+    url = base + path
 
     response = @http.headers(headers).get(url, params: params)
     parse_response(response, options[:as])
@@ -19,8 +19,8 @@ class Wechat::HttpClient
 
   def post(path, payload, headers: {}, params: {}, **options)
     headers['Accept'] ||= 'application/json'
-    @base = options[:base] if options[:base]
-    url = @base + path
+    base = options[:base].presence || @base
+    url = base + path
 
     response = @http.headers(headers).post(url, params: params, body: payload)
     parse_response(response, options[:as])
@@ -28,8 +28,8 @@ class Wechat::HttpClient
 
   def post_file(path, file, headers: {}, params: {}, **options)
     headers['Accept'] ||= 'application/json'
-    @base = options[:base] if options[:base]
-    url = @base + path
+    base = options[:base].presence || @base
+    url = base + path
 
     form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file)
     response = @http.headers(headers).post(
@@ -66,7 +66,7 @@ class Wechat::HttpClient
       # 40014: invalid access_token
       # 40001, invalid credential, access_token is invalid or not latest hint
       # 48001, api unauthorized hint, should not handle here # GH-230
-    when 42001, 40014, 40001
+    when 42001, 40014, 40001, 41001
       raise Wechat::AccessTokenExpiredError
       # 40029, invalid code for mp # GH-225
       # 43004, require subscribe hint # GH-214
