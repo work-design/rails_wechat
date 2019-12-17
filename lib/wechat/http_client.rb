@@ -67,11 +67,11 @@ class Wechat::HttpClient
       # 40001, invalid credential, access_token is invalid or not latest hint
       # 48001, api unauthorized hint, should not handle here # GH-230
     when 42001, 40014, 40001
-      raise AccessTokenExpiredError
+      raise Wechat::AccessTokenExpiredError
       # 40029, invalid code for mp # GH-225
       # 43004, require subscribe hint # GH-214
     when 2
-      raise ResponseError.new(data['errcode'], data['errmsg'])
+      raise Wechat::ResponseError.new(data['errcode'], data['errmsg'])
     else
       data
     end
