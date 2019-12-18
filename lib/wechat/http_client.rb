@@ -51,7 +51,7 @@ class Wechat::HttpClient
       data = Tempfile.new('tmp')
       data.binmode
       data.write(body)
-      data.close
+      data.rewind
       return data
     elsif content_type =~ /html|xml/
       data = Hash.from_xml(body)
