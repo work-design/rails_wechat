@@ -52,7 +52,7 @@ class Wechat::HttpClient
       data.binmode
       data.write(body)
       data.close
-      data
+      return data
     elsif content_type =~ /html|xml/
       data = Hash.from_xml(body)
     else
