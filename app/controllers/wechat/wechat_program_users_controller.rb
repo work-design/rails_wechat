@@ -40,7 +40,7 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
       @wechat_program_user.save
       @wechat_program_user.reload
     else
-      current_authorized_token.destroy
+      render :mobile_err, locals: { model: @wechat_program_user }, status: :unprocessable_entity
     end
   end
 
