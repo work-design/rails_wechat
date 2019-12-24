@@ -38,6 +38,7 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
       @account.join(name: @wechat_program_user.name, invited_code: params[:invited_code])
       @wechat_program_user.account = @account
       @wechat_program_user.save
+      @wechat_program_user.reload
     else
       current_authorized_token.destroy
     end
