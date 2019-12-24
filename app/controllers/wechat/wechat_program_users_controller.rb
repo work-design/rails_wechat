@@ -36,7 +36,8 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
       @account.confirmed = true
       current_authorized_token.update(account_id: @account.id)
       @account.join(name: @wechat_program_user.name, invited_code: params[:invited_code])
-      @wechat_program_user.update(account_id: @account.id)
+      @wechat_program_user.account = @account
+      @wechat_program_user.save
     else
       current_authorized_token.destroy
     end
