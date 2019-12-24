@@ -11,6 +11,7 @@ module RailsWechat::OauthUser::WechatProgramUser
       r['phoneNumber']
     else
       self.errors.add :base, 'can not get phone number!'
+      nil
     end
   end
   
