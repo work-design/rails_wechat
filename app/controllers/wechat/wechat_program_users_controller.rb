@@ -35,8 +35,8 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
       @account = Account.find_by(identity: phone_number) || Account.create_with_identity(phone_number)
       @account.confirmed = true
       current_authorized_token.update(account_id: @account.id)
-      @wechat_program_user.update(account_id: @account.id)
       @account.join(name: @wechat_program_user.name, invited_code: params[:invited_code])
+      @wechat_program_user.update(account_id: @account.id)
     else
       current_authorized_token.destroy
     end
