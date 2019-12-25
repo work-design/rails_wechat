@@ -10,7 +10,7 @@ module RailsWechat::OauthUser::WechatProgramUser
     if r['phoneNumber']
       r['phoneNumber']
     else
-      self.errors.add :base, 'can not get phone number!'
+      self.errors.add :base, "手机号获取失败，session_key 为：#{session_key}"
       nil
     end
   end
