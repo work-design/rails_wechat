@@ -34,10 +34,14 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
     if phone_number
       @account = Account.find_by(identity: phone_number) || Account.create_with_identity(phone_number)
       @account.confirmed = true
-      current_authorized_token.update(account_id: @account.id)
       @account.join(name: @wechat_program_user.name, invited_code: params[:invited_code])
+      
       @wechat_program_user.account = @account
+      current_authorized_token.account = @account
+      
       @wechat_program_user.save
+      current_authorized_token.save
+      
       @wechat_program_user.reload
     else
       render :mobile_err, locals: { model: @wechat_program_user }, status: :unprocessable_entity
