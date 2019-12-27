@@ -22,7 +22,7 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
       language: userinfo_params[:language],
       city: userinfo_params[:city],
       province: userinfo_params[:province],
-      country: userinfo_params[:country],
+      country: userinfo_params[:country]
     }
     
     @wechat_program_user.save
@@ -44,6 +44,7 @@ class Wechat::WechatProgramUsersController < Wechat::BaseController
       
       @wechat_program_user.reload
     else
+      current_authorized_token.destroy  # 触发重新授权逻辑
       render :mobile_err, locals: { model: @wechat_program_user }, status: :unprocessable_entity
     end
   end
