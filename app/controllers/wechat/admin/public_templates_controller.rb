@@ -46,7 +46,9 @@ class Wechat::Admin::PublicTemplatesController < Wechat::Admin::BaseController
       :title,
       :tid,
       :description,
-      kid_list: []
+      :notifiable_type,
+      :code,
+      template_key_words_attributes: {}
     )
   end
 
