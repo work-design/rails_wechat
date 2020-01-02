@@ -16,13 +16,8 @@ module RailsWechat::WechatNotice
   end
 
   def notify_setting
-    nt = notifiable_type.constantize
-    if nt.respond_to?(:notifies)
-      r = nt.notifies
-      Hash(r[self.code.to_sym]).fetch(:only, []).map(&->(o){ [nt.human_attribute_name(o), o] }).to_h
-    else
-      {}
-    end
+    r = RailsNotice.notifiable_types.dig(notifiable_type, self.code.to_sym) || {}
+    r.fetch(:only, []).map(&->(o){ [notifiable_type.constantize.human_attribute_name(o), o] }).to_h
   end
 
 end
