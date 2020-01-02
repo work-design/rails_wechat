@@ -7,17 +7,9 @@
   <div class="content">
     <%= form_with model: @public_template, url: admin_public_template_path(@public_template) do |f| %>
       <%= render 'shared/error_messages', target: @public_template %>
-      <div class="inline fields">
-        <div class="six wide field"></div>
-        <div class="six wide field">
-        <% @key_words.each do |key_word| %>
-          <div class="ui checkbox">
-            <%= check_box_tag 'public_template[kid_list][]', key_word['kid'], @public_template.kid_list.include?(key_word['kid'].to_i) %>
-            <label><%= key_word['name'] %></label>
-          </div>
-        <% end %>
-        </div>
-      </div>
+      <%= f.fields :template_key_words, on: { wrap_all: false, label: false, placeholder: true }, css: { wrap_input: 'field' } do |ef| %>
+        <%= render partial: 'item_form', locals: { ef: ef } %>
+      <% end %>
       <%= f.text_field :notifiable_type %>
       <%= f.text_field :code %>
       <%= f.text_field :description %>

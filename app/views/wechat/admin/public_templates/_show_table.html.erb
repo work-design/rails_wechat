@@ -17,8 +17,20 @@
       <td><%= @public_template.tid %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= PublicTemplate.human_attribute_name(:kid_list) %></td>
-      <td><%= @public_template.kid_list %></td>
+      <td class="right aligned"><%= PublicTemplate.human_attribute_name(:template_key_words) %></td>
+      <td>
+        <table class="ui very basic table">
+        <% @public_template.template_key_words.each do |template_key_word| %>
+          <tr>
+            <td><%= template_key_word.kid %></td>
+            <td><%= template_key_word.name %></td>
+            <td><%= template_key_word.example %></td>
+            <td><%= template_key_word.rule %></td>
+            <td><%= template_key_word.mapping %></td>
+          </tr>
+        <% end %>
+        </table>
+      </td>
     </tr>
     <tr>
       <td class="right aligned"><%= PublicTemplate.human_attribute_name(:description) %></td>

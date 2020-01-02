@@ -2,7 +2,7 @@ class Wechat::Admin::PublicTemplatesController < Wechat::Admin::BaseController
   before_action :set_public_template, only: [:show, :edit, :update, :destroy]
 
   def index
-    @public_templates = PublicTemplate.page(params[:page])
+    @public_templates = PublicTemplate.includes(:template_key_words).page(params[:page])
   end
 
   def new
@@ -21,7 +21,6 @@ class Wechat::Admin::PublicTemplatesController < Wechat::Admin::BaseController
   end
 
   def edit
-    @key_words = @public_template.key_words
   end
 
   def update
