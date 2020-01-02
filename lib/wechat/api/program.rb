@@ -23,6 +23,10 @@ class Wechat::Api::Program < Wechat::Api::Base
     post 'newtmpl/addtemplate', { tid: tid, kidList: kid_list }, base: WXAAPI
   end
 
+  def del_template(template_id)
+    post 'newtmpl/deltemplate', {}, params: { priTmplId: template_id }, base: WXAAPI
+  end
+
   def get_wxacode(path, width = 430)
     post 'getwxacode', { path: path, width: width }, base: WXA_BASE
   end

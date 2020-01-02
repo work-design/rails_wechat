@@ -10,9 +10,10 @@ module RailsWechat::WechatTemplate
 
     belongs_to :wechat_app
     belongs_to :public_template
-    has_many :wechat_notices, dependent: :delete_all
+    #has_many :wechat_notices, dependent: :delete_all
 
     before_create :sync_to_wechat
+    after_destroy_commit :del_to_wechat
   end
 
   def sync_to_wechat
@@ -26,6 +27,11 @@ module RailsWechat::WechatTemplate
   def sync_to_wechat!
     sync_to_wechat
     save
+  end
+
+  def del_to_wechat
+    r = wechat_app.api.del_template(template_id)
+    logger.debug(r['errmsg'])
   end
 
   def messenger
