@@ -19,7 +19,7 @@ class Wechat::Admin::WechatTemplatesController < Wechat::Admin::BaseController
 
   def sync
     r = @wechat_app.sync_wechat_templates
-    redirect_to admin_wechat_templates_url(wechat_app_id: params[:wechat_app_id]), notice: r.to_s
+    redirect_to admin_wechat_app_wechat_templates_url(params[:wechat_app_id]), notice: r.to_s
   end
 
   def show
