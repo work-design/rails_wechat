@@ -82,6 +82,10 @@ module Wechat::Api::Base::CgiBin
     post_file 'material/add_material', file, params: { type: type }
   end
   
+  def material_add_news(*news)
+    post 'material/add_news', articles: news
+  end
+  
   def material_delete(media_id)
     post 'material/del_material', media_id: media_id
   end

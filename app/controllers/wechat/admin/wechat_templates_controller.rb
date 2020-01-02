@@ -3,7 +3,9 @@ class Wechat::Admin::WechatTemplatesController < Wechat::Admin::BaseController
   before_action :set_wechat_template, only: [:show, :edit, :update, :destroy]
 
   def index
-    @wechat_templates = WechatTemplate.page(params[:page])
+    q_params = {}
+    q_params.merge! params.permit(:wechat_app_id)
+    @wechat_templates = WechatTemplate.default_where(q_params).page(params[:page])
   end
 
   def new
