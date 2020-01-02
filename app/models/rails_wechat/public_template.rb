@@ -10,10 +10,18 @@ module RailsWechat::PublicTemplate
 
     validates :code, uniqueness: { scope: :notifiable_type }
 
-    has_many :template_key_words, dependent: :delete_all
+    has_many :template_key_words, -> { order(position: :asc) }, dependent: :delete_all
     accepts_nested_attributes_for :template_key_words
 
     after_create_commit :sync_key_words
+  end
+
+  def kid_list
+    template_key_words.where.not(mapping: [nil, '']).pluck(:kid)
+  end
+
+  def content
+    template_key_words.where.not(mapping: [nil, '']).pluck(:name)
   end
 
   def sync_key_words

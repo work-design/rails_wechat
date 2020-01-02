@@ -13,11 +13,8 @@
       </th>
       <th><%= WechatTemplate.human_attribute_name(:template_type) %></th>
       <th>
-        <%= link_to new_admin_wechat_template_path, remote: true, class: 'ui mini green button' do %>
-          <i class="fas fa-plus"></i><%= t('.new') %>
-        <% end %>
         <% if params[:wechat_app_id] %>
-          <%= link_to sync_admin_wechat_templates_path(wechat_app_id: params[:wechat_app_id]), method: :post, class: 'ui mini green button' do %>
+          <%= link_to sync_admin_wechat_app_wechat_templates_path(params[:wechat_app_id]), method: :post, class: 'ui mini green button' do %>
             <i class="fas fa-sync"></i><% t('.sync') %>
           <% end %>
         <% end %>
@@ -35,15 +32,24 @@
       </td>
       <td><%= wechat_template.template_type %></td>
       <td>
-        <%= link_to admin_wechat_template_path(wechat_template), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
-          <i class="fas fa-eye"></i>
-        <% end %>
-        <%= link_to admin_wechat_template_wechat_notices_path(wechat_template), data: { tooltip: t('.edit') }, class: 'ui mini circular icon button' do %>
-          <i class="fas fa-pencil-alt"></i>
-        <% end %>
-        <%= link_to admin_wechat_template_path(wechat_template), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, remote: true, class: 'ui mini circular icon button' do %>
-          <i class="fas fa-trash-alt"></i>
-        <% end %>
+        <div class="ui toggle checkbox">
+          <%= check_box_tag '', nil, true, data: { method: :delete, remote: true, url: admin_wechat_app_wechat_template_path(@wechat_app, wechat_template), submit: true }, id: nil %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  <% @public_templates.each do |public_template| %>
+    <tr>
+      <td></td>
+      <td><%= public_template.title %></td>
+      <td>
+        <p><%= public_template.content %></p>
+      </td>
+      <td></td>
+      <td>
+        <div class="ui toggle checkbox">
+          <%= check_box_tag '[wechat_template]public_template_id', public_template.id, false, data: { method: :post, remote: true, url: admin_wechat_app_wechat_templates_path(@wechat_app), submit: true }, id: nil %>
+        </div>
       </td>
     </tr>
   <% end %>

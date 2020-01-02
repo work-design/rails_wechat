@@ -1,15 +1,12 @@
 class Wechat::Admin::WechatTemplatesController < Wechat::Admin::BaseController
-  before_action :set_wechat_app, only: [:sync]
+  before_action :set_wechat_app
   before_action :set_wechat_template, only: [:show, :edit, :update, :destroy]
 
   def index
     q_params = {}
-    q_params.merge! params.permit(:wechat_app_id)
-    @wechat_templates = WechatTemplate.default_where(q_params).page(params[:page])
-  end
-
-  def new
-    @wechat_template = WechatTemplate.new
+    @wechat_templates = @wechat_app.wechat_templates.default_where(q_params).page(params[:page])
+    public_template_ids = @wechat_templates.pluck(:public_template_id)
+    @public_templates = PublicTemplate.where.not(id: public_template_ids)
   end
 
   def create
@@ -47,7 +44,7 @@ class Wechat::Admin::WechatTemplatesController < Wechat::Admin::BaseController
   def set_wechat_app
     @wechat_app = WechatApp.default_where(default_params).find_by id: params[:wechat_app_id]
   end
-  
+
   def set_wechat_template
     @wechat_template = WechatTemplate.find(params[:id])
   end
@@ -55,6 +52,7 @@ class Wechat::Admin::WechatTemplatesController < Wechat::Admin::BaseController
   def wechat_template_params
     params.fetch(:wechat_template, {}).permit(
       :wechat_app_id,
+      :public_template_id,
       :template_id,
       :title,
       :content,

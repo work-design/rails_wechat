@@ -12,17 +12,21 @@ class Wechat::Api::Program < Wechat::Api::Base
     r = get 'newtmpl/gettemplate', base: WXAAPI
     r['data']
   end
-  
+
   # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getPubTemplateKeyWordsById.html
   def template_key_words(tid)
     r = get 'newtmpl/getpubtemplatekeywords', params: { tid: tid }, base: WXAAPI
     r['data']
   end
 
+  def add_template(tid, kid_list)
+    post 'newtmpl/addtemplate', { tid: tid, kidList: kid_list }, base: WXAAPI
+  end
+
   def get_wxacode(path, width = 430)
     post 'getwxacode', { path: path, width: width }, base: WXA_BASE
   end
-  
+
   def get_wxacode_unlimit(scene, **options)
     p = { scene: scene, **options }
     post 'getwxacodeunlimit', p, base: WXA_BASE
