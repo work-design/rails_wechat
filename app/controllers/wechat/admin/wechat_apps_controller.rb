@@ -56,7 +56,7 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
 
   private
   def set_wechat_app
-    @wechat_app = WechatApp.where(default_params).find(params[:id])
+    @wechat_app = WechatApp.default_where(default_params).find(params[:id])
   end
   
   def prepare_form

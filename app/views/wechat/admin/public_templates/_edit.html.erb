@@ -7,7 +7,17 @@
   <div class="content">
     <%= form_with model: @public_template, url: admin_public_template_path(@public_template) do |f| %>
       <%= render 'shared/error_messages', target: @public_template %>
-      <%= f.text_field :kid_list %>
+      <div class="inline fields">
+        <div class="six wide field"></div>
+        <div class="six wide field">
+        <% @key_words.each do |key_word| %>
+          <div class="ui checkbox">
+            <%= check_box_tag 'public_template[kid_list][]', key_word['kid'], @public_template.kid_list.include?(key_word['kid'].to_i) %>
+            <label><%= key_word['name'] %></label>
+          </div>
+        <% end %>
+        </div>
+      </div>
       <%= f.text_field :description %>
       <%= f.submit %>
     <% end %>

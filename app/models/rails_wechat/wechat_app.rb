@@ -94,7 +94,7 @@ module RailsWechat::WechatApp
       q.merge! organ_id: self.organ_id
     end
     
-    self.class.base_class.unscoped.where.not(id: self.id).where(q).update_all(primary: false)
+    self.class.unscoped.where.not(id: self.id).where(q).update_all(primary: false)
   end
 
   def match_values

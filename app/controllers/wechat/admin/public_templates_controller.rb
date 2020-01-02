@@ -21,6 +21,7 @@ class Wechat::Admin::PublicTemplatesController < Wechat::Admin::BaseController
   end
 
   def edit
+    @key_words = @public_template.key_words
   end
 
   def update
@@ -44,8 +45,8 @@ class Wechat::Admin::PublicTemplatesController < Wechat::Admin::BaseController
     params.fetch(:public_template, {}).permit(
       :title,
       :tid,
-      :kid_list,
-      :description
+      :description,
+      kid_list: []
     )
   end
 

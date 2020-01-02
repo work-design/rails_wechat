@@ -3,12 +3,14 @@ module RailsWechat::PublicTemplate
   included do
     attribute :title, :string
     attribute :tid, :string
-    attribute :kid_list, :integer, array: true
+    attribute :kid_list, :integer, array: true, default: []
     attribute :description, :string
   end
   
   def key_words
-    api.template_key_words tid
+    app = WechatProgram.default
+    return [] unless app
+    app.api.template_key_words tid
   end
   
   
