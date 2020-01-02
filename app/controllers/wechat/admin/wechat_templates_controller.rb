@@ -10,7 +10,7 @@ class Wechat::Admin::WechatTemplatesController < Wechat::Admin::BaseController
   end
 
   def create
-    @wechat_template = WechatTemplate.new(wechat_template_params)
+    @wechat_template = @wechat_app.wechat_templates.build(wechat_template_params)
 
     unless @wechat_template.save
       render :new, locals: { model: @wechat_template }, status: :unprocessable_entity

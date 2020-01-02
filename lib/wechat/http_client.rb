@@ -19,6 +19,7 @@ class Wechat::HttpClient
 
   def post(path, payload, headers: {}, params: {}, **options)
     headers['Accept'] ||= 'application/json'
+    headers['Content-Type'] ||= 'application/json'
     base = options[:base].presence || @base
     url = base + path
 
@@ -46,7 +47,7 @@ class Wechat::HttpClient
 
     content_type = response.content_type.mime_type
     body = response.body.to_s
-    
+
     if content_type =~ /image|audio|video/
       data = Tempfile.new('tmp')
       data.binmode

@@ -17,7 +17,7 @@ module RailsWechat::WechatTemplate
   end
 
   def sync_to_wechat
-    r = wechat_app.api.add_template(public_template.tid, public_tempate.kid_list)
+    r = wechat_app.api.add_template(public_template.tid, public_template.kid_list)
     logger.debug(r['errmsg'])
     if r['errcode'] == 0
       self.template_id = r['priTmplId']

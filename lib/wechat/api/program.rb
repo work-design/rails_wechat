@@ -19,8 +19,8 @@ class Wechat::Api::Program < Wechat::Api::Base
     r['data']
   end
 
-  def add_template(tid, kid_list)
-    post 'newtmpl/addtemplate', { tid: tid, kidList: kid_list }, base: WXAAPI
+  def add_template(tid, kid_list, description: 'tst')
+    post 'newtmpl/addtemplate', { tid: tid, kidList: kid_list, sceneDesc: description }, base: WXAAPI
   end
 
   def del_template(template_id)
