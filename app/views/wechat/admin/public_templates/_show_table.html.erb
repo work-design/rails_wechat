@@ -1,0 +1,28 @@
+<table class="ui very basic large table">
+  <thead>
+    <tr>
+      <th class="six wide">
+        <%= link_to t('.edit'), edit_admin_public_template_path(@public_template), class: 'ui mini blue right floated button', remote: true %>
+      </th>
+      <th class="ten wide"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="right aligned"><%= PublicTemplate.human_attribute_name(:title) %></td>
+      <td><%= @public_template.title %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= PublicTemplate.human_attribute_name(:tid) %></td>
+      <td><%= @public_template.tid %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= PublicTemplate.human_attribute_name(:kid_list) %></td>
+      <td><%= @public_template.kid_list %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= PublicTemplate.human_attribute_name(:description) %></td>
+      <td><%= @public_template.description %></td>
+    </tr>
+  </tbody>
+</table>

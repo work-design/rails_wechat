@@ -1,0 +1,15 @@
+<div class="ui modal" id="modal">
+  <i class="close icon"></i>
+  <div class="ui header">
+    <%= t('.new') %>
+  </div>
+
+  <div class="content">
+    <%= form_with model: @public_template, url: admin_public_templates_path do |f| %>
+      <%= render 'shared/error_messages', target: @public_template %>
+      <%= f.text_field :tid %>
+      <%= f.text_field :description %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

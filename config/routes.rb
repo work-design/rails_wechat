@@ -32,6 +32,13 @@ Rails.application.routes.draw do
         post :sync, on: :collection
       end
       resources :wechat_users
+      resources :wechat_templates do
+        collection do
+          get :default
+          post :sync
+        end
+        resources :wechat_notices
+      end
     end
     resources :wechat_menus do
       collection do
@@ -41,13 +48,7 @@ Rails.application.routes.draw do
       end
       get :edit_parent, on: :member
     end
-    resources :wechat_templates do
-      collection do
-        get :default
-        post :sync
-      end
-      resources :wechat_notices
-    end
+    resources :public_templates
     resources :extractors
     resources :tickets
     resources :accounts, only: [] do
