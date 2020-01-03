@@ -2,7 +2,7 @@ module RailsWechat::WechatApp
   extend ActiveSupport::Concern
   included do
     delegate :url_helpers, to: 'Rails.application.routes'
-    
+
     attribute :type, :string, default: 'WechatPublic'
     attribute :name, :string
     attribute :enabled, :boolean, default: true
@@ -23,7 +23,7 @@ module RailsWechat::WechatApp
     attribute :access_token_expires_at, :datetime
     attribute :jsapi_ticket, :string
     attribute :jsapi_ticket_expires_at, :datetime
-    
+
     belongs_to :organ, optional: true
     has_many :wechat_menus, dependent: :destroy
     has_many :text_responses, dependent: :destroy
@@ -32,14 +32,14 @@ module RailsWechat::WechatApp
     has_many :wechat_requests, dependent: :nullify
     has_many :wechat_tags, dependent: :delete_all
     has_many :wechat_templates, dependent: :destroy
-    
+
     has_many :wechat_app_extractors, dependent: :delete_all
     has_many :extractors, through: :wechat_app_extractors
-    
+
     has_many :wechat_users, foreign_key: :app_id, primary_key: :appid
-    
+
     scope :valid, -> { where(enabled: true) }
-    
+
     validates :name, presence: true
     validates :appid, presence: true, uniqueness: true
     validates :secret, presence: true
@@ -50,17 +50,17 @@ module RailsWechat::WechatApp
     end
     after_save :set_primary, if: -> { self.primary? && saved_change_to_primary? }
   end
-  
+
   def url
     url_helpers.wechat_url(self.id)
   end
-  
+
   def menu
     {
       button: default_menus + within_menus
     }
   end
-  
+
   def default_menus
     if organ
       limit = 3 - organ.limit_wechat_menu
@@ -69,7 +69,7 @@ module RailsWechat::WechatApp
     end
     WechatMenu.where(parent_id: nil).limit(limit).as_json
   end
-  
+
   def within_menus
     if organ
       self.wechat_menus.limit(organ.limit_wechat_menu).where(parent_id: nil).as_json
@@ -77,7 +77,7 @@ module RailsWechat::WechatApp
       self.wechat_menus.where(parent_id: nil).as_json
     end
   end
-  
+
   def access_token_valid?
     return false unless access_token_expires_at.acts_like?(:time)
     access_token_expires_at > Time.current
@@ -93,7 +93,7 @@ module RailsWechat::WechatApp
     if self.class.column_names.include?('organ_id')
       q.merge! organ_id: self.organ_id
     end
-    
+
     self.class.unscoped.where.not(id: self.id).where(q).update_all(primary: false)
   end
 
@@ -104,7 +104,7 @@ module RailsWechat::WechatApp
   def api
     Wechat::Api::Public.new(self)
   end
-  
+
   def mass_messenger
     Wechat::Message::Mass::Public.new(self)
   end
@@ -122,7 +122,7 @@ module RailsWechat::WechatApp
       wechat_tag.save
     end
   end
- 
+
   def sync_wechat_templates
     templates = api.templates
     templates.each do |template|
@@ -131,6 +131,11 @@ module RailsWechat::WechatApp
       wechat_template.assign_attributes template.slice('title', 'content', 'example')
       wechat_template.save
     end
+  end
+
+  def template_ids(notifiable_type, *code)
+    ids = PublicTemplate.where(notifiable_type: notifiable_type, code: code).pluck(:id)
+    wechat_templates.where(public_template_id: ids).pluck(:template_id)
   end
 
   class_methods do
