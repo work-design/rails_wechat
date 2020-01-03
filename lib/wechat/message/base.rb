@@ -1,7 +1,6 @@
 class Wechat::Message::Base
-
   attr_reader :message_hash, :api
-  
+
   def initialize(app, msg = {})
     @api = app.api
     @message_hash = msg
@@ -14,7 +13,7 @@ class Wechat::Message::Base
   def to_xml
     @message_hash.to_xml(root: 'xml', children: 'item', skip_instruct: true, skip_types: true)
   end
-  
+
   def to_json
     @message_hash.to_json
   end
@@ -32,18 +31,18 @@ class Wechat::Message::Base
     else
       msg = response.to_xml
     end
-  
+
     if @wechat_app.encrypt_mode
       _encrypt = Base64.strict_encode64(Cipher.encrypt(Cipher.pack(msg, @we_app_id), @wechat_app.encoding_aes_key))
       msg = encrypt(_encrypt, params[:timestamp], params[:nonce])
     end
-  
+
     msg
   end
 
   def do_encrypt(encrypt, timestamp, nonce)
     msg_sign = Signature.hexdigest(@wechat_app.token, timestamp, nonce, encrypt)
-  
+
     {
       Encrypt: encrypt,
       MsgSignature: msg_sign,
@@ -51,7 +50,7 @@ class Wechat::Message::Base
       Nonce: nonce
     }
   end
-  
+
   private
   def update(fields = {})
     @message_hash.merge!(fields)

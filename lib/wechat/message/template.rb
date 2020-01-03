@@ -10,17 +10,17 @@ class Wechat::Message::Template < Wechat::Message::Base
     'miniprogram',
     'data'
   ].freeze
-  
+
   attr_reader :template
-  def initialize(app, template, msg = {})
+  def initialize(template, msg = {})
     super(app)
-    
+
     @template = template
   end
-  
+
   def do_send
-  
+
   end
-  
-  
+
+
 end

@@ -2,9 +2,9 @@ module RailsWechat::WechatNotice
   extend ActiveSupport::Concern
 
   included do
-
     belongs_to :wechat_template
     belongs_to :wechat_app
+    belongs_to :wechat_user
     has_many :wechat_subscribeds
 
     before_validation do
@@ -12,10 +12,9 @@ module RailsWechat::WechatNotice
     end
   end
 
-
   def to_wechat
-    x = Wechat::Message::Template::Program.new()
-    x.do_send
+    msg = Wechat::Message::Template::Program.new(wechat_template)
+    msg.do_send
   end
 
 

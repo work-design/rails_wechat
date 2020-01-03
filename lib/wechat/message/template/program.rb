@@ -1,5 +1,6 @@
 class Wechat::Message::Template::Program < Wechat::Message::Template
 
+
   def to(openid, **options)
     @message_hash.merge!(touser: openid, **options)
   end
