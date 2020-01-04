@@ -70,7 +70,8 @@ class Wechat::Api::Public < Wechat::Api::Base
   end
 
   def templates
-    get 'template/get_all_private_template'
+    r = get 'template/get_all_private_template'
+    r['template_list']
   end
 
   def add_message_template(template_id_short)
