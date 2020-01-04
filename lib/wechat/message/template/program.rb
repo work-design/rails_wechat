@@ -1,7 +1,7 @@
 class Wechat::Message::Template::Program < Wechat::Message::Template
 
 
-  def to(openid, **options)
+  def to_user(openid, **options)
     @message_hash.merge!(touser: openid, **options)
   end
 
@@ -10,9 +10,10 @@ class Wechat::Message::Template::Program < Wechat::Message::Template
     api.post 'message/subscribe/send', {}, base: API_BASE
   end
 
-  def templatess(opts = {})
-    template_fields = opts.symbolize_keys.slice(*TEMPLATE_KEYS)
-    @message_hash.merge!(MsgType: 'template', Template: template_fields)
+  def templates(opts = {})
+    @message_hash.merge! template_id: @notice.wechat_template.template_id
+    @message_hash.merge! touser: @notice.wechat_user.uid
+    @message_hash.merge! data: @notice.data
   end
 
 end

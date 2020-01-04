@@ -43,4 +43,12 @@ module RailsWechat::WechatTemplate
     content.gsub(/(?<={{)\w+(?=.DATA}})/).to_a
   end
 
+  def data_mappings
+    if public_template
+      public_template.data_keys
+    else
+      {}
+    end
+  end
+
 end

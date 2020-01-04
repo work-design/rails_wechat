@@ -20,6 +20,13 @@ module RailsWechat::PublicTemplate
     template_key_words.where.not(mapping: [nil, '']).pluck(:kid)
   end
 
+  def data_hash
+    r = template_key_words.where.not(mapping: [nil, '']).map do |i|
+      ["#{i.rule}#{i.kid}", i.mapping]
+    end
+    r.to_h
+  end
+
   def content
     template_key_words.where.not(mapping: [nil, '']).pluck(:name)
   end

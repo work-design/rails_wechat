@@ -1,26 +1,14 @@
 class Wechat::Message::Template < Wechat::Message::Base
-  TEMPLATE_KEYS = [
-    'template_id',
-    'form_id',
-    'page',
-    'color',
-    'emphasis_keyword',
-    'topcolor',
-    'url',
-    'miniprogram',
-    'data'
-  ].freeze
 
-  attr_reader :template
-  def initialize(template, msg = {})
+  attr_reader :notice
+  def initialize(notice, msg = {})
     super(app)
 
-    @template = template
+    @notice = notice
   end
 
   def do_send
 
   end
-
 
 end
