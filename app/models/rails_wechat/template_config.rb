@@ -1,7 +1,8 @@
-module RailsWechat::PublicTemplate
+module RailsWechat::TemplateConfig
   extend ActiveSupport::Concern
 
   included do
+    attribute :type, :string
     attribute :title, :string
     attribute :tid, :string
     attribute :description, :string
@@ -22,8 +23,9 @@ module RailsWechat::PublicTemplate
 
   def data_hash
     r = template_key_words.where.not(mapping: [nil, '']).map do |i|
-      ["#{i.rule}#{i.kid}", i.mapping]
+      { "#{i.rule}#{i.kid}" => { value: i.mapping, color: i.color} }
     end
+
     r.to_h
   end
 

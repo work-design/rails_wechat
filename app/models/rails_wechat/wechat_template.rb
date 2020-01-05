@@ -45,7 +45,7 @@ module RailsWechat::WechatTemplate
 
   def data_mappings
     if public_template
-      public_template.data_keys
+      public_template.data_hash
     else
       {}
     end

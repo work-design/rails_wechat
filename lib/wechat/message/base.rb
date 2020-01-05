@@ -19,7 +19,7 @@ class Wechat::Message::Base
   end
 
   def save_to_db!
-    model = WechatRequest.new
+    model = WechatMessage.new
     model.body = @message_hash
     model.save!
     self

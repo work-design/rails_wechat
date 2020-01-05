@@ -8,6 +8,7 @@ module RailsWechat::TemplateKeyWord
     attribute :example, :string
     attribute :rule, :string
     attribute :mapping, :string
+    attribute :color, :string
 
     belongs_to :public_template
 

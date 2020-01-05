@@ -16,8 +16,8 @@ module RailsWechat::WechatNotice
   end
 
   def data
-    wechat_template.data_mappings.transform_values do |key|
-      { value: notification.notifiable_detail[key] }
+    wechat_template.data_mappings.transform_values do |key, value|
+      value.merge! value: notification.notifiable_detail[value]
     end
   end
 

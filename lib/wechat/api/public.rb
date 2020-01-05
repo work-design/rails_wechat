@@ -74,7 +74,7 @@ class Wechat::Api::Public < Wechat::Api::Base
     r['template_list']
   end
 
-  def add_message_template(template_id_short)
+  def add_template(template_id_short)
     post 'template/api_add_template', template_id_short: template_id_short
   end
 

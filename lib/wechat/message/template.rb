@@ -5,14 +5,13 @@ class Wechat::Message::Template < Wechat::Message::Base
     super(app)
 
     @notice = notice
+    to_message
   end
 
   def to_user(openid, **options)
     @message_hash.merge!(touser: openid, **options)
   end
 
-  def do_send
 
-  end
 
 end
