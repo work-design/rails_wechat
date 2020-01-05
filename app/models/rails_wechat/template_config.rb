@@ -22,11 +22,7 @@ module RailsWechat::TemplateConfig
   end
 
   def data_hash
-    r = template_key_words.where.not(mapping: [nil, '']).map do |i|
-      { "#{i.rule}#{i.kid}" => { value: i.mapping, color: i.color} }
-    end
-
-    r.to_h
+    {}
   end
 
   def content

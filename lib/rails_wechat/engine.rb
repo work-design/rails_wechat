@@ -7,6 +7,7 @@ module RailsWechat
       "#{config.root}/app/models/wechat_request",
       "#{config.root}/app/models/wechat_response",
       "#{config.root}/app/models/wechat_app",
+      "#{config.root}/app/models/template_config",
       "#{config.root}/app/models/oauth_user"
     ]
 

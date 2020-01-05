@@ -16,13 +16,17 @@ module RailsWechat::WechatNotice
   end
 
   def data
-    wechat_template.data_mappings.transform_values do |key, value|
-      value.merge! value: notification.notifiable_detail[value]
+    wechat_template.data_mappings.transform_values do |value|
+      value[:value] = notification.notifiable_detail[value[:value]]
     end
   end
 
   def to_wechat
-    msg = Wechat::Message::Template::Program.new(self)
+    if wechat_app.is_a?(WechatProgram)
+      msg = Wechat::Message::Template::Program.new(self)
+    else
+      msg = Wechat::Message::Template::Public.new(self)
+    end
     msg.do_send
   end
 
