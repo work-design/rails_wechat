@@ -65,10 +65,6 @@ class Wechat::Api::Public < Wechat::Api::Base
     post 'menu/delconditional', menuid: menuid
   end
 
-  def template_message_send(message)
-    post 'message/template/send', message, headers: { content_type: :json }
-  end
-
   def templates
     r = get 'template/get_all_private_template'
     r['template_list']

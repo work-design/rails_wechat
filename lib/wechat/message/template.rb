@@ -12,6 +12,4 @@ class Wechat::Message::Template < Wechat::Message::Base
     @message_hash.merge!(touser: openid, **options)
   end
 
-
-
 end
