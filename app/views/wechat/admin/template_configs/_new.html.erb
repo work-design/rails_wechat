@@ -5,8 +5,8 @@
   </div>
 
   <div class="content">
-    <%= form_with model: @public_template, url: admin_public_templates_path do |f| %>
-      <%= render 'shared/error_messages', target: @public_template %>
+    <%= form_with model: @template_config, url: admin_template_configs_path do |f| %>
+      <%= render 'shared/error_messages', target: @template_config %>
       <%= f.text_field :tid %>
       <%= f.text_field :description %>
       <%= f.submit %>

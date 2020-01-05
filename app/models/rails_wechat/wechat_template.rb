@@ -9,7 +9,7 @@ module RailsWechat::WechatTemplate
     attribute :template_type, :integer
 
     belongs_to :wechat_app
-    belongs_to :public_template, optional: true
+    belongs_to :template_config, optional: true
     #has_many :wechat_notices, dependent: :delete_all
 
     before_create :sync_to_wechat
@@ -18,7 +18,7 @@ module RailsWechat::WechatTemplate
 
   def sync_to_wechat
     return if template_id.present?
-    r = wechat_app.api.add_template(public_template.tid, public_template.kid_list)
+    r = wechat_app.api.add_template(template_config.tid, template_config.kid_list)
     logger.debug(r['errmsg'])
     if r['errcode'] == 0
       self.template_id = r['priTmplId']
@@ -44,8 +44,8 @@ module RailsWechat::WechatTemplate
   end
 
   def data_mappings
-    if public_template
-      public_template.data_hash
+    if template_config
+      template_config.data_hash
     else
       {}
     end

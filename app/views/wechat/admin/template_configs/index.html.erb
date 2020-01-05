@@ -1,0 +1,48 @@
+<div class="ui top attached segment">
+  <%= render 'filter' %>
+</div>
+
+<table class="ui bottom attached selectable table">
+  <thead>
+    <tr>
+      <th><%= PublicTemplate.human_attribute_name(:title) %></th>
+      <th><%= PublicTemplate.human_attribute_name(:tid) %></th>
+      <th><%= PublicTemplate.human_attribute_name(:description) %></th>
+      <th>
+        <p><%= PublicTemplate.human_attribute_name(:notifiable_type) %></p>
+        <p><%= PublicTemplate.human_attribute_name(:code) %></p>
+      </th>
+      <th>
+        <%= link_to new_admin_template_config_path, remote: true, class: 'ui mini green button' do %>
+          <i class="fas fa-plus"></i><%= t('.new') %>
+        <% end %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @template_configs.each do |template_config| %>
+    <tr>
+      <td><%= template_config.title %></td>
+      <td><%= template_config.tid %></td>
+      <td><%= template_config.description %></td>
+      <td>
+        <p><%= template_config.notifiable_type %></p>
+        <p><%= template_config.code %></p>
+      </td>
+      <td>
+        <%= link_to admin_template_config_path(template_config), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-eye"></i>
+        <% end %>
+        <%= link_to edit_admin_template_config_path(template_config), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        <%= link_to admin_template_config_path(template_config), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @template_configs %>

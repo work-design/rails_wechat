@@ -38,17 +38,17 @@
       </td>
     </tr>
   <% end %>
-  <% @public_templates.each do |public_template| %>
+  <% @template_configs.each do |template_config| %>
     <tr>
       <td></td>
-      <td><%= public_template.title %></td>
+      <td><%= template_config.title %></td>
       <td>
-        <p><%= public_template.content %></p>
+        <p><%= template_config.content %></p>
       </td>
       <td></td>
       <td>
         <div class="ui toggle checkbox">
-          <%= check_box_tag '[wechat_template]public_template_id', public_template.id, false, data: { method: :post, remote: true, url: admin_wechat_app_wechat_templates_path(@wechat_app), submit: true }, id: nil %>
+          <%= check_box_tag '[wechat_template]template_config_id', template_config.id, false, data: { method: :post, remote: true, url: admin_wechat_app_wechat_templates_path(@wechat_app), submit: true }, id: nil %>
         </div>
       </td>
     </tr>

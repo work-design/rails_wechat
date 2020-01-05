@@ -48,7 +48,7 @@ Rails.application.routes.draw do
       end
       get :edit_parent, on: :member
     end
-    resources :public_templates
+    resources :template_configs
     resources :extractors
     resources :tickets
     resources :accounts, only: [] do

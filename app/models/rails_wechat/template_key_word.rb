@@ -10,7 +10,7 @@ module RailsWechat::TemplateKeyWord
     attribute :mapping, :string
     attribute :color, :string
 
-    belongs_to :public_template
+    belongs_to :template_config
 
     acts_as_list
   end

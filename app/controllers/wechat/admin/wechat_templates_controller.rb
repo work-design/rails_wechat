@@ -5,8 +5,8 @@ class Wechat::Admin::WechatTemplatesController < Wechat::Admin::BaseController
   def index
     q_params = {}
     @wechat_templates = @wechat_app.wechat_templates.default_where(q_params).page(params[:page])
-    public_template_ids = @wechat_templates.pluck(:public_template_id)
-    @public_templates = PublicTemplate.where.not(id: public_template_ids)
+    template_config_ids = @wechat_templates.pluck(:template_config_id)
+    @template_configs = PublicTemplate.where.not(id: template_config_ids)
   end
 
   def create
@@ -52,7 +52,7 @@ class Wechat::Admin::WechatTemplatesController < Wechat::Admin::BaseController
   def wechat_template_params
     params.fetch(:wechat_template, {}).permit(
       :wechat_app_id,
-      :public_template_id,
+      :template_config_id,
       :template_id,
       :title,
       :content,

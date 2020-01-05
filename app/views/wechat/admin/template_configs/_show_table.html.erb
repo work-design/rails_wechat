@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th class="six wide">
-        <%= link_to t('.edit'), edit_admin_public_template_path(@public_template), class: 'ui mini blue right floated button', remote: true %>
+        <%= link_to t('.edit'), edit_admin_template_config_path(@template_config), class: 'ui mini blue right floated button', remote: true %>
       </th>
       <th class="ten wide"></th>
     </tr>
@@ -10,17 +10,17 @@
   <tbody>
     <tr>
       <td class="right aligned"><%= PublicTemplate.human_attribute_name(:title) %></td>
-      <td><%= @public_template.title %></td>
+      <td><%= @template_config.title %></td>
     </tr>
     <tr>
       <td class="right aligned"><%= PublicTemplate.human_attribute_name(:tid) %></td>
-      <td><%= @public_template.tid %></td>
+      <td><%= @template_config.tid %></td>
     </tr>
     <tr>
       <td class="right aligned"><%= PublicTemplate.human_attribute_name(:template_key_words) %></td>
       <td>
         <table class="ui very basic table">
-        <% @public_template.template_key_words.each do |template_key_word| %>
+        <% @template_config.template_key_words.each do |template_key_word| %>
           <tr>
             <td><%= template_key_word.kid %></td>
             <td><%= template_key_word.name %></td>
@@ -34,7 +34,7 @@
     </tr>
     <tr>
       <td class="right aligned"><%= PublicTemplate.human_attribute_name(:description) %></td>
-      <td><%= @public_template.description %></td>
+      <td><%= @template_config.description %></td>
     </tr>
   </tbody>
 </table>
