@@ -5,7 +5,7 @@
   </div>
 
   <div class="content">
-    <%= form_with model: @template_config, url: admin_template_config_path(@template_config) do |f| %>
+    <%= form_with model: @template_config, scope: :template_config, url: admin_template_config_path(@template_config) do |f| %>
       <%= render 'shared/error_messages', target: @template_config %>
       <%= f.fields :template_key_words, on: { wrap_all: false, label: false, placeholder: true }, css: { wrap_input: 'field' } do |ef| %>
         <%= render partial: 'item_form', locals: { ef: ef } %>
