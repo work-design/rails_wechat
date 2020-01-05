@@ -6,7 +6,7 @@ class Wechat::Admin::WechatTemplatesController < Wechat::Admin::BaseController
     q_params = {}
     @wechat_templates = @wechat_app.wechat_templates.default_where(q_params).page(params[:page])
     template_config_ids = @wechat_templates.pluck(:template_config_id)
-    @template_configs = PublicTemplate.where.not(id: template_config_ids)
+    @template_configs = TemplateConfig.where.not(id: template_config_ids)
   end
 
   def create

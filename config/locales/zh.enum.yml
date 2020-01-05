@@ -25,3 +25,7 @@ zh:
       wechat_tag_default:
         default_type:
           WechatUser: 微信已绑定用户
+      template_config:
+        type:
+          TemplatePublic: 公众号
+          TemplateProgram: 小程序

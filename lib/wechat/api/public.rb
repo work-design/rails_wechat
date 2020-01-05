@@ -78,7 +78,7 @@ class Wechat::Api::Public < Wechat::Api::Base
     post 'template/api_add_template', template_id_short: template_id_short
   end
 
-  def del_message_template(template_id)
+  def del_template(template_id)
     post 'template/del_private_template', template_id: template_id
   end
 

@@ -5,12 +5,13 @@
 <table class="ui bottom attached selectable table">
   <thead>
     <tr>
-      <th><%= PublicTemplate.human_attribute_name(:title) %></th>
-      <th><%= PublicTemplate.human_attribute_name(:tid) %></th>
-      <th><%= PublicTemplate.human_attribute_name(:description) %></th>
+      <th><%= TemplateConfig.human_attribute_name(:type) %></th>
+      <th><%= TemplateConfig.human_attribute_name(:title) %></th>
+      <th><%= TemplateConfig.human_attribute_name(:tid) %></th>
+      <th><%= TemplateConfig.human_attribute_name(:description) %></th>
       <th>
-        <p><%= PublicTemplate.human_attribute_name(:notifiable_type) %></p>
-        <p><%= PublicTemplate.human_attribute_name(:code) %></p>
+        <p><%= TemplateConfig.human_attribute_name(:notifiable_type) %></p>
+        <p><%= TemplateConfig.human_attribute_name(:code) %></p>
       </th>
       <th>
         <%= link_to new_admin_template_config_path, remote: true, class: 'ui mini green button' do %>
@@ -22,6 +23,7 @@
   <tbody>
   <% @template_configs.each do |template_config| %>
     <tr>
+      <td><%= template_config.type_i18n %></td>
       <td><%= template_config.title %></td>
       <td><%= template_config.tid %></td>
       <td><%= template_config.description %></td>

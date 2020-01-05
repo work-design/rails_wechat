@@ -42,6 +42,7 @@ class Wechat::Admin::TemplateConfigsController < Wechat::Admin::BaseController
 
   def template_config_params
     params.fetch(:template_config, {}).permit(
+      :type,
       :title,
       :tid,
       :description,
