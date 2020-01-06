@@ -1,9 +1,9 @@
 class Wechat::Message::Template < Wechat::Message::Base
-
   attr_reader :notice
-  def initialize(notice, msg = {})
-    super(app)
 
+  def initialize(notice)
+    super notice.wechat_app
+    
     @notice = notice
     to_message
   end

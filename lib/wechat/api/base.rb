@@ -6,7 +6,7 @@ class Wechat::Api::Base
   API_BASE = 'https://api.weixin.qq.com/cgi-bin/'
   DATACUBE_BASE = 'https://api.weixin.qq.com/datacube/'
   SNS_BASE = 'https://api.weixin.qq.com/sns/'
-  
+
   attr_reader :app, :client, :access_token, :jsapi_ticket
 
   def initialize(app)
@@ -15,7 +15,7 @@ class Wechat::Api::Base
     @access_token = Wechat::AccessToken::Public.new(@client, app)
     @jsapi_ticket = Wechat::JsapiTicket::Public.new(@client, app, @access_token)
   end
-  
+
   def callbackip
     get 'getcallbackip'
   end
@@ -49,7 +49,6 @@ class Wechat::Api::Base
     post 'clear_quota', appid: app.appid
   end
 
-  protected
   def get(path, params: {}, headers: {}, base: nil, as: nil)
     with_access_token(params) do |with_token_params|
       client.get path, headers: headers, params: with_token_params, base: base, as: as
@@ -68,6 +67,7 @@ class Wechat::Api::Base
     end
   end
 
+  protected
   def with_access_token(params = {}, tries = 2)
     yield(params.merge!(access_token: access_token.token))
   rescue Wechat::AccessTokenExpiredError

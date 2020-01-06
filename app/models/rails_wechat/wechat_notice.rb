@@ -7,27 +7,37 @@ module RailsWechat::WechatNotice
     belongs_to :notification
     belongs_to :wechat_template
     belongs_to :wechat_app
-    belongs_to :wechat_user
+    belongs_to :wechat_user, class_name: 'OauthUser'
     belongs_to :wechat_subscribed, optional: true
 
     before_validation do
       self.wechat_app = wechat_template.wechat_app
+      self.wechat_user ||= wechat_subscribed.wechat_user if self.wechat_subscribed
     end
   end
 
   def data
     wechat_template.data_mappings.transform_values do |value|
       value[:value] = notification.notifiable_detail[value[:value]]
+      value
     end
   end
 
-  def to_wechat
+  def to_message
     if wechat_app.is_a?(WechatProgram)
-      msg = Wechat::Message::Template::Program.new(self)
+      Wechat::Message::Template::Program.new(self)
     else
-      msg = Wechat::Message::Template::Public.new(self)
+      Wechat::Message::Template::Public.new(self)
     end
-    msg.do_send
+  end
+
+  def do_send
+    r = to_message.do_send
+    if r['errcode'] == 0
+      wechat_subscribed.update sending_at: Time.now if wechat_subscribed
+    else
+      r
+    end
   end
 
 end

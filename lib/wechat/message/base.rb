@@ -1,4 +1,5 @@
 class Wechat::Message::Base
+  API_BASE = 'https://api.weixin.qq.com/cgi-bin/'
   attr_reader :message_hash, :api
 
   def initialize(app, msg = {})

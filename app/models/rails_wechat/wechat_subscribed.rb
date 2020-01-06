@@ -11,7 +11,6 @@ module RailsWechat::WechatSubscribed
       ban: 'ban'
     }, _prefix: true
 
-    belongs_to :wechat_notice, optional: true
     belongs_to :wechat_user
     belongs_to :wechat_template
   end
