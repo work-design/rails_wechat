@@ -134,7 +134,7 @@ module RailsWechat::WechatApp
   end
 
   def template_ids(notifiable_type, *code)
-    ids = PublicTemplate.where(notifiable_type: notifiable_type, code: code).pluck(:id)
+    ids = TemplateConfig.where(notifiable_type: notifiable_type, code: code).pluck(:id)
     wechat_templates.where(template_config_id: ids).pluck(:template_id)
   end
 

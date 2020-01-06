@@ -10,7 +10,12 @@ class Wechat::Api::Program < Wechat::Api::Base
   # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/template-message/templateMessage.getTemplateList.html
   def templates
     r = get 'newtmpl/gettemplate', base: WXAAPI
-    r['data']
+    if r['errcode'] === 0
+      r['data']
+    else
+      Rails.logger.info r
+      []
+    end
   end
 
   # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getPubTemplateKeyWordsById.html

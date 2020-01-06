@@ -10,7 +10,7 @@ module RailsWechat::WechatTemplate
 
     belongs_to :wechat_app
     belongs_to :template_config, optional: true
-    #has_many :wechat_notices, dependent: :delete_all
+    has_many :wechat_notices, dependent: :delete_all
 
     before_create :sync_to_wechat
     after_destroy_commit :del_to_wechat
@@ -22,7 +22,13 @@ module RailsWechat::WechatTemplate
     logger.debug(r['errmsg'])
     if r['errcode'] == 0
       self.template_id = r['priTmplId']
+    else
+      return
     end
+    r_content = wechat_app.api.templates.find { |i| i['priTmplId'] == self.template_id }
+    self.template_type = r_content['type']
+    self.assign_attributes r_content.slice('title', 'content', 'example')
+    self
   end
 
   def sync_to_wechat!
