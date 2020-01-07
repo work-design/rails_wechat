@@ -7,19 +7,13 @@ module RailsWechat::Application
     return super unless request.variant.any?(:wechat)
     store_location(return_to)
 
-    if current_oauth_user && current_oauth_user.user.nil?
-      redirect_url = sign_url(uid: current_oauth_user.uid)
+    if current_wechat_user && current_wechat_user.user.nil?
+      redirect_url = sign_url(uid: current_wechat_user.uid)
     else
       redirect_url = '/auth/wechat'
     end
 
-    respond_to do |format|
-      format.js { render js: "window.location.href = '#{redirect_url}'" }
-      format.html { redirect_to redirect_url }
-      format.json do
-        render json: { status: 'error', error_message: '请登录后操作', redirect_to: redirect_url }
-      end
-    end
+    render 'wechat_require_login', locals: { redirect_url: redirect_url, message: '请登录后操作' }, status: 401
   end
 
   def current_wechat_user
@@ -31,23 +25,17 @@ module RailsWechat::Application
   def require_wechat_user(return_to: nil)
     return if current_oauth_user
     store_location(return_to)
-    
+
     redirect_url = '/auth/wechat?skip_register=true'
 
-    respond_to do |format|
-      format.js { render js: "window.location.href = '#{redirect_url}'" }
-      format.html { redirect_to redirect_url }
-      format.json do
-        render json: { status: 'error', error_message: '请允许获取您的微信信息', redirect_to: redirect_url }
-      end
-    end
+    render 'wechat_require_login', locals: { redirect_url: redirect_url, message: '请允许获取您的微信信息' }, status: 401
   end
 
   def bind_to_wechat(request)
     key = request[:EventKey].delete_prefix?('qrscene_')
     wechat_user = WechatUser.find_by(open_id: request[:FromUserName])
     session[:wechat_open_id] ||= request[:FromUserName]
-  
+
     user = User.find_by id: key
     if wechat_user && user
       old_user = wechat_user.user
@@ -64,7 +52,7 @@ module RailsWechat::Application
       user.wechat_users.create(open_id: request[:FromUserName], state: :bind)
       request.reply.text "已成功绑定,账号 #{user.member_name}"
     else
-      request.reply.text "未找到当前用户,绑定失败"
+      request.reply.text '未找到当前用户,绑定失败'
     end
   end
 
