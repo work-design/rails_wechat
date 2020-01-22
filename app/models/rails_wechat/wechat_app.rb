@@ -35,6 +35,8 @@ module RailsWechat::WechatApp
 
     has_many :wechat_app_extractors, dependent: :delete_all
     has_many :extractors, through: :wechat_app_extractors
+    has_many :post_syncs, dependent: :delete_all
+    has_many :posts, through: :post_syncs
 
     has_many :wechat_users, foreign_key: :app_id, primary_key: :appid
 
