@@ -1,6 +1,8 @@
 # frozen_string_literal: true
+require 'wechat/api/base/cgi_bin'
 
 class Wechat::Api::Public < Wechat::Api::Base
+  include Wechat::Api::Base::CgiBin
 
   # https://developers.weixin.qq.com/doc/offiaccount/User_Management/User_Tag_Management.html
   def tags
