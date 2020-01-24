@@ -1,5 +1,5 @@
 class Wechat::Message::Received < Wechat::Message::Base
-  
+
   # see: https://mp.weixin.qq.com/wiki?id=mp1421140453
   MSG_TYPE = [
     'text', 'image', 'voice', 'video', 'shortvideo', 'location', 'link', 'event' # 消息类型
@@ -12,7 +12,7 @@ class Wechat::Message::Received < Wechat::Message::Base
     'click', 'view',  # 企业微信使用
     'scancode_push', 'scancode_waitmsg', 'pic_sysphoto', 'pic_photo_or_album', 'pic_weixin', 'location_select', 'enter_agent', 'batch_job_result'  # 企业微信使用
   ].freeze
-  
+
   def self.from_controller(controller)
     app = controller.instance_variable_get(:@wechat_app)
     new(app, controller.request.raw_post, controller.class.configs)
@@ -33,7 +33,7 @@ class Wechat::Message::Received < Wechat::Message::Base
   def post_xml
     data = Hash.from_xml(@message_body).fetch('xml', {})
     encrypt_data = data.fetch('Encrypt', nil)
-    
+
     if encrypt_data.present?
       r = Base64.decode64(encrypt_data)
       r = Wechat::Cipher.decrypt(r, @app.encoding_aes_key)
@@ -43,7 +43,7 @@ class Wechat::Message::Received < Wechat::Message::Base
     end
     @message_hash = data.with_indifferent_access
   end
-  
+
   def wechat_user
     return @wechat_user if defined? @wechat_user
     @wechat_user = WechatUser.find_or_initialize_by(uid: @message_hash[:FromUserName])
@@ -75,17 +75,17 @@ class Wechat::Message::Received < Wechat::Message::Base
   end
 
   def reply
-    Replied.new(
+    Wechat::Message::Replied.new(
       ToUserName: @message_hash['FromUserName'],
       FromUserName: @message_hash['ToUserName'],
       CreateTime: Time.now.to_i
     )
   end
-  
+
   def response
     filtered = @rules.find do |rule|
       next unless rule[:msg_type].to_s == @message_hash['MsgType']
-      
+
       if rule[:msg_type] == :event
         next unless rule[:event].underscore == @message_hash['Event'].underscore
       end
@@ -96,7 +96,7 @@ class Wechat::Message::Received < Wechat::Message::Base
         true
       end
     end
-    
+
     if filtered
       filtered[:proc].call(self, @content)
     else
@@ -109,5 +109,5 @@ class Wechat::Message::Received < Wechat::Message::Base
     res = app.scan_responses.find_by(match_value: key)
     res.invoke_effect(wechat_user) if res
   end
-  
+
 end
