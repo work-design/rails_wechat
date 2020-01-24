@@ -8,7 +8,7 @@ module RailsWechat::Post
   def to_wechat
     r = wechat_app.api.material_add_news xx
     if r['media_id']
-      post_sync = wechat_app.post_syncs.build(source_id: r['media_id'])
+      post_sync = wechat_app.post_syncs.find_or_initialize_by(source_id: r['media_id'])
       post_sync.post = self
       post_sync.save
     end
