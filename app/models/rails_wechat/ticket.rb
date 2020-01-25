@@ -1,7 +1,6 @@
 module RailsWechat::Ticket
   extend ActiveSupport::Concern
   included do
-    attribute :match_value, :string
     attribute :serial_start, :integer
     attribute :start_at, :time, default: -> { '0:00'.to_time }
     attribute :finish_at, :time, default: -> { '23:59'.to_time }
@@ -11,9 +10,8 @@ module RailsWechat::Ticket
     belongs_to :organ, optional: true
     has_one :wechat_response, as: :effective
     has_many :ticket_items, dependent: :nullify
-    after_save :sync_to_wechat_response, if: -> { saved_change_to_match_value? }
   end
-  
+
   def effective?(time = Time.now)
     time > start_at.change(Date.today.parts) && time < finish_at.change(Date.today.parts)
   end
@@ -26,7 +24,7 @@ module RailsWechat::Ticket
       invalid_response.presence
     end
   end
-  
+
   def serial_number(now = Time.current)
     begin_at = now.beginning_of_month - 1.day
     end_at = now.next_month.beginning_of_month - 1.day
@@ -57,11 +55,4 @@ module RailsWechat::Ticket
     end
   end
 
-  def sync_to_wechat_response
-    return unless wechat_app
-    wechat_response || build_wechat_response
-    wechat_response.assign_attributes(type: 'TextResponse', wechat_app_id: wechat_config.id, match_value: match_value)
-    wechat_response.save
-  end
-  
 end
