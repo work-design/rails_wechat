@@ -1,6 +1,5 @@
 <%= form_with model: [:admin, @ticket] do |f| %>
   <%= render 'shared/error_messages', target: @ticket %>
-  <%= f.text_field :match_value %>
   <%= f.text_field :serial_start %>
   <%= f.text_field :valid_response %>
   <%= f.text_field :invalid_response %>

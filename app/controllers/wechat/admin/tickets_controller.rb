@@ -44,7 +44,6 @@ class Wechat::Admin::TicketsController < Wechat::Admin::BaseController
 
   def ticket_params
     p = params.fetch(:ticket, {}).permit(
-      :match_value,
       :serial_start,
       :start_at,
       :finish_at,

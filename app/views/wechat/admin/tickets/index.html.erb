@@ -5,7 +5,6 @@
 <table class="ui bottom attached selectable table">
   <thead>
     <tr>
-      <th><%= Ticket.human_attribute_name(:match_value) %></th>
       <th><%= Ticket.human_attribute_name(:serial_start) %></th>
       <th>
         <p><%= Ticket.human_attribute_name(:start_at) %></p>
@@ -25,7 +24,6 @@
   <tbody>
   <% @tickets.each do |ticket| %>
     <tr>
-      <td><%= ticket.match_value %></td>
       <td><%= ticket.serial_start %></td>
       <td>
         <p><%= ticket.start_at.to_s(:time) %></p>
