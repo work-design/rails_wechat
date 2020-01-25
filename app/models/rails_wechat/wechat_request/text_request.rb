@@ -6,7 +6,7 @@ module RailsWechat::WechatRequest::TextRequest
 
   def response
     res = wechat_app.text_responses.map do |wr|
-      if body.match?(Regexp.new(wr.match_value))
+      if body.match?(wr.scan_regexp)
         wr.invoke_effect(self)
       end
     end.compact
