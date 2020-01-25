@@ -18,7 +18,7 @@ class Wechat::Message::Received < Wechat::Message::Base
     new(app, controller.request.raw_post, controller.class.configs)
   end
 
-  attr_reader :app
+  attr_reader :app, :rules
   def initialize(app, message_body, rules)
     @app = app
     @message_body = message_body

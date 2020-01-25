@@ -9,7 +9,7 @@ class Wechat::WechatsController < ApplicationController
         url: _routes.url_helpers.bind_my_oauth_users_url(uid: received.wechat_user.uid)
       }
     ]
-  
+
     received.reply.news result_msg
   end
 
@@ -27,7 +27,7 @@ class Wechat::WechatsController < ApplicationController
 
     received.reply.text msg
   end
- 
+
   on :event, event: 'subscribe' do |received|
     result_msg = [{
       title: '欢迎关注',
@@ -53,8 +53,8 @@ class Wechat::WechatsController < ApplicationController
         url: _routes.url_helpers.bind_my_oauth_users_url(uid: received.wechat_user.uid)
       }
     ]
-    
+
     received.reply.news result_msg
   end
-  
+
 end
