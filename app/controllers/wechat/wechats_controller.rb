@@ -18,7 +18,7 @@ class Wechat::WechatsController < ApplicationController
       msg = received.app.help_without_user
     elsif received.wechat_user.user.disabled?
       msg = received.app.help_user_disabled
-    elsif 'accept_not_match_feedback'
+    elsif 'ss'
       wf = received.wechat_user.wechat_requests.create(wechat_app_id: received.app.id, body: content, type: 'TextRequest')
       msg = wf.response
     else

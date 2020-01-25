@@ -7,12 +7,12 @@ module RailsWechat::WechatResponse
     attribute :expire_at, :datetime
     attribute :qrcode_ticket, :string
     attribute :qrcode_url, :string
-    
+
     belongs_to :wechat_app
     belongs_to :effective, polymorphic: true, optional: true
-    
+
     validates :match_value, presence: true
-    
+
     before_validation do
       self.match_value ||= "#{effective_type}_#{effective_id}"
       self.expire_at = Time.current + expire_seconds if expire_seconds
@@ -26,5 +26,5 @@ module RailsWechat::WechatResponse
   def invoke_effect(request_from)
     effective.invoke_effect(request_from) if effective
   end
-  
+
 end
