@@ -1,5 +1,8 @@
 module RailsWechat::WechatReply::VideoReply
-
+  extend ActiveSupport::Concern
+  included do
+    attribute :msg_type, :string, default: 'video'
+  end
 
   def video(media_id, **options)
     options.slice!(:title, :description)

@@ -1,5 +1,8 @@
 module RailsWechat::WechatReply::NewsReply
-
+  extend ActiveSupport::Concern
+  included do
+    attribute :msg_type, :string, default: 'news'
+  end
 
   def content
     items = body.map do |item|

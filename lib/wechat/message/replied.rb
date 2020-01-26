@@ -9,7 +9,7 @@ class Wechat::Message::Replied < Wechat::Message::Base
   def by(wechat_request)
     r = wechat_request.response
     if r.is_a? WechatReply
-
+      r.content
     end
   end
 

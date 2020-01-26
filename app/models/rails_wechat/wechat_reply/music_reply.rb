@@ -1,4 +1,8 @@
 module RailsWechat::WechatReply::MusicReply
+  extend ActiveSupport::Concern
+  included do
+    attribute :msg_type, :string, default: 'music'
+  end
 
   def content(thumb_media_id, **options)
     r = options.slice!(:title, :description, :HQ_music_url)
