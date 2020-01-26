@@ -48,6 +48,7 @@ class Wechat::Admin::ExtractorsController < Wechat::Admin::BaseController
       :prefix,
       :suffix,
       :more,
+      :serial,
       :serial_start,
       :start_at,
       :finish_at,

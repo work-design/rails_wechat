@@ -6,6 +6,7 @@ module RailsWechat::Extractor
     attribute :prefix, :string
     attribute :suffix, :string
     attribute :more, :boolean, default: false
+    attribute :serial, :boolean, default: false
     attribute :serial_start, :integer
     attribute :start_at, :time, default: -> { '0:00'.to_time }
     attribute :finish_at, :time, default: -> { '23:59'.to_time }

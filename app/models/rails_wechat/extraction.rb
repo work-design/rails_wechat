@@ -16,7 +16,7 @@ module RailsWechat::Extraction
   end
 
   def respond_text
-    "#{ticket.valid_response}#{serial_number}"
+    "#{extractor.valid_response}#{serial_number}"
   end
 
 end

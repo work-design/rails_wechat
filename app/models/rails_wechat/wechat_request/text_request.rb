@@ -19,7 +19,7 @@ module RailsWechat::WechatRequest::TextRequest
   end
 
   def do_extract
-    wechat_app.extractors.map do |extractor|
+    res = wechat_app.extractors.map do |extractor|
       matched = body.scan(extractor.scan_regexp)
       next if matched.blank?
 
@@ -27,7 +27,13 @@ module RailsWechat::WechatRequest::TextRequest
       ex.name = extractor.name
       ex.matched = matched.join(', ')
       ex.save
-      ex
+      ex.serial_number
+    end.compact
+
+    if res.present?
+      res.join("\n")
+    else
+      wechat_app.help
     end
   end
 
