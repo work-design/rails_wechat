@@ -1,4 +1,4 @@
-module RailsWechat::WechatMessage
+module RailsWechat::WechatReply
   extend ActiveSupport::Concern
   included do
     attribute :type, :string

@@ -21,6 +21,10 @@
       <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
       <th><%= WechatResponse.human_attribute_name(:default_response) %></th>
       <th>
+        <p><%= WechatResponse.human_attribute_name(:request_type) %></p>
+        <p><%= WechatResponse.human_attribute_name(:reply_type) %></p>
+      </th>
+      <th>
         <p><%= WechatResponse.human_attribute_name(:created_at) %></p>
         <p><%= WechatResponse.human_attribute_name(:expire_at) %></p>
       </th>
@@ -47,6 +51,10 @@
       </td>
       <td><%= wechat_response.match_value %></td>
       <td><%= wechat_response.default_response %></td>
+      <td>
+        <p><%= WechatRequest.enum_i18n(:type, wechat_response.request_type) %></p>
+        <p><%= WechatReply.enum_i18n(:type, wechat_response.reply_type) %></p>
+      </td>
       <td>
         <p><time><%= wechat_response.created_at.to_s(:rfc822) %></time></p>
         <p><time><%= wechat_response.expire_at.to_s(:rfc822) if wechat_response.expire_at %></time></p>
