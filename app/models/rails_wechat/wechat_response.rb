@@ -8,6 +8,7 @@ module RailsWechat::WechatResponse
     attribute :expire_at, :datetime
     attribute :qrcode_ticket, :string
     attribute :qrcode_url, :string
+    attribute :default_response, :string
 
     belongs_to :wechat_app
     belongs_to :effective, polymorphic: true, optional: true
@@ -25,7 +26,11 @@ module RailsWechat::WechatResponse
   end
 
   def invoke_effect(request_from)
-    effective.invoke_effect(request_from) if effective
+    if effective
+      effective.invoke_effect(request_from)
+    else
+      default_response
+    end
   end
 
 end

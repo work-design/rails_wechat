@@ -11,7 +11,9 @@ module RailsWechat::WechatRequest::TextRequest
       end
     end.compact
 
-    "#{wechat_app.help_feedback}#{res.join(', ')}"
+    if res.present?
+      res.join("\n")
+    end
   end
 
   def do_extract

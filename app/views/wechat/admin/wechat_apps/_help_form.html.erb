@@ -1,8 +1,6 @@
 <%= form_with model: @wechat_app, scope: :wechat_app, url: admin_wechat_app_path do |f| %>
   <%= render 'shared/error_messages', target: @wechat_app %>
-  <%= f.text_area :help %>
   <%= f.text_field :help_without_user %>
   <%= f.text_field :help_user_disabled %>
-  <%= f.text_field :help_feedback %>
   <%= f.submit %>
 <% end %>

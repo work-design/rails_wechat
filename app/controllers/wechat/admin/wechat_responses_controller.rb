@@ -55,11 +55,10 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
       :type,
       :match_value,
       :contain,
+      :default_response,
       :expire_seconds,
       :start_at,
-      :finish_at,
-      :valid_response,
-      :invalid_response
+      :finish_at
     )
   end
 

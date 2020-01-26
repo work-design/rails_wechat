@@ -15,9 +15,7 @@ module RailsWechat::WechatApp
     attribute :key, :string, comment: '支付专用'
     attribute :encrypt_mode, :boolean, default: true
     attribute :encoding_aes_key, :string
-    attribute :help, :string, limit: 1024, default: '', comment: '默认帮助'
     attribute :help_without_user, :string, default: '请绑定账号，输入"绑定"根据提示操作', comment: '未注册用户提示'
-    attribute :help_feedback, :string, default: '你的反馈已收到', comment: '正常发送反馈内容回复'
     attribute :help_user_disabled, :string
     attribute :access_token, :string
     attribute :access_token_expires_at, :datetime

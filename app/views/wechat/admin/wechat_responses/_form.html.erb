@@ -2,4 +2,5 @@
 <%= f.select :type, options_for_select(WechatResponse.options_i18n(:type), @wechat_response.type) %>
 <%= f.check_box :contain %>
 <%= f.text_field :match_value %>
+<%= f.text_area :default_response %>
 <%= f.submit %>
