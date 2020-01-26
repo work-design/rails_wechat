@@ -32,11 +32,15 @@ class Wechat::WechatsController < ApplicationController
       description: '查看数据'
     }]
 
-    if received[:EventKey]
+    if received[:EventKey].present?
       received.reply.text received.qr_response
     else
-      received.reply.news(result_msg)
+      received.reply.news result_msg
     end
+  end
+
+  on :event, event: 'unsubscribe' do |received|
+
   end
 
   on :event, event: 'scan' do |received|
