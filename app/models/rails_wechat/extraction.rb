@@ -11,7 +11,7 @@ module RailsWechat::Extraction
     belongs_to :wechat_user
 
     before_validation do
-      self.wechat_user ||= wechat_request.wechat_user
+      self.wechat_user ||= wechat_request&.wechat_user
     end
   end
 

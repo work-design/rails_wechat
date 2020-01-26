@@ -34,7 +34,7 @@ module RailsWechat::Extractor
     end_at = now.next_month.beginning_of_month - 1.day
     serial_init = serial_start.presence || (now.strftime('%Y%m') + '0001').to_i
     if now < end_at
-      last_item = extractions.default_where('created_at-gte': begin_at).order(serial_number: :desc).first
+      last_item = extractions.where.not(serial_number: nil).default_where('created_at-gte': begin_at).order(serial_number: :desc).first
       if last_item
         last_item.serial_number + 1
       else
@@ -42,7 +42,7 @@ module RailsWechat::Extractor
       end
     else
       serial_init = (now.next_month.strftime('%Y%m') + '0001').to_i
-      last_item = extractions.default_where('created_at-gte': end_at).order(serial_number: :desc).first
+      last_item = extractions.where.not(serial_number: nil).default_where('created_at-gte': end_at).order(serial_number: :desc).first
       if last_item
         last_item.serial_number + 1
       else

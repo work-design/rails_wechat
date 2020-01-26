@@ -31,7 +31,7 @@ module RailsWechat::WechatResponse
     if effective
       effective.invoke_effect(request_from)
     else
-      default_response
+      default_response.presence
     end
   end
 
