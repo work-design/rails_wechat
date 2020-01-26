@@ -16,7 +16,9 @@ module RailsWechat::Extraction
   end
 
   def respond_text
-    "#{extractor.valid_response}#{serial_number}"
+    if serial_number.present?
+      "#{extractor.valid_response}#{serial_number}"
+    end
   end
 
 end

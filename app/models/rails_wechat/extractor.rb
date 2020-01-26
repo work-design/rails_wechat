@@ -25,7 +25,7 @@ module RailsWechat::Extractor
     end
   end
 
-  def effective?(time = Time.now)
+  def effective?(time = Time.current)
     time > start_at.change(Date.today.parts) && time < finish_at.change(Date.today.parts)
   end
 
