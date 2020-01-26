@@ -10,25 +10,16 @@ class Wechat::WechatsController < ApplicationController
       }
     ]
 
-    received.reply.news result_msg
+    received.reply.with NewsReply.new(wechat_user_id: received.wechat_user.id, body: result_msg)
   end
 
   on :text do |received, content|
-    if received.wechat_user.user.nil?
-      msg = received.app.help_without_user
-    elsif received.wechat_user.user.disabled?
-      msg = received.app.help_user_disabled
-    else
-      wechat_request = received.wechat_user.wechat_requests.create(wechat_app_id: received.app.id, body: content, type: 'TextRequest')
-      msg = wechat_request.response
-    end
-
-    received.reply.text msg
+    wechat_request = received.wechat_user.wechat_requests.create(wechat_app_id: received.app.id, body: content, type: 'TextRequest')
+    received.reply.by wechat_request
   end
 
   on :event, event: 'subscribe' do |received|
     wechat_request = received.wechat_user.wechat_requests.create(wechat_app_id: received.app.id, body: received[:EventKey], type: 'SubscribeRequest')
-
     received.reply.by wechat_request
   end
 
@@ -37,7 +28,7 @@ class Wechat::WechatsController < ApplicationController
   end
 
   on :event, event: 'scan' do |received|
-    received.reply.text received.qr_response
+    received.reply.with TextReply.new(wechat_user_id: received.wechat_user.id,content: received.qr_response)
   end
 
   on :event, event: 'click', with: 'bind' do |received|
@@ -49,7 +40,7 @@ class Wechat::WechatsController < ApplicationController
       }
     ]
 
-    received.reply.news result_msg
+    received.reply.with NewsReply.new(wechat_user_id: received.wechat_user.id, body: result_msg)
   end
 
 end

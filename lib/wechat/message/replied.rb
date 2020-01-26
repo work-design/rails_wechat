@@ -17,10 +17,13 @@ class Wechat::Message::Replied < Wechat::Message::Base
     update(ToUserName: openid_or_userid)
   end
 
+  def with(wechat_reply)
+    wechat_reply.to_hash
+  end
+
   def save_to_db!
-    model = WechatReply.new
-    model.body = @message_hash
-    model.save!
+    @wecaht_app.body = @message_hash
+    @wecaht_app.save!
     self
   end
 
