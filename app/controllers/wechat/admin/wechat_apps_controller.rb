@@ -79,6 +79,7 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
       :mch_id,
       :key,
       :encrypt_mode,
+      :help,
       :help_without_user,
       :help_user_disabled,
       extractor_ids: []

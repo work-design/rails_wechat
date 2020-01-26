@@ -16,6 +16,7 @@
       </th>
       <th><%= WechatApp.human_attribute_name(:encrypt_mode) %></th>
       <th>
+        <p><%= WechatApp.human_attribute_name(:help) %></p>
         <p><%= WechatApp.human_attribute_name(:help_without_user) %></p>
         <p><%= WechatApp.human_attribute_name(:help_user_disabled) %></p>
       </th>
@@ -47,6 +48,7 @@
         </div>
       </td>
       <td>
+        <p><%= wechat_app.help %></p>
         <p><%= wechat_app.help_without_user %></p>
         <p><%= wechat_app.help_user_disabled %></p>
         <%= link_to help_admin_wechat_app_path(wechat_app), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
