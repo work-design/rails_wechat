@@ -6,6 +6,10 @@ class Wechat::Message::Replied < Wechat::Message::Base
     @message_hash = params
   end
 
+  def xxx(wechat_request)
+
+  end
+
   def to(openid_or_userid)
     update(ToUserName: openid_or_userid)
   end

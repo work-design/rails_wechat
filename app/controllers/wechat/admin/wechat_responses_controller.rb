@@ -58,7 +58,9 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
       :default_response,
       :expire_seconds,
       :start_at,
-      :finish_at
+      :finish_at,
+      :request_type,
+      :reply_type
     )
   end
 

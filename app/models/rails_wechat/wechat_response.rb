@@ -9,6 +9,8 @@ module RailsWechat::WechatResponse
     attribute :qrcode_ticket, :string
     attribute :qrcode_url, :string
     attribute :default_response, :string
+    attribute :request_type, :string, comment: '用户发送消息类型'
+    attribute :reply_type, :string, comment: '自动回复消息类型'
 
     belongs_to :wechat_app
     belongs_to :effective, polymorphic: true, optional: true

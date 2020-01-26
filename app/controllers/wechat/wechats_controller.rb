@@ -27,16 +27,9 @@ class Wechat::WechatsController < ApplicationController
   end
 
   on :event, event: 'subscribe' do |received|
-    result_msg = [{
-      title: '欢迎关注',
-      description: '查看数据'
-    }]
+    wechat_request = received.wechat_user.wechat_requests.create(wechat_app_id: received.app.id, body: received[:EventKey], type: 'SubscribeRequest')
 
-    if received[:EventKey].present?
-      received.reply.text received.qr_response
-    else
-      received.reply.news result_msg
-    end
+    received.reply.xxx wechat_request
   end
 
   on :event, event: 'unsubscribe' do |received|

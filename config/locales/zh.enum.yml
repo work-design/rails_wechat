@@ -12,6 +12,15 @@ zh:
           TextResponse: 文字
           PersistScanResponse: 永久二维码
           TempScanResponse: 临时二维码
+          EventResponse: 事件
+      wechat_reply:
+        type:
+          NewsReply: 图文消息
+          TextReply: 文本消息
+      wechat_request:
+        type:
+          TextRequest: 文字消息
+          SubscribeRequest: 订阅消息
       wechat_app:
         type:
           WechatPublic: 服务号

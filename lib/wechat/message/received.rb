@@ -104,10 +104,4 @@ class Wechat::Message::Received < Wechat::Message::Base
     end
   end
 
-  def qr_response
-    key = @message_hash[:EventKey].to_s.delete_prefix('qrscene_')
-    res = app.scan_responses.find_by(match_value: key)
-    res.invoke_effect(wechat_user) if res
-  end
-
 end
