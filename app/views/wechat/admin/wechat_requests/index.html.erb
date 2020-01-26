@@ -16,8 +16,7 @@
   <thead>
     <tr>
       <th class="one wide"><%= WechatRequest.human_attribute_name(:wechat_user_id) %></th>
-      <th class="six wide"><%= WechatRequest.human_attribute_name(:extractions) %></th>
-      <th class="five wide"><%= WechatRequest.human_attribute_name(:ticket_items) %></th>
+      <th class="ten wide"><%= WechatRequest.human_attribute_name(:extractions) %></th>
       <th class="two wide"><%= WechatRequest.human_attribute_name(:created_at) %></th>
       <th class="two wide">
         <%= link_to find_data_list_table_lists_path('RequestDailyExport', params.permit('created_at-gte', 'created_at-lte')), class: 'ui mini blue button', remote: true do %>
@@ -42,17 +41,9 @@
           <tr>
             <td><%= ex.name %></td>
             <td><%= ex.matched %></td>
+            <td><%= ex.respond_text %></td>
           </tr>
         <% end %>
-        </table>
-      </td>
-      <td>
-        <table class="ui very basic table">
-          <% wechat_request.ticket_items.each do |ri| %>
-            <tr>
-              <td><%= ri.respond_text %></td>
-            </tr>
-          <% end %>
         </table>
       </td>
       <td><time><%= wechat_request.created_at.to_s(:rfc822) %></time></td>
