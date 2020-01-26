@@ -17,6 +17,7 @@
     <tr>
       <th><%= WechatResponse.human_attribute_name(:type) %></th>
       <th><%= WechatResponse.human_attribute_name(:qrcode) %></th>
+      <th><%= WechatResponse.human_attribute_name(:contain) %></th>
       <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
       <th><%= WechatResponse.human_attribute_name(:expire_at) %></th>
       <th><%= WechatResponse.human_attribute_name(:created_at) %></th>
@@ -35,6 +36,11 @@
         <% if wechat_response.is_a?(ScanResponse) %>
           <%= image_tag wechat_response.qrcode_file, class: 'ui small image' if wechat_response.qrcode_file.attached? %>
         <% end %>
+      </td>
+      <td>
+        <div class="ui toggle checkbox">
+          <%= check_box_tag '[wechat_response]contain', nil, wechat_response.contain, data: { method: :patch, remote: true, url: admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), submit: true }, id: nil %>
+        </div>
       </td>
       <td><%= wechat_response.match_value %></td>
       <td><time><%= wechat_response.expire_at.to_s(:rfc822) if wechat_response.expire_at %></time></td>

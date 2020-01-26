@@ -1,10 +1,10 @@
 module RailsWechat::WechatResponse::TextResponse
 
-  def scan_regexp
-    if contained
-      /#{match_value}/
+  def scan_regexp(body)
+    if contain
+      body.match? Regexp.new(match_value)
     else
-      /^((?!#{match_value}).)*$/
+      !body.match?(Regexp.new match_value)
     end
   end
 

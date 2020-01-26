@@ -22,7 +22,8 @@ zh:
         body: 内容
         extractions: 内容解析
       wechat_response:
-        match_value: 匹配关键词
+        match_value: 关键词
+        contain: 是否包含
         qrcode: 二维码
         expire_at: 过期时间
       extractor:
