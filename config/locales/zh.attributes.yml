@@ -33,6 +33,10 @@ zh:
         prefix: 前缀
         suffix: 后缀
         more: 尽可能多的匹配
+        serial: 是否生成序列号
+        serial_start: 初始序列号
+        valid_response: 有效应答语
+        invalid_response: 无效应答语
       wechat_menu:
         parent_id: 一级目录
         menu_type: 菜单类型
@@ -48,6 +52,3 @@ zh:
         unionid: 微信开放平台UnionID
         account_id: 账号
         user_id: 用户
-      ticket:
-        valid_response: 有效应答语
-        invalid_response: 无效应答语
