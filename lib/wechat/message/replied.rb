@@ -17,31 +17,11 @@ class Wechat::Message::Replied < Wechat::Message::Base
     update(ToUserName: openid_or_userid)
   end
 
-  # 公众号消息类型
-  # see: https://mp.weixin.qq.com/wiki?id=mp1421140543
-  def text(content)
-    update(MsgType: 'text', Content: content)
+  def save_to_db!
+    model = WechatReply.new
+    model.body = @message_hash
+    model.save!
+    self
   end
-
-  def image(media_id)
-    update(MsgType: 'image', Image: { MediaId: media_id })
-  end
-
-  def voice(media_id)
-    update(MsgType: 'voice', Voice: { MediaId: media_id })
-  end
-
-  def video(media_id, **options)
-    options.slice!(:title, :description)
-    options.transform_keys! { |k| k.to_s.camelize.to_sym }
-
-    update(
-      MsgType: 'video',
-      Video: { MediaId: media_id }.merge!(options)
-    )
-  end
-
-
-
 
 end

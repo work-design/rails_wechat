@@ -1,4 +1,4 @@
-module RailsWechat::WechatReply::TextReply
+module RailsWechat::WechatReply::MusicReply
 
   def content(thumb_media_id, **options)
     r = options.slice!(:title, :description, :HQ_music_url)
