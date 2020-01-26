@@ -4,16 +4,12 @@ module RailsWechat::WechatRequest::SubscribeRequest
   end
 
   def response
-    result_msg = [
-      {
-        title: '欢迎关注',
-        description: '查看数据'
-      }]
-
     if body.present?
       qr_response
     else
-      result_msg
+      r = wechat_app.wechat_responses.where(request_type: type).map do |wr|
+        wr.invoke_effect(self)
+      end
     end
   end
 

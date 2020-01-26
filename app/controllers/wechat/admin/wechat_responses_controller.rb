@@ -4,7 +4,7 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
 
   def index
     q_params = {
-      type: ['TextResponse', 'PersistScanResponse']
+      type: ['TextResponse', 'PersistScanResponse', 'EventResponse']
     }
     q_params.merge! params.permit(:type)
     @wechat_responses = @wechat_app.wechat_responses.default_where(q_params).order(id: :desc).page(params[:page])
@@ -60,7 +60,8 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
       :start_at,
       :finish_at,
       :request_type,
-      :reply_type
+      :effective_type,
+      :effective_id
     )
   end
 

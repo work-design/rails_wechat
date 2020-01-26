@@ -9,4 +9,8 @@ module RailsWechat::WechatReply
     belongs_to :messaging, polymorphic: true, optional: true
   end
 
+  def invoke_effect(request_from)
+
+  end
+
 end

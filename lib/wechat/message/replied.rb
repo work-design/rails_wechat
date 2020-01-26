@@ -6,8 +6,11 @@ class Wechat::Message::Replied < Wechat::Message::Base
     @message_hash = params
   end
 
-  def xxx(wechat_request)
+  def by(wechat_request)
+    r = wechat_request.response
+    if r.is_a? WechatReply
 
+    end
   end
 
   def to(openid_or_userid)
@@ -38,22 +41,7 @@ class Wechat::Message::Replied < Wechat::Message::Base
     )
   end
 
-  def music(thumb_media_id, **options)
-    r = options.slice!(:title, :description, :HQ_music_url)
-    options.transform_keys! { |k| k.to_s.camelize.to_sym }
-    options.merge! MusicURL: r[:music_url] if r[:music_ul]
-    update(
-      MsgType: 'music',
-      Music: { ThumbMediaId: thumb_media_id }.merge!(options)
-    )
-  end
 
-  def news(collection, limit = 8)
-    items = collection.take(limit).map do |item|
-      item.slice(:title, :description, :pic_url, :url).transform_keys! { |k| k.to_s.camelize.to_sym }
-    end
 
-    update(MsgType: 'news', ArticleCount: items.count, Articles: items)
-  end
 
 end

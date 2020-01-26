@@ -29,7 +29,7 @@ class Wechat::WechatsController < ApplicationController
   on :event, event: 'subscribe' do |received|
     wechat_request = received.wechat_user.wechat_requests.create(wechat_app_id: received.app.id, body: received[:EventKey], type: 'SubscribeRequest')
 
-    received.reply.xxx wechat_request
+    received.reply.by wechat_request
   end
 
   on :event, event: 'unsubscribe' do |received|

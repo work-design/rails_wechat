@@ -1,0 +1,5 @@
+<%= render 'shared/error_messages', target: @wechat_reply %>
+<%= f.select :type, options_for_select(WechatReply.options_i18n(:type), @wechat_reply.type) %>
+<%= f.text_field :value %>
+<%= f.text_area :body %>
+<%= f.submit %>
