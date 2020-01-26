@@ -19,7 +19,7 @@ module RailsWechat::WechatRequest::SubscribeRequest
 
   def qr_response
     key = body.delete_prefix('qrscene_')
-    res = wechat_app.scan_responses.find_by(match_value: key)
+    res = wechat_app.wechat_responses.where(request_type: type).find_by(match_value: key)
     res.invoke_effect(wechat_user) if res
   end
 

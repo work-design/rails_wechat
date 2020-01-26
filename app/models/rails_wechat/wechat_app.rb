@@ -25,8 +25,6 @@ module RailsWechat::WechatApp
 
     belongs_to :organ, optional: true
     has_many :wechat_menus, dependent: :destroy
-    has_many :text_responses, dependent: :destroy
-    has_many :scan_responses, dependent: :destroy
     has_many :wechat_responses, dependent: :destroy
     has_many :wechat_requests, dependent: :nullify
     has_many :wechat_tags, dependent: :delete_all
@@ -96,10 +94,6 @@ module RailsWechat::WechatApp
     end
 
     self.class.unscoped.where.not(id: self.id).where(q).update_all(primary: false)
-  end
-
-  def match_values
-    text_responses.map(&:match_value).join('|')
   end
 
   def api
