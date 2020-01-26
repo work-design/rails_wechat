@@ -47,7 +47,12 @@ class Wechat::Admin::ExtractorsController < Wechat::Admin::BaseController
       :name,
       :prefix,
       :suffix,
-      :more
+      :more,
+      :serial_start,
+      :start_at,
+      :finish_at,
+      :valid_response,
+      :invalid_response
     )
     p.merge! default_form_params
   end

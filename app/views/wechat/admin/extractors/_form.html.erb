@@ -4,5 +4,10 @@
   <%= f.text_field :prefix %>
   <%= f.text_area :suffix %>
   <%= f.check_box :more %>
+  <%= f.text_field :serial_start %>
+  <%= f.text_field :valid_response %>
+  <%= f.text_field :invalid_response %>
+  <%= f.time_select :start_at, default: '0:00'.to_time %>
+  <%= f.time_select :finish_at, default: '23:59'.to_time %>
   <%= f.submit %>
 <% end %>

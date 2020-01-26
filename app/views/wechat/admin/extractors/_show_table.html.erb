@@ -20,5 +20,25 @@
       <td class="right aligned"><%= Extractor.human_attribute_name(:suffix) %></td>
       <td><%= @extractor.suffix %></td>
     </tr>
+    <tr>
+      <td class="right aligned"><%= Ticket.human_attribute_name(:serial_start) %></td>
+      <td><%= @ticket.serial_start %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= Ticket.human_attribute_name(:start_at) %></td>
+      <td><%= @ticket.start_at %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= Ticket.human_attribute_name(:finish_at) %></td>
+      <td><%= @ticket.finish_at %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= Ticket.human_attribute_name(:valid_response) %></td>
+      <td><%= @ticket.valid_response %></td>
+    </tr>
+    <tr>
+      <td class="right aligned"><%= Ticket.human_attribute_name(:invalid_response) %></td>
+      <td><%= @ticket.invalid_response %></td>
+    </tr>
   </tbody>
 </table>

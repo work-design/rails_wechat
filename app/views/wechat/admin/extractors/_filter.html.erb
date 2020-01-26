@@ -2,5 +2,6 @@
   <div class="fields">
     <%= f.text_field :name %>
     <%= f.submit %>
+    <%= link_to t('.clear'), filter_params(except: [:name]), class: 'ui button' %>
   </div>
 <% end %>
