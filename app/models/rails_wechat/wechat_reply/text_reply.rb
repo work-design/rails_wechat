@@ -5,7 +5,7 @@ module RailsWechat::WechatReply::TextReply
   end
 
   def content
-    { Content: body }
+    { Content: value }
   end
 
   def xx

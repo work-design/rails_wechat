@@ -9,7 +9,7 @@ module RailsWechat::WechatReply
     attribute :body, :json
 
     belongs_to :wechat_app
-    belongs_to :wechat_user
+    belongs_to :wechat_user, optional: true
     belongs_to :messaging, polymorphic: true, optional: true
   end
 
