@@ -4,8 +4,10 @@ module RailsWechat::WechatReply::VoiceReply
     attribute :msg_type, :string, default: 'voice'
   end
 
-  def voice(media_id)
-    update(MsgType: 'voice', Voice: { MediaId: media_id })
+  def content
+    {
+      Voice: { MediaId: value }
+    }
   end
 
 end

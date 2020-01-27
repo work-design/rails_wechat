@@ -9,12 +9,14 @@ class Wechat::Message::Replied < Wechat::Message::Base
   def by(wechat_request)
     r = wechat_request.response
     if r.is_a? WechatReply
-      r.content
+      update(r.to_wechat)
+    else
+      update(MsgType: 'text', Content: r)
     end
   end
 
-  def to(openid_or_userid)
-    update(ToUserName: openid_or_userid)
+  def to(openid)
+    update(ToUserName: openid)
   end
 
   def with(wechat_reply)

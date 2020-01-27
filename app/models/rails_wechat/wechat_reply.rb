@@ -1,3 +1,4 @@
+# https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html
 module RailsWechat::WechatReply
   extend ActiveSupport::Concern
   included do
@@ -12,6 +13,14 @@ module RailsWechat::WechatReply
 
   def invoke_effect(request_from)
 
+  end
+
+  def content
+    {}
+  end
+
+  def to_wechat
+    { MsgType: msg_type }.merge! content
   end
 
 end

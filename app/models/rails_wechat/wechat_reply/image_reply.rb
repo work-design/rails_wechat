@@ -4,9 +4,10 @@ module RailsWechat::WechatReply::ImageReply
     attribute :msg_type, :string, default: 'image'
   end
 
-
   def content
-    update(MsgType: 'image', Image: { MediaId: value })
+    {
+      Image: { MediaId: value }
+    }
   end
 
 end

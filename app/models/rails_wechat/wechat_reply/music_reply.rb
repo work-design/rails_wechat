@@ -4,14 +4,14 @@ module RailsWechat::WechatReply::MusicReply
     attribute :msg_type, :string, default: 'music'
   end
 
-  def content(thumb_media_id, **options)
+  def content
     r = options.slice!(:title, :description, :HQ_music_url)
     options.transform_keys! { |k| k.to_s.camelize.to_sym }
     options.merge! MusicURL: r[:music_url] if r[:music_ul]
-    update(
-      MsgType: 'music',
-      Music: { ThumbMediaId: thumb_media_id }.merge!(options)
-    )
+
+    {
+      Music: { ThumbMediaId: value }.merge!(options)
+    }
   end
 
 end
