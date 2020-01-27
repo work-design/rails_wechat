@@ -8,8 +8,8 @@ module RailsWechat::WechatReply::NewsReply
   end
 
   def content
-    items = body.map do |item|
-      item.slice(:title, :description, :pic_url, :url).transform_keys! { |k| k.to_s.camelize.to_sym }
+    items = news_reply_items.map do |item|
+      item.to_wechat
     end
 
     {

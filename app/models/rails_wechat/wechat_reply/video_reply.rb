@@ -2,8 +2,6 @@ module RailsWechat::WechatReply::VideoReply
   extend ActiveSupport::Concern
   included do
     attribute :msg_type, :string, default: 'video'
-    attribute :title, :string
-    attribute :description, :string
   end
 
   def content

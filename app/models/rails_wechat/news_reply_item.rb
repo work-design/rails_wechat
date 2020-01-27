@@ -9,5 +9,14 @@ module RailsWechat::NewsReplyItem
     belongs_to :news_reply
   end
 
+  def to_wechat
+    {
+      Title: title,
+      Description: description,
+      PicUrl: pic_url,
+      Url: url
+    }
+  end
+
 
 end

@@ -1,0 +1,16 @@
+<div class="ui modal" id="modal">
+  <i class="fas fa-times close icon"></i>
+  <div class="ui header">
+    <%= t('.edit') %>
+  </div>
+
+  <div class="content">
+    <%= form_with model: @wechat_reply, scope: :wechat_reply, url: admin_wechat_app_wechat_reply_path(@wechat_app, @wechat_reply) do |f| %>
+      <%= render 'shared/error_messages', target: @wechat_reply %>
+      <%= f.fields :expense_items, on: { wrap_all: false, label: false, placeholder: true }, css: { wrap_input: 'field' } do |ef| %>
+        <%= render partial: 'item_form', locals: { ef: ef } %>
+      <% end %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>

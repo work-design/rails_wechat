@@ -4,6 +4,8 @@ module RailsWechat::WechatReply
   included do
     attribute :type, :string
     attribute :value, :string
+    attribute :title, :string
+    attribute :description, :string
     attribute :body, :json
 
     belongs_to :wechat_app

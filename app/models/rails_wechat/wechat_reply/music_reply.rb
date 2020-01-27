@@ -5,12 +5,12 @@ module RailsWechat::WechatReply::MusicReply
   end
 
   def content
-    r = options.slice!(:title, :description, :HQ_music_url)
-    options.transform_keys! { |k| k.to_s.camelize.to_sym }
-    options.merge! MusicURL: r[:music_url] if r[:music_ul]
-
     {
-      Music: { ThumbMediaId: value }.merge!(options)
+      Music: {
+        ThumbMediaId: value,
+        Title: title,
+        Description: description
+      }
     }
   end
 

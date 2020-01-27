@@ -1,6 +1,6 @@
 class Wechat::Admin::WechatRepliesController < Wechat::Admin::BaseController
   before_action :set_wechat_app
-  before_action :set_wechat_reply, only: [:show, :edit, :update, :destroy]
+  before_action :set_wechat_reply, only: [:show, :edit, :edit_news, :update, :destroy]
 
   def index
     q_params = {}
@@ -23,6 +23,9 @@ class Wechat::Admin::WechatRepliesController < Wechat::Admin::BaseController
   end
 
   def edit
+  end
+
+  def edit_news
   end
 
   def update
@@ -49,8 +52,11 @@ class Wechat::Admin::WechatRepliesController < Wechat::Admin::BaseController
   def wechat_reply_params
     params.fetch(:wechat_reply, {}).permit(
       :type,
+      :title,
+      :description,
       :value,
-      :body
+      :body,
+      news_reply_items_attributes: {}
     )
   end
 
