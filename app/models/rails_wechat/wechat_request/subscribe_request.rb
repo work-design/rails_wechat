@@ -8,8 +8,13 @@ module RailsWechat::WechatRequest::SubscribeRequest
       qr_response
     else
       r = wechat_app.wechat_responses.where(request_type: type).map do |wr|
-        wr.invoke_effect(self)
+        if wr.effective.is_a? WechatReply
+          wr.effective
+        else
+          wr.invoke_effect(self)
+        end
       end
+      r[0]
     end
   end
 
