@@ -19,8 +19,8 @@ zh:
           TextReply: 文本消息
       wechat_request:
         type:
-          TextRequest: 文字消息
-          SubscribeRequest: 订阅消息
+          TextRequest: 文字
+          SubscribeRequest: 关注
       wechat_app:
         type:
           WechatPublic: 服务号
