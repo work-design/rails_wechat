@@ -27,7 +27,6 @@ module Wechat::Responder
   def create
     received = Wechat::Message::Received.from_controller(self)
     replied = received.response
-
     if replied.respond_to? :to_xml
       render plain: replied.to_xml
     else

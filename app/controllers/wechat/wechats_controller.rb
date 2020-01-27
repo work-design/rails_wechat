@@ -2,15 +2,18 @@ class Wechat::WechatsController < ApplicationController
   include Wechat::Responder
 
   on :text, with: '绑定' do |received|
-    result_msg = [
-      {
-        title: '请绑定',
-        description: '绑定信息',
-        url: _routes.url_helpers.bind_my_oauth_users_url(uid: received.wechat_user.uid)
-      }
-    ]
+    reply_params = {
+      wechat_user_id: received.wechat_user.id,
+      news_reply_items_attributes: [
+        {
+          title: '请绑定',
+          description: '绑定信息',
+          url: _routes.url_helpers.bind_my_oauth_users_url(uid: received.wechat_user.uid)
+        }
+      ]
+    }
 
-    received.reply.with NewsReply.new(wechat_user_id: received.wechat_user.id, body: result_msg)
+    received.reply.with NewsReply.new(reply_params)
   end
 
   on :text do |received, content|
@@ -28,19 +31,22 @@ class Wechat::WechatsController < ApplicationController
   end
 
   on :event, event: 'scan' do |received|
-    received.reply.with TextReply.new(wechat_user_id: received.wechat_user.id,content: received.qr_response)
+    received.reply.with TextReply.new(wechat_user_id: received.wechat_user.id, content: received.qr_response)
   end
 
   on :event, event: 'click', with: 'bind' do |received|
-    result_msg = [
-      {
-        title: '请绑定',
-        description: '绑定信息',
-        url: _routes.url_helpers.bind_my_oauth_users_url(uid: received.wechat_user.uid)
-      }
-    ]
+    reply_parms = {
+      wechat_user_id: received.wechat_user.id,
+      news_reply_items_attributes: [
+        {
+          title: '请绑定',
+          description: '绑定信息',
+          url: _routes.url_helpers.bind_my_oauth_users_url(uid: received.wechat_user.uid)
+        }
+      ]
+    }
 
-    received.reply.with NewsReply.new(wechat_user_id: received.wechat_user.id, body: result_msg)
+    received.reply.with NewsReply.new(reply_parms)
   end
 
 end

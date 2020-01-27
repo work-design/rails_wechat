@@ -20,7 +20,7 @@ class Wechat::Message::Replied < Wechat::Message::Base
   end
 
   def with(wechat_reply)
-    wechat_reply.to_hash
+    update(wechat_reply.to_wechat)
   end
 
   def save_to_db!
