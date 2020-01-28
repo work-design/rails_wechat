@@ -4,6 +4,6 @@
 <%= f.text_field :match_value %>
 <%= f.text_area :default_response %>
 <%= f.select :request_type, options_for_select(WechatRequest.options_i18n(:type), @wechat_response.request_type) %>
-<%= f.select :effective_type, options_for_select(WechatReply.options_i18n(:type), @wechat_response.reply_type) %>
+<%= f.select :effective_type, options_for_select(WechatReply.options_i18n(:type), @wechat_response.effective_type) %>
 
 <%= f.submit %>
