@@ -12,7 +12,11 @@ module RailsWechat::WechatNotice
 
     before_validation do
       self.wechat_app = wechat_template.wechat_app
-      self.wechat_user ||= wechat_subscribed.wechat_user if self.wechat_subscribed
+      if self.wechat_subscribed
+        self.wechat_user ||= wechat_subscribed.wechat_user
+      else
+        self.wechat_user ||= notification.receiver.wechat_users.find_by(app_id: wechat_app.appid)
+      end
     end
   end
 

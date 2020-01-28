@@ -124,6 +124,7 @@ module RailsWechat::WechatApp
     end
   end
 
+  # 小程序
   def sync_wechat_templates
     templates = api.templates
     templates.each do |template|
@@ -131,6 +132,19 @@ module RailsWechat::WechatApp
       wechat_template.template_type = template['type']
       wechat_template.assign_attributes template.slice('title', 'content', 'example')
       wechat_template.save
+    end
+  end
+
+  # 公众号
+  def sync_template_configs
+    templates = api.templates
+    templates.each do |template|
+      template_config = TemplatePublic.new(title: template['title'])
+      data_keys = WechatTemplate.new(content: template['content']).data_keys
+      data_keys.each do |key|
+        template_config.template_key_words.build(name: key)
+      end
+      template_config.save
     end
   end
 

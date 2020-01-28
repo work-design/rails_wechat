@@ -11,7 +11,7 @@ module RailsWechat::TemplateConfig
 
     validates :code, uniqueness: { scope: :notifiable_type }
 
-    has_many :template_key_words, -> { order(position: :asc) }, dependent: :delete_all
+    has_many :template_key_words, -> { order(position: :asc) }, inverse_of: :template_config, dependent: :delete_all
     accepts_nested_attributes_for :template_key_words
 
     after_create_commit :sync_key_words
