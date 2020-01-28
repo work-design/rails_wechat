@@ -55,6 +55,11 @@ module RailsWechat::WechatApp
     url_helpers.wechat_url(self.id)
   end
 
+  def sync_menu
+    api.menu_delete
+    api.menu_create menu
+  end
+
   def menu
     {
       button: default_menus + within_menus
