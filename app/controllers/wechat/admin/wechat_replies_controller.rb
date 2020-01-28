@@ -55,7 +55,6 @@ class Wechat::Admin::WechatRepliesController < Wechat::Admin::BaseController
       :title,
       :description,
       :value,
-      :body,
       news_reply_items_attributes: {}
     )
   end
