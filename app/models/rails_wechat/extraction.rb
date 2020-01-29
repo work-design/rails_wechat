@@ -10,6 +10,8 @@ module RailsWechat::Extraction
     belongs_to :extractable, polymorphic: true
     belongs_to :wechat_user
 
+    default_scope -> { order(id: :asc) }
+
     before_validation do
       self.wechat_user ||= wechat_request&.wechat_user
     end
