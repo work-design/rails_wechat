@@ -32,8 +32,8 @@
   <% @extractors.each do |extractor| %>
     <tr>
       <td><%= extractor.name %></td>
-      <td><%= extractor.prefix %></td>
-      <td><%= extractor.suffix %></td>
+      <td><%= extractor.prefix.inspect if extractor.prefix %></td>
+      <td><%= extractor.suffix.inspect if extractor.suffix %></td>
       <td>
         <div class="ui toggle checkbox">
           <%= check_box_tag '[extractor]more', nil, extractor.more, data: { method: :patch, remote: true, url: admin_extractor_path(extractor), submit: true }, id: nil %>
