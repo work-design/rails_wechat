@@ -3,6 +3,8 @@ module RailsWechat::WechatNotice
 
   included do
     attribute :link, :string, default: 'index'
+    attribute :msg_id, :string
+    attribute :status, :string
 
     belongs_to :notification
     belongs_to :wechat_template
@@ -38,6 +40,7 @@ module RailsWechat::WechatNotice
   def do_send
     r = to_message.do_send
     if r['errcode'] == 0
+      self.update msg_id: r['msgid']
       wechat_subscribed.update sending_at: Time.now if wechat_subscribed
     else
       r

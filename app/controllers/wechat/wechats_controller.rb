@@ -31,7 +31,13 @@ class Wechat::WechatsController < ApplicationController
   end
 
   on :event, event: 'scan' do |received|
-    received.reply.with TextReply.new(wechat_user_id: received.wechat_user.id, content: received.qr_response)
+    received.reply.with TextReply.new(wechat_user_id: received.wechat_user.id, value: received.qr_response)
+  end
+
+  on :event, event: 'templatesendjobfinish' do |received, content|
+    r = WechatNotice.find_by(msg_id: content['MsgID'])
+    r.update status: content['Status']
+    received.reply.with TextReply.new(wechat_user_id: received.wechat_user.id, value: 'SUCCESS')
   end
 
   on :event, event: 'click', with: 'bind' do |received|

@@ -18,7 +18,7 @@ class Wechat::Message::Received < Wechat::Message::Base
     new(app, controller.request.raw_post, controller.class.configs)
   end
 
-  attr_reader :app, :rules
+  attr_reader :app, :rules, :content
   def initialize(app, message_body, rules)
     @app = app
     @message_body = message_body
@@ -57,18 +57,9 @@ class Wechat::Message::Received < Wechat::Message::Base
     when 'text'
       @content = @message_hash['Content']
       @with = @content
-    when 'image', 'voice', 'video', 'shortvideo'
-      @content = @message_hash.slice('MediaId')
-    when 'location'
-      @content = @message_hash.slice('Location_X', 'Location_Y', 'Scale', 'Label')
-    when 'event'
-      case @message_hash['Event']
-      when 'LOCATION'
-        @content = @message_hash.slice('Event', 'Latitude', 'Longitude', 'Precision')
-      else
-        @content = @message_hash.slice('Event', 'EventKey', 'Ticket')
-        @with = @message_hash['EventKey']
-      end
+    when 'image', 'voice', 'video', 'shortvideo', 'location', 'event'
+      @content = @message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
+      @with = @message_hash['EventKey']
     else
       warn "Don't know how to parse message as #{@message_hash['MsgType']}", uplevel: 1
     end
