@@ -30,7 +30,7 @@ module Wechat::Responder
     if replied.respond_to? :to_xml
       render plain: replied.to_xml
     else
-      head :ok, content_type: 'text/html'
+      head :ok
     end
 
     ActiveSupport::Notifications.instrument 'wechat.responder.after_create', request: received.to_xml, response: replied&.to_xml
