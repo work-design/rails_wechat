@@ -13,7 +13,7 @@ module RailsWechat::WechatNotice
     belongs_to :wechat_subscribed, optional: true
 
     before_validation do
-      self.link ||= notification.link
+      self.link = notification.link
       self.wechat_app ||= wechat_template.wechat_app
       if self.wechat_subscribed
         self.wechat_user ||= wechat_subscribed.wechat_user
