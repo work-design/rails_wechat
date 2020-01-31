@@ -1,6 +1,7 @@
 zh:
   wechat:
     admin:
+      title: 微信公众平台
       wechat_apps:
         index:
           title: 微信设置
