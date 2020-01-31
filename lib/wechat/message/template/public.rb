@@ -5,9 +5,12 @@ class Wechat::Message::Template::Public < Wechat::Message::Template
   end
 
   def to_message
-    @message_hash.merge! template_id: @notice.wechat_template.template_id
-    @message_hash.merge! touser: @notice.wechat_user.uid
-    @message_hash.merge! data: @notice.data
+    @message_hash.merge!(
+      touser: @notice.wechat_user.uid,
+      template_id: @notice.wechat_template.template_id,
+      url: @notice.link,
+      data: @notice.data
+    )
   end
 
 end
