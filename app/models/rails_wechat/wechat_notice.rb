@@ -13,14 +13,15 @@ module RailsWechat::WechatNotice
     belongs_to :wechat_subscribed, optional: true
 
     before_validation do
-      self.link = notification.link
-      self.wechat_app = wechat_template.wechat_app
+      self.link ||= notification.link
+      self.wechat_app ||= wechat_template.wechat_app
       if self.wechat_subscribed
         self.wechat_user ||= wechat_subscribed.wechat_user
       else
         self.wechat_user ||= notification.receiver.wechat_users.find_by(app_id: wechat_app.appid)
       end
     end
+    after_create_commit :do_send_later
   end
 
   def data
@@ -36,6 +37,10 @@ module RailsWechat::WechatNotice
     else
       Wechat::Message::Template::Public.new(self)
     end
+  end
+
+  def do_send_later
+    WechatNoticeSendJob.perform_later(self)
   end
 
   def do_send
