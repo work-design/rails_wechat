@@ -11,6 +11,8 @@ module RailsWechat::WechatReply
     belongs_to :wechat_app
     belongs_to :wechat_user, optional: true
     belongs_to :messaging, polymorphic: true, optional: true
+
+    has_one_attached :media
   end
 
   def invoke_effect(request_from)

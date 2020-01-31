@@ -1,4 +1,5 @@
 require 'httpx'
+require 'http/form_data'
 
 class Wechat::HttpClient
 
@@ -33,10 +34,10 @@ class Wechat::HttpClient
     url = base + path
 
     form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file)
-    response = @http.headers(headers).post(
+    response = @http.plugin(:multipart).headers(headers).post(
       url,
       params: params,
-      form: { media: form_file, hack: 'X' } # Existing here for http-form_data 1.0.1 handle single param improperly
+      form: { media: form_file }
     )
     parse_response(response, options[:as])
   end

@@ -15,8 +15,12 @@ zh:
           EventResponse: 事件
       wechat_reply:
         type:
-          NewsReply: 图文消息
-          TextReply: 文本消息
+          NewsReply: 图文
+          TextReply: 文本
+          ImageReply: 图片
+          MusicReply: 音乐
+          VioceReply: 语音
+          VideoReply: 视频
       wechat_request:
         type:
           TextRequest: 文字

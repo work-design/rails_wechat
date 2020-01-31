@@ -3,7 +3,11 @@ module RailsWechat::WechatRequest::TextRequest
 
   def response
     res = wechat_app.wechat_responses.where(request_type: type).map do |wr|
-      if wr.scan_regexp(body)
+      next unless wr.scan_regexp(body)
+
+      if wr.effective.is_a? WechatReply
+        return wr.effective
+      else
         wr.invoke_effect(self)
       end
     end.compact
