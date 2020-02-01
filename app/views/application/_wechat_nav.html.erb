@@ -1,3 +1,4 @@
+<% if rails_role_user.any_role?('wechat/admin') %>
 <div class="item">
   <a class="<%= active_helper(modules: 'wechat/admin', active_class: 'title active', item_class: 'title') %>">
     <i class="fas fa-cog"></i>
@@ -9,3 +10,4 @@
     <%= link_to '解析设置', admin_extractors_path, class: active_helper(controllers: 'extractors') %>
   </div>
 </div>
+<% end %>
