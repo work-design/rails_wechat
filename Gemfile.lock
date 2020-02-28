@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: fb200bf291bee5bb31d479c36705edc2b8b46074
+  revision: bd11de895f9620807ffef23638b21434ed49fc12
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 9bab932ab26c9c0566afeb1180e8410fb5fa8944
+  revision: 70e0ad52e892696aa9ea49eceecd93e82deda450
   specs:
     rails_com (1.2.9)
       default_where (~> 2.2)
@@ -90,7 +90,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
-    acts_as_list (1.0.0)
+    acts_as_list (1.0.1)
       activerecord (>= 4.2)
     awesome_print (1.8.0)
     bcrypt (3.1.13)
@@ -156,7 +156,7 @@ GEM
     pry-stack_explorer (0.4.9.3)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
-    puma (4.3.1)
+    puma (4.3.2)
       nio4r (~> 2.0)
     rack (2.2.2)
     rack-proxy (0.6.5)
