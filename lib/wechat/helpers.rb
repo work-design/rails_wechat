@@ -9,8 +9,9 @@ module Wechat::Helpers
     api = app.api
     page_url = controller.request.original_url
     page_url.delete_suffix!('#')
-    logger.debug "  ==========> Current page is: #{page_url}"
     js_hash = api.jsapi_ticket.signature(page_url)
+    logger.debug "  ==========> Current page is: #{page_url}"
+    logger.debug "  ==========> Hash: #{js_hash.inspect}"
 
     <<-WECHAT_CONFIG_JS
 wx.config({
