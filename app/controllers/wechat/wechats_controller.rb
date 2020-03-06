@@ -27,7 +27,8 @@ class Wechat::WechatsController < ApplicationController
   end
 
   on :event, event: 'unsubscribe' do |received|
-
+    wechat_request = received.wechat_user.wechat_requests.create(wechat_app_id: received.app.id, body: received[:EventKey], type: 'UnsubscribeRequest')
+    received.reply.by wechat_request
   end
 
   on :event, event: 'scan' do |received|

@@ -25,6 +25,7 @@ zh:
         type:
           TextRequest: 文字
           SubscribeRequest: 关注
+          UnsubscribeRequest: 取消关注
       wechat_app:
         type:
           WechatPublic: 服务号
