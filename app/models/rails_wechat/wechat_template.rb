@@ -16,6 +16,15 @@ module RailsWechat::WechatTemplate
     after_destroy_commit :del_to_wechat
   end
 
+  def init_template_config
+    if wechat_app.is_a?(WechatPublic)
+      config = TemplatePublic.find_or_initialize_by(content: content)
+      config.title = title
+      self.template_config = config
+      self.save
+    end
+  end
+
   def sync_to_wechat
     return if template_id.present?
     r = wechat_app.api.add_template(template_config.tid, template_config.kid_list)

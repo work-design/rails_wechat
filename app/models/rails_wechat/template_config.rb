@@ -8,10 +8,12 @@ module RailsWechat::TemplateConfig
     attribute :description, :string
     attribute :notifiable_type, :string
     attribute :code, :string, default: 'default'
+    attribute :content, :string
 
     validates :code, uniqueness: { scope: :notifiable_type }
 
     has_many :template_key_words, -> { order(position: :asc) }, inverse_of: :template_config, dependent: :delete_all
+    has_many :wechat_templates, dependent: :nullify
     accepts_nested_attributes_for :template_key_words
 
     after_create_commit :sync_key_words
@@ -26,7 +28,7 @@ module RailsWechat::TemplateConfig
   end
 
   def content
-    template_key_words.where.not(mapping: [nil, '']).pluck(:name)
+    super || template_key_words.where.not(mapping: [nil, '']).pluck(:name)
   end
 
   def sync_key_words
