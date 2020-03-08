@@ -24,9 +24,9 @@ zh:
       extractors:
         index:
           title: 解析回复内容
-      tickets:
+      template_configs:
         index:
-          title: 自动票号
+          title: 模板设置
       wechat_templates:
         index:
           title: 消息模板
