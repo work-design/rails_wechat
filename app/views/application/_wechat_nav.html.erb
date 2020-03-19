@@ -1,5 +1,4 @@
-<% if rails_role_user.any_role?('wechat/admin') %>
-<div class="item">
+<div class="item" data-controller="menu">
   <a class="<%= active_helper(modules: 'wechat/admin', active_class: 'title active', item_class: 'title') %>">
     <i class="fab fa-weixin"></i>
     <span><%= t('wechat.admin.title') %></span>
@@ -11,4 +10,3 @@
     <%= link_to t('wechat.admin.template_configs.index.title'), admin_template_configs_path, class: active_helper(controllers: 'template_configs') %>
   </div>
 </div>
-<% end %>
