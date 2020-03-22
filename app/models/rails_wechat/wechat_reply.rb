@@ -23,6 +23,8 @@ module RailsWechat::WechatReply
     {}
   end
 
+
+
   def to_wechat
     { MsgType: msg_type }.merge! content
   end

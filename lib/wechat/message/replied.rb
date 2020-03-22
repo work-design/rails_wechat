@@ -6,21 +6,8 @@ class Wechat::Message::Replied < Wechat::Message::Base
     @message_hash = params
   end
 
-  def by(wechat_request)
-    r = wechat_request.response
-    if r.is_a? WechatReply
-      update(r.to_wechat)
-    else
-      update(MsgType: 'text', Content: r)
-    end
-  end
-
   def to(openid)
     update(ToUserName: openid)
-  end
-
-  def with(wechat_reply)
-    update(wechat_reply.to_wechat)
   end
 
   def save_to_db!

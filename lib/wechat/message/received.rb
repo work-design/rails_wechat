@@ -1,6 +1,5 @@
 class Wechat::Message::Received < Wechat::Message::Base
-
-  # see: https://mp.weixin.qq.com/wiki?id=mp1421140453
+  # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
   MSG_TYPE = {
     'text' => 'WechatRequestText',
     'image' => 'WechatRequestImage',
@@ -38,7 +37,7 @@ class Wechat::Message::Received < Wechat::Message::Base
     if encrypt_data.present?
       r = Base64.decode64(encrypt_data)
       r = Wechat::Cipher.decrypt(r, @app.encoding_aes_key)
-      content, @we_app_id = Wechat::Cipher.unpack(r)
+      content, _ = Wechat::Cipher.unpack(r)
 
       data = Hash.from_xml(content).fetch('xml', {})
     end
@@ -71,20 +70,21 @@ class Wechat::Message::Received < Wechat::Message::Base
   end
 
   def reply
-    Wechat::Message::Replied.new(
+    @reply = Wechat::Message::Replied.new(
       ToUserName: @message_hash['FromUserName'],
       FromUserName: @message_hash['ToUserName'],
       CreateTime: Time.now.to_i
     )
-  end
-
-  def response
     wechat_request = wechat_user.wechat_requests.create(wechat_app_id: app.id, body: content, type: type)
-    reply.by wechat_request
+    r = wechat_request.response
 
+    if r.respond_to? :to_wechat
+      @reply.update(content: r.to_wechat)
+    else
+      @reply.update(MsgType: 'text', Content: r)
+    end
 
-
-
+    @reply
   end
 
 end
