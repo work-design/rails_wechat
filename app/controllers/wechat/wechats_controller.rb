@@ -8,7 +8,7 @@ class Wechat::WechatsController < ApplicationController
         {
           title: '请绑定',
           description: '绑定信息',
-          url: _routes.url_helpers.bind_my_oauth_users_url(uid: received.wechat_user.uid)
+          url: _routes.url_helpers.bind_my_oauth_users_url(uid: received.wechat_user.uid, organ_id: received.app.organ_id)
         }
       ]
     }
