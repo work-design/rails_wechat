@@ -5,8 +5,7 @@ class Wechat::HttpClient
 
   def initialize(base)
     @base = base
-    @http = HTTPX.timeout(**RailsWechat.config.httpx_timeout)
-    @http.with(ssl: RailsWechat.config.httpx_ssl)
+    @http = HTTPX.with(**RailsWechat.config.httpx)
   end
 
   def get(path, headers: {}, params: {}, **options)
