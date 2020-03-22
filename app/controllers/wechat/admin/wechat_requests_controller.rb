@@ -3,8 +3,10 @@ class Wechat::Admin::WechatRequestsController < Wechat::Admin::BaseController
   before_action :set_wechat_request, only: [:show, :edit, :update, :destroy]
 
   def index
-    q_params = {}
-    q_params.merge! params.permit('created_at-gte', 'created_at-lte')
+    q_params = {
+      type: 'TextRequest'
+    }
+    q_params.merge! params.permit('created_at-gte', 'created_at-lte', :type)
     if q_params['created_at-lte']
       q_params['created_at-lte'] = q_params['created_at-lte'].to_time.end_of_day
     end
