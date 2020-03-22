@@ -1,59 +1,47 @@
 class Wechat::WechatsController < ApplicationController
-  include Wechat::Responder
+  skip_before_action :verify_authenticity_token, raise: false
+  before_action :set_wechat_app
+  before_action :verify_signature
 
-  on :text, with: '绑定' do |received|
-    reply_params = {
-      wechat_user_id: received.wechat_user.id,
-      news_reply_items_attributes: [
-        {
-          title: '请绑定',
-          description: '绑定信息',
-          url: _routes.url_helpers.bind_my_oauth_users_url(uid: received.wechat_user.uid, organ_id: received.app.organ_id)
-        }
-      ]
-    }
-
-    received.reply.with NewsReply.new(reply_params)
+  def show
+    if @wechat_app.is_a?(WechatWork)
+      echostr, _corp_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(params[:echostr]), @wechat_app.encoding_aes_key))
+      render plain: echostr
+    else
+      render plain: params[:echostr]
+    end
   end
 
-  on :text do |received, content|
-    wechat_request = received.wechat_user.wechat_requests.create(wechat_app_id: received.app.id, body: content, type: 'TextRequest')
-    received.reply.by wechat_request
+  def create
+    received = Wechat::Message::Received.new(@wechat_app, request.raw_post)
+    replied = received.response
+
+    if replied.respond_to? :to_xml
+      render plain: replied.to_xml
+    else
+      head :ok
+    end
+
+    ActiveSupport::Notifications.instrument 'wechat.responder.after_create', request: received.to_xml, response: replied&.to_xml
   end
 
-  on :event, event: 'subscribe' do |received|
-    wechat_request = received.wechat_user.wechat_requests.create(wechat_app_id: received.app.id, body: received[:EventKey], type: 'SubscribeRequest')
-    received.reply.by wechat_request
+  private
+  def set_wechat_app
+    @wechat_app = WechatApp.valid.find(params[:id])
   end
 
-  on :event, event: 'unsubscribe' do |received|
-    wechat_request = received.wechat_user.wechat_requests.create(wechat_app_id: received.app.id, body: received[:EventKey], type: 'UnsubscribeRequest')
-    received.reply.by wechat_request
-  end
+  def verify_signature
+    if @wechat_app
+      msg_encrypt = nil
+      #msg_encrypt = params[:echostr] || request_encrypt_content if @wechat_app.encrypt_mode
+      signature = params[:signature] || params[:msg_signature]
 
-  on :event, event: 'scan' do |received|
-    received.reply.with TextReply.new(wechat_user_id: received.wechat_user.id, value: received.qr_response)
-  end
+      forbidden = (signature != Wechat::Signature.hexdigest(@wechat_app.token, params[:timestamp], params[:nonce], msg_encrypt))
+    else
+      forbidden = true
+    end
 
-  on :event, event: 'templatesendjobfinish' do |received, content|
-    r = WechatNotice.find_by(msg_id: content['MsgID'])
-    r.update status: content['Status']
-    received.reply.with TextReply.new(wechat_user_id: received.wechat_user.id, value: 'SUCCESS')
-  end
-
-  on :event, event: 'click', with: 'bind' do |received|
-    reply_parms = {
-      wechat_user_id: received.wechat_user.id,
-      news_reply_items_attributes: [
-        {
-          title: '请绑定',
-          description: '绑定信息',
-          url: _routes.url_helpers.bind_my_oauth_users_url(uid: received.wechat_user.uid)
-        }
-      ]
-    }
-
-    received.reply.with NewsReply.new(reply_parms)
+    render plain: 'Forbidden', status: 403 if forbidden
   end
 
 end

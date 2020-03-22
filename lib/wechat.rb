@@ -3,10 +3,10 @@
 require 'wechat/errors'
 require 'wechat/api'
 require 'wechat/helpers'
+require 'wechat/signature'
 
 module Wechat
   autoload :Message, 'wechat/message'
-  autoload :Responder, 'wechat/responder'
   autoload :Cipher, 'wechat/cipher'
   autoload :ControllerApi, 'wechat/controller_api'
 

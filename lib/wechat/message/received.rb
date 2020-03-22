@@ -1,9 +1,16 @@
 class Wechat::Message::Received < Wechat::Message::Base
 
   # see: https://mp.weixin.qq.com/wiki?id=mp1421140453
-  MSG_TYPE = [
-    'text', 'image', 'voice', 'video', 'shortvideo', 'location', 'link', 'event' # 消息类型
-  ].freeze
+  MSG_TYPE = {
+    'text' => 'WechatRequestText',
+    'image' => 'WechatRequestImage',
+    'voice' => 'WechatRequestVoice',
+    'video' => 'WechatRequestVideo',
+    'shortvideo' => 'WechatRequestShortVideo',
+    'location' => 'WechatRequestLocation',
+    'link' => 'WechatRequestLink',
+    'event' => 'WechatRequestEvent'
+  }
   # see: https://mp.weixin.qq.com/wiki?id=mp1421140454
   # see: https://work.weixin.qq.com/api/doc#90000/90135/90240
   EVENT = [
@@ -13,16 +20,10 @@ class Wechat::Message::Received < Wechat::Message::Base
     'scancode_push', 'scancode_waitmsg', 'pic_sysphoto', 'pic_photo_or_album', 'pic_weixin', 'location_select', 'enter_agent', 'batch_job_result'  # 企业微信使用
   ].freeze
 
-  def self.from_controller(controller)
-    app = controller.instance_variable_get(:@wechat_app)
-    new(app, controller.request.raw_post, controller.class.configs)
-  end
-
-  attr_reader :app, :rules, :content
-  def initialize(app, message_body, rules)
+  attr_reader :app, :content
+  def initialize(app, message_body)
     @app = app
     @message_body = message_body
-    @rules = rules
     @content = nil
     @api = @app.api
 
@@ -52,6 +53,10 @@ class Wechat::Message::Received < Wechat::Message::Base
     @wechat_user
   end
 
+  def type
+    MSG_TYPE[@message_hash['MsgType']]
+  end
+
   def parse_content
     case @message_hash['MsgType']
     when 'text'
@@ -74,25 +79,12 @@ class Wechat::Message::Received < Wechat::Message::Base
   end
 
   def response
-    filtered = @rules.find do |rule|
-      next unless rule[:msg_type].to_s == @message_hash['MsgType']
+    wechat_request = wechat_user.wechat_requests.create(wechat_app_id: app.id, body: content, type: type)
+    reply.by wechat_request
 
-      if rule[:msg_type] == :event
-        next unless rule[:event].underscore == @message_hash['Event'].underscore
-      end
 
-      if rule[:with]
-        @with.match? rule[:with]
-      else
-        true
-      end
-    end
 
-    if filtered
-      filtered[:proc].call(self, @content)
-    else
-      {}
-    end
+
   end
 
 end

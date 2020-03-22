@@ -5,10 +5,8 @@ module RailsWechat::WechatRequest::TextRequest
     res = wechat_app.wechat_responses.where(request_type: type).map do |wr|
       next unless wr.scan_regexp(body)
 
-      if wr.effective.is_a? WechatReply
-        return wr.effective
-      else
-        wr.invoke_effect(self)
+      if wr.effective
+        return wr.effective.invoke_effect(self)
       end
     end.compact
     res += do_extract
