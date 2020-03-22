@@ -1,7 +1,7 @@
 class Wechat::Message::Received < Wechat::Message::Base
   # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
   MSG_TYPE = {
-    'text' => 'WechatRequestText',
+    'text' => 'TextRequest',
     'image' => 'WechatRequestImage',
     'voice' => 'WechatRequestVoice',
     'video' => 'WechatRequestVideo',
@@ -9,15 +9,27 @@ class Wechat::Message::Received < Wechat::Message::Base
     'location' => 'WechatRequestLocation',
     'link' => 'WechatRequestLink',
     'event' => 'WechatRequestEvent'
-  }
-  # see: https://mp.weixin.qq.com/wiki?id=mp1421140454
-  # see: https://work.weixin.qq.com/api/doc#90000/90135/90240
-  EVENT = [
-    'subscribe', 'unsubscribe', 'LOCATION', # 公众号与企业微信通用
-    'CLICK', 'VIEW', 'SCAN',  # 公众号使用
-    'click', 'view',  # 企业微信使用
-    'scancode_push', 'scancode_waitmsg', 'pic_sysphoto', 'pic_photo_or_album', 'pic_weixin', 'location_select', 'enter_agent', 'batch_job_result'  # 企业微信使用
-  ].freeze
+  }.freeze
+  # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_event_pushes.html
+  # see: https://work.weixin.qq.com/api/doc/90000/90135/90240
+  EVENT = {
+    'subscribe' => 'SubscribeRequest',
+    'unsubscribe' => 'UnsubscribeRequest',
+    'LOCATION' => 'WechatRequestLocation', # 公众号与企业微信通用
+    'CLICK' => '',
+    'VIEW' => '',
+    'SCAN' => '',
+    'click' => '',
+    'view' => '',  # 企业微信使用
+    'scancode_push' => '',
+    'scancode_waitmsg' => '',
+    'pic_sysphoto' => '',
+    'pic_photo_or_album' => '',
+    'pic_weixin' => '',
+    'location_select' => '',
+    'enter_agent' => '',
+    'batch_job_result' => ''  # 企业微信使用
+  }.freeze
 
   attr_reader :app, :content
   def initialize(app, message_body)
@@ -25,6 +37,7 @@ class Wechat::Message::Received < Wechat::Message::Base
     @message_body = message_body
     @content = nil
     @api = @app.api
+    @wechat_request = wechat_user.wechat_requests.build(wechat_app_id: app.id, body: content, type: type)
 
     post_xml
     parse_content
@@ -53,14 +66,17 @@ class Wechat::Message::Received < Wechat::Message::Base
   end
 
   def type
-    MSG_TYPE[@message_hash['MsgType']]
+    if @message_hash['MsgType'] == 'event'
+      EVENT[@message_hash['Event']]
+    else
+      MSG_TYPE[@message_hash['MsgType']]
+    end
   end
 
   def parse_content
     case @message_hash['MsgType']
     when 'text'
       @content = @message_hash['Content']
-      @with = @content
     when 'image', 'voice', 'video', 'shortvideo', 'location', 'event'
       @content = @message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
       @with = @message_hash['EventKey']
@@ -75,8 +91,7 @@ class Wechat::Message::Received < Wechat::Message::Base
       FromUserName: @message_hash['ToUserName'],
       CreateTime: Time.now.to_i
     )
-    wechat_request = wechat_user.wechat_requests.create(wechat_app_id: app.id, body: content, type: type)
-    r = wechat_request.response
+    r = @wechat_request.response
 
     if r.respond_to? :to_wechat
       @reply.update(content: r.to_wechat)
@@ -85,6 +100,10 @@ class Wechat::Message::Received < Wechat::Message::Base
     end
 
     @reply
+  end
+
+  def save
+    @wechat_request.save
   end
 
 end

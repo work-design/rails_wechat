@@ -15,7 +15,6 @@ class WechatRequest < ApplicationRecord
     received.reply.with NewsReply.new(reply_params)
   end
 
-
   on :event, event: 'templatesendjobfinish' do |received, content|
     r = WechatNotice.find_by(msg_id: content['MsgID'])
     r.update status: content['Status']
