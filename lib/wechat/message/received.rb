@@ -37,9 +37,10 @@ class Wechat::Message::Received < Wechat::Message::Base
     @message_body = message_body
     @content = nil
     @api = @app.api
-    @wechat_request = wechat_user.wechat_requests.build(wechat_app_id: app.id, body: content, type: type)
 
     post_xml
+    @wechat_request = wechat_user.wechat_requests.build(wechat_app_id: app.id, body: content, type: type)
+
     parse_content
   end
 
@@ -50,10 +51,11 @@ class Wechat::Message::Received < Wechat::Message::Base
     if encrypt_data.present?
       r = Base64.decode64(encrypt_data)
       r = Wechat::Cipher.decrypt(r, @app.encoding_aes_key)
-      content, _ = Wechat::Cipher.unpack(r)
+      content, app_id = Wechat::Cipher.unpack(r)
 
       data = Hash.from_xml(content).fetch('xml', {})
     end
+
     @message_hash = data.with_indifferent_access
   end
 
@@ -91,7 +93,7 @@ class Wechat::Message::Received < Wechat::Message::Base
       FromUserName: @message_hash['ToUserName'],
       CreateTime: Time.now.to_i
     )
-    r = @wechat_request.response
+    r = @wechat_request.response || 'sss'
 
     if r.respond_to? :to_wechat
       @reply.update(content: r.to_wechat)
