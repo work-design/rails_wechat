@@ -19,7 +19,6 @@
       <th><%= WechatResponse.human_attribute_name(:qrcode) %></th>
       <th><%= WechatResponse.human_attribute_name(:contain) %></th>
       <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
-      <th><%= WechatResponse.human_attribute_name(:default_response) %></th>
       <th>
         <p><%= WechatResponse.human_attribute_name(:request_type) %></p>
       </th>
@@ -49,7 +48,6 @@
         </div>
       </td>
       <td><%= wechat_response.match_value %></td>
-      <td><%= wechat_response.default_response %></td>
       <td>
         <p><%= WechatRequest.enum_i18n(:type, wechat_response.request_type) %></p>
       </td>
