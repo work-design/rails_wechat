@@ -93,7 +93,7 @@ class Wechat::Message::Received < Wechat::Message::Base
       FromUserName: @message_hash['ToUserName'],
       CreateTime: Time.now.to_i
     )
-    r = @wechat_request.response || 'sss'
+    r = @wechat_request.response || ''
 
     if r.respond_to? :to_wechat
       @reply.update(content: r.to_wechat)

@@ -10,6 +10,14 @@ class Wechat::Message::Replied < Wechat::Message::Base
     update(ToUserName: openid)
   end
 
+  def to_xml
+    if @message_hash['content'].blank?
+      'success'
+    else
+      super
+    end
+  end
+
   def save_to_db!
     @wecaht_app.body = @message_hash
     @wecaht_app.save!

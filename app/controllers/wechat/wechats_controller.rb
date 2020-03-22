@@ -19,7 +19,7 @@ class Wechat::WechatsController < ApplicationController
     if replied.respond_to? :to_xml
       render plain: replied.to_xml
     else
-      head :ok
+      render plain: 'success'
     end
 
     ActiveSupport::Notifications.instrument 'wechat.responder.after_create', request: received.to_xml, response: replied&.to_xml
