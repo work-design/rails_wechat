@@ -16,7 +16,7 @@ module RailsWechat::WechatReply
   end
 
   def invoke_effect(request_from)
-
+    value
   end
 
   def content

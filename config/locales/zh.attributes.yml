@@ -27,7 +27,7 @@ zh:
         qrcode: 二维码
         expire_at: 过期时间
         request_type: 用户消息类型
-        reply_type: 回复消息类型
+        effective: 自动回复
       extractor:
         prefix: 前缀
         suffix: 后缀

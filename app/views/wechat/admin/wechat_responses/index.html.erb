@@ -23,6 +23,12 @@
         <p><%= WechatResponse.human_attribute_name(:expire_at) %></p>
       </th>
       <th>
+        <%= WechatResponse.human_attribute_name(:effective) %>
+        <%= link_to admin_wechat_app_wechat_replies_path, data: { tooltip: t('wechat.admin.wechat_replies.index.title') }, target: '_blank' do %>
+          <i class="fas fa-cog"></i>
+        <% end %>
+      </th>
+      <th>
         <%= link_to new_admin_wechat_app_wechat_response_path(@wechat_app), remote: true, class: 'ui mini green button' do %>
           <i class="fas fa-plus"></i><% t('.new') %>
         <% end %>
@@ -45,6 +51,9 @@
       <td>
         <p><time><%= wechat_response.created_at.to_s(:rfc822) %></time></p>
         <p><time><%= wechat_response.expire_at.to_s(:rfc822) if wechat_response.expire_at %></time></p>
+      </td>
+      <td>
+        <p><%= wechat_response.effective_type %></p>
       </td>
       <td>
         <%= link_to admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>

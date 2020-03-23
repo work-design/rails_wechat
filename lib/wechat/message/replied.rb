@@ -11,7 +11,7 @@ class Wechat::Message::Replied < Wechat::Message::Base
   end
 
   def to_xml
-    if @message_hash['content'].blank?
+    if @message_hash[:Content].blank?
       'success'
     else
       super

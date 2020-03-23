@@ -1,6 +1,7 @@
 class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
   before_action :set_wechat_app
   before_action :set_wechat_response, only: [:show, :edit, :update, :destroy]
+  before_action :prepare_form, only: [:new, :create, :edit, :update]
 
   def index
     q_params = {
@@ -50,6 +51,14 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
     @wechat_response = @wechat_app.wechat_responses.find(params[:id])
   end
 
+  def prepare_form
+    q = { organ_id: nil }
+    if defined?(current_organ) && current_organ
+      q.merge! organ_id: [current_organ.id, nil]
+    end
+    @extractors = Extractor.default_where(q)
+  end
+
   def wechat_response_params
     params.fetch(:wechat_response, {}).permit(
       :type,
@@ -60,7 +69,8 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
       :finish_at,
       :request_type,
       :effective_type,
-      :effective_id
+      :effective_id,
+      extractor_ids: []
     )
   end
 

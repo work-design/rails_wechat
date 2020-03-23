@@ -14,6 +14,8 @@ module RailsWechat::WechatResponse
 
     belongs_to :wechat_app
     belongs_to :effective, polymorphic: true, optional: true
+    has_many :wechat_response_extractors, dependent: :delete_all
+    has_many :extractors, through: :wechat_response_extractors
 
     has_one_attached :qrcode_file
 

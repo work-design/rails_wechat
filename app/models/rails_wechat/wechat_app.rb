@@ -31,8 +31,6 @@ module RailsWechat::WechatApp
     has_many :wechat_tags, dependent: :delete_all
     has_many :wechat_templates, dependent: :destroy
 
-    has_many :wechat_app_extractors, dependent: :delete_all
-    has_many :extractors, through: :wechat_app_extractors
     has_many :post_syncs, as: :synced, dependent: :delete_all
     has_many :posts, through: :post_syncs
 

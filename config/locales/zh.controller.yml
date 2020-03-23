@@ -15,6 +15,9 @@ zh:
       wechat_responses:
         index:
           title: 回复设置
+      wechat_replies:
+        index:
+          title: 回复内容
       wechat_tags:
         index:
           title: 用户标签

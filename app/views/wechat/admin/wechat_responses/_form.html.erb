@@ -3,4 +3,5 @@
 <%= f.check_box :contain %>
 <%= f.text_field :match_value %>
 <%= f.select :effective_type, options_for_select(WechatReply.options_i18n(:type), @wechat_response.effective_type) %>
+<%= f.collection_select :extractor_ids, @extractors, :id, :name, {}, { multiple: true } %>
 <%= f.submit %>

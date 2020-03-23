@@ -2,7 +2,7 @@ module RailsWechat::WechatRequest::TextRequest
   extend ActiveSupport::Concern
 
   def response
-    res = wechat_app.wechat_responses.where(request_type: type).map do |wr|
+    res = wechat_responses.map do |wr|
       next unless wr.scan_regexp(body)
 
       if wr.effective
@@ -19,7 +19,7 @@ module RailsWechat::WechatRequest::TextRequest
   end
 
   def do_extract
-    wechat_app.extractors.map do |extractor|
+    extractors.map do |extractor|
       matched = body.scan(extractor.scan_regexp)
       next if matched.blank?
 
