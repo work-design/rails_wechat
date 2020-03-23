@@ -24,7 +24,7 @@ zh:
       wechat_users:
         index:
           title: 微信用户
-      extractors:
+      wechat_extractors:
         index:
           title: 解析回复内容
       template_configs:

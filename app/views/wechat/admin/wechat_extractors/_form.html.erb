@@ -1,5 +1,5 @@
-<%= form_with model: [:admin, @extractor] do |f| %>
-  <%= render 'shared/error_messages', target: @extractor %>
+<%= form_with model: [:admin, @wechat_response, @wechat_extractor] do |f| %>
+  <%= render 'shared/error_messages', target: @wechat_extractor %>
   <%= f.text_field :name %>
   <%= f.text_field :prefix %>
   <%= f.text_area :suffix %>

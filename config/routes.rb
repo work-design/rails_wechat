@@ -45,6 +45,9 @@ Rails.application.routes.draw do
         resources :wechat_notices
       end
     end
+    resources :wechat_responses, only: [] do
+      resources :wechat_extractors
+    end
     resources :wechat_menus do
       collection do
         get :default
@@ -54,7 +57,6 @@ Rails.application.routes.draw do
       get :edit_parent, on: :member
     end
     resources :template_configs
-    resources :extractors
     resources :accounts, only: [] do
       get :qrcode, on: :member
     end

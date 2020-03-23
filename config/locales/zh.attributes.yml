@@ -28,7 +28,7 @@ zh:
         expire_at: 过期时间
         request_type: 用户消息类型
         effective: 自动回复
-      extractor:
+      wechat_extractor:
         prefix: 前缀
         suffix: 后缀
         more: 尽可能多的匹配

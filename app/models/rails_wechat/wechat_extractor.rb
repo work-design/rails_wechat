@@ -1,4 +1,4 @@
-module RailsWechat::Extractor
+module RailsWechat::WechatExtractor
   extend ActiveSupport::Concern
 
   included do
@@ -13,8 +13,8 @@ module RailsWechat::Extractor
     attribute :valid_response, :string
     attribute :invalid_response, :string
 
-    belongs_to :organ, optional: true  # for SaaS
-    has_many :extractions, dependent: :nullify
+    belongs_to :wechat_response
+    has_many :wechat_extractions, dependent: :nullify
   end
 
   def scan_regexp

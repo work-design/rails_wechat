@@ -14,8 +14,7 @@ module RailsWechat::WechatResponse
 
     belongs_to :wechat_app
     belongs_to :effective, polymorphic: true, optional: true
-    has_many :wechat_response_extractors, dependent: :delete_all
-    has_many :extractors, through: :wechat_response_extractors
+    has_many :wechat_extractors, dependent: :delete_all
 
     has_one_attached :qrcode_file
 
@@ -87,18 +86,18 @@ module RailsWechat::WechatResponse
   end
 
   def do_extract(request_from)
-    extractors.map do |extractor|
-      matched = request_from.body.scan(extractor.scan_regexp)
+    wechat_extractors.map do |wechat_extractor|
+      matched = request_from.body.scan(wechat_extractor.scan_regexp)
       next if matched.blank?
 
-      ex = request_from.extractions.find_or_initialize_by(extractor_id: extractor.id)
-      ex.name = extractor.name
+      ex = request_from.wechat_extractions.find_or_initialize_by(wechat_extractor_id: wechat_extractor.id)
+      ex.name = wechat_extractor.name
       ex.matched = matched.join(', ')
-      if extractor.serial && extractor.effective?
-        ex.serial_number = extractor.serial_number if ex.new_record?
+      if wechat_extractor.serial && wechat_extractor.effective?
+        ex.serial_number = wechat_extractor.serial_number if ex.new_record?
         r = ex.respond_text
       else
-        r = extractor.invalid_response.presence
+        r = wechat_extractor.invalid_response.presence
       end
       ex.save
 

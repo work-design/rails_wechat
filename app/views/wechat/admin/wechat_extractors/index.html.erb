@@ -1,0 +1,74 @@
+<div class="ui top attached segment">
+  <%= render 'filter' %>
+</div>
+
+<table class="ui bottom attached selectable table">
+  <thead>
+    <tr>
+      <th><%= WechatExtractor.human_attribute_name(:name) %></th>
+      <th><%= WechatExtractor.human_attribute_name(:prefix) %></th>
+      <th><%= WechatExtractor.human_attribute_name(:suffix) %></th>
+      <th><%= WechatExtractor.human_attribute_name(:more) %></th>
+      <th>
+        <p><%= WechatExtractor.human_attribute_name(:start_at) %></p>
+        <p><%= WechatExtractor.human_attribute_name(:finish_at) %></p>
+      </th>
+      <th>
+        <p class="ui green text"><%= WechatExtractor.human_attribute_name(:valid_response) %></p>
+        <p class="ui red text"><%= WechatExtractor.human_attribute_name(:invalid_response) %></p>
+      </th>
+      <th>
+        <p><%= WechatExtractor.human_attribute_name(:serial) %></p>
+        <p><%= WechatExtractor.human_attribute_name(:serial_start) %></p>
+      </th>
+      <th>
+        <%= link_to new_admin_wechat_extractor_path, remote: true, class: 'ui mini green button' do %>
+          <i class="fas fa-plus"></i><% t('.new') %>
+        <% end %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @wechat_extractors.each do |wechat_extractor| %>
+    <tr>
+      <td><%= wechat_extractor.name %></td>
+      <td><%= wechat_extractor.prefix.inspect if wechat_extractor.prefix %></td>
+      <td><%= wechat_extractor.suffix.inspect if wechat_extractor.suffix %></td>
+      <td>
+        <div class="ui toggle checkbox">
+          <%= check_box_tag '[wechat_extractor]more', nil, wechat_extractor.more, data: { method: :patch, remote: true, url: admin_wechat_extractor_path(wechat_extractor), submit: true }, id: nil %>
+        </div>
+      </td>
+      <td>
+        <p><%= wechat_extractor.start_at.to_s(:time) if wechat_extractor.start_at %></p>
+        <p><%= wechat_extractor.finish_at.to_s(:time) if wechat_extractor.finish_at %></p>
+      </td>
+      <td>
+        <p class="ui green text"><%= wechat_extractor.valid_response %></p>
+        <p class="ui red text"><%= wechat_extractor.invalid_response %></p>
+      </td>
+      <td>
+        <div>
+          <div class="ui toggle checkbox">
+            <%= check_box_tag '[wechat_extractor]serial', nil, wechat_extractor.serial, data: { method: :patch, remote: true, url: admin_wechat_extractor_path(wechat_extractor), submit: true }, id: nil %>
+          </div>
+        </div>
+        <p><%= wechat_extractor.serial_start %></p>
+      </td>
+      <td>
+        <%= link_to admin_wechat_extractor_path(wechat_extractor), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-eye"></i>
+        <% end %>
+        <%= link_to edit_admin_wechat_extractor_path(wechat_extractor), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        <%= link_to admin_wechat_extractor_path(wechat_extractor), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, class: 'ui mini circular icon button' do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @wechat_extractors %>

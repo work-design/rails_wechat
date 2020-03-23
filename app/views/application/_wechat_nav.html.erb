@@ -6,7 +6,6 @@
   </a>
   <div class="<%= active_helper(modules: 'wechat/admin', active_class: 'menu content active', item_class: 'menu content') %>">
     <%= link_to t('wechat.admin.wechat_apps.index.title'), admin_wechat_apps_path, class: active_helper(controllers: 'wechat_apps') %>
-    <%= link_to t('wechat.admin.extractors.index.title'), admin_extractors_path, class: active_helper(controllers: 'extractors') %>
     <%= link_to t('wechat.admin.template_configs.index.title'), admin_template_configs_path, class: active_helper(controllers: 'template_configs') %>
   </div>
 </div>
