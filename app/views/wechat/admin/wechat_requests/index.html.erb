@@ -39,7 +39,7 @@
       <td><%= wechat_request.type_i18n %></td>
       <td>
         <table class="ui very basic table">
-        <% wechat_request.extractions.each do |ex| %>
+        <% wechat_request.wechat_extractions.each do |ex| %>
           <tr>
             <td><%= ex.name %></td>
             <td><%= ex.matched %></td>
