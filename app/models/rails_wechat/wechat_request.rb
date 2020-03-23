@@ -1,6 +1,8 @@
 module RailsWechat::WechatRequest
   extend ActiveSupport::Concern
   included do
+    mattr_accessor :rules, default: []  # 用于配置 reply 的逻辑
+
     attribute :type, :string
     attribute :body, :string
     attribute :raw_body, :json
@@ -17,19 +19,17 @@ module RailsWechat::WechatRequest
   def do_extract
   end
 
-  def response
-    filtered = @rules.find do |rule|
-      next unless rule[:msg_type].to_s == @message_hash['MsgType']
+  def rule_tag
+    {
+      msg_type: msg_type,
+      event: event,
+      body: body
+    }
+  end
 
-      if rule[:msg_type] == :event
-        next unless rule[:event].underscore == @message_hash['Event'].underscore
-      end
-
-      if rule[:with]
-        @with.match? rule[:with]
-      else
-        true
-      end
+  def reply
+    filtered = rules.find do |rule|
+      rule.slice(:msg_type, :event, :body) == self.rule_tag
     end
 
     if filtered
@@ -41,34 +41,15 @@ module RailsWechat::WechatRequest
 
   class_methods do
 
-    def on(msg_type, event: nil, with: nil, &block)
-      @configs ||= []
-      config = { msg_type: msg_type }
+    def on(msg_type: nil, body: nil, event: nil, &block)
+      config = {
+        msg_type: msg_type,
+        event: event,
+        body: body,
+      }
       config[:proc] = block if block_given?
 
-      if msg_type == :event
-        if event
-          config[:event] = event
-        else
-          raise 'Must appoint event type'
-        end
-      end
-
-      if with.present?
-        unless WITH_TYPE.include?(msg_type)
-          warn "Only #{WITH_TYPE.join(', ')} can having :with parameters", uplevel: 1
-        end
-
-        case with
-        when String, Regexp
-          config[:with] = with
-        else
-          raise 'With is only support String or Regexp!'
-        end
-      end
-
-      @configs << config
-      config
+      rules << config
     end
 
   end

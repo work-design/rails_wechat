@@ -75,22 +75,22 @@ module RailsWechat::WechatResponse
     time < expire_at
   end
 
-  def invoke_effect(request_from)
+  def invoke_effect(request)
     r = []
     if effective
-      r << effective.invoke_effect(request_from)
+      r << effective.invoke_effect(request)
     end
-    r += do_extract(request_from)
+    r += do_extract(request)
     r.compact!
     r.join("\n")
   end
 
-  def do_extract(request_from)
+  def do_extract(request)
     wechat_extractors.map do |wechat_extractor|
-      matched = request_from.body.scan(wechat_extractor.scan_regexp)
+      matched = request.body.scan(wechat_extractor.scan_regexp)
       next if matched.blank?
 
-      ex = request_from.wechat_extractions.find_or_initialize_by(wechat_extractor_id: wechat_extractor.id)
+      ex = request.wechat_extractions.find_or_initialize_by(wechat_extractor_id: wechat_extractor.id)
       ex.name = wechat_extractor.name
       ex.matched = matched.join(', ')
       if wechat_extractor.serial && wechat_extractor.effective?

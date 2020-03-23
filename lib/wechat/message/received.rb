@@ -16,19 +16,19 @@ class Wechat::Message::Received < Wechat::Message::Base
     'subscribe' => 'SubscribeRequest',
     'unsubscribe' => 'UnsubscribeRequest',
     'LOCATION' => 'WechatRequestLocation', # 公众号与企业微信通用
-    'CLICK' => '',
-    'VIEW' => '',
-    'SCAN' => '',
-    'click' => '',
-    'view' => '',  # 企业微信使用
-    'scancode_push' => '',
-    'scancode_waitmsg' => '',
-    'pic_sysphoto' => '',
-    'pic_photo_or_album' => '',
-    'pic_weixin' => '',
-    'location_select' => '',
-    'enter_agent' => '',
-    'batch_job_result' => ''  # 企业微信使用
+    'CLICK' => 'WechatRequest',
+    'VIEW' => 'WechatRequest',
+    'SCAN' => 'WechatRequest',
+    'click' => 'WechatRequest',
+    'view' => 'WechatRequest',  # 企业微信使用
+    'scancode_push' => 'WechatRequest',
+    'scancode_waitmsg' => 'WechatRequest',
+    'pic_sysphoto' => 'WechatRequest',
+    'pic_photo_or_album' => 'WechatRequest',
+    'pic_weixin' => 'WechatRequest',
+    'location_select' => 'WechatRequest',
+    'enter_agent' => 'WechatRequest',
+    'batch_job_result' => 'WechatRequest'  # 企业微信使用
   }.freeze
 
   attr_reader :app, :content
@@ -40,7 +40,10 @@ class Wechat::Message::Received < Wechat::Message::Base
     @api = @app.api
 
     post_xml
+
     @request = wechat_user.wechat_requests.build(wechat_app_id: app.id, body: content, type: type)
+    @request.msg_type = @message_hash['MsgType']
+
     parse_content
     save
   end
@@ -79,10 +82,10 @@ class Wechat::Message::Received < Wechat::Message::Base
   def parse_content
     case @message_hash['MsgType']
     when 'text'
-      @wechat_request.body = @message_hash['Content']
+      @request.body = @message_hash['Content']
     when 'image', 'voice', 'video', 'shortvideo', 'location', 'event'
-      @wechat_request.raw_body = @message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
-      @wechat_request.body = @message_hash['EventKey']
+      @request.raw_body = @message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
+      @request.body = @message_hash['EventKey']
     else
       warn "Don't know how to parse message as #{@message_hash['MsgType']}", uplevel: 1
     end
