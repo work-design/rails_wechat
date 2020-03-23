@@ -16,7 +16,6 @@
   <thead>
     <tr>
       <th><%= WechatResponse.human_attribute_name(:request_type) %></th>
-      <th><%= WechatResponse.human_attribute_name(:type) %></th>
       <th><%= WechatResponse.human_attribute_name(:contain) %></th>
       <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
       <th>
@@ -34,7 +33,6 @@
   <% @wechat_responses.each do |wechat_response| %>
     <tr>
       <td><%= WechatRequest.enum_i18n(:type, wechat_response.request_type) %></td>
-      <td><%= wechat_response.type_i18n %></td>
       <td>
         <div class="ui toggle checkbox">
           <%= check_box_tag '[wechat_response]contain', nil, wechat_response.contain, data: { method: :patch, remote: true, url: admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), submit: true }, id: nil %>
@@ -42,9 +40,7 @@
       </td>
       <td>
         <%= wechat_response.match_value %>
-        <% if wechat_response.is_a?(ScanResponse) %>
-          <%= image_tag wechat_response.qrcode_file, class: 'ui small image' if wechat_response.qrcode_file.attached? %>
-        <% end %>
+        <%= image_tag wechat_response.qrcode_file, class: 'ui small image' if wechat_response.qrcode_file.attached? %>
       </td>
       <td>
         <p><time><%= wechat_response.created_at.to_s(:rfc822) %></time></p>

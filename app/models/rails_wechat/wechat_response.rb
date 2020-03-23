@@ -1,9 +1,11 @@
 module RailsWechat::WechatResponse
   extend ActiveSupport::Concern
   included do
-    attribute :type, :string, default: 'TextResponse'
+    delegate :url_helpers, to: 'Rails.application.routes'
+
     attribute :match_value, :string
     attribute :contain, :boolean, default: true
+    #attribute :expire_seconds, :integer, default: 2592000
     attribute :expire_seconds, :integer
     attribute :expire_at, :datetime
     attribute :qrcode_ticket, :string
@@ -13,12 +15,57 @@ module RailsWechat::WechatResponse
     belongs_to :wechat_app
     belongs_to :effective, polymorphic: true, optional: true
 
+    has_one_attached :qrcode_file
+
     validates :match_value, presence: true
 
     before_validation do
       self.match_value ||= "#{effective_type}_#{effective_id}"
       self.expire_at = Time.current + expire_seconds if expire_seconds
     end
+    after_save_commit :sync, if: -> { saved_change_to_match_value? }
+  end
+
+  def sync
+    commit_to_wechat
+    persist_to_file
+  end
+
+  def scan_regexp(body)
+    if contain
+      body.match? Regexp.new(match_value)
+    else
+      !body.match?(Regexp.new match_value)
+    end
+  end
+
+  def persist_to_file
+    file = QrcodeHelper.code_file self.qrcode_url
+    self.qrcode_file.attach io: file, filename: self.qrcode_url
+  end
+
+  def qrcode_file_url
+    url_helpers.rails_blob_url(qrcode_file) if qrcode_file.attachment.present?
+  end
+
+  def commit_to_wechat
+    if expire_seconds
+      r = wechat_app.api.qrcode_create_scene self.match_value, expire_seconds
+      self.expire_at = Time.current + expire_seconds
+    elsif self.qrcode_ticket.blank?
+      r = wechat_app.api.qrcode_create_limit_scene self.match_value
+    end
+
+    self.qrcode_ticket = r['ticket']
+    self.qrcode_url = r['url']
+    self.save
+  end
+
+  def refresh
+    unless effective?
+      sync
+    end
+    self
   end
 
   def effective?(time = Time.now)

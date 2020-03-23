@@ -1,6 +1,7 @@
 class WechatRequest < ApplicationRecord
   include RailsWechat::WechatRequest
-  on :text, with: '绑定' do |received|
+
+  on msg_type: 'text', body: '绑定' do |received|
     reply_params = {
       wechat_user_id: received.wechat_user.id,
       news_reply_items_attributes: [
@@ -15,7 +16,7 @@ class WechatRequest < ApplicationRecord
     received.reply.with NewsReply.new(reply_params)
   end
 
-  on :event, event: 'templatesendjobfinish' do |received, content|
+  on msg_type: 'event', event: 'templatesendjobfinish' do |received, content|
     r = WechatNotice.find_by(msg_id: content['MsgID'])
     r.update status: content['Status']
     received.reply.with TextReply.new(wechat_user_id: received.wechat_user.id, value: 'SUCCESS')

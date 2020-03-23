@@ -3,6 +3,9 @@ module RailsWechat::WechatRequest
   included do
     attribute :type, :string
     attribute :body, :text
+    attribute :msg_type, :string
+    attribute :event, :string
+    attribute :event_key, :string
 
     belongs_to :wechat_user
     belongs_to :wechat_app
@@ -28,7 +31,7 @@ module RailsWechat::WechatRequest
     end
 
     if filtered
-      filtered[:proc].call(self, @content)
+      filtered[:proc].call(self)
     else
       {}
     end

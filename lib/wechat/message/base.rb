@@ -52,7 +52,7 @@ class Wechat::Message::Base
     }
   end
 
-  def update(fields = {})
+  def update(**fields)
     @message_hash.merge!(fields)
     self
   end

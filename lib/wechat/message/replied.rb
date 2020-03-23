@@ -18,9 +18,8 @@ class Wechat::Message::Replied < Wechat::Message::Base
     end
   end
 
-  def save_to_db!
-    @wecaht_app.body = @message_hash
-    @wecaht_app.save!
+  def save!
+    @wecaht_request_reply.save!
     self
   end
 

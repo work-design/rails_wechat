@@ -7,11 +7,11 @@
 <% end %>
 <div class="ui divider"></div>
 <dl>
-  <dt><%= WechatResponse.human_attribute_name(:type) %></dt>
+  <dt><%= WechatResponse.human_attribute_name(:request_type) %></dt>
   <dd>
-    <%= link_to t('.all'), filter_params(except: [:type]), class: active_params(type: '', active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
-    <% WechatResponse.options_i18n(:type).each do |text, value| %>
-      <%= link_to text, filter_params(type: value), class: active_params(type: value, active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
+    <%= link_to t('.all'), filter_params(except: [:request_type]), class: active_params(request_type: '', active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
+    <% WechatRequest.options_i18n(:request_type).each do |text, value| %>
+      <%= link_to text, filter_params(request_type: value), class: active_params(request_type: value, active_class: 'ui basic blue button', item_class: 'ui basic white button') %>
     <% end %>
   </dd>
 </dl>
