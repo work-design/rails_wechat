@@ -32,6 +32,7 @@ class Wechat::Message::Received < Wechat::Message::Base
   }.freeze
 
   attr_reader :app, :content
+
   def initialize(app, message_body)
     @app = app
     @message_body = message_body
@@ -39,7 +40,7 @@ class Wechat::Message::Received < Wechat::Message::Base
     @api = @app.api
 
     post_xml
-    @wechat_request = wechat_user.wechat_requests.build(wechat_app_id: app.id, body: content, type: type)
+    @request = wechat_user.wechat_requests.build(wechat_app_id: app.id, body: content, type: type)
     parse_content
     save
   end
@@ -93,19 +94,10 @@ class Wechat::Message::Received < Wechat::Message::Base
       FromUserName: @message_hash['ToUserName'],
       CreateTime: Time.now.to_i
     )
-    r = @wechat_request.response
-
-    if r.respond_to? :to_wechat
-      @reply.update(content: r.to_wechat)
-    else
-      @reply.update(MsgType: 'text', Content: r)
-    end
-
-    @reply
   end
 
   def save
-    @wechat_request.save
+    @request.save
   end
 
 end

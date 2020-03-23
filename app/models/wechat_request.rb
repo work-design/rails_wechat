@@ -22,7 +22,7 @@ class WechatRequest < ApplicationRecord
     received.reply.with TextReply.new(wechat_user_id: received.wechat_user.id, value: 'SUCCESS')
   end
 
-  on :event, event: 'click', with: 'bind' do |received|
+  on msg_type: 'event', event: 'click', event_key: 'bind' do |received|
     reply_parms = {
       wechat_user_id: received.wechat_user.id,
       news_reply_items_attributes: [

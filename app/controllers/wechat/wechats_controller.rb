@@ -15,6 +15,7 @@ class Wechat::WechatsController < ApplicationController
   def create
     received = Wechat::Message::Received.new(@wechat_app, request.raw_post)
     replied = received.reply
+    replied.get_reply
 
     if replied.respond_to? :to_xml
       render plain: replied.to_xml

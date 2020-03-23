@@ -1,5 +1,6 @@
 module RailsWechat::WechatReply::MusicReply
   extend ActiveSupport::Concern
+
   included do
     attribute :msg_type, :string, default: 'music'
   end
