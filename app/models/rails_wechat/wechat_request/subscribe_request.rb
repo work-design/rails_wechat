@@ -1,7 +1,5 @@
 module RailsWechat::WechatRequest::SubscribeRequest
   extend ActiveSupport::Concern
-  included do
-  end
 
   def response
     if body.present?

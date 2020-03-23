@@ -77,9 +77,33 @@ module RailsWechat::WechatResponse
   end
 
   def invoke_effect(request_from)
+    r = []
     if effective
-      effective.invoke_effect(request_from)
+      r << effective.invoke_effect(request_from)
     end
+    r += do_extract(request_from)
+    r.compact!
+    r.join("\n")
+  end
+
+  def do_extract(request_from)
+    extractors.map do |extractor|
+      matched = request_from.body.scan(extractor.scan_regexp)
+      next if matched.blank?
+
+      ex = request_from.extractions.find_or_initialize_by(extractor_id: extractor.id)
+      ex.name = extractor.name
+      ex.matched = matched.join(', ')
+      if extractor.serial && extractor.effective?
+        ex.serial_number = extractor.serial_number if ex.new_record?
+        r = ex.respond_text
+      else
+        r = extractor.invalid_response.presence
+      end
+      ex.save
+
+      r
+    end.compact
   end
 
 end

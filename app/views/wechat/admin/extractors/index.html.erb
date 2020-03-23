@@ -10,16 +10,16 @@
       <th><%= Extractor.human_attribute_name(:suffix) %></th>
       <th><%= Extractor.human_attribute_name(:more) %></th>
       <th>
-        <p><%= Extractor.human_attribute_name(:serial) %></p>
-        <p><%= Extractor.human_attribute_name(:serial_start) %></p>
-      </th>
-      <th>
         <p><%= Extractor.human_attribute_name(:start_at) %></p>
         <p><%= Extractor.human_attribute_name(:finish_at) %></p>
       </th>
       <th>
         <p class="ui green text"><%= Extractor.human_attribute_name(:valid_response) %></p>
         <p class="ui red text"><%= Extractor.human_attribute_name(:invalid_response) %></p>
+      </th>
+      <th>
+        <p><%= Extractor.human_attribute_name(:serial) %></p>
+        <p><%= Extractor.human_attribute_name(:serial_start) %></p>
       </th>
       <th>
         <%= link_to new_admin_extractor_path, remote: true, class: 'ui mini green button' do %>
@@ -40,20 +40,20 @@
         </div>
       </td>
       <td>
-        <div>
-          <div class="ui toggle checkbox">
-            <%= check_box_tag '[extractor]serial', nil, extractor.serial, data: { method: :patch, remote: true, url: admin_extractor_path(extractor), submit: true }, id: nil %>
-          </div>
-        </div>
-        <p><%= extractor.serial_start %></p>
-      </td>
-      <td>
         <p><%= extractor.start_at.to_s(:time) if extractor.start_at %></p>
         <p><%= extractor.finish_at.to_s(:time) if extractor.finish_at %></p>
       </td>
       <td>
         <p class="ui green text"><%= extractor.valid_response %></p>
         <p class="ui red text"><%= extractor.invalid_response %></p>
+      </td>
+      <td>
+        <div>
+          <div class="ui toggle checkbox">
+            <%= check_box_tag '[extractor]serial', nil, extractor.serial, data: { method: :patch, remote: true, url: admin_extractor_path(extractor), submit: true }, id: nil %>
+          </div>
+        </div>
+        <p><%= extractor.serial_start %></p>
       </td>
       <td>
         <%= link_to admin_extractor_path(extractor), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
