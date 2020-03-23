@@ -27,7 +27,7 @@ module RailsWechat::WechatRequest
     }
   end
 
-  def reply
+  def reply_from_rule
     filtered = rules.find do |rule|
       rule.slice(:msg_type, :event, :body) == self.rule_tag
     end
