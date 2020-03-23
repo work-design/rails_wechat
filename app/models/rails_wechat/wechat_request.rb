@@ -2,7 +2,8 @@ module RailsWechat::WechatRequest
   extend ActiveSupport::Concern
   included do
     attribute :type, :string
-    attribute :body, :text
+    attribute :body, :string
+    attribute :raw_body, :json
     attribute :msg_type, :string
     attribute :event, :string
     attribute :event_key, :string

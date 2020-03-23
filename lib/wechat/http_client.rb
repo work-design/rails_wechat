@@ -13,7 +13,7 @@ class Wechat::HttpClient
     base = options[:base].presence || @base
     url = base + path
 
-    response = @http.headers(headers).get(url, params: params)
+    response = @http.with_headers(headers).get(url, params: params)
     parse_response(response, options[:as])
   end
 
@@ -23,7 +23,7 @@ class Wechat::HttpClient
     base = options[:base].presence || @base
     url = base + path
 
-    response = @http.headers(headers).post(url, params: params, body: payload)
+    response = @http.with_headers(headers).post(url, params: params, body: payload)
     parse_response(response, options[:as])
   end
 
@@ -33,7 +33,7 @@ class Wechat::HttpClient
     url = base + path
 
     form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file)
-    response = @http.plugin(:multipart).headers(headers).post(
+    response = @http.plugin(:multipart).with_headers(headers).post(
       url,
       params: params,
       form: { media: form_file }

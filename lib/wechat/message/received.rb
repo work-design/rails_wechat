@@ -40,8 +40,8 @@ class Wechat::Message::Received < Wechat::Message::Base
 
     post_xml
     @wechat_request = wechat_user.wechat_requests.build(wechat_app_id: app.id, body: content, type: type)
-
     parse_content
+    save
   end
 
   def post_xml
@@ -78,10 +78,10 @@ class Wechat::Message::Received < Wechat::Message::Base
   def parse_content
     case @message_hash['MsgType']
     when 'text'
-      @content = @message_hash['Content']
+      @wechat_request.body = @message_hash['Content']
     when 'image', 'voice', 'video', 'shortvideo', 'location', 'event'
-      @content = @message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
-      @with = @message_hash['EventKey']
+      @wechat_request.raw_body = @message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
+      @wechat_request.body = @message_hash['EventKey']
     else
       warn "Don't know how to parse message as #{@message_hash['MsgType']}", uplevel: 1
     end
@@ -93,7 +93,7 @@ class Wechat::Message::Received < Wechat::Message::Base
       FromUserName: @message_hash['ToUserName'],
       CreateTime: Time.now.to_i
     )
-    r = @wechat_request.response || ''
+    r = @wechat_request.response
 
     if r.respond_to? :to_wechat
       @reply.update(content: r.to_wechat)

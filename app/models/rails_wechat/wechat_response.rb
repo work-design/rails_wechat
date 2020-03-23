@@ -3,6 +3,7 @@ module RailsWechat::WechatResponse
   included do
     delegate :url_helpers, to: 'Rails.application.routes'
 
+    attribute :request_type, :string, comment: '用户发送消息类型'
     attribute :match_value, :string
     attribute :contain, :boolean, default: true
     #attribute :expire_seconds, :integer, default: 2592000
@@ -10,7 +11,6 @@ module RailsWechat::WechatResponse
     attribute :expire_at, :datetime
     attribute :qrcode_ticket, :string
     attribute :qrcode_url, :string
-    attribute :request_type, :string, comment: '用户发送消息类型'
 
     belongs_to :wechat_app
     belongs_to :effective, polymorphic: true, optional: true
@@ -23,12 +23,7 @@ module RailsWechat::WechatResponse
       self.match_value ||= "#{effective_type}_#{effective_id}"
       self.expire_at = Time.current + expire_seconds if expire_seconds
     end
-    after_save_commit :sync, if: -> { saved_change_to_match_value? }
-  end
-
-  def sync
-    commit_to_wechat
-    persist_to_file
+    after_save_commit :sync, if: -> { ['WechatRequestEvent'].include?(request_type) && saved_change_to_match_value? }
   end
 
   def scan_regexp(body)
@@ -37,6 +32,11 @@ module RailsWechat::WechatResponse
     else
       !body.match?(Regexp.new match_value)
     end
+  end
+
+  def sync
+    commit_to_wechat
+    persist_to_file
   end
 
   def persist_to_file
@@ -54,6 +54,8 @@ module RailsWechat::WechatResponse
       self.expire_at = Time.current + expire_seconds
     elsif self.qrcode_ticket.blank?
       r = wechat_app.api.qrcode_create_limit_scene self.match_value
+    else
+      r = {}
     end
 
     self.qrcode_ticket = r['ticket']

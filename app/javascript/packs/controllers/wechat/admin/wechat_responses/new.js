@@ -1,1 +1,1 @@
-$('#wechat_response_type').dropdown();
+$('#wechat_response_request_type').dropdown()
