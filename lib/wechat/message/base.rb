@@ -20,6 +20,19 @@ class Wechat::Message::Base
     @message_hash.to_json
   end
 
+  def content_blank?
+    case @message_hash['MsgType']
+    when 'image', 'voice', 'video', 'music'
+      !@message_hash.key?(@message_hash['MsgType'].classify)
+    when 'news'
+      !@message_hash.key?('Articles')
+    when 'text'
+      @message_hash[:Content].blank?
+    else
+      false
+    end
+  end
+
   def save_to_db!
     model = WechatMessage.new
     model.body = @message_hash

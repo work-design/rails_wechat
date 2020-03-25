@@ -4,7 +4,7 @@ class Wechat::Message::Replied < Wechat::Message::Base
 
   def initialize(request, **params)
     @request = request
-    @message_hash = params
+    @message_hash = params.with_indifferent_access
   end
 
   def to(openid)
@@ -15,14 +15,14 @@ class Wechat::Message::Replied < Wechat::Message::Base
     r = request.reply
 
     if r.respond_to? :to_wechat
-      update(content: r.to_wechat)
+      update **r.to_wechat
     else
       update(MsgType: 'text', Content: r)
     end
   end
 
   def to_xml
-    if @message_hash[:Content].blank?
+    if content_blank?
       'success'
     else
       super
