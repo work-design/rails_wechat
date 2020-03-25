@@ -83,6 +83,7 @@ class Wechat::Message::Received < Wechat::Message::Base
     when 'text'
       @request.body = @message_hash['Content']
     when 'image', 'voice', 'video', 'shortvideo', 'location', 'event'
+      @request.event = @message_hash['Event']
       @request.body = @message_hash['EventKey']
     else
       warn "Don't know how to parse message as #{@message_hash['MsgType']}", uplevel: 1

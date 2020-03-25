@@ -16,6 +16,10 @@ module RailsWechat::WechatRequest
     has_many :wechat_responses, ->(o){ where(request_type: o.type) }, primary_key: :wechat_app_id, foreign_key: :wechat_app_id
   end
 
+  def reply
+    reply_from_rule
+  end
+
   def rule_tag
     {
       msg_type: msg_type,
@@ -29,11 +33,7 @@ module RailsWechat::WechatRequest
       rule.slice(:msg_type, :event, :body) == self.rule_tag
     end
 
-    if filtered
-      filtered[:proc].call(self)
-    else
-      {}
-    end
+    filtered[:proc].call(self) if filtered
   end
 
   class_methods do

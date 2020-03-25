@@ -3,8 +3,5 @@ module RailsWechat::WechatRequest::UnsubscribeRequest
   included do
   end
 
-  def reply
-  end
-
 end
 

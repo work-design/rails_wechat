@@ -2,6 +2,9 @@ module RailsWechat::WechatRequest::SubscribeRequest
   extend ActiveSupport::Concern
 
   def reply
+    r = reply_from_rule
+    return r if r
+
     if body.present?
       qr_response
     else
