@@ -41,11 +41,12 @@ module RailsWechat::WechatRequest
 
   class_methods do
 
-    def on(msg_type: nil, body: nil, event: nil, &block)
+    def on(msg_type: nil, body: nil, event: nil, proc: nil, &block)
       config = {
         msg_type: msg_type,
         event: event,
         body: body,
+        proc: proc
       }
       config[:proc] = block if block_given?
 

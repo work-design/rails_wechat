@@ -2,8 +2,7 @@ module WechatRequestExtend
   extend ActiveSupport::Concern
   included do
 
-    #msg_type: 'event', event: 'click', body: 'bind'
-    on msg_type: 'text', body: '绑定' do |request|
+    proc = Proc.new do |request|
       reply_params = {
         wechat_user_id: request.wechat_user_id,
         news_reply_items_attributes: [
@@ -17,7 +16,8 @@ module WechatRequestExtend
 
       NewsReply.new(reply_params)
     end
-
+    on msg_type: 'event', event: 'click', body: 'bind', proc: proc
+    on msg_type: 'text', body: '绑定', proc: proc
     on msg_type: 'event', event: 'templatesendjobfinish' do |request|
       r = WechatNotice.find_by(msg_id: request.raw_body['MsgID'])
       r.update status: request.raw_body['Status']
