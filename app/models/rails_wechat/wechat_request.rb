@@ -16,9 +16,6 @@ module RailsWechat::WechatRequest
     has_many :wechat_responses, ->(o){ where(request_type: o.type) }, primary_key: :wechat_app_id, foreign_key: :wechat_app_id
   end
 
-  def do_extract
-  end
-
   def rule_tag
     {
       msg_type: msg_type,
