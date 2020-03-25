@@ -31,17 +31,14 @@ class Wechat::Message::Received < Wechat::Message::Base
     'batch_job_result' => 'WechatRequest'  # 企业微信使用
   }.freeze
 
-  attr_reader :app, :content
-
   def initialize(app, message_body)
     @app = app
-    @message_body = message_body
-    @content = nil
     @api = @app.api
+    @message_body = message_body
 
     post_xml
 
-    @request = wechat_user.wechat_requests.build(wechat_app_id: app.id, body: content, type: type)
+    @request = wechat_user.wechat_requests.build(wechat_app_id: app.id, type: type)
     @request.msg_type = @message_hash['MsgType']
 
     parse_content
@@ -93,6 +90,7 @@ class Wechat::Message::Received < Wechat::Message::Base
 
   def reply
     @reply = Wechat::Message::Replied.new(
+      @request,
       ToUserName: @message_hash['FromUserName'],
       FromUserName: @message_hash['ToUserName'],
       CreateTime: Time.now.to_i

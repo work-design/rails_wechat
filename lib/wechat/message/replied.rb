@@ -2,7 +2,8 @@
 
 class Wechat::Message::Replied < Wechat::Message::Base
 
-  def initialize(params)
+  def initialize(request, **params)
+    @request = request
     @message_hash = params
   end
 

@@ -1,4 +1,4 @@
-module WechatRequest::Extend
+module WechatRequestExtend
   extend ActiveSupport::Concern
   included do
 

@@ -1,4 +1,4 @@
 class WechatRequest < ApplicationRecord
   include RailsWechat::WechatRequest
-  include WechatRequest::Extend
+  include WechatRequestExtend
 end unless defined? WechatRequest
