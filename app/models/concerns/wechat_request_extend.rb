@@ -16,7 +16,7 @@ module WechatRequestExtend
 
       NewsReply.new(reply_params)
     end
-    on msg_type: 'x' do |request|
+    on msg_type: 'text' do |request|
       if request.wechat_user.user.nil?
         value = '请绑定账号，输入"绑定"根据提示操作'
       elsif wechat_user.user.disabled?
