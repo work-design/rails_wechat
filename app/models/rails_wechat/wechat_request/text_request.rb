@@ -13,8 +13,6 @@ module RailsWechat::WechatRequest::TextRequest
 
     if res.present?
       res.join("\n")
-    else
-      wechat_app.help
     end
   end
 

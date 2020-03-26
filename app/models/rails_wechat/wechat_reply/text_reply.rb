@@ -8,14 +8,4 @@ module RailsWechat::WechatReply::TextReply
     { Content: value }
   end
 
-  def xx
-    if wechat_user.user.nil?
-      msg = received.app.help_without_user
-    elsif wechat_user.user.disabled?
-      msg = received.app.help_user_disabled
-    else
-      msg = wechat_request.response
-    end
-  end
-
 end

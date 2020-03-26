@@ -37,10 +37,6 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
   def edit
   end
 
-  def edit_help
-
-  end
-
   def update
     @wechat_app.assign_attributes(wechat_app_params)
 
@@ -69,10 +65,7 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
       :agentid,
       :mch_id,
       :key,
-      :encrypt_mode,
-      :help,
-      :help_without_user,
-      :help_user_disabled
+      :encrypt_mode
     )
     p.merge! default_form_params
   end

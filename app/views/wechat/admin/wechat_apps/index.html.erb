@@ -15,11 +15,6 @@
         <p><%= WechatApp.human_attribute_name(:key) %></p>
       </th>
       <th><%= WechatApp.human_attribute_name(:encrypt_mode) %></th>
-      <th>
-        <p><%= WechatApp.human_attribute_name(:help) %></p>
-        <p><%= WechatApp.human_attribute_name(:help_without_user) %></p>
-        <p><%= WechatApp.human_attribute_name(:help_user_disabled) %></p>
-      </th>
       <th><%= WechatApp.human_attribute_name(:enabled) %></th>
       <th><%= WechatApp.human_attribute_name(:primary) %></th>
       <th></th>
@@ -46,14 +41,6 @@
         <div class="ui toggle checkbox">
           <%= check_box_tag '[wechat_app]encrypt_mode', nil, wechat_app.encrypt_mode, data: { method: :patch, remote: true, url: admin_wechat_app_path(wechat_app), submit: true }, id: nil %>
         </div>
-      </td>
-      <td>
-        <p><%= wechat_app.help %></p>
-        <p><%= wechat_app.help_without_user %></p>
-        <p><%= wechat_app.help_user_disabled %></p>
-        <%= link_to help_admin_wechat_app_path(wechat_app), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
-          <i class="fas fa-pencil-alt"></i>
-        <% end %>
       </td>
       <td>
         <div class="ui toggle checkbox">

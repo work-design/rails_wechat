@@ -13,7 +13,6 @@ zh:
         primary: 主账号
         agentid: 企业微信应用ID（AgentId）
         url: 服务器地址（URL）
-        help: 帮助
         help_without_user: 未注册提示
         help_user_disabled: 用户被禁提示
         help_feedback: 收到反馈后提示
