@@ -9,6 +9,10 @@
   </thead>
   <tbody>
     <tr>
+      <td class="right aligned"><%= WechatApp.human_attribute_name(:type) %></td>
+      <td><%= @wechat_app.type_i18n %></td>
+    </tr>
+    <tr>
       <td class="right aligned"><%= WechatApp.human_attribute_name(:enabled) %></td>
       <td><%= @wechat_app.enabled %></td>
     </tr>
@@ -37,20 +41,8 @@
       <td><%= @wechat_app.token %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= WechatApp.human_attribute_name(:help) %></td>
-      <td><%= simple_format @wechat_app.help %></td>
-    </tr>
-    <tr>
-      <td class="right aligned"><%= WechatApp.human_attribute_name(:help_without_user) %></td>
-      <td><%= simple_format @wechat_app.help_without_user %></td>
-    </tr>
-    <tr>
-      <td class="right aligned"><%= WechatApp.human_attribute_name(:help_user_disabled) %></td>
-      <td><%= simple_format @wechat_app.help_user_disabled %></td>
-    </tr>
-    <tr>
       <td class="right aligned"><%= WechatApp.human_attribute_name(:created_at) %></td>
-      <td><%= @wechat_app.created_at %></td>
+      <td><time><%= @wechat_app.created_at.to_s(:rfc822) %></time></td>
     </tr>
   </tbody>
 </table>
