@@ -1,12 +1,14 @@
-<div class="ui modal" id="modal">
-  <i class="fas fa-times close"></i>
-  <div class="ui header">
-    <%= t('.new') %>
-  </div>
-
-  <div class="content">
-    <%= form_with model: @wechat_app, scope: :wechat_app, url: admin_wechat_apps_path do |f| %>
-      <%= render partial: 'form', locals: { f: f } %>
-    <% end %>
+<div class="modal is-active" data-controller="modal">
+  <div class="modal-background" data-action="click->modal#close"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title"><%= t('.new') %></p>
+      <button class="delete" aria-label="close" data-action="modal#close"></button>
+    </header>
+    <section class="modal-card-body">
+      <%= form_with model: @wechat_app, scope: :wechat_app, url: admin_wechat_apps_path do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </section>
   </div>
 </div>

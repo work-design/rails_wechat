@@ -1,12 +1,15 @@
-<div class="ui modal" id="modal">
-  <i class="fas fa-times close icon"></i>
-  <div class="ui header">
-    <%= t('.edit') %>
-  </div>
-
-  <div class="content">
-    <%= form_with model: @wechat_tag, url: admin_wechat_app_wechat_tag_path(@wechat_app, @wechat_tag) do |f| %>
-      <%= render partial: 'form', locals: { f: f } %>
-    <% end %>
+<div class="modal is-active" data-controller="modal">
+  <div class="modal-background" data-action="event->modal#close"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title"><%= t('.edit') %></p>
+      <button class="delete" aria-label="close" data-action="modal#close"></button>
+    </header>
+    <section class="modal-card-body">
+      <%= form_with model: @wechat_tag, url: admin_wechat_app_wechat_tag_path(@wechat_app, @wechat_tag) do |f| %>
+        <%= render partial: 'form', locals: { f: f } %>
+      <% end %>
+    </section>
   </div>
 </div>
+

@@ -32,13 +32,13 @@
         <p><%= template_config.code %></p>
       </td>
       <td>
-        <%= link_to admin_template_config_path(template_config), data: { tooltip: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_template_config_path(template_config), aria: { label: t('.show') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-eye"></i>
         <% end %>
-        <%= link_to edit_admin_template_config_path(template_config), data: { tooltip: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to edit_admin_template_config_path(template_config), aria: { label: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to admin_template_config_path(template_config), method: :delete, data: { tooltip: t('.destroy'), confirm: t('.confirm') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to admin_template_config_path(template_config), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'ui mini circular icon button' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>
