@@ -1,8 +1,0 @@
-<%= form_with model: @wechat_feedback do |f| %>
-  <%= render 'shared/error_messages', target: @wechat_feedback %>
-  <%= f.text_field :wechat_user_id %>
-  <%= f.text_field :body %>
-  <%= f.text_field :feedback_on %>
-  <%= f.text_field :kind %>
-  <%= f.submit %>
-<% end %>

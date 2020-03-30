@@ -1,18 +1,16 @@
 <% content_for :breadcrumb do %>
-  <div class="ui basic segment breadcrumb">
-    <%= link_to t('wechat.admin.wechat_apps.index.title'), admin_wechat_apps_path, class: 'section' %>
-    <% if @wechat_app %>
-    <i class="fas fa-angle-right divider"></i>
-    <%= link_to @wechat_app.name, admin_wechat_apps_path(id: @wechat_app.id), class: 'section' %>
-    <% end %>
-    <i class="fas fa-angle-right divider"></i>
-    <div class="section"><%= t('.title') %></div>
+  <div class="breadcrumb has-succeeds-separator">
+    <ul>
+      <li><%= link_to t('wechat.admin.wechat_apps.index.title'), admin_wechat_apps_path %></li>
+      <% if @wechat_app %>
+      <li><%= link_to @wechat_app.name, admin_wechat_apps_path(id: @wechat_app.id) %></li>
+      <% end %>
+      <li class="is-active"><%= t('.title') %></li>
+    </ul>
   </div>
 <% end %>
 
-<div class="ui top attached segment">
-  <%= render 'filter' %>
-</div>
+<%= render 'filter' %>
 
 <table class="table is-hoverable is-fullwidth">
   <thead>

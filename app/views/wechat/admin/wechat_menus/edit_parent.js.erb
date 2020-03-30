@@ -1,2 +1,1 @@
-$('#modal').replaceWith('<%= j(render 'edit_parent') %>');
-$('#modal').modal('show');
+document.getElementById('modal').innerHTML = '<%= j(render 'edit_parent') %>'

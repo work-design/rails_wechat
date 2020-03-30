@@ -1,10 +1,10 @@
 <% content_for :breadcrumb do %>
-  <div class="ui basic segment breadcrumb">
-    <%= link_to t('wechat.admin.wechat_apps.index.title'), admin_wechat_apps_path, class: 'section' %>
-    <i class="fas fa-angle-right divider"></i>
-    <%= link_to @wechat_app.name, admin_wechat_apps_path(id: @wechat_app.id), class: 'section' %>
-    <i class="fas fa-angle-right divider"></i>
-    <div class="section"><%= t('.title') %></div>
+  <div class="breadcrumb">
+    <ul>
+      <li><%= link_to t('wechat.admin.wechat_apps.index.title'), admin_wechat_apps_path %></li>
+      <li><%= link_to @wechat_app.name, admin_wechat_apps_path(id: @wechat_app.id) %></li>
+      <li class="is-active"><%= t('.title') %></li>
+    </ul>
   </div>
 <% end %>
 

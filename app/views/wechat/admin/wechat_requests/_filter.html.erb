@@ -1,12 +1,13 @@
 <%= form_with theme: 'search', model: WechatRequest.new do |f| %>
-  <div class="fields">
+  <div class="field-body">
     <%= f.date_field 'created_at-gte', value: params['created_at-gte'] %>
     <%= f.date_field 'created_at-lte', value: params['created_at-lte'] %>
-    <%= f.submit %>
-    <%= link_to t('.clear'), filter_params(except: ['created_at-gte', 'created_at-lte']), class: 'ui button' %>
+    <div class="field is-narrow">
+      <%= f.submit %>
+      <%= link_to t('.clear'), filter_params(except: ['created_at-gte', 'created_at-lte']), class: 'button is-light' %>
+    </div>
   </div>
 <% end %>
-<div class="ui divider"></div>
 <dl>
   <dt><%= WechatRequest.human_attribute_name(:type) %></dt>
   <dd>

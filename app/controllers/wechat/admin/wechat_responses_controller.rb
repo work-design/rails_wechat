@@ -56,7 +56,7 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
     if defined?(current_organ) && current_organ
       q.merge! organ_id: [current_organ.id, nil]
     end
-    @extractors = Extractor.default_where(q)
+    @wechat_extractors = WechatExtractor.default_where(q)
   end
 
   def wechat_response_params

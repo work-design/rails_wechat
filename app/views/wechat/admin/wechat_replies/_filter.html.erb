@@ -1,7 +1,9 @@
 <%= form_with theme: 'search', model: WechatReply.new do |f| %>
-  <div class="fields">
+  <div class="field-body">
     <%= f.text_field :name %>
-    <%= f.submit %>
-    <%= link_to t('.clear'), filter_params(except: [:name]), class: 'ui button' %>
+    <div class="field is-narrow">
+      <%= f.submit %>
+      <%= link_to t('.clear'), filter_params(except: [:name]), class: 'button is-light' %>
+    </div>
   </div>
 <% end %>
