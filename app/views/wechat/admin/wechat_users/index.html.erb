@@ -21,7 +21,7 @@
       <td><%= wechat_user.account_id %></td>
       <td><%= wechat_user.user_id %></td>
       <td>
-        <%= link_to edit_admin_wechat_app_wechat_user_path(@wechat_app, wechat_user), aria: { label: t('.edit') }, remote: true, class: 'ui mini circular icon button' do %>
+        <%= link_to edit_admin_wechat_app_wechat_user_path(@wechat_app, wechat_user), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
       </td>
