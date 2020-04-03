@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/qinmingyuan/default_form.git
-  revision: b114638c85a98e5c32dcacff3fbfff5c462d6b62
+  revision: 0d176d352cf2049aadfdbeb35cd8575b7712a796
   specs:
     default_form (1.5.0)
       rails_com (~> 1.2)
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 1ae70c8c9bc955fba7dd12a0d707f200ad093634
+  revision: 29a7a3577fce5881d75d4669a0d2cbc7be04bd3b
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: e53cc78e272bb1e08af68eca28e28c03bccb5718
+  revision: 1fe4fe41c40875d82e48ae2f95296565c05f83ff
   specs:
     rails_com (1.2.9)
       default_where (~> 2.2)
