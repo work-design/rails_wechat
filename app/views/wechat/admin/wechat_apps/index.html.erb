@@ -17,7 +17,7 @@
       <th><%= WechatApp.human_attribute_name(:primary) %></th>
       <th></th>
       <th>
-        <%= link_to new_admin_wechat_app_path, remote: true, class: 'ui mini green button' do %>
+        <%= link_to new_admin_wechat_app_path, remote: true, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><% t('.new') %>
         <% end %>
       </th>
@@ -68,7 +68,7 @@
         <% end %>
       </td>
       <td>
-        <%= link_to info_admin_wechat_app_path(wechat_app), aria: { label: t('.info') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to info_admin_wechat_app_path(wechat_app), aria: { label: t('wechat.admin.wechat_apps.info.title') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-cog"></i>
         <% end %>
         <%= link_to admin_wechat_app_path(wechat_app), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>

@@ -1,15 +1,8 @@
-<div class="ui modal" id="modal">
-  <i class="close icon"></i>
-  <div class="ui header">
-    <%= t('.new') %>
-  </div>
-
-  <div class="content">
-    <%= form_with model: @wechat_menu, scope: :wechat_menu, url: admin_wechat_menus_path do |f| %>
-      <%= f.hidden_field :wechat_app_id %>
-      <%= f.hidden_field :type, value: 'ParentMenu' %>
-      <%= f.text_field :name, required: true %>
-      <%= f.submit %>
-    <% end %>
-  </div>
-</div>
+<%= render 'modal' do %>
+  <%= form_with model: @wechat_menu, scope: :wechat_menu, url: admin_wechat_menus_path do |f| %>
+    <%= f.hidden_field :wechat_app_id %>
+    <%= f.hidden_field :type, value: 'ParentMenu' %>
+    <%= f.text_field :name, required: true %>
+    <%= f.submit %>
+  <% end %>
+<% end %>>

@@ -9,7 +9,7 @@
       <th><%= WechatSubscribed.human_attribute_name(:status) %></th>
       <th><%= WechatSubscribed.human_attribute_name(:sending_at) %></th>
       <th>
-        <%= link_to new_my_wechat_subscribed_path, remote: true, class: 'ui mini green button' do %>
+        <%= link_to new_my_wechat_subscribed_path, remote: true, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>

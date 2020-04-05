@@ -1,3 +1,1 @@
-$('#modal').replaceWith('<%= j(render 'info') %>')
-$('#modal').modal('show')
-remote_js_load('<%= raw remote_js_load %>')
+document.getElementById('modal').innerHTML = '<%= j(render 'info') %>'

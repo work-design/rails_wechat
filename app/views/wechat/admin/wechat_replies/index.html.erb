@@ -7,7 +7,7 @@
       <th class="six column"><%= WechatReply.human_attribute_name(:value) %></th>
       <th class="six column"><%= WechatReply.human_attribute_name(:body) %></th>
       <th class="two column">
-        <%= link_to new_admin_wechat_app_wechat_reply_path(@wechat_app), remote: true, class: 'ui mini green button' do %>
+        <%= link_to new_admin_wechat_app_wechat_reply_path(@wechat_app), remote: true, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>

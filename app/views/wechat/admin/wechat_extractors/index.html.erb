@@ -1,18 +1,13 @@
 <% content_for :breadcrumb do %>
-  <div class="ui basic segment breadcrumb">
-    <%= link_to t('wechat.admin.wechat_apps.index.title'), admin_wechat_apps_path, class: 'section' %>
-    <i class="fas fa-angle-right divider"></i>
-    <%= link_to @wechat_response.wechat_app.name, admin_wechat_apps_path(id: @wechat_response.wechat_app_id), class: 'section' %>
-    <i class="fas fa-angle-right divider"></i>
-    <%= link_to t('wechat.admin.wechat_responses.index.title'), admin_wechat_app_wechat_responses_path(@wechat_response.wechat_app_id), class: 'section' %>
-    <i class="fas fa-angle-right divider"></i>
-    <div class="section"><%= t('.title') %></div>
-  </div>
+  <ul>
+    <li><%= link_to t('wechat.admin.wechat_apps.index.title'), admin_wechat_apps_path %></li>
+    <li><%= link_to @wechat_response.wechat_app.name, admin_wechat_apps_path(id: @wechat_response.wechat_app_id) %></li>
+    <li><%= link_to t('wechat.admin.wechat_responses.index.title'), admin_wechat_app_wechat_responses_path(@wechat_response.wechat_app_id) %></li>
+    <li class="is-active"><%= t('.title') %></li>
+  </ul>
 <% end %>
 
-<div class="ui top attached segment">
-  <%= render 'filter' %>
-</div>
+<%= render 'filter' %>
 
 <table class="table is-hoverable is-fullwidth">
   <thead>
@@ -34,7 +29,7 @@
         <p><%= WechatExtractor.human_attribute_name(:serial_start) %></p>
       </th>
       <th>
-        <%= link_to new_admin_wechat_response_wechat_extractor_path(@wechat_response), remote: true, class: 'ui mini green button' do %>
+        <%= link_to new_admin_wechat_response_wechat_extractor_path(@wechat_response), remote: true, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><% t('.new') %>
         <% end %>
       </th>
@@ -56,8 +51,8 @@
         <p><%= wechat_extractor.finish_at.to_s(:time) if wechat_extractor.finish_at %></p>
       </td>
       <td>
-        <p class="ui green text"><%= wechat_extractor.valid_response %></p>
-        <p class="ui red text"><%= wechat_extractor.invalid_response %></p>
+        <p class="has-text-success"><%= wechat_extractor.valid_response %></p>
+        <p class="has-text-danger"><%= wechat_extractor.invalid_response %></p>
       </td>
       <td>
         <div>

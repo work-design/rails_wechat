@@ -5,7 +5,8 @@ zh:
       wechat_apps:
         index:
           title: 微信设置
-          info: 如何设置
+        info:
+          title: 如何设置
       wechat_requests:
         index:
           title: 用户消息

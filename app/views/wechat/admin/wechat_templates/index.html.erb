@@ -12,7 +12,7 @@
       <th><%= WechatTemplate.human_attribute_name(:template_type) %></th>
       <th>
         <% if params[:wechat_app_id] %>
-          <%= link_to sync_admin_wechat_app_wechat_templates_path(params[:wechat_app_id]), method: :post, class: 'ui mini green button' do %>
+          <%= link_to sync_admin_wechat_app_wechat_templates_path(params[:wechat_app_id]), method: :post, class: 'button is-link is-small' do %>
             <i class="fas fa-sync"></i><% t('.sync') %>
           <% end %>
         <% end %>
