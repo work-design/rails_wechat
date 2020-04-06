@@ -1,4 +1,4 @@
-<%= render 'modal' do %>
+<%= render layout: 'modal' do %>
   <%= form_with model: @wechat_menu, scope: :wechat_menu, url: admin_wechat_menus_path do |f| %>
     <%= f.hidden_field :wechat_app_id %>
     <%= f.hidden_field :type, value: 'ParentMenu' %>
