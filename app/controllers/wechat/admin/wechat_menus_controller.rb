@@ -20,7 +20,7 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
   end
 
   def new
-    @wechat_menu = WechatMenu.new(wechat_app_id: params[:wechat_app_id])
+    @wechat_menu = WechatMenu.new(wechat_app_id: params[:wechat_app_id], type: 'ViewMenu')
   end
 
   def create
