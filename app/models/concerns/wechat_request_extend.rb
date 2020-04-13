@@ -9,7 +9,7 @@ module WechatRequestExtend
           {
             title: '请绑定',
             description: '绑定信息',
-            url: url_helpers.bind_my_oauth_users_url(uid: request.wechat_user.uid, organ_id: request.wechat_app.organ_id, subdomain: request.wechat_app&.organ&.subdomain)
+            url: url_helpers.bind_my_oauth_users_url(uid: request.wechat_user.uid, subdomain: request.wechat_app&.organ&.subdomain)
           }
         ]
       }
