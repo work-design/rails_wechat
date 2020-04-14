@@ -1,4 +1,4 @@
-class Wechat::Admin::TemplateConfigsController < Wechat::Admin::BaseController
+class Wechat::Panel::TemplateConfigsController < Wechat::Panel::BaseController
   before_action :set_template_config, only: [:show, :edit, :update, :destroy]
 
   def index

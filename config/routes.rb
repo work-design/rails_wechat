@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     resources :wechat_subscribeds
   end
 
+  scope :panel, module: 'wechat/panel', as: :panel do
+    resources :template_configs
+  end
+
   scope :admin, module: 'wechat/admin', as: :admin do
     resources :wechat_apps do
       get :own, on: :collection
@@ -55,7 +59,6 @@ Rails.application.routes.draw do
       end
       get :edit_parent, on: :member
     end
-    resources :template_configs
     resources :accounts, only: [] do
       get :qrcode, on: :member
     end

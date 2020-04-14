@@ -4,6 +4,7 @@ module RailsWechat
   configure do |config|
     config.app_controller = 'ApplicationController'
     config.admin_controller = 'AdminController'
+    config.panel_controller = 'PanelController'
     config.my_controller = 'MyController'
     config.httpx = {
       ssl: {

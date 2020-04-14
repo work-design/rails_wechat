@@ -28,9 +28,11 @@ zh:
       wechat_extractors:
         index:
           title: 解析回复内容
-      template_configs:
-        index:
-          title: 模板设置
       wechat_templates:
         index:
           title: 消息模板
+    panel:
+      title: 模板设置
+      template_configs:
+        index:
+          title: 模板设置
