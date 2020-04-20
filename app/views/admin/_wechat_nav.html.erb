@@ -1,4 +1,4 @@
-<div class="<%= active_helper(modules: 'wechat/admin', active_class: 'menu ex-accordion is-active', item_class: 'menu ex-accordion') %>" data-controller="menu">
+<div class="<%= active_helper(modules: 'wechat/admin', active: 'menu ex-accordion is-active', item: 'menu ex-accordion') %>" data-controller="menu">
   <%= content_tag :div, class: 'menu-list' do %>
     <%= link_to t('wechat.admin.wechat_apps.index.title'), admin_wechat_apps_path, class: active_helper(controllers: 'wechat_apps') -%>
   <% end %>
