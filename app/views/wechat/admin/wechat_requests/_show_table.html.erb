@@ -1,4 +1,4 @@
-<table class="ui very basic large table">
+<table class="table is-fullwidth">
   <thead>
     <tr>
       <th class="six wide">
@@ -12,9 +12,9 @@
       <td class="right aligned"><%= WechatRequest.human_attribute_name(:wechat_user_id) %></td>
       <td>
         <% if @wechat_request.wechat_user.user %>
-          <%= link_to @wechat_request.wechat_user.user.name, admin_user_path(@wechat_request.wechat_user.user_id) %>
+          <%= link_to @wechat_request.wechat_user.user.name, panel_user_path(@wechat_request.wechat_user.user_id), remote: true, text: true %>
         <% else %>
-          <%= link_to @wechat_request.wechat_user.name, admin_user_path(@wechat_request.wechat_user.name) %>
+          <%= link_to @wechat_request.wechat_user.name, admin_oauth_user_path(@wechat_request.wechat_user_id), remote: true, text: true %>
         <% end %>
       </td>
     </tr>
