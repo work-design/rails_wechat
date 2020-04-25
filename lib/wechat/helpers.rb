@@ -29,7 +29,7 @@ WECHAT_CONFIG_JS
 
   def wechat_config_js(wechat_app_id: nil, debug: false, apis: [])
     config_js = wechat_raw_config_js(wechat_app_id: wechat_app_id, debug: debug, apis: apis)
-    javascript_tag config_js, type: 'application/javascript'
+    javascript_tag config_js, type: 'application/javascript', nonce: true
   end
 
 end
