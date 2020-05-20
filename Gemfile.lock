@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/qinmingyuan/default_form.git
-  revision: bea5fd0b1f1a44cd67009d6a55035d86dbd3000a
+  revision: daad2730788b5ecd813070fe931d013fe5cef76b
   specs:
     default_form (1.5.1)
       rails_com (~> 1.2)
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 8b63bcbcc069edff6be519a00c4c6992c3ecd271
+  revision: 270f45e4fad4f1e17c123e4c49850e7f7d83f8a4
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -16,19 +16,18 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: cec53ff302ba54c254006183767b189694ba8d96
+  revision: abf22a589b9f717bac08d2857d53873d8968b89b
   specs:
     rails_com (1.2.9)
       default_where (~> 2.2)
       http-form_data (~> 2.2)
-      httpx (~> 0.5)
+      httpx (~> 0.8)
       rails (~> 6.0)
 
 PATH
   remote: .
   specs:
     rails_wechat (0.1.0)
-      httpx (~> 0.7)
       rails_auth
       rails_com (~> 1.2)
 
@@ -113,7 +112,7 @@ GEM
       activesupport (>= 4.2.0)
     http-2-next (0.2.6)
     http-form_data (2.3.0)
-    httpx (0.7.0)
+    httpx (0.8.2)
       http-2-next (>= 0.1.2)
       timers
     i18n (1.8.2)
@@ -141,7 +140,7 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
-    mimemagic (0.3.4)
+    mimemagic (0.3.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
