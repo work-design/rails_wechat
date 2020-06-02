@@ -88,7 +88,11 @@ module RailsWechat::WechatResponse
   def do_extract(request)
     wechat_extractors.map do |wechat_extractor|
       matched = request.body.scan(wechat_extractor.scan_regexp)
-      next if matched.blank?
+      if matched.blank?
+        next
+      else
+        logger.debug matched.inspect
+      end
 
       ex = request.wechat_extractions.find_or_initialize_by(wechat_extractor_id: wechat_extractor.id)
       ex.name = wechat_extractor.name
