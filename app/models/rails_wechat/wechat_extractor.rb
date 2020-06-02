@@ -26,7 +26,7 @@ module RailsWechat::WechatExtractor
   end
 
   def effective?(time = Time.current)
-    time > start_at.change(Date.today.parts) && time < finish_at.change(Date.today.parts)
+    time > start_at.change(time.to_date.parts) && time < finish_at.change(time.to_date.parts)
   end
 
   def serial_number(now = Time.current)
