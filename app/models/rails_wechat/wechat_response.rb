@@ -91,7 +91,7 @@ module RailsWechat::WechatResponse
       if matched.blank?
         next
       else
-        logger.debug "Matched: #{matched.inspect}"
+        logger.debug "Matched: #{matched.inspect}, Extractor: #{wechat_extractor.name}"
       end
 
       ex = request.wechat_extractions.find_or_initialize_by(wechat_extractor_id: wechat_extractor.id)
