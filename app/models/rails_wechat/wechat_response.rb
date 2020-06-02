@@ -93,7 +93,7 @@ module RailsWechat::WechatResponse
       ex = request.wechat_extractions.find_or_initialize_by(wechat_extractor_id: wechat_extractor.id)
       ex.name = wechat_extractor.name
       ex.matched = matched.join(', ')
-      if wechat_extractor.serial && wechat_extractor.effective?
+      if wechat_extractor.serial && wechat_extractor.effective?(request.created_at)
         ex.serial_number = wechat_extractor.serial_number if ex.new_record?
         r = ex.respond_text
       else
