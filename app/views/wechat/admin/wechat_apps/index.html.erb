@@ -36,18 +36,21 @@
         <p><%= wechat_app.key %></p>
       </td>
       <td>
-        <div class="ui toggle checkbox">
-          <%= check_box_tag '[wechat_app]encrypt_mode', nil, wechat_app.encrypt_mode, data: { method: :patch, remote: true, url: admin_wechat_app_path(wechat_app), submit: true }, id: nil %>
+        <div data-controller="input">
+          <%= check_box_tag '[wechat_app]encrypt_mode', nil, wechat_app.encrypt_mode, data: { method: :patch, remote: true, url: admin_wechat_app_path(wechat_app), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
+          <label></label>
         </div>
       </td>
       <td>
-        <div class="ui toggle checkbox">
-          <%= check_box_tag '[wechat_app]enabled', nil, wechat_app.enabled, data: { method: :patch, remote: true, url: admin_wechat_app_path(wechat_app), submit: true }, id: nil %>
+        <div data-controller="input">
+          <%= check_box_tag '[wechat_app]enabled', nil, wechat_app.enabled, data: { method: :patch, remote: true, url: admin_wechat_app_path(wechat_app), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
+          <label></label>
         </div>
       </td>
       <td>
-        <div class="ui toggle checkbox <%= wechat_app.primary ? 'disabled' : '' %>">
-          <%= check_box_tag '[wechat_app]primary', nil, wechat_app.primary, data: { method: :patch, remote: true, url: admin_wechat_app_path(wechat_app), submit: true }, id: nil %>
+        <div data-controller="input">
+          <%= check_box_tag '[wechat_app]primary', nil, wechat_app.primary, data: { method: :patch, remote: true, url: admin_wechat_app_path(wechat_app), action: 'input#submit' }, id: nil, class: 'switch is-rounded', disabled: wechat_app.primary %>
+          <label></label>
         </div>
       </td>
       <td>
