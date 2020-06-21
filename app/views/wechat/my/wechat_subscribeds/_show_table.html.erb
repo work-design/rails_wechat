@@ -1,4 +1,4 @@
-<table class="ui very basic large table">
+<table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
       <th class="six wide">
@@ -9,15 +9,15 @@
   </thead>
   <tbody>
     <tr>
-      <td class="right aligned"><%= WechatSubscribed.human_attribute_name(:wechat_template) %></td>
+      <td class="has-text-right"><%= WechatSubscribed.human_attribute_name(:wechat_template) %></td>
       <td><%= @wechat_subscribed.wechat_template %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= WechatSubscribed.human_attribute_name(:status) %></td>
+      <td class="has-text-right"><%= WechatSubscribed.human_attribute_name(:status) %></td>
       <td><%= @wechat_subscribed.status %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= WechatSubscribed.human_attribute_name(:sending_at) %></td>
+      <td class="has-text-right"><%= WechatSubscribed.human_attribute_name(:sending_at) %></td>
       <td><%= @wechat_subscribed.sending_at %></td>
     </tr>
   </tbody>

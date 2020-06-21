@@ -1,4 +1,4 @@
-<table class="ui very basic large table">
+<table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
       <th class="six wide">
@@ -9,11 +9,11 @@
   </thead>
   <tbody>
     <tr>
-      <td class="right aligned"><%= WechatNotice.human_attribute_name(:notifiable_type) %></td>
+      <td class="has-text-right"><%= WechatNotice.human_attribute_name(:notifiable_type) %></td>
       <td><%= @wechat_notice.notifiable_type %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= WechatNotice.human_attribute_name(:code) %></td>
+      <td class="has-text-right"><%= WechatNotice.human_attribute_name(:code) %></td>
       <td><%= @wechat_notice.code %></td>
     </tr>
   </tbody>

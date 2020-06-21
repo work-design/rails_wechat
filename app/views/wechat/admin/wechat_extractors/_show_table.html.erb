@@ -1,4 +1,4 @@
-<table class="ui very basic large table">
+<table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
       <th class="six wide">
@@ -9,35 +9,35 @@
   </thead>
   <tbody>
     <tr>
-      <td class="right aligned"><%= Extractor.human_attribute_name(:name) %></td>
+      <td class="has-text-right"><%= Extractor.human_attribute_name(:name) %></td>
       <td><%= @extractor.name %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Extractor.human_attribute_name(:prefix) %></td>
+      <td class="has-text-right"><%= Extractor.human_attribute_name(:prefix) %></td>
       <td><%= @extractor.prefix %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Extractor.human_attribute_name(:suffix) %></td>
+      <td class="has-text-right"><%= Extractor.human_attribute_name(:suffix) %></td>
       <td><%= @extractor.suffix %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Ticket.human_attribute_name(:serial_start) %></td>
+      <td class="has-text-right"><%= Ticket.human_attribute_name(:serial_start) %></td>
       <td><%= @ticket.serial_start %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Ticket.human_attribute_name(:start_at) %></td>
+      <td class="has-text-right"><%= Ticket.human_attribute_name(:start_at) %></td>
       <td><%= @ticket.start_at %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Ticket.human_attribute_name(:finish_at) %></td>
+      <td class="has-text-right"><%= Ticket.human_attribute_name(:finish_at) %></td>
       <td><%= @ticket.finish_at %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Ticket.human_attribute_name(:valid_response) %></td>
+      <td class="has-text-right"><%= Ticket.human_attribute_name(:valid_response) %></td>
       <td><%= @ticket.valid_response %></td>
     </tr>
     <tr>
-      <td class="right aligned"><%= Ticket.human_attribute_name(:invalid_response) %></td>
+      <td class="has-text-right"><%= Ticket.human_attribute_name(:invalid_response) %></td>
       <td><%= @ticket.invalid_response %></td>
     </tr>
   </tbody>
