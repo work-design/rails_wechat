@@ -151,12 +151,14 @@ module RailsWechat::WechatApp
 
   class_methods do
 
-    def default
-      q = {}
-      if column_names.include?('organ_id')
-        q.merge! organ_id: nil
+    def default(params = {})
+      q = params.dup
+      app = default_where(q).valid.find_by(primary: true)
+      if app
+        app
+      else
+        default_where(organ_id: nil, allow: { organ_id: nil }).valid.find_by(primary: true)
       end
-      where(q).valid.find_by(primary: true)
     end
 
   end

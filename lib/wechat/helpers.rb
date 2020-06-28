@@ -4,7 +4,7 @@ module Wechat::Helpers
     if wechat_app_id
       app = WechatApp.valid.find(wechat_app_id)
     else
-      app = WechatApp.default
+      app = WechatApp.default(controller.default_params)
     end
     api = app.api
     page_url = controller.request.original_url
