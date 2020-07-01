@@ -1,0 +1,14 @@
+<% content_for :breadcrumb do %>
+  <ul>
+    <li><%= link_to t('wechat.admin.wechat_apps.index.title'), admin_wechat_apps_path %></li>
+    <li><%= link_to @wechat_app.name, admin_wechat_apps_path(id: @wechat_app.id) %></li>
+    <li class="is-active"><%= t('.title') %></li>
+  </ul>
+<% end %>
+
+<div class="tabs">
+  <ul>
+    <li class="<%= active_helper(controllers: 'wechat_tags', active: 'is-active') %>"><%= link_to t('wechat.admin.wechat_tags.index.title'), admin_wechat_app_wechat_tags_path(@wechat_app) %></li>
+    <li class="<%= active_helper(controllers: 'wechat_users', active: 'is-active') %>"><%= link_to t('wechat.admin.wechat_users.index.title'), admin_wechat_app_wechat_users_path(@wechat_app) %></li>
+  </ul>
+</div>
