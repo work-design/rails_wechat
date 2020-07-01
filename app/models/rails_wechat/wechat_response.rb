@@ -1,5 +1,6 @@
 module RailsWechat::WechatResponse
   extend ActiveSupport::Concern
+
   included do
     delegate :url_helpers, to: 'Rails.application.routes'
 

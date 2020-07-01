@@ -7,6 +7,7 @@
       <th><%= WechatUser.human_attribute_name(:name) %></th>
       <th><%= WechatUser.human_attribute_name(:uid) %></th>
       <th><%= WechatUser.human_attribute_name(:wechat_tags) %></th>
+      <th><%= WechatUser.human_attribute_name(:remark) %></th>
       <th><%= WechatUser.human_attribute_name(:unionid) %></th>
       <th><%= WechatUser.human_attribute_name(:account_id) %></th>
       <th><%= WechatUser.human_attribute_name(:user_id) %></th>
@@ -23,6 +24,7 @@
           <span class="button is-small"><%= wechat_tag.name %></span>
         <% end %>
       </td>
+      <td><%= wechat_user.remark %></td>
       <td><%= wechat_user.unionid %></td>
       <td><%= wechat_user.account_id %></td>
       <td><%= wechat_user.user_id %></td>

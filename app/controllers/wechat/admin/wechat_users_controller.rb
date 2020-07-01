@@ -35,10 +35,7 @@ class Wechat::Admin::WechatUsersController < Wechat::Admin::BaseController
   def wechat_user_params
     params.fetch(:wechat_user, {}).permit(
       :name,
-      :uid,
-      :unionid,
-      :account_id,
-      :user_id,
+      :remark,
       wechat_tag_ids: []
     )
   end

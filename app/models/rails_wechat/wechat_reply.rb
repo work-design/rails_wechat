@@ -1,6 +1,7 @@
 # https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html
 module RailsWechat::WechatReply
   extend ActiveSupport::Concern
+
   included do
     attribute :type, :string
     attribute :value, :string

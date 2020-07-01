@@ -1,5 +1,6 @@
 module RailsWechat::WechatRequest
   extend ActiveSupport::Concern
+
   included do
     mattr_accessor :rules, default: []  # 用于配置 reply 的逻辑
 

@@ -3,12 +3,22 @@ module RailsWechat::OauthUser::WechatUser
 
   included do
     attribute :provider, :string, default: 'wechat'
+    attribute :remark, :string
+
     belongs_to :wechat_app, foreign_key: :app_id, primary_key: :appid
 
     has_many :wechat_requests, dependent: :delete_all
     has_many :wechat_subscribeds, dependent: :delete_all
     has_many :wechat_user_tags, dependent: :destroy
     has_many :wechat_tags, through: :wechat_user_tags
+
+    before_save :sync_to_wechat, if: -> { remark_changed? }
+  end
+
+  def sync_to_wechat
+    wechat_app.api.user_update_remark(uid, remark)
+  rescue Wechat::WechatError => e
+    logger.info e.message
   end
 
   def sync_user_info
