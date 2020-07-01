@@ -6,8 +6,12 @@ module RailsWechat::WechatUserTag
     belongs_to :wechat_tag, counter_cache: true
     belongs_to :user_tagged, optional: true
 
-    after_create_commit :sync_to_wechat
+    after_create_commit :sync_create_later
     after_destroy_commit :remove_from_wechat
+  end
+
+  def sync_create_later
+    WechatUserTagJob.perform_later(self)
   end
 
   def sync_to_wechat

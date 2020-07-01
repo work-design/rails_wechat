@@ -12,10 +12,14 @@ module RailsWechat::OauthUser::WechatUser
     has_many :wechat_user_tags, dependent: :destroy
     has_many :wechat_tags, through: :wechat_user_tags
 
-    before_save :sync_to_wechat, if: -> { remark_changed? }
+    after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
   end
 
-  def sync_to_wechat
+  def sync_remark_later
+    WechatUserJob.perform_later(self)
+  end
+
+  def sync_remark_to_wechat
     wechat_app.api.user_update_remark(uid, remark)
   rescue Wechat::WechatError => e
     logger.info e.message
