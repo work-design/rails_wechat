@@ -37,6 +37,25 @@ module RailsWechat::WechatRequest
     filtered[:proc].call(self) if filtered
   end
 
+  def kefu(text)
+    custom = Wechat::Message::Custom.new(wechat_app)
+    custom.to(wechat_user.uid)
+    custom.update(
+      msgtype: 'text',
+      text:
+        {
+          content: text
+        }
+    )
+    custom.do_send
+  end
+
+  # Typing
+  # CancelTyping
+  def typing(command = 'Typing')
+    wechat_app.api.message_custom_typing(wechat_user.uid, command)
+  end
+
   class_methods do
 
     def on(msg_type: nil, body: nil, event: nil, proc: nil, &block)

@@ -69,31 +69,35 @@ module Wechat::Api::Base::CgiBin
   def material(media_id)
     get 'material/get', params: { media_id: media_id }, as: :file
   end
-  
+
   def material_count
     get 'material/get_materialcount'
   end
-  
+
   def material_list(type = 'news', offset = 0, count = 20)
     post 'material/batchget_material', type: type, offset: offset, count: count
   end
-  
+
   def material_add(type, file)
     post_file 'material/add_material', file, params: { type: type }
   end
-  
+
   def material_add_news(*news)
     post 'material/add_news', articles: news
   end
-  
+
   def material_delete(media_id)
     post 'material/del_material', media_id: media_id
   end
-  
-  def custom_message_send(message)
-    post 'message/custom/send', message, headers: { content_type: :json }
+
+  def message_custom_send(message)
+    post 'message/custom/send', message
   end
-  
+
+  def message_custom_typing(openid, command = 'Typing')
+    post 'message/custom/typing', touser: openid, command: command
+  end
+
   def customservice_getonlinekflist
     get 'customservice/getonlinekflist'
   end
