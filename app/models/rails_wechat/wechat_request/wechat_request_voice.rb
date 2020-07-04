@@ -1,4 +1,4 @@
-module RailsWechat::WechatRequest::UnsubscribeRequest
+module RailsWechat::WechatRequest::WechatRequestVoice
   extend ActiveSupport::Concern
 
   included do
