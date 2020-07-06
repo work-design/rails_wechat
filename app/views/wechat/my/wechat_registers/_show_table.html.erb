@@ -1,0 +1,20 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th class="six wide">
+        <%= link_to t('.edit'), edit_my_wechat_register_path(@wechat_register), class: 'ui mini blue right floated button', remote: true %>
+      </th>
+      <th class="ten wide"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="has-text-right"><%= WechatRegister.human_attribute_name(:id_name) %></td>
+      <td><%= @wechat_register.id_name %></td>
+    </tr>
+    <tr>
+      <td class="has-text-right"><%= WechatRegister.human_attribute_name(:id_number) %></td>
+      <td><%= @wechat_register.id_number %></td>
+    </tr>
+  </tbody>
+</table>
