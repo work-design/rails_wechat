@@ -8,7 +8,9 @@ class Wechat::My::WechatUsersController < Wechat::My::BaseController
   end
 
   def update
-    if @wechat_user.update(wechat_user_params)
+    @wechat_user.assign_attribute wechat_user_params
+
+    if @wechat_user.save
       redirect_to wechat_users_url
     else
       render :edit
@@ -17,12 +19,17 @@ class Wechat::My::WechatUsersController < Wechat::My::BaseController
 
   def destroy
     @wechat_user.destroy
-    redirect_to wechat_users_url
   end
 
   private
   def set_wechat_user
     current_wechat_user
+  end
+
+  def wechat_user_params
+    params.fetch(:wechat_user, {}).permit(
+      :remark
+    )
   end
 
 end
