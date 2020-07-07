@@ -50,3 +50,6 @@ zh:
         unionid: 微信开放平台UnionID
         account_id: 账号
         user_id: 用户
+      wechat_register:
+        id_name: 真实姓名
+        id_number: 身份证号

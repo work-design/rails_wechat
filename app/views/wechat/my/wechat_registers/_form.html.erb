@@ -1,6 +1,13 @@
-<%= form_with model: @wechat_register do |f| %>
+<%= form_with theme: 'weui', model: [:my, @wechat_register] do |f| %>
   <%= render 'shared/error_messages', target: @wechat_register %>
-  <%= f.text_field :id_name %>
-  <%= f.text_field :id_number %>
-  <%= f.submit %>
+  <div class="weui-form__control-area">
+    <div class="weui-cells__group weui-cells__group_form">
+      <div class="weui-cells__title">开通公众号 / 从医专用邮箱</div>
+      <div class="weui-cells weui-cells_form">
+        <%= f.text_field :id_name %>
+        <%= f.text_field :id_number %>
+      </div>
+    </div>
+  </div>
+  <%= f.submit nil, wrap: { all: nil } %>
 <% end %>

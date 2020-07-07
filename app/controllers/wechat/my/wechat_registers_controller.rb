@@ -6,13 +6,15 @@ class Wechat::My::WechatRegistersController < Wechat::My::BaseController
   end
 
   def new
-    @wechat_register = WechatRegister.new
+    @wechat_register = current_member.wechat_registers.build
   end
 
   def create
-    @wechat_register = WechatRegister.new(wechat_register_params)
+    @wechat_register = current_member.wechat_registers.build(wechat_register_params)
 
-    unless @wechat_register.save
+    if @wechat_register.save
+      render 'create', locals: { return_to: my_wechat_registers_url }
+    else
       render :new, locals: { model: @wechat_register }, status: :unprocessable_entity
     end
   end
