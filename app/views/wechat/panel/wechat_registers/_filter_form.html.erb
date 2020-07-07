@@ -1,0 +1,10 @@
+<%= form_with theme: 'search', model: WechatRegister.new do |f| %>
+  <div class="field-body">
+    <%= f.text_field :id_name %>
+    <%= f.text_field :id_number %>
+    <div class="field is-narrow">
+      <%= f.submit %>
+      <%= link_to t('.clear'), filter_params(except: [:id_name, :id_number]), class: 'button is-light' %>
+    </div>
+  </div>
+<% end %>

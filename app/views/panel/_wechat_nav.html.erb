@@ -1,6 +1,7 @@
 <div class="<%= active_helper(modules: 'wechat/panel', active: 'menu ex-accordion is-active', item: 'menu ex-accordion') %>" data-controller="menu">
   <%= content_tag :div, class: 'menu-list' do %>
-    <%= link_to t('wechat.panel.template_configs.index.title'), panel_template_configs_path, class: active_helper(controllers: 'template_configs', active: 'is-active') -%>
+    <%= link_to t('wechat.panel.template_configs.index.title'), panel_template_configs_path, class: active_helper(controllers: 'template_configs', active: 'is-active') %>
+    <%= link_to t('wechat.panel.wechat_registers.index.title'), panel_wechat_registers_path, class: active_helper(controllers: 'wechat_registers', active: 'is-active') -%>
   <% end %>
   <a class="menu-label" data-action="menu#toggle">
     <i class="fab fa-weixin"></i>

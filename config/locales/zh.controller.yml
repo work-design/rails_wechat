@@ -32,7 +32,10 @@ zh:
         index:
           title: 消息模板
     panel:
-      title: 模板设置
+      title: 公众号通用
       template_configs:
         index:
           title: 模板设置
+      wechat_registers:
+        index:
+          title: 公众号申请

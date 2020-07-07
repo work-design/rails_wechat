@@ -1,0 +1,6 @@
+<%= form_with model: [:panel, @wechat_register] do |f| %>
+  <%= render 'shared/error_messages', target: @wechat_register %>
+  <%= f.text_field :id_name, required: true %>
+  <%= f.text_field :id_number, required: true %>
+  <%= f.submit %>
+<% end %>
