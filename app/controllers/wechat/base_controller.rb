@@ -1,4 +1,4 @@
-class Wechat::BaseController < RailsWechat.config.app_controller.constantize
+class Wechat::BaseController < ApplicationController
   include RailsAuth::Application
 
-end
+end unless defined? Wechat::BaseController

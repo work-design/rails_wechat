@@ -1,4 +1,4 @@
-class Wechat::My::BaseController < RailsWechat.config.my_controller.constantize
+class Wechat::My::BaseController < MyController
   include RailsWechat::Application
 
-end
+end unless defined? Wechat::My::BaseController
