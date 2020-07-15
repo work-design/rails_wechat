@@ -1,0 +1,27 @@
+<% @wechat_registers.each do |wechat_register| %>
+<div class="weui-form-preview">
+  <div class="weui-form-preview__hd">
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label"><%= wechat_register.id_name %></label>
+      <em class="weui-form-preview__value"><%= wechat_register.secret_id_number %></em>
+    </div>
+  </div>
+  <div class="weui-form-preview__ft">
+    <%= link_to edit_my_wechat_register_path(wechat_register), aria: { label: t('.edit') }, remote: true, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
+      <i class="fas fa-pencil-alt"></i>
+    <% end %>
+    <%= link_to my_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
+      <i class="fas fa-trash-alt"></i>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<% if @wechat_registers.blank? %>
+<div class="weui-panel">
+  <%= link_to new_my_wechat_register_path, remote: true, class: 'weui-btn_cell weui-btn_cell-primary' do %>
+    <span class="weui-btn_cell__icon"><i class="fas fa-plus"></i></span>
+    <span><%= t('.new') %></span>
+  <% end %>
+</div>
+<% end %>
