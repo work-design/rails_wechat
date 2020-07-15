@@ -5,7 +5,7 @@ module RailsWechat::OauthUser::WechatUser
     attribute :provider, :string, default: 'wechat'
     attribute :remark, :string
 
-    belongs_to :wechat_app, foreign_key: :app_id, primary_key: :appid
+    belongs_to :wechat_app, foreign_key: :app_id, primary_key: :appid, optional: true
 
     has_many :wechat_requests, dependent: :delete_all
     has_many :wechat_subscribeds, dependent: :delete_all

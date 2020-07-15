@@ -5,4 +5,3 @@ module RailsWechat::WechatRequest::WechatRequestVoice
   end
 
 end
-
