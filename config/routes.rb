@@ -22,7 +22,11 @@ Rails.application.routes.draw do
 
   scope :panel, module: 'wechat/panel', as: :panel do
     resources :template_configs
-    resources :wechat_registers
+    resources :wechat_registers do
+      member do
+        get 'app' => :edit_app
+      end
+    end
   end
 
   scope :admin, module: 'wechat/admin', as: :admin do

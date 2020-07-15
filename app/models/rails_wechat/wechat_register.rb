@@ -5,14 +5,22 @@ module RailsWechat::WechatRegister
     attribute :id_name, :string
     attribute :id_number, :string
     attribute :state, :string, default: 'init'
+    attribute :appid, :string
 
     belongs_to :member
+    belongs_to :wechat_app, foreign_key: :app_id, primary_key: :appid, optional: true
 
     enum state: {
       init: 'init',
       doing: 'doing',
       done: 'done'
     }
+
+    before_save :compute_state
+  end
+
+  def compute_state
+    
   end
 
 end
