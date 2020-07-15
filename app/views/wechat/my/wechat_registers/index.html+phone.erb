@@ -6,6 +6,14 @@
       <em class="weui-form-preview__value"><%= wechat_register.secret_id_number %></em>
     </div>
   </div>
+  <div class="weui-form-preview__bd">
+  <% wechat_register.as_json(only: [:verify_status]).each do |label, value| %>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label"><%= WechatRegister.human_attribute_name(label) %></label>
+      <span class="weui-form-preview__value"><%= WechatRegister.enum_i18n(label, value) %></span>
+    </div>
+  <% end %>
+  </div>
   <div class="weui-form-preview__ft">
     <%= link_to edit_my_wechat_register_path(wechat_register), aria: { label: t('.edit') }, remote: true, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
       <i class="fas fa-pencil-alt"></i>

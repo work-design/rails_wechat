@@ -7,6 +7,10 @@ zh:
           ClickMenu: 点击事件
           ViewMenu: 链接
           MiniProgramMenu: 小程序
+      wechat_register:
+        verify_status:
+          true: 已验证
+          false: 未验证
       wechat_response:
         type:
           TextResponse: 文字

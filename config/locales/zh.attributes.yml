@@ -16,6 +16,10 @@ zh:
         help_without_user: 未注册提示
         help_user_disabled: 用户被禁提示
         help_feedback: 收到反馈后提示
+      wechat_register:
+        id_name: 真实姓名
+        id_number: 身份证号
+        veirfy_status: 验证结果
       wechat_request:
         wechat_user_id: 微信用户
         body: 内容
@@ -50,6 +54,3 @@ zh:
         unionid: 微信开放平台UnionID
         account_id: 账号
         user_id: 用户
-      wechat_register:
-        id_name: 真实姓名
-        id_number: 身份证号
