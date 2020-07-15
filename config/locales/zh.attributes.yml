@@ -19,7 +19,8 @@ zh:
       wechat_register:
         id_name: 真实姓名
         id_number: 身份证号
-        veirfy_status: 验证结果
+        verify_status: 验证结果
+        state: 状态
       wechat_request:
         wechat_user_id: 微信用户
         body: 内容

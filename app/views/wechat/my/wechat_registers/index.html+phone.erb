@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="weui-form-preview__bd">
-  <% wechat_register.as_json(only: [:verify_status]).each do |label, value| %>
+  <% wechat_register.as_json(only: [:verify_status, :state]).each do |label, value| %>
     <div class="weui-form-preview__item">
       <label class="weui-form-preview__label"><%= WechatRegister.human_attribute_name(label) %></label>
       <span class="weui-form-preview__value"><%= WechatRegister.enum_i18n(label, value) %></span>

@@ -11,6 +11,10 @@ zh:
         verify_status:
           true: 已验证
           false: 未验证
+        state:
+          init: 处理中
+          doing: 开始处理
+          done: 已完成
       wechat_response:
         type:
           TextResponse: 文字
