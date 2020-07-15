@@ -16,11 +16,15 @@ module RailsWechat::WechatRegister
       done: 'done'
     }
 
-    before_save :compute_state
+    before_save :compute_state, if: -> { appid_changed? }
   end
 
   def compute_state
-    
+    if appid.present?
+      self.state = 'done'
+    else
+      self.state = 'doing'
+    end
   end
 
 end
