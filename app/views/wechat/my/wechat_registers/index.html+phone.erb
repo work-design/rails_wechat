@@ -15,7 +15,7 @@
   <% end %>
   </div>
   <div class="weui-form-preview__ft">
-    <%= link_to edit_my_wechat_register_path(wechat_register), aria: { label: t('.edit') }, remote: true, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
+    <%= link_to edit_my_wechat_register_path(wechat_register), aria: { label: t('.edit') }, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
     <%= link_to my_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
@@ -27,7 +27,7 @@
 
 <% if @wechat_registers.blank? %>
 <div class="weui-panel">
-  <%= link_to new_my_wechat_register_path, remote: true, class: 'weui-btn_cell weui-btn_cell-primary' do %>
+  <%= link_to new_my_wechat_register_path, class: 'weui-btn_cell weui-btn_cell-primary' do %>
     <span class="weui-btn_cell__icon"><i class="fas fa-plus"></i></span>
     <span><%= t('.new') %></span>
   <% end %>

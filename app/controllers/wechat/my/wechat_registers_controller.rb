@@ -28,7 +28,9 @@ class Wechat::My::WechatRegistersController < Wechat::My::BaseController
   def update
     @wechat_register.assign_attributes(wechat_register_params)
 
-    unless @wechat_register.save
+    if @wechat_register.save
+      render 'update', locals: { return_to: my_wechat_registers_url }
+    else
       render :edit, locals: { model: @wechat_register }, status: :unprocessable_entity
     end
   end
