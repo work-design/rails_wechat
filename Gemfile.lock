@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 8c020b620f8a645590772c4d0ce162d47e29562e
+  revision: 3733a654dfded5c69450f98cb66a4a692001e23b
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -16,9 +16,10 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 0d4b7e294329ed91cd8b65ffa5535fc30faa8394
+  revision: f7aaee7fcce12b0e28f99fe3045a48565e5c9e86
   specs:
     rails_com (1.2.9)
+      acme-client
       default_where (~> 2.2)
       http-form_data (~> 2.2)
       httpx (~> 0.8)
@@ -35,6 +36,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    acme-client (2.0.6)
+      faraday (>= 0.17, < 2.0.0)
     actioncable (6.0.3.2)
       actionpack (= 6.0.3.2)
       nio4r (~> 2.0)
@@ -109,6 +112,8 @@ GEM
     factory_bot_rails (6.0.0)
       factory_bot (~> 6.0.0)
       railties (>= 5.0.0)
+    faraday (1.0.1)
+      multipart-post (>= 1.2, < 3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     http-2-next (0.2.6)
@@ -145,6 +150,7 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
+    multipart-post (2.1.1)
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
@@ -210,7 +216,7 @@ GEM
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
-    websocket-driver (0.7.2)
+    websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     zeitwerk (2.3.0)
