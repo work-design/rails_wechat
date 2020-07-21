@@ -70,7 +70,7 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
       :request_type,
       :effective_type,
       :effective_id,
-      extractor_ids: []
+      wechat_extractor_ids: []
     )
   end
 

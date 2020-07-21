@@ -8,7 +8,17 @@
   <%= f.text_field :serial_start %>
   <%= f.text_field :valid_response %>
   <%= f.text_field :invalid_response %>
-  <%= f.time_select :start_at, default: '0:00'.to_time %>
-  <%= f.time_select :finish_at, default: '23:59'.to_time %>
+  <div class="field is-horizontal">
+    <%= f.label :start_at %>
+    <div class="field-body">
+      <%= f.time_select :start_at, start_hour: 8, end_hour: 18, minute_step: 30, default: { hour: 0, min: 0 }, wrap: { all: 'field is-narrow', select: 'select' }, on: { label: false } %>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <%= f.label :finish_at %>
+    <div class="field-body">
+      <%= f.time_select :finish_at, start_hour: 8, end_hour: 18, minute_step: 30, default: { hour: 23, min: 59 }, wrap: { all: 'field is-narrow', select: 'select' }, on: { label: false } %>
+    </div>
+  </div>
   <%= f.submit %>
 <% end %>
