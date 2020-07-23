@@ -13,7 +13,7 @@ module RailsWechat::WechatTicket
   end
 
   def parse_data
-    r = Wechat::Cipher.decrypt(Base64.decode64(ticket_data), @app.encoding_aes_key)
+    r = Wechat::Cipher.decrypt(Base64.decode64(ticket_data), wechat_platform.encoding_aes_key)
     content, _ = Wechat::Cipher.unpack(r)
 
     Hash.from_xml(content).fetch('xml', {})
