@@ -16,6 +16,8 @@ module RailsWechat::WechatPlatform
     has_many :wechat_agencies
   end
 
-
+  def api
+    @api = Wechat::Api::Public.new(self)
+  end
 
 end
