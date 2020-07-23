@@ -18,10 +18,13 @@ class Wechat::WechatController < Wechat::BaseController
 
   def wx_notice
     @wechat_ticket = WechatTicket.new(ticket_params)
-    @wechat_ticket.ticket_data = request.body
-    @wechat_ticket.save
+    @wechat_ticket.ticket_data = request.body.read
 
-    head :no_content
+    if @wechat_ticket.save
+      render plain: 'success'
+    else
+      head :no_content
+    end
   end
 
   def login_by_wechat_user(oauth_user)
