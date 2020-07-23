@@ -8,6 +8,12 @@ module RailsWechat::WechatTicket
     attribute :msg_signature, :string
     attribute :appid, :string
     attribute :ticket_data, :string
+
+    belongs_to :wechat_platform, foreign_key: :appid, primary_key: :appid
+  end
+
+  def enx
+
   end
 
 end
