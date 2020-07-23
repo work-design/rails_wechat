@@ -1,0 +1,12 @@
+<%= form_with model: @wechat_platform do |f| %>
+  <%= render 'shared/error_messages', target: @wechat_platform %>
+  <%= f.text_field :name %>
+  <%= f.text_field :appid %>
+  <%= f.text_field :secret %>
+  <%= f.text_field :verify_ticket %>
+  <%= f.text_field :access_token %>
+  <%= f.text_field :access_token_expires_at %>
+  <%= f.text_field :pre_auth_code %>
+  <%= f.text_field :pre_auth_code_expires_at %>
+  <%= f.submit %>
+<% end %>

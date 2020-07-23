@@ -27,6 +27,9 @@ Rails.application.routes.draw do
         get 'app' => :edit_app
       end
     end
+    resources :wechat_platforms do
+      resources :wechat_agencies
+    end
   end
 
   scope :admin, module: 'wechat/admin', as: :admin do
