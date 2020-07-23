@@ -19,7 +19,7 @@ module RailsWechat::WechatReply::ImageReply
     Tempfile.open do |file|
       file.binmode
 
-      HTTPX.get(media.service_url).body.each do |fragment|
+      HTTPX.get(media.url).body.each do |fragment|
         file.write fragment
       end
 
