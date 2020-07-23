@@ -12,8 +12,11 @@ module RailsWechat::WechatTicket
     belongs_to :wechat_platform, foreign_key: :appid, primary_key: :appid
   end
 
-  def enx
+  def parse_data
+    r = Wechat::Cipher.decrypt(Base64.decode64(ticket_data), @app.encoding_aes_key)
+    content, _ = Wechat::Cipher.unpack(r)
 
+    Hash.from_xml(content).fetch('xml', {})
   end
 
 end

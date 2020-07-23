@@ -50,14 +50,13 @@ class Wechat::Message::Received < Wechat::Message::Base
     encrypt_data = data.fetch('Encrypt', nil)
 
     if encrypt_data.present?
-      r = Base64.decode64(encrypt_data)
-      r = Wechat::Cipher.decrypt(r, @app.encoding_aes_key)
-      content, app_id = Wechat::Cipher.unpack(r)
+      r = Wechat::Cipher.decrypt(Base64.decode64(encrypt_data), @app.encoding_aes_key)
+      content, _ = Wechat::Cipher.unpack(r)
 
       data = Hash.from_xml(content).fetch('xml', {})
     end
 
-    @message_hash = data.with_indifferent_access
+    @message_hash = data
   end
 
   def wechat_user
