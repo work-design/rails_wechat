@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       end
     end
     resources :wechat_platforms do
-      resources :wechat_agencies
+      resources :wechat_agencies, shallow: true
     end
   end
 

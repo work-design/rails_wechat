@@ -4,13 +4,19 @@
   <thead>
     <tr>
       <th><%= WechatPlatform.human_attribute_name(:name) %></th>
-      <th><%= WechatPlatform.human_attribute_name(:appid) %></th>
-      <th><%= WechatPlatform.human_attribute_name(:secret) %></th>
+      <th>
+        <p><%= WechatPlatform.human_attribute_name(:appid) %></p>
+        <p><%= WechatPlatform.human_attribute_name(:secret) %></p>
+      </th>
       <th><%= WechatPlatform.human_attribute_name(:verify_ticket) %></th>
-      <th><%= WechatPlatform.human_attribute_name(:access_token) %></th>
-      <th><%= WechatPlatform.human_attribute_name(:access_token_expires_at) %></th>
-      <th><%= WechatPlatform.human_attribute_name(:pre_auth_code) %></th>
-      <th><%= WechatPlatform.human_attribute_name(:pre_auth_code_expires_at) %></th>
+      <th>
+        <p><%= WechatPlatform.human_attribute_name(:access_token) %></p>
+        <p><%= WechatPlatform.human_attribute_name(:access_token_expires_at) %></p>
+      </th>
+      <th>
+        <p><%= WechatPlatform.human_attribute_name(:pre_auth_code) %></p>
+        <p><%= WechatPlatform.human_attribute_name(:pre_auth_code_expires_at) %></p>
+      </th>
       <th>
         <%= link_to new_panel_wechat_platform_path, remote: true, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
@@ -22,13 +28,19 @@
   <% @wechat_platforms.each do |wechat_platform| %>
     <tr>
       <td><%= wechat_platform.name %></td>
-      <td><%= wechat_platform.appid %></td>
-      <td><%= wechat_platform.secret %></td>
+      <td>
+        <p><%= wechat_platform.appid %></p>
+        <p><%= wechat_platform.secret %></p>
+      </td>
       <td><%= wechat_platform.verify_ticket %></td>
-      <td><%= wechat_platform.access_token %></td>
-      <td><%= wechat_platform.access_token_expires_at %></td>
-      <td><%= wechat_platform.pre_auth_code %></td>
-      <td><%= wechat_platform.pre_auth_code_expires_at %></td>
+      <td>
+        <p><%= wechat_platform.access_token %></p>
+        <p><time><%= wechat_platform.access_token_expires_at.to_s(:rfc822) %></time></p>
+      </td>
+      <td>
+        <p><%= wechat_platform.pre_auth_code %></p>
+        <p><time><%= wechat_platform.pre_auth_code_expires_at.to_s(:rfc822) %></time></p>
+      </td>
       <td>
         <%= link_to panel_wechat_platform_path(wechat_platform), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-eye"></i>

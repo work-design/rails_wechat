@@ -1,0 +1,42 @@
+<%= render 'filter_form' %>
+
+<table class="table is-hoverable is-fullwidth">
+  <thead>
+    <tr>
+      <th><%= WechatAgency.human_attribute_name(:appid) %></th>
+      <th>
+        <p><%= WechatAgency.human_attribute_name(:access_token) %></p>
+        <p><%= WechatAgency.human_attribute_name(:access_token_expires_at) %></p>
+      </th>
+      <th><%= WechatAgency.human_attribute_name(:refresh_token) %></th>
+      <th><%= WechatAgency.human_attribute_name(:func_infos) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @wechat_agencies.each do |wechat_agency| %>
+    <tr>
+      <td><%= wechat_agency.appid %></td>
+      <td>
+        <p><%= wechat_agency.access_token %></p>
+        <p><time><%= wechat_agency.access_token_expires_at.to_s(:rfc822) %></time></p>
+      </td>
+      <td><%= wechat_agency.refresh_token %></td>
+      <td><%= wechat_agency.func_infos %></td>
+      <td>
+        <%= link_to panel_wechat_agency_path(wechat_agency), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+          <i class="fas fa-eye"></i>
+        <% end %>
+        <%= link_to edit_panel_wechat_agency_path(wechat_agency), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        <%= link_to panel_wechat_agency_path(wechat_agency), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @wechat_agencies %>

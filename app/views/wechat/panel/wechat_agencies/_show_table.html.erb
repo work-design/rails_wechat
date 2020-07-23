@@ -1,0 +1,32 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>
+        <%= link_to t('.edit'), edit_panel_wechat_agency_path(@wechat_agency), class: 'button is-small is-link', remote: true %>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="has-text-right"><%= WechatAgency.human_attribute_name(:appid) %></td>
+      <td><%= @wechat_agency.appid %></td>
+    </tr>
+    <tr>
+      <td class="has-text-right"><%= WechatAgency.human_attribute_name(:access_token) %></td>
+      <td><%= @wechat_agency.access_token %></td>
+    </tr>
+    <tr>
+      <td class="has-text-right"><%= WechatAgency.human_attribute_name(:access_token_expires_at) %></td>
+      <td><%= @wechat_agency.access_token_expires_at %></td>
+    </tr>
+    <tr>
+      <td class="has-text-right"><%= WechatAgency.human_attribute_name(:refresh_token) %></td>
+      <td><%= @wechat_agency.refresh_token %></td>
+    </tr>
+    <tr>
+      <td class="has-text-right"><%= WechatAgency.human_attribute_name(:func_infos) %></td>
+      <td><%= @wechat_agency.func_infos %></td>
+    </tr>
+  </tbody>
+</table>
