@@ -5,6 +5,8 @@ module RailsWechat::WechatPlatform
     attribute :name, :string
     attribute :appid, :string
     attribute :secret, :string
+    attribute :token, :string
+    attribute :encoding_aes_key, :string
     attribute :verify_ticket, :string
     attribute :access_token, :string
     attribute :access_token_expires_at, :datetime
