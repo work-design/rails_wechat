@@ -10,13 +10,17 @@ module RailsWechat::WechatTicket
     attribute :ticket_data, :string
 
     belongs_to :wechat_platform, foreign_key: :appid, primary_key: :appid
+
+    after_create_commit :parsed_data
   end
 
-  def parse_data
+  def parsed_data
     r = Wechat::Cipher.decrypt(Base64.decode64(ticket_data), wechat_platform.encoding_aes_key)
     content, _ = Wechat::Cipher.unpack(r)
 
-    Hash.from_xml(content).fetch('xml', {})
+    data = Hash.from_xml(content).fetch('xml', {})
+    wechat_platform.update(verify_ticket: data['ComponentVerifyTicket'])
+    data
   end
 
 end
