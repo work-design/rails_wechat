@@ -16,13 +16,31 @@ class Wechat::WechatController < Wechat::BaseController
     end
   end
 
+  def wx_notice
+    @wechat_ticket = WechatTicket.new(ticket_params)
+    @wechat_ticket.ticket_data = request.body
+    @wechat_ticket.save
+
+    head :no_content
+  end
+
   def login_by_wechat_user(oauth_user)
     headers['Auth-Token'] = oauth_user.account.auth_token
     oauth_user.user.update(last_login_at: Time.now)
-  
+
     logger.debug "Login by oauth user as user: #{oauth_user.user_id}"
     @current_oauth_user = oauth_user
     @current_user = oauth_user.user
   end
-  
+
+  private
+  def ticket_params
+    params.permit(
+      :signature,
+      :timestamp,
+      :nonce,
+      :msg_signature
+    )
+  end
+
 end

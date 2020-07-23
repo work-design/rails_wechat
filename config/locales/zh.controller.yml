@@ -36,6 +36,9 @@ zh:
       template_configs:
         index:
           title: 模板设置
+      wechat_platforms:
+        index:
+          title: 微信第三方平台
       wechat_registers:
         index:
           title: 公众号申请

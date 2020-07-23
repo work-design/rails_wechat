@@ -43,11 +43,11 @@
       <td><%= wechat_platform.verify_ticket %></td>
       <td>
         <p><%= wechat_platform.access_token %></p>
-        <p><time><%= wechat_platform.access_token_expires_at.to_s(:rfc822) %></time></p>
+        <p><time><%= wechat_platform.access_token_expires_at.to_s(:rfc822) if wechat_platform.access_token_expires_at %></time></p>
       </td>
       <td>
         <p><%= wechat_platform.pre_auth_code %></p>
-        <p><time><%= wechat_platform.pre_auth_code_expires_at.to_s(:rfc822) %></time></p>
+        <p><time><%= wechat_platform.pre_auth_code_expires_at.to_s(:rfc822) if wechat_platform.pre_auth_code_expires_at %></time></p>
       </td>
       <td>
         <%= link_to panel_wechat_platform_path(wechat_platform), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>

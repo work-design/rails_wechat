@@ -16,4 +16,6 @@ module RailsWechat::WechatPlatform
     has_many :wechat_agencies
   end
 
+
+
 end

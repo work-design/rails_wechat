@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
     controller :wechat do
       post 'wechat/auth' => :auth
+      post :wx_notice
     end
   end
 

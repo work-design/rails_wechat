@@ -45,11 +45,8 @@ class Wechat::Panel::WechatPlatformsController < Wechat::Panel::BaseController
       :name,
       :appid,
       :secret,
-      :verify_ticket,
-      :access_token,
-      :access_token_expires_at,
-      :pre_auth_code,
-      :pre_auth_code_expires_at
+      :token,
+      :encoding_aes_key
     )
   end
 
