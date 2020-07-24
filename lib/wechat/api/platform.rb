@@ -1,4 +1,6 @@
 class Wechat::Api::Platform < Wechat::Api::Base
+  require 'wechat/api/platform/component'
+  include Component
 
   def initialize(app)
     super
