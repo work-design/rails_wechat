@@ -5,9 +5,6 @@ Rails.application.routes.draw do
       member do
         post '' => :create
       end
-      collection do
-        post ':appid/callback' => :platform
-      end
     end
     resources :wechat_program_users do
       collection do
@@ -22,6 +19,9 @@ Rails.application.routes.draw do
     resources :wechat_platforms, only: [:show] do
       member do
         get :callback
+      end
+      collection do
+        post ':appid/callback' => :message
       end
     end
   end
