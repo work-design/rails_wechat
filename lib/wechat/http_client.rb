@@ -3,33 +3,29 @@ require 'http/form_data'
 
 class Wechat::HttpClient
 
-  def initialize(base)
-    @base = base
+  def initialize
     @http = HTTPX.with(**RailsWechat.config.httpx)
   end
 
-  def get(path, headers: {}, params: {}, **options)
+  def get(path, headers: {}, params: {}, base: nil, **options)
     headers['Accept'] ||= 'application/json'
-    base = options[:base].presence || @base
     url = base + path
 
     response = @http.with_headers(headers).get(url, params: params)
     parse_response(response, options[:as])
   end
 
-  def post(path, payload, headers: {}, params: {}, **options)
+  def post(path, payload, headers: {}, params: {}, base: nil, **options)
     headers['Accept'] ||= 'application/json'
     headers['Content-Type'] ||= 'application/json'
-    base = options[:base].presence || @base
     url = base + path
 
     response = @http.with_headers(headers).post(url, params: params, body: payload)
     parse_response(response, options[:as])
   end
 
-  def post_file(path, file, headers: {}, params: {}, **options)
+  def post_file(path, file, headers: {}, params: {}, base: nil, **options)
     headers['Accept'] ||= 'application/json'
-    base = options[:base].presence || @base
     url = base + path
 
     form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file)

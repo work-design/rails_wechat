@@ -1,4 +1,5 @@
 module Wechat::Api::Work::Agent
+  API_BASE =      'https://qyapi.weixin.qq.com/cgi-bin/'
 
   def menu
     get 'menu/get', params: { agentid: @agentid }

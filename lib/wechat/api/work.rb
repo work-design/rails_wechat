@@ -3,10 +3,11 @@
 class Wechat::Api::Work < Wechat::Api::Base
   require 'wechat/api/work/agent'
   include Wechat::Api::Work::Agent
-  API_BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
+
 
   def initialize(app)
-    @client = Wechat::HttpClient.new(API_BASE)
+    super
+    @client = Wechat::HttpClient.new
     @access_token = Wechat::AccessToken::Work.new(@client, app)
     @agentid = app.agentid
     @jsapi_ticket = Wechat::JsapiTicket::Work.new(@client, app, @access_token)

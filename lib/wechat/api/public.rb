@@ -4,6 +4,12 @@ require 'wechat/api/base/cgi_bin'
 class Wechat::Api::Public < Wechat::Api::Base
   include Wechat::Api::Base::CgiBin
 
+  def initialize(app)
+    super
+    @access_token = Wechat::AccessToken::Public.new(@client, app)
+    @jsapi_ticket = Wechat::JsapiTicket::Public.new(@client, app, @access_token)
+  end
+
   # https://developers.weixin.qq.com/doc/offiaccount/User_Management/User_Tag_Management.html
   def tags
     get 'tags/get'

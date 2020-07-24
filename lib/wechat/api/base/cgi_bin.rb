@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 module Wechat::Api::Base::CgiBin
+  API_BASE = 'https://api.weixin.qq.com/cgi-bin/'
+
+  def callbackip
+    get 'getcallbackip'
+  end
+
+  # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/API_Call_Limits.html
+  def clear_quota
+    post 'clear_quota', appid: app.appid
+  end
 
   def users(nextid = nil)
     params = {}
@@ -50,6 +60,17 @@ module Wechat::Api::Base::CgiBin
     post 'shorturl', action: 'long2short', long_url: long_url
   end
 
+  # https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Batch_Sends_and_Originality_Checks.html
+  def media_uploadimg(file)
+    post_file 'media/uploadimg', file
+  end
+
+  # https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Batch_Sends_and_Originality_Checks.html
+  def media_uploadnews(mpnews_message)
+    post 'media/uploadnews', mpnews_message
+  end
+
+
   def message_mass_delete(msg_id)
     post 'message/mass/delete', msg_id: msg_id
   end
@@ -64,6 +85,18 @@ module Wechat::Api::Base::CgiBin
 
   def wxa_create_qrcode(path, width = 430)
     post 'wxaapp/createwxaqrcode', path: path, width: width
+  end
+
+  def media(media_id)
+    get 'media/get', params: { media_id: media_id }, as: :file
+  end
+
+  def media_hq(media_id)
+    get 'media/get/jssdk', params: { media_id: media_id }, as: :file
+  end
+
+  def media_create(type, file)
+    post_file 'media/upload', file, params: { type: type }
   end
 
   def material(media_id)
