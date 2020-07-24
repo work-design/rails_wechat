@@ -31,6 +31,7 @@ class Wechat::WechatsController < ApplicationController
     r = Hash.from_xml(request.body.read)['xml']
     @wechat_ticket.appid = r['AppId']
     @wechat_ticket.ticket_data = r['Encrypt']
+    puts "$$$$$$$$$$$$$$$$$$$$#{r}"
 
     if @wechat_ticket.save
       render plain: 'success'
