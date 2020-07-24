@@ -19,6 +19,8 @@ module RailsWechat::WechatAgency
 
     belongs_to :wechat_platform
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
+
+    after_create_commit :store_info_later
   end
 
   def api
@@ -34,6 +36,10 @@ module RailsWechat::WechatAgency
   def refresh_access_token
     r = wechat_platform.api.authorizer_token(appid, refresh_token)
     store_access_token(r)
+  end
+
+  def store_info_later
+    WechatAgencyJob.perform_later(self)
   end
 
   def store_info
