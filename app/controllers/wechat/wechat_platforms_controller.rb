@@ -18,6 +18,7 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
     @wechat_ticket.appid = r['AppId'] || params[:appid]
     @wechat_ticket.ticket_data = r['Encrypt']
     logger.debug "----------> #{r}"
+    parsed_data(@wechat_ticket.ticket_data)
 
     if @wechat_ticket.save
       render plain: 'success'
@@ -39,7 +40,7 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
     @wechat_app = @wechat_platform.wechat_agencies.find_by(appid: params[:appid]).wechat_app
   end
 
-  def parsed_data
+  def parsed_data(ticket_data)
     r = Wechat::Cipher.decrypt(Base64.decode64(ticket_data), @wechat_platform.encoding_aes_key)
     content, _ = Wechat::Cipher.unpack(r)
 
