@@ -12,7 +12,7 @@ module Wechat
             component_appid: @app.appid,
             component_appsecret: @app.secret,
             component_verify_ticket: @app.verify_ticket
-          },
+          }.to_json,
           base: BASE
         )
         write_token_to_store(data)

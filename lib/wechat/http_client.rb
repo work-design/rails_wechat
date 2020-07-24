@@ -3,6 +3,7 @@ require 'http/form_data'
 
 class Wechat::HttpClient
 
+  attr_reader :http
   def initialize
     @http = HTTPX.with(**RailsWechat.config.httpx)
   end
@@ -39,7 +40,7 @@ class Wechat::HttpClient
 
   private
   def parse_response(response, parse_as)
-    raise "Request not OK, response status #{response.status}" if response.status != 200
+    raise "Request get fail, response status #{response.status}" if response.status != 200
 
     content_type = response.content_type.mime_type
     body = response.body.to_s
