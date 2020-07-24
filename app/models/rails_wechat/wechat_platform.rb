@@ -15,6 +15,7 @@ module RailsWechat::WechatPlatform
     attribute :pre_auth_code_expires_at, :datetime
 
     has_many :wechat_agencies
+    has_many :wechat_auths
   end
 
   def api
