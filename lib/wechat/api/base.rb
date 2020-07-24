@@ -2,17 +2,9 @@
 
 class Wechat::Api::Base
 
-  SNS_BASE =      'https://api.weixin.qq.com/sns/'
-
-
-  API_BASE =      'https://api.weixin.qq.com/cgi-bin/'
-  PLATFORM_BASE = 'https://api.weixin.qq.com/cgi-bin/component'
-
-  API_BASE =      'https://qyapi.weixin.qq.com/cgi-bin/'
 
 
   attr_reader :app, :client, :access_token, :jsapi_ticket
-
   def initialize(app)
     @app = app
     @client = Wechat::HttpClient.new

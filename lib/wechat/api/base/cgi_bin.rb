@@ -1,37 +1,37 @@
 # frozen_string_literal: true
 
 module Wechat::Api::Base::CgiBin
-  API_BASE = 'https://api.weixin.qq.com/cgi-bin/'
+  BASE = 'https://api.weixin.qq.com/cgi-bin/'
 
   def callbackip
-    get 'getcallbackip'
+    get 'getcallbackip', base: BASE
   end
 
   # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/API_Call_Limits.html
   def clear_quota
-    post 'clear_quota', appid: app.appid
+    post 'clear_quota', appid: app.appid, base: BASE
   end
 
   def users(nextid = nil)
     params = {}
     params.merge! next_openid: nextid if nextid.present?
-    get 'user/get', params: params
+    get 'user/get', params: params, base: BASE
   end
 
   def user(openid)
-    get 'user/info', params: { openid: openid }
+    get 'user/info', params: { openid: openid }, base: BASE
   end
 
   def user_batchget(openids, lang = 'zh-CN')
-    post 'user/info/batchget', user_list: openids.collect { |v| { openid: v, lang: lang } }
+    post 'user/info/batchget', user_list: openids.collect { |v| { openid: v, lang: lang } }, base: BASE
   end
 
   def user_group(openid)
-    post 'groups/getid', openid: openid
+    post 'groups/getid', openid: openid, base: BASE
   end
 
   def user_change_group(openid, to_groupid)
-    post 'groups/members/update', openid: openid, to_groupid: to_groupid
+    post 'groups/members/update', openid: openid, to_groupid: to_groupid, base: BASE
   end
 
   def user_update_remark(openid, remark)
@@ -108,31 +108,31 @@ module Wechat::Api::Base::CgiBin
   end
 
   def material_list(type = 'news', offset = 0, count = 20)
-    post 'material/batchget_material', type: type, offset: offset, count: count
+    post 'material/batchget_material', type: type, offset: offset, count: count, base: BASE
   end
 
   def material_add(type, file)
-    post_file 'material/add_material', file, params: { type: type }
+    post_file 'material/add_material', file, params: { type: type }, base: BASE
   end
 
   def material_add_news(*news)
-    post 'material/add_news', articles: news
+    post 'material/add_news', articles: news, base: BASE
   end
 
   def material_delete(media_id)
-    post 'material/del_material', media_id: media_id
+    post 'material/del_material', media_id: media_id, base: BASE
   end
 
   def message_custom_send(message)
-    post 'message/custom/send', message
+    post 'message/custom/send', message, base: BASE
   end
 
   def message_custom_typing(openid, command = 'Typing')
-    post 'message/custom/typing', touser: openid, command: command
+    post 'message/custom/typing', touser: openid, command: command, base: BASE
   end
 
   def customservice_getonlinekflist
-    get 'customservice/getonlinekflist'
+    get 'customservice/getonlinekflist', base: BASE
   end
 
 end
