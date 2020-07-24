@@ -13,7 +13,9 @@ class Wechat::WechatsController < ApplicationController
   end
 
   def create
-    received = Wechat::Message::Received.new(@wechat_app, request.raw_post)
+    r = Hash.from_xml(request.raw_post).fetch('xml', {})
+    @wechat_received = @wechat_app.wechat_receiveds.build(body: r)
+    @wechat_received.encrypt_data = r['Encrypt']
     replied = received.reply
     replied.get_reply
 

@@ -18,7 +18,7 @@ class Wechat::WechatController < Wechat::BaseController
 
   def wx_notice
     @wechat_ticket = WechatTicket.new(ticket_params)
-    r = Hash.from_xml(request.body.read)['xml']
+    r = Hash.from_xml(request.raw_post)['xml']
     @wechat_ticket.appid = r['AppId']
     @wechat_ticket.ticket_data = r['Encrypt']
 
