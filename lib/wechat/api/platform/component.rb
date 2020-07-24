@@ -27,4 +27,14 @@ module Wechat::Api::Platform::Component
     post 'api_authorizer_token', body, base: BASE
   end
 
+  def get_authorizer_info(appid)
+    body = {
+      component_appid: app.appid,
+      authorizer_appid: appid
+    }
+
+    r = post 'api_get_authorizer_info', body, base: BASE
+    r['authorizer_info']
+  end
+
 end

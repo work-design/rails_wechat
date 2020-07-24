@@ -7,6 +7,15 @@ module RailsWechat::WechatAgency
     attribute :access_token_expires_at, :datetime
     attribute :refresh_token, :string
     attribute :func_infos, :string, array: true
+    attribute :nick_name, :string
+    attribute :head_img, :string
+    attribute :user_name, :string
+    attribute :principal_name, :string
+    attribute :alias_name, :string
+    attribute :qrcode_url, :string
+    attribute :business_info, :json
+    attribute :service_type, :string
+    attribute :verify_type, :string
 
     belongs_to :wechat_platform
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
@@ -20,6 +29,15 @@ module RailsWechat::WechatAgency
   def refresh_access_token
     r = wechat_platform.api.authorizer_token(appid, refresh_token)
     store_access_token(r)
+  end
+
+  def store_info
+    r = wechat_platform.api.get_authorizer_info(appid)
+    self.assign_attributes r.slice('nick_name', 'head_img', 'user_name', 'principal_name', 'qrcode_url', 'business_info')
+    self.alias_name = r['alias']
+    self.service_type = r.dig('service_type_info', 'id')
+    self.verify_type = r.dig('verify_type_info', 'id')
+    self.save
   end
 
   def store_access_token(r)

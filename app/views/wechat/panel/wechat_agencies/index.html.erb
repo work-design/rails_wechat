@@ -7,9 +7,16 @@
       <th>
         <p><%= WechatAgency.human_attribute_name(:access_token) %></p>
         <p><%= WechatAgency.human_attribute_name(:access_token_expires_at) %></p>
+        <p><%= WechatAgency.human_attribute_name(:refresh_token) %></p>
       </th>
-      <th><%= WechatAgency.human_attribute_name(:refresh_token) %></th>
       <th><%= WechatAgency.human_attribute_name(:func_infos) %></th>
+      <th>
+        <p><%= WechatAgency.human_attribute_name(:nick_name) %></p>
+        <p><%= WechatAgency.human_attribute_name(:principal_name) %></p>
+        <p><%= WechatAgency.human_attribute_name(:user_name) %></p>
+        <p><%= WechatAgency.human_attribute_name(:alias_name) %></p>
+      </th>
+      <th><%= WechatAgency.human_attribute_name(:qrcode_url) %></th>
       <th></th>
     </tr>
   </thead>
@@ -20,9 +27,19 @@
       <td>
         <p><%= wechat_agency.access_token %></p>
         <p><time><%= wechat_agency.access_token_expires_at.to_s(:rfc822) %></time></p>
+        <p><%= wechat_agency.refresh_token %></p>
       </td>
-      <td><%= wechat_agency.refresh_token %></td>
-      <td><%= wechat_agency.func_infos %></td>
+      <td><%= simple_format wechat_agency.func_infos %></td>
+      <td>
+        <p>
+          <%= image_tag wechat_agency.head_img class: 'image is-24x24' if wechat_agency.head_img %>
+          <%= wechat_agency.nick_name %>
+        </p>
+        <p><%= wechat_agency.principal_name %></p>
+        <p><%= wechat_agency.user_name %></p>
+        <p><%= wechat_agency.alias_name %></p>
+      </td>
+      <td><%= image_tag wechat_agency.qrcode_url %></td>
       <td>
         <%= link_to panel_agency_path(wechat_agency), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-eye"></i>
