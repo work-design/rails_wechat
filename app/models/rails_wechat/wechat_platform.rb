@@ -1,5 +1,4 @@
 module RailsWechat::WechatPlatform
-  URL = 'https://mp.weixin.qq.com/dashboard/cgi-bin/componentloginpage'
   extend ActiveSupport::Concern
 
   included do
@@ -25,7 +24,8 @@ module RailsWechat::WechatPlatform
     @api = Wechat::Api::Platform.new(self)
   end
 
-  def save_pre_auth_code(token_hash)
+  def refresh_pre_auth_code
+    token_hash = api.create_preauthcode
     unless token_hash.is_a?(Hash) && token_hash['pre_auth_code']
       raise Wechat::InvalidCredentialError, token_hash['errmsg']
     end
@@ -46,11 +46,14 @@ module RailsWechat::WechatPlatform
   end
 
   def auth_url
-    {
+    refresh_pre_auth_code unless pre_auth_code_valid?
+    url = URI('https://mp.weixin.qq.com/dashboard/cgi-bin/componentloginpage')
+    url.query = {
       component_appid: appid,
       pre_auth_code: pre_auth_code,
       redirect_uri: url_helpers.callback_wechat_platform_url(self)
-    }
+    }.to_query
+    url.to_s
   end
 
 end

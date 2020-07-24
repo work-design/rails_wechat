@@ -5,10 +5,7 @@ module Wechat::Api::Platform::Component
     body = {
       component_appid: app.appid
     }
-
-    r = post 'api_create_preauthcode', body, base: BASE
-    app.save_pre_auth_code(r)
-    r
+    post 'api_create_preauthcode', body, base: BASE
   end
 
   def query_auth(auth_code)
