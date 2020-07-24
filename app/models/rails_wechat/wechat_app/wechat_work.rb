@@ -1,6 +1,6 @@
 module RailsWechat::WechatApp::WechatWork
   extend ActiveSupport::Concern
-  
+
   included do
     validates :agentid, presence: true
     alias_attribute :corpid, :appid
@@ -8,7 +8,8 @@ module RailsWechat::WechatApp::WechatWork
   end
 
   def api
-    Wechat::Api::Work.new(self)
+    return @api if defined? @api
+    @api = Wechat::Api::Work.new(self)
   end
-  
+
 end

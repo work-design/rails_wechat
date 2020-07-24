@@ -99,7 +99,8 @@ module RailsWechat::WechatApp
   end
 
   def api
-    Wechat::Api::Public.new(self)
+    return @api if defined? @api
+    @api = Wechat::Api::Public.new(self)
   end
 
   def mass_messenger

@@ -17,7 +17,8 @@ module RailsWechat::WechatPlatform
   end
 
   def api
-    @api = Wechat::Api::Public.new(self)
+    retutn @api if defined? @api
+    @api = Wechat::Api::Platform.new(self)
   end
 
 end
