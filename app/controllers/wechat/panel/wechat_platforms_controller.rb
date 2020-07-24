@@ -45,6 +45,7 @@ class Wechat::Panel::WechatPlatformsController < Wechat::Panel::BaseController
       :name,
       :appid,
       :secret,
+      :verify_ticket,
       :token,
       :encoding_aes_key
     )
