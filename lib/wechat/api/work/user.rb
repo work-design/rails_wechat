@@ -1,17 +1,5 @@
-module Wechat::Api::Work::XX
+module Wechat::Api::Work::User
   BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
-
-  def agent_list
-    get 'agent/list'
-  end
-
-  def agent(agentid)
-    get 'agent/get', params: { agentid: agentid }
-  end
-
-  def checkin(useridlist, starttime = Time.now.beginning_of_day, endtime = Time.now.end_of_day, opencheckindatatype = 3)
-    post 'checkin/getcheckindata', opencheckindatatype: opencheckindatatype, starttime: starttime.to_i, endtime: endtime.to_i, useridlist: useridlist
-  end
 
   def getuserinfo(code)
     get 'user/getuserinfo', params: { code: code }

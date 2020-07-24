@@ -12,8 +12,6 @@ module Wechat::Api::Public::Base
     post 'clear_quota', appid: app.appid, base: BASE
   end
 
-
-
   def qrcode_create_scene(scene_id_or_str, expire_seconds = 2592000)
     case scene_id_or_str
     when 0.class

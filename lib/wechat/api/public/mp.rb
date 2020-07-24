@@ -1,4 +1,4 @@
-module Wechat::Api::Base::Mp
+module Wechat::Api::Public::Mp
   BASE = 'https://mp.weixin.qq.com/cgi-bin/'
 
   def qrcode(ticket)
