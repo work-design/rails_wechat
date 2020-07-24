@@ -39,7 +39,7 @@
         <p><%= wechat_agency.user_name %></p>
         <p><%= wechat_agency.alias_name %></p>
       </td>
-      <td><%= image_tag wechat_agency.qrcode_url %></td>
+      <td><%= image_tag wechat_agency.qrcode_url if wechat_agency.qrcode_url %></td>
       <td>
         <%= link_to panel_agency_path(wechat_agency), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-eye"></i>
