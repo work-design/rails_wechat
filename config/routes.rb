@@ -14,6 +14,11 @@ Rails.application.routes.draw do
       post 'wechat/auth' => :auth
       post :wx_notice
     end
+    resources :wechat_platforms, only: [:show] do
+      member do
+        get :callback
+      end
+    end
   end
 
   scope :my, module: 'wechat/my', as: :my do

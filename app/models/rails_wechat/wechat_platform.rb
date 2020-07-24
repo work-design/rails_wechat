@@ -1,4 +1,5 @@
 module RailsWechat::WechatPlatform
+  URL = 'https://mp.weixin.qq.com/dashboard/cgi-bin/componentloginpage'
   extend ActiveSupport::Concern
 
   included do
@@ -34,6 +35,19 @@ module RailsWechat::WechatPlatform
   def access_token_valid?
     return false unless access_token_expires_at.acts_like?(:time)
     access_token_expires_at > Time.current
+  end
+
+  def pre_auth_code_valid?
+    return false unless pre_auth_code_expires_at.acts_like?(:time)
+    pre_auth_code_expires_at > 3.minutes.since
+  end
+
+  def auth_url
+    {
+      component_appid: appid,
+      pre_auth_code: pre_auth_code,
+      redirect_uri: xx
+    }
   end
 
 end

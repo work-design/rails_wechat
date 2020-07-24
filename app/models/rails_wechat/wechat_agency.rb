@@ -9,7 +9,7 @@ module RailsWechat::WechatAgency
     attribute :func_infos, :string, array: true
 
     belongs_to :wechat_platform
-    #belongs_to :wechat_app, optional: true
+    belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
   end
 
 end

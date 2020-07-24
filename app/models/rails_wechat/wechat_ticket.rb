@@ -9,7 +9,7 @@ module RailsWechat::WechatTicket
     attribute :appid, :string
     attribute :ticket_data, :string
 
-    belongs_to :wechat_platform, foreign_key: :appid, primary_key: :appid
+    belongs_to :wechat_platform, foreign_key: :appid, primary_key: :appid, optional: true
 
     after_create_commit :parsed_data
   end
