@@ -16,6 +16,8 @@ module RailsWechat::WechatPlatform
 
     has_many :wechat_agencies
     has_many :wechat_auths
+
+    delegate :url_helpers, to: 'Rails.application.routes'
   end
 
   def api
@@ -47,7 +49,7 @@ module RailsWechat::WechatPlatform
     {
       component_appid: appid,
       pre_auth_code: pre_auth_code,
-      redirect_uri: xx
+      redirect_uri: url_helpers.callback_wechat_platform_url(self)
     }
   end
 
