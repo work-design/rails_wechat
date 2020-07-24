@@ -21,6 +21,11 @@ module RailsWechat::WechatAgency
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
   end
 
+  def api
+    return @api if defined? @api
+    @api = Wechat::Api::Public.new(self)
+  end
+
   def access_token_valid?
     return false unless access_token_expires_at.acts_like?(:time)
     access_token_expires_at > Time.current
