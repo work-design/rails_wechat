@@ -65,16 +65,16 @@ module RailsWechat::WechatReceived
   end
 
   def parse_content
-    @request.raw_body = @message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
+    @request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
 
     case msg_type
     when 'text'
-      @request.body = @message_hash['Content']
+      @request.body = message_hash['Content']
     when 'image', 'voice', 'video', 'shortvideo', 'location', 'event'
-      @request.event = @message_hash['Event']
-      @request.body = @message_hash['EventKey']
+      @request.event = message_hash['Event']
+      @request.body = message_hash['EventKey']
     else
-      warn "Don't know how to parse message as #{@message_hash['MsgType']}", uplevel: 1
+      warn "Don't know how to parse message as #{message_hash['MsgType']}", uplevel: 1
     end
   end
 
