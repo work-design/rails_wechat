@@ -1,5 +1,5 @@
 module Wechat::Api::Platform::Component
-  PLATFORM_BASE = 'https://api.weixin.qq.com/cgi-bin/component'
+  BASE = 'https://api.weixin.qq.com/cgi-bin/component'
 
   def api_component_token
     body = {
@@ -8,7 +8,7 @@ module Wechat::Api::Platform::Component
       component_verify_ticket: app.verify_ticket
     }
 
-    post 'api_component_token', body
+    post 'api_component_token', body, base: BASE
   end
 
 end
