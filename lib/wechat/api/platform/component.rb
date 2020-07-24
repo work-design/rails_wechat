@@ -1,14 +1,13 @@
 module Wechat::Api::Platform::Component
   BASE = 'https://api.weixin.qq.com/cgi-bin/component'
 
-  def api_component_token
+  def api_create_preauthcode(appid)
     body = {
-      component_appid: app.appid,
-      component_appsecret: app.secret,
-      component_verify_ticket: app.verify_ticket
+      component_appid: appid
     }
 
-    post 'api_component_token', body, base: BASE
+    post 'api_create_preauthcode', body, base: BASE
   end
+
 
 end

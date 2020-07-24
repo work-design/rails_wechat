@@ -21,4 +21,9 @@ module RailsWechat::WechatPlatform
     @api = Wechat::Api::Platform.new(self)
   end
 
+  def access_token_valid?
+    return false unless access_token_expires_at.acts_like?(:time)
+    access_token_expires_at > Time.current
+  end
+
 end
