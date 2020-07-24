@@ -6,9 +6,9 @@ module Wechat
       BASE = 'https://api.weixin.qq.com/cgi-bin/component/'
 
       def refresh
-        data = @client.get(
+        data = @client.post(
           'api_component_token',
-          params: {
+          {
             component_appid: @app.appid,
             component_appsecret: @app.secret,
             component_verify_ticket: @app.verify_ticket
