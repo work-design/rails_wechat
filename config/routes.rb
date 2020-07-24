@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
   scope module: :wechat do
-    resources :wechats, only: [:show, :update] do
-      post '' => :create, on: :member
+    resources :wechats, only: [:show] do
+      member do
+        post '' => :create
+      end
+      collection do
+        post ':appid/callback' => :platform
+      end
     end
     resources :wechat_program_users do
       collection do

@@ -1,6 +1,6 @@
 class Wechat::WechatsController < ApplicationController
   skip_before_action :verify_authenticity_token, raise: false
-  before_action :set_wechat_app
+  before_action :set_wechat_app, only: [:show, :create]
   before_action :verify_signature
 
   def show
@@ -26,9 +26,26 @@ class Wechat::WechatsController < ApplicationController
     ActiveSupport::Notifications.instrument 'wechat.responder.after_create', request: received.to_xml, response: replied&.to_xml
   end
 
+  def platform
+    @wechat_ticket = WechatTicket.new(ticket_params)
+    r = Hash.from_xml(request.body.read)['xml']
+    @wechat_ticket.appid = r['AppId']
+    @wechat_ticket.ticket_data = r['Encrypt']
+
+    if @wechat_ticket.save
+      render plain: 'success'
+    else
+      head :no_content
+    end
+  end
+
   private
   def set_wechat_app
     @wechat_app = WechatApp.valid.find(params[:id])
+  end
+
+  def set_wechat_agent
+    @wechat_app = WechatApp.find params[:appid]
   end
 
   def verify_signature
