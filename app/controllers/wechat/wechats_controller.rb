@@ -27,9 +27,9 @@ class Wechat::WechatsController < ApplicationController
   end
 
   def platform
-    @wechat_ticket = WechatTicket.new(ticket_params)
+    @wechat_ticket = WechatTicket.new
     r = Hash.from_xml(request.body.read)['xml']
-    @wechat_ticket.appid = r['AppId']
+    @wechat_ticket.appid = r['AppId'] || params[:appid]
     @wechat_ticket.ticket_data = r['Encrypt']
     puts "$$$$$$$$$$$$$$$$$$$$#{r}"
 
