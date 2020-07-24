@@ -46,6 +46,9 @@
         <p><time><%= wechat_platform.pre_auth_code_expires_at.to_s(:rfc822) if wechat_platform.pre_auth_code_expires_at %></time></p>
       </td>
       <td>
+        <%= link_to wechat_platform.auth_url, aria: { label: '测试授权' }, class: 'button is-small is-rounded is-light' do %>
+          <i class="fas fa-eye"></i>
+        <% end %>
         <%= link_to panel_wechat_platform_path(wechat_platform), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-eye"></i>
         <% end %>
