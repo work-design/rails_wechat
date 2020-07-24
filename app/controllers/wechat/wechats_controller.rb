@@ -1,7 +1,7 @@
 class Wechat::WechatsController < ApplicationController
   skip_before_action :verify_authenticity_token, raise: false
   before_action :set_wechat_app, only: [:show, :create]
-  before_action :verify_signature
+  before_action :verify_signature, only: [:show, :create]
 
   def show
     if @wechat_app.is_a?(WechatWork)
