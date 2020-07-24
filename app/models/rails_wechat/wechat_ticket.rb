@@ -11,7 +11,7 @@ module RailsWechat::WechatTicket
 
     belongs_to :wechat_platform, foreign_key: :appid, primary_key: :appid, optional: true
 
-    after_create_commit :parsed_data
+    after_create_commit :parsed_data, if: -> { wechat_platform.present? }
   end
 
   def parsed_data
