@@ -13,9 +13,18 @@ module Wechat::Api::Platform::Component
       component_appid: app.appid,
       authorization_code: auth_code
     }
-    r = post 'api_query_auth', body, base:BASE
+    r = post 'api_query_auth', body, base: BASE
     r['authorization_info']
   end
 
+  def authorizer_token(appid, refresh_token)
+    body = {
+      component_appid: app.appid,
+      authorizer_appid: appid,
+      authorizer_refresh_token: refresh_token
+    }
+
+    post 'api_authorizer_token', body, base: BASE
+  end
 
 end
