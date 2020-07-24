@@ -21,6 +21,16 @@ module RailsWechat::WechatPlatform
     @api = Wechat::Api::Platform.new(self)
   end
 
+  def save_pre_auth_code(token_hash)
+    unless token_hash.is_a?(Hash) && token_hash['pre_auth_code']
+      raise Wechat::InvalidCredentialError, token_hash['errmsg']
+    end
+
+    self.pre_auth_code = token_hash['pre_auth_code']
+    self.pre_auth_code_expires_at = Time.current + token_hash['expires_in'].to_i
+    self.save
+  end
+
   def access_token_valid?
     return false unless access_token_expires_at.acts_like?(:time)
     access_token_expires_at > Time.current
