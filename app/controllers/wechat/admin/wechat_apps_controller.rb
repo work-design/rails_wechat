@@ -21,7 +21,11 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
   end
 
   def create
-    @wechat_app = WechatApp.new(wechat_app_params)
+    @wechat_app = WechatApp.find_or_initialize_by(appid: wechat_app_params[:appid])
+    if @wechat_app.organ
+      @wechat_app.errors.add :base, '该账号已在其他组织添加，请联系客服'
+    end
+    @wechat_app.assign_attributes wechat_app_params
 
     unless @wechat_app.save
       render :new, locals: { model: @wechat_app }, status: :unprocessable_entity
