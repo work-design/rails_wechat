@@ -30,7 +30,6 @@ module RailsWechat::WechatReceived
     'enter_agent' => 'WechatRequest',
     'batch_job_result' => 'WechatRequest'  # 企业微信使用
   }.freeze
-
   extend ActiveSupport::Concern
 
   included do
@@ -40,12 +39,13 @@ module RailsWechat::WechatReceived
     attribute :msg_type, :string
     attribute :content, :string
     attribute :encrypt_data, :string
+    attribute :message_hash, :json
 
     belongs_to :wechat_platform, optional: true
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 
-    after_create_commit :decrypt_data
+    before_create :decrypt_data
   end
 
   def decrypt_data
@@ -54,7 +54,8 @@ module RailsWechat::WechatReceived
       r = Wechat::Cipher.decrypt(Base64.decode64(encrypt_data), aes_key)
       content, _ = Wechat::Cipher.unpack(r)
 
-      Hash.from_xml(content).fetch('xml', {})
+      self.message_hash = Hash.from_xml(content).fetch('xml', {})
+      self.save
     end
   end
 
@@ -62,6 +63,14 @@ module RailsWechat::WechatReceived
     @wechat_user = WechatUser.find_or_initialize_by(uid: @message_hash[:FromUserName])
     @wechat_user.app_id = appid
     @wechat_user.save
+  end
+
+  def request_type
+    if message_hash['MsgType'] == 'event'
+      EVENT[message_hash['Event']]
+    else
+      MSG_TYPE[message_hash['MsgType']]
+    end
   end
 
   def parse_content
@@ -76,6 +85,12 @@ module RailsWechat::WechatReceived
     else
       warn "Don't know how to parse message as #{message_hash['MsgType']}", uplevel: 1
     end
+  end
+
+  def to_request
+    @wechat_request = wechat_app.wechat_requests.build(wechat_user_id: app.id, type: type)
+    @wechat_request.msg_type = message_hash['MsgType']
+    @wechat_request.save
   end
 
 end

@@ -13,14 +13,12 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
   end
 
   def message
-    @wechat_ticket = WechatTicket.new
+    @wechat_received = WechatReceived.new
+    @wechat_received.appid = params[:appid]
     r = Hash.from_xml(request.body.read)['xml']
-    @wechat_ticket.appid = r['AppId'] || params[:appid]
-    @wechat_ticket.ticket_data = r['Encrypt']
-    logger.debug "----------> #{r}"
-    parsed_data(@wechat_ticket.ticket_data)
+    @wechat_received.encrypt_data = r['Encrypt']
 
-    if @wechat_ticket.save
+    if @wechat_received.save
       render plain: 'success'
     else
       head :no_content
@@ -38,15 +36,6 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
 
   def set_wechat_app
     @wechat_app = @wechat_platform.wechat_agencies.find_by(appid: params[:appid]).wechat_app
-  end
-
-  def parsed_data(ticket_data)
-    r = Wechat::Cipher.decrypt(Base64.decode64(ticket_data), @wechat_platform.encoding_aes_key)
-    content, _ = Wechat::Cipher.unpack(r)
-
-    data = Hash.from_xml(content).fetch('xml', {})
-    logger.debug "----------> #{data}"
-    data
   end
 
 end
