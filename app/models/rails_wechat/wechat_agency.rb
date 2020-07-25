@@ -36,6 +36,7 @@ module RailsWechat::WechatAgency
 
   def init_wechat_app
     wechat_app || build_wechat_app
+    wechat_app.save
   end
 
   def access_token_valid?
