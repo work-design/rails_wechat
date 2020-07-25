@@ -55,7 +55,6 @@ module RailsWechat::WechatReceived
       content, _ = Wechat::Cipher.unpack(r)
 
       self.message_hash = Hash.from_xml(content).fetch('xml', {})
-      self.save
     end
   end
 
