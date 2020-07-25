@@ -46,6 +46,7 @@ module RailsWechat::WechatReceived
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 
     before_create :decrypt_data
+    before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
     before_save :init_wechat_user, if: -> { open_id_changed? && open_id }
   end
 
@@ -57,6 +58,12 @@ module RailsWechat::WechatReceived
 
       self.message_hash = Hash.from_xml(content).fetch('xml', {})
     end
+  end
+
+  def parse_message_hash
+    self.open_id = message_hash['FromUserName']
+    self.msg_type = message_hash['MsgType']
+    self.msg_id = message_hash['MsgId']
   end
 
   def init_wechat_user

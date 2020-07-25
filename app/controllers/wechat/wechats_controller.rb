@@ -14,8 +14,12 @@ class Wechat::WechatsController < ApplicationController
 
   def create
     r = Hash.from_xml(request.raw_post).fetch('xml', {})
-    @wechat_received = @wechat_app.wechat_receiveds.build(body: r)
-    @wechat_received.encrypt_data = r['Encrypt']
+    @wechat_received = @wechat_app.wechat_receiveds.build
+    if r['Encrypt']
+      @wechat_received.encrypt_data = r['Encrypt']
+    else
+      @wechat_received.message_hash = r
+    end
     replied = received.reply
     replied.get_reply
 

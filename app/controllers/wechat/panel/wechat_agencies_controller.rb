@@ -1,6 +1,6 @@
 class Wechat::Panel::WechatAgenciesController < Wechat::Panel::BaseController
   before_action :set_wechat_platform
-  before_action :set_wechat_agency, only: [:show, :edit, :update, :destroy]
+  before_action :set_wechat_agency, only: [:show, :edit, :update]
 
   def index
     @wechat_agencies = @wechat_platform.wechat_agencies.page(params[:page])
