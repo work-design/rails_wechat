@@ -46,6 +46,7 @@ module RailsWechat::WechatReceived
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 
     before_create :decrypt_data
+    before_save :init_wechat_user, if: -> { open_id_changed? && open_id }
   end
 
   def decrypt_data
@@ -59,9 +60,8 @@ module RailsWechat::WechatReceived
   end
 
   def init_wechat_user
-    @wechat_user = WechatUser.find_or_initialize_by(uid: @message_hash[:FromUserName])
-    @wechat_user.app_id = appid
-    @wechat_user.save
+    wechat_user || build_wechat_user
+    wechat_user.app_id = appid
   end
 
   def request_type
