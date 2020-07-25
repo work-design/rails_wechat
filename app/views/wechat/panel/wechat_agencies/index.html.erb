@@ -1,3 +1,10 @@
+<% content_for :breadcrumb do %>
+  <ul>
+    <li><%= link_to t('wechat.panel.wechat_platforms.index.title'), panel_wechat_platforms_path %></li>
+    <li><%= t('wechat.panel.wechat_agencies.index.title') %></li>
+  </ul>
+<% end %>
+
 <%= render 'filter_form' %>
 
 <table class="table is-hoverable is-fullwidth">
