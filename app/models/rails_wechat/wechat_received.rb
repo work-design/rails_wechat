@@ -43,7 +43,7 @@ module RailsWechat::WechatReceived
 
     belongs_to :wechat_platform, optional: true
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
-    belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
+    belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true, autosave: true
 
     before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
     before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
@@ -67,7 +67,7 @@ module RailsWechat::WechatReceived
   def init_wechat_user
     wechat_user || build_wechat_user
     wechat_user.app_id = appid
-    logger.debug "---------> #{wechat_user.object_id}"
+    logger.debug "---------> #{wechat_user.valid?}"
   end
 
   def request_type
