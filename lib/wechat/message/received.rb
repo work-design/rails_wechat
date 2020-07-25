@@ -1,9 +1,6 @@
 class Wechat::Message::Received < Wechat::Message::Base
 
 
-
-
-
   def reply
     @reply = Wechat::Message::Replied.new(
       @request,

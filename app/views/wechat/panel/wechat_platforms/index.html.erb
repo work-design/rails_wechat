@@ -36,12 +36,10 @@
         <p><%= wechat_platform.verify_ticket %></p>
       </td>
       <td>
-        <pre>
-          <code><%= wechat_platform.access_token %></code>
-          <code><time><%= wechat_platform.access_token_expires_at.to_s(:rfc822) if wechat_platform.access_token_expires_at %></time></code>
-          <code><%= wechat_platform.pre_auth_code %></code>
-          <code><time><%= wechat_platform.pre_auth_code_expires_at.to_s(:rfc822) if wechat_platform.pre_auth_code_expires_at %></time></code>
-        </pre>
+        <p><%= wechat_platform.access_token %></p>
+        <p><time><%= wechat_platform.access_token_expires_at.to_s(:rfc822) if wechat_platform.access_token_expires_at %></time></p>
+        <p><%= wechat_platform.pre_auth_code %></p>
+        <p><time><%= wechat_platform.pre_auth_code_expires_at.to_s(:rfc822) if wechat_platform.pre_auth_code_expires_at %></time></p>
       </td>
       <td>
         <%= link_to wechat_platform.auth_url, aria: { label: '测试授权' }, class: 'button is-small is-rounded is-light' do %>

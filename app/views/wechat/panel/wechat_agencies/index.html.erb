@@ -32,7 +32,7 @@
       <td><%= simple_format wechat_agency.func_infos %></td>
       <td>
         <p>
-          <%= image_tag wechat_agency.head_img class: 'image is-24x24' if wechat_agency.head_img %>
+          <%= image_tag wechat_agency.head_img, class: 'image is-24x24' if wechat_agency.head_img %>
           <%= wechat_agency.nick_name %>
         </p>
         <p><%= wechat_agency.principal_name %></p>
