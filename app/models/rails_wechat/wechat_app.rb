@@ -36,10 +36,7 @@ module RailsWechat::WechatApp
 
     scope :valid, -> { where(enabled: true) }
 
-    validates :name, presence: true
     validates :appid, presence: true, uniqueness: true
-    validates :secret, presence: true
-    validates :token, presence: true
 
     before_validation do
       self.encoding_aes_key ||= SecureRandom.alphanumeric(43) if encrypt_mode

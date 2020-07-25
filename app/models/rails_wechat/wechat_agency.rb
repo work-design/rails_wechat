@@ -1,4 +1,9 @@
 module RailsWechat::WechatAgency
+  SERVICE_TYPE = {
+    '0' => 'WechatRead',
+    '1' => 'WechatRead',
+    '2' => 'WechatPublic'
+  }.freeze
   extend ActiveSupport::Concern
 
   included do
@@ -21,11 +26,16 @@ module RailsWechat::WechatAgency
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
 
     after_create_commit :store_info_later
+    before_save :init_wechat_app, if: -> { appid_changed? && appid }
   end
 
   def api
     return @api if defined? @api
     @api = Wechat::Api::Public.new(self)
+  end
+
+  def init_wechat_app
+    wechat_app || build_wechat_app
   end
 
   def access_token_valid?
