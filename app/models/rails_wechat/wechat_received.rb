@@ -45,19 +45,17 @@ module RailsWechat::WechatReceived
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 
-    before_create :decrypt_data
+    before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
     before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
-    before_save :init_wechat_user, if: -> { open_id_changed? && open_id }
+    before_save :init_wechat_user, if: -> { open_id_changed? && open_id.present? }
   end
 
   def decrypt_data
-    if encrypt_data.present?
-      aes_key = wechat_platform ? wechat_platform.encoding_aes_key : wechat_app.encoding_aes_key
-      r = Wechat::Cipher.decrypt(Base64.decode64(encrypt_data), aes_key)
-      content, _ = Wechat::Cipher.unpack(r)
+    aes_key = wechat_platform ? wechat_platform.encoding_aes_key : wechat_app.encoding_aes_key
+    r = Wechat::Cipher.decrypt(Base64.decode64(encrypt_data), aes_key)
+    content, _ = Wechat::Cipher.unpack(r)
 
-      self.message_hash = Hash.from_xml(content).fetch('xml', {})
-    end
+    self.message_hash = Hash.from_xml(content).fetch('xml', {})
   end
 
   def parse_message_hash
