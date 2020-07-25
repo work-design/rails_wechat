@@ -13,7 +13,7 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
   end
 
   def message
-    @wechat_received = WechatReceived.new
+    @wechat_received = @wechat_platform.wechat_receiveds.build
     @wechat_received.appid = params[:appid]
     r = Hash.from_xml(request.body.read)['xml']
     @wechat_received.encrypt_data = r['Encrypt']
