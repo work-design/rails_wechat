@@ -10,8 +10,6 @@
         <p><%= WechatPlatform.human_attribute_name(:token) %></p>
         <p><%= WechatPlatform.human_attribute_name(:encoding_aes_key) %></p>
         <p><%= WechatPlatform.human_attribute_name(:verify_ticket) %></p>
-      </th>
-      <th>
         <p><%= WechatPlatform.human_attribute_name(:access_token) %></p>
         <p><%= WechatPlatform.human_attribute_name(:access_token_expires_at) %></p>
         <p><%= WechatPlatform.human_attribute_name(:pre_auth_code) %></p>
@@ -34,8 +32,6 @@
         <p><%= wechat_platform.token %></p>
         <p><%= wechat_platform.encoding_aes_key %></p>
         <p><%= wechat_platform.verify_ticket %></p>
-      </td>
-      <td>
         <p><%= wechat_platform.access_token %></p>
         <p><time><%= wechat_platform.access_token_expires_at.to_s(:rfc822) if wechat_platform.access_token_expires_at %></time></p>
         <p><%= wechat_platform.pre_auth_code %></p>
