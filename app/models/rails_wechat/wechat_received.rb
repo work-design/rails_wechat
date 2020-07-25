@@ -67,6 +67,7 @@ module RailsWechat::WechatReceived
   def init_wechat_user
     wechat_user || build_wechat_user
     wechat_user.app_id = appid
+    logger.debug "---------> #{wechat_user.object_id}"
   end
 
   def request_type
