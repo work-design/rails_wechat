@@ -1,5 +1,5 @@
 class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
-  before_action :set_wechat_register, only: [:show, :edit, :edit_app, :update, :destroy]
+  before_action :set_wechat_register, only: [:show, :edit, :edit_app, :edit_bind, :update, :destroy]
 
   def index
     q_params = {}
@@ -29,6 +29,9 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
   def edit_app
   end
 
+  def edit_bind
+  end
+
   def update
     @wechat_register.assign_attributes(wechat_register_params)
 
@@ -50,7 +53,7 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
     params.fetch(:wechat_register, {}).permit(
       :id_name,
       :id_number,
-      :state,
+      :bind_url,
       :appid
     )
   end

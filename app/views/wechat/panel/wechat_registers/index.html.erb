@@ -36,6 +36,9 @@
         <%= link_to edit_panel_wechat_register_path(wechat_register), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
+        <%= link_to bind_panel_wechat_register_path(wechat_register), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+          <i class="fas fa-qrcode"></i>
+        <% end %>
         <%= link_to app_panel_wechat_register_path(wechat_register), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fab fa-weixin"></i>
         <% end %>
