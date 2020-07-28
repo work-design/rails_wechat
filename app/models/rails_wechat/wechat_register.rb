@@ -8,6 +8,7 @@ module RailsWechat::WechatRegister
     attribute :bind_url, :string
     attribute :state, :string, default: 'init'
     attribute :appid, :string
+    attribute :password, :string
 
     belongs_to :member
     belongs_to :wechat_app, foreign_key: :app_id, primary_key: :appid, optional: true
@@ -18,6 +19,9 @@ module RailsWechat::WechatRegister
       done: 'done'
     }
 
+    after_initialize if: :new_record? do
+      self.password = SecureRandom.urlsafe_base64
+    end
     before_save :compute_state, if: -> { appid_changed? }
   end
 
@@ -27,6 +31,10 @@ module RailsWechat::WechatRegister
     else
       self.state = 'doing'
     end
+  end
+
+  def email
+    "#{id}@#{RailsWechat.config.email_domain}"
   end
 
 end
