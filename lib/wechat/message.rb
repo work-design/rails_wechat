@@ -10,8 +10,4 @@ require 'wechat/message/template'
 require 'wechat/message/template/public'
 require 'wechat/message/template/program'
 
-require 'wechat/message/received'
-
-require 'wechat/message/replied'
 require 'wechat/message/custom'  # 客服消息
-require 'wechat/message/replied/work'

@@ -33,6 +33,7 @@ module RailsWechat::WechatApp
     has_many :posts, through: :post_syncs
 
     has_many :wechat_users, foreign_key: :app_id, primary_key: :appid
+    has_many :wechat_receiveds, foreign_key: :appid, primary_key: :appid
 
     scope :valid, -> { where(enabled: true) }
 

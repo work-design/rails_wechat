@@ -20,7 +20,7 @@ class Wechat::WechatsController < ApplicationController
     else
       @wechat_received.message_hash = r
     end
-    replied = received.reply
+    replied = @wechat_received.reply
     replied.get_reply
 
     if replied.respond_to? :to_xml

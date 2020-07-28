@@ -98,4 +98,11 @@ module RailsWechat::WechatReceived
     @wechat_request.save
   end
 
+  def reply
+    @reply = WechatReply.new(
+      @request,
+
+    )
+  end
+
 end

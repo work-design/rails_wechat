@@ -28,4 +28,10 @@ module RailsWechat::WechatReply
     { MsgType: msg_type }.merge! content
   end
 
+  def xx
+    {ToUserName: @message_hash['FromUserName'],
+      FromUserName: @message_hash['ToUserName'],
+      CreateTime: Time.now.to_i}
+  end
+
 end
