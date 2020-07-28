@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       member do
         get 'app' => :edit_app
         get 'bind' => :edit_bind
+        put :code
       end
     end
     resources :wechat_platforms do

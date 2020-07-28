@@ -39,7 +39,12 @@
         <p class="has-text-danger"><%= wechat_register.password %></p>
       </td>
       <td>
-        <p><%= wechat_register.member.identity %></p>
+        <p>
+          <%= wechat_register.member.identity %>
+          <%= link_to code_panel_wechat_register_path(wechat_register), method: :put, aria: { label: '验证码' }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+            <i class="fas fa-paper-plane"></i>
+          <% end %>
+        </p>
         <p><%= wechat_register.mobile_code %></p>
       </td>
       <td><%= image_tag wechat_register.bind_url, class: 'image is-24x24' if wechat_register.bind_url.present? %></td>
