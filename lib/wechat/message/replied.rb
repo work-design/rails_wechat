@@ -7,6 +7,6 @@ class Wechat::Message::Replied < Wechat::Message::Base
     @message_hash = params.with_indifferent_access
   end
 
- 
+
 
 end
