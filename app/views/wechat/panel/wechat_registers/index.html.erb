@@ -9,7 +9,7 @@
       </th>
       <th>
         <p><%= WechatRegister.human_attribute_name(:email) %></p>
-        <p><%= WechatRegister.human_attribute_name(:verify_code) %></p>
+        <p><%= WechatRegister.human_attribute_name(:email_code) %></p>
         <p class="has-text-danger"><%= WechatRegister.human_attribute_name(:password) %></p>
       </th>
       <th>
@@ -30,12 +30,12 @@
   <% @wechat_registers.each do |wechat_register| %>
     <tr>
       <td>
-        <p><%= wechat_register.id_name %></p>
+        <p><%= link_to wechat_register.id_name, panel_wechat_register_path(wechat_register) %></p>
         <p><%= wechat_register.id_number %></p>
       </td>
       <td>
         <p><%= wechat_register.email %></p>
-        <p><%= wechat_register.verify_code %></p>
+        <p><%= wechat_register.email_code %></p>
         <p class="has-text-danger"><%= wechat_register.password %></p>
       </td>
       <td>

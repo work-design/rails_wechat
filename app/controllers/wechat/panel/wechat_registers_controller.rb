@@ -1,5 +1,9 @@
 class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
-  before_action :set_wechat_register, only: [:show, :edit, :edit_app, :edit_bind, :update, :destroy]
+  before_action :set_wechat_register, only: [
+    :show, :code, :qrcode,
+    :edit, :edit_app, :edit_bind,
+    :update, :destroy
+  ]
 
   def index
     q_params = {}
@@ -21,6 +25,12 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
   end
 
   def show
+  end
+
+  def code
+  end
+
+  def qrcode
   end
 
   def edit

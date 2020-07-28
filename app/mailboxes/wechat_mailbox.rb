@@ -2,7 +2,7 @@ class WechatMailbox < ApplicationMailbox
 
   def process
     html = Nokogiri::HTML(mail.body.to_s)
-    forwarder.verify_code = html.search('p.mmsgLetterDigital')[0]&.inner_text
+    forwarder.email_code = html.search('p.mmsgLetterDigital')[0]&.inner_text
     forwarder.save
   end
 
