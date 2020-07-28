@@ -28,7 +28,11 @@ Rails.application.routes.draw do
 
   scope :my, module: 'wechat/my', as: :my do
     resources :wechat_subscribeds
-    resources :wechat_registers
+    resources :wechat_registers do
+      member do
+        get 'code' => :edit_code
+      end
+    end
   end
 
   scope :panel, module: 'wechat/panel', as: :panel do

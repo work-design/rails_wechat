@@ -9,6 +9,7 @@ module RailsWechat::WechatRegister
     attribute :state, :string, default: 'init'
     attribute :appid, :string
     attribute :password, :string
+    attribute :mobile_code, :string
 
     belongs_to :member
     belongs_to :wechat_app, foreign_key: :app_id, primary_key: :appid, optional: true

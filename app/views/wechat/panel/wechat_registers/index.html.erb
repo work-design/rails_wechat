@@ -12,6 +12,10 @@
         <p><%= WechatRegister.human_attribute_name(:verify_code) %></p>
         <p class="has-text-danger"><%= WechatRegister.human_attribute_name(:password) %></p>
       </th>
+      <th>
+        <p><%= Member.human_attribute_name(:identity) %></p>
+        <p><%= WechatRegister.human_attribute_name(:mobile_code) %></p>
+      </th>
       <th><%= WechatRegister.human_attribute_name(:bind_url) %></th>
       <th><%= WechatRegister.human_attribute_name(:state) %></th>
       <th><%= WechatRegister.human_attribute_name(:appid) %></th>
@@ -33,6 +37,10 @@
         <p><%= wechat_register.email %></p>
         <p><%= wechat_register.verify_code %></p>
         <p class="has-text-danger"><%= wechat_register.password %></p>
+      </td>
+      <td>
+        <p><%= wechat_register.member.identity %></p>
+        <p><%= wechat_register.mobile_code %></p>
       </td>
       <td><%= image_tag wechat_register.bind_url, class: 'image is-24x24' if wechat_register.bind_url.present? %></td>
       <td><%= wechat_register.state_i18n %></td>
