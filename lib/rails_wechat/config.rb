@@ -7,6 +7,7 @@ module RailsWechat
         verify_mode: OpenSSL::SSL::VERIFY_NONE
       }
     }
+    config.email_domain = 'mail.work.design'
   end
 
 end
