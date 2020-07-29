@@ -43,9 +43,13 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
   end
 
   def edit_assign
+    @members = @wechat_register.members
+    @task_templates = @wechat_register.task_templates
   end
 
   def update_assign
+    @wechat_register.to_task!(params[:member_id], params[:task_template_id])
+    render 'update'
   end
 
   def update

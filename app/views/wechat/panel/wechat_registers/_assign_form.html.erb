@@ -1,6 +1,7 @@
-<%= form_with scope: nil, model: @wechat_register, url: assign_panel_wechat_register_path(@wechat_register) do |f| %>
+<%= form_with scope: '', model: @wechat_register, url: assign_panel_wechat_register_path(@wechat_register) do |f| %>
   <%= render 'shared/error_messages', target: @wechat_register %>
   <%= f.collection_select :organ_id, Organ.official, :id, :name %>
-  <%= f.select :member_id, options_for_select([]) %>
+  <%= f.collection_select :member_id, @members, :id, :name %>
+  <%= f.collection_select :task_template_id, @task_templates, :id, :title %>
   <%= f.submit %>
 <% end %>
