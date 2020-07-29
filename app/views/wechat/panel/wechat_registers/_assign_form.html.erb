@@ -1,0 +1,6 @@
+<%= form_with scope: nil, model: @wechat_register, url: assign_panel_wechat_register_path(@wechat_register) do |f| %>
+  <%= render 'shared/error_messages', target: @wechat_register %>
+  <%= f.collection_select :organ_id, Organ.official, :id, :name %>
+  <%= f.select :member_id, options_for_select([]) %>
+  <%= f.submit %>
+<% end %>

@@ -1,7 +1,7 @@
 class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
   before_action :set_wechat_register, only: [
     :show, :code, :qrcode,
-    :edit, :edit_app, :edit_bind,
+    :edit, :edit_app, :edit_bind, :edit_assign, :update_assign,
     :update, :destroy
   ]
 
@@ -40,6 +40,12 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
   end
 
   def edit_bind
+  end
+
+  def edit_assign
+  end
+
+  def update_assign
   end
 
   def update
