@@ -19,7 +19,7 @@ module RailsWechat::WechatNotice
       if self.wechat_subscribed
         self.wechat_user ||= wechat_subscribed.wechat_user
       else
-        self.wechat_user ||= notification.receiver.wechat_users.find_by(app_id: wechat_app.appid)
+        self.wechat_user ||= notification.user.wechat_users.find_by(app_id: wechat_app.appid)
       end
     end
     after_create_commit :do_send_later
