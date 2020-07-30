@@ -14,7 +14,7 @@ class Wechat::Api::Base
     end
   end
 
-  def post(path, payload, params: {}, headers: {}, base: nil)
+  def post(path, params: {}, headers: {}, base: nil, **payload)
     with_access_token(params) do |with_token_params|
       client.post path, payload.to_json, headers: headers, params: with_token_params, base: base
     end
