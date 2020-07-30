@@ -12,13 +12,14 @@ module RailsWechat::TemplateConfig::TemplatePublic
     r
   end
 
-  def sync_key_words
-    app = WechatPublic.default
+  def sync_key_words(app = WechatPublic.default)
     if tid.present? && app
-      result = app.api.add_template tid
-      template_id = result['template_id']
-      app.api.del_template template_id
-      template = app.api.templates.find { |i| i['template_id'] == template_id }
+      template = app.api.templates.find { |i| i['template_id'] == tid }
+      if template.blank?
+        result = app.api.add_template tid
+        template = app.api.templates.find { |i| i['template_id'] == result['template_id'] }
+        app.api.del_template result['template_id']
+      end
       self.update content: template['content']
     end
 
