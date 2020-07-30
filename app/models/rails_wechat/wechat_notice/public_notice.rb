@@ -1,4 +1,8 @@
-class Wechat::Message::Template::Public < Wechat::Message::Template
+module RailsWechat::WechatNotice::PublicNotice
+  extend ActiveSupport::Concern
+
+  included do
+  end
 
   def do_send
     api.post 'message/template/send', @message_hash, base: API_BASE

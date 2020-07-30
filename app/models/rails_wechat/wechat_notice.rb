@@ -5,6 +5,7 @@ module RailsWechat::WechatNotice
     attribute :link, :string, default: 'index'
     attribute :msg_id, :string
     attribute :status, :string
+    attribute :type, :string
 
     belongs_to :notification
     belongs_to :wechat_template
@@ -41,6 +42,10 @@ module RailsWechat::WechatNotice
 
   def do_send_later
     WechatNoticeSendJob.perform_later(self)
+  end
+
+  def to_user(openid, **options)
+    update(touser: openid, **options)
   end
 
   def do_send

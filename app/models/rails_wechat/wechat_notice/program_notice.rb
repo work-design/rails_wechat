@@ -1,4 +1,8 @@
-class Wechat::Message::Template::Program < Wechat::Message::Template
+module RailsWechat::WechatNotice::ProgramNotice
+  extend ActiveSupport::Concern
+
+  included do
+  end
 
   # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.send.html
   def do_send
