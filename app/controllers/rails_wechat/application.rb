@@ -17,7 +17,9 @@ module RailsWechat::Application
       end
     end
 
-    render 'wechat_require_login', locals: { redirect_url: redirect_url, message: '请登录后操作' }, status: 401
+    logger.debug "---------> #{redirect_url}"
+    redirect_to redirect_url
+    #render 'wechat_require_login', locals: { redirect_url: redirect_url, message: '请登录后操作' }, status: 401
   end
 
   def current_wechat_app
