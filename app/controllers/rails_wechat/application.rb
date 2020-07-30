@@ -13,7 +13,7 @@ module RailsWechat::Application
       if current_wechat_app && current_session_organ
         redirect_url = current_wechat_app.oauth2_url(host: request.host, port: request.port, protocol: request.protocol)
       else
-        redirect_url = ActionDispatch::Http::URL.url_for path: '/auth/wechat',
+        redirect_url = ActionDispatch::Http::URL.url_for path: '/auth/wechat', host: request.host, port: request.port, protocol: request.protocol
       end
     end
 

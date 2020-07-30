@@ -18,10 +18,14 @@ module RailsWechat::WechatMenu::ViewMenu
   def host
     organ = wechat_app&.organ
     if organ
-      organ.host
+      organ.host(subdomain)
     else
       ''
     end
+  end
+
+  def subdomain
+    [['app', wechat_app&.organ_id, wechat_app.id].join('_'), RailsCom.config.subdomain].join('.')
   end
 
 end
