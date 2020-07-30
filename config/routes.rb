@@ -12,6 +12,9 @@ Rails.application.routes.draw do
         post :info
       end
     end
+    resources :wechat_apps, only: [:show] do
+
+    end
     controller :wechat do
       post 'wechat/auth' => :auth
       post :wx_notice

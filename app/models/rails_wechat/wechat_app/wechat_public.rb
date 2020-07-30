@@ -13,22 +13,23 @@ module RailsWechat::WechatApp::WechatPublic
     end
   end
 
-  def wechat_public_oauth2(oauth2_params, account = nil)
-    openid = cookies.signed_or_encrypted[:we_openid]
-    unionid = cookies.signed_or_encrypted[:we_unionid]
-    we_token = cookies.signed_or_encrypted[:we_access_token]
-    if openid.present?
-      yield openid, { 'openid' => openid, 'unionid' => unionid, 'access_token' => we_token}
-    elsif params[:code].present? && params[:state] == oauth2_params[:state]
-      access_info = wechat(account).web_access_token(params[:code])
-      cookies.signed_or_encrypted[:we_openid] = { value: access_info['openid'], expires: self.class.oauth2_cookie_duration.from_now }
-      cookies.signed_or_encrypted[:we_unionid] = { value: access_info['unionid'], expires: self.class.oauth2_cookie_duration.from_now }
-      cookies.signed_or_encrypted[:we_access_token] = { value: access_info['access_token'], expires: self.class.oauth2_cookie_duration.from_now }
-      yield access_info['openid'], access_info
-    else
-      redirect_to generate_oauth2_url(oauth2_params)
-    end
+  def oauth2_url
+    "https://open.weixin.qq.com/connect/oauth2/authorize?#{oauth2_params.to_query}#wechat_redirect"
   end
 
+  def generate_wechat_user(code)
+    h = {
+      appid: appid,
+      secret: secret,
+      code: code,
+      grant_type: 'authorization_code'
+    }
+    r = HTTPX.get "https://api.weixin.qq.com/sns/oauth2/access_token?#{h.to_query}"
+    result = JSON.parse(r.body.to_s)
+    wechat_user = wechat_users.find_or_initialize_by(uid: result['openid'])
+    wechat_user.access_token = result.slice('access_token', 'refresh_token', 'unionid')
+    wechat_user.expires_at = Time.current + result['expires_in']
+    wechat_user
+  end
 
 end

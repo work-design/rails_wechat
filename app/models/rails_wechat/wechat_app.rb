@@ -102,21 +102,14 @@ module RailsWechat::WechatApp
     @api = Wechat::Api::Public.new(self)
   end
 
-  def oauth2_params
+  def oauth2_params(scope = 'snsapi_userinfo')
     {
       appid: appid,
-      redirect_uri: page_url || generate_redirect_uri(account),
-      scope: scope,
+      redirect_uri: url_helpers.wechat_app_url(id),
       response_type: 'code',
+      scope: scope,
       state: SecureRandom.hex(16)
     }
-  end
-
-  def generate_redirect_uri(account = nil)
-    domain_name = Wechat.config(account).trusted_domain_fullname
-    page_url = domain_name ? "#{domain_name}#{request.original_fullpath}" : request.original_url
-    safe_query = request.query_parameters.except('code', 'state', 'access_token').to_query
-    page_url.sub(request.query_string, safe_query)
   end
 
   def generate_oauth2_url(oauth2_params)
