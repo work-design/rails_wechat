@@ -1,6 +1,6 @@
 <%= form_with model: @template_config, scope: :template_config, url: panel_template_config_path(@template_config) do |f| %>
   <%= render 'shared/error_messages', target: @template_config %>
-  <%= f.fields :template_key_words, can: { wrap_all: false, label: false, placeholder: true }, css: { wrap_input: 'field' } do |ef| %>
+  <%= f.fields :template_key_words, wrap: { all: nil } do |ef| %>
     <%= render partial: 'item_form', locals: { ef: ef } %>
   <% end %>
   <%= f.text_field :notifiable_type %>

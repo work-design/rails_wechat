@@ -1,4 +1,6 @@
-<div class="field">
-  <label class="six wide field"><%= ef.object.name %></label>
-  <%= ef.text_field :mapping %>
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label"><%= ef.object.name %></label>
+  </div>
+  <%= ef.text_field :mapping, label: nil %>
 </div>
