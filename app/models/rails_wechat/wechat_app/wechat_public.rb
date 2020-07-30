@@ -35,7 +35,7 @@ module RailsWechat::WechatApp::WechatPublic
     result = JSON.parse(r.body.to_s)
     wechat_user = wechat_users.find_or_initialize_by(uid: result['openid'])
     wechat_user.access_token = result.slice('access_token', 'refresh_token', 'unionid')
-    wechat_user.expires_at = Time.current + result['expires_in']
+    wechat_user.expires_at = Time.current + result['expires_in'].to_i
     wechat_user
   end
 
