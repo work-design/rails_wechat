@@ -19,11 +19,11 @@ module Wechat::Api::Program::Wxapi
   end
 
   def add_template(tid, kid_list, description: 'tst')
-    post 'newtmpl/addtemplate', { tid: tid, kidList: kid_list, sceneDesc: description }, base: BASE
+    post 'newtmpl/addtemplate', tid: tid, kidList: kid_list, sceneDesc: description, base: BASE
   end
 
   def del_template(template_id)
-    post 'newtmpl/deltemplate', {}, params: { priTmplId: template_id }, base: BASE
+    post 'newtmpl/deltemplate', params: { priTmplId: template_id }, base: BASE
   end
 
 end
