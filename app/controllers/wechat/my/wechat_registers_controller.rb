@@ -2,7 +2,7 @@ class Wechat::My::WechatRegistersController < Wechat::My::BaseController
   before_action :set_wechat_register, only: [:show, :edit, :edit_code, :update, :destroy]
 
   def index
-    @wechat_registers = WechatRegister.page(params[:page])
+    @wechat_registers = current_member.wechat_registers.page(params[:page])
   end
 
   def new
