@@ -12,8 +12,9 @@
 * 对公众号极低的要求，就算是未经过认证的个人微信号，依然可以实现 oauth2 登陆的效果； 
 * 支持微信支付多账号配置；
 * 注释清晰，添加对文档的引用；
+* 支持多账号 omniauth 登陆；
 
-如果你只是在Rails里使用微信公众号功能，强烈建议直接使用本 gem，并配合经过我改造后的 [omniauth-wechat-oauth2](https://github.com/qinmingyuan/omniauth-wechat-oauth2) 使用。
+如果你只是在Rails里使用微信公众号功能，强烈建议直接使用本 gem。
 
 ## 功能
 * 精准消息推送，推送消息给你想推送的人群；
