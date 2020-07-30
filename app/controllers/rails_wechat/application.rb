@@ -10,14 +10,27 @@ module RailsWechat::Application
     if current_wechat_user && current_wechat_user.user.nil?
       redirect_url = sign_url(uid: current_wechat_user.uid)
     else
-      if current_session_organ
-        redirect_url = ActionDispatch::Http::URL.url_for path: '/auth/wechat', host: current_session_organ.auth_host(request.url)
+      if current_wechat_app && current_session_organ
+        redirect_url = current_wechat_app.oauth2_url(host: request.host, port: request.port, protocol: request.protocol)
       else
-        redirect_url = ActionDispatch::Http::URL.url_for path: '/auth/wechat', host: request.host, port: request.port
+        redirect_url = ActionDispatch::Http::URL.url_for path: '/auth/wechat',
       end
     end
 
     render 'wechat_require_login', locals: { redirect_url: redirect_url, message: '请登录后操作' }, status: 401
+  end
+
+  def current_wechat_app
+    return @current_wechat_app if defined?(@current_wechat_app)
+    sd = request.subdomains
+    if sd.size == 2 && sd[1] == RailsCom.config.subdomain
+      if sd[0].start_with?('app_')
+        id = sd[0].split('_')[-1]
+      else
+        id = nil
+      end
+      @current_wechat_app = WechatApp.find_by(id: id)
+    end
   end
 
   def current_wechat_user
