@@ -32,24 +32,12 @@ module RailsWechat::WechatNotice
     end
   end
 
-  def to_message
-    if wechat_app.is_a?(WechatProgram)
-      Wechat::Message::Template::Program.new(self)
-    else
-      Wechat::Message::Template::Public.new(self)
-    end
-  end
-
   def do_send_later
     WechatNoticeSendJob.perform_later(self)
   end
 
-  def to_user(openid, **options)
-    update(touser: openid, **options)
-  end
-
   def do_send
-    r = to_message.do_send
+    r = do_send
     if r['errcode'] == 0
       self.update msg_id: r['msgid']
       wechat_subscribed.update sending_at: Time.now if wechat_subscribed
