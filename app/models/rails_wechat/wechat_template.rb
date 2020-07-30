@@ -12,6 +12,7 @@ module RailsWechat::WechatTemplate
     belongs_to :template_config, optional: true
     has_many :wechat_notices, dependent: :delete_all
 
+    before_save :sync_from_template_config, if: -> { template_config_id_changed? || template_config }
     before_create :sync_to_wechat
     after_destroy_commit :del_to_wechat
   end
@@ -25,8 +26,15 @@ module RailsWechat::WechatTemplate
     end
   end
 
+  def sync_from_template_config
+    self.template_id ||= template_config.tid
+  end
+
   def sync_to_wechat
-    return if template_id.present?
+    if template_id.present?
+      sync_from_wechat
+    end
+    return if content.present?
     r = wechat_app.api.add_template(template_config.tid, template_config.kid_list)
     logger.debug(r['errmsg'])
     if r['errcode'] == 0
@@ -34,7 +42,14 @@ module RailsWechat::WechatTemplate
     else
       return
     end
-    r_content = wechat_app.api.templates.find { |i| i['priTmplId'] == self.template_id }
+    sync_from_wechat
+  end
+
+  def sync_from_wechat
+    r_content = wechat_app.api.templates.find do |i|
+      tid = wechat_app.is_a?(WechatPublic) ? i['template_id'] : i['priTmplId']
+      tid == self.template_id
+    end
     self.template_type = r_content['type']
     self.assign_attributes r_content.slice('title', 'content', 'example')
     self
