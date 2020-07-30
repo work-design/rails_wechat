@@ -13,8 +13,15 @@ module RailsWechat::WechatApp::WechatPublic
     end
   end
 
-  def oauth2_url
-    "https://open.weixin.qq.com/connect/oauth2/authorize?#{oauth2_params.to_query}#wechat_redirect"
+  def oauth2_url(scope = 'snsapi_userinfo', **host_options)
+    h = {
+      appid: appid,
+      redirect_uri: url_helpers.wechat_app_url(id, **host_options),
+      response_type: 'code',
+      scope: scope,
+      state: SecureRandom.hex(16)
+    }
+    "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
   end
 
   def generate_wechat_user(code)

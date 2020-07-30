@@ -102,16 +102,6 @@ module RailsWechat::WechatApp
     @api = Wechat::Api::Public.new(self)
   end
 
-  def oauth2_params(scope = 'snsapi_userinfo', **host_options)
-    {
-      appid: appid,
-      redirect_uri: url_helpers.wechat_app_url(id, **host_options),
-      response_type: 'code',
-      scope: scope,
-      state: SecureRandom.hex(16)
-    }
-  end
-
   def generate_oauth2_url(oauth2_params)
     if oauth2_params[:scope] == 'snsapi_login'
       "https://open.weixin.qq.com/connect/qrconnect?#{oauth2_params.to_query}#wechat_redirect"
