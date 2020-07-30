@@ -7,7 +7,6 @@ module Wechat
 
       def refresh
         data = @client.get('ticket/getticket', params: { access_token: @access_token.token, type: 'jsapi' }, base: BASE)
-        data['oauth2_state'] = SecureRandom.hex(16)
         write_ticket_to_store(data)
       end
 

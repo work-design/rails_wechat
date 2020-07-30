@@ -65,10 +65,6 @@ module RailsWechat::WechatTemplate
     logger.debug(r['errmsg'])
   end
 
-  def messenger
-    wechat_app.template_messenger(self)
-  end
-
   def data_keys
     content.gsub(/(?<={{)\w+(?=.DATA}})/).to_a
   end

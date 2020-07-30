@@ -21,11 +21,6 @@ module Wechat
         end
       end
 
-      def oauth2_state
-        ticket
-        @oauth2_state
-      end
-
       # Obtain the wechat jssdk config signature parameter and return below hash
       #  params = {
       #    noncestr: noncestr,
@@ -49,16 +44,14 @@ module Wechat
       end
 
       protected
-      
+
       def write_ticket_to_store(ticket_hash)
-        if @app
-          @app.jsapi_ticket = ticket_hash['ticket']
-          @app.jsapi_ticket_expires_at = Time.current + ticket_hash['expires_in'].to_i
-          @app.save
-          @app.jsapi_ticket
-        end
+        @app.jsapi_ticket = ticket_hash['ticket']
+        @app.jsapi_ticket_expires_at = Time.current + ticket_hash['expires_in'].to_i
+        @app.save
+        @app.jsapi_ticket
       end
-      
+
     end
   end
 end

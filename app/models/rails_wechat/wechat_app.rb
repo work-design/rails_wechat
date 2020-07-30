@@ -19,6 +19,7 @@ module RailsWechat::WechatApp
     attribute :access_token, :string
     attribute :access_token_expires_at, :datetime
     attribute :jsapi_ticket, :string
+    attribute :oauth2_state, :string
     attribute :jsapi_ticket_expires_at, :datetime
 
     belongs_to :organ, optional: true
@@ -101,12 +102,29 @@ module RailsWechat::WechatApp
     @api = Wechat::Api::Public.new(self)
   end
 
-  def mass_messenger
-    Wechat::Message::Mass::Public.new(self)
+  def oauth2_params
+    {
+      appid: appid,
+      redirect_uri: page_url || generate_redirect_uri(account),
+      scope: scope,
+      response_type: 'code',
+      state: SecureRandom.hex(16)
+    }
   end
 
-  def template_messenger(template)
-    Wechat::Message::Template::Public.new(self, template)
+  def generate_redirect_uri(account = nil)
+    domain_name = Wechat.config(account).trusted_domain_fullname
+    page_url = domain_name ? "#{domain_name}#{request.original_fullpath}" : request.original_url
+    safe_query = request.query_parameters.except('code', 'state', 'access_token').to_query
+    page_url.sub(request.query_string, safe_query)
+  end
+
+  def generate_oauth2_url(oauth2_params)
+    if oauth2_params[:scope] == 'snsapi_login'
+      "https://open.weixin.qq.com/connect/qrconnect?#{oauth2_params.to_query}#wechat_redirect"
+    else
+      "https://open.weixin.qq.com/connect/oauth2/authorize?#{oauth2_params.to_query}#wechat_redirect"
+    end
   end
 
   def sync_wechat_tags
