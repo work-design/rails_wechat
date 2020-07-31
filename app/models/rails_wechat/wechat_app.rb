@@ -21,6 +21,7 @@ module RailsWechat::WechatApp
     attribute :jsapi_ticket, :string
     attribute :oauth2_state, :string
     attribute :jsapi_ticket_expires_at, :datetime
+    attribute :user_name, :string
 
     belongs_to :organ, optional: true
     has_many :wechat_menus, dependent: :destroy

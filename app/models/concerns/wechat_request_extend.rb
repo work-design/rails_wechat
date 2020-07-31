@@ -5,7 +5,8 @@ module WechatRequestExtend
 
     bind_proc = Proc.new do |request|
       reply_params = {
-        wechat_user_id: request.wechat_user.id,
+        open_id: request.open_id,
+        appid: request.appid,
         news_reply_items_attributes: [
           {
             title: '请绑定',
@@ -33,7 +34,7 @@ module WechatRequestExtend
       r = WechatNotice.find_by(msg_id: request.raw_body['MsgID'])
       r.update status: request.raw_body['Status']
 
-      TextReply.new(wechat_user_id: request.wechat_user_id, value: 'SUCCESS')
+      TextReply.new(open_id: request.open_id, value: 'SUCCESS')
     end
 
   end

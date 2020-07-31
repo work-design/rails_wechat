@@ -10,8 +10,8 @@ module RailsWechat::WechatRequest
     attribute :msg_type, :string
     attribute :event, :string
     attribute :event_key, :string
-    attribute :appid, :string
-    attribute :open_id, :string
+    attribute :appid, :string, index: true
+    attribute :open_id, :string, index: true
 
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true

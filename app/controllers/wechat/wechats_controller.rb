@@ -22,7 +22,6 @@ class Wechat::WechatsController < ApplicationController
     end
     @wechat_received.save
     replied = @wechat_received.reply
-    #replied.get_reply
 
     if replied.respond_to? :to_xml
       render plain: replied.to_xml
