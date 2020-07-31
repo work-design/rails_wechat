@@ -24,7 +24,7 @@ module RailsWechat::WechatResponse
       self.match_value ||= "#{effective_type}_#{effective_id}"
       self.expire_at = Time.current + expire_seconds if expire_seconds
     end
-    after_save_commit :sync, if: -> { ['WechatRequestEvent'].include?(request_type) && saved_change_to_match_value? }
+    after_save_commit :to_qrcode, if: -> { ['WechatRequestEvent', 'SubscribeRequest'].include?(request_type) && saved_change_to_match_value? }
   end
 
   def scan_regexp(body)
@@ -35,7 +35,7 @@ module RailsWechat::WechatResponse
     end
   end
 
-  def sync
+  def to_qrcode
     commit_to_wechat
     persist_to_file
   end
@@ -67,7 +67,7 @@ module RailsWechat::WechatResponse
 
   def refresh
     unless effective?
-      sync
+      to_qrcode
     end
     self
   end
