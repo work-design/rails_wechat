@@ -1,10 +1,11 @@
 module WechatRequestExtend
   extend ActiveSupport::Concern
+
   included do
 
     bind_proc = Proc.new do |request|
       reply_params = {
-        wechat_user_id: request.wechat_user_id,
+        wechat_user_id: request.wechat_user.id,
         news_reply_items_attributes: [
           {
             title: '请绑定',

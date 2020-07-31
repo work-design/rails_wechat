@@ -16,7 +16,7 @@ module RailsWechat::WechatReply
     has_one_attached :media
   end
 
-  def invoke_effect(request_from)
+  def invoke_effect(request_from = nil)
     value
   end
 

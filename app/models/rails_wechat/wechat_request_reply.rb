@@ -8,7 +8,6 @@ module RailsWechat::WechatRequestReply
     belongs_to :wechat_reply
   end
 
-
   def to(openid)
     update(ToUserName: openid)
   end
@@ -35,6 +34,5 @@ module RailsWechat::WechatRequestReply
     @wecaht_request_reply.save!
     self
   end
-
 
 end

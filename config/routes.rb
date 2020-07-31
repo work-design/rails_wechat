@@ -58,10 +58,18 @@ Rails.application.routes.draw do
 
   scope :admin, module: 'wechat/admin', as: :admin do
     resources :wechat_apps do
-      get :own, on: :collection
-      get :info, on: :member
+      collection do
+        get :own
+      end
+      member do
+        get :info
+      end
       resources :wechat_responses do
-        post :sync, on: :member
+        member do
+          post :sync
+          get 'reply' => :edit_reply
+          patch 'reply' => :update_reply
+        end
       end
       resources :wechat_requests, except: [:new, :create]
       resources :wechat_replies do

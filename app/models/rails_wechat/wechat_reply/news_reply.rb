@@ -1,5 +1,6 @@
 module RailsWechat::WechatReply::NewsReply
   extend ActiveSupport::Concern
+
   included do
     attribute :msg_type, :string, default: 'news'
 

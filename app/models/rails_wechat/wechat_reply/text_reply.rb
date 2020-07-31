@@ -1,5 +1,6 @@
 module RailsWechat::WechatReply::TextReply
   extend ActiveSupport::Concern
+
   included do
     attribute :msg_type, :string, default: 'text'
   end

@@ -50,7 +50,12 @@
         <p><time><%= wechat_response.expire_at.to_s(:rfc822) if wechat_response.expire_at %></time></p>
       </td>
       <td>
-        <p><%= wechat_response.effective_type %></p>
+        <p>
+          <span><%= wechat_response.effective_type %></span>
+          <%= link_to reply_admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+            <i class="fas fa-pencil-alt"></i>
+          <% end %>
+        </p>
         <p><%= wechat_response.effective_id %></p>
       </td>
       <td>

@@ -1,6 +1,6 @@
 class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
   before_action :set_wechat_app
-  before_action :set_wechat_response, only: [:show, :edit, :update, :destroy]
+  before_action :set_wechat_response, only: [:show, :edit, :edit_reply, :update, :destroy]
   before_action :prepare_form, only: [:new, :create, :edit, :update]
 
   def index
@@ -27,6 +27,14 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
   end
 
   def edit
+  end
+
+  def edit_reply
+    q_params = {
+      wechat_app_id: params[:wechat_app_id],
+      type: @wechat_response.effective_type
+    }
+    @wechat_replies = WechatReply.where(q_params)
   end
 
   def update
