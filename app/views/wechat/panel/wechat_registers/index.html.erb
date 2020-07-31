@@ -50,7 +50,7 @@
         </p>
         <p><%= wechat_register.mobile_code %></p>
       </td>
-      <td><%= image_tag wechat_register.bind_url, class: 'image is-24x24' if wechat_register.bind_url.present? %></td>
+      <td><%= image_tag wechat_register.bind_qrcode, class: 'image is-24x24' if wechat_register.bind_qrcode.attached? %></td>
       <td><%= wechat_register.state_i18n %></td>
       <td><%= wechat_register.appid %></td>
       <td>

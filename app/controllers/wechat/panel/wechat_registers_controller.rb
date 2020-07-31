@@ -1,7 +1,7 @@
 class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
   before_action :set_wechat_register, only: [
     :show, :code, :qrcode,
-    :edit, :edit_app, :edit_bind, :edit_assign, :update_assign,
+    :edit, :edit_app, :edit_bind, :update_bind, :edit_assign, :update_assign,
     :update, :destroy
   ]
 
@@ -42,6 +42,14 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
   def edit_bind
   end
 
+  def update_bind
+    @wechat_register.assign_attributes wechat_register_params
+    if @wechat_register.save
+      @wechat_register.notify_qrcode
+    end
+    render 'update'
+  end
+
   def edit_assign
     @members = @wechat_register.members
     @task_templates = @wechat_register.task_templates
@@ -73,7 +81,7 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
     params.fetch(:wechat_register, {}).permit(
       :id_name,
       :id_number,
-      :bind_url,
+      :bind_qrcode,
       :appid
     )
   end

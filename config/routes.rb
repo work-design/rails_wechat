@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       member do
         get 'app' => :edit_app
         get 'bind' => :edit_bind
+        patch 'bind' => :update_bind
         get 'assign' => :edit_assign
         patch 'assign' => :update_assign
         put :qrcode

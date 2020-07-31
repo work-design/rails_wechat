@@ -14,6 +14,8 @@ module RailsWechat::WechatRegister
     belongs_to :member
     belongs_to :wechat_app, foreign_key: :app_id, primary_key: :appid, optional: true
 
+    has_one_attached :bind_qrcode
+
     enum state: {
       init: 'init',
       doing: 'doing',
@@ -24,6 +26,8 @@ module RailsWechat::WechatRegister
       self.password = SecureRandom.urlsafe_base64
     end
     before_save :compute_state, if: -> { appid_changed? }
+
+    acts_as_notify only: [:id_name]
   end
 
   def compute_state
@@ -36,6 +40,14 @@ module RailsWechat::WechatRegister
 
   def email
     "#{id}@#{RailsWechat.config.email_domain}"
+  end
+
+  def notify_qrcode
+    to_notification(
+      receiver: member.user,
+      title: '二维码已更新，请点击',
+      link: bind_qrcode.url
+    )
   end
 
 end
