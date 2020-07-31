@@ -11,8 +11,9 @@ module RailsWechat::WechatResponse
     attribute :expire_at, :datetime
     attribute :qrcode_ticket, :string
     attribute :qrcode_url, :string
+    attribute :appid, :string, index: true
 
-    belongs_to :wechat_app
+    belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid
     belongs_to :effective, polymorphic: true, optional: true
     has_many :wechat_extractors, dependent: :delete_all
 

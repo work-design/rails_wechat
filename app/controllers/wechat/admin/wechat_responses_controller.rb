@@ -31,7 +31,7 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
 
   def edit_reply
     q_params = {
-      wechat_app_id: params[:wechat_app_id],
+      appid: @wechat_app.appid,
       type: @wechat_response.effective_type
     }
     @wechat_replies = WechatReply.where(q_params)

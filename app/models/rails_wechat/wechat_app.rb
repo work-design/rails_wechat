@@ -25,9 +25,9 @@ module RailsWechat::WechatApp
 
     belongs_to :organ, optional: true
     has_many :wechat_menus, dependent: :destroy
-    has_many :wechat_responses, dependent: :destroy
-    has_many :wechat_replies, dependent: :destroy
-    has_many :wechat_requests, dependent: :nullify
+    has_many :wechat_responses, foreign_key: :appid, primary_key: :appid, dependent: :destroy
+    has_many :wechat_replies, foreign_key: :appid, primary_key: :appid, dependent: :destroy
+    has_many :wechat_requests, foreign_key: :appid, primary_key: :appid, dependent: :nullify
     has_many :wechat_tags, dependent: :delete_all
     has_many :wechat_templates, dependent: :destroy
 

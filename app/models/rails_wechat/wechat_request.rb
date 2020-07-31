@@ -17,7 +17,7 @@ module RailsWechat::WechatRequest
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
     has_many :wechat_receiveds, dependent: :nullify
     has_many :wechat_extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
-    has_many :wechat_responses, ->(o){ where(request_type: o.type) }, primary_key: :wechat_app_id, foreign_key: :wechat_app_id
+    has_many :wechat_responses, ->(o){ where(request_type: o.type) }, primary_key: :appid, foreign_key: :appid
   end
 
   def reply
