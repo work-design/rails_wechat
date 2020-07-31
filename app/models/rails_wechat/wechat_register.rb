@@ -46,7 +46,8 @@ module RailsWechat::WechatRegister
     to_notification(
       receiver: member.user,
       title: '二维码已更新，请点击',
-      link: bind_qrcode.url
+      link: bind_qrcode.url,
+      organ_id: 1  # todo 演示
     )
   end
 
