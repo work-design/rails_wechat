@@ -7,7 +7,6 @@ module RailsWechat::WechatResponse
     attribute :request_type, :string, comment: '用户发送消息类型'
     attribute :match_value, :string
     attribute :contain, :boolean, default: true
-    #attribute :expire_seconds, :integer, default: 2592000
     attribute :expire_seconds, :integer
     attribute :expire_at, :datetime
     attribute :qrcode_ticket, :string
@@ -51,6 +50,7 @@ module RailsWechat::WechatResponse
   end
 
   def commit_to_wechat
+    # 默认: 2592000 ，即 30 天
     if expire_seconds
       r = wechat_app.api.qrcode_create_scene self.match_value, expire_seconds
       self.expire_at = Time.current + expire_seconds

@@ -10,8 +10,8 @@ module RailsWechat::WechatReceived
     'link' => 'WechatRequestLink',
     'event' => 'WechatRequestEvent'
   }.freeze
-  # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_event_pushes.html
-  # see: https://work.weixin.qq.com/api/doc/90000/90135/90240
+  # https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_event_pushes.html
+  # https://work.weixin.qq.com/api/doc/90000/90135/90240
   EVENT = {
     'subscribe' => 'SubscribeRequest',
     'unsubscribe' => 'UnsubscribeRequest',
@@ -42,12 +42,14 @@ module RailsWechat::WechatReceived
     attribute :message_hash, :json
 
     belongs_to :wechat_platform, optional: true
+    belongs_to :wechat_request, optional: true
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 
     before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
     before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
     before_save :init_wechat_user, if: -> { open_id_changed? && open_id.present? }
+    after_create_commit :parse_content
   end
 
   def decrypt_data
@@ -70,32 +72,29 @@ module RailsWechat::WechatReceived
     wechat_user.save
   end
 
-  def request_type
-    if message_hash['MsgType'] == 'event'
-      EVENT[message_hash['Event']]
-    else
-      MSG_TYPE[message_hash['MsgType']]
-    end
-  end
-
   def parse_content
-    @request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
+    wechat_request || build_wechat_request
+    wechat_request.appid = appid
+    wechat_request.open_id = open_id
+    wechat_request.msg_type = msg_type
+    wechat_request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
 
     case msg_type
     when 'text'
-      @request.body = message_hash['Content']
-    when 'image', 'voice', 'video', 'shortvideo', 'location', 'event'
-      @request.event = message_hash['Event']
-      @request.body = message_hash['EventKey']
+      wechat_request.body = message_hash['Content']
+    when 'event'
+      wechat_request.event = message_hash['Event']
+      wechat_request.type = EVENT[message_hash['Event']]
+      wechat_request.body = message_hash['EventKey']
+    when 'image', 'voice', 'video', 'shortvideo', 'location'
+      wechat_request.event = message_hash['Event']
+      wechat_request.type = MSG_TYPE[msg_type]
+      wechat_request.body = message_hash['EventKey']
     else
       warn "Don't know how to parse message as #{message_hash['MsgType']}", uplevel: 1
     end
-  end
 
-  def to_request
-    @wechat_request = wechat_app.wechat_requests.build(wechat_user_id: app.id, type: type)
-    @wechat_request.msg_type = message_hash['MsgType']
-    @wechat_request.save
+    self.save  # will auto save wechat request
   end
 
   def reply
