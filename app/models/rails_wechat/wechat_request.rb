@@ -13,6 +13,7 @@ module RailsWechat::WechatRequest
     attribute :appid, :string, index: true
     attribute :open_id, :string, index: true
     attribute :reply_body, :json
+    attribute :reply_encrypt, :string
 
     belongs_to :wechat_reply, optional: true
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
@@ -70,6 +71,33 @@ module RailsWechat::WechatRequest
     else
       self.reply_body = {}
     end
+  end
+
+  def encrypt_mode
+    wechat_app.encrypt_mode || true
+  end
+
+  def encoding_aes_key
+    wechat_app.encoding_aes_key
+  end
+
+  def token
+    wechat_app.token
+  end
+
+  def do_encrypt(nonce)
+    return unless encrypt_mode
+
+    encrypt = Base64.strict_encode64(Wechat::Cipher.encrypt(Wechat::Cipher.pack(to_xml, appid), encoding_aes_key))
+    timestamp = Time.current.to_i
+    msg_sign = Wechat::Signature.hexdigest(token, timestamp, nonce, encrypt)
+
+    {
+      Encrypt: encrypt,
+      MsgSignature: msg_sign,
+      TimeStamp: timestamp,
+      Nonce: nonce
+    }
   end
 
   def to_xml
