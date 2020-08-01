@@ -21,13 +21,9 @@ class Wechat::WechatsController < ApplicationController
       @wechat_received.message_hash = r
     end
     @wechat_received.save
-    replied = @wechat_received.reply
+    request = @wechat_received.reply
 
-    if replied.respond_to? :to_xml
-      render plain: replied.to_xml
-    else
-      render plain: 'success'
-    end
+    render plain: request.to_xml
   end
 
   private

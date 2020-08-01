@@ -103,7 +103,10 @@ module RailsWechat::WechatReceived
   end
 
   def reply
+    reload
     wechat_request.reply
+    wechat_request.save
+    wechat_request
   end
 
 end

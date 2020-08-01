@@ -8,6 +8,10 @@ module RailsWechat
       }
     }
     config.email_domain = 'mail.work.design'
+    config.x = ActiveSupport::OrderedOptions.new
+    config.x.xx = ->() {
+
+    }
   end
 
 end

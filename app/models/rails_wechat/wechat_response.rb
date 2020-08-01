@@ -77,10 +77,11 @@ module RailsWechat::WechatResponse
     time < expire_at
   end
 
-  def invoke_effect(request = nil)
+  def invoke_effect(request)
     r = []
     if effective
-      r << effective.invoke_effect(request)
+      return request.wechat_reply = effective
+      #r << effective.invoke_effect(request)
     end
     r += do_extract(request)
     r.compact!

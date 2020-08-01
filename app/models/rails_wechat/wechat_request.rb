@@ -12,12 +12,16 @@ module RailsWechat::WechatRequest
     attribute :event_key, :string
     attribute :appid, :string, index: true
     attribute :open_id, :string, index: true
+    attribute :reply_body, :json
 
+    belongs_to :wechat_reply, optional: true
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
     has_many :wechat_receiveds, dependent: :nullify
     has_many :wechat_extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
     has_many :wechat_responses, ->(o){ where(request_type: o.type) }, primary_key: :appid, foreign_key: :appid
+
+    before_save :get_reply_body, if: -> { (wechat_reply_id_changed? || new_record?) && wechat_reply }
   end
 
   def reply
@@ -57,6 +61,28 @@ module RailsWechat::WechatRequest
   # CancelTyping
   def typing(command = 'Typing')
     wechat_app.api.message_custom_typing(wechat_user.uid, command)
+  end
+
+  def get_reply_body
+    if wechat_reply
+      self.reply_body = wechat_reply.to_wechat
+      self.reply_body.merge!(ToUserName: open_id)
+    else
+      self.reply_body = {}
+    end
+  end
+
+  def to_xml
+    if reply_body.blank?
+      'success'
+    else
+      reply_body.to_xml(
+        root: 'xml',
+        children: 'item',
+        skip_instruct: true,
+        skip_types: true
+      )
+    end
   end
 
   class_methods do
