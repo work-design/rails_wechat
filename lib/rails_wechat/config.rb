@@ -1,5 +1,20 @@
 module RailsWechat
   include ActiveSupport::Configurable
+  bind_proc = -> (request) {
+    reply_params = {
+      open_id: request.open_id,
+      appid: request.appid,
+      news_reply_items_attributes: [
+        {
+          title: '请绑定',
+          description: '绑定信息',
+          url: request.url_helpers.bind_my_oauth_users_url(uid: request.wechat_user.uid, subdomain: request.wechat_app&.organ&.subdomain)
+        }
+      ]
+    }
+
+    NewsReply.new(reply_params)
+  }
 
   configure do |config|
     config.httpx = {
@@ -8,10 +23,31 @@ module RailsWechat
       }
     }
     config.email_domain = 'mail.work.design'
-    config.x = ActiveSupport::OrderedOptions.new
-    config.x.xx = ->() {
-
+    config.rules = ActiveSupport::OrderedOptions.new
+    config.rules.xx = {
+      msg_type: 'text',
+      proc: ->(request) {
+        if request.wechat_user.user.nil?
+          value = '请绑定账号，输入"绑定"根据提示操作'
+        elsif wechat_user.user.disabled?
+          value = '你的账号已被禁用'
+        else
+          value = ''
+        end
+        TextReply.new value: value
+      }
     }
+    config.rules.a = {
+      msg_type: 'event',
+      event: 'templatesendjobfinish',
+      proc: -> (request) {
+        r = WechatNotice.find_by(msg_id: request.raw_body['MsgID'])
+        r.update status: request.raw_body['Status']
+        TextReply.new(open_id: request.open_id, value: 'SUCCESS')
+      }
+    }
+    config.rules.b = { msg_type: 'event', event: 'click', body: 'bind', proc: bind_proc }
+    config.rules.c = { msg_type: 'text', body: '绑定', proc: bind_proc }
   end
 
 end

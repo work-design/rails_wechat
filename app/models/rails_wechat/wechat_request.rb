@@ -2,7 +2,7 @@ module RailsWechat::WechatRequest
   extend ActiveSupport::Concern
 
   included do
-    mattr_accessor :rules, default: []  # 用于配置 reply 的逻辑
+    delegate :url_helpers, to: 'Rails.application.routes'
 
     attribute :type, :string
     attribute :body, :string
@@ -33,11 +33,11 @@ module RailsWechat::WechatRequest
       msg_type: msg_type,
       event: event,
       body: body
-    }
+    }.compact
   end
 
   def reply_from_rule
-    filtered = rules.find do |rule|
+    filtered = RailsWechat.config.rules.find do |_, rule|
       rule.slice(:msg_type, :event, :body) == self.rule_tag
     end
 
@@ -84,22 +84,5 @@ module RailsWechat::WechatRequest
       )
     end
   end
-
-  class_methods do
-
-    def on(msg_type: nil, body: nil, event: nil, proc: nil, &block)
-      config = {
-        msg_type: msg_type,
-        event: event,
-        body: body,
-        proc: proc
-      }
-      config[:proc] = block if block_given?
-
-      rules << config
-    end
-
-  end
-
 
 end

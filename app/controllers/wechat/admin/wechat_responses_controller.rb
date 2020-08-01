@@ -69,7 +69,6 @@ class Wechat::Admin::WechatResponsesController < Wechat::Admin::BaseController
 
   def wechat_response_params
     params.fetch(:wechat_response, {}).permit(
-      :type,
       :match_value,
       :contain,
       :expire_seconds,
