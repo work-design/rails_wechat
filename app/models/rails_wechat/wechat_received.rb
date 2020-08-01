@@ -82,14 +82,15 @@ module RailsWechat::WechatReceived
 
     case msg_type
     when 'text'
+      wechat_request.type = MSG_TYPE[msg_type]
       wechat_request.body = message_hash['Content']
     when 'event'
-      wechat_request.event = message_hash['Event']
       wechat_request.type = EVENT[message_hash['Event']]
+      wechat_request.event = message_hash['Event']
       wechat_request.body = message_hash['EventKey']
     when 'image', 'voice', 'video', 'shortvideo', 'location'
-      wechat_request.event = message_hash['Event']
       wechat_request.type = MSG_TYPE[msg_type]
+      wechat_request.event = message_hash['Event']
       wechat_request.body = message_hash['EventKey']
     else
       warn "Don't know how to parse message as #{message_hash['MsgType']}", uplevel: 1

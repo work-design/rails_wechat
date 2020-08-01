@@ -2,8 +2,8 @@ module RailsWechat::WechatRequest::TextRequest
   extend ActiveSupport::Concern
 
   def reply
-    r = reply_from_rule
-    return r if r
+    self.wechat_reply = reply_from_rule
+    return if self.wechat_reply
 
     res = wechat_responses.map do |wr|
       next unless wr.scan_regexp(body)

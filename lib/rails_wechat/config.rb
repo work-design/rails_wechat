@@ -2,7 +2,6 @@ module RailsWechat
   include ActiveSupport::Configurable
   bind_proc = -> (request) {
     reply_params = {
-      open_id: request.open_id,
       appid: request.appid,
       news_reply_items_attributes: [
         {

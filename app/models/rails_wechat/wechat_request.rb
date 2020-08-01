@@ -21,7 +21,7 @@ module RailsWechat::WechatRequest
     has_many :wechat_extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
     has_many :wechat_responses, ->(o){ where(request_type: o.type) }, primary_key: :appid, foreign_key: :appid
 
-    before_save :get_reply_body, if: -> { (wechat_reply_id_changed? || new_record?) && wechat_reply }
+    before_save :get_reply_body, if: -> { (wechat_reply_id_changed? || new_record? || wechat_reply&.new_record?) && wechat_reply }
   end
 
   def reply
@@ -39,7 +39,7 @@ module RailsWechat::WechatRequest
   def reply_from_rule
     filtered = RailsWechat.config.rules.find do |_, rule|
       rule.slice(:msg_type, :event, :body) == self.rule_tag
-    end
+    end[1]
 
     filtered[:proc].call(self) if filtered
   end
