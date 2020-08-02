@@ -30,6 +30,11 @@ Rails.application.routes.draw do
   end
 
   scope :my, module: 'wechat/my', as: :my do
+    resource :user, only: [] do
+      collection do
+        get :invite_qrcode
+      end
+    end
     resources :wechat_subscribeds
     resources :wechat_registers do
       member do

@@ -10,11 +10,14 @@ module RailsWechat::User
   def invite_qrcode(appid)
     p = {
       appid: appid,
-      match_value: "invite_by_#{id}",
-      request_type: 'SubscribeRequest'
+      match_value: "invite_by_#{id}"
     }
     res = WechatResponse.find_or_initialize_by(p)
     res.effective_type = 'TextReply'
+    res.request_types = [
+      'SubscribeRequest',
+      'ScanRequest'
+    ]
     res.save
     res.qrcode_file_url
   end
