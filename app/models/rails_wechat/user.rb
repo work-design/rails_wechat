@@ -18,6 +18,7 @@ module RailsWechat::User
       'SubscribeRequest',
       'ScanRequest'
     ]
+    res.expire_seconds = 2592000
     res.save
     res.qrcode_file_url
   end
