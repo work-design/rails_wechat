@@ -7,11 +7,6 @@ en:
           ClickMenu: Click Event
           ViewMenu: Link
           MiniProgramMenu: Mini Program
-      wechat_response:
-        type:
-          TextResponse: Text
-          PersistScanResponse: Scan Qrcode
-          TempScanResponse: Temp Scan Qrcode
       wechat_app:
         type:
           WechatPublic: Public Wechat

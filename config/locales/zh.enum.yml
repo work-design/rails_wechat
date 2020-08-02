@@ -15,12 +15,6 @@ zh:
           init: 处理中
           doing: 开始处理
           done: 已完成
-      wechat_response:
-        type:
-          TextResponse: 文字
-          PersistScanResponse: 永久二维码
-          TempScanResponse: 临时二维码
-          EventResponse: 事件
       wechat_reply:
         type:
           NewsReply: 图文
@@ -34,6 +28,7 @@ zh:
           TextRequest: 文字
           SubscribeRequest: 关注
           UnsubscribeRequest: 取消关注
+          WechatRequest: 其他
       wechat_app:
         type:
           WechatPublic: 服务号

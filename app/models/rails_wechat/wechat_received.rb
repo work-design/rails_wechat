@@ -17,8 +17,8 @@ module RailsWechat::WechatReceived
     'unsubscribe' => 'UnsubscribeRequest',
     'LOCATION' => 'WechatRequestLocation', # 公众号与企业微信通用
     'CLICK' => 'WechatRequest',
-    'VIEW' => 'WechatRequest',
-    'SCAN' => 'WechatRequest',
+    'VIEW' => 'ViewRequest',
+    'SCAN' => 'ScanRequest',
     'click' => 'WechatRequest',
     'view' => 'WechatRequest',  # 企业微信使用
     'scancode_push' => 'WechatRequest',

@@ -1,5 +1,4 @@
 module RailsWechat::WechatRequest::TextRequest
-  extend ActiveSupport::Concern
 
   def reply
     self.wechat_reply = reply_from_rule

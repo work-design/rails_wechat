@@ -1,4 +1,4 @@
-module RailsWechat::WechatRequest::SubscribeRequest
+module RailsWechat::WechatRequest::ScanRequest
 
   def reply
     r = reply_from_rule
@@ -21,4 +21,3 @@ module RailsWechat::WechatRequest::SubscribeRequest
   end
 
 end
-

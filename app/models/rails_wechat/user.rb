@@ -7,4 +7,16 @@ module RailsWechat::User
     has_many :wechat_subscribeds, ->{ where(sending_at: nil).order(id: :asc) }, through: :wechat_program_users
   end
 
+  def invite_qrcode(appid)
+    p = {
+      appid: appid,
+      match_value: "invite_by_#{id}",
+      request_type: 'SubscribeRequest'
+    }
+    res = WechatResponse.find_or_initialize_by(p)
+    res.effective_type = 'TextReply'
+    res.save
+    res.qrcode_file_url
+  end
+
 end

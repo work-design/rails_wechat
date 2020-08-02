@@ -40,9 +40,9 @@ module RailsWechat::WechatRequest
   def reply_from_rule
     filtered = RailsWechat.config.rules.find do |_, rule|
       rule.slice(:msg_type, :event, :body) == self.rule_tag
-    end[1]
+    end
 
-    filtered[:proc].call(self) if filtered
+    filtered[0][:proc].call(self) if filtered.present?
   end
 
   def kefu(text)
