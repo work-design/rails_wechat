@@ -28,6 +28,8 @@ zh:
           TextRequest: 文字
           SubscribeRequest: 关注
           UnsubscribeRequest: 取消关注
+          ScanRequest: 扫描事件
+          ViewRequest: 菜单
           WechatRequest: 其他
       wechat_app:
         type:
