@@ -28,6 +28,7 @@ module RailsWechat::WechatResponse
       self.expire_at = Time.current + expire_seconds if expire_seconds
     end
     after_save_commit :to_qrcode, if: -> { (['WechatRequestEvent', 'SubscribeRequest'] & request_types) && saved_change_to_match_value? }
+    after_save_commit :sync_to_response_requests, if: -> { saved_change_to_request_types? }
   end
 
   def scan_regexp(body)
@@ -41,6 +42,16 @@ module RailsWechat::WechatResponse
   def to_qrcode
     commit_to_wechat
     persist_to_file
+  end
+
+  def sync_to_response_requests
+    types = wechat_response_requests.pluck(:request_type)
+    adds = request_types - types
+    removes = types - request_types
+    adds.each do |add|
+      self.wechat_response_requests.create(request_type: add) unless add.blank?
+    end
+    self.wechat_response_requests.where(request_type: removes).delete_all
   end
 
   def persist_to_file
