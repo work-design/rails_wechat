@@ -12,13 +12,13 @@
 <table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
-      <th><%= WechatResponse.human_attribute_name(:request_type) %></th>
       <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
       <th><%= WechatResponse.human_attribute_name(:contain) %></th>
       <th>
         <p><%= WechatResponse.human_attribute_name(:created_at) %></p>
         <p><%= WechatResponse.human_attribute_name(:expire_at) %></p>
       </th>
+      <th><%= WechatResponse.human_attribute_name(:request_type) %></th>
       <th>
         <%= WechatResponse.human_attribute_name(:effective) %>
         <%= link_to admin_wechat_app_wechat_replies_path, aria: { label: t('wechat.admin.wechat_replies.index.title') }, target: '_blank' do %>
@@ -35,7 +35,6 @@
   <tbody>
   <% @wechat_responses.each do |wechat_response| %>
     <tr>
-      <td><%= WechatRequest.enum_i18n(:type, wechat_response.request_type) %></td>
       <td>
         <%= wechat_response.match_value %>
         <%= image_tag wechat_response.qrcode_file, class: 'image is-32x32' if wechat_response.qrcode_file.attached? %>
@@ -48,6 +47,11 @@
       <td>
         <p><time><%= wechat_response.created_at.to_s(:rfc822) %></time></p>
         <p><time><%= wechat_response.expire_at.to_s(:rfc822) if wechat_response.expire_at %></time></p>
+      </td>
+      <td>
+        <% wechat_response.wechat_response_requests.each do |wechat_response_request| %>
+          <p><%= WechatRequest.enum_i18n(:type, wechat_response_request.request_type) %></p>
+        <% end %>
       </td>
       <td>
         <p>

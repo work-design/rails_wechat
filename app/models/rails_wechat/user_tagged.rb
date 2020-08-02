@@ -11,7 +11,7 @@ module RailsWechat::UserTagged
     user.oauth_users.where(type: 'WechatUser').each do |wechat_user|
       wechat_tag = wechat_tags.find_by(wechat_app_id: wechat_user.wechat_app&.id)
       next unless wechat_tag
-      
+
       wut = wechat_user.wechat_user_tags.build(wechat_tag_id: wechat_tag.id)
       wut.save
     end

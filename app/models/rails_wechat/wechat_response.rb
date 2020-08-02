@@ -4,7 +4,7 @@ module RailsWechat::WechatResponse
   included do
     delegate :url_helpers, to: 'Rails.application.routes'
 
-    attribute :request_type, :string, comment: '用户发送消息类型'
+    attribute :request_types, :string, array: true
     attribute :match_value, :string
     attribute :contain, :boolean, default: true
     attribute :expire_seconds, :integer
@@ -16,6 +16,8 @@ module RailsWechat::WechatResponse
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid
     belongs_to :effective, polymorphic: true, optional: true
     has_many :wechat_extractors, dependent: :delete_all
+    has_many :wechat_response_requests, dependent: :delete_all
+    accepts_nested_attributes_for :wechat_response_requests, allow_destroy: true
 
     has_one_attached :qrcode_file
 
@@ -25,7 +27,7 @@ module RailsWechat::WechatResponse
       self.match_value ||= "#{effective_type}_#{effective_id}"
       self.expire_at = Time.current + expire_seconds if expire_seconds
     end
-    after_save_commit :to_qrcode, if: -> { ['WechatRequestEvent', 'SubscribeRequest'].include?(request_type) && saved_change_to_match_value? }
+    after_save_commit :to_qrcode, if: -> { (['WechatRequestEvent', 'SubscribeRequest'] & request_types) && saved_change_to_match_value? }
   end
 
   def scan_regexp(body)
