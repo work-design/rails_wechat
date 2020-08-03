@@ -91,14 +91,11 @@ module RailsWechat::WechatResponse
   end
 
   def invoke_effect(request)
-    r = []
     if effective
-      return request.wechat_reply = effective
-      #r << effective.invoke_effect(request)
+      request.wechat_reply = effective.invoke_effect(request)
+    else
+      do_extract(request)
     end
-    r += do_extract(request)
-    r.compact!
-    r.join("\n")
   end
 
   def do_extract(request)

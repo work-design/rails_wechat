@@ -5,7 +5,6 @@ module RailsWechat::WechatRegister
     attribute :id_name, :string
     attribute :id_number, :string
     attribute :email_code, :string
-    attribute :bind_url, :string
     attribute :state, :string, default: 'init'
     attribute :appid, :string
     attribute :password, :string

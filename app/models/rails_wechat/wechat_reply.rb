@@ -17,7 +17,7 @@ module RailsWechat::WechatReply
   end
 
   def invoke_effect(request_from = nil)
-    value
+    self
   end
 
   def content
