@@ -69,6 +69,9 @@
         <%= link_to app_panel_wechat_register_path(wechat_register), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fab fa-weixin"></i>
         <% end %>
+        <%= link_to my_tasks_path(tasking_type: 'WechatRegister', tasking_id: wechat_register.id), aria: { label: t('.tasks') }, class: 'button is-small is-rounded is-light' do %>
+          <i class="fas fa-tasks"></i>
+        <% end %>
         <%= link_to panel_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
