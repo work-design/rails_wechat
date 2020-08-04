@@ -51,8 +51,11 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
   end
 
   def edit_assign
-    @members = @wechat_register.members
-    @task_templates = @wechat_register.task_templates
+    q_params = {
+      organ_id: current_session_organ&.id
+    }
+    @members = @wechat_register.members.default_where(q_params)
+    @task_templates = @wechat_register.task_templates.default_where(member_id: params[:member_id])
   end
 
   def update_assign
