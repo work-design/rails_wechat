@@ -1,6 +1,6 @@
 <%= form_with scope: '', model: @wechat_register, url: assign_panel_wechat_register_path(@wechat_register) do |f| %>
   <%= render 'shared/error_messages', target: @wechat_register %>
-  <%= f.collection_select :member_id, @members, :id, :name, {}, { data: { controller: 'typer', action: 'typer#form', url: assign_panel_wechat_register_path(@wechat_register) } } %>
+  <%= f.collection_select :member_id, @members, :id, :name, { include_blank: true, selected: params[:member_id] }, { data: { controller: 'typer', url: assign_panel_wechat_register_path(@wechat_register) } } %>
   <%= f.collection_select :task_template_id, @task_templates, :id, :title %>
   <%= f.submit %>
 <% end %>
