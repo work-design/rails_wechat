@@ -82,7 +82,8 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
       :id_name,
       :id_number,
       :bind_qrcode,
-      :appid
+      :appid,
+      :password
     )
   end
 
