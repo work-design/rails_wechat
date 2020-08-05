@@ -1,5 +1,6 @@
 module RailsWechat::WechatMenu::ViewMenu
   extend ActiveSupport::Concern
+
   included do
     attribute :menu_type, :string, default: 'view'
     after_initialize if: :new_record? do
@@ -25,7 +26,7 @@ module RailsWechat::WechatMenu::ViewMenu
   end
 
   def subdomain
-    [['app', wechat_app&.organ_id, wechat_app.id].join('_'), RailsCom.config.subdomain].join('.')
+    [['app', wechat_app&.organ_id, wechat_app.id].join('-'), RailsCom.config.subdomain].join('.')
   end
 
 end

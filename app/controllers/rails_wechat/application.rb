@@ -26,8 +26,8 @@ module RailsWechat::Application
     return @current_wechat_app if defined?(@current_wechat_app)
     sd = request.subdomains
     if sd.size == 2 && sd[1] == RailsCom.config.subdomain
-      if sd[0].start_with?('app_')
-        id = sd[0].split('_')[-1]
+      if sd[0].start_with?('app-')
+        id = sd[0].split('-')[-1]
       else
         id = nil
       end
