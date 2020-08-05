@@ -47,6 +47,7 @@ module RailsWechat::WechatPlatform
   end
 
   def auth_url
+    return if verify_ticket.blank?
     refresh_pre_auth_code unless pre_auth_code_valid?
     url = URI('https://mp.weixin.qq.com/dashboard/cgi-bin/componentloginpage')
     url.query = {
@@ -58,6 +59,7 @@ module RailsWechat::WechatPlatform
   end
 
   def click_auth_url
+    return if verify_ticket.blank?
     refresh_pre_auth_code unless pre_auth_code_valid?
     url = URI('https://mp.weixin.qq.com/safe/bindcomponent')
     url.query = {
