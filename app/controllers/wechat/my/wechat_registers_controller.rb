@@ -51,6 +51,7 @@ class Wechat::My::WechatRegistersController < Wechat::My::BaseController
     params.fetch(:wechat_register, {}).permit(
       :id_name,
       :id_number,
+      :mobile,
       :mobile_code
     )
   end
