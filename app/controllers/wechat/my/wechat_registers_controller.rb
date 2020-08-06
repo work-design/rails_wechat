@@ -20,7 +20,7 @@ class Wechat::My::WechatRegistersController < Wechat::My::BaseController
   end
 
   def create
-    @wechat_register = current_member.wechat_registers.build(wechat_register_params)
+    new_wechat_register
 
     if @wechat_register.save
       render 'create', locals: { return_to: my_wechat_registers_url }
@@ -55,9 +55,9 @@ class Wechat::My::WechatRegistersController < Wechat::My::BaseController
   private
   def new_wechat_register
     if current_member
-      @wechat_register = current_member.wechat_registers.build
+      @wechat_register = current_member.wechat_registers.build(wechat_register_params)
     else
-      @wechat_register = WechatRegister.new
+      @wechat_register = current_user.wechat_registers.build(wechat_register_params)
     end
   end
 
