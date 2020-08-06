@@ -12,6 +12,7 @@ module RailsWechat::WechatRegister
     attribute :mobile_code, :string
 
     belongs_to :user
+    belongs_to :organ
     belongs_to :member, foreign_key: :mobile, primary_key: :identity, optional: true
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
 
@@ -31,7 +32,23 @@ module RailsWechat::WechatRegister
     before_validation :sync_user, if: -> { mobile_changed? && member }
     before_save :compute_state, if: -> { appid_changed? }
 
-    acts_as_notify only: [:id_name]
+    acts_as_notify only: [:id_name], methods: [:time, :bind_url, :hello, :remark]
+  end
+
+  def hello
+    '您好，这是您注册公众号绑定管理员的二维码'
+  end
+
+  def time
+    Time.current.to_s
+  end
+
+  def bind_url
+    bind_qrcode.url
+  end
+
+  def remark
+    '此二维码不支持图片识别，可复制链接在电脑或其他手机上访问后再扫一扫！'
   end
 
   def compute_state
@@ -50,8 +67,8 @@ module RailsWechat::WechatRegister
     to_notification(
       receiver: user,
       title: '二维码已更新，请点击',
-      link: bind_qrcode.url,
-      organ_id: 1  # todo 演示
+      link: bind_url,
+      organ_id: organ_id
     )
   end
 

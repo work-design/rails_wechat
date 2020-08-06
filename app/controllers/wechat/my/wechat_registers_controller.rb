@@ -67,12 +67,13 @@ class Wechat::My::WechatRegistersController < Wechat::My::BaseController
   end
 
   def wechat_register_params
-    params.fetch(:wechat_register, {}).permit(
+    p = params.fetch(:wechat_register, {}).permit(
       :id_name,
       :id_number,
       :mobile,
       :mobile_code
     )
+    p.merge! default_form_params
   end
 
 end
