@@ -1,7 +1,7 @@
 class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
   before_action :set_wechat_register, only: [
     :show, :code, :qrcode,
-    :edit, :edit_app, :edit_bind, :update_bind, :edit_assign, :update_assign,
+    :edit, :edit_app, :edit_bind, :update_bind, :edit_assign, :update_assign, :edit_qrcode,
     :update, :destroy
   ]
 
@@ -50,6 +50,9 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
     render 'update'
   end
 
+  def edit_qrcode
+  end
+
   def edit_assign
     q_params = {
       organ_id: current_session_organ&.id
@@ -86,7 +89,8 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
       :id_number,
       :bind_qrcode,
       :appid,
-      :password
+      :password,
+      :qrcode
     )
   end
 

@@ -50,6 +50,7 @@ Rails.application.routes.draw do
         get 'app' => :edit_app
         get 'bind' => :edit_bind
         patch 'bind' => :update_bind
+        get 'qrcode' => :edit_qrcode
         get 'assign' => :edit_assign
         patch 'assign' => :update_assign
         put :qrcode

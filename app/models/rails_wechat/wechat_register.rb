@@ -19,6 +19,7 @@ module RailsWechat::WechatRegister
     validates :mobile, presence: true, uniqueness: true
 
     has_one_attached :bind_qrcode
+    has_one_attached :qrcode
 
     enum state: {
       init: 'init',
