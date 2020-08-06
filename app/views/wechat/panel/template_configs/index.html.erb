@@ -4,9 +4,11 @@
   <thead>
     <tr>
       <th><%= TemplateConfig.human_attribute_name(:type) %></th>
-      <th><%= TemplateConfig.human_attribute_name(:title) %></th>
+      <th>
+        <p><%= TemplateConfig.human_attribute_name(:title) %></p>
+        <p><%= TemplateConfig.human_attribute_name(:description) %></p>
+      </th>
       <th><%= TemplateConfig.human_attribute_name(:tid) %></th>
-      <th><%= TemplateConfig.human_attribute_name(:description) %></th>
       <th>
         <p><%= TemplateConfig.human_attribute_name(:notifiable_type) %></p>
         <p><%= TemplateConfig.human_attribute_name(:code) %></p>
@@ -22,9 +24,11 @@
   <% @template_configs.each do |template_config| %>
     <tr>
       <td><%= template_config.type_i18n %></td>
-      <td><%= template_config.title %></td>
+      <td>
+        <p><%= template_config.title %></p>
+        <p><%= template_config.description %></p>
+      </td>
       <td><%= template_config.tid %></td>
-      <td><%= template_config.description %></td>
       <td>
         <p><%= template_config.notifiable_type %></p>
         <p><%= template_config.code %></p>
