@@ -6,21 +6,18 @@ module RailsWechat::WechatNotice
     attribute :msg_id, :string
     attribute :status, :string
     attribute :type, :string
+    attribute :appid, :string
 
     belongs_to :notification
     belongs_to :wechat_template
-    belongs_to :wechat_app
+    belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid
     belongs_to :wechat_user, class_name: 'OauthUser'
     belongs_to :wechat_subscribed, optional: true
 
     before_validation do
       self.link = notification.link
       self.wechat_app ||= wechat_template.wechat_app
-      if self.wechat_subscribed
-        self.wechat_user ||= wechat_subscribed.wechat_user
-      else
-        self.wechat_user ||= notification.user.wechat_users.find_by(app_id: wechat_app.appid)
-      end
+      #self.wechat_subscribed = wechat_user.wechat_subscribed  todo  deal with
     end
     after_create_commit :do_send_later
   end
