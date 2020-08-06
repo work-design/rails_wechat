@@ -68,7 +68,7 @@ module RailsWechat::WechatRegister
   end
 
   def promoter
-    open_id = member.user.wechat_users.find_by(app_id: organ_appid)&.uid
+    open_id = user.wechat_users.find_by(app_id: organ_appid)&.uid
     if open_id
       wr = WechatRequest.where(open_id: open_id).default_where('body-ll': 'invite_member_').order(id: :desc).first
       member_id = wr&.body.to_s.delete_prefix('invite_member_')
