@@ -7,11 +7,12 @@ module RailsWechat::WechatNotice
     attribute :status, :string
     attribute :type, :string
     attribute :appid, :string
+    attribute :open_id, :string
 
     belongs_to :notification
     belongs_to :wechat_template
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid
-    belongs_to :wechat_user, class_name: 'OauthUser'
+    belongs_to :wechat_user, class_name: 'OauthUser', foreign_key: :open_id, primary_key: :uid
     belongs_to :wechat_subscribed, optional: true
 
     before_validation do
