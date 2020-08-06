@@ -5,6 +5,7 @@ module RailsWechat::User
     has_many :wechat_users
     has_many :wechat_program_users
     has_many :wechat_subscribeds, ->{ where(sending_at: nil).order(id: :asc) }, through: :wechat_program_users
+    has_many :wechat_registers, dependent: :destroy
   end
 
   def invite_qrcode(appid)
