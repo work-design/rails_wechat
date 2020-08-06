@@ -58,6 +58,7 @@ class Wechat::My::WechatRegistersController < Wechat::My::BaseController
       @wechat_register = current_member.wechat_registers.build(wechat_register_params)
     else
       @wechat_register = current_user.wechat_registers.build(wechat_register_params)
+      @wechat_register.mobile ||= current_account.identity if current_account.is_a?(MobileAccount)
     end
   end
 
