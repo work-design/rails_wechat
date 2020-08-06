@@ -63,13 +63,41 @@ module RailsWechat::WechatRegister
     "#{mobile}@#{RailsWechat.config.email_domain}"
   end
 
-  def notify_qrcode
+  def organ_appid
+    organ.wechat_apps.default&.appid
+  end
+
+  def promoter
+    open_id = member.user.wechat_users.find_by(app_id: organ_appid)&.uid
+    if open_id
+      wr = WechatRequest.where(open_id: open_id).default_where('body-ll': 'invite_member_').order(id: :desc).first
+      member_id = wr&.body.to_s.delete_prefix('invite_member_')
+      Member.find_by id: member_id
+    end
+  end
+
+  def notify_promoter
+    return unless promoter
+    to_notification(
+      receiver: promoter.user,
+      title: '二维码已更新，请邀请对方绑定',
+      link: bind_url,
+      organ_id: promoter.organ_id
+    )
+  end
+
+  def notify_owner
     to_notification(
       receiver: user,
       title: '二维码已更新，请点击',
       link: bind_url,
       organ_id: organ_id
     )
+  end
+
+  def notify_qrcode
+    notify_owner
+    notify_promoter
   end
 
   def sync_user
