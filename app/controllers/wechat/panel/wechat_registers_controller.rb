@@ -9,7 +9,7 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
     q_params = {}
     q_params.merge! params.permit(:id_name, :id_number)
 
-    @wechat_registers = WechatRegister.default_where(q_params).page(params[:page])
+    @wechat_registers = WechatRegister.default_where(q_params).order(id: :desc).page(params[:page])
   end
 
   def new
