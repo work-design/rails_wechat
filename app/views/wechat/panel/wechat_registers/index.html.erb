@@ -13,7 +13,7 @@
         <p class="has-text-danger"><%= WechatRegister.human_attribute_name(:password) %></p>
       </th>
       <th>
-        <p><%= Member.human_attribute_name(:identity) %></p>
+        <p><%= WechatRegister.human_attribute_name(:mobile) %></p>
         <p><%= WechatRegister.human_attribute_name(:mobile_code) %></p>
       </th>
       <th><%= WechatRegister.human_attribute_name(:bind_url) %></th>
@@ -43,7 +43,7 @@
       </td>
       <td>
         <p>
-          <%= wechat_register.member.identity %>
+          <%= wechat_register.mobile %>
           <%= link_to code_panel_wechat_register_path(wechat_register), method: :put, aria: { label: '验证码' }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
             <i class="fas fa-paper-plane"></i>
           <% end %>

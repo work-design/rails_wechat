@@ -8,10 +8,13 @@ module RailsWechat::WechatRegister
     attribute :state, :string, default: 'init'
     attribute :appid, :string
     attribute :password, :string
+    attribute :mobile, :string
     attribute :mobile_code, :string
 
-    belongs_to :member
-    belongs_to :wechat_app, foreign_key: :app_id, primary_key: :appid, optional: true
+    belongs_to :member, foreign_key: :mobile, primary_key: :identity, optional: true
+    belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
+
+    validates :mobile, presence: true
 
     has_one_attached :bind_qrcode
 
@@ -38,7 +41,7 @@ module RailsWechat::WechatRegister
   end
 
   def email
-    "#{id}@#{RailsWechat.config.email_domain}"
+    "#{mobile}@#{RailsWechat.config.email_domain}"
   end
 
   def notify_qrcode

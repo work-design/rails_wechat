@@ -21,6 +21,7 @@ zh:
         id_number: 身份证号
         verify_status: 验证结果
         email_code: 邮件验证码
+        mobile: 手机号
         mobile_code: 手机验证码
         bind_url: 绑定二维码
         state: 状态
