@@ -59,7 +59,7 @@ module RailsWechat::WechatRegister
     '您好，我们正在协助您注册微信公众号'
   end
 
-  def keword1_code
+  def keyword1_code
     '手机号验证码'
   end
 
