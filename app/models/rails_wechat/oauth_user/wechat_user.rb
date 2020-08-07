@@ -14,6 +14,7 @@ module RailsWechat::OauthUser::WechatUser
     has_many :wechat_notices, foreign_key: :open_id, primary_key: :uid
 
     after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
+    after_save_commit :sync_user_info_later, if: -> { saved_change_to_access_token? && (name.blank? && avatar_url.blank?) }
   end
 
   def sync_remark_later
@@ -24,6 +25,10 @@ module RailsWechat::OauthUser::WechatUser
     wechat_app.api.user_update_remark(uid, remark)
   rescue Wechat::WechatError => e
     logger.info e.message
+  end
+
+  def sync_user_info_later
+    WechatUserInfoJob.perform_later(self)
   end
 
   def sync_user_info
@@ -37,7 +42,7 @@ module RailsWechat::OauthUser::WechatUser
 
     self.name = res['nickname']
     self.avatar_url = res['headimgurl']
-    self
+    self.save
   end
 
   def assign_user_info(raw_info)
