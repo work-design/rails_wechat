@@ -150,6 +150,10 @@ module RailsWechat::WechatApp
     wechat_templates.where(template_config_id: ids).pluck(:template_id)
   end
 
+  def subdomain
+    [['app', organ_id, id].join('-'), RailsCom.config.subdomain].join('.')
+  end
+
   class_methods do
 
     def default(params = {})
