@@ -28,6 +28,7 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
   end
 
   def code
+    @wechat_register.notify_mobile_code
   end
 
   def qrcode

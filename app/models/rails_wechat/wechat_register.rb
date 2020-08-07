@@ -2,6 +2,8 @@ module RailsWechat::WechatRegister
   extend ActiveSupport::Concern
 
   included do
+    delegate :url_helpers, to: 'Rails.application.routes'
+
     attribute :id_name, :string
     attribute :id_number, :string
     attribute :email_code, :string
@@ -34,6 +36,7 @@ module RailsWechat::WechatRegister
     before_save :compute_state, if: -> { appid_changed? }
 
     acts_as_notify only: [:id_name], methods: [:time, :bind_url, :hello, :remark]
+    acts_as_notify :code, methods: [:hello_code, :keyword1_code, :remark_code]
   end
 
   def hello
@@ -50,6 +53,18 @@ module RailsWechat::WechatRegister
 
   def remark
     '此二维码不支持图片识别，可复制链接在电脑或其他手机上访问后再扫一扫！'
+  end
+
+  def hello_code
+    '您好，我们正在协助您注册微信公众号'
+  end
+
+  def keword1_code
+    '手机号验证码'
+  end
+
+  def remark_code
+    '请点击链接，输入您收到的验证码。'
   end
 
   def compute_state
@@ -92,6 +107,15 @@ module RailsWechat::WechatRegister
       receiver: user,
       title: '二维码已更新，请点击',
       link: bind_url,
+      organ_id: organ_id
+    )
+  end
+
+  def notify_mobile_code
+    to_notification(
+      receiver: user,
+      title: '手机验证码已下发，该验证码用于注册微信公众号',
+      link: url_helpers.code_my_wechat_register_url(id, subdomain: organ.subdomain),
       organ_id: organ_id
     )
   end
