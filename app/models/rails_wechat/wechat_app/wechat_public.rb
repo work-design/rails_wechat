@@ -1,8 +1,4 @@
 module RailsWechat::WechatApp::WechatPublic
-  extend ActiveSupport::Concern
-  included do
-
-  end
 
   def sync_wechat_templates
     templates = api.templates
@@ -34,7 +30,7 @@ module RailsWechat::WechatApp::WechatPublic
     r = HTTPX.get "https://api.weixin.qq.com/sns/oauth2/access_token?#{h.to_query}"
     result = JSON.parse(r.body.to_s)
     wechat_user = wechat_users.find_or_initialize_by(uid: result['openid'])
-    wechat_user.access_token = result.slice('access_token', 'refresh_token', 'unionid')
+    wechat_user.assign_attributes result.slice('access_token', 'refresh_token', 'unionid')
     wechat_user.expires_at = Time.current + result['expires_in'].to_i
     wechat_user
   end
