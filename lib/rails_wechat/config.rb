@@ -1,6 +1,6 @@
 module RailsWechat
   include ActiveSupport::Configurable
-  bind_proc = -> (request) {
+  bind_proc = ->(request) {
     reply_params = {
       appid: request.appid,
       news_reply_items_attributes: [
@@ -39,7 +39,7 @@ module RailsWechat
     config.rules.a = {
       msg_type: 'event',
       event: 'templatesendjobfinish',
-      proc: -> (request) {
+      proc: ->(request) {
         r = WechatNotice.find_by(msg_id: request.raw_body['MsgID'])
         r.update status: request.raw_body['Status']
         TextReply.new(open_id: request.open_id, value: 'SUCCESS')
@@ -47,6 +47,24 @@ module RailsWechat
     }
     config.rules.b = { msg_type: 'event', event: 'click', body: 'bind', proc: bind_proc }
     config.rules.c = { msg_type: 'text', body: '绑定', proc: bind_proc }
+    config.rules.d = {
+      msg_type: 'text',
+      body: '退出',
+      proc: ->(request) {
+        reply_params = {
+          appid: request.appid,
+          news_reply_items_attributes: [
+            {
+              title: '退出登录',
+              description: '绑定信息',
+              url: request.url_helpers.logout_url
+            }
+          ]
+        }
+
+        NewsReply.new(reply_params)
+      }
+    }
   end
 
 end
