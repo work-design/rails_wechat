@@ -35,32 +35,9 @@ module RailsWechat::OauthUser::WechatUser
       self.errors.add :base, "#{res['errcode']}, #{res['errmsg']}"
     end
 
-    assign_profile_info(res.slice('nickname', 'headimgurl'))
-    assign_user_info(res.slice('unionid'))
+    self.name = res['nickname']
+    self.avatar_url = res['headimgurl']
     self
-  end
-
-  def assign_info(oauth_params)
-    info_params = oauth_params.fetch('info', {})
-    assign_profile_info(info_params)
-
-    raw_info = oauth_params.dig('extra', 'raw_info') || {}
-    assign_user_info(raw_info)
-
-    credential_params = oauth_params.fetch('credentials', {})
-    credential_params['access_token'] = credential_params['token']
-    assign_token_info(credential_params)
-  end
-
-  def assign_token_info(credential_params)
-    self.access_token = credential_params['access_token']
-    self.refresh_token = credential_params['refresh_token']
-    self.expires_at = credential_params['expires_in']
-  end
-
-  def assign_profile_info(info_params)
-    self.name = info_params['nickname']
-    self.avatar_url = info_params['headimgurl']
   end
 
   def assign_user_info(raw_info)
@@ -70,11 +47,6 @@ module RailsWechat::OauthUser::WechatUser
       self.user_id ||= same_oauth_user.user_id
       self.account_id ||= same_oauth_user.account_id
     end
-  end
-
-  def save_info(oauth_params)
-    assign_info(oauth_params)
-    self.save
   end
 
 end
