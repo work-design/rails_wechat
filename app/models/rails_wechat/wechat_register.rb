@@ -79,12 +79,12 @@ module RailsWechat::WechatRegister
     "#{mobile}@#{RailsWechat.config.email_domain}"
   end
 
-  def organ_appid
-    organ.wechat_apps.default&.appid
+  def organ_app
+    organ.wechat_apps.default
   end
 
   def promoter
-    open_id = user.wechat_users.find_by(app_id: organ_appid)&.uid
+    open_id = user.wechat_users.find_by(app_id: organ_app&.appid)&.uid
     if open_id
       wr = WechatRequest.where(open_id: open_id).default_where('body-ll': 'invite_member_').order(id: :desc).first
       member_id = wr&.body.to_s.delete_prefix('invite_member_')
@@ -114,8 +114,9 @@ module RailsWechat::WechatRegister
   def notify_mobile_code
     to_notification(
       receiver: user,
+      code: 'code',
       title: '手机验证码已下发，该验证码用于注册微信公众号',
-      link: url_helpers.code_my_wechat_register_url(id, subdomain: organ.subdomain),
+      link: url_helpers.code_my_wechat_register_url(id, subdomain: orgran_app&.subdomain),
       organ_id: organ_id
     )
   end
