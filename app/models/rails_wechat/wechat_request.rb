@@ -43,7 +43,7 @@ module RailsWechat::WechatRequest
       rule.slice(:msg_type, :event, :body) == self.rule_tag
     end
 
-    filtered[0][:proc].call(self) if filtered.present?
+    filtered[1][:proc].call(self) if filtered.present?
   end
 
   def kefu(text)
