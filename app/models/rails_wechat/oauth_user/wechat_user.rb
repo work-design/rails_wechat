@@ -17,6 +17,10 @@ module RailsWechat::OauthUser::WechatUser
     after_save_commit :sync_user_info_later, if: -> { saved_change_to_access_token? && (name.blank? && avatar_url.blank?) }
   end
 
+  def name
+    super.blank? ? "WechatUser_#{id}" : super
+  end
+
   def sync_remark_later
     WechatUserJob.perform_later(self)
   end
