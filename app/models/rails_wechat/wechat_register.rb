@@ -36,7 +36,7 @@ module RailsWechat::WechatRegister
     before_save :compute_state, if: -> { appid_changed? }
 
     acts_as_notify only: [:id_name], methods: [:time, :bind_url, :hello, :remark]
-    acts_as_notify :code, methods: [:hello_code, :keyword1_code, :remark_code]
+    acts_as_notify :code, only: [:id_name, :mobile], methods: [:hello_code, :keyword1_code, :remark_code]
   end
 
   def hello
