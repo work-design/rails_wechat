@@ -31,7 +31,7 @@
         <% if wechat_request.wechat_user.user %>
           <%= link_to wechat_request.wechat_user.user.name, panel_user_path(wechat_request.wechat_user.user_id), remote: true, text: true %>
         <% else %>
-          <%= link_to wechat_request.wechat_user.name, admin_oauth_user_path(wechat_request.wechat_user) %>
+          <%= link_to wechat_request.wechat_user.name, admin_oauth_user_path(wechat_request.wechat_user), remote: true, text: true %>
         <% end %>
       </td>
       <td><%= wechat_request.type_i18n %></td>
