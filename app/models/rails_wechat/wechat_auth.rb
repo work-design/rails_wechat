@@ -12,6 +12,7 @@ module RailsWechat::WechatAuth
 
   def deal_auth_code
     r = wechat_platform.api.query_auth(auth_code)
+    return unless r
     agency = wechat_platform.wechat_agencies.find_or_initialize_by(appid: r['authorizer_appid'])
     agency.store_access_token(r)
   end
