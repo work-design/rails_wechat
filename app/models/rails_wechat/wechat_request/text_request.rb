@@ -4,15 +4,12 @@ module RailsWechat::WechatRequest::TextRequest
     self.wechat_reply = reply_from_rule
     return if self.wechat_reply
 
-    res = wechat_responses.map do |wr|
+    wechat_responses.find do |wr|
       next unless wr.scan_regexp(body)
-
-      wr.invoke_effect(self)
-    end.compact
-
-    if res.present?
-      res.join("\n")
+      self.wechat_reply = wr.invoke_effect(self)
     end
+
+    self
   end
 
 end
