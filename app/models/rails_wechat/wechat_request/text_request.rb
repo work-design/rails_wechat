@@ -5,8 +5,9 @@ module RailsWechat::WechatRequest::TextRequest
     return if self.wechat_reply
 
     wechat_responses.find do |wr|
-      next unless wr.scan_regexp(body)
-      self.wechat_reply = wr.invoke_effect(self)
+      if wr.scan_regexp(body)
+        self.wechat_reply = wr.invoke_effect(self)
+      end
     end
 
     self
