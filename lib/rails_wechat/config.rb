@@ -65,6 +65,13 @@ module RailsWechat
         NewsReply.new(reply_params)
       }
     }
+    config.rules.e = {
+      msg_type: 'text',
+      body: 'TESTCOMPONENT_MSG_TYPE_TEXT',
+      proc: ->(request) {
+        TextReply.new(open_id: request.open_id, value: 'TESTCOMPONENT_MSG_TYPE_TEXT_callback')
+      }
+    }
   end
 
 end
