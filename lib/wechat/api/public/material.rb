@@ -49,5 +49,4 @@ module Wechat::Api::Public::Material
     get 'customservice/getonlinekflist', base: BASE
   end
 
-
 end
