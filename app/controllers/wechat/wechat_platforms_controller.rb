@@ -17,12 +17,10 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
     @wechat_received.appid = params[:appid]
     r = Hash.from_xml(request.body.read)['xml']
     @wechat_received.encrypt_data = r['Encrypt']
+    @wechat_received.save
 
-    if @wechat_received.save
-      render plain: 'success'
-    else
-      head :no_content
-    end
+    request = @wechat_received.reply
+    render plain: request.to_xml
   end
 
   private
