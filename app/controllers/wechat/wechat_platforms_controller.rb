@@ -20,7 +20,7 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
     @wechat_received.save
 
     request = @wechat_received.reply
-    render plain: request.to_xml
+    render plain: request.to_wechat
   end
 
   private

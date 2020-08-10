@@ -13,11 +13,12 @@ module RailsWechat::WechatRequest
     attribute :appid, :string, index: true
     attribute :open_id, :string, index: true
     attribute :reply_body, :json
-    attribute :reply_encrypt, :string
+    attribute :reply_encrypt, :json
 
     belongs_to :wechat_reply, optional: true
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
+    has_one :wechat_received
     has_many :wechat_receiveds, dependent: :nullify
     has_many :wechat_extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
     has_many :wechat_response_requests, ->(o){ where(request_type: o.type) }, primary_key: :appid, foreign_key: :appid
@@ -72,33 +73,49 @@ module RailsWechat::WechatRequest
     else
       self.reply_body = {}
     end
+    if encrypt_mode
+      do_encrypt
+    end
   end
 
   def encrypt_mode
-    wechat_app.encrypt_mode || true
+    wechat_app.encrypt_mode || wechat_received&.wechat_platform
   end
 
   def encoding_aes_key
-    wechat_app.encoding_aes_key
+    wechat_app.encoding_aes_key.presence || wechat_received&.wechat_platform&.encoding_aes_key
   end
 
   def token
     wechat_app.token
   end
 
-  def do_encrypt(nonce)
+  def do_encrypt
     return unless encrypt_mode
 
+    nonce = SecureRandom.hex(10)
     encrypt = Base64.strict_encode64(Wechat::Cipher.encrypt(Wechat::Cipher.pack(to_xml, appid), encoding_aes_key))
-    timestamp = Time.current.to_i
+    timestamp = reply_body['CreateTime']
     msg_sign = Wechat::Signature.hexdigest(token, timestamp, nonce, encrypt)
 
-    {
+    self.reply_encrypt = {
       Encrypt: encrypt,
       MsgSignature: msg_sign,
       TimeStamp: timestamp,
       Nonce: nonce
     }
+  end
+
+  def to_wechat
+    if reply_encrypt.present?
+      reply_encrypt.to_xml(
+        root: 'xml',
+        children: 'item',
+        skip_instruct: true,
+        skip_types: true)
+    else
+      to_xml
+    end
   end
 
   def to_xml
