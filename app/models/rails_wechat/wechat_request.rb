@@ -98,8 +98,8 @@ module RailsWechat::WechatRequest
     return unless encrypt_mode
 
     nonce = SecureRandom.hex(10)
-    #content = reply_body.merge(FuncFlag: 0).to_xml(root: 'xml', children: 'item', skip_instruct: true, skip_types: true)
-    encrypt = Base64.strict_encode64(Wechat::Cipher.encrypt(Wechat::Cipher.pack(to_xml, encrypt_appid), encoding_aes_key))
+    content = reply_body.merge(FuncFlag: 0).to_xml(root: 'xml', children: 'item', skip_instruct: true, skip_types: true)
+    encrypt = Base64.strict_encode64(Wechat::Cipher.encrypt(Wechat::Cipher.pack(content, encrypt_appid), encoding_aes_key))
     timestamp = reply_body['CreateTime']
     msg_sign = Wechat::Signature.hexdigest(token, timestamp, nonce, encrypt)
 
