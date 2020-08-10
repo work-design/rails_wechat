@@ -93,9 +93,8 @@ module RailsWechat::WechatResponse
   def invoke_effect(request)
     if effective
       request.wechat_reply = effective.invoke_effect(request)
-    else
-      do_extract(request)
     end
+    do_extract(request)
   end
 
   def do_extract(request)
