@@ -70,6 +70,7 @@ module RailsWechat::WechatRequest
     if wechat_reply
       self.reply_body = wechat_reply.to_wechat
       self.reply_body.merge!(ToUserName: open_id)
+      self.reply_body.merge!(FromUserName: wechat_app.user_name) if wechat_app
     else
       self.reply_body = {}
     end
