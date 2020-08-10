@@ -42,7 +42,7 @@ module RailsWechat
       proc: ->(request) {
         r = WechatNotice.find_by(msg_id: request.raw_body['MsgID'])
         r.update status: request.raw_body['Status']
-        TextReply.new(open_id: request.open_id, value: 'SUCCESS')
+        TextReply.new(value: 'SUCCESS')
       }
     }
     config.rules.b = { msg_type: 'event', event: 'click', body: 'bind', proc: bind_proc }
@@ -69,7 +69,7 @@ module RailsWechat
       msg_type: 'text',
       body: 'TESTCOMPONENT_MSG_TYPE_TEXT',
       proc: ->(request) {
-        TextReply.new(open_id: request.open_id, value: 'TESTCOMPONENT_MSG_TYPE_TEXT_callback')
+        TextReply.new(value: 'TESTCOMPONENT_MSG_TYPE_TEXT_callback')
       }
     }
   end
