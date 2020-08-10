@@ -72,6 +72,13 @@ module RailsWechat
         TextReply.new(value: 'TESTCOMPONENT_MSG_TYPE_TEXT_callback')
       }
     }
+    config.rules.f = {
+      msg_type: 'text',
+      body: /QUERY_AUTH_CODE:/,
+      proc: ->(request) {
+        
+      }
+    }
   end
 
 end
