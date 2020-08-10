@@ -76,7 +76,10 @@ module RailsWechat
       msg_type: 'text',
       body: /QUERY_AUTH_CODE:/,
       proc: ->(request) {
-        
+        wechat_auth = request.wechat_platform.wechat_auths.build
+        wechat_auth.auth_code = request.body.delete_prefix 'QUERY_AUTH_CODE:'
+        wechat_auth.save
+        SuccessReply.new
       }
     }
   end

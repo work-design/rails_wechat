@@ -19,6 +19,7 @@ module RailsWechat::WechatRequest
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
     has_one :wechat_received
+    has_one :wechat_platform, through: :wechat_received
     has_many :wechat_receiveds, dependent: :nullify
     has_many :wechat_extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
     has_many :wechat_response_requests, ->(o){ where(request_type: o.type) }, primary_key: :appid, foreign_key: :appid
@@ -67,7 +68,9 @@ module RailsWechat::WechatRequest
   end
 
   def get_reply_body
-    if wechat_reply
+    if wechat_reply.is_a?(SuccessReply)
+      self.reply_body = {}
+    elsif wechat_reply
       self.reply_body = wechat_reply.to_wechat
       self.reply_body.merge!(ToUserName: open_id)
       self.reply_body.merge!(FromUserName: wechat_app.user_name) if wechat_app
