@@ -35,14 +35,15 @@ module RailsWechat::WechatRequest
   def rule_tag
     {
       msg_type: msg_type,
-      event: event,
-      body: body
+      event: event
     }.compact
   end
 
   def reply_from_rule
     filtered = RailsWechat.config.rules.find do |_, rule|
-      rule.slice(:msg_type, :event, :body) == self.rule_tag
+      if rule.slice(:msg_type, :event) == self.rule_tag
+        rule[:body].match? self.body
+      end
     end
 
     filtered[1][:proc].call(self) if filtered.present?
