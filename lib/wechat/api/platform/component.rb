@@ -43,7 +43,8 @@ module Wechat::Api::Platform::Component
       component_appsecret: app.secret,
       component_verify_ticket: app.verify_ticket
     }
-    post 'api_component_token', **body, base: BASE
+
+    client.post 'api_component_token', **body, base: BASE  # use client without access token
   end
 
 end

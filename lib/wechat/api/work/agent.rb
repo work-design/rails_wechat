@@ -2,7 +2,7 @@ module Wechat::Api::Work::Agent
   BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
   def gettoken
-    get 'gettoken', params: { corpid: app.appid, corpsecret: app.secret }
+    client.get 'gettoken', params: { corpid: app.appid, corpsecret: app.secret }
   end
 
   def agent_list
