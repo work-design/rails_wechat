@@ -15,8 +15,7 @@ class Wechat::Api::Public < Wechat::Api::Base
 
   def initialize(app)
     super
-    @access_token = Wechat::AccessToken::Public.new(@client, app)
-    @jsapi_ticket = Wechat::JsapiTicket::Public.new(@client, app, @access_token)
+    @jsapi_ticket = Wechat::JsapiTicket::Public.new(@client, app, app.access_token)
   end
 
 end

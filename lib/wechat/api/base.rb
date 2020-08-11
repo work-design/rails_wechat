@@ -2,7 +2,7 @@
 
 class Wechat::Api::Base
 
-  attr_reader :app, :client, :access_token, :jsapi_ticket
+  attr_reader :app, :client, :jsapi_ticket
   def initialize(app)
     @app = app
     @client = Wechat::HttpClient.new
@@ -28,12 +28,8 @@ class Wechat::Api::Base
 
   protected
   def with_access_token(params = {}, tries = 2)
-    if app.access_token_valid?
-      yield(params.merge!(access_token: app.access_token))
-    else
-      app.refresh_token
-      retry unless (tries -= 1).zero?
-    end
+    app.refresh_token unless app.access_token_valid?
+    yield params.merge!(access_token: app.access_token)
   rescue Wechat::AccessTokenExpiredError
     app.refresh_token
     retry unless (tries -= 1).zero?

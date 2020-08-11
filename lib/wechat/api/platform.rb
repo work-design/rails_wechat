@@ -2,16 +2,12 @@ class Wechat::Api::Platform < Wechat::Api::Base
   require 'wechat/api/platform/component'
   include Component
 
-  def initialize(app)
-    super
-    @access_token = Wechat::AccessToken::Platform.new(@client, app)
-  end
-
   protected
   def with_access_token(params = {}, tries = 2)
-    yield(params.merge!(component_access_token: access_token.token))
+    app.refresh_token unless app.access_token_valid?
+    yield params.merge!(component_access_token: access_token.token)
   rescue Wechat::AccessTokenExpiredError
-    access_token.refresh
+    app.refresh_token
     retry unless (tries -= 1).zero?
   end
 
