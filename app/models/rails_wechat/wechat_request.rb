@@ -21,6 +21,7 @@ module RailsWechat::WechatRequest
     has_one :wechat_received
     has_one :wechat_platform, through: :wechat_received
     has_many :wechat_receiveds, dependent: :nullify
+    has_many :wechat_services, dependent: :nullify
     has_many :wechat_extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
     has_many :wechat_response_requests, ->(o){ where(request_type: o.type) }, primary_key: :appid, foreign_key: :appid
     has_many :wechat_responses, through: :wechat_response_requests

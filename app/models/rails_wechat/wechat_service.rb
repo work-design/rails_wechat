@@ -9,8 +9,16 @@ module RailsWechat::WechatService
     attribute :open_id, :string
     attribute :body, :json
 
+    belongs_to :wechat_request, optional: true
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
+
+    before_initialize if: :new_record? do
+      if wechat_request
+        self.appid = wechat_request.appid
+        self.open_id = wechat_request.open_id
+      end
+    end
   end
 
   def content
