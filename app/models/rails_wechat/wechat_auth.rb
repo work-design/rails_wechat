@@ -7,6 +7,7 @@ module RailsWechat::WechatAuth
     attribute :testcase, :boolean, default: false
 
     belongs_to :wechat_platform
+    belongs_to :wechat_request, optional: true  # for testcase 2
 
     after_create_commit :deal_auth_code
   end
@@ -23,6 +24,7 @@ module RailsWechat::WechatAuth
   # 测试公众号使用客服消息接口处理用户消息
   def deal_test_case(agency)
     text_service = agency.wechat_services.build(type: 'TextService')
+    text_service.open_id = wechat_request.open_id
     text_service.value = "#{auth_code}_from_api"
     text_service.save
     text_service.do_send

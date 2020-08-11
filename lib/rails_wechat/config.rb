@@ -78,6 +78,7 @@ module RailsWechat
       proc: ->(request) {
         wechat_auth = request.wechat_platform.wechat_auths.build
         wechat_auth.auth_code = request.body.delete_prefix 'QUERY_AUTH_CODE:'
+        wechat_auth.wechat_request = request
         wechat_auth.testcase = true
         wechat_auth.save
         SuccessReply.new
