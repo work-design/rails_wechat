@@ -28,9 +28,14 @@ class Wechat::Api::Base
 
   protected
   def with_access_token(params = {}, tries = 2)
-    yield(params.merge!(access_token: access_token.token))
+    if app.access_token_valid?
+      yield(params.merge!(access_token: app.access_token))
+    else
+      app.refresh_token
+      retry unless (tries -= 1).zero?
+    end
   rescue Wechat::AccessTokenExpiredError
-    access_token.refresh
+    app.refresh_token
     retry unless (tries -= 1).zero?
   end
 

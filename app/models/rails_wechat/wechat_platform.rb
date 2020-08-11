@@ -46,6 +46,17 @@ module RailsWechat::WechatPlatform
     pre_auth_code_expires_at > 3.minutes.since
   end
 
+  def refresh_access_token
+    r = api.component_token
+    store_access_token(r)
+  end
+
+  def store_access_token(token_hash)
+    self.access_token = token_hash['component_access_token']
+    self.access_token_expires_at = Time.current + token_hash['expires_in'].to_i
+    self.save
+  end
+
   def auth_url
     return if verify_ticket.blank?
     refresh_pre_auth_code unless pre_auth_code_valid?

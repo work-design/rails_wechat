@@ -89,6 +89,17 @@ module RailsWechat::WechatApp
     jsapi_ticket_expires_at > Time.current
   end
 
+  def refresh_access_token
+    r = api.token
+    store_access_token(r)
+  end
+
+  def store_access_token(token_hash)
+    self.access_token = token_hash['access_token']
+    self.access_token_expires_at = Time.current + token_hash['expires_in'].to_i
+    self.save
+  end
+
   def set_primary
     q = {}
     if self.class.column_names.include?('organ_id')
