@@ -38,7 +38,7 @@ module Wechat::Api::Public::Material
   end
 
   def message_custom_send(message)
-    post 'message/custom/send', message, base: BASE
+    post 'message/custom/send', **message, base: BASE
   end
 
   def message_custom_typing(openid, command = 'Typing')
