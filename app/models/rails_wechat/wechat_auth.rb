@@ -19,6 +19,8 @@ module RailsWechat::WechatAuth
     agency.store_access_token(r)
   end
 
+  # 第三方平台上线测试用例2
+  # 测试公众号使用客服消息接口处理用户消息
   def deal_test_case
     text_service = agency.wechat_services.build(type: 'TextService')
     text_service.value = "#{auth_code}_from_api"
