@@ -13,9 +13,4 @@ class Wechat::Api::Public < Wechat::Api::Base
   include Mp
   include User
 
-  def initialize(app)
-    super
-    @jsapi_ticket = Wechat::JsapiTicket::Public.new(@client, app, app.access_token)
-  end
-
 end
