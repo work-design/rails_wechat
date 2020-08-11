@@ -5,4 +5,12 @@ module RailsWechat::WechatService::TextService
     attribute :msgtype, :string, default: 'text'
   end
 
+  def content
+    {
+      text: {
+        content: value
+      }
+    }
+  end
+
 end

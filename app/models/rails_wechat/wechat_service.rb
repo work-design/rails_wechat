@@ -13,5 +13,16 @@ module RailsWechat::WechatService
     belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
   end
 
+  def content
+    {}
+  end
+
+  def to_wechat
+    {
+      touser: open_id,
+      msgtype: msgtype,
+    }.merge! content
+  end
+
 
 end

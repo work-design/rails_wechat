@@ -5,4 +5,12 @@ module RailsWechat::WechatService::ImageService
     attribute :msgtype, :string, default: 'image'
   end
 
+  def content
+    {
+      image: {
+        media_id: value
+      }
+    }
+  end
+
 end
