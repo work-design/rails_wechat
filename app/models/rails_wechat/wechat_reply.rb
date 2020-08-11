@@ -17,7 +17,7 @@ module RailsWechat::WechatReply
   end
 
   def invoke_effect(request_from = nil, **options)
-    self.assign_attributes options
+    self.value += options[:value]
     self
   end
 
