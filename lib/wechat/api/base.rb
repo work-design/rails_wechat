@@ -2,7 +2,7 @@
 
 class Wechat::Api::Base
 
-  attr_reader :app, :client, :jsapi_ticket
+  attr_reader :app, :client
   def initialize(app)
     @app = app
     @client = Wechat::HttpClient.new

@@ -6,10 +6,9 @@ module Wechat::Helpers
     else
       app = WechatApp.default(controller.default_params)
     end
-    api = app.api
     page_url = controller.request.original_url
     page_url.delete_suffix!('#')
-    js_hash = api.jsapi_ticket.signature(page_url)
+    js_hash = Wechat::Signature.signature(app.jsapi_ticket, page_url)
     logger.debug "  ==========> Current page is: #{page_url}"
     logger.debug "  ==========> Hash: #{js_hash.inspect}"
 

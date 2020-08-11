@@ -100,6 +100,17 @@ module RailsWechat::WechatApp
     self.save
   end
 
+  def refresh_jsapi_ticket
+    r = api.jsapi_ticket
+    store_jsapi_ticket(r)
+  end
+
+  def store_jsapi_ticket(ticket_hash)
+    self.jsapi_ticket = ticket_hash['ticket']
+    self.jsapi_ticket_expires_at = Time.current + ticket_hash['expires_in'].to_i
+    self.save
+  end
+
   def set_primary
     q = {}
     if self.class.column_names.include?('organ_id')

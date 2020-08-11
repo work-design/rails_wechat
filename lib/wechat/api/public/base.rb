@@ -11,6 +11,10 @@ module Wechat::Api::Public::Base
     client.get 'token', params: { grant_type: 'client_credential', appid: app.appid, secret: app.secret }, base: BASE
   end
 
+  def jsapi_ticket
+    get 'ticket/getticket', params: { type: 'jsapi' }, base: BASE
+  end
+
   # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/API_Call_Limits.html
   def clear_quota
     post 'clear_quota', appid: app.appid, base: BASE
