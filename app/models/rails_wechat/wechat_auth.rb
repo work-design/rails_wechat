@@ -4,10 +4,12 @@ module RailsWechat::WechatAuth
   included do
     attribute :auth_code, :string
     attribute :auth_code_expires_at, :datetime
+    attribute :testcase, :boolean, default: false
 
     belongs_to :wechat_platform
 
     after_create_commit :deal_auth_code
+    after_create_commit :deal_test_case, if: -> { testcase }
   end
 
   def deal_auth_code
@@ -15,6 +17,13 @@ module RailsWechat::WechatAuth
     return unless r
     agency = wechat_platform.wechat_agencies.find_or_initialize_by(appid: r['authorizer_appid'])
     agency.store_access_token(r)
+  end
+
+  def deal_test_case
+    text_service = agency.wechat_services.build(type: 'TextService')
+    text_service.value = "#{auth_code}_from_api"
+    text_service.save
+    text_service.do_send
   end
 
 end
