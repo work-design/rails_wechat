@@ -15,15 +15,6 @@ module Wechat::Api::Base::Sns
     get 'auth', params: { access_token: web_access_token, openid: openid }, base: BASE
   end
 
-  def web_refresh_access_token(user_refresh_token)
-    params = {
-      appid: access_token.appid,
-      grant_type: 'refresh_token',
-      refresh_token: user_refresh_token
-    }
-    get 'oauth2/refresh_token', params: params, base: BASE
-  end
-
   def web_userinfo(web_access_token, openid, lang = 'zh_CN')
     get 'userinfo', params: { access_token: web_access_token, openid: openid, lang: lang }, base: BASE
   end

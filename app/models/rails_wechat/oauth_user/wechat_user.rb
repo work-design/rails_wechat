@@ -36,8 +36,11 @@ module RailsWechat::OauthUser::WechatUser
   end
 
   def sync_user_info
-    userinfo_url = "https://api.weixin.qq.com/sns/userinfo?access_token=#{access_token}&openid=#{uid}"
-    user_response = HTTPX.get(userinfo_url)
+    params = {
+      access_token: access_token,
+      openid: uid
+    }
+    user_response = HTTPX.get('https://api.weixin.qq.com/sns/userinfo', params: params)
     res = JSON.parse(user_response.to_s)
 
     if res['errcode'].present?
@@ -46,6 +49,20 @@ module RailsWechat::OauthUser::WechatUser
 
     self.name = res['nickname']
     self.avatar_url = res['headimgurl']
+    self.save
+  end
+
+  def refresh_access_token
+    params = {
+      appid: app_id,
+      grant_type: 'refresh_token',
+      refresh_token: user_refresh_token
+    }
+
+    response = HTTPX.get 'https://api.weixin.qq.com/sns/oauth2/refresh_token', params: params
+    res = JSON.parse(response.to_s)
+    self.assign_attributes res.slice('access_token', 'refresh_token')
+    self.expires_at = Time.current + res['expires_in'].to_i
     self.save
   end
 
