@@ -56,7 +56,7 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
 
   def edit_assign
     q_params = {
-      organ_id: current_session_organ&.id
+      organ_id: current_organ&.id
     }
     @members = @wechat_register.members.default_where(q_params)
     @task_templates = @wechat_register.task_templates.default_where(member_id: params[:member_id])
