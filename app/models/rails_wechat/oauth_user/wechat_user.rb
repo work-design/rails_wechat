@@ -14,7 +14,7 @@ module RailsWechat::OauthUser::WechatUser
     has_many :wechat_notices, foreign_key: :open_id, primary_key: :uid
 
     after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
-    after_save_commit :sync_user_info_later, if: -> { saved_change_to_access_token? && (name.blank? && avatar_url.blank?) }
+    after_save_commit :sync_user_info_later, if: -> { saved_change_to_access_token? && (attributes['name'].blank? && avatar_url.blank?) }
   end
 
   def name
