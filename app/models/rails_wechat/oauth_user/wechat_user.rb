@@ -56,7 +56,7 @@ module RailsWechat::OauthUser::WechatUser
     params = {
       appid: app_id,
       grant_type: 'refresh_token',
-      refresh_token: user_refresh_token
+      refresh_token: refresh_token
     }
 
     response = HTTPX.get 'https://api.weixin.qq.com/sns/oauth2/refresh_token', params: params
