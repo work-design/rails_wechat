@@ -50,6 +50,7 @@ module RailsWechat::OauthUser::WechatUser
     self.name = res['nickname']
     self.avatar_url = res['headimgurl']
     self.save
+    res
   end
 
   def refresh_access_token
@@ -64,6 +65,7 @@ module RailsWechat::OauthUser::WechatUser
     self.assign_attributes res.slice('access_token', 'refresh_token')
     self.expires_at = Time.current + res['expires_in'].to_i
     self.save
+    res
   end
 
   def assign_user_info(raw_info)
