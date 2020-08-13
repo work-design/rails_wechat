@@ -24,10 +24,17 @@ module RailsWechat::WechatNotice
   end
 
   def data
-    wechat_template.data_mappings.transform_values do |value|
-      value[:value] = notification.notifiable_detail[value[:value]]
-      value
+    r = {}
+    wechat_template.data_mappings.each do |key, value|
+      if key == 'first' && value[:value].blank?
+        r.merge! first: { value: notification.title }
+      else
+        r.merge! key => {
+          value: notification.notifiable_detail[value[:value]]
+        }
+      end
     end
+    r
   end
 
   def do_send_later
@@ -38,7 +45,7 @@ module RailsWechat::WechatNotice
     r = do_send
     if r['errcode'] == 0
       self.update msg_id: r['msgid']
-      wechat_subscribed.update sending_at: Time.now if wechat_subscribed
+      wechat_subscribed.update sending_at: Time.current if wechat_subscribed
     else
       r
     end
