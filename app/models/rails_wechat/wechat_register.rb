@@ -39,10 +39,6 @@ module RailsWechat::WechatRegister
     acts_as_notify :code, only: [:id_name, :mobile], methods: [:hello_code, :keyword1_code, :remark_code]
   end
 
-  def hello
-    '您好，这是您注册公众号绑定管理员的二维码'
-  end
-
   def time
     Time.current.to_s
   end
