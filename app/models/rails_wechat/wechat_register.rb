@@ -37,6 +37,7 @@ module RailsWechat::WechatRegister
 
     acts_as_notify only: [:id_name], methods: [:time, :bind_url, :hello, :remark]
     acts_as_notify :code, only: [:id_name, :mobile], methods: [:hello_code, :keyword1_code, :remark_code]
+    acts_as_notify :auth, only: [:id_name], methods: [:auth_keyword2, :state_i18n, :auth_remark]
   end
 
   def time
@@ -113,6 +114,16 @@ module RailsWechat::WechatRegister
       code: 'code',
       title: '手机验证码已下发，该验证码用于注册微信公众号',
       link: url_helpers.code_my_wechat_register_url(id, subdomain: organ_app&.subdomain),
+      organ_id: organ_id
+    )
+  end
+
+  def notify_auth
+    to_notification(
+      receiver: user,
+      code: 'auth',
+      title: '授权服务',
+      link: WechatPlatform.first.click_auth_url,
       organ_id: organ_id
     )
   end
