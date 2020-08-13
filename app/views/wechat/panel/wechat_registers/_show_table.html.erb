@@ -24,5 +24,9 @@
       <td class="has-text-right"><%= WechatRegister.human_attribute_name(:id_number) %></td>
       <td><%= @wechat_register.id_number %></td>
     </tr>
+    <tr>
+      <td class="has-text-right"><%= WechatRegister.human_attribute_name(:qrcode) %></td>
+      <td><%= image_tag @wechat_register.qrcode if @wechat_register.qrcode.attached? %></td>
+    </tr>
   </tbody>
 </table>
