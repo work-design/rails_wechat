@@ -22,6 +22,12 @@
         <% end %>
       </span>
     </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label"><%= WechatRegister.human_attribute_name(:qrcode) %></label>
+      <div class="weui-form-preview__value">
+        <%= image_tag wechat_register.qrcode if wechat_register.qrcode.attached? %>
+      </div>
+    </div>
   </div>
   <div class="weui-form-preview__ft">
     <%= link_to edit_my_wechat_register_path(wechat_register), aria: { label: t('.edit') }, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
