@@ -96,7 +96,7 @@ module RailsWechat::WechatRegister
     return unless promoter
     to_notification(
       receiver: promoter.user,
-      title: '二维码已更新，请邀请对方绑定',
+      title: '管理员绑定二维码已生成，请邀请对方绑定',
       link: bind_url,
       organ_id: promoter.organ_id
     )
@@ -105,7 +105,7 @@ module RailsWechat::WechatRegister
   def notify_owner
     to_notification(
       receiver: user,
-      title: '二维码已更新，请点击',
+      title: '您好，这是您注册公众号绑定管理员的二维码',
       link: bind_url,
       organ_id: organ_id
     )
