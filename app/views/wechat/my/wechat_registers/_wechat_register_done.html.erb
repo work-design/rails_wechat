@@ -1,0 +1,29 @@
+<div class="weui-form-preview">
+  <div class="weui-form-preview__hd">
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label"><%= wechat_register.id_name %></label>
+    </div>
+  </div>
+  <div class="weui-form-preview__bd">
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label"><%= WechatRegister.human_attribute_name(:qrcode) %></label>
+      <div class="weui-form-preview__value">
+        <%= image_tag wechat_register.qrcode if wechat_register.qrcode.attached? %>
+      </div>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label"><%= WechatRegister.human_attribute_name(:appid) %></label>
+      <span class="weui-form-preview__value"><%= wechat_register.appid %></span>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label"><%= WechatRegister.human_attribute_name(:email) %></label>
+      <span class="weui-form-preview__value"><%= wechat_register.email %></span>
+    </div>
+  </div>
+  <div class="weui-form-preview__ft">
+    <%= link_to my_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
+      <i class="fas fa-user-secret"></i>
+      <span>加密发送密码到微信</span>
+    <% end %>
+  </div>
+</div>

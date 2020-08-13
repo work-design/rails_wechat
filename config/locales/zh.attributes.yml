@@ -26,6 +26,7 @@ zh:
         bind_qrcode: 绑定二维码
         qrcode: 关注二维码
         state: 状态
+        email: 登陆邮箱
       wechat_request:
         wechat_user_id: 微信用户
         body: 内容
