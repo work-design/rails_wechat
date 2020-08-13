@@ -68,13 +68,23 @@ module RailsWechat::OauthUser::WechatUser
     res
   end
 
-  def assign_user_info(raw_info)
+  def assign_info(oauth_params)
+    info_params = oauth_params.fetch('info', {})
+    self.name = info_params['nickname']
+    self.avatar_url = info_params['headimgurl']
+
+    raw_info = oauth_params.dig('extra', 'raw_info') || {}
     self.unionid = raw_info['unionid']
     self.app_id ||= raw_info['app_id']
     if self.unionid && self.same_oauth_user
       self.user_id ||= same_oauth_user.user_id
       self.account_id ||= same_oauth_user.account_id
     end
+
+    credential_params = oauth_params.fetch('credentials', {})
+    self.access_token = credential_params['token']
+    self.refresh_token = credential_params['refresh_token']
+    self.expires_at = Time.current + credential_params['expires_in'].to_i
   end
 
 end
