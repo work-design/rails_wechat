@@ -77,6 +77,7 @@ module RailsWechat::WechatResponse
     self.qrcode_ticket = r['ticket']
     self.qrcode_url = r['url']
     self.save
+    r
   end
 
   def refresh
