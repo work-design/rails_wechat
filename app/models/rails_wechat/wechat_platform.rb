@@ -74,7 +74,9 @@ module RailsWechat::WechatPlatform
     refresh_pre_auth_code unless pre_auth_code_valid?
     url = URI('https://mp.weixin.qq.com/safe/bindcomponent')
     url.query = {
+      action: 'bindcomponent',
       auth_type: 1,
+      no_scan: 1,
       component_appid: appid,
       pre_auth_code: pre_auth_code,
       redirect_uri: url_helpers.callback_wechat_platform_url(self)
