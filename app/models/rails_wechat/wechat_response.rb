@@ -55,6 +55,7 @@ module RailsWechat::WechatResponse
   end
 
   def persist_to_file
+    return unless self.qrcode_url
     file = QrcodeHelper.code_file self.qrcode_url
     self.qrcode_file.attach io: file, filename: self.qrcode_url
   end
