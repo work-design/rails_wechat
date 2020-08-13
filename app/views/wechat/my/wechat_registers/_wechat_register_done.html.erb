@@ -24,6 +24,6 @@
     <%= link_to my_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
       <i class="fas fa-user-secret"></i>
       <span>加密发送密码到微信</span>
-    <% end %>
+    <% end if false %>
   </div>
 </div>
