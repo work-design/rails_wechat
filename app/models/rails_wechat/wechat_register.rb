@@ -13,7 +13,6 @@ module RailsWechat::WechatRegister
     attribute :mobile, :string
     attribute :mobile_code, :string
 
-    belongs_to :user
     belongs_to :organ, optional: true
     belongs_to :member, foreign_key: :mobile, primary_key: :identity, optional: true
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true

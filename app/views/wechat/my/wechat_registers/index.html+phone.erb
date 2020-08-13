@@ -14,15 +14,6 @@
     </div>
     <% end %>
     <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label"><%= WechatRegister.human_attribute_name(:mobile_code) %></label>
-      <span class="weui-form-preview__value">
-        <%= wechat_register.mobile_code %>
-        <%= link_to code_my_wechat_register_path(wechat_register), aria: { label: t('.edit') } do %>
-          <i class="fas fa-pencil-alt"></i>
-        <% end %>
-      </span>
-    </div>
-    <div class="weui-form-preview__item">
       <label class="weui-form-preview__label"><%= WechatRegister.human_attribute_name(:qrcode) %></label>
       <div class="weui-form-preview__value">
         <%= image_tag wechat_register.qrcode if wechat_register.qrcode.attached? %>
@@ -36,6 +27,9 @@
     <%= link_to my_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
       <i class="fas fa-trash-alt"></i>
     <% end %>
+    <%= link_to code_my_wechat_register_path(wechat_register), aria: { label: t('.edit') }, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
+      <i class="fas fa-mobile-alt"></i>
+    <% end unless wechat_register.mobile_code %>
   </div>
 </div>
 <% end %>
