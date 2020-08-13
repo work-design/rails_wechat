@@ -5,7 +5,7 @@ module RailsWechat::TemplateConfig::TemplatePublic
 
   def data_hash
     r = {}
-    template_key_words.where.not(mapping: [nil, '']).each do |i|
+    template_key_words.each do |i|
       r.merge! i.name => { value: i.mapping, color: i.color }
     end
 
