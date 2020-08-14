@@ -32,9 +32,9 @@
     <tr>
       <td><%= wechat_agency.appid %></td>
       <td>
-        <p><%= wechat_agency.access_token %></p>
+        <pre><%= wechat_agency.access_token %></pre>
         <p><time><%= wechat_agency.access_token_expires_at.to_s(:rfc822) %></time></p>
-        <p><%= wechat_agency.refresh_token %></p>
+        <pre><%= wechat_agency.refresh_token %></pre>
       </td>
       <td><%= simple_format wechat_agency.func_infos %></td>
       <td>
