@@ -73,8 +73,16 @@ module RailsWechat::WechatReceived
     wechat_user.save
   end
 
+  def compute_type
+    if msg_type == 'event'
+      EVENT[message_hash['Event']]
+    else
+      MSG_TYPE[msg_type]
+    end
+  end
+
   def parse_content
-    wechat_request || build_wechat_request
+    wechat_request || build_wechat_request(type: compute_type)
     wechat_request.appid = appid
     wechat_request.open_id = open_id
     wechat_request.msg_type = msg_type
@@ -82,16 +90,18 @@ module RailsWechat::WechatReceived
 
     case msg_type
     when 'text'
-      wechat_request.type = MSG_TYPE[msg_type]
       wechat_request.body = message_hash['Content']
     when 'event'
-      wechat_request.type = EVENT[message_hash['Event']]
       wechat_request.event = message_hash['Event']
       wechat_request.body = message_hash['EventKey']
-    when 'image', 'voice', 'video', 'shortvideo', 'location'
-      wechat_request.type = MSG_TYPE[msg_type]
-      wechat_request.event = message_hash['Event']
-      wechat_request.body = message_hash['EventKey']
+    when 'image'
+      wechat_request.body = message_hash['PicUrl']
+    when 'voice'
+      wechat_request.body = message_hash['Recognition'] || message_hash['MediaId']
+    when 'video', 'shortvideo'
+      wechat_request.body = message_hash['MediaId']
+    when 'location'
+      wechat_request.body = "#{message_hash['Location_X']}:#{message_hash['Location_Y']}"
     else
       warn "Don't know how to parse message as #{message_hash['MsgType']}", uplevel: 1
     end
@@ -104,7 +114,6 @@ module RailsWechat::WechatReceived
   end
 
   def reply
-    reload
     wechat_request.reply
     wechat_request.save
     wechat_request
