@@ -80,7 +80,8 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
       :name,
       :value,
       :mp_appid,
-      :mp_pagepath
+      :mp_pagepath,
+      :position
     )
   end
 
