@@ -17,7 +17,17 @@ module RailsWechat::AppSync
   end
 
   def sync_from_menu
-
+    r = api.menu
+    present_menus = r.dig('menu', 'button')
+    present_menus.each do |present_menu|
+      if present_menu['sub_button'].present?
+        parent = self.wechat_menus.build(type: 'ParentMenu', name: present_menu['name'])
+        present_menu['sub_button'].each do |sub|
+          parent.children.build(name: sub['name'], menu_type: sub['type'], value: sub['url'] || sub['key'])
+        end
+        parent.save
+      end
+    end
   end
 
 end
