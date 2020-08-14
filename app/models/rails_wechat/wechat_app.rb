@@ -24,18 +24,10 @@ module RailsWechat::WechatApp
     attribute :user_name, :string
 
     belongs_to :organ, optional: true
-    has_many :wechat_menus, dependent: :destroy
-    has_many :wechat_responses, foreign_key: :appid, primary_key: :appid, dependent: :destroy
-    has_many :wechat_replies, foreign_key: :appid, primary_key: :appid, dependent: :destroy
-    has_many :wechat_requests, foreign_key: :appid, primary_key: :appid, dependent: :nullify
     has_many :wechat_tags, dependent: :delete_all
     has_many :wechat_templates, dependent: :destroy
-
     has_many :post_syncs, as: :synced, dependent: :delete_all
     has_many :posts, through: :post_syncs
-
-    has_many :wechat_users, foreign_key: :app_id, primary_key: :appid
-    has_many :wechat_receiveds, foreign_key: :appid, primary_key: :appid
 
     scope :valid, -> { where(enabled: true) }
 
@@ -77,11 +69,6 @@ module RailsWechat::WechatApp
     else
       self.wechat_menus.where(parent_id: nil).as_json
     end
-  end
-
-  def access_token_valid?
-    return false unless access_token_expires_at.acts_like?(:time)
-    access_token_expires_at > Time.current
   end
 
   def jsapi_ticket_valid?

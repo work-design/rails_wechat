@@ -24,8 +24,6 @@ module RailsWechat::WechatAgency
 
     belongs_to :wechat_platform
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
-    has_many :wechat_receiveds, foreign_key: :appid, primary_key: :appid
-    has_many :wechat_services, foreign_key: :appid, primary_key: :appid
 
     after_create_commit :store_info_later
     before_save :init_wechat_app, if: -> { appid_changed? && appid }
@@ -39,11 +37,6 @@ module RailsWechat::WechatAgency
   def init_wechat_app
     wechat_app || build_wechat_app
     wechat_app.save
-  end
-
-  def access_token_valid?
-    return false unless access_token_expires_at.acts_like?(:time)
-    access_token_expires_at > Time.current
   end
 
   def refresh_access_token

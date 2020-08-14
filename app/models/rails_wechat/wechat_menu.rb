@@ -12,7 +12,7 @@ module RailsWechat::WechatMenu
     attribute :pagepath, :string
     attribute :position, :integer
 
-    belongs_to :wechat_app, optional: true
+    belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
     belongs_to :parent, class_name: self.name, optional: true
   end
 
