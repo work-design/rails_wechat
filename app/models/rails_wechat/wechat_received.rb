@@ -102,7 +102,7 @@ module RailsWechat::WechatReceived
       wechat_request.body = message_hash['MediaId']
     when 'location'
       wechat_request.body = "#{message_hash['Location_X']}:#{message_hash['Location_Y']}"
-    when 'lik'
+    when 'link'
       wechat_request.body = message_hash['Url']
     else
       warn "Don't know how to parse message as #{message_hash['MsgType']}", uplevel: 1
