@@ -1,3 +1,5 @@
 <%= form_with model: @wechat_menu, scope: :wechat_menu, url: admin_wechat_menu_path(@wechat_menu) do |f| %>
+  <%= render 'shared/error_messages', target: @wechat_menu %>
+  <%= f.hidden_field :appid %>
   <%= render partial: 'form', locals: { f: f } %>
 <% end %>
