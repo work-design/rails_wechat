@@ -1,1 +1,1 @@
-document.getElementById('modal').innerHTML = '<%= j(render 'new_parent') %>'
+document.getElementById('modal').innerHTML = '<%= j(render partial: 'modal_form', locals: { action: 'new_parent' }) %>'

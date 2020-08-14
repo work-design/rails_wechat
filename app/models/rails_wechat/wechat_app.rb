@@ -60,7 +60,7 @@ module RailsWechat::WechatApp
     else
       limit = 3
     end
-    WechatMenu.where(parent_id: nil, wechat_app_id: nil).limit(limit).as_json
+    WechatMenu.where(parent_id: nil, appid: nil).limit(limit).as_json
   end
 
   def within_menus

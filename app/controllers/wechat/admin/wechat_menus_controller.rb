@@ -5,21 +5,25 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
 
   def default
     q_params = {}
-
-    @wechat_menus = WechatMenu.where(appid: nil).order(parent_id: :desc, id: :asc).page(params[:page])
+    @wechat_menus = WechatMenu.where(appid: nil).order(parent_id: :desc, position: :asc).page(params[:page])
 
     render 'index'
   end
 
   def index
     q_params = {}
-    q_params.merge! appid: [@wechat_app.appid, nil].uniq
+    q_params.merge! appid: [params[:appid], nil].uniq
 
-    @wechat_menus = WechatMenu.where(q_params).order(parent_id: :desc, id: :asc).page(params[:page])
+    @wechat_menus = WechatMenu.where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
   end
 
   def new
-    @wechat_menu = WechatMenu.new(wechat_app_id: params[:wechat_app_id], type: 'ViewMenu')
+    @wechat_menu = WechatMenu.new(appid: params[:appid], type: 'ViewMenu')
+    @parents = WechatMenu.where(type: 'ParentMenu', parent_id: nil, appid: params[:appid])
+  end
+
+  def new_parent
+    @wechat_menu = WechatMenu.new(appid: params[:appid])
   end
 
   def create
@@ -39,6 +43,7 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
   end
 
   def edit
+    @parents = WechatMenu.where(type: 'ParentMenu', parent_id: nil, appid: @wechat_menu.appid)
   end
 
   def edit_parent
@@ -58,7 +63,7 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
 
   private
   def set_wechat_app
-    @wechat_app = WechatApp.default_where(default_params).find_by id: params[:wechat_app_id]
+    @wechat_app = WechatApp.default_where(default_params).find_by appid: params[:appid]
   end
 
   def set_wechat_menu
@@ -68,8 +73,6 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
   def prepare_form
     @types = WechatMenu.options_i18n(:type)
     @types.reject! { |_, v| v == :ParentMenu }
-
-    @parents = WechatMenu.where(type: 'ParentMenu', parent_id: nil, wechat_app_id: params[:wechat_app_id])
   end
 
   def wechat_menu_params
