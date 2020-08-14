@@ -23,7 +23,7 @@ module RailsWechat::AppSync
       if present_menu['sub_button'].present?
         parent = self.wechat_menus.build(type: 'ParentMenu', name: present_menu['name'])
         present_menu['sub_button'].each do |sub|
-          parent.children.build(name: sub['name'], menu_type: sub['type'], value: sub['url'] || sub['key'])
+          parent.children.build(appid: appid, name: sub['name'], menu_type: sub['type'], value: sub['url'] || sub['key'])
         end
         parent.save
       end
