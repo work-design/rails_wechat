@@ -8,7 +8,7 @@ module RailsWechat::WechatMenu::ParentMenu
   def as_json
     {
       name: name,
-      sub_button: children.order(position: :asc).as_json
+      sub_button: children.order(position: :desc).as_json
     }
   end
 
