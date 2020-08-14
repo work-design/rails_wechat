@@ -50,8 +50,8 @@ zh:
         parent_id: 一级目录
         menu_type: 菜单类型
         value: 值
-        appid: 小程序APPID
-        pagepath: 小程序路径
+        mp_appid: 小程序APPID
+        mp_pagepath: 小程序路径
       wechat_tag:
         tag_id: 标签ID
         count: 微信用户数

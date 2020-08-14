@@ -1,10 +1,10 @@
 <table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
-      <th class="six wide">
+      <th>
         <%= link_to t('.edit'), edit_admin_wechat_menu_path(@wechat_menu), class: 'ui mini blue right floated button', remote: true %>
       </th>
-      <th class="ten wide"></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -21,12 +21,12 @@
       <td><%= @wechat_menu.value %></td>
     </tr>
     <tr>
-      <td class="has-text-right"><%= WechatMenu.human_attribute_name(:appid) %></td>
-      <td><%= @wechat_menu.appid %></td>
+      <td class="has-text-right"><%= WechatMenu.human_attribute_name(:mp_appid) %></td>
+      <td><%= @wechat_menu.mp_appid %></td>
     </tr>
     <tr>
-      <td class="has-text-right"><%= WechatMenu.human_attribute_name(:pagepath) %></td>
-      <td><%= @wechat_menu.pagepath %></td>
+      <td class="has-text-right"><%= WechatMenu.human_attribute_name(:mp_pagepath) %></td>
+      <td><%= @wechat_menu.mp_pagepath %></td>
     </tr>
   </tbody>
 </table>

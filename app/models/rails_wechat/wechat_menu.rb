@@ -9,7 +9,8 @@ module RailsWechat::WechatMenu
     attribute :name, :string
     attribute :value, :string
     attribute :appid, :string
-    attribute :pagepath, :string
+    attribute :mp_appid, :string
+    attribute :mp_pagepath, :string
     attribute :position, :integer
 
     belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true

@@ -5,16 +5,15 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
 
   def default
     q_params = {}
-    q_params.merge! wechat_app_id: nil
 
-    @wechat_menus = WechatMenu.where(q_params).order(parent_id: :desc, id: :asc).page(params[:page])
+    @wechat_menus = WechatMenu.where(appid: nil).order(parent_id: :desc, id: :asc).page(params[:page])
 
     render 'index'
   end
 
   def index
     q_params = {}
-    q_params.merge! wechat_app_id: [params[:wechat_app_id], nil].uniq
+    q_params.merge! appid: [@wechat_app.appid, nil].uniq
 
     @wechat_menus = WechatMenu.where(q_params).order(parent_id: :desc, id: :asc).page(params[:page])
   end
@@ -75,13 +74,13 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
 
   def wechat_menu_params
     params.fetch(:wechat_menu, {}).permit(
-      :wechat_app_id,
+      :appid,
       :parent_id,
       :type,
       :name,
       :value,
-      :appid,
-      :pagepath
+      :mp_appid,
+      :mp_pagepath
     )
   end
 

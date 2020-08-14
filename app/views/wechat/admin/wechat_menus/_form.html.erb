@@ -1,11 +1,11 @@
 <%= render 'shared/error_messages', target: @wechat_menu %>
-<%= f.hidden_field :wechat_app_id %>
+<%= f.hidden_field :appid, value: @wechat_app.appid %>
 <% if @parents.present? %>
   <%= f.collection_select :parent_id, @parents, :id, :name, include_blank: true %>
 <% end %>
 <%= f.select :type, options_for_select(@types, @wechat_menu.type) %>
 <%= f.text_field :name, required: true %>
 <%= f.text_field :value, required: true %>
-<%= f.text_field :appid %>
-<%= f.text_field :pagepath %>
+<%= f.text_field :mp_appid %>
+<%= f.text_field :mp_pagepath %>
 <%= f.submit %>

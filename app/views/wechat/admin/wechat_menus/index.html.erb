@@ -8,7 +8,7 @@
   </ul>
 <% end %>
 
-<%= render 'filter' %>
+<%= render 'filter_form' %>
 
 <table class="table is-hoverable is-fullwidth">
   <thead>
@@ -16,7 +16,7 @@
       <th><%= WechatMenu.human_attribute_name(:menu_type) %></th>
       <th><%= WechatMenu.human_attribute_name(:name) %></th>
       <th><%= WechatMenu.human_attribute_name(:value) %></th>
-      <th><%= WechatMenu.human_attribute_name(:appid) %></th>
+      <th><%= WechatMenu.human_attribute_name(:mp_appid) %></th>
       <th><%= WechatMenu.human_attribute_name(:pagepath) %></th>
       <th>
         <%= link_to sync_admin_wechat_menus_path(wechat_app_id: params[:wechat_app_id]), method: :post, class: 'button is-link is-small' do %>
@@ -37,10 +37,10 @@
       <td><%= wechat_menu.type_i18n %></td>
       <td><%= wechat_menu.name %></td>
       <td><%= wechat_menu.value %></td>
-      <td><%= wechat_menu.appid %></td>
-      <td><%= wechat_menu.pagepath %></td>
+      <td><%= wechat_menu.mp_appid %></td>
+      <td><%= wechat_menu.mp_pagepath %></td>
       <td>
-        <% if wechat_menu.wechat_app_id.to_s == params[:wechat_app_id].to_s %>
+        <% if wechat_menu.appid.to_s == @wechat_app.appid.to_s %>
           <% if wechat_menu.type == 'ParentMenu' %>
             <%= link_to edit_parent_admin_wechat_menu_path(wechat_menu), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
               <i class="fas fa-pencil-alt"></i>
