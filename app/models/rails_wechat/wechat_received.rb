@@ -97,7 +97,7 @@ module RailsWechat::WechatReceived
     when 'image'
       wechat_request.body = message_hash['PicUrl']
     when 'voice'
-      wechat_request.body = message_hash['Recognition'] || message_hash['MediaId']
+      wechat_request.body = message_hash['Recognition'].presence || message_hash['MediaId']
     when 'video', 'shortvideo'
       wechat_request.body = message_hash['MediaId']
     when 'location'
