@@ -30,7 +30,7 @@ module RailsWechat::WechatRequest
   end
 
   def reply
-    reply_from_rule
+    self.wechat_reply = reply_from_rule
   end
 
   def rule_tag
