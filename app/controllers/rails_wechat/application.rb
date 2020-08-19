@@ -2,6 +2,10 @@
 module RailsWechat::Application
   extend ActiveSupport::Concern
 
+  included do
+    helper_method :current_wechat_app
+  end
+
   def require_login(return_to: nil)
     return if current_user
     return super unless request.variant.any?(:wechat)

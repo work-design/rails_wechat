@@ -1,11 +1,7 @@
 module Wechat::Helpers
 
-  def wechat_raw_config_js(wechat_app_id: nil, debug: false, apis: [])
-    if wechat_app_id
-      app = WechatApp.valid.find(wechat_app_id)
-    else
-      app = WechatApp.default(controller.default_params)
-    end
+  def wechat_raw_config_js(debug: false, apis: [])
+    app = current_wechat_app
     page_url = controller.request.original_url
     page_url.delete_suffix!('#')
     js_hash = Wechat::Signature.signature(app.jsapi_ticket, page_url)
@@ -26,8 +22,8 @@ WECHAT_CONFIG_JS
     logger.debug e.message
   end
 
-  def wechat_config_js(wechat_app_id: nil, debug: false, apis: [])
-    config_js = wechat_raw_config_js(wechat_app_id: wechat_app_id, debug: debug, apis: apis)
+  def wechat_config_js(debug: false, apis: [])
+    config_js = wechat_raw_config_js(debug: debug, apis: apis)
     javascript_tag config_js, type: 'application/javascript', nonce: true
   end
 
