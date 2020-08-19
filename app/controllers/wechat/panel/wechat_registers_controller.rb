@@ -88,6 +88,7 @@ class Wechat::Panel::WechatRegistersController < Wechat::Panel::BaseController
     params.fetch(:wechat_register, {}).permit(
       :id_name,
       :id_number,
+      :mobile,
       :bind_qrcode,
       :appid,
       :password,
