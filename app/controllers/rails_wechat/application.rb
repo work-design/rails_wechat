@@ -36,6 +36,8 @@ module RailsWechat::Application
         id = nil
       end
       @current_wechat_app = WechatApp.find_by(id: id)
+    else
+      WechatApp.default_where(default_params).default
     end
   end
 
