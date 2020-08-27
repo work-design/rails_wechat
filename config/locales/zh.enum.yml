@@ -7,6 +7,8 @@ zh:
           ClickMenu: 点击事件
           ViewMenu: 链接
           MiniProgramMenu: 小程序
+          ScanPushMenu: 扫码推事件
+          ScanWaitMenu: 扫码带提示
       wechat_register:
         state:
           init: 处理中
