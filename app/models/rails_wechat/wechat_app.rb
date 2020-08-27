@@ -169,7 +169,7 @@ module RailsWechat::WechatApp
   end
 
   def subdomain
-    [['app', organ_id, id].join('-'), RailsCom.config.subdomain].join('.')
+    [['app', organ_id, id].join('-'), RailsCom.config.subdomain].compact.join('.')
   end
 
   class_methods do
