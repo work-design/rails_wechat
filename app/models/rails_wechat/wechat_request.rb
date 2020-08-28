@@ -36,7 +36,8 @@ module RailsWechat::WechatRequest
   def rule_tag
     {
       msg_type: msg_type,
-      event: event&.downcase
+      event: event&.downcase,
+      event_key: event_key
     }.compact
   end
 
