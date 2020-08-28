@@ -93,7 +93,8 @@ module RailsWechat::WechatReceived
       wechat_request.body = message_hash['Content']
     when 'event'
       wechat_request.event = message_hash['Event']
-      wechat_request.body = message_hash['EventKey']
+      wechat_request.event_key = message_hash['EventKey']
+      wechat_request.body = message_hash.dig('ScanCodeInfo', 'ScanResult')
     when 'image'
       wechat_request.body = message_hash['PicUrl']
     when 'voice'
