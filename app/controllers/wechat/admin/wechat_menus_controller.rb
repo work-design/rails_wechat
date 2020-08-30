@@ -5,7 +5,8 @@ class Wechat::Admin::WechatMenusController < Wechat::Admin::BaseController
 
   def default
     q_params = {}
-    @wechat_menus = WechatMenu.where(appid: nil).order(parent_id: :desc, position: :asc).page(params[:page])
+    q_params.merge! params.permit(:name)
+    @wechat_menus = WechatMenu.where(appid: nil).default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
 
     render 'index'
   end
