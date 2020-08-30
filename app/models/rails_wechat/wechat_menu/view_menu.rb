@@ -12,7 +12,7 @@ module RailsWechat::WechatMenu::ViewMenu
     {
       type: menu_type,
       name: name,
-      url: ERB::Util.url_encode(value)
+      url: value
     }
   end
 
