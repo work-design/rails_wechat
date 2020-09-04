@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 988e004c02c0e9017d723d96e1704ef8cc2be08c
+  revision: 5b551e806d54026a0451215d3ccadfed709b20a1
   specs:
     rails_com (1.2.9)
       acme-client
@@ -32,6 +32,7 @@ PATH
     rails_wechat (0.1.0)
       rails_auth
       rails_com (~> 1.2)
+      rqrcode
 
 GEM
   remote: https://rubygems.org/
@@ -100,6 +101,7 @@ GEM
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     builder (3.2.4)
+    chunky_png (1.3.12)
     coderay (1.1.3)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
@@ -195,6 +197,10 @@ GEM
       thor (>= 0.20.3, < 2.0)
     rake (13.0.1)
     rdoc (6.2.1)
+    rqrcode (1.1.2)
+      chunky_png (~> 1.0)
+      rqrcode_core (~> 0.1)
+    rqrcode_core (0.1.2)
     sdoc (1.1.0)
       rdoc (>= 5.0)
     semantic_range (2.3.0)
@@ -208,7 +214,7 @@ GEM
     sqlite3 (1.4.2)
     thor (1.0.1)
     thread_safe (0.3.6)
-    timers (4.3.0)
+    timers (4.3.2)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     webpacker (5.1.1)
