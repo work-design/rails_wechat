@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 1eb16898f3d1442632595f83f91314fc98775783
+  revision: a77f86b6f159cf64225c6221d2408505ffd4249c
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 2977ddb5f1f231c19ef81547c613f83c901fc05d
+  revision: 6cc1906a3288dee24670aa84db82f37bfc34ed7f
   specs:
     rails_com (1.2.9)
       acme-client
@@ -25,6 +25,7 @@ GIT
       httpx (~> 0.8)
       kaminari
       rails (~> 6.0)
+      rqrcode
 
 PATH
   remote: .
@@ -97,7 +98,7 @@ GEM
     acts_as_list (1.0.1)
       activerecord (>= 4.2)
     awesome_print (1.8.0)
-    bcrypt (3.1.15)
+    bcrypt (3.1.16)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     builder (3.2.4)

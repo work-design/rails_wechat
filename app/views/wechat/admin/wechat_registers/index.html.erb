@@ -26,7 +26,7 @@
       </th>
       <th><%= WechatRegister.human_attribute_name(:created_at) %></th>
       <th>
-        <%= link_to new_panel_wechat_register_path, remote: true, class: 'button is-link is-small' do %>
+        <%= link_to new_admin_wechat_register_path, remote: true, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
         <%= link_to admin_task_templates_path(tasking_type: 'WechatRegister'), target: '_blank', class: 'button is-link is-small' do %>
@@ -39,7 +39,7 @@
   <% @wechat_registers.each do |wechat_register| %>
     <tr>
       <td>
-        <p><%= link_to wechat_register.id_name, panel_wechat_register_path(wechat_register) %></p>
+        <p><%= link_to wechat_register.id_name, admin_wechat_register_path(wechat_register) %></p>
         <p><%= wechat_register.id_number %></p>
       </td>
       <td>
@@ -50,7 +50,7 @@
       <td>
         <p>
           <%= wechat_register.mobile %>
-          <%= link_to code_panel_wechat_register_path(wechat_register), method: :put, aria: { label: '验证码' }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+          <%= link_to code_admin_wechat_register_path(wechat_register), method: :put, aria: { label: '验证码' }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
             <i class="fas fa-paper-plane"></i>
           <% end %>
         </p>
@@ -59,13 +59,13 @@
       <td>
         <p>
           <%= image_tag wechat_register.bind_qrcode, class: 'image is-24x24' if wechat_register.bind_qrcode.attached? %>
-          <%= link_to bind_panel_wechat_register_path(wechat_register), aria: { label: t('.bind') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+          <%= link_to bind_admin_wechat_register_path(wechat_register), aria: { label: t('.bind') }, remote: true, class: 'button is-small is-rounded is-light' do %>
             <i class="fas fa-qrcode"></i>
           <% end %>
         </p>
         <p>
           <%= image_tag wechat_register.qrcode, class: 'image is-24x24' if wechat_register.qrcode.attached? %>
-          <%= link_to qrcode_panel_wechat_register_path(wechat_register), aria: { label: t('.qrcode') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+          <%= link_to qrcode_admin_wechat_register_path(wechat_register), aria: { label: t('.qrcode') }, remote: true, class: 'button is-small is-rounded is-light' do %>
             <i class="fas fa-qrcode"></i>
           <% end %>
         </p>
@@ -76,22 +76,22 @@
       </td>
       <td><time><%= wechat_register.created_at.to_s(:rfc822) %></time></td>
       <td>
-        <%= link_to panel_wechat_register_path(wechat_register), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to admin_wechat_register_path(wechat_register), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-eye"></i>
         <% end %>
-        <%= link_to assign_panel_wechat_register_path(wechat_register), aria: { label: '分配' }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to assign_admin_wechat_register_path(wechat_register), aria: { label: '分配' }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-hand-point-right"></i>
         <% end %>
-        <%= link_to edit_panel_wechat_register_path(wechat_register), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to edit_admin_wechat_register_path(wechat_register), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to app_panel_wechat_register_path(wechat_register), aria: { label: t('.app') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to app_admin_wechat_register_path(wechat_register), aria: { label: t('.app') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fab fa-weixin"></i>
         <% end %>
         <%= link_to my_tasks_path(tasking_type: 'WechatRegister', tasking_id: wechat_register.id), aria: { label: t('.tasks') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-tasks"></i>
         <% end %>
-        <%= link_to panel_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to admin_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>

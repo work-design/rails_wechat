@@ -2,11 +2,7 @@ class Wechat::My::WechatRegistersController < Wechat::My::BaseController
   before_action :set_wechat_register, only: [:show, :edit, :edit_code, :update, :destroy]
 
   def index
-    if current_member
-      @wechat_registers = current_member.wechat_registers
-    else
-      @wechat_registers = current_user.wechat_registers
-    end
+    @wechat_registers = current_user.wechat_registers
     if @wechat_registers.blank?
       new_wechat_register
       render :new
@@ -54,12 +50,8 @@ class Wechat::My::WechatRegistersController < Wechat::My::BaseController
 
   private
   def new_wechat_register
-    if current_member
-      @wechat_register = current_member.wechat_registers.build(wechat_register_params)
-    else
-      @wechat_register = current_user.wechat_registers.build(wechat_register_params)
-      @wechat_register.mobile ||= current_account.identity if current_account.is_a?(MobileAccount)
-    end
+    @wechat_register = current_user.wechat_registers.build(wechat_register_params)
+    @wechat_register.mobile ||= current_account.identity if current_account.is_a?(MobileAccount)
   end
 
   def set_wechat_register

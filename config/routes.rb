@@ -45,6 +45,12 @@ Rails.application.routes.draw do
 
   scope :panel, module: 'wechat/panel', as: :panel do
     resources :template_configs
+    resources :wechat_platforms do
+      resources :wechat_agencies, shallow: true, as: :agencies
+    end
+  end
+
+  scope :admin, module: 'wechat/admin', as: :admin do
     resources :wechat_registers do
       member do
         get 'app' => :edit_app
@@ -57,12 +63,6 @@ Rails.application.routes.draw do
         put :code
       end
     end
-    resources :wechat_platforms do
-      resources :wechat_agencies, shallow: true, as: :agencies
-    end
-  end
-
-  scope :admin, module: 'wechat/admin', as: :admin do
     resources :wechat_apps do
       collection do
         get :own
