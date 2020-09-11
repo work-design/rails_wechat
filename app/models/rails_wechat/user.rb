@@ -8,9 +8,9 @@ module RailsWechat::User
     has_many :wechat_registers, dependent: :destroy
   end
 
-  def invite_qrcode(appid)
+  def invite_qrcode(wechat_app)
     p = {
-      appid: appid,
+      appid: wechat_app.appid,
       match_value: "invite_by_#{id}"
     }
     res = WechatResponse.find_or_initialize_by(p)
