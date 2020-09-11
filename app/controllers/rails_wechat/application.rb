@@ -21,7 +21,7 @@ module RailsWechat::Application
       end
     end
 
-    logger.debug "---------> #{redirect_url}"
+    logger.debug "  ---------> #{redirect_url}"
     redirect_to redirect_url
     #render 'wechat_require_login', locals: { redirect_url: redirect_url, message: '请登录后操作' }, status: 401
   end
@@ -39,7 +39,7 @@ module RailsWechat::Application
     else
       @current_wechat_app = WechatApp.default_where(default_params).default
     end
-    logger.debug "---------> Current Wechat App is #{@current_wechat_app.id}"
+    logger.debug "  ---------> Current Wechat App is #{@current_wechat_app.id}"
     @current_wechat_app
   end
 
