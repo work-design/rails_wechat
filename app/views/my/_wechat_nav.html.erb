@@ -1,5 +1,5 @@
 <span class="menu-label"><%= t('wechat.my.title') %></span>
 <div class="menu-list">
   <%= link_to t('wechat.my.wechat_registers.index.title'), my_wechat_registers_path, class: active_helper(controllers: 'wechat/my/wechat_registers', active: 'is-active') %>
-  <%= link_to '邀请二维码', invite_qrcode_my_user_path,  class: active_helper('wechat/my/users': ['invite_qrcode'], active: 'is-active') %>
+  <%= link_to '邀请二维码', invite_qrcode_my_user_path,  class: active_helper('wechat/my/users': ['invite_qrcode'], active: 'is-active') if current_wechat_app %>
 </div>

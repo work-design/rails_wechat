@@ -39,7 +39,7 @@ module RailsWechat::Application
     else
       @current_wechat_app = WechatApp.default_where(default_params).default
     end
-    logger.debug "  ---------> Current Wechat App is #{@current_wechat_app.id}"
+    logger.debug "  ---------> Current Wechat App is #{@current_wechat_app&.id}"
     @current_wechat_app
   end
 
