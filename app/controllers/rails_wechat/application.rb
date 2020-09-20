@@ -28,13 +28,8 @@ module RailsWechat::Application
 
   def current_wechat_app
     return @current_wechat_app if defined?(@current_wechat_app)
-    sd = request.subdomains
-    if sd.present? && sd[1].presence == RailsCom.config.subdomain.presence
-      if sd[0].start_with?('app-')
-        id = sd[0].split('-')[-1]
-      else
-        id = nil
-      end
+    if request.subdomain.start_with? /app-/
+      id = request.subdomains[0].split('-')[-1]
       @current_wechat_app = WechatApp.find_by(id: id)
     else
       @current_wechat_app = WechatApp.default_where(default_params).default
