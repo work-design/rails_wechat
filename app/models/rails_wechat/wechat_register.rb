@@ -90,7 +90,7 @@ module RailsWechat::WechatRegister
   def notify_promoter
     return unless promoter
     to_notification(
-      receiver: promoter.user,
+      user: promoter.user,
       title: '管理员绑定二维码已生成，请邀请对方绑定',
       link: bind_url,
       organ_id: promoter.organ_id
@@ -99,7 +99,7 @@ module RailsWechat::WechatRegister
 
   def notify_owner
     to_notification(
-      receiver: user,
+      user: user,
       title: '您好，这是您注册公众号绑定管理员的二维码',
       link: bind_url,
       organ_id: organ_id
@@ -108,7 +108,7 @@ module RailsWechat::WechatRegister
 
   def notify_mobile_code
     to_notification(
-      receiver: user,
+      user: user,
       code: 'code',
       title: '手机验证码已下发，该验证码用于注册微信公众号',
       link: url_helpers.code_my_wechat_register_url(id, subdomain: organ_app&.subdomain),
@@ -118,7 +118,7 @@ module RailsWechat::WechatRegister
 
   def notify_auth
     to_notification(
-      receiver: user,
+      user: user,
       code: 'auth',
       title: '授权服务',
       link: WechatPlatform.first.click_auth_url,
