@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/qinmingyuan/default_form.git
-  revision: 56536edc9bbc76fdc435489c451b0e550b6ae230
+  revision: 699c6867b73fa56229cea6f69a431be278bda341
   specs:
     default_form (1.5.1)
       rails_com (~> 1.2)
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: baf6fc9f5f06780c1b08e6dc6cff20c1543de99f
+  revision: 00e9ee4114eab36d71ca2e52db23ae272ef33d7b
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: c69e3f4f6b81e459770a7c51d5b3970eca83e80c
+  revision: d7b8e24dd752c834fcf35fef02718c155b5a5c35
   specs:
     rails_com (1.2.9)
       acme-client
@@ -25,7 +25,6 @@ GIT
       httpx (~> 0.8)
       kaminari
       rails (~> 6.0)
-      rqrcode
 
 PATH
   remote: .
@@ -121,7 +120,7 @@ GEM
       activesupport (>= 4.2.0)
     http-2-next (0.2.6)
     http-form_data (2.3.0)
-    httpx (0.8.2)
+    httpx (0.9.0)
       http-2-next (>= 0.1.2)
       timers
     i18n (1.8.5)
