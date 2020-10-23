@@ -1,84 +1,43 @@
-<% content_for :breadcrumb do %>
-  <ul>
-    <li><%= link_to t('wechat.admin.wechat_apps.index.title'), admin_wechat_apps_path %></li>
-    <li><%= link_to @wechat_app.name, admin_wechat_apps_path(id: @wechat_app.id) %></li>
-    <li class="is-active"><%= t('.title') %></li>
-  </ul>
-<% end %>
-
-<%= render 'filter_form' %>
-<%= render 'filter_table' %>
-
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th><%= WechatResponse.human_attribute_name(:match_value) %></th>
-      <th><%= WechatResponse.human_attribute_name(:contain) %></th>
-      <th>
-        <p><%= WechatResponse.human_attribute_name(:created_at) %></p>
-        <p><%= WechatResponse.human_attribute_name(:expire_at) %></p>
-      </th>
-      <th><%= WechatResponse.human_attribute_name(:request_type) %></th>
-      <th>
-        <%= WechatResponse.human_attribute_name(:effective) %>
-        <%= link_to admin_wechat_app_wechat_replies_path, aria: { label: t('wechat.admin.wechat_replies.index.title') }, target: '_blank' do %>
-          <i class="fas fa-cog"></i>
-        <% end %>
-      </th>
-      <th>
-        <%= link_to new_admin_wechat_app_wechat_response_path(@wechat_app), remote: true, class: 'button is-link is-small' do %>
-          <i class="fas fa-plus"></i><% t('.new') %>
-        <% end %>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @wechat_responses.each do |wechat_response| %>
-    <tr>
-      <td>
-        <%= wechat_response.match_value %>
-        <%= image_tag wechat_response.qrcode_file, class: 'image is-32x32' if wechat_response.qrcode_file.attached? %>
-      </td>
-      <td>
-        <div class="ui toggle checkbox">
-          <%= check_box_tag '[wechat_response]contain', nil, wechat_response.contain, data: { method: :patch, remote: true, url: admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), submit: true }, id: nil %>
-        </div>
-      </td>
-      <td>
-        <p><time><%= wechat_response.created_at.to_s(:rfc822) %></time></p>
-        <p><time><%= wechat_response.expire_at.to_s(:rfc822) if wechat_response.expire_at %></time></p>
-      </td>
-      <td>
-        <% wechat_response.wechat_response_requests.each do |wechat_response_request| %>
-          <p><%= WechatRequest.enum_i18n(:type, wechat_response_request.request_type) %></p>
-        <% end %>
-      </td>
-      <td>
-        <p>
-          <span><%= wechat_response.effective_type %></span>
-          <%= link_to reply_admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-            <i class="fas fa-pencil-alt"></i>
-          <% end %>
-        </p>
-        <p><%= wechat_response.effective_id %></p>
-      </td>
-      <td>
-        <%= link_to admin_wechat_response_wechat_extractors_path(wechat_response), aria: { label: t('wechat.admin.wechat_extractors.index.title') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-expand-alt"></i>
-        <% end %>
-        <%= link_to admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-eye"></i>
-        <% end %>
-        <%= link_to edit_admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-pencil-alt"></i>
-        <% end %>
-        <%= link_to admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-trash-alt"></i>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<%= paginate @wechat_responses %>
+<tr>
+  <td>
+    <%= wechat_response.match_value %>
+    <%= image_tag wechat_response.qrcode_file, class: 'image is-32x32' if wechat_response.qrcode_file.attached? %>
+  </td>
+  <td>
+    <div class="ui toggle checkbox">
+      <%= check_box_tag '[wechat_response]contain', nil, wechat_response.contain, data: { method: :patch, remote: true, url: admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), submit: true }, id: nil %>
+    </div>
+  </td>
+  <td>
+    <p><time><%= wechat_response.created_at.to_s(:rfc822) %></time></p>
+    <p><time><%= wechat_response.expire_at.to_s(:rfc822) if wechat_response.expire_at %></time></p>
+  </td>
+  <td>
+    <% wechat_response.wechat_response_requests.each do |wechat_response_request| %>
+      <p><%= WechatRequest.enum_i18n(:type, wechat_response_request.request_type) %></p>
+    <% end %>
+  </td>
+  <td>
+    <p>
+      <span><%= wechat_response.effective_type %></span>
+      <%= link_to reply_admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <i class="fas fa-pencil-alt"></i>
+      <% end %>
+    </p>
+    <p><%= wechat_response.effective_id %></p>
+  </td>
+  <td>
+    <%= link_to admin_wechat_response_wechat_extractors_path(wechat_response), aria: { label: t('wechat.admin.wechat_extractors.index.title') }, class: 'button is-small is-rounded is-light' do %>
+      <i class="fas fa-expand-alt"></i>
+    <% end %>
+    <%= link_to admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+      <i class="fas fa-eye"></i>
+    <% end %>
+    <%= link_to edit_admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+      <i class="fas fa-pencil-alt"></i>
+    <% end %>
+    <%= link_to admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
+      <i class="fas fa-trash-alt"></i>
+    <% end %>
+  </td>
+</tr>

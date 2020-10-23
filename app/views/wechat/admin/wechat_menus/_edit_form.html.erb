@@ -2,4 +2,5 @@
   <%= render 'shared/error_messages', target: @wechat_menu %>
   <%= f.hidden_field :appid %>
   <%= render partial: 'form', locals: { f: f } %>
+  <%= f.submit %>
 <% end %>
