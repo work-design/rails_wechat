@@ -20,11 +20,4 @@
   <p><%= WechatRegister.human_attribute_name(:appid) %></p>
 </th>
 <th><%= WechatRegister.human_attribute_name(:created_at) %></th>
-<th>
-  <%= link_to new_admin_wechat_register_path, remote: true, class: 'button is-link is-small' do %>
-    <i class="fas fa-plus"></i><%= t('.new') %>
-  <% end %>
-  <%= link_to admin_task_templates_path(tasking_type: 'WechatRegister'), target: '_blank', class: 'button is-link is-small' do %>
-    <i class="fas fa-plus"></i>任务模板
-  <% end %>
-</th>
+<th></th>

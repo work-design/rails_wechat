@@ -5,7 +5,8 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
     q_params = {}
     q_params.merge! default_params
     q_params.merge! params.permit(:id)
-    @wechat_apps = WechatApp.default_where(q_params).order(id: :asc)
+
+    @wechat_apps = WechatApp.default_where(q_params).order(id: :asc).page(params[:page])
   end
 
   def own

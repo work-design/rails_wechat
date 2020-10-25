@@ -3,8 +3,4 @@
 <th style="width: 30%"><%= WechatRequest.human_attribute_name(:body) %></th>
 <th><%= WechatRequest.human_attribute_name(:extractions) %></th>
 <th><%= WechatRequest.human_attribute_name(:created_at) %></th>
-<th>
-  <%= link_to find_data_list_table_lists_path('RequestDailyExport', params.permit('created_at-gte', 'created_at-lte')), class: 'button is-link is-small', remote: true do %>
-    <i class="file excel icon"></i><%= t('.export') %>
-  <% end %>
-</th>
+<th></th>

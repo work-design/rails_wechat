@@ -1,0 +1,9 @@
+<%= link_to sync_admin_wechat_menus_path(appid: params[:appid]), method: :post, class: 'button is-link' do %>
+  <i class="fas fa-sync"></i><span><% t('.sync') %></span>
+<% end %>
+<%= link_to new_admin_wechat_menu_path(appid: params[:appid]), remote: true, class: 'button is-link' do %>
+  <i class="fas fa-plus"></i><span><% t('.new') %></span>
+<% end %>
+<%= link_to new_parent_admin_wechat_menus_path(appid: params[:appid]), remote: true, class: 'button is-link' do %>
+  <i class="fas fa-plus"></i><span><% t('.new_parent') %></span>
+<% end %>

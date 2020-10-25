@@ -1,0 +1,6 @@
+<%= link_to new_admin_wechat_register_path, remote: true, class: 'button is-link' do %>
+  <i class="fas fa-plus"></i><span><%= t('.new') %></span>
+<% end %>
+<%= link_to admin_task_templates_path(tasking_type: 'WechatRegister'), target: '_blank', class: 'button is-link' do %>
+  <i class="fas fa-plus"></i><span>任务模板</span>
+<% end %>

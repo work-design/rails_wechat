@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 350f1a28a2a39b865fd53e1448ef2e411cd8ebc0
+  revision: 02eb2f0a11aa91708bd8206238b167cc89cf9c84
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: fc8a8df92918660fecc9e87ac83b97d2ebe1b984
+  revision: 24c6bf56597b273e027bb1423b96a8b0b115ec01
   specs:
     rails_com (1.2.9)
       acme-client
@@ -119,8 +119,9 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
-    faraday (1.0.1)
+    faraday (1.1.0)
       multipart-post (>= 1.2, < 3)
+      ruby2_keywords
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     http-2-next (0.2.6)
@@ -206,6 +207,7 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 0.1)
     rqrcode_core (0.1.2)
+    ruby2_keywords (0.0.2)
     sdoc (1.1.0)
       rdoc (>= 5.0)
     semantic_range (2.3.0)
