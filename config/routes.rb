@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope module: :wechat do
+  scope module: :wechat, defaults: { business: 'wechat' } do
     resources :wechats, only: [:show] do
       member do
         post '' => :create
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :my, module: 'wechat/my', as: :my do
+  scope :my, module: 'wechat/my', as: :my, defaults: { namespace: 'my', business: 'wechat' } do
     resource :user, only: [] do
       collection do
         get :invite_qrcode
@@ -43,14 +43,14 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :panel, module: 'wechat/panel', as: :panel do
+  scope :panel, module: 'wechat/panel', as: :panel, defaults: { namespace: 'panel', business: 'wechat' } do
     resources :template_configs
     resources :wechat_platforms do
       resources :wechat_agencies, shallow: true, as: :agencies
     end
   end
 
-  scope :admin, module: 'wechat/admin', as: :admin do
+  scope :admin, module: 'wechat/admin', as: :admin, defaults: { namespace: 'admin', business: 'wechat' } do
     resources :wechat_registers do
       member do
         get 'app' => :edit_app
@@ -84,7 +84,9 @@ Rails.application.routes.draw do
         end
       end
       resources :wechat_tags do
-        post :sync, on: :collection
+        collection do
+          post :sync
+        end
       end
       resources :wechat_users
       resources :wechat_templates do
@@ -104,10 +106,14 @@ Rails.application.routes.draw do
         get :new_parent
         post :sync
       end
-      get :edit_parent, on: :member
+      member do
+        get :edit_parent
+      end
     end
     resources :accounts, only: [] do
-      get :qrcode, on: :member
+      member do
+        get :qrcode
+      end
     end
   end
 
