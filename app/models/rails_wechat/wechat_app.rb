@@ -22,6 +22,7 @@ module RailsWechat::WechatApp
     attribute :oauth2_state, :string
     attribute :jsapi_ticket_expires_at, :datetime
     attribute :user_name, :string
+    attribute :oauth_enable, :boolean, default: true
 
     belongs_to :organ, optional: true
     has_many :wechat_tags, dependent: :delete_all
@@ -169,7 +170,9 @@ module RailsWechat::WechatApp
   end
 
   def subdomain
-    [['app', organ_id, id].join('-'), RailsCom.config.subdomain].compact.join('.')
+    if oauth_enable
+      [['app', organ_id, id].join('-'), RailsCom.config.subdomain].compact.join('.')
+    end
   end
 
   class_methods do
