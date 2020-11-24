@@ -28,12 +28,10 @@ module RailsWechat::Application
 
   def current_wechat_app
     return @current_wechat_app if defined?(@current_wechat_app)
-    if request.subdomain.start_with? /app-/
-      id = request.subdomains[0].split('-')[-1]
-      @current_wechat_app = WechatApp.find_by(id: id)
-    else
-      @current_wechat_app = WechatApp.default_where(default_params).default
-    end
+
+    @current_wechat_app = current_organ_domain&.wechat_app
+    @current_wechat_app = WechatApp.default_where(default_params).default unless @current_wechat_app
+
     logger.debug "  ---------> Current Wechat App is #{@current_wechat_app&.id}"
     @current_wechat_app
   end
