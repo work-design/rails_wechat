@@ -122,12 +122,16 @@ module RailsWechat::WechatApp
     @api = Wechat::Api::Public.new(self)
   end
 
-  def generate_oauth2_url(oauth2_params)
-    if oauth2_params[:scope] == 'snsapi_login'
-      "https://open.weixin.qq.com/connect/qrconnect?#{oauth2_params.to_query}#wechat_redirect"
-    else
-      "https://open.weixin.qq.com/connect/oauth2/authorize?#{oauth2_params.to_query}#wechat_redirect"
-    end
+  def oauth2_qrcode_url
+    q = {
+      appid: appid,
+      redirect_uri: url_helpers.wechat_app_url(id, **host_options),
+      scope: 'snsapi_login',
+      response_type: 'code',
+      state: SecureRandom.hex(16)
+    }
+
+    "https://open.weixin.qq.com/connect/qrconnect?#{q.to_query}#wechat_redirect"
   end
 
   def sync_wechat_tags
