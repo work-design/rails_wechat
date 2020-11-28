@@ -1,8 +1,5 @@
-<%= form_with model: [:admin, @wechat_register] do |f| %>
-  <%= render 'shared/error_messages', target: @wechat_register %>
-  <%= f.text_field :id_name, required: true %>
-  <%= f.text_field :id_number, required: true %>
-  <%= f.text_field :mobile %>
-  <%= f.text_field :password %>
-  <%= f.submit %>
-<% end %>
+<%= render 'shared/error_messages', target: f.object %>
+<%= f.text_field :id_name, required: true %>
+<%= f.text_field :id_number, required: true %>
+<%= f.text_field :mobile %>
+<%= f.text_field :password %>
