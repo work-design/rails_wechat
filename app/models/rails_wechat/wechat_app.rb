@@ -74,7 +74,11 @@ module RailsWechat::WechatApp
 
   def refresh_access_token
     r = api.token
-    store_access_token(r)
+    if r['access_token']
+      store_access_token(r)
+    else
+      logger.debug "  ==========> #{r['errmsg']}"
+    end
   end
 
   def store_access_token(token_hash)
