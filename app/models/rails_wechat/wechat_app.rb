@@ -23,6 +23,8 @@ module RailsWechat::WechatApp
     attribute :jsapi_ticket_expires_at, :datetime
     attribute :user_name, :string
     attribute :oauth_enable, :boolean, default: true
+    attribute :apiclient_cert, :string
+    attribute :apiclient_key, :string
 
     belongs_to :organ, optional: true
     has_many :wechat_tags, dependent: :delete_all

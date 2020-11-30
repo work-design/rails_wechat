@@ -1,5 +1,5 @@
 class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
-  before_action :set_wechat_app, only: [:show, :info, :edit, :edit_help, :update, :destroy]
+  before_action :set_wechat_app, only: [:show, :info, :edit, :edit_cert, :update_cert, :update, :destroy]
 
   def index
     q_params = {}
@@ -37,6 +37,17 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
   end
 
   def info
+  end
+
+  def edit_cert
+  end
+
+  def update_cert
+    pkcs12 = WxPay.set_apiclient_by_pkcs12(params[:cert].read, @wechat_app.mch_id)
+
+    @wechat_app.apiclient_cert = pkcs12.certificate
+    @wechat_app.apiclient_key = pkcs12.key
+    @wechat_app.save
   end
 
   def edit

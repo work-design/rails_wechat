@@ -69,6 +69,8 @@ Rails.application.routes.draw do
       end
       member do
         get :info
+        get 'cert' => :edit_cert
+        patch 'cert' => :update_cert
       end
       resources :wechat_responses do
         member do

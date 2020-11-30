@@ -1,0 +1,4 @@
+<%= form_with model: @wechat_app, scope: '', url: { action: 'update_cert' } do |f| %>
+  <%= f.file_field :cert %>
+  <%= f.submit %>
+<% end %>

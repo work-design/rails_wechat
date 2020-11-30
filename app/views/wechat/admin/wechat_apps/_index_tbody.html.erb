@@ -44,16 +44,19 @@
     <% end %>
   </td>
   <td>
-    <%= link_to info_admin_wechat_app_path(wechat_app), aria: { label: t('wechat.admin.wechat_apps.info.title') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to({ action: 'info', id: wechat_app.id }, aria: { label: t('wechat.admin.wechat_apps.info.title') }, remote: true, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-cog"></i>
     <% end %>
-    <%= link_to admin_wechat_app_path(wechat_app), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to({ action: 'edit_cert', id: wechat_app.id }, aria: { label: t('wechat.admin.wechat_apps.edit_cert.title') }, remote: true, class: 'button is-small is-rounded is-light') do %>
+      <i class="fas fa-certificate"></i>
+    <% end %>
+    <%= link_to({ action: 'show', id: wechat_app.id }, aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-info"></i>
     <% end %>
-    <%= link_to edit_admin_wechat_app_path(wechat_app), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to({ action: 'edit', id: wechat_app.id }, aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
-    <%= link_to admin_wechat_app_path(wechat_app), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to({ action: 'destroy', id: wechat_app.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-trash-alt"></i>
     <% end %>
   </td>
