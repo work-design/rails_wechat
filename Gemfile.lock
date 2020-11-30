@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/qinmingyuan/default_form.git
-  revision: 979419809f67974ee7bebce7764eca540a6c73db
+  revision: ce966758f09f01916c01b22bb7c7ed221d2a8fd8
   specs:
     default_form (1.5.1)
       rails_com (~> 1.2)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: a77a18db32355f7f03e282e6a4a0fd3e13c21b70
+  revision: 951348e5566ad54de5d7c359836a6fc69221b63f
   specs:
     rails_com (1.2.9)
       acme-client

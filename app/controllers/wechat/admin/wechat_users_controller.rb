@@ -29,7 +29,7 @@ class Wechat::Admin::WechatUsersController < Wechat::Admin::BaseController
 
   private
   def set_wechat_user
-    @wechat_user = WechatUser.find(params[:id])
+    @wechat_user = @wechat_app.wechat_users.find params[:id]
   end
 
   def wechat_user_params
