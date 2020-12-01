@@ -31,6 +31,7 @@ module RailsWechat::WechatApp
     has_many :wechat_templates, dependent: :destroy
     has_many :post_syncs, as: :synced, dependent: :delete_all
     has_many :posts, through: :post_syncs
+    has_many :organ_domains, foreign_key: :appid, primary_key: :appid
 
     scope :valid, -> { where(enabled: true) }
 
@@ -39,11 +40,10 @@ module RailsWechat::WechatApp
     before_validation do
       self.encoding_aes_key ||= SecureRandom.alphanumeric(43) if encrypt_mode
     end
-    after_save :set_primary, if: -> { self.primary? && saved_change_to_primary? }
   end
 
   def url
-    url_helpers.wechat_url(self.id)
+    url_helpers.wechat_url(self.id, host: host)
   end
 
   def sync_menu
@@ -114,15 +114,6 @@ module RailsWechat::WechatApp
     self.save
   end
 
-  def set_primary
-    q = {}
-    if self.class.column_names.include?('organ_id')
-      q.merge! organ_id: self.organ_id
-    end
-
-    self.class.unscoped.where.not(id: self.id).where(q).update_all(primary: false)
-  end
-
   def api
     return @api if defined? @api
     @api = Wechat::Api::Public.new(self)
@@ -179,24 +170,10 @@ module RailsWechat::WechatApp
     wechat_templates.where(template_config_id: ids).pluck(:template_id)
   end
 
-  def subdomain
+  def host
     if oauth_enable
-      [['app', organ_id, id].join('-'), RailsCom.config.subdomain].compact.join('.')
+      organ_domains.first&.identifier
     end
-  end
-
-  class_methods do
-
-    def default(params = {})
-      q = params.dup
-      app = default_where(q).valid.find_by(primary: true)
-      if app
-        app
-      else
-        default_where(organ_id: nil, allow: { organ_id: nil }).valid.find_by(primary: true)
-      end
-    end
-
   end
 
 end
