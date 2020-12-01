@@ -21,12 +21,6 @@
     </div>
   </td>
   <td>
-    <div data-controller="input">
-      <%= check_box_tag '[wechat_app]primary', nil, wechat_app.primary, data: { method: :patch, remote: true, url: admin_wechat_app_path(wechat_app), action: 'input#submit' }, id: nil, class: 'switch is-rounded', disabled: wechat_app.primary %>
-      <label></label>
-    </div>
-  </td>
-  <td>
     <%= link_to admin_wechat_menus_path(appid: wechat_app.appid), aria: { label: t('wechat.admin.wechat_menus.index.title') }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-bars"></i>
     <% end %>

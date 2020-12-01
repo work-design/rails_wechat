@@ -64,9 +64,6 @@ Rails.application.routes.draw do
       end
     end
     resources :wechat_apps do
-      collection do
-        get :own
-      end
       member do
         get :info
         get 'cert' => :edit_cert

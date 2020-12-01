@@ -9,14 +9,6 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
     @wechat_apps = WechatApp.default_where(q_params).order(id: :asc).page(params[:page])
   end
 
-  def own
-    q_params = {}
-    q_params.merge! organ_id: nil, allow: { organ_id: nil }
-
-    @wechat_apps = WechatApp.default_where(q_params).order(id: :asc)
-    render 'index'
-  end
-
   def new
     @wechat_app = WechatApp.new
   end
@@ -75,7 +67,6 @@ class Wechat::Admin::WechatAppsController < Wechat::Admin::BaseController
       :type,
       :name,
       :enabled,
-      :primary,
       :appid,
       :secret,
       :agentid,
