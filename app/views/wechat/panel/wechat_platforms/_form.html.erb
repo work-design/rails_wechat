@@ -1,10 +1,7 @@
-<%= form_with model: [:panel, @wechat_platform] do |f| %>
-  <%= render 'shared/error_messages', target: @wechat_platform %>
-  <%= f.text_field :name %>
-  <%= f.text_field :appid %>
-  <%= f.text_field :secret %>
-  <%= f.text_field :verify_ticket %>
-  <%= f.text_field :token %>
-  <%= f.text_field :encoding_aes_key %>
-  <%= f.submit %>
-<% end %>
+<%= render 'shared/error_messages', target: f.object %>
+<%= f.text_field :name %>
+<%= f.text_field :appid %>
+<%= f.text_field :secret %>
+<%= f.text_field :verify_ticket %>
+<%= f.text_field :token %>
+<%= f.text_field :encoding_aes_key %>

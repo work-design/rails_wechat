@@ -1,52 +1,5 @@
-<%= render 'filter' %>
-
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th><%= TemplateConfig.human_attribute_name(:type) %></th>
-      <th>
-        <p><%= TemplateConfig.human_attribute_name(:title) %></p>
-        <p><%= TemplateConfig.human_attribute_name(:description) %></p>
-      </th>
-      <th><%= TemplateConfig.human_attribute_name(:tid) %></th>
-      <th>
-        <p><%= TemplateConfig.human_attribute_name(:notifiable_type) %></p>
-        <p><%= TemplateConfig.human_attribute_name(:code) %></p>
-      </th>
-      <th>
-        <%= link_to new_panel_template_config_path, remote: true, class: 'button is-link is-small' do %>
-          <i class="fas fa-plus"></i><%= t('.new') %>
-        <% end %>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @template_configs.each do |template_config| %>
-    <tr>
-      <td><%= template_config.type_i18n %></td>
-      <td>
-        <p><%= template_config.title %></p>
-        <p><%= template_config.description %></p>
-      </td>
-      <td><%= template_config.tid %></td>
-      <td>
-        <p><%= template_config.notifiable_type %></p>
-        <p><%= template_config.code %></p>
-      </td>
-      <td>
-        <%= link_to panel_template_config_path(template_config), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-info"></i>
-        <% end %>
-        <%= link_to edit_panel_template_config_path(template_config), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-pencil-alt"></i>
-        <% end %>
-        <%= link_to panel_template_config_path(template_config), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-trash-alt"></i>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<%= render layout: 'index_table', locals: { cache_key: TemplateConfig.column_names.hash } do %>
+  <%= render partial: 'index_tbody', collection: @template_configs, as: :template_config %>
+<% end %>
 
 <%= paginate @template_configs %>
