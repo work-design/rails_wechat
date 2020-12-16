@@ -15,7 +15,7 @@
     <%= link_to wechat_platform.auth_url, aria: { label: '测试授权' }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-vial"></i>
     <% end if wechat_platform.auth_url %>
-    <%= link_to({ controller: 'wechat_agencies', id: wechat_platform }, aria: { label: t('wechat.panel.wechat_agencies.index.title') }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ controller: 'wechat_agencies', wechat_platform_id: wechat_platform }, aria: { label: t('wechat.panel.wechat_agencies.index.title') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-door-open"></i>
     <% end %>
     <%= link_to({ action: 'show', id: wechat_platform.id }, aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light') do %>
