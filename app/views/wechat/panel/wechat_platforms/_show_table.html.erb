@@ -1,44 +1,32 @@
-<table class="table is-fullwidth">
-  <thead>
-    <tr>
-      <th>
-        <%= link_to t('.edit'), edit_panel_wechat_platform_path(@wechat_platform), class: 'button is-small is-link', remote: true %>
-      </th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:name) %></td>
-      <td><%= @wechat_platform.name %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:appid) %></td>
-      <td><%= @wechat_platform.appid %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:secret) %></td>
-      <td><%= @wechat_platform.secret %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:verify_ticket) %></td>
-      <td><%= @wechat_platform.verify_ticket %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:access_token) %></td>
-      <td><%= @wechat_platform.access_token %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:access_token_expires_at) %></td>
-      <td><%= @wechat_platform.access_token_expires_at %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:pre_auth_code) %></td>
-      <td><%= @wechat_platform.pre_auth_code %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:pre_auth_code_expires_at) %></td>
-      <td><%= @wechat_platform.pre_auth_code_expires_at %></td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:name) %></td>
+  <td><%= @wechat_platform.name %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:appid) %></td>
+  <td><%= @wechat_platform.appid %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:secret) %></td>
+  <td><%= @wechat_platform.secret %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:verify_ticket) %></td>
+  <td><%= @wechat_platform.verify_ticket %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:access_token) %></td>
+  <td><%= @wechat_platform.access_token %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:access_token_expires_at) %></td>
+  <td><%= @wechat_platform.access_token_expires_at %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:pre_auth_code) %></td>
+  <td><%= @wechat_platform.pre_auth_code %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatPlatform.human_attribute_name(:pre_auth_code_expires_at) %></td>
+  <td><%= @wechat_platform.pre_auth_code_expires_at %></td>
+</tr>
