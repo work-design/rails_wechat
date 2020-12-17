@@ -76,20 +76,17 @@ module RailsWechat::WechatRequest
     wechat_app.encrypt_mode || wechat_received&.wechat_platform.present?
   end
 
-  def encoding_aes_key
-    wechat_app.encoding_aes_key.presence || wechat_received&.wechat_platform&.encoding_aes_key
-  end
-
-  def encrypt_appid
-    wechat_received&.wechat_platform&.appid || appid
-  end
-
-  def token
-    wechat_received&.wechat_platform&.token || wechat_app.token
-  end
-
   def do_encrypt
     return unless encrypt_mode
+    if wechat_platform
+      token = wechat_platform.token
+      encoding_aes_key = wechat_platform.encoding_aes_key
+      encrypt_appid = wechat_platform.appid
+    else
+      token = wechat_app.token
+      encoding_aes_key = wechat_app.encoding_aes_key
+      encrypt_appid = appid
+    end
 
     nonce = SecureRandom.hex(10)
     #content = reply_body.merge(FuncFlag: 0).to_xml(root: 'xml', children: 'item', skip_instruct: true, skip_types: true)
