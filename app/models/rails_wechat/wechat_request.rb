@@ -67,25 +67,20 @@ module RailsWechat::WechatRequest
     else
       self.reply_body = {}
     end
-    if encrypt_mode
-      do_encrypt
-    end
-  end
-
-  def encrypt_mode
-    wechat_app.encrypt_mode || wechat_received&.wechat_platform.present?
+    do_encrypt
   end
 
   def do_encrypt
-    return unless encrypt_mode
     if wechat_platform
       token = wechat_platform.token
       encoding_aes_key = wechat_platform.encoding_aes_key
       encrypt_appid = wechat_platform.appid
-    else
+    elsif wechat_app.encrypt_mode
       token = wechat_app.token
       encoding_aes_key = wechat_app.encoding_aes_key
       encrypt_appid = appid
+    else
+      return
     end
 
     nonce = SecureRandom.hex(10)
