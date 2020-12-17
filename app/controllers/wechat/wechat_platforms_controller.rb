@@ -3,7 +3,7 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
   before_action :set_wechat_platform, only: [:show, :callback]
   before_action :set_wechat_platform_by_appid, only: [:message]
 
-  def wx_notice
+  def notice
     @wechat_ticket = WechatTicket.new(ticket_params)
     r = Hash.from_xml(request.raw_post)['xml']
     @wechat_ticket.appid = r['AppId']
