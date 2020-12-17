@@ -2,6 +2,7 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
   skip_before_action :verify_authenticity_token, raise: false
   before_action :set_wechat_platform, only: [:show, :message, :callback]
 
+  # 授权事件接收URL: wechat_platforms/notice
   def notice
     @wechat_ticket = WechatTicket.new(ticket_params)
     r = Hash.from_xml(request.raw_post)['xml']
@@ -18,7 +19,6 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
   def show
   end
 
-  # 授权事件接收
   def callback
     @wechat_auth = @wechat_platform.wechat_auths.build
     @wechat_auth.auth_code = params[:auth_code]
@@ -26,6 +26,7 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
     @wechat_auth.save
   end
 
+  # 消息与事件接收URL: wechat_platforms/:id/callback/$APPID$
   def message
     @wechat_received = @wechat_platform.wechat_receiveds.build
     @wechat_received.appid = params[:appid]
