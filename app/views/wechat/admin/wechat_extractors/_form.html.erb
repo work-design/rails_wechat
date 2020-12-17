@@ -1,24 +1,21 @@
-<%= form_with model: [:admin, @wechat_response, @wechat_extractor] do |f| %>
-  <%= render 'shared/error_messages', target: @wechat_extractor %>
-  <%= f.text_field :name %>
-  <%= f.text_field :prefix %>
-  <%= f.text_area :suffix %>
-  <%= f.check_box :more %>
-  <%= f.check_box :serial %>
-  <%= f.text_field :serial_start %>
-  <%= f.text_field :valid_response %>
-  <%= f.text_field :invalid_response %>
-  <div class="field is-horizontal">
-    <%= f.label :start_at %>
-    <div class="field-body">
-      <%= f.time_select :start_at, start_hour: 0, end_hour: 23, minute_step: 30, default: { hour: 0, min: 0 }, wrap: { all: 'field is-narrow', select: 'select' }, on: { label: false } %>
-    </div>
+<%= render 'shared/error_messages', target: f.object %>
+<%= f.text_field :name %>
+<%= f.text_field :prefix %>
+<%= f.text_area :suffix %>
+<%= f.check_box :more %>
+<%= f.check_box :serial %>
+<%= f.text_field :serial_start %>
+<%= f.text_field :valid_response %>
+<%= f.text_field :invalid_response %>
+<div class="field is-horizontal">
+  <%= f.label :start_at %>
+  <div class="field-body">
+    <%= f.time_select :start_at, start_hour: 0, end_hour: 23, minute_step: 30, default: { hour: 0, min: 0 }, wrap: { all: 'field is-narrow', select: 'select' }, on: { label: false } %>
   </div>
-  <div class="field is-horizontal">
-    <%= f.label :finish_at %>
-    <div class="field-body">
-      <%= f.time_select :finish_at, start_hour: 0, end_hour: 23, minute_step: 30, default: { hour: 23, min: 59 }, wrap: { all: 'field is-narrow', select: 'select' }, on: { label: false } %>
-    </div>
+</div>
+<div class="field is-horizontal">
+  <%= f.label :finish_at %>
+  <div class="field-body">
+    <%= f.time_select :finish_at, start_hour: 0, end_hour: 23, minute_step: 30, default: { hour: 23, min: 59 }, wrap: { all: 'field is-narrow', select: 'select' }, on: { label: false } %>
   </div>
-  <%= f.submit %>
-<% end %>
+</div>
