@@ -19,10 +19,10 @@ Rails.application.routes.draw do
     resources :wechat_platforms, only: [:show] do
       member do
         get :callback
+        post 'callback/:appid' => :message
       end
       collection do
         post :notice
-        post ':appid/callback' => :message
       end
     end
   end

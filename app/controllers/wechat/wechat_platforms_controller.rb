@@ -1,7 +1,6 @@
 class Wechat::WechatPlatformsController < Wechat::BaseController
   skip_before_action :verify_authenticity_token, raise: false
-  before_action :set_wechat_platform, only: [:show, :callback]
-  before_action :set_wechat_platform_by_appid, only: [:message]
+  before_action :set_wechat_platform, only: [:show, :message, :callback]
 
   def notice
     @wechat_ticket = WechatTicket.new(ticket_params)
@@ -50,10 +49,6 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
 
   def set_wechat_platform
     @wechat_platform = WechatPlatform.find(params[:id])
-  end
-
-  def set_wechat_platform_by_appid
-    @wechat_platform = WechatPlatform.find_by(appid: params[:appid])
   end
 
   def set_wechat_app
