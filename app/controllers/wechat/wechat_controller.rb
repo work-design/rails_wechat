@@ -16,19 +16,6 @@ class Wechat::WechatController < Wechat::BaseController
     end
   end
 
-  def wx_notice
-    @wechat_ticket = WechatTicket.new(ticket_params)
-    r = Hash.from_xml(request.raw_post)['xml']
-    @wechat_ticket.appid = r['AppId']
-    @wechat_ticket.ticket_data = r['Encrypt']
-
-    if @wechat_ticket.save
-      render plain: 'success'
-    else
-      head :no_content
-    end
-  end
-
   def login_by_wechat_user(oauth_user)
     headers['Auth-Token'] = oauth_user.account.auth_token
     oauth_user.user.update(last_login_at: Time.now)
@@ -39,13 +26,6 @@ class Wechat::WechatController < Wechat::BaseController
   end
 
   private
-  def ticket_params
-    params.permit(
-      :signature,
-      :timestamp,
-      :nonce,
-      :msg_signature
-    )
-  end
+
 
 end

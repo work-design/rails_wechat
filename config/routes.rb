@@ -12,12 +12,9 @@ Rails.application.routes.draw do
         post :info
       end
     end
-    resources :wechat_apps, only: [:show] do
-
-    end
+    resources :wechat_apps, only: [:show]
     controller :wechat do
       post 'wechat/auth' => :auth
-      post :wx_notice
     end
     resources :wechat_platforms, only: [:show] do
       member do
@@ -25,6 +22,7 @@ Rails.application.routes.draw do
         post '' => :show
       end
       collection do
+        post :notice
         post ':appid/callback' => :message
       end
     end

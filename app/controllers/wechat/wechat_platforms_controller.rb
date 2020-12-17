@@ -3,15 +3,20 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
   before_action :set_wechat_platform, only: [:show, :callback]
   before_action :set_wechat_platform_by_appid, only: [:message]
 
+  def wx_notice
+    @wechat_ticket = WechatTicket.new(ticket_params)
+    r = Hash.from_xml(request.raw_post)['xml']
+    @wechat_ticket.appid = r['AppId']
+    @wechat_ticket.ticket_data = r['Encrypt']
+
+    if @wechat_ticket.save
+      render plain: 'success'
+    else
+      head :no_content
+    end
+  end
+
   def show
-    @wechat_received = @wechat_platform.wechat_receiveds.build
-    @wechat_received.appid = params[:appid]
-    r = Hash.from_xml(request.body.read)['xml']
-
-    logger.debug "  =========> #{r}"
-
-    @wechat_received.encrypt_data = r['Encrypt']
-    @wechat_received.save
   end
 
   # 授权事件接收
@@ -34,6 +39,15 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
   end
 
   private
+  def ticket_params
+    params.permit(
+      :signature,
+      :timestamp,
+      :nonce,
+      :msg_signature
+    )
+  end
+
   def set_wechat_platform
     @wechat_platform = WechatPlatform.find(params[:id])
   end
