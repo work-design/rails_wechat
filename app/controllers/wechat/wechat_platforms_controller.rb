@@ -1,10 +1,12 @@
 class Wechat::WechatPlatformsController < Wechat::BaseController
   skip_before_action :verify_authenticity_token, raise: false
-  before_action :set_wechat_platform
+  before_action :set_wechat_platform, only: [:show, :callback]
+  before_action :set_wechat_platform_by_appid, only: [:message]
 
   def show
   end
 
+  # 授权事件接收
   def callback
     @wechat_auth = @wechat_platform.wechat_auths.build
     @wechat_auth.auth_code = params[:auth_code]
@@ -25,11 +27,11 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
 
   private
   def set_wechat_platform
-    if params[:id]
-      @wechat_platform = WechatPlatform.find(params[:id])
-    else
-      @wechat_platform = WechatPlatform.first
-    end
+    @wechat_platform = WechatPlatform.find(params[:id])
+  end
+
+  def set_wechat_platform_by_appid
+    @wechat_platform = WechatPlatform.find_by(appid: params[:appid])
   end
 
   def set_wechat_app
