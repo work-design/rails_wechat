@@ -4,6 +4,14 @@ class Wechat::WechatPlatformsController < Wechat::BaseController
   before_action :set_wechat_platform_by_appid, only: [:message]
 
   def show
+    @wechat_received = @wechat_platform.wechat_receiveds.build
+    @wechat_received.appid = params[:appid]
+    r = Hash.from_xml(request.body.read)['xml']
+
+    logger.debug "  =========> #{r}"
+
+    @wechat_received.encrypt_data = r['Encrypt']
+    @wechat_received.save
   end
 
   # 授权事件接收
