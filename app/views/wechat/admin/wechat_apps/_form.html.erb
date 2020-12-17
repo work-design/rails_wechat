@@ -1,5 +1,5 @@
-<%= render 'shared/error_messages', target: @wechat_app %>
-<%= f.select :type, options_for_select(WechatApp.options_i18n(:type), @wechat_app.type) %>
+<%= render 'shared/error_messages', target: f.object %>
+<%= f.select :type, options_for_select(WechatApp.options_i18n(:type), f.object.type) %>
 <%= f.text_field :name %>
 <%= f.text_field :appid %>
 <%= f.text_field :secret %>
