@@ -67,7 +67,7 @@ module RailsWechat::WechatApp
   end
 
   def within_menus
-    if organ
+    if organ && organ.respond_to?(:limit_wechat_menu)
       self.wechat_menus.limit(organ.limit_wechat_menu).where(parent_id: nil).order(position: :asc).as_json
     else
       self.wechat_menus.where(parent_id: nil).order(position: :asc).as_json
