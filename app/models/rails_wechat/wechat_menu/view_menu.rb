@@ -19,7 +19,7 @@ module RailsWechat::WechatMenu::ViewMenu
   def host
     organ = wechat_app&.organ
     if organ
-      organ.host(wechat_app.subdomain)
+      organ.host
     else
       ''
     end
