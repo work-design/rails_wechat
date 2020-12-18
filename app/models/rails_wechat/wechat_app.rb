@@ -58,7 +58,7 @@ module RailsWechat::WechatApp
   end
 
   def default_menus
-    if organ
+    if organ && organ.respond_to?(:limit_wechat_menu)
       limit = 3 - organ.limit_wechat_menu
     else
       limit = 3
