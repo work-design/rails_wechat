@@ -12,8 +12,15 @@ module RailsWechat::WechatMenu::ViewMenu
     {
       type: menu_type,
       name: name,
-      url: value
+      url: url
     }
+  end
+
+  def url
+    ActionDispatch::Http::URL.url_for(
+      host: value,
+      protocol: Rails.application.routes.default_url_options[:protocol]
+    )
   end
 
   def host
