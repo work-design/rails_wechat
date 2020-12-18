@@ -16,7 +16,7 @@ module RailsWechat::WechatReceived
     'subscribe' => 'SubscribeRequest',
     'unsubscribe' => 'UnsubscribeRequest',
     'LOCATION' => 'WechatRequestLocation', # 公众号与企业微信通用
-    'CLICK' => 'WechatRequest',
+    'CLICK' => 'WechatRequestClick',
     'VIEW' => 'ViewRequest',
     'SCAN' => 'ScanRequest',
     'click' => 'WechatRequest',
@@ -94,7 +94,7 @@ module RailsWechat::WechatReceived
     when 'event'
       wechat_request.event = message_hash['Event']
       wechat_request.event_key = message_hash['EventKey']
-      wechat_request.body = message_hash.dig('ScanCodeInfo', 'ScanResult')
+      wechat_request.body = message_hash.dig('ScanCodeInfo', 'ScanResult') || message_hash['EventKey']
     when 'image'
       wechat_request.body = message_hash['PicUrl']
     when 'voice'
