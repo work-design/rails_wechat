@@ -1,24 +1,12 @@
-<table class="table is-fullwidth">
-  <thead>
-    <tr>
-      <th class="six wide">
-        <%= link_to t('.edit'), edit_admin_wechat_app_wechat_reply_path(@wechat_app, @wechat_reply), class: 'ui mini blue right floated button', remote: true %>
-      </th>
-      <th class="ten wide"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= WechatReply.human_attribute_name(:type) %></td>
-      <td><%= @wechat_reply.type %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatReply.human_attribute_name(:value) %></td>
-      <td><%= @wechat_reply.value %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatReply.human_attribute_name(:body) %></td>
-      <td><%= @wechat_reply.body %></td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= WechatReply.human_attribute_name(:type) %></td>
+  <td><%= @wechat_reply.type_i18n %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatReply.human_attribute_name(:value) %></td>
+  <td><%= @wechat_reply.value %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatReply.human_attribute_name(:body) %></td>
+  <td><%= @wechat_reply.body %></td>
+</tr>
