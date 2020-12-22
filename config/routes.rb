@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope module: :wechat, defaults: { business: 'wechat' } do
+  scope module: :wechat, defaults: { namespace: 'application', business: 'wechat' } do
     resources :wechats, only: [:show] do
       member do
         post '' => :create
