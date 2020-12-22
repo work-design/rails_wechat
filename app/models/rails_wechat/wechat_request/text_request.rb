@@ -13,11 +13,14 @@ module RailsWechat::WechatRequest::TextRequest
     self
   end
 
-  def rule_tag
-    {
-      msg_type: msg_type,
-      body: body
-    }.compact
+  def reply_from_rule
+    filtered = RailsWechat.config.rules.find do |_, rule|
+      if rule[:msg_type] == 'text' && rule[:body]
+        rule[:body].match? self.body
+      end
+    end
+
+    filtered[1][:proc].call(self) if filtered.present?
   end
 
 end
