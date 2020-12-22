@@ -13,4 +13,11 @@ module RailsWechat::WechatRequest::TextRequest
     self
   end
 
+  def rule_tag
+    {
+      msg_type: msg_type,
+      body: body
+    }.compact
+  end
+
 end
