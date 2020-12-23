@@ -113,7 +113,7 @@ module RailsWechat::WechatReceived
   end
 
   def check_wechat_app
-    wechat_app.update user_name: message_hash['ToUserName']
+    wechat_app.update user_name: message_hash['ToUserName'] if wechat_app
   end
 
   def reply
