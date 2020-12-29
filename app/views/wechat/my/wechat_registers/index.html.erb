@@ -6,7 +6,7 @@
       <th><%= WechatRegister.human_attribute_name(:id_name) %></th>
       <th><%= WechatRegister.human_attribute_name(:id_number) %></th>
       <th>
-        <%= link_to new_my_wechat_register_path, remote: true, class: 'button is-link is-small' do %>
+        <%= link_to new_my_wechat_register_path, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>
@@ -18,13 +18,13 @@
       <td><%= wechat_register.id_name %></td>
       <td><%= wechat_register.id_number %></td>
       <td>
-        <%= link_to my_wechat_register_path(wechat_register), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to my_wechat_register_path(wechat_register), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-info"></i>
         <% end %>
-        <%= link_to edit_my_wechat_register_path(wechat_register), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to edit_my_wechat_register_path(wechat_register), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to my_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to my_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>

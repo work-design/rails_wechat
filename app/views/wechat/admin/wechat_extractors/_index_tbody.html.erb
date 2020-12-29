@@ -4,7 +4,7 @@
   <td><%= wechat_extractor.suffix.inspect if wechat_extractor.suffix %></td>
   <td>
     <div class="ui toggle checkbox">
-      <%= check_box_tag '[wechat_extractor]more', nil, wechat_extractor.more, data: { method: :patch, remote: true, url: admin_wechat_response_wechat_extractor_path(@wechat_response, wechat_extractor), submit: true }, id: nil %>
+      <%= check_box_tag '[wechat_extractor]more', nil, wechat_extractor.more, data: { method: :patch, url: admin_wechat_response_wechat_extractor_path(@wechat_response, wechat_extractor), submit: true }, id: nil %>
     </div>
   </td>
   <td>
@@ -18,16 +18,16 @@
   <td>
     <div>
       <div class="ui toggle checkbox">
-        <%= check_box_tag '[wechat_extractor]serial', nil, wechat_extractor.serial, data: { method: :patch, remote: true, url: admin_wechat_response_wechat_extractor_path(@wechat_response, wechat_extractor), submit: true }, id: nil %>
+        <%= check_box_tag '[wechat_extractor]serial', nil, wechat_extractor.serial, data: { method: :patch, url: admin_wechat_response_wechat_extractor_path(@wechat_response, wechat_extractor), submit: true }, id: nil %>
       </div>
     </div>
     <p><%= wechat_extractor.serial_start %></p>
   </td>
   <td>
-    <%= link_to admin_wechat_response_wechat_extractor_path(@wechat_response, wechat_extractor), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to admin_wechat_response_wechat_extractor_path(@wechat_response, wechat_extractor), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-info"></i>
     <% end %>
-    <%= link_to edit_admin_wechat_response_wechat_extractor_path(@wechat_response, wechat_extractor), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to edit_admin_wechat_response_wechat_extractor_path(@wechat_response, wechat_extractor), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
     <%= link_to admin_wechat_response_wechat_extractor_path(@wechat_response, wechat_extractor), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>

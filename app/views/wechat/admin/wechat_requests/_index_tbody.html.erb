@@ -1,9 +1,9 @@
 <tr>
   <td>
     <% if wechat_request.wechat_user.user %>
-      <%= link_to wechat_request.wechat_user.user.name, panel_user_path(wechat_request.wechat_user.user_id), remote: true, text: true %>
+      <%= link_to wechat_request.wechat_user.user.name, panel_user_path(wechat_request.wechat_user.user_id), text: true %>
     <% else %>
-      <%= link_to wechat_request.wechat_user.name, admin_oauth_user_path(wechat_request.wechat_user), remote: true, text: true %>
+      <%= link_to wechat_request.wechat_user.name, admin_oauth_user_path(wechat_request.wechat_user), text: true %>
     <% end %>
   </td>
   <td><%= wechat_request.type_i18n %></td>
@@ -19,12 +19,12 @@
     <% end %>
     </table>
   </td>
-  <td><time><%= wechat_request.created_at.to_s(:rfc822) %></time></td>
+  <td><time data-controller="time"><%= wechat_request.created_at.to_s(:rfc822) %></time></td>
   <td>
-    <%= link_to admin_wechat_app_wechat_request_path(@wechat_app, wechat_request), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to admin_wechat_app_wechat_request_path(@wechat_app, wechat_request), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-info"></i>
     <% end %>
-    <%= link_to admin_wechat_app_wechat_request_path(@wechat_app, wechat_request), method: :delete, remote: true, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to admin_wechat_app_wechat_request_path(@wechat_app, wechat_request), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-trash-alt"></i>
     <% end %>
   </td>

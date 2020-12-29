@@ -1,13 +1,13 @@
 GIT
   remote: https://github.com/qinmingyuan/default_form.git
-  revision: ac31a38225b03689bf533ca3973b538a65abde36
+  revision: 0eddbc13834a470f413a22bb87a342bab4e8879b
   specs:
     default_form (1.5.1)
       rails_com (~> 1.2)
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: cf93ab4810da8bdbcdb0ab1e7ae95d9be386f4e9
+  revision: 3286bf20877021bd9e6e544d2a17f39fd6a9f01c
   specs:
     rails_auth (1.0.6)
       bcrypt (~> 3.1)
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: d37ab2c646c977b7bca567a9bc9462d088c4abba
+  revision: 3ef6a195f9d38798621233ed59b57112fcf19cb7
   specs:
     rails_com (1.2.9)
       acme-client
@@ -123,7 +123,7 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
-    faraday (1.1.0)
+    faraday (1.2.0)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
     globalid (0.4.2)

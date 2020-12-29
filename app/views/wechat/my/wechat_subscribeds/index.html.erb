@@ -9,7 +9,7 @@
       <th><%= WechatSubscribed.human_attribute_name(:status) %></th>
       <th><%= WechatSubscribed.human_attribute_name(:sending_at) %></th>
       <th>
-        <%= link_to new_my_wechat_subscribed_path, remote: true, class: 'button is-link is-small' do %>
+        <%= link_to new_my_wechat_subscribed_path, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>
@@ -22,13 +22,13 @@
       <td><%= wechat_subscribed.status %></td>
       <td><%= wechat_subscribed.sending_at %></td>
       <td>
-        <%= link_to my_wechat_subscribed_path(wechat_subscribed), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to my_wechat_subscribed_path(wechat_subscribed), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-info"></i>
         <% end %>
-        <%= link_to edit_my_wechat_subscribed_path(wechat_subscribed), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to edit_my_wechat_subscribed_path(wechat_subscribed), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-pencil-alt"></i>
         <% end %>
-        <%= link_to my_wechat_subscribed_path(wechat_subscribed), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to my_wechat_subscribed_path(wechat_subscribed), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
       </td>

@@ -8,7 +8,7 @@
     <td></td>
     <td>
       <div data-controller="input">
-        <%= check_box_tag '[wechat_template]template_config_id', template_config.id, false, data: { method: :post, remote: true, url: admin_wechat_app_wechat_templates_path(@wechat_app), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
+        <%= check_box_tag '[wechat_template]template_config_id', template_config.id, false, data: { method: :post, url: admin_wechat_app_wechat_templates_path(@wechat_app), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
         <label></label>
       </div>
     </td>

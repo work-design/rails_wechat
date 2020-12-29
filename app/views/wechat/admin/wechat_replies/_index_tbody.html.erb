@@ -3,13 +3,13 @@
   <td><%= wechat_reply.value %></td>
   <td><%= wechat_reply.body %></td>
   <td>
-    <%= link_to admin_wechat_app_wechat_reply_path(@wechat_app, wechat_reply), aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to admin_wechat_app_wechat_reply_path(@wechat_app, wechat_reply), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-info"></i>
     <% end %>
-    <%= link_to edit_admin_wechat_app_wechat_reply_path(@wechat_app, wechat_reply), aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to edit_admin_wechat_app_wechat_reply_path(@wechat_app, wechat_reply), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
-    <%= link_to admin_wechat_app_wechat_reply_path(@wechat_app, wechat_reply), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to admin_wechat_app_wechat_reply_path(@wechat_app, wechat_reply), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
       <i class="fas fa-trash-alt"></i>
     <% end %>
   </td>

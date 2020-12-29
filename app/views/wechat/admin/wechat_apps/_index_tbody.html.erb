@@ -1,57 +1,38 @@
-<tr>
-  <td><%= wechat_app.type_i18n %></td>
-  <td><%= wechat_app.name %></td>
-  <td>
-    <p><%= wechat_app.appid %></p>
-    <p><%= wechat_app.secret %></p>
-    <p><%= wechat_app.agentid %></p>
-    <p><%= wechat_app.mch_id %></p>
-    <p><%= wechat_app.key %></p>
-  </td>
-  <td>
-    <div data-controller="input">
-      <%= check_box_tag '[wechat_app]encrypt_mode', nil, wechat_app.encrypt_mode, data: { method: :patch, remote: true, url: admin_wechat_app_path(wechat_app), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
-      <label></label>
-    </div>
-  </td>
-  <td>
-    <div data-controller="input">
-      <%= check_box_tag '[wechat_app]enabled', nil, wechat_app.enabled, data: { method: :patch, remote: true, url: admin_wechat_app_path(wechat_app), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
-      <label></label>
-    </div>
-  </td>
-  <td>
-    <%= link_to admin_wechat_menus_path(appid: wechat_app.appid), aria: { label: t('wechat.admin.wechat_menus.index.title') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-bars"></i>
-    <% end %>
-    <%= link_to admin_wechat_app_wechat_responses_path(wechat_app), aria: { label: t('wechat.admin.wechat_responses.index.title') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-reply-all"></i>
-    <% end %>
-    <%= link_to admin_wechat_app_wechat_requests_path(wechat_app), aria: { label: t('wechat.admin.wechat_requests.index.title') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-comments"></i>
-    <% end %>
-    <%= link_to admin_wechat_app_wechat_tags_path(wechat_app), aria: { label: t('wechat.admin.wechat_tags.index.title') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-user-tag"></i>
-    <% end %>
-    <%= link_to admin_wechat_app_wechat_templates_path(wechat_app), aria: { label: t('wechat.admin.wechat_templates.index.title') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-inbox"></i>
-    <% end %>
-  </td>
-  <td>
-    <%= link_to({ action: 'info', id: wechat_app.id }, aria: { label: t('wechat.admin.wechat_apps.info.title') }, remote: true, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-cog"></i>
-    <% end %>
-    <%= link_to({ action: 'edit_cert', id: wechat_app.id }, aria: { label: t('wechat.admin.wechat_apps.edit_cert.title') }, remote: true, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-certificate"></i>
-    <% end %>
-    <%= link_to({ action: 'show', id: wechat_app.id }, aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-info"></i>
-    <% end %>
-    <%= link_to({ action: 'edit', id: wechat_app.id }, aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-pencil-alt"></i>
-    <% end %>
-    <%= link_to({ action: 'destroy', id: wechat_app.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-trash-alt"></i>
-    <% end %>
-  </td>
-</tr>
+<td><%= model.type_i18n %></td>
+<td><%= model.name %></td>
+<td>
+  <p><%= model.appid %></p>
+  <p><%= model.secret %></p>
+  <p><%= model.agentid %></p>
+  <p><%= model.mch_id %></p>
+  <p><%= model.key %></p>
+</td>
+<td>
+  <div data-controller="input">
+    <%= check_box_tag '[model]encrypt_mode', nil, model.encrypt_mode, data: { method: :patch, url: admin_wechat_app_path(model), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
+    <label></label>
+  </div>
+</td>
+<td>
+  <div data-controller="input">
+    <%= check_box_tag '[model]enabled', nil, model.enabled, data: { method: :patch, url: admin_wechat_app_path(model), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
+    <label></label>
+  </div>
+</td>
+<td>
+  <%= link_to admin_wechat_menus_path(appid: model.appid), aria: { label: t('wechat.admin.wechat_menus.index.title') }, class: 'button is-small is-rounded is-light' do %>
+    <i class="fas fa-bars"></i>
+  <% end %>
+  <%= link_to admin_wechat_app_wechat_responses_path(model), aria: { label: t('wechat.admin.wechat_responses.index.title') }, class: 'button is-small is-rounded is-light' do %>
+    <i class="fas fa-reply-all"></i>
+  <% end %>
+  <%= link_to admin_wechat_app_wechat_requests_path(model), aria: { label: t('wechat.admin.wechat_requests.index.title') }, class: 'button is-small is-rounded is-light' do %>
+    <i class="fas fa-comments"></i>
+  <% end %>
+  <%= link_to admin_wechat_app_wechat_tags_path(model), aria: { label: t('wechat.admin.wechat_tags.index.title') }, class: 'button is-small is-rounded is-light' do %>
+    <i class="fas fa-user-tag"></i>
+  <% end %>
+  <%= link_to admin_wechat_app_wechat_templates_path(model), aria: { label: t('wechat.admin.wechat_templates.index.title') }, class: 'button is-small is-rounded is-light' do %>
+    <i class="fas fa-inbox"></i>
+  <% end %>
+</td>

@@ -1,5 +1,5 @@
 <%= render layout: 'index_table', locals: { cache_key: WechatRequest.column_names.hash } do %>
-  <%= render partial: 'index_tbody', collection: @wechat_requests, as: :wechat_request %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @wechat_requests, as: :wechat_request %>
 <% end %>
 
 <%= paginate @wechat_requests %>

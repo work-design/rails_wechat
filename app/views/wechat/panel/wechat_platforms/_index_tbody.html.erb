@@ -7,9 +7,9 @@
     <p><%= wechat_platform.encoding_aes_key %></p>
     <p><%= wechat_platform.verify_ticket %></p>
     <p><%= wechat_platform.access_token %></p>
-    <p><time><%= wechat_platform.access_token_expires_at.to_s(:rfc822) if wechat_platform.access_token_expires_at %></time></p>
+    <p><time data-controller="time"><%= wechat_platform.access_token_expires_at.to_s(:rfc822) if wechat_platform.access_token_expires_at %></time></p>
     <p><%= wechat_platform.pre_auth_code %></p>
-    <p><time><%= wechat_platform.pre_auth_code_expires_at.to_s(:rfc822) if wechat_platform.pre_auth_code_expires_at %></time></p>
+    <p><time data-controller="time"><%= wechat_platform.pre_auth_code_expires_at.to_s(:rfc822) if wechat_platform.pre_auth_code_expires_at %></time></p>
   </td>
   <td>
     <%= link_to wechat_platform.auth_url, aria: { label: '测试授权' }, class: 'button is-small is-rounded is-light' do %>
@@ -18,13 +18,13 @@
     <%= link_to({ controller: 'wechat_agencies', wechat_platform_id: wechat_platform }, aria: { label: t('wechat.panel.wechat_agencies.index.title') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-door-open"></i>
     <% end %>
-    <%= link_to({ action: 'show', id: wechat_platform.id }, aria: { label: t('.show') }, remote: true, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ action: 'show', id: wechat_platform.id }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-info"></i>
     <% end %>
-    <%= link_to({ action: 'edit', id: wechat_platform.id }, aria: { label: t('.edit') }, remote: true, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ action: 'edit', id: wechat_platform.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
-    <%= link_to({ action: 'destroy', id: wechat_platform.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, remote: true, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ action: 'destroy', id: wechat_platform.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-trash-alt"></i>
     <% end %>
   </td>
