@@ -1,9 +1,6 @@
-<%= form_with model: @wechat_template do |f| %>
-  <%= render 'shared/error_messages', target: @wechat_template %>
-  <%= f.text_field :template_id %>
-  <%= f.text_field :title %>
-  <%= f.text_field :content %>
-  <%= f.text_field :example %>
-  <%= f.text_field :template_type %>
-  <%= f.submit %>
-<% end %>
+<%= render 'shared/error_messages', target: f.object %>
+<%= f.text_field :template_id %>
+<%= f.text_field :title %>
+<%= f.text_field :content %>
+<%= f.text_field :example %>
+<%= f.text_field :template_type %>

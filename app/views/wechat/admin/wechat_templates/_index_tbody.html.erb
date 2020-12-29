@@ -1,15 +1,13 @@
-<tr>
-  <td><%= wechat_template.template_id %></td>
-  <td><%= wechat_template.title %></td>
-  <td>
-    <p><%= wechat_template.content %></p>
-    <p class="has-text-grey"><p><%= wechat_template.example %></p></p>
-  </td>
-  <td><%= wechat_template.template_type %></td>
-  <td>
-    <div data-controller="input">
-      <%= check_box_tag '', nil, true, data: { method: :delete, url: admin_wechat_app_wechat_template_path(@wechat_app, wechat_template), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
-      <label></label>
-    </div>
-  </td>
-</tr>
+<td><%= model.template_id %></td>
+<td><%= model.title %></td>
+<td>
+  <p><%= model.content %></p>
+  <p class="has-text-grey"><p><%= model.example %></p></p>
+</td>
+<td><%= model.template_type %></td>
+<td>
+  <div data-controller="input">
+    <%= check_box_tag '', nil, true, data: { method: :delete, url: admin_wechat_app_wechat_template_path(@wechat_app, model), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
+    <label></label>
+  </div>
+</td>
