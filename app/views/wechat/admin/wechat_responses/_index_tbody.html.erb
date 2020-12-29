@@ -1,43 +1,27 @@
-<tr>
-  <td>
-    <%= wechat_response.match_value %>
-    <%= image_tag wechat_response.qrcode_file, class: 'image is-32x32' if wechat_response.qrcode_file.attached? %>
-  </td>
-  <td>
-    <div class="ui toggle checkbox">
-      <%= check_box_tag '[wechat_response]contain', nil, wechat_response.contain, data: { method: :patch, url: admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), submit: true }, id: nil %>
-    </div>
-  </td>
-  <td>
-    <p><time data-controller="time"><%= wechat_response.created_at.to_s(:rfc822) %></time></p>
-    <p><time data-controller="time"><%= wechat_response.expire_at.to_s(:rfc822) if wechat_response.expire_at %></time></p>
-  </td>
-  <td>
-    <% wechat_response.wechat_response_requests.each do |wechat_response_request| %>
-      <p><%= WechatRequest.enum_i18n(:type, wechat_response_request.request_type) %></p>
-    <% end %>
-  </td>
-  <td>
-    <p>
-      <span><%= wechat_response.effective_type %></span>
-      <%= link_to reply_admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
-        <i class="fas fa-pencil-alt"></i>
-      <% end %>
-    </p>
-    <p><%= wechat_response.effective_id %></p>
-  </td>
-  <td>
-    <%= link_to admin_wechat_response_wechat_extractors_path(wechat_response), aria: { label: t('wechat.admin.wechat_extractors.index.title') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-expand-alt"></i>
-    <% end %>
-    <%= link_to admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-info"></i>
-    <% end %>
-    <%= link_to edit_admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
+<td>
+  <%= model.match_value %>
+  <%= image_tag model.qrcode_file, class: 'image is-32x32' if model.qrcode_file.attached? %>
+</td>
+<td>
+  <div class="ui toggle checkbox">
+    <%= check_box_tag '[model]contain', nil, model.contain, data: { method: :patch, url: admin_wechat_app_wechat_response_path(@wechat_app, model), submit: true }, id: nil %>
+  </div>
+</td>
+<td>
+  <p><time data-controller="time"><%= model.created_at.to_s(:rfc822) %></time></p>
+  <p><time data-controller="time"><%= model.expire_at.to_s(:rfc822) if model.expire_at %></time></p>
+</td>
+<td>
+  <% model.wechat_response_requests.each do |wechat_response_request| %>
+    <p><%= WechatRequest.enum_i18n(:type, wechat_response_request.request_type) %></p>
+  <% end %>
+</td>
+<td>
+  <p>
+    <span><%= model.effective_type %></span>
+    <%= link_to({ action: 'edit_reply', id: model.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
-    <%= link_to admin_wechat_app_wechat_response_path(@wechat_app, wechat_response), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-trash-alt"></i>
-    <% end %>
-  </td>
-</tr>
+  </p>
+  <p><%= model.effective_id %></p>
+</td>

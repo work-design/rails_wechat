@@ -1,24 +1,6 @@
-<tr>
-  <td><%= wechat_menu.type_i18n %></td>
-  <td><%= wechat_menu.name %></td>
-  <td><%= wechat_menu.value %></td>
-  <td><%= wechat_menu.mp_appid %></td>
-  <td><%= wechat_menu.mp_pagepath %></td>
-  <td><%= wechat_menu.position %></td>
-  <td>
-    <% if wechat_menu.appid.to_s == params[:appid] %>
-      <% if wechat_menu.type == 'ParentMenu' %>
-        <%= link_to edit_parent_admin_wechat_menu_path(wechat_menu), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-pencil-alt"></i>
-        <% end %>
-      <% else %>
-        <%= link_to edit_admin_wechat_menu_path(wechat_menu), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fas fa-pencil-alt"></i>
-        <% end %>
-      <% end %>
-      <%= link_to admin_wechat_menu_path(wechat_menu), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-        <i class="fas fa-trash-alt"></i>
-      <% end %>
-    <% end %>
-  </td>
-</tr>
+<td><%= model.type_i18n %></td>
+<td><%= model.name %></td>
+<td><%= model.value %></td>
+<td><%= model.mp_appid %></td>
+<td><%= model.mp_pagepath %></td>
+<td><%= model.position %></td>

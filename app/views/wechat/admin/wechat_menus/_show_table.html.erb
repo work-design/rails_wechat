@@ -1,32 +1,20 @@
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th>
-        <%= link_to t('.edit'), edit_admin_wechat_menu_path(@wechat_menu), class: 'ui mini blue right floated button' %>
-      </th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= WechatMenu.human_attribute_name(:menu_type) %></td>
-      <td><%= @wechat_menu.menu_type %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatMenu.human_attribute_name(:name) %></td>
-      <td><%= @wechat_menu.name %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatMenu.human_attribute_name(:value) %></td>
-      <td><%= @wechat_menu.value %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatMenu.human_attribute_name(:mp_appid) %></td>
-      <td><%= @wechat_menu.mp_appid %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= WechatMenu.human_attribute_name(:mp_pagepath) %></td>
-      <td><%= @wechat_menu.mp_pagepath %></td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= WechatMenu.human_attribute_name(:menu_type) %></td>
+  <td><%= @wechat_menu.menu_type %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatMenu.human_attribute_name(:name) %></td>
+  <td><%= @wechat_menu.name %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatMenu.human_attribute_name(:value) %></td>
+  <td><%= @wechat_menu.value %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatMenu.human_attribute_name(:mp_appid) %></td>
+  <td><%= @wechat_menu.mp_appid %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= WechatMenu.human_attribute_name(:mp_pagepath) %></td>
+  <td><%= @wechat_menu.mp_pagepath %></td>
+</tr>
