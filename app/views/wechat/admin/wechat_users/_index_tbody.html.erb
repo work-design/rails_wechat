@@ -1,21 +1,11 @@
-<tr>
-  <td><%= wechat_user.name %></td>
-  <td><%= wechat_user.uid %></td>
-  <td>
-    <% wechat_user.wechat_tags.each do |wechat_tag| %>
-      <span class="button is-small"><%= wechat_tag.name %></span>
-    <% end %>
-  </td>
-  <td><%= wechat_user.remark %></td>
-  <td><%= wechat_user.unionid %></td>
-  <td><%= wechat_user.account_id %></td>
-  <td><%= wechat_user.user_id %></td>
-  <td>
-    <%= link_to({ action: 'edit', id: wechat_user.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-pencil-alt"></i>
-    <% end %>
-    <%= link_to({ action: 'destroy', id: wechat_user.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-trash"></i>
-    <% end %>
-  </td>
-</tr>
+<td><%= model.name %></td>
+<td><%= model.uid %></td>
+<td>
+  <% model.wechat_tags.each do |wechat_tag| %>
+    <span class="tag"><%= wechat_tag.name %></span>
+  <% end %>
+</td>
+<td><%= model.remark %></td>
+<td><%= model.unionid %></td>
+<td><%= model.account_id %></td>
+<td><%= model.user_id %></td>

@@ -11,9 +11,9 @@ module Wechat::Api::Public::User
 
   def tag_create(tag_name, tag_id = nil)
     if tag_id.present?
-      r = post 'tags/update', { tag: { id: tag_id, name: tag_name } }, base: BASE
+      r = post 'tags/update', tag: { id: tag_id, name: tag_name }, base: BASE
     else
-      r = post 'tags/create', { tag: { name: tag_name } }, base: BASE
+      r = post 'tags/create', tag: { name: tag_name }, base: BASE
     end
 
     if r['errcode'] == 0
