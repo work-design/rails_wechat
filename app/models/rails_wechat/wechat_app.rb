@@ -32,6 +32,8 @@ module RailsWechat::WechatApp
     has_many :post_syncs, as: :synced, dependent: :delete_all
     has_many :posts, through: :post_syncs
     has_many :organ_domains, foreign_key: :appid, primary_key: :appid
+    has_one :wechat_agency, foreign_key: :appid, primary_key: :appid
+    has_many :wechat_agencies, foreign_key: :appid, primary_key: :appid
 
     scope :valid, -> { where(enabled: true) }
 
@@ -116,7 +118,13 @@ module RailsWechat::WechatApp
 
   def api
     return @api if defined? @api
-    @api = Wechat::Api::Public.new(self)
+    if secret.present?
+      @api = Wechat::Api::Public.new(self)
+    elsif wechat_agency
+      @api = Wechat::Api::Public.new(wechat_agency)
+    else
+      @api = nil
+    end
   end
 
   def oauth2_qrcode_url
