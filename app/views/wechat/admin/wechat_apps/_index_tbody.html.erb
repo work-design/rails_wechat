@@ -8,16 +8,18 @@
   <p><%= model.key %></p>
 </td>
 <td>
-  <div data-controller="input">
-    <%= check_box_tag '[model]encrypt_mode', nil, model.encrypt_mode, data: { method: :patch, url: admin_wechat_app_path(model), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
-    <label></label>
-  </div>
+  <%= form_with theme: nil, model: model, scope: :wechat_app, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :encrypt_mode, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+    <%= f.submit nil, data: { input_target: 'submit' }, style: 'display: none' %>
+  <% end %>
 </td>
 <td>
-  <div data-controller="input">
-    <%= check_box_tag '[model]enabled', nil, model.enabled, data: { method: :patch, url: admin_wechat_app_path(model), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
-    <label></label>
-  </div>
+  <%= form_with theme: nil, model: model, scope: :wechat_app, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :enabled, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+    <%= f.submit nil, data: { input_target: 'submit' }, style: 'display: none' %>
+  <% end %>
 </td>
 <td>
   <%= link_to admin_wechat_menus_path(appid: model.appid), aria: { label: t('wechat.admin.wechat_menus.index.title') }, class: 'button is-small is-rounded is-light' do %>
