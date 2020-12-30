@@ -1,16 +1,5 @@
-<%= render 'filter' %>
-
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-    
-    </tr>
-  </thead>
-  <tbody>
-  <% @wechat_notices.each do |wechat_notice| %>
-  
-  <% end %>
-  </tbody>
-</table>
+<%= render layout: 'index_table', locals: { cache_key: WechatNotice.column_names.hash } do %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @wechat_notices, as: :model %>
+<% end %>
 
 <%= paginate @wechat_notices %>

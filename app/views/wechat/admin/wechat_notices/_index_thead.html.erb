@@ -1,8 +1,3 @@
 <th><%= WechatNotice.human_attribute_name(:notifiable_type) %></th>
 <th><%= WechatNotice.human_attribute_name(:code) %></th>
 <th><%= WechatNotice.human_attribute_name(:mappings) %></th>
-<th>
-  <%= link_to new_admin_wechat_template_wechat_notice_path(@wechat_template), class: 'button is-link is-small' do %>
-    <i class="fas fa-plus"></i><%= t('.new') %>
-  <% end %>
-</th>
