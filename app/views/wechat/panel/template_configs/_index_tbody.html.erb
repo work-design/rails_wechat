@@ -1,23 +1,10 @@
-<tr>
-  <td><%= template_config.type_i18n %></td>
-  <td>
-    <p><%= template_config.title %></p>
-    <p><%= template_config.description %></p>
-  </td>
-  <td><%= template_config.tid %></td>
-  <td>
-    <p><%= template_config.notifiable_type %></p>
-    <p><%= template_config.code %></p>
-  </td>
-  <td>
-    <%= link_to({ action: 'show', id: template_config.id }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-info"></i>
-    <% end %>
-    <%= link_to({ action: 'edit', id: template_config.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-pencil-alt"></i>
-    <% end %>
-    <%= link_to({ action: 'destroy', id: template_config.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-trash-alt"></i>
-    <% end %>
-  </td>
-</tr>
+<td><%= model.type_i18n %></td>
+<td>
+  <p><%= model.title %></p>
+  <p><%= model.description %></p>
+</td>
+<td><%= model.tid %></td>
+<td>
+  <p><%= model.notifiable_type %></p>
+  <p><%= model.code %></p>
+</td>

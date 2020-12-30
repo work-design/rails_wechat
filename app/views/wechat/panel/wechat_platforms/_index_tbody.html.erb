@@ -1,31 +1,12 @@
-<tr>
-  <td><%= wechat_platform.name %></td>
-  <td>
-    <p><%= wechat_platform.appid %></p>
-    <p><%= wechat_platform.secret %></p>
-    <p><%= wechat_platform.token %></p>
-    <p><%= wechat_platform.encoding_aes_key %></p>
-    <p><%= wechat_platform.verify_ticket %></p>
-    <p><%= wechat_platform.access_token %></p>
-    <p><time data-controller="time"><%= wechat_platform.access_token_expires_at.to_s(:rfc822) if wechat_platform.access_token_expires_at %></time></p>
-    <p><%= wechat_platform.pre_auth_code %></p>
-    <p><time data-controller="time"><%= wechat_platform.pre_auth_code_expires_at.to_s(:rfc822) if wechat_platform.pre_auth_code_expires_at %></time></p>
-  </td>
-  <td>
-    <%= link_to wechat_platform.auth_url, aria: { label: '测试授权' }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fas fa-vial"></i>
-    <% end if wechat_platform.auth_url %>
-    <%= link_to({ controller: 'wechat_agencies', wechat_platform_id: wechat_platform }, aria: { label: t('wechat.panel.wechat_agencies.index.title') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-door-open"></i>
-    <% end %>
-    <%= link_to({ action: 'show', id: wechat_platform.id }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-info"></i>
-    <% end %>
-    <%= link_to({ action: 'edit', id: wechat_platform.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-pencil-alt"></i>
-    <% end %>
-    <%= link_to({ action: 'destroy', id: wechat_platform.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-trash-alt"></i>
-    <% end %>
-  </td>
-</tr>
+<td><%= model.name %></td>
+<td>
+  <p><%= model.appid %></p>
+  <p><%= model.secret %></p>
+  <p><%= model.token %></p>
+  <p><%= model.encoding_aes_key %></p>
+  <p><%= model.verify_ticket %></p>
+  <p><%= model.access_token %></p>
+  <p><time data-controller="time"><%= model.access_token_expires_at.to_s(:rfc822) if model.access_token_expires_at %></time></p>
+  <p><%= model.pre_auth_code %></p>
+  <p><time data-controller="time"><%= model.pre_auth_code_expires_at.to_s(:rfc822) if model.pre_auth_code_expires_at %></time></p>
+</td>

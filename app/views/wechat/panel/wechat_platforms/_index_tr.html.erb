@@ -1,0 +1,22 @@
+<tr id="tr_<%= model.id %>" data-controller="show" data-action="mouseenter->show#show mouseleave->show#hide">
+  <%= yield %>
+  <td>
+    <turbo-frame data-show-target="item" style="visibility: hidden">
+      <%= link_to model.auth_url, data: { turbo_frame: '_top' }, aria: { label: '测试授权' }, class: 'button is-small is-rounded is-light' do %>
+        <i class="fas fa-vial"></i>
+      <% end if model.auth_url %>
+      <%= link_to({ controller: 'wechat_agencies', model_id: model }, data: { turbo_frame: '_top' }, aria: { label: t('wechat.panel.wechat_agencies.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fas fa-door-open"></i>
+      <% end %>
+      <%= link_to({ action: 'show', id: model.id }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fas fa-info"></i>
+      <% end %>
+      <%= link_to({ action: 'edit', id: model.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fas fa-pencil-alt"></i>
+      <% end %>
+      <%= button_to({ action: 'destroy', id: model.id }, method: :delete, data: { confirm: t('.confirm') }, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+    </turbo-frame>
+  </td>
+</tr>

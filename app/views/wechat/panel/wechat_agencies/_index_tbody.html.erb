@@ -1,30 +1,17 @@
-<tr>
-  <td><%= wechat_agency.appid %></td>
-  <td>
-    <pre><%= wechat_agency.access_token %></pre>
-    <p><time data-controller="time"><%= wechat_agency.access_token_expires_at.to_s(:rfc822) %></time></p>
-    <pre><%= wechat_agency.refresh_token %></pre>
-  </td>
-  <td><%= simple_format wechat_agency.func_infos %></td>
-  <td>
-    <p>
-      <%= image_tag wechat_agency.head_img, class: 'image is-24x24' if wechat_agency.head_img %>
-      <%= wechat_agency.nick_name %>
-    </p>
-    <p><%= wechat_agency.principal_name %></p>
-    <p><%= wechat_agency.user_name %></p>
-    <p><%= wechat_agency.alias_name %></p>
-  </td>
-  <td><%= image_tag wechat_agency.qrcode_url, class: 'image is-128x128' if wechat_agency.qrcode_url %></td>
-  <td>
-    <%= link_to({ action: 'show', id: wechat_agency.id }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-info"></i>
-    <% end %>
-    <%= link_to({ action: 'edit', id: wechat_agency.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-pencil-alt"></i>
-    <% end %>
-    <%= link_to({ action: 'destroy', id: wechat_agency.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fas fa-trash-alt"></i>
-    <% end %>
-  </td>
-</tr>
+<td><%= model.appid %></td>
+<td>
+  <pre><%= model.access_token %></pre>
+  <p><time data-controller="time"><%= model.access_token_expires_at.to_s(:rfc822) %></time></p>
+  <pre><%= model.refresh_token %></pre>
+</td>
+<td><%= simple_format model.func_infos %></td>
+<td>
+  <p>
+    <%= image_tag model.head_img, class: 'image is-24x24' if model.head_img %>
+    <%= model.nick_name %>
+  </p>
+  <p><%= model.principal_name %></p>
+  <p><%= model.user_name %></p>
+  <p><%= model.alias_name %></p>
+</td>
+<td><%= image_tag model.qrcode_url, class: 'image is-128x128' if model.qrcode_url %></td>
