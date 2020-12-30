@@ -12,4 +12,12 @@ module RailsWechat::WechatRequest::WechatRequestClick
     }.compact
   end
 
+  def reply_from_rule
+    filtered = RailsWechat.config.rules.find do |_, rule|
+      rule.slice(:msg_type, :event, :body) == self.rule_tag
+    end
+
+    filtered[1][:proc].call(self) if filtered.present?
+  end
+
 end
