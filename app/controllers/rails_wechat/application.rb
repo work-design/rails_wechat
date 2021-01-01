@@ -26,7 +26,7 @@ module RailsWechat::Application
     return @current_wechat_app if defined?(@current_wechat_app)
 
     @current_wechat_app = current_organ_domain&.wechat_app
-    @current_wechat_app = WechatApp.default_where(default_params).default unless @current_wechat_app
+    @current_wechat_app = WechatApp.default_where(default_params).first unless @current_wechat_app
 
     logger.debug "  ---------> Current Wechat App is #{@current_wechat_app&.id}"
     @current_wechat_app

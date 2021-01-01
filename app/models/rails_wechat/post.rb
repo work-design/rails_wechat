@@ -16,7 +16,7 @@ module RailsWechat::Post
 
   def wechat_app
     return @wechat_app if defined? @wechat_app
-    @wechat_app = WechatApp.default
+    @wechat_app = WechatApp.first
   end
 
   def xx
