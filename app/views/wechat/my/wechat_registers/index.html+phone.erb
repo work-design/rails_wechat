@@ -8,7 +8,7 @@
 
 <% if @wechat_registers.blank? %>
 <div class="weui-panel">
-  <%= link_to new_my_wechat_register_path, class: 'weui-btn_cell weui-btn_cell-primary' do %>
+  <%= link_to({ action: 'new' }, class: 'weui-btn_cell weui-btn_cell-primary') do %>
     <span class="weui-btn_cell__icon"><i class="fas fa-plus"></i></span>
     <span><%= t('.new') %></span>
   <% end %>
