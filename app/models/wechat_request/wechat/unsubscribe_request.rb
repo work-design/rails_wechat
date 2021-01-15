@@ -1,3 +1,5 @@
-class UnsubscribeRequest < WechatRequest
-  include RailsWechat::WechatRequest::UnsubscribeRequest
-end unless defined? UnsubscribeRequest
+module Wechat
+  class UnsubscribeRequest < WechatRequest
+    include RailsWechat::WechatRequest::UnsubscribeRequest
+  end
+end

@@ -1,3 +1,5 @@
-class TextRequest < WechatRequest
-  include RailsWechat::WechatRequest::TextRequest
-end unless defined? TextRequest
+module Wechat
+  class TextRequest < WechatRequest
+    include RailsWechat::WechatRequest::TextRequest
+  end
+end

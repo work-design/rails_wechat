@@ -1,3 +1,5 @@
-class WechatRequestImage < WechatRequest
-  include RailsWechat::WechatRequest::WechatRequestImage
-end unless defined? WechatRequestImage
+module Wechat
+  class WechatRequestImage < WechatRequest
+    include RailsWechat::WechatRequest::WechatRequestImage
+  end
+end

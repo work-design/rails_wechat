@@ -1,3 +1,5 @@
-class ScanRequest < WechatRequest
-  include RailsWechat::WechatRequest::ScanRequest
+module Wechat
+  class ScanRequest < WechatRequest
+    include RailsWechat::WechatRequest::ScanRequest
+  end
 end

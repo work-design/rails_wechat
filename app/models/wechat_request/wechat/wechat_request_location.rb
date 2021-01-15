@@ -1,3 +1,5 @@
-class WechatRequestLocation < WechatRequest
-  include RailsWechat::WechatRequest::WechatRequestLocation
-end unless defined? WechatRequestLocation
+module Wechat
+  class WechatRequestLocation < WechatRequest
+    include RailsWechat::WechatRequest::WechatRequestLocation
+  end
+end

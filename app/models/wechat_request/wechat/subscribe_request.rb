@@ -1,3 +1,5 @@
-class SubscribeRequest < WechatRequest
-  include RailsWechat::WechatRequest::SubscribeRequest
-end unless defined? SubscribeRequest
+module Wechat
+  class SubscribeRequest < WechatRequest
+    include RailsWechat::WechatRequest::SubscribeRequest
+  end
+end

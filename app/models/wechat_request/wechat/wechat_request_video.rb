@@ -1,3 +1,5 @@
-class WechatRequestVideo < WechatRequest
-  include RailsWechat::WechatRequest::WechatRequestVideo
-end unless defined? WechatRequestVideo
+module Wechat
+  class WechatRequestVideo < WechatRequest
+    include RailsWechat::WechatRequest::WechatRequestVideo
+  end
+end

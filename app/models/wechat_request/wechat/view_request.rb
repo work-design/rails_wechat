@@ -1,3 +1,5 @@
-class ViewRequest < WechatRequest
-  include RailsWechat::WechatRequest::ViewRequest
-end unless defined? ViewRequest
+module Wechat
+  class ViewRequest < WechatRequest
+    include RailsWechat::WechatRequest::ViewRequest
+  end
+end

@@ -1,3 +1,5 @@
-class WechatRequestVoice < WechatRequest
-  include RailsWechat::WechatRequest::WechatRequestVoice
-end unless defined? WechatRequestVoice
+module Wechat
+  class WechatRequestVoice < WechatRequest
+    include RailsWechat::WechatRequest::WechatRequestVoice
+  end
+end

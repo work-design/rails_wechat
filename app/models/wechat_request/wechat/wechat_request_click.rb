@@ -1,3 +1,5 @@
-class WechatRequestClick < WechatRequest
-  include RailsWechat::WechatRequest::WechatRequestClick
-end unless defined? WechatRequestClick
+module Wechat
+  class WechatRequestClick < WechatRequest
+    include RailsWechat::WechatRequest::WechatRequestClick
+  end
+end
