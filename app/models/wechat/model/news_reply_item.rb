@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::NewsReplyItem
+  module Model::NewsReplyItem
     extend ActiveSupport::Concern
 
     included do

@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatTicket
+  module Model::WechatTicket
     extend ActiveSupport::Concern
 
     included do

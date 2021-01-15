@@ -1,8 +1,8 @@
 module Wechat
-  module RailsWechat::Account
+  module Model::Account
     extend ActiveSupport::Concern
 
-    include RailsWechat::EffectiveModule
+    include Model::EffectiveModule
     included do
       has_one :wechat_response, as: :effective
     end

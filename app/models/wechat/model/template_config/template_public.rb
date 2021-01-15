@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::TemplateConfig::TemplatePublic
+  module Model::TemplateConfig::TemplatePublic
     extend ActiveSupport::Concern
 
     included do

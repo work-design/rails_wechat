@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::TemplateKeyWord
+  module Model::TemplateKeyWord
     extend ActiveSupport::Concern
 
     included do

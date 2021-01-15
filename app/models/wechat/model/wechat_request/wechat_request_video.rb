@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatRequest::WechatRequestVideo
+  module Model::WechatRequest::WechatRequestVideo
     extend ActiveSupport::Concern
 
     included do

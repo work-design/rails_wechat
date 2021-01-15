@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatNotice::ProgramNotice
+  module Model::WechatNotice::ProgramNotice
     BASE = 'https://api.weixin.qq.com/cgi-bin/'
 
     # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.send.html

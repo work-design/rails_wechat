@@ -1,9 +1,27 @@
 GIT
+  remote: https://github.com/hotwired/turbo-rails.git
+  revision: cf5f3cb4d61b50f4c19b0b55aebba00c6f428e1a
+  branch: main
+  specs:
+    turbo-rails (0.5.4)
+      rails (>= 6.0.0)
+
+GIT
   remote: https://github.com/qinmingyuan/default_form.git
   revision: 1e72c95dd3d13dbfa70661d63bdf644169c8d03f
   specs:
     default_form (1.5.1)
       rails_com (~> 1.2)
+
+GIT
+  remote: https://github.com/rails/webpacker.git
+  revision: 6efb3ee5367dbced7b76b7daec35684db4d9570a
+  specs:
+    webpacker (6.0.0.beta.2)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
@@ -28,6 +46,13 @@ GIT
       kaminari
       rails (~> 6.0)
 
+GIT
+  remote: https://github.com/work-design/rails_ui.git
+  revision: 9f7e5f7240ed3ae41c069c26a0d96cd4700bd512
+  specs:
+    rails_ui (0.1.0)
+      rails
+
 PATH
   remote: .
   specs:
@@ -41,60 +66,60 @@ GEM
   specs:
     acme-client (2.0.7)
       faraday (>= 0.17, < 2.0.0)
-    actioncable (6.1.0)
-      actionpack (= 6.1.0)
-      activesupport (= 6.1.0)
+    actioncable (6.1.1)
+      actionpack (= 6.1.1)
+      activesupport (= 6.1.1)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailbox (6.1.0)
-      actionpack (= 6.1.0)
-      activejob (= 6.1.0)
-      activerecord (= 6.1.0)
-      activestorage (= 6.1.0)
-      activesupport (= 6.1.0)
+    actionmailbox (6.1.1)
+      actionpack (= 6.1.1)
+      activejob (= 6.1.1)
+      activerecord (= 6.1.1)
+      activestorage (= 6.1.1)
+      activesupport (= 6.1.1)
       mail (>= 2.7.1)
-    actionmailer (6.1.0)
-      actionpack (= 6.1.0)
-      actionview (= 6.1.0)
-      activejob (= 6.1.0)
-      activesupport (= 6.1.0)
+    actionmailer (6.1.1)
+      actionpack (= 6.1.1)
+      actionview (= 6.1.1)
+      activejob (= 6.1.1)
+      activesupport (= 6.1.1)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (6.1.0)
-      actionview (= 6.1.0)
-      activesupport (= 6.1.0)
+    actionpack (6.1.1)
+      actionview (= 6.1.1)
+      activesupport (= 6.1.1)
       rack (~> 2.0, >= 2.0.9)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
-    actiontext (6.1.0)
-      actionpack (= 6.1.0)
-      activerecord (= 6.1.0)
-      activestorage (= 6.1.0)
-      activesupport (= 6.1.0)
+    actiontext (6.1.1)
+      actionpack (= 6.1.1)
+      activerecord (= 6.1.1)
+      activestorage (= 6.1.1)
+      activesupport (= 6.1.1)
       nokogiri (>= 1.8.5)
-    actionview (6.1.0)
-      activesupport (= 6.1.0)
+    actionview (6.1.1)
+      activesupport (= 6.1.1)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    activejob (6.1.0)
-      activesupport (= 6.1.0)
+    activejob (6.1.1)
+      activesupport (= 6.1.1)
       globalid (>= 0.3.6)
-    activemodel (6.1.0)
-      activesupport (= 6.1.0)
-    activerecord (6.1.0)
-      activemodel (= 6.1.0)
-      activesupport (= 6.1.0)
-    activestorage (6.1.0)
-      actionpack (= 6.1.0)
-      activejob (= 6.1.0)
-      activerecord (= 6.1.0)
-      activesupport (= 6.1.0)
+    activemodel (6.1.1)
+      activesupport (= 6.1.1)
+    activerecord (6.1.1)
+      activemodel (= 6.1.1)
+      activesupport (= 6.1.1)
+    activestorage (6.1.1)
+      actionpack (= 6.1.1)
+      activejob (= 6.1.1)
+      activerecord (= 6.1.1)
+      activesupport (= 6.1.1)
       marcel (~> 0.3.1)
       mimemagic (~> 0.3.2)
-    activesupport (6.1.0)
+    activesupport (6.1.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -152,7 +177,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    loofah (2.8.0)
+    loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -169,6 +194,7 @@ GEM
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    pg (1.2.3)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -177,35 +203,37 @@ GEM
     pry-stack_explorer (0.6.0)
       binding_of_caller (~> 1.0)
       pry (~> 0.13)
+    puma (5.1.1)
+      nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rails (6.1.0)
-      actioncable (= 6.1.0)
-      actionmailbox (= 6.1.0)
-      actionmailer (= 6.1.0)
-      actionpack (= 6.1.0)
-      actiontext (= 6.1.0)
-      actionview (= 6.1.0)
-      activejob (= 6.1.0)
-      activemodel (= 6.1.0)
-      activerecord (= 6.1.0)
-      activestorage (= 6.1.0)
-      activesupport (= 6.1.0)
+    rails (6.1.1)
+      actioncable (= 6.1.1)
+      actionmailbox (= 6.1.1)
+      actionmailer (= 6.1.1)
+      actionpack (= 6.1.1)
+      actiontext (= 6.1.1)
+      actionview (= 6.1.1)
+      activejob (= 6.1.1)
+      activemodel (= 6.1.1)
+      activerecord (= 6.1.1)
+      activestorage (= 6.1.1)
+      activesupport (= 6.1.1)
       bundler (>= 1.15.0)
-      railties (= 6.1.0)
+      railties (= 6.1.1)
       sprockets-rails (>= 2.0.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.3.0)
       loofah (~> 2.3)
-    railties (6.1.0)
-      actionpack (= 6.1.0)
-      activesupport (= 6.1.0)
+    railties (6.1.1)
+      actionpack (= 6.1.1)
+      activesupport (= 6.1.1)
       method_source
       rake (>= 0.8.7)
       thor (~> 1.0)
@@ -231,11 +259,6 @@ GEM
     timers (4.3.2)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    webpacker (5.2.1)
-      activesupport (>= 5.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 5.2)
-      semantic_range (>= 2.3.0)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -253,14 +276,18 @@ DEPENDENCIES
   factory_bot_rails
   jbuilder
   kaminari
+  pg
   pry-rails
   pry-stack_explorer
+  puma
   rails_auth!
   rails_com!
+  rails_ui!
   rails_wechat!
   sdoc
   sqlite3
-  webpacker
+  turbo-rails!
+  webpacker!
 
 BUNDLED WITH
    2.2.3

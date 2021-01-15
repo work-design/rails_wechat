@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatReply::SuccessReply
+  module Model::WechatReply::SuccessReply
 
     def to_wechat
       {}

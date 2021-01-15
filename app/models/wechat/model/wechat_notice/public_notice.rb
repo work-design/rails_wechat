@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatNotice::PublicNotice
+  module Model::WechatNotice::PublicNotice
     BASE = 'https://api.weixin.qq.com/cgi-bin/'
 
     def do_send

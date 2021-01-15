@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatAgency
+  module Model::WechatAgency
     SERVICE_TYPE = {
       '0' => 'WechatRead',
       '1' => 'WechatRead',

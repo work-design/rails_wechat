@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::Organ
+  module Model::Organ
     extend ActiveSupport::Concern
 
     included do

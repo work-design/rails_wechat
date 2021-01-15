@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatMessageTag
+  module Model::WechatMessageTag
     extend ActiveSupport::Concern
 
     included do

@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatRequest::WechatRequestVoice
+  module Model::WechatRequest::WechatRequestVoice
     extend ActiveSupport::Concern
 
     included do

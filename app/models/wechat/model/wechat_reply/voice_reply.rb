@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatReply::VoiceReply
+  module Model::WechatReply::VoiceReply
     extend ActiveSupport::Concern
 
     included do

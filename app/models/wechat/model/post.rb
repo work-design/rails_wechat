@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::Post
+  module Model::Post
     extend ActiveSupport::Concern
 
     included do

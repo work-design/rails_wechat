@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::UserTagged
+  module Model::UserTagged
     extend ActiveSupport::Concern
 
     included do

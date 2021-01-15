@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatRequest::SubscribeRequest
+  module Model::WechatRequest::SubscribeRequest
 
     def reply
       r = reply_from_rule

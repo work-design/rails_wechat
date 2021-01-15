@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatRequest::TextRequest
+  module Model::WechatRequest::TextRequest
 
     def reply
       self.wechat_reply = reply_from_rule

@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatMenu
+  module Model::WechatMenu
     extend ActiveSupport::Concern
 
     included do

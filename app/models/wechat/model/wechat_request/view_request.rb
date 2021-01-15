@@ -1,4 +1,4 @@
 module Wechat
-  module RailsWechat::WechatRequest::ViewRequest
+  module Model::WechatRequest::ViewRequest
   end
 end

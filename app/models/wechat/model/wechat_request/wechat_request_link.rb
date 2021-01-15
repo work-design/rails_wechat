@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatRequest::WechatRequestLink
+  module Model::WechatRequest::WechatRequestLink
     extend ActiveSupport::Concern
 
     included do

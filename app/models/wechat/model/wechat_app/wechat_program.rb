@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatApp::WechatProgram
+  module Model::WechatApp::WechatProgram
     extend ActiveSupport::Concern
 
     included do

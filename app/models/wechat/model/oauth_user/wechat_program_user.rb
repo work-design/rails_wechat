@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::OauthUser::WechatProgramUser
+  module Model::OauthUser::WechatProgramUser
     extend ActiveSupport::Concern
 
     included do

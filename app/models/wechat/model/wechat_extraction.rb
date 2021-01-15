@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatExtraction
+  module Model::WechatExtraction
     extend ActiveSupport::Concern
 
     included do

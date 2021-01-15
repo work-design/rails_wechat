@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatReply::TextReply
+  module Model::WechatReply::TextReply
     extend ActiveSupport::Concern
 
     included do

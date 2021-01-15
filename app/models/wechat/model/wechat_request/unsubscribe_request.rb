@@ -1,4 +1,4 @@
 module Wechat
-  module RailsWechat::WechatRequest::UnsubscribeRequest
+  module Model::WechatRequest::UnsubscribeRequest
   end
 end

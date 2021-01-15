@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatRequest::ScanRequest
+  module Model::WechatRequest::ScanRequest
 
     def reply
       r = reply_from_rule

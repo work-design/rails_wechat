@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatTag
+  module Model::WechatTag
     SYS_TAG = ['2'].freeze
     extend ActiveSupport::Concern
 

@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::EffectiveModule
+  module Model::EffectiveModule
 
     def invoke_effect(wechat_user)
       p 'please implement in class'

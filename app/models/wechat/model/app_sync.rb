@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::AppSync
+  module Model::AppSync
     extend ActiveSupport::Concern
 
     included do

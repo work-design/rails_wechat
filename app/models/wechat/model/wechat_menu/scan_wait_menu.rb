@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatMenu::ScanWaitMenu
+  module Model::WechatMenu::ScanWaitMenu
     extend ActiveSupport::Concern
 
     included do

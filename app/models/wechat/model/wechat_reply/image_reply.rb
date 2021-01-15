@@ -1,5 +1,5 @@
 module Wechat
-  module RailsWechat::WechatReply::ImageReply
+  module Model::WechatReply::ImageReply
     extend ActiveSupport::Concern
 
     included do
