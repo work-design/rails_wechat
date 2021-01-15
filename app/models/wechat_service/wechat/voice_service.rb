@@ -1,3 +1,5 @@
-class VoiceService < WechatService
-  include RailsWechat::WechatService::VoiceService
-end unless defined? VoiceService
+module Wechat
+  class VoiceService < WechatService
+    include RailsWechat::WechatService::VoiceService
+  end
+end

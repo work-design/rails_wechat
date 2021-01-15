@@ -1,3 +1,5 @@
-class NewsService < WechatService
-  include RailsWechat::WechatService::NewsService
-end unless defined? NewsService
+module Wechat
+  class NewsService < WechatService
+    include RailsWechat::WechatService::NewsService
+  end
+end

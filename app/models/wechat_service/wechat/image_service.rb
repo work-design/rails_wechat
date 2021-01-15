@@ -1,3 +1,5 @@
-class ImageService < WechatService
-  include RailsWechat::WechatService::ImageService
-end unless defined? ImageService
+module Wechat
+  class ImageService < WechatService
+    include RailsWechat::WechatService::ImageService
+  end
+end
