@@ -1,7 +1,9 @@
-module RailsWechat::WechatRequest::WechatRequestVideo
-  extend ActiveSupport::Concern
+module Wechat
+  module RailsWechat::WechatRequest::WechatRequestVideo
+    extend ActiveSupport::Concern
 
-  included do
+    included do
+    end
+
   end
-
 end

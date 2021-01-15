@@ -1,8 +1,9 @@
-module RailsWechat::WechatRequest::WechatRequestLocation
-  extend ActiveSupport::Concern
+module Wechat
+  module RailsWechat::WechatRequest::WechatRequestLocation
+    extend ActiveSupport::Concern
 
-  included do
+    included do
+    end
+
   end
-
 end
-

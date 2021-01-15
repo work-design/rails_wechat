@@ -1,7 +1,9 @@
-module RailsWechat::WechatReply::SuccessReply
+module Wechat
+  module RailsWechat::WechatReply::SuccessReply
 
-  def to_wechat
-    {}
+    def to_wechat
+      {}
+    end
+
   end
-
 end

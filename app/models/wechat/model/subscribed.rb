@@ -1,11 +1,14 @@
-module RailsWechat::Subscribed
-  extend ActiveSupport::Concern
-  included do
-  
+module Wechat
+  module RailsWechat::Subscribed
+    extend ActiveSupport::Concern
+
+    included do
+
+    end
+
+    def to_template
+
+    end
+
   end
-  
-  def to_template
-  
-  end
-  
 end

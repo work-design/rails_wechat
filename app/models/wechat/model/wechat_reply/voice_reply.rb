@@ -1,14 +1,16 @@
-module RailsWechat::WechatReply::VoiceReply
-  extend ActiveSupport::Concern
+module Wechat
+  module RailsWechat::WechatReply::VoiceReply
+    extend ActiveSupport::Concern
 
-  included do
-    attribute :msg_type, :string, default: 'voice'
+    included do
+      attribute :msg_type, :string, default: 'voice'
+    end
+
+    def content
+      {
+        Voice: { MediaId: value }
+      }
+    end
+
   end
-
-  def content
-    {
-      Voice: { MediaId: value }
-    }
-  end
-
 end

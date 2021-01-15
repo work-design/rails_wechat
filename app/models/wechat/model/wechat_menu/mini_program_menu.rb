@@ -1,18 +1,20 @@
-module RailsWechat::WechatMenu::MiniProgramMenu
-  extend ActiveSupport::Concern
+module Wechat
+  module RailsWechat::WechatMenu::MiniProgramMenu
+    extend ActiveSupport::Concern
 
-  included do
-    attribute :menu_type, :string, default: 'miniprogram'
+    included do
+      attribute :menu_type, :string, default: 'miniprogram'
+    end
+
+    def as_json
+      {
+        type: menu_type,
+        name: name,
+        url: value,
+        appid: mp_appid,
+        pagepath: mp_pagepath
+      }
+    end
+
   end
-
-  def as_json
-    {
-      type: menu_type,
-      name: name,
-      url: value,
-      appid: mp_appid,
-      pagepath: mp_pagepath
-    }
-  end
-
 end

@@ -1,33 +1,35 @@
-module RailsWechat::AppSync
-  extend ActiveSupport::Concern
+module Wechat
+  module RailsWechat::AppSync
+    extend ActiveSupport::Concern
 
-  included do
-    has_many :wechat_menus, foreign_key: :appid, primary_key: :appid
-    has_many :wechat_receiveds, foreign_key: :appid, primary_key: :appid
-    has_many :wechat_replies, foreign_key: :appid, primary_key: :appid
-    has_many :wechat_requests, foreign_key: :appid, primary_key: :appid
-    has_many :wechat_responses, foreign_key: :appid, primary_key: :appid
-    has_many :wechat_services, foreign_key: :appid, primary_key: :appid
-    has_many :wechat_users, foreign_key: :app_id, primary_key: :appid
-  end
+    included do
+      has_many :wechat_menus, foreign_key: :appid, primary_key: :appid
+      has_many :wechat_receiveds, foreign_key: :appid, primary_key: :appid
+      has_many :wechat_replies, foreign_key: :appid, primary_key: :appid
+      has_many :wechat_requests, foreign_key: :appid, primary_key: :appid
+      has_many :wechat_responses, foreign_key: :appid, primary_key: :appid
+      has_many :wechat_services, foreign_key: :appid, primary_key: :appid
+      has_many :wechat_users, foreign_key: :app_id, primary_key: :appid
+    end
 
-  def access_token_valid?
-    return false unless access_token_expires_at.acts_like?(:time)
-    access_token_expires_at > Time.current
-  end
+    def access_token_valid?
+      return false unless access_token_expires_at.acts_like?(:time)
+      access_token_expires_at > Time.current
+    end
 
-  def sync_from_menu
-    r = api.menu
-    present_menus = r.dig('menu', 'button')
-    present_menus.each do |present_menu|
-      if present_menu['sub_button'].present?
-        parent = self.wechat_menus.build(type: 'ParentMenu', name: present_menu['name'])
-        present_menu['sub_button'].each do |sub|
-          parent.children.build(appid: appid, name: sub['name'], menu_type: sub['type'], value: sub['url'] || sub['key'])
+    def sync_from_menu
+      r = api.menu
+      present_menus = r.dig('menu', 'button')
+      present_menus.each do |present_menu|
+        if present_menu['sub_button'].present?
+          parent = self.wechat_menus.build(type: 'ParentMenu', name: present_menu['name'])
+          present_menu['sub_button'].each do |sub|
+            parent.children.build(appid: appid, name: sub['name'], menu_type: sub['type'], value: sub['url'] || sub['key'])
+          end
+          parent.save
         end
-        parent.save
       end
     end
-  end
 
+  end
 end

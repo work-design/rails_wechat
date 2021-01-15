@@ -1,19 +1,20 @@
-module RailsWechat::WechatReply::VideoReply
-  extend ActiveSupport::Concern
+module Wechat
+  module RailsWechat::WechatReply::VideoReply
+    extend ActiveSupport::Concern
 
-  included do
-    attribute :msg_type, :string, default: 'video'
-  end
+    included do
+      attribute :msg_type, :string, default: 'video'
+    end
 
-  def content
-    {
-      Video: {
-        MediaId: value,
-        Title: title,
-        Description: description
+    def content
+      {
+        Video: {
+          MediaId: value,
+          Title: title,
+          Description: description
+        }
       }
-    }
+    end
+
   end
-
-
 end

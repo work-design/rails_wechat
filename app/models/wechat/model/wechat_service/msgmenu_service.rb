@@ -1,8 +1,10 @@
-module RailsWechat::WechatService::MsgmenuService
-  extend ActiveSupport::Concern
+module Wechat
+  module RailsWechat::WechatService::MsgmenuService
+    extend ActiveSupport::Concern
 
-  included do
-    attribute :msgtype, :string, default: 'msgmenu'
+    included do
+      attribute :msgtype, :string, default: 'msgmenu'
+    end
+
   end
-
 end
