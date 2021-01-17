@@ -32,7 +32,7 @@ module Wechat
       has_many :wechat_templates, dependent: :destroy
       has_many :post_syncs, as: :synced, dependent: :delete_all
       has_many :posts, through: :post_syncs
-      has_many :organ_domains, foreign_key: :appid, primary_key: :appid
+      has_many :organ_domains, class_name: 'Org::OrganDomain', foreign_key: :appid, primary_key: :appid
       has_one :wechat_agency, foreign_key: :appid, primary_key: :appid
       has_many :wechat_agencies, foreign_key: :appid, primary_key: :appid
 

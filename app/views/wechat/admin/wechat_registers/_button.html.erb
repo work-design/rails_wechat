@@ -1,3 +1,3 @@
-<%= link_to({ action: 'new' }, class: 'button is-link') do %>
+<%= link_to({ action: 'new' }, data: { turbo_frame: 'modal' }, class: 'button is-link') do %>
   <i class="fas fa-plus"></i><span><%= t('.new') %></span>
 <% end %>
