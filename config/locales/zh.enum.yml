@@ -1,14 +1,14 @@
 zh:
   activerecord:
     enum:
-      wechat_menu:
+      wechat/wechat_menu:
         type:
-          ParentMenu: 一级目录
-          ClickMenu: 点击事件
-          ViewMenu: 链接
-          MiniProgramMenu: 小程序
-          ScanPushMenu: 扫码推事件
-          ScanWaitMenu: 扫码带提示
+          Wechat::ParentMenu: 一级目录
+          Wechat::ClickMenu: 点击事件
+          Wechat::ViewMenu: 链接
+          Wechat::MiniProgramMenu: 小程序
+          Wechat::ScanPushMenu: 扫码推事件
+          Wechat::ScanWaitMenu: 扫码带提示
       wechat_register:
         state:
           init: 处理中
@@ -16,27 +16,27 @@ zh:
           done: 已完成
       wechat_reply:
         type:
-          NewsReply: 图文
-          TextReply: 文本
-          ImageReply: 图片
-          MusicReply: 音乐
-          VioceReply: 语音
-          VideoReply: 视频
+          Wechat::NewsReply: 图文
+          Wechat::TextReply: 文本
+          Wechat::ImageReply: 图片
+          Wechat::MusicReply: 音乐
+          Wechat::VioceReply: 语音
+          Wechat::VideoReply: 视频
       wechat_request:
         type:
-          TextRequest: 文字
-          SubscribeRequest: 关注
-          UnsubscribeRequest: 取消关注
-          ScanRequest: 扫描事件
-          ViewRequest: 菜单
-          WechatRequest: 其他
-      wechat_app:
+          Wechat::TextRequest: 文字
+          Wechat::SubscribeRequest: 关注
+          Wechat::UnsubscribeRequest: 取消关注
+          Wechat::ScanRequest: 扫描事件
+          Wechat::ViewRequest: 菜单
+          Wechat::WechatRequest: 其他
+      wechat/wechat_app:
         type:
-          WechatPublic: 服务号
-          WechatRead: 订阅号
-          WechatWork: 企业微信
-          WechatProgram: 小程序
-          WechatMobile: 移动端应用
+          Wechat::WechatPublic: 服务号
+          Wechat::WechatRead: 订阅号
+          Wechat::WechatWork: 企业微信
+          Wechat::WechatProgram: 小程序
+          Wechat::WechatMobile: 移动端应用
         encrypt_mode:
           true: 安全模式（推荐）
           false: 明文模式
@@ -45,5 +45,5 @@ zh:
           WechatUser: 微信已绑定用户
       template_config:
         type:
-          TemplatePublic: 公众号
-          TemplateProgram: 小程序
+          Wechat::TemplatePublic: 公众号
+          Wechat::TemplateProgram: 小程序

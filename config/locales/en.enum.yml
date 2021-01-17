@@ -3,17 +3,17 @@ en:
     enum:
       wechat_menu:
         type:
-          ParentMenu: Root Menu
-          ClickMenu: Click Event
-          ViewMenu: Link
-          MiniProgramMenu: Mini Program
-      wechat_app:
+          Wechat::ParentMenu: Root Menu
+          Wechat::ClickMenu: Click Event
+          Wechat::ViewMenu: Link
+          Wechat::MiniProgramMenu: Mini Program
+      wechat/wechat_app:
         type:
-          WechatPublic: Public Wechat
-          WechatRead: Read Wechat
-          WechatWork: Work Wechat
-          WechatProgram: Mini Program
-          WechatMobile: App
+          Wechat::WechatPublic: Public Wechat
+          Wechat::WechatRead: Read Wechat
+          Wechat::WechatWork: Work Wechat
+          Wechat::WechatProgram: Mini Program
+          Wechat::WechatMobile: App
         encrypt_mode:
           true: Encrypt Mode
           false: Text Mode
