@@ -1,3 +1,4 @@
-class Wechat::BaseController < BaseController
-
+module Wechat
+  class BaseController < BaseController
+  end
 end

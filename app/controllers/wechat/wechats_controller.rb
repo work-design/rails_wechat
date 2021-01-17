@@ -1,48 +1,50 @@
-class Wechat::WechatsController < ApplicationController
-  skip_before_action :verify_authenticity_token, raise: false
-  before_action :set_wechat_app
-  before_action :verify_signature
+module Wechat
+  class WechatsController < BaseController
+    skip_before_action :verify_authenticity_token, raise: false
+    before_action :set_wechat_app
+    before_action :verify_signature
 
-  def show
-    if @wechat_app.is_a?(WechatWork)
-      echostr, _corp_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(params[:echostr]), @wechat_app.encoding_aes_key))
-      render plain: echostr
-    else
-      render plain: params[:echostr]
-    end
-  end
-
-  def create
-    r = Hash.from_xml(request.raw_post).fetch('xml', {})
-    @wechat_received = @wechat_app.wechat_receiveds.build
-    if r['Encrypt']
-      @wechat_received.encrypt_data = r['Encrypt']
-    else
-      @wechat_received.message_hash = r
-    end
-    @wechat_received.save
-    request = @wechat_received.reply
-
-    render plain: request.to_wechat
-  end
-
-  private
-  def set_wechat_app
-    @wechat_app = WechatApp.valid.find(params[:id])
-  end
-
-  def verify_signature
-    if @wechat_app
-      msg_encrypt = nil
-      #msg_encrypt = params[:echostr] || request_encrypt_content if @wechat_app.encrypt_mode
-      signature = params[:signature] || params[:msg_signature]
-
-      forbidden = (signature != Wechat::Signature.hexdigest(@wechat_app.token, params[:timestamp], params[:nonce], msg_encrypt))
-    else
-      forbidden = true
+    def show
+      if @wechat_app.is_a?(WechatWork)
+        echostr, _corp_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(params[:echostr]), @wechat_app.encoding_aes_key))
+        render plain: echostr
+      else
+        render plain: params[:echostr]
+      end
     end
 
-    render plain: 'Forbidden', status: 403 if forbidden
-  end
+    def create
+      r = Hash.from_xml(request.raw_post).fetch('xml', {})
+      @wechat_received = @wechat_app.wechat_receiveds.build
+      if r['Encrypt']
+        @wechat_received.encrypt_data = r['Encrypt']
+      else
+        @wechat_received.message_hash = r
+      end
+      @wechat_received.save
+      request = @wechat_received.reply
 
+      render plain: request.to_wechat
+    end
+
+    private
+    def set_wechat_app
+      @wechat_app = WechatApp.valid.find(params[:id])
+    end
+
+    def verify_signature
+      if @wechat_app
+        msg_encrypt = nil
+        #msg_encrypt = params[:echostr] || request_encrypt_content if @wechat_app.encrypt_mode
+        signature = params[:signature] || params[:msg_signature]
+
+        forbidden = (signature != Wechat::Signature.hexdigest(@wechat_app.token, params[:timestamp], params[:nonce], msg_encrypt))
+      else
+        forbidden = true
+      end
+
+      render plain: 'Forbidden', status: 403 if forbidden
+    end
+
+  end
 end

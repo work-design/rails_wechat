@@ -1,4 +1,4 @@
-class Wechat::Panel::BaseController < PanelController
-
-
-end unless defined? Wechat::Panel::BaseController
+module Wechat
+  class Panel::BaseController < PanelController
+  end
+end
