@@ -1,4 +1,4 @@
-<%= render layout: 'index_table', locals: { cache_key: WechatReply.column_names.hash } do %>
+<%= render layout: 'index_table', locals: { cache_key: Wechat::WechatReply.column_names.hash } do %>
   <%= render partial: 'index_tbody', layout: 'index_tr', collection: @wechat_replies, as: :model %>
 <% end %>
 

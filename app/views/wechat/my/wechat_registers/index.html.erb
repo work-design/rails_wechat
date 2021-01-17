@@ -3,8 +3,8 @@
 <table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
-      <th><%= WechatRegister.human_attribute_name(:id_name) %></th>
-      <th><%= WechatRegister.human_attribute_name(:id_number) %></th>
+      <th><%= Wechat::WechatRegister.human_attribute_name(:id_name) %></th>
+      <th><%= Wechat::WechatRegister.human_attribute_name(:id_number) %></th>
       <th>
         <%= link_to new_my_wechat_register_path, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>

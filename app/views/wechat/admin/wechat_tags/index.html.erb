@@ -1,5 +1,5 @@
 <%= render 'wechat_nav_user' %>
-<%= render layout: 'index_table', locals: { cache_key: WechatTag.column_names.hash } do %>
+<%= render layout: 'index_table', locals: { cache_key: Wechat::WechatTag.column_names.hash } do %>
   <%= render partial: 'index_tbody', layout: 'index_tr', collection: @wechat_tags, as: :model %>
 <% end %>
 
