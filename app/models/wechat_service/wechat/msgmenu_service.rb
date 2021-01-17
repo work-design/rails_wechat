@@ -1,5 +1,5 @@
 module Wechat
   class MsgmenuService < WechatService
-    include RailsWechat::WechatService::MsgmenuService
+    include Model::WechatService::MsgmenuService
   end
 end

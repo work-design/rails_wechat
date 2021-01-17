@@ -1,5 +1,5 @@
 module Wechat
   class ProgramNotice < WechatNotice
-    include RailsWechat::WechatNotice::ProgramNotice
+    include Model::WechatNotice::ProgramNotice
   end
 end

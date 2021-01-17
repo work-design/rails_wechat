@@ -1,5 +1,5 @@
 module Wechat
   class WechatProgramUser < Auth::WechatUser
-    include RailsWechat::OauthUser::WechatProgramUser
+    include Model::OauthUser::WechatProgramUser
   end
 end

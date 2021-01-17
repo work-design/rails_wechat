@@ -1,5 +1,5 @@
 module Wechat
   class ClickMenu < WechatMenu
-    include RailsWechat::WechatMenu::ClickMenu
+    include Model::WechatMenu::ClickMenu
   end
 end

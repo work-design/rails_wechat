@@ -1,5 +1,5 @@
 module Wechat
   class ImageReply < WechatReply
-    include RailsWechat::WechatReply::ImageReply
+    include Model::WechatReply::ImageReply
   end
 end

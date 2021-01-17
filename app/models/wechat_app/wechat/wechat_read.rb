@@ -1,5 +1,5 @@
 module Wechat
   class WechatRead < WechatApp
-    include RailsWechat::WechatApp::WechatRead
+    include Model::WechatApp::WechatRead
   end
 end

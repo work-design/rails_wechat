@@ -1,5 +1,5 @@
 module Wechat
   class TemplatePublic < TemplateConfig
-    include RailsWechat::TemplateConfig::TemplatePublic
+    include Model::TemplateConfig::TemplatePublic
   end
 end

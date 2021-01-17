@@ -1,5 +1,5 @@
 module Wechat
   class VideoService < WechatService
-    include RailsWechat::WechatService::VideoService
+    include Model::WechatService::VideoService
   end
 end

@@ -1,5 +1,5 @@
 module Wechat
   class VoiceService < WechatService
-    include RailsWechat::WechatService::VoiceService
+    include Model::WechatService::VoiceService
   end
 end

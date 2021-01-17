@@ -1,5 +1,5 @@
 module Wechat
   class PublicNotice < WechatNotice
-    include RailsWechat::WechatNotice::PublicNotice
+    include Model::WechatNotice::PublicNotice
   end
 end

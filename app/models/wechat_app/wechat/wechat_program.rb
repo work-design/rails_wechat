@@ -1,5 +1,5 @@
 module Wechat
   class WechatProgram < WechatApp
-    include RailsWechat::WechatApp::WechatProgram
+    include Model::WechatApp::WechatProgram
   end
 end

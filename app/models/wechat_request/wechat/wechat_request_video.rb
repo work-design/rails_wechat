@@ -1,5 +1,5 @@
 module Wechat
   class WechatRequestVideo < WechatRequest
-    include RailsWechat::WechatRequest::WechatRequestVideo
+    include Model::WechatRequest::WechatRequestVideo
   end
 end

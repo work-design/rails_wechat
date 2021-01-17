@@ -1,5 +1,5 @@
 module Wechat
   class ViewRequest < WechatRequest
-    include RailsWechat::WechatRequest::ViewRequest
+    include Model::WechatRequest::ViewRequest
   end
 end

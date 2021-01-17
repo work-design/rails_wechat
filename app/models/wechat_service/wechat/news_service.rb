@@ -1,5 +1,5 @@
 module Wechat
   class NewsService < WechatService
-    include RailsWechat::WechatService::NewsService
+    include Model::WechatService::NewsService
   end
 end

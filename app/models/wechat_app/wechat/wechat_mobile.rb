@@ -1,5 +1,5 @@
 module Wechat
   class WechatMobile < WechatApp
-    include RailsWechat::WechatApp::WechatMobile
+    include Model::WechatApp::WechatMobile
   end
 end

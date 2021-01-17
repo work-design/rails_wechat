@@ -1,5 +1,5 @@
 module Wechat
   class WechatRequestLocation < WechatRequest
-    include RailsWechat::WechatRequest::WechatRequestLocation
+    include Model::WechatRequest::WechatRequestLocation
   end
 end

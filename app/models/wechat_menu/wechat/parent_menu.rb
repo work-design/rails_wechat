@@ -1,5 +1,5 @@
 module Wechat
   class ParentMenu < WechatMenu
-    include RailsWechat::WechatMenu::ParentMenu
+    include Model::WechatMenu::ParentMenu
   end
 end

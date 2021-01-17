@@ -1,5 +1,5 @@
 module Wechat
   class SubscribeRequest < WechatRequest
-    include RailsWechat::WechatRequest::SubscribeRequest
+    include Model::WechatRequest::SubscribeRequest
   end
 end

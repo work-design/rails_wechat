@@ -1,5 +1,5 @@
 module Wechat
   class ScanWaitMenu < WechatMenu
-    include RailsWechat::WechatMenu::ScanWaitMenu
+    include Model::WechatMenu::ScanWaitMenu
   end
 end

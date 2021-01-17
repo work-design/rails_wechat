@@ -1,5 +1,5 @@
 module Wechat
   class TextRequest < WechatRequest
-    include RailsWechat::WechatRequest::TextRequest
+    include Model::WechatRequest::TextRequest
   end
 end

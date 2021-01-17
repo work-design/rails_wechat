@@ -1,5 +1,5 @@
 module Wechat
   class TemplateProgram < TemplateConfig
-    include RailsWechat::TemplateConfig::TemplateProgram
+    include Model::TemplateConfig::TemplateProgram
   end
 end

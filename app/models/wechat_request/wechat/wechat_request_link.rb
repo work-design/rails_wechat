@@ -1,5 +1,5 @@
 module Wechat
   class WechatRequestLink < WechatRequest
-    include RailsWechat::WechatRequest::WechatRequestLink
+    include Model::WechatRequest::WechatRequestLink
   end
 end

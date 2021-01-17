@@ -1,5 +1,5 @@
 module Wechat
   class ImageService < WechatService
-    include RailsWechat::WechatService::ImageService
+    include Model::WechatService::ImageService
   end
 end

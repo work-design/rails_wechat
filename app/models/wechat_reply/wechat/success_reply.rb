@@ -1,5 +1,5 @@
 module Wechat
   class SuccessReply < WechatReply
-    include RailsWechat::WechatReply::SuccessReply
+    include Model::WechatReply::SuccessReply
   end
 end

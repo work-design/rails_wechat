@@ -1,5 +1,5 @@
 module Wechat
   class MiniProgramMenu < WechatMenu
-    include RailsWechat::WechatMenu::MiniProgramMenu
+    include Model::WechatMenu::MiniProgramMenu
   end
 end

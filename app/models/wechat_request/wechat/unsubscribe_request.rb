@@ -1,5 +1,5 @@
 module Wechat
   class UnsubscribeRequest < WechatRequest
-    include RailsWechat::WechatRequest::UnsubscribeRequest
+    include Model::WechatRequest::UnsubscribeRequest
   end
 end
