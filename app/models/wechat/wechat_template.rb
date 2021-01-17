@@ -1,5 +1,5 @@
 module Wechat
   class WechatTemplate < ApplicationRecord
-    include RailsWechat::WechatTemplate
+    include Model::WechatTemplate
   end
 end

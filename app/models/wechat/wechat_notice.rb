@@ -1,5 +1,5 @@
 module Wechat
   class WechatNotice < ApplicationRecord
-    include RailsWechat::WechatNotice
+    include Model::WechatNotice
   end
 end

@@ -1,5 +1,5 @@
 module Wechat
   class WechatPlatform < ApplicationRecord
-    include RailsWechat::WechatPlatform
+    include Model::WechatPlatform
   end
 end

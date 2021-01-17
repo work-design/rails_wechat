@@ -1,5 +1,5 @@
 module Wechat
   class TemplateConfig < ApplicationRecord
-    include RailsWechat::TemplateConfig
+    include Model::TemplateConfig
   end
 end

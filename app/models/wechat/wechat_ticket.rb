@@ -1,5 +1,5 @@
 module Wechat
   class WechatTicket < ApplicationRecord
-    include RailsWechat::WechatTicket
+    include Model::WechatTicket
   end
 end

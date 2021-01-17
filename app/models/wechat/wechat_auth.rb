@@ -1,5 +1,5 @@
 module Wechat
   class WechatAuth < ApplicationRecord
-    include RailsWechat::WechatAuth
+    include Model::WechatAuth
   end
 end

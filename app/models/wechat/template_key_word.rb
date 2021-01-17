@@ -1,5 +1,5 @@
 module Wechat
   class TemplateKeyWord < ApplicationRecord
-    include RailsWechat::TemplateKeyWord
+    include Model::TemplateKeyWord
   end
 end

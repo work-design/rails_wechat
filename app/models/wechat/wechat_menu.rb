@@ -1,5 +1,5 @@
 module Wechat
   class WechatMenu < ApplicationRecord
-    include RailsWechat::WechatMenu
+    include Model::WechatMenu
   end
 end

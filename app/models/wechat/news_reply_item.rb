@@ -1,5 +1,5 @@
 module Wechat
   class NewsReplyItem < ApplicationRecord
-    include RailsWechat::NewsReplyItem
+    include Model::NewsReplyItem
   end
 end

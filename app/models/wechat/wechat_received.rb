@@ -1,5 +1,5 @@
 module Wechat
   class WechatReceived < ApplicationRecord
-    include RailsWechat::WechatReceived
+    include Model::WechatReceived
   end
 end

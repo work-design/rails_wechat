@@ -1,6 +1,6 @@
 module Wechat
   class WechatAgency < ApplicationRecord
-    include RailsWechat::WechatAgency
-    include RailsWechat::AppSync
+    include Model::WechatAgency
+    include Model::AppSync
   end
 end

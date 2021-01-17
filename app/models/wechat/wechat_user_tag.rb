@@ -1,5 +1,5 @@
 module Wechat
   class WechatUserTag < ApplicationRecord
-    include RailsWechat::WechatUserTag
+    include Model::WechatUserTag
   end
 end

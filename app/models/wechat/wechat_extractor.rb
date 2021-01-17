@@ -1,5 +1,5 @@
 module Wechat
   class WechatExtractor < ApplicationRecord
-    include RailsWechat::WechatExtractor
+    include Model::WechatExtractor
   end
 end

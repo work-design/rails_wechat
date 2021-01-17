@@ -1,5 +1,5 @@
 module Wechat
   class WechatResponseRequest < ApplicationRecord
-    include RailsWechat::WechatResponseRequest
+    include Model::WechatResponseRequest
   end
 end
