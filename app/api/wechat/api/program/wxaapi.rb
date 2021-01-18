@@ -1,4 +1,4 @@
-module Wechat::Api::Program::Wxapi
+module Wechat::Api::Program::Wxaapi
   BASE = 'https://api.weixin.qq.com/wxaapi/'
 
   # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/template-message/templateMessage.getTemplateList.html
