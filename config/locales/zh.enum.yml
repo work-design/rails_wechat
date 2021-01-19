@@ -9,12 +9,12 @@ zh:
           Wechat::MiniProgramMenu: 小程序
           Wechat::ScanPushMenu: 扫码推事件
           Wechat::ScanWaitMenu: 扫码带提示
-      wechat_register:
+      wechat/wechat_register:
         state:
           init: 处理中
           doing: 开始处理
           done: 已完成
-      wechat_reply:
+      wechat/wechat_reply:
         type:
           Wechat::NewsReply: 图文
           Wechat::TextReply: 文本
@@ -22,7 +22,7 @@ zh:
           Wechat::MusicReply: 音乐
           Wechat::VioceReply: 语音
           Wechat::VideoReply: 视频
-      wechat_request:
+      wechat/wechat_request:
         type:
           Wechat::TextRequest: 文字
           Wechat::SubscribeRequest: 关注
@@ -40,10 +40,10 @@ zh:
         encrypt_mode:
           true: 安全模式（推荐）
           false: 明文模式
-      wechat_tag_default:
+      wechat/wechat_tag_default:
         default_type:
           WechatUser: 微信已绑定用户
-      template_config:
+      wechat/template_config:
         type:
           Wechat::TemplatePublic: 公众号
           Wechat::TemplateProgram: 小程序
