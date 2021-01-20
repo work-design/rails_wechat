@@ -14,21 +14,20 @@ module Wechat
 
       if current_wechat_user && current_wechat_user.user.nil?
         redirect_url = sign_url(uid: current_wechat_user.uid)
-      elsif current_wechat_app
+      elsif current_wechat_app && current_wechat_app.respond_to?(:oauth2_url)
         redirect_url = current_wechat_app.oauth2_url(host: request.host, port: request.port, protocol: request.protocol)
       end
 
-      logger.debug "  ---------> #{redirect_url}"
-      redirect_to redirect_url
+      if redirect_url
+        logger.debug "  ----- Redirect to: #{redirect_url} -----"
+        redirect_to redirect_url
+      end
       #render 'wechat_require_login', locals: { redirect_url: redirect_url, message: '请登录后操作' }, status: 401
     end
 
     def current_wechat_app
       return @current_wechat_app if defined?(@current_wechat_app)
-
       @current_wechat_app = current_organ_domain&.wechat_app
-      @current_wechat_app = WechatApp.default_where(default_params).first unless @current_wechat_app
-
       logger.debug "  ---------> Current Wechat App is #{@current_wechat_app&.id}"
       @current_wechat_app
     end
