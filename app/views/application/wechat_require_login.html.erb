@@ -1,4 +1,3 @@
 <%= javascript_tag nonce: true do %>
-  Turbolinks.clearCache()
-  Turbolinks.visit('<%= redirect_url %>', { action: 'replace' })
+  Turbo.visit('<%= redirect_url %>', { action: 'replace' })
 <% end %>
