@@ -1,3 +1,4 @@
 <%= javascript_tag nonce: true do %>
+  Turbo.clearCache()
   Turbo.visit('<%= redirect_url %>', { action: 'replace' })
 <% end %>
