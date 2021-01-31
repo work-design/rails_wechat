@@ -1,14 +1,14 @@
 <tr id="tr_<%= model.id %>" data-controller="show" data-action="mouseenter->show#show mouseleave->show#hide">
   <%= yield %>
   <td>
-    <turbo-frame data-show-target="item" style="visibility: hidden">
+    <span data-show-target="item" style="visibility: hidden">
       <%= link_to assign_admin_wechat_register_path(model), aria: { label: '分配' }, class: 'button is-small is-rounded is-light' do %>
         <i class="fas fa-hand-point-right"></i>
       <% end %>
       <%= link_to app_admin_wechat_register_path(model), aria: { label: t('.app') }, class: 'button is-small is-rounded is-light' do %>
         <i class="fab fa-weixin"></i>
       <% end %>
-      <%= link_to my_tasks_path(tasking_type: 'WechatRegister', tasking_id: model.id), aria: { label: t('.tasks') }, class: 'button is-small is-rounded is-light' do %>
+      <%= link_to({ controller: 'bench/me/tasks', tasking_type: 'WechatRegister', tasking_id: model.id }, aria: { label: t('.tasks') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fas fa-tasks"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
@@ -20,6 +20,6 @@
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fas fa-trash-alt"></i>
       <% end %>
-    </turbo-frame>
+    </span>
   </td>
 </tr>

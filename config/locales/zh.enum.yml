@@ -43,6 +43,9 @@ zh:
       wechat/wechat_tag_default:
         default_type:
           WechatUser: 微信已绑定用户
+      auth/oauth_user:
+        type:
+          Wechat::WechatUser: 微信用户
       wechat/template_config:
         type:
           Wechat::TemplatePublic: 公众号

@@ -1,7 +1,9 @@
 en:
   activerecord:
     enum:
-      wechat_menu:
+      wechat/wechat_user:
+        type: Wechat User
+      wechat/wechat_menu:
         type:
           Wechat::ParentMenu: Root Menu
           Wechat::ClickMenu: Click Event

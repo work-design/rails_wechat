@@ -1,42 +1,37 @@
-<tr>
-  <td>
-    <p><%= link_to model.id_name, admin_wechat_register_path(model) %></p>
-    <p><%= model.id_number %></p>
-  </td>
-  <td>
-    <p><%= model.email %></p>
-    <p><%= model.email_code %></p>
-    <p class="has-text-danger"><%= model.password %></p>
-  </td>
-  <td>
-    <p>
-      <%= model.mobile %>
-      <%= link_to code_admin_wechat_register_path(model), method: :put, aria: { label: '验证码' }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-        <i class="fas fa-paper-plane"></i>
-      <% end %>
-    </p>
-    <p><%= model.mobile_code %></p>
-  </td>
-  <td>
-    <p>
-      <%= image_tag model.bind_qrcode, class: 'image is-24x24' if model.bind_qrcode.attached? %>
-      <%= link_to bind_admin_wechat_register_path(model), aria: { label: t('.bind') }, class: 'button is-small is-rounded is-light' do %>
-        <i class="fas fa-qrcode"></i>
-      <% end %>
-    </p>
-    <p>
-      <%= image_tag model.qrcode, class: 'image is-24x24' if model.qrcode.attached? %>
-      <%= link_to qrcode_admin_wechat_register_path(model), aria: { label: t('.qrcode') }, class: 'button is-small is-rounded is-light' do %>
-        <i class="fas fa-qrcode"></i>
-      <% end %>
-    </p>
-  </td>
-  <td>
-    <p><%= model.state_i18n %></p>
-    <p><%= model.appid %></p>
-  </td>
-  <td><time data-controller="time"><%= model.created_at.to_s(:rfc822) %></time></td>
-  <td>
-  
-  </td>
-</tr>
+<td>
+  <p><%= link_to model.id_name, admin_wechat_register_path(model) %></p>
+  <p><%= model.id_number %></p>
+</td>
+<td>
+  <p><%= model.email %></p>
+  <p><%= model.email_code %></p>
+  <p class="has-text-danger"><%= model.password %></p>
+</td>
+<td>
+  <p>
+    <%= model.mobile %>
+    <%= link_to code_admin_wechat_register_path(model), method: :put, aria: { label: '验证码' }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
+      <i class="fas fa-paper-plane"></i>
+    <% end %>
+  </p>
+  <p><%= model.mobile_code %></p>
+</td>
+<td>
+  <p>
+    <%= image_tag model.bind_qrcode, class: 'image is-24x24' if model.bind_qrcode.attached? %>
+    <%= link_to bind_admin_wechat_register_path(model), aria: { label: t('.bind') }, class: 'button is-small is-rounded is-light' do %>
+      <i class="fas fa-qrcode"></i>
+    <% end %>
+  </p>
+  <p>
+    <%= image_tag model.qrcode, class: 'image is-24x24' if model.qrcode.attached? %>
+    <%= link_to qrcode_admin_wechat_register_path(model), aria: { label: t('.qrcode') }, class: 'button is-small is-rounded is-light' do %>
+      <i class="fas fa-qrcode"></i>
+    <% end %>
+  </p>
+</td>
+<td>
+  <p><%= model.state_i18n %></p>
+  <p><%= model.appid %></p>
+</td>
+<td><time data-controller="time"><%= model.created_at.to_s(:rfc822) %></time></td>
