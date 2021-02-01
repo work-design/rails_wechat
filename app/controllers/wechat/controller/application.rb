@@ -24,7 +24,7 @@ module Wechat
         logger.debug "  \e[35m-----> Redirect to: #{redirect_url} <-----\e[0m"
       end
 
-      render 'wechat_require_login', locals: { redirect_url: redirect_url, message: '请登录后操作' }, status: 401
+      redirect_to redirect_url
     end
 
     def current_wechat_app

@@ -28,13 +28,13 @@ module Wechat
 
     def refresh_pre_auth_code
       token_hash = api.create_preauthcode
-      unless token_hash.is_a?(Hash) && token_hash['pre_auth_code']
-        raise Wechat::InvalidCredentialError, token_hash['errmsg']
+      if token_hash.is_a?(Hash) && token_hash['pre_auth_code']
+        self.pre_auth_code = token_hash['pre_auth_code']
+        self.pre_auth_code_expires_at = Time.current + token_hash['expires_in'].to_i
+        self.save
+      else
+        raise Wechat::InvalidCredentialError, Hash(token_hash)['errmsg']
       end
-
-      self.pre_auth_code = token_hash['pre_auth_code']
-      self.pre_auth_code_expires_at = Time.current + token_hash['expires_in'].to_i
-      self.save
     end
 
     def access_token_valid?
