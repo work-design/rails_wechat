@@ -6,6 +6,7 @@
   <p><%= model.agentid %></p>
   <p><%= model.mch_id %></p>
   <p><%= model.key %></p>
+  <p><%= model.serial_no %></p>
 </td>
 <td>
   <%= form_with theme: nil, model: model, scope: :wechat_app, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>

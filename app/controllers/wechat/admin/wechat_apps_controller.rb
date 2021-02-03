@@ -73,7 +73,8 @@ module Wechat
         :agentid,
         :mch_id,
         :key,
-        :encrypt_mode
+        :encrypt_mode,
+        :serial_no
       )
       p.merge! default_form_params
     end

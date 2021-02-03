@@ -26,6 +26,7 @@ module Wechat
       attribute :oauth_enable, :boolean, default: true
       attribute :apiclient_cert, :string
       attribute :apiclient_key, :string
+      attribute :serial_no, :string
 
       belongs_to :organ, optional: true
       has_many :wechat_tags, dependent: :delete_all
