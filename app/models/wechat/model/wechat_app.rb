@@ -15,6 +15,7 @@ module Wechat
       attribute :agentid, :string, comment: '企业微信所用'
       attribute :mch_id, :string, comment: '支付专用、商户号'
       attribute :key, :string, comment: '支付专用'
+      attribute :key_v3, :string, comment: '支付通知解密'
       attribute :encrypt_mode, :boolean, default: true
       attribute :encoding_aes_key, :string
       attribute :access_token, :string

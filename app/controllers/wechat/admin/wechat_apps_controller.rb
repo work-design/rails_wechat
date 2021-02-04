@@ -73,6 +73,7 @@ module Wechat
         :agentid,
         :mch_id,
         :key,
+        :key_v3,
         :encrypt_mode,
         :serial_no
       )
