@@ -1,4 +1,4 @@
-<%= form_with model: @wechat_menu, scope: :wechat_menu, url: admin_wechat_menu_path(@wechat_menu) do |f| %>
+<%= form_with model: @wechat_menu, scope: :wechat_menu, url: { action: 'update' } do |f| %>
   <%= f.text_field :name, required: true %>
   <%= f.number_field :position, step: 1 %>
   <%= f.submit %>
