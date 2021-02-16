@@ -20,8 +20,8 @@ module Wechat
     end
 
     def new
-      @wechat_menu = WechatMenu.new(appid: params[:appid], type: 'ViewMenu')
-      @parents = WechatMenu.where(type: 'ParentMenu', parent_id: nil, appid: params[:appid])
+      @wechat_menu = WechatMenu.new(appid: params[:appid], type: 'Wechat::ViewMenu')
+      @parents = WechatMenu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: params[:appid])
     end
 
     def new_parent
@@ -45,7 +45,7 @@ module Wechat
     end
 
     def edit
-      @parents = WechatMenu.where(type: 'ParentMenu', parent_id: nil, appid: @wechat_menu.appid)
+      @parents = WechatMenu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @wechat_menu.appid)
     end
 
     def edit_parent
