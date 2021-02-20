@@ -2,13 +2,13 @@
   <%= yield %>
   <td>
     <span data-show-target="item" style="visibility: hidden">
-      <%= link_to({ controller: 'wechat_extractors', wechat_response_id: model.id }, data: { turbo_frame: '_top' }, aria: { label: t('wechat.admin.wechat_extractors.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'wechat_extractors', wechat_response_id: model.id }, aria: { label: t('wechat.admin.wechat_extractors.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fas fa-expand-alt"></i>
       <% end %>
-      <%= link_to({ action: 'show', id: model.id }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fas fa-info"></i>
       <% end %>
-      <%= link_to({ action: 'edit', id: model.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fas fa-pencil-alt"></i>
       <% end %>
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, data: { confirm: t('.confirm') }, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light') do %>

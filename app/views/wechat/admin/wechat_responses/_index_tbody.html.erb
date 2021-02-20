@@ -3,9 +3,10 @@
   <%= image_tag model.qrcode_file, class: 'image is-32x32' if model.qrcode_file.attached? %>
 </td>
 <td>
-  <div class="ui toggle checkbox">
-    <%= check_box_tag '[model]contain', nil, model.contain, data: { method: :patch, url: admin_wechat_app_wechat_response_path(@wechat_app, model), submit: true }, id: nil %>
-  </div>
+  <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :contain, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
 </td>
 <td>
   <p><time data-controller="time"><%= model.created_at.to_s(:rfc822) %></time></p>
@@ -19,7 +20,7 @@
 <td>
   <p>
     <span><%= model.effective_type %></span>
-    <%= link_to({ action: 'edit_reply', id: model.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ action: 'edit_reply', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
   </p>

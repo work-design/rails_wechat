@@ -2,34 +2,34 @@ module Wechat
   module Model::WechatReceived
     # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
     MSG_TYPE = {
-      'text' => 'TextRequest',
-      'image' => 'WechatRequestImage',
-      'voice' => 'WechatRequestVoice',
-      'video' => 'WechatRequestVideo',
-      'shortvideo' => 'WechatRequestShortVideo',
-      'location' => 'WechatRequestLocation',
-      'link' => 'WechatRequestLink',
-      'event' => 'WechatRequestEvent'
+      'text' => 'Wechat::TextRequest',
+      'image' => 'Wechat::WechatRequestImage',
+      'voice' => 'Wechat::WechatRequestVoice',
+      'video' => 'Wechat::WechatRequestVideo',
+      'shortvideo' => 'Wechat::WechatRequestShortVideo',
+      'location' => 'Wechat::WechatRequestLocation',
+      'link' => 'Wechat::WechatRequestLink',
+      'event' => 'Wechat::WechatRequestEvent'
     }.freeze
     # https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_event_pushes.html
     # https://work.weixin.qq.com/api/doc/90000/90135/90240
     EVENT = {
-      'subscribe' => 'SubscribeRequest',
-      'unsubscribe' => 'UnsubscribeRequest',
-      'LOCATION' => 'WechatRequestLocation', # 公众号与企业微信通用
-      'CLICK' => 'WechatRequestClick',
-      'VIEW' => 'ViewRequest',
-      'SCAN' => 'ScanRequest',
-      'click' => 'WechatRequest',
-      'view' => 'WechatRequest',  # 企业微信使用
-      'scancode_push' => 'WechatRequest',
-      'scancode_waitmsg' => 'WechatRequest',
-      'pic_sysphoto' => 'WechatRequest',
-      'pic_photo_or_album' => 'WechatRequest',
-      'pic_weixin' => 'WechatRequest',
-      'location_select' => 'WechatRequest',
-      'enter_agent' => 'WechatRequest',
-      'batch_job_result' => 'WechatRequest'  # 企业微信使用
+      'subscribe' => 'Wechat::SubscribeRequest',
+      'unsubscribe' => 'Wechat::UnsubscribeRequest',
+      'LOCATION' => 'Wechat::WechatRequestLocation', # 公众号与企业微信通用
+      'CLICK' => 'Wechat::WechatRequestClick',
+      'VIEW' => 'Wechat::ViewRequest',
+      'SCAN' => 'Wechat::ScanRequest',
+      'click' => 'Wechat::WechatRequest',
+      'view' => 'Wechat::WechatRequest',  # 企业微信使用
+      'scancode_push' => 'Wechat::WechatRequest',
+      'scancode_waitmsg' => 'Wechat::WechatRequest',
+      'pic_sysphoto' => 'Wechat::WechatRequest',
+      'pic_photo_or_album' => 'Wechat::WechatRequest',
+      'pic_weixin' => 'Wechat::WechatRequest',
+      'location_select' => 'Wechat::WechatRequest',
+      'enter_agent' => 'Wechat::WechatRequest',
+      'batch_job_result' => 'Wechat::WechatRequest'  # 企业微信使用
     }.freeze
     extend ActiveSupport::Concern
 
