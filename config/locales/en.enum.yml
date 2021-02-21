@@ -22,3 +22,9 @@ en:
       wechat_tag_default:
         default_type:
           WechatUser: Wechat User
+      wechat/wechat_response:
+        effective_type:
+          Wechat::NewsReply: 新闻
+          Wechat::TextReply: 文字
+          Wechat::ImageReply: 图片
+          Wechat::SuccessReply: 成功
