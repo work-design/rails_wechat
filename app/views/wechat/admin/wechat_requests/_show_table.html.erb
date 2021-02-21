@@ -1,5 +1,5 @@
 <tr>
-  <td class="has-text-right"><%= WechatRequest.human_attribute_name(:wechat_user_id) %></td>
+  <td class="has-text-right"><%= Wechat::WechatRequest.human_attribute_name(:wechat_user_id) %></td>
   <td>
     <% if @wechat_request.wechat_user.user %>
       <%= link_to @wechat_request.wechat_user.user.name, panel_user_path(@wechat_request.wechat_user.user_id), text: true %>
@@ -9,6 +9,6 @@
   </td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= WechatRequest.human_attribute_name(:body) %></td>
+  <td class="has-text-right"><%= Wechat::WechatRequest.human_attribute_name(:body) %></td>
   <td><%= simple_format @wechat_request.body %></td>
 </tr>
