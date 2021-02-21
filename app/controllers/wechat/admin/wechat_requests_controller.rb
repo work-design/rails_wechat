@@ -5,7 +5,7 @@ module Wechat
 
     def index
       q_params = {
-        type: 'TextRequest'
+        type: 'Wechat::TextRequest'
       }
       q_params.merge! params.permit('created_at-gte', 'created_at-lte', :type)
       if q_params['created_at-lte']

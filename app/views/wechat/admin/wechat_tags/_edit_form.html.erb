@@ -1,4 +1,4 @@
-<%= form_with model: @wechat_tag, url: admin_wechat_app_wechat_tag_path(@wechat_app, @wechat_tag) do |f| %>
+<%= form_with model: @wechat_tag, url: { action: 'update' } do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
   <%= f.submit %>
 <% end %>
