@@ -1,14 +1,14 @@
 <tr id="tr_<%= model.id %>" data-controller="show" data-action="mouseenter->show#show mouseleave->show#hide">
   <%= yield %>
   <td>
-    <turbo-frame data-show-target="item" style="visibility: hidden">
+    <span data-show-target="item" style="visibility: hidden">
       <% if model.appid.to_s == params[:appid] %>
         <% if model.type == 'ParentMenu' %>
-          <%= link_to({ action: 'edit_parent', id: model.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+          <%= link_to({ action: 'edit_parent', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
             <i class="fas fa-pencil-alt"></i>
           <% end %>
         <% else %>
-          <%= link_to({ action: 'edit', id: model.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+          <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
             <i class="fas fa-pencil-alt"></i>
           <% end %>
         <% end %>
@@ -16,6 +16,6 @@
           <i class="fas fa-trash-alt"></i>
         <% end %>
       <% end %>
-    </turbo-frame>
+    </span>
   </td>
 </tr>
