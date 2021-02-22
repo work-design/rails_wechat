@@ -53,7 +53,7 @@ module Wechat
     private
     def new_wechat_register
       @wechat_register = current_user.wechat_registers.build(wechat_register_params)
-      @wechat_register.mobile ||= current_account.identity if current_account.is_a?(MobileAccount)
+      @wechat_register.mobile ||= current_account.identity if current_account.is_a?(Auth::MobileAccount)
     end
 
     def set_wechat_register
