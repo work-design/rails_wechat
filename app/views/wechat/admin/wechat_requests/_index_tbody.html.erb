@@ -1,8 +1,8 @@
 <td>
   <% if model.wechat_user.user %>
-    <%= link_to model.wechat_user.user.name, panel_user_path(model.wechat_user.user_id), text: true %>
+    <%= link_to model.wechat_user.user.name, { controller: 'auth/panel/users', action: 'show', id: model.wechat_user.user_id }, text: true, data: { turbo_frame: 'modal' } %>
   <% else %>
-    <%= link_to model.wechat_user.name, admin_oauth_user_path(model.wechat_user), text: true %>
+    <%= link_to model.wechat_user.name, { controller: 'auth/panel/oauth_users', action: 'show', id: model.wechat_user.id }, text: true, data: { turbo_frame: 'modal' } %>
   <% end %>
 </td>
 <td><%= model.type_i18n %></td>
