@@ -29,7 +29,8 @@ module Wechat
       attribute :apiclient_key, :string
       attribute :serial_no, :string
 
-      belongs_to :organ, optional: true
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
+
       has_many :wechat_tags, dependent: :delete_all
       has_many :wechat_templates, dependent: :destroy
       has_many :post_syncs, as: :synced, dependent: :delete_all
