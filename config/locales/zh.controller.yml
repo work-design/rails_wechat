@@ -54,3 +54,6 @@ zh:
       wechat_registers:
         index:
           title: 公众号申请
+      users:
+        invite_qrcode:
+          title: 邀请二维码

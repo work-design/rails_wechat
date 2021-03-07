@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope module: :wechat, defaults: { namespace: 'application', business: 'wechat' } do
+  scope module: :wechat, defaults: { business: 'wechat' } do
     resources :wechats, only: [:show] do
       member do
         post '' => :create
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :my, module: 'wechat/my', as: :my, defaults: { namespace: 'my', business: 'wechat' } do
+  scope :my, module: 'wechat/my', as: :my, defaults: { business: 'wechat', namespace: 'my' } do
     resource :user, only: [] do
       collection do
         get :invite_qrcode
@@ -41,14 +41,14 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :panel, module: 'wechat/panel', as: :panel, defaults: { namespace: 'panel', business: 'wechat' } do
+  scope :panel, module: 'wechat/panel', as: :panel, defaults: { business: 'wechat', namespace: 'panel' } do
     resources :template_configs
     resources :wechat_platforms do
       resources :wechat_agencies, shallow: true, as: :agencies
     end
   end
 
-  scope :admin, module: 'wechat/admin', as: :admin, defaults: { namespace: 'admin', business: 'wechat' } do
+  scope :admin, module: 'wechat/admin', as: :admin, defaults: { business: 'wechat', namespace: 'admin' } do
     resources :wechat_registers do
       member do
         get 'app' => :edit_app
