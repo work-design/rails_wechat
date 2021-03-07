@@ -1,44 +1,32 @@
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th>
-        <%= link_to t('.edit'), edit_admin_extractor_path(@extractor), class: 'ui mini blue right floated button' %>
-      </th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= Extractor.human_attribute_name(:name) %></td>
-      <td><%= @extractor.name %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Extractor.human_attribute_name(:prefix) %></td>
-      <td><%= @extractor.prefix %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Extractor.human_attribute_name(:suffix) %></td>
-      <td><%= @extractor.suffix %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Ticket.human_attribute_name(:serial_start) %></td>
-      <td><%= @ticket.serial_start %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Ticket.human_attribute_name(:start_at) %></td>
-      <td><%= @ticket.start_at %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Ticket.human_attribute_name(:finish_at) %></td>
-      <td><%= @ticket.finish_at %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Ticket.human_attribute_name(:valid_response) %></td>
-      <td><%= @ticket.valid_response %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Ticket.human_attribute_name(:invalid_response) %></td>
-      <td><%= @ticket.invalid_response %></td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= Wechat::WechatExtractor.human_attribute_name(:name) %></td>
+  <td><%= @wechat_extractor.name %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::WechatExtractor.human_attribute_name(:prefix) %></td>
+  <td><%= @wechat_extractor.prefix %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::WechatExtractor.human_attribute_name(:suffix) %></td>
+  <td><%= @wechat_extractor.suffix %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::WechatExtractor.human_attribute_name(:serial_start) %></td>
+  <td><%= @wechat_extractor.serial_start %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::WechatExtractor.human_attribute_name(:start_at) %></td>
+  <td><%= @wechat_extractor.start_at %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::WechatExtractor.human_attribute_name(:finish_at) %></td>
+  <td><%= @wechat_extractor.finish_at %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::WechatExtractor.human_attribute_name(:valid_response) %></td>
+  <td><%= @wechat_extractor.valid_response %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::WechatExtractor.human_attribute_name(:invalid_response) %></td>
+  <td><%= @wechat_extractor.invalid_response %></td>
+</tr>

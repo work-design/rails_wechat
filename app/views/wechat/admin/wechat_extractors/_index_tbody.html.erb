@@ -2,9 +2,10 @@
 <td><%= model.prefix.inspect if model.prefix %></td>
 <td><%= model.suffix.inspect if model.suffix %></td>
 <td>
-  <div data-controller="input">
-    <%= check_box_tag '[model]more', nil, model.more, data: { method: :patch, url: admin_wechat_response_wechat_extractor_path(@wechat_response, model), submit: true }, id: nil %>
-  </div>
+  <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :more, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
 </td>
 <td>
   <p><%= model.start_at.to_s(:time) if model.start_at %></p>
@@ -15,10 +16,9 @@
   <p class="has-text-danger"><%= model.invalid_response %></p>
 </td>
 <td>
-  <div>
-    <div data-controller="input">
-      <%= check_box_tag '[model]serial', nil, model.serial, data: { method: :patch, url: admin_wechat_response_wechat_extractor_path(@wechat_response, model), submit: true }, id: nil %>
-    </div>
-  </div>
+  <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :serial, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
   <p><%= model.serial_start %></p>
 </td>
