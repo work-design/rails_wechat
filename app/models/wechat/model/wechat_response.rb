@@ -62,7 +62,7 @@ module Wechat
     end
 
     def qrcode_file_url
-      url_helpers.rails_blob_url(qrcode_file) if qrcode_file.attachment.present?
+      qrcode_file.url if qrcode_file.attachment.present?
     end
 
     def commit_to_wechat
