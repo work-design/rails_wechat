@@ -15,10 +15,10 @@ module Wechat
         match_value: "invite_by_#{id}"
       }
       res = WechatResponse.find_or_initialize_by(p)
-      res.effective_type = 'TextReply'
+      res.effective_type = 'Wechat::TextReply'
       res.request_types = [
-        'SubscribeRequest',
-        'ScanRequest'
+        'Wechat::SubscribeRequest',
+        'Wechat::ScanRequest'
       ]
       res.expire_seconds ||= 2592000
       res.save
