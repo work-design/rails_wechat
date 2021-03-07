@@ -12,3 +12,7 @@
   <td class="has-text-right"><%= Wechat::WechatRequest.human_attribute_name(:body) %></td>
   <td><%= simple_format @wechat_request.body %></td>
 </tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::WechatRequest.human_attribute_name(:wechat_reply_id) %></td>
+  <td><%= @wechat_request.wechat_reply&.value %></td>
+</tr>
