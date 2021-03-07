@@ -1,11 +1,4 @@
 <%= render 'shared/error_messages', target: f.object %>
-<div class="weui-form__control-area">
-  <div class="weui-cells__group weui-cells__group_form">
-    <div class="weui-cells__title">开通公众号 / 从医专用邮箱</div>
-    <div class="weui-cells weui-cells_form">
-      <%= f.text_field :id_name, required: true %>
-      <%= f.text_field :id_number, required: true %>
-      <%= f.phone_field :mobile, required: true %>
-    </div>
-  </div>
-</div>
+<%= f.text_field :id_name, required: true %>
+<%= f.text_field :id_number, required: true %>
+<%= f.phone_field :mobile, required: true %>
