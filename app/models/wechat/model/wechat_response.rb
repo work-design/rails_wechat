@@ -28,7 +28,7 @@ module Wechat
         self.match_value ||= "#{effective_type}_#{effective_id}"
         self.expire_at ||= Time.current + expire_seconds if expire_seconds
       end
-      after_save_commit :to_qrcode, if: -> { (['WechatRequestEvent', 'SubscribeRequest'] & request_types).present? && saved_change_to_match_value? }
+      after_save_commit :to_qrcode, if: -> { (['Wechat::WechatRequestEvent', 'Wechat::SubscribeRequest'] & request_types).present? && saved_change_to_match_value? }
       after_save_commit :sync_to_response_requests, if: -> { saved_change_to_request_types? }
     end
 
