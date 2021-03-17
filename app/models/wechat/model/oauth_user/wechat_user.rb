@@ -27,6 +27,7 @@ module Wechat
     end
 
     def sync_remark_to_wechat
+      return unless wechat_app
       wechat_app.api.user_update_remark(uid, remark)
     rescue Wechat::WechatError => e
       logger.info e.message
