@@ -31,7 +31,7 @@ module Wechat
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
-      has_many :wechat_tags, dependent: :delete_all
+      has_many :wechat_tags, foreign_key: :appid, primary_key: :appid, dependent: :destroy
       has_many :wechat_templates, dependent: :destroy
       has_many :post_syncs, as: :synced, dependent: :delete_all
       has_many :posts, through: :post_syncs

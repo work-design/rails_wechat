@@ -4,6 +4,7 @@ module Wechat
 
     included do
       has_many :wechat_tags, dependent: :destroy
+
       after_save_commit :sync_wechat_tag_later, if: -> { saved_change_to_name? }
     end
 

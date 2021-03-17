@@ -4,13 +4,14 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :appid, :string
       attribute :name, :string
       attribute :count, :integer, default: 0
       attribute :wechat_user_tags_count, :integer, default: 0
       attribute :tag_id, :integer
 
       belongs_to :tagging, polymorphic: true, optional: true
-      belongs_to :wechat_app
+      belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid
       belongs_to :user_tag, optional: true
       has_many :wechat_user_tags, dependent: :destroy
       has_many :wechat_users, through: :wechat_user_tags

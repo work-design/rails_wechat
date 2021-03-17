@@ -1,5 +1,10 @@
 module Wechat
   module Model::WechatRequest::SubscribeRequest
+    extend ActiveSupport::Concern
+
+    included do
+      after_create_commit :sync_to_tag
+    end
 
     def reply
       r = reply_from_rule
@@ -19,6 +24,10 @@ module Wechat
       key = body.delete_prefix('qrscene_')
       res = wechat_responses.find_by(match_value: key)
       res.invoke_effect(self) if res
+    end
+
+    def sync_to_tag
+      wechat_app.wechat_tags
     end
 
   end
