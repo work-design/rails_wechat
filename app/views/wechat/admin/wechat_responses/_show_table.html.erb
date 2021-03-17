@@ -1,22 +1,10 @@
-<table class="table is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th>
-        <%= link_to t('.edit'), edit_admin_wechat_app_wechat_response_path(@wechat_app, @wechat_response), class: 'ui mini blue right floated button' %>
-      </th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= WechatResponse.human_attribute_name(:match_value) %></td>
-      <td><%= @wechat_response.match_value %></td>
-    </tr>
-    <% if @wechat_response.qrcode_file.attached? %>
-    <tr>
-      <td class="has-text-right"><%= WechatResponse.human_attribute_name(:qrcode_file) %></td>
-      <td><%= image_tag @wechat_response.qrcode_file %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<tr>
+  <td class="has-text-right"><%= Wechat::WechatResponse.human_attribute_name(:match_value) %></td>
+  <td><%= @wechat_response.match_value %></td>
+</tr>
+<% if @wechat_response.qrcode_file.attached? %>
+<tr>
+  <td class="has-text-right"><%= Wechat::WechatResponse.human_attribute_name(:qrcode_file) %></td>
+  <td><%= image_tag @wechat_response.qrcode_file %></td>
+</tr>
+<% end %>
