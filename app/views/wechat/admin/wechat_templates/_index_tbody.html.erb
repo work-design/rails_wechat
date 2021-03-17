@@ -6,8 +6,8 @@
 </td>
 <td><%= model.template_type %></td>
 <td>
-  <div data-controller="input">
-    <%= check_box_tag '', nil, true, data: { method: :delete, url: admin_wechat_app_wechat_template_path(@wechat_app, model), action: 'input#submit' }, id: nil, class: 'switch is-rounded' %>
-    <label></label>
-  </div>
+  <%= form_with theme: nil, model: model, url: { action: 'destroy', id: model.id }, method: :delete, data: { controller: 'input' } do |f| %>
+    <%= f.check_box '', checked: true, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
 </td>
