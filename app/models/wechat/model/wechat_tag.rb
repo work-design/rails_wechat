@@ -16,7 +16,7 @@ module Wechat
       has_many :wechat_user_tags, dependent: :destroy
       has_many :wechat_users, through: :wechat_user_tags
 
-      validates :name, uniqueness: { scope: :wechat_app_id }
+      validates :name, uniqueness: { scope: :appid }
 
       before_create :sync_name
       after_create_commit :sync_to_wechat, if: -> { tag_id.blank? }

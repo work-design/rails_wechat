@@ -27,7 +27,10 @@ module Wechat
     end
 
     def sync_to_tag
-      wechat_app.wechat_tags
+      wechat_tag = wechat_tags.find_or_create_by(name: body)
+      if wechat_user
+        wechat_user.wechat_user_tags.find_or_create_by(wechat_tag_id: wechat_tag.id)
+      end
     end
 
   end
