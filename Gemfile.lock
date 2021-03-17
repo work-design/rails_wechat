@@ -25,16 +25,17 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 5d7701c340b8628f84efd583defbb74a600fdcbd
+  revision: 7b495924b3e39e692a74bceaa538e8a8063f1c3e
   specs:
     rails_auth (1.1.0)
       bcrypt (~> 3.1)
+      groupdate
       jwt (>= 2.0, <= 3.0)
       rails_com (~> 1.2)
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 97e04ba8056cfe28e739902fd6c5b70d1dd47840
+  revision: 26aa0860a5bc98287a3b10602bb1184008a626c8
   specs:
     rails_com (1.2.9)
       acme-client
@@ -155,6 +156,8 @@ GEM
     faraday-net_http (1.0.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    groupdate (5.2.2)
+      activesupport (>= 5)
     http-2-next (0.4.0)
     http-form_data (2.3.0)
     httpx (0.12.0)

@@ -43,14 +43,15 @@ module Wechat
       attribute :message_hash, :json
 
       belongs_to :wechat_platform, optional: true
-      belongs_to :wechat_request, optional: true
       belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
+
+      has_one :wechat_request
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
       before_save :init_wechat_user, if: -> { open_id_changed? && open_id.present? }
-      after_create_commit :parse_content
+      after_create :parse_content
       after_create_commit :check_wechat_app
     end
 
