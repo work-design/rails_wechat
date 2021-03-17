@@ -84,7 +84,7 @@ module Wechat
     end
 
     def parse_content
-      wechat_request || build_wechat_request(type: compute_type)
+      build_wechat_request(type: compute_type)
       wechat_request.appid = appid
       wechat_request.open_id = open_id
       wechat_request.msg_type = msg_type
