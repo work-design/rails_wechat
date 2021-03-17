@@ -40,8 +40,12 @@ module Wechat
       end
     end
 
+    def expired?
+      expire_at && expire_at < Time.current
+    end
+
     def to_qrcode
-      commit_to_wechat
+      commit_to_wechat if expired?
       persist_to_file
     end
 
