@@ -32,6 +32,7 @@ module Wechat
       return unless r
       tag = r['tag']
       self.tag_id = tag['id']
+      self.save
     rescue Wechat::WechatError => e
       logger.info e.message
     end
