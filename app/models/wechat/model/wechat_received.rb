@@ -96,10 +96,10 @@ module Wechat
       when 'event'
         wechat_request.event = message_hash['Event']
         wechat_request.event_key = message_hash['EventKey'] || message_hash.dig('ScanCodeInfo', 'ScanResult')
-        if msg_type == 'subscribe'
-          wechat_request.body = event_key.delete_prefix('qrscene_')
+        if wechat_request.event == 'subscribe'
+          wechat_request.body = wechat_request.event_key.delete_prefix('qrscene_')
         else
-          wechat_request.body = event_key
+          wechat_request.body = wechat_request.event_key
         end
       when 'image'
         wechat_request.body = message_hash['PicUrl']
