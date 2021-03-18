@@ -10,12 +10,10 @@ module Wechat::Api::Public::Menu
   end
 
   def menu_create(menu)
-    # 微信不接受7bit escaped json(eg \uxxxx), 中文必须UTF-8编码, 这可能是个安全漏洞
     post 'menu/create', **menu, base: BASE
   end
 
   def menu_addconditional(menu)
-    # Wechat not accept 7bit escaped json(eg \uxxxx), must using UTF-8, possible security vulnerability?
     post 'menu/addconditional', **menu, base: BASE
   end
 
