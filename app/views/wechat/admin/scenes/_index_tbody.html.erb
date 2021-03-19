@@ -1,4 +1,7 @@
-<td><%= model.match_value %></td>
+<td>
+  <%= model.match_value %>
+  <%= image_tag model.qrcode_file, class: 'image is-32x32' if model.qrcode_file.attached? %>
+</td>
 <td>
   <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
     <%= f.check_box :contain, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>

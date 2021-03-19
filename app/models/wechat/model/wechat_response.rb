@@ -10,8 +10,6 @@ module Wechat
       attribute :contain, :boolean, default: true
       attribute :expire_seconds, :integer
       attribute :expire_at, :datetime
-      attribute :qrcode_ticket, :string
-      attribute :qrcode_url, :string
       attribute :appid, :string, index: true
 
       belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid
@@ -20,15 +18,12 @@ module Wechat
       has_many :wechat_response_requests, dependent: :delete_all
       accepts_nested_attributes_for :wechat_response_requests, allow_destroy: true
 
-      has_one_attached :qrcode_file
-
       validates :match_value, presence: true
 
       before_validation do
         self.match_value ||= "#{effective_type}_#{effective_id}"
         self.expire_at ||= Time.current + expire_seconds if expire_seconds
       end
-      after_save_commit :to_qrcode, if: -> { (['Wechat::WechatRequestEvent', 'Wechat::SubscribeRequest'] & request_types).present? && saved_change_to_match_value? }
       after_save_commit :sync_to_response_requests, if: -> { saved_change_to_request_types? }
     end
 
@@ -44,11 +39,6 @@ module Wechat
       expire_at && expire_at < Time.current
     end
 
-    def to_qrcode
-      commit_to_wechat if expired?
-      persist_to_file
-    end
-
     def sync_to_response_requests
       types = wechat_response_requests.pluck(:request_type)
       adds = request_types - types
@@ -57,40 +47,6 @@ module Wechat
         self.wechat_response_requests.create(request_type: add) unless add.blank?
       end
       self.wechat_response_requests.where(request_type: removes).delete_all
-    end
-
-    def persist_to_file
-      return unless self.qrcode_url
-      file = QrcodeHelper.code_file self.qrcode_url
-      self.qrcode_file.attach io: file, filename: self.qrcode_url
-    end
-
-    def qrcode_file_url
-      qrcode_file.url if qrcode_file.attachment.present?
-    end
-
-    def commit_to_wechat
-      # 默认: 2592000 ，即 30 天
-      if expire_seconds
-        r = wechat_app.api.qrcode_create_scene self.match_value, expire_seconds
-        self.expire_at = Time.current + expire_seconds
-      elsif self.qrcode_ticket.blank?
-        r = wechat_app.api.qrcode_create_limit_scene self.match_value
-      else
-        r = {}
-      end
-
-      self.qrcode_ticket = r['ticket']
-      self.qrcode_url = r['url']
-      self.save
-      r
-    end
-
-    def refresh
-      unless effective?
-        to_qrcode
-      end
-      self
     end
 
     def effective?(time = Time.now)

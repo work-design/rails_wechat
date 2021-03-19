@@ -1,0 +1,4 @@
+<%= form_with model: @wechat_response, scope: :wechat_response, url: admin_wechat_app_wechat_response_path(@wechat_app, @wechat_response) do |f| %>
+  <%= f.collection_select :effective_id, @wechat_replies, :id, :value %>
+  <%= f.submit %>
+<% end %>

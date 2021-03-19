@@ -1,0 +1,4 @@
+<%= form_with model: @wechat_response, scope: :wechat_response, url: admin_wechat_app_wechat_responses_path(@wechat_app) do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+  <%= f.submit %>
+<% end %>

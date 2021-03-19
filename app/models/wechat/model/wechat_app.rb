@@ -38,6 +38,7 @@ module Wechat
       has_many :organ_domains, class_name: 'Org::OrganDomain', foreign_key: :appid, primary_key: :appid
       has_one :wechat_agency, foreign_key: :appid, primary_key: :appid
       has_many :wechat_agencies, foreign_key: :appid, primary_key: :appid
+      has_many :scenes, foreign_key: :appid, primary_key: :appid
 
       scope :valid, -> { where(enabled: true) }
       scope :shared, -> { where(shared: true) }

@@ -50,7 +50,9 @@ Rails.application.routes.draw do
   end
 
   scope :share, module: 'wechat/share', defaults: { business: 'wechat', namespace: 'share' } do
-    resources :wechat_apps
+    resources :wechat_apps do
+      resources :scenes
+    end
     resources :wechat_menus do
       collection do
         get :default
