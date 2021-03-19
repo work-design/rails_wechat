@@ -49,6 +49,9 @@ zh:
       wechat_platforms:
         index:
           title: 微信第三方平台
+      wechat_apps:
+        index:
+          title: 微信公众号
     my:
       title: 微信公众号
       wechat_registers:

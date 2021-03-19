@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
   scope :panel, module: 'wechat/panel', as: :panel, defaults: { business: 'wechat', namespace: 'panel' } do
     resources :template_configs
+    resources :wechat_apps
     resources :wechat_platforms do
       resources :wechat_agencies, shallow: true, as: :agencies
     end
