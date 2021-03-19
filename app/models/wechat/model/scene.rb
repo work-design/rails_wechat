@@ -16,6 +16,8 @@ module Wechat
       belongs_to :wechat_response, optional: true
 
       has_one :wechat_tag, ->(o){ where(name: o.match_value) }, primary_key: :appid, foreign_key: :appid
+      has_many :scene_menus, dependent: :destroy
+      has_many :wechat_menus, through: :scene_menus
 
       has_one_attached :qrcode_file
 
