@@ -52,6 +52,13 @@ zh:
       wechat_apps:
         index:
           title: 微信公众号
+    share:
+      wechat_apps:
+        index:
+          title: 可用公众号
+      wechat_menus:
+        index:
+          title: 我的菜单
     my:
       title: 微信公众号
       wechat_registers:
