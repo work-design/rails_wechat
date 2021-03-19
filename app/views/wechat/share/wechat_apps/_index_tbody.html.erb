@@ -6,10 +6,6 @@
     <dd><%= model.appid %></dd>
   <% end if model.appid.present? %>
   <%= content_tag :dl do %>
-    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::WechatApp.human_attribute_name(:secret) %></dt>
-    <dd><%= model.secret %></dd>
-  <% end if model.secret.present? %>
-  <%= content_tag :dl do %>
     <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::WechatApp.human_attribute_name(:agentid) %></dt>
     <dd><%= model.agentid %></dd>
   <% end if model.agentid.present? %>
@@ -17,22 +13,16 @@
     <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::WechatApp.human_attribute_name(:mch_id) %></dt>
     <dd><%= model.mch_id %></dd>
   <% end if model.mch_id.present? %>
-  <%= content_tag :dl do %>
-    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::WechatApp.human_attribute_name(:key) %></dt>
-    <dd><%= model.key %></dd>
-  <% end if model.key.present? %>
-  <%= content_tag :dl do %>
-    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::WechatApp.human_attribute_name(:key_v3) %></dt>
-    <dd><%= model.key_v3 %></dd>
-  <% end if model.key_v3.present? %>
-  <%= content_tag :dl do %>
-    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::WechatApp.human_attribute_name(:serial_no) %></dt>
-    <dd><%= model.serial_no %></dd>
-  <% end if model.serial_no.present? %>
 </td>
 <td>
   <%= form_with theme: nil, model: model, scope: :wechat_app, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
-    <%= f.check_box :shared, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <%= f.check_box :encrypt_mode, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
+</td>
+<td>
+  <%= form_with theme: nil, model: model, scope: :wechat_app, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :enabled, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
     <label data-action="click->input#check"></label>
   <% end %>
 </td>

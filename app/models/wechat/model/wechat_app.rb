@@ -8,7 +8,7 @@ module Wechat
       attribute :type, :string, default: 'Wechat::WechatPublic'
       attribute :name, :string
       attribute :enabled, :boolean, default: true
-      attribute :primary, :boolean, default: false
+      attribute :shared, :boolean, default: false
       attribute :appid, :string
       attribute :secret, :string
       attribute :token, :string, default: -> { SecureRandom.hex }
@@ -40,6 +40,7 @@ module Wechat
       has_many :wechat_agencies, foreign_key: :appid, primary_key: :appid
 
       scope :valid, -> { where(enabled: true) }
+      scope :shared, -> { where(shared: true) }
 
       validates :appid, presence: true, uniqueness: true
 

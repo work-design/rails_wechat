@@ -1,6 +1,6 @@
 module Wechat
   class Panel::WechatAppsController < Panel::BaseController
-    before_action :set_wechat_app, only: [:show, :info, :edit, :edit_cert, :update_cert, :update, :destroy]
+    before_action :set_wechat_app, only: [:show, :edit, :update, :destroy]
 
     def index
       q_params = {}
@@ -28,20 +28,6 @@ module Wechat
     def show
     end
 
-    def info
-    end
-
-    def edit_cert
-    end
-
-    def update_cert
-      pkcs12 = WxPay.set_apiclient_by_pkcs12(params[:cert].read, @wechat_app.mch_id)
-
-      @wechat_app.apiclient_cert = pkcs12.certificate
-      @wechat_app.apiclient_key = pkcs12.key
-      @wechat_app.save
-    end
-
     def edit
     end
 
@@ -63,10 +49,10 @@ module Wechat
     end
 
     def wechat_app_params
-      p = params.fetch(:wechat_app, {}).permit(
+      params.fetch(:wechat_app, {}).permit(
         :type,
         :name,
-        :enabled,
+        :shared,
         :appid,
         :secret,
         :agentid,
@@ -76,7 +62,6 @@ module Wechat
         :encrypt_mode,
         :serial_no
       )
-      p.merge! default_form_params
     end
 
   end
