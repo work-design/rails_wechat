@@ -5,3 +5,6 @@
 <%= f.text_field :mp_appid %>
 <%= f.text_field :mp_pagepath %>
 <%= f.number_field :position, step: 1 %>
+<%= f.fields :scene_menus do |ef| %>
+  <%= ef.hidden_field :scene_id, value: params[:scene_id] %>
+<% end %>

@@ -56,15 +56,15 @@ Rails.application.routes.draw do
           patch :sync
         end
         resources :wechat_users
-      end
-      resources :wechat_menus do
-        collection do
-          get :default
-          get :new_parent
-          post :sync
-        end
-        member do
-          get :edit_parent
+        resources :wechat_menus do
+          collection do
+            get :default
+            get :new_parent
+            post :sync
+          end
+          member do
+            get :edit_parent
+          end
         end
       end
     end

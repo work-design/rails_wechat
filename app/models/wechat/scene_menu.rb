@@ -1,5 +1,5 @@
 module Wechat
-  class Scene < ApplicationRecord
+  class SceneMenu < ApplicationRecord
     include Model::SceneMenu
   end
 end
