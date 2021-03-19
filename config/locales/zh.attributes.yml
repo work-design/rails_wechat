@@ -1,7 +1,7 @@
 zh:
   activerecord:
     attributes:
-      wechat_app:
+      wechat/wechat_app:
         appid: 开发者ID（AppID）
         secret: 开发者密码（AppSecret）
         token: 令牌（Token）
@@ -16,7 +16,7 @@ zh:
         help_without_user: 未注册提示
         help_user_disabled: 用户被禁提示
         help_feedback: 收到反馈后提示
-      wechat_register:
+      wechat/wechat_register:
         id_name: 真实姓名
         id_number: 身份证号
         verify_status: 验证结果
@@ -27,18 +27,21 @@ zh:
         qrcode: 关注二维码
         state: 状态
         email: 登陆邮箱
-      wechat_request:
+      wechat/wechat_request:
         wechat_user_id: 微信用户
         body: 内容
         extractions: 内容解析
-      wechat_response:
+      wechat/wechat_response:
         match_value: 关键词
         contain: 是否包含
-        qrcode: 二维码
-        expire_at: 过期时间
         request_type: 用户消息类型
         effective: 自动回复
-      wechat_extractor:
+      wechat/scene:
+        match_value: 关键词
+        qrcode: 二维码
+        expire_seconds: 过期（单位：秒）
+        expire_at: 过期时间
+      wechat/wechat_extractor:
         prefix: 前缀
         suffix: 后缀
         more: 尽可能多的匹配
@@ -46,17 +49,17 @@ zh:
         serial_start: 初始序列号
         valid_response: 有效应答语
         invalid_response: 无效应答语
-      wechat_menu:
+      wechat/wechat_menu:
         parent_id: 一级目录
         menu_type: 菜单类型
         value: 值
         mp_appid: 小程序APPID
         mp_pagepath: 小程序路径
-      wechat_tag:
+      wechat/wechat_tag:
         tag_id: 标签ID
         count: 微信用户数
         wechat_user_tags_count: 系统用户数
-      wechat_user:
+      wechat/wechat_user:
         uid: 微信OpenID
         unionid: 微信开放平台UnionID
         account_id: 账号

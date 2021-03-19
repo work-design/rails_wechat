@@ -4,10 +4,4 @@
   <p><%= Wechat::WechatResponse.human_attribute_name(:expire_at) %></p>
 </th>
 <th><%= Wechat::WechatResponse.human_attribute_name(:request_type) %></th>
-<th>
-  <%= Wechat::WechatResponse.human_attribute_name(:effective) %>
-  <%= link_to({ controller: 'wechat_replies' }, aria: { label: t('wechat.admin.wechat_replies.index.title') }, target: '_blank') do %>
-    <i class="fas fa-cog"></i>
-  <% end %>
-</th>
 <th></th>
