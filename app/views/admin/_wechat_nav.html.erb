@@ -2,7 +2,7 @@
   <%= content_tag :div, class: 'menu-list' do %>
     <%= link_to t('wechat.admin.wechat_registers.index.title'), { controller: 'wechat/admin/wechat_registers' }, class: active_helper(controllers: 'wechat_registers', active: 'is-active') %>
     <%= link_to t('wechat.admin.wechat_apps.index.title'), { controller: 'wechat/admin/wechat_apps' }, class: active_helper(controllers: 'wechat/admin/wechat_apps', active: 'is-active') -%>
-    <%= link_to t('wechat.share.wechat_apps.index.title'), { controller: 'wechat/share/wechat_apps' }, class: active_helper(controllers: 'wechat/share/wechat_apps', active: 'is-active') %>
+    <%= link_to t('wechat.share.wechat_apps.index.title'), { controller: 'wechat/share/wechat_apps' }, class: active_helper(controllers: ['wechat/share/wechat_apps', 'wechat/share/wechat_menus'], active: 'is-active') %>
 <% end %>
   <a class="menu-label" data-action="menu#toggle">
     <i class="fab fa-weixin"></i>
