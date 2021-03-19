@@ -46,11 +46,6 @@ module Wechat
       end
     end
 
-    def sync
-      r= Wechat.api(@wechat_app.account).menu_create @wechat_app.menu
-      redirect_to admin_wechat_app_wechat_menus_url(@wechat_app), notice: r.to_s
-    end
-
     def destroy
       @wechat_response.destroy
     end

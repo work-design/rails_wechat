@@ -4,7 +4,7 @@ module Wechat
 
     included do
       attribute :match_value, :string
-      attribute :expire_seconds, :integer
+      attribute :expire_seconds, :integer  # 默认: 2592000 ，即 30 天
       attribute :expire_at, :datetime
       attribute :qrcode_ticket, :string
       attribute :qrcode_url, :string
@@ -14,6 +14,8 @@ module Wechat
 
       belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid
       belongs_to :wechat_response, optional: true
+
+      has_one :wechat_tag, ->(o){ where(name: o.match_value) }, primary_key: :appid, foreign_key: :appid
 
       has_one_attached :qrcode_file
 
@@ -39,15 +41,14 @@ module Wechat
     end
 
     def commit_to_wechat
-      # 默认: 2592000 ，即 30 天
       if expire_seconds
         r = wechat_app.api.qrcode_create_scene self.match_value, expire_seconds
-        self.expire_at = Time.current + expire_seconds
-      elsif self.qrcode_ticket.blank?
+      elsif true#self.qrcode_ticket.blank?
         r = wechat_app.api.qrcode_create_limit_scene self.match_value
       else
         r = {}
       end
+      binding.pry
 
       self.qrcode_ticket = r['ticket']
       self.qrcode_url = r['url']

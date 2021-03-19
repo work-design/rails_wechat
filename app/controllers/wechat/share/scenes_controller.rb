@@ -28,14 +28,6 @@ module Wechat
     def edit
     end
 
-    def edit_reply
-      q_params = {
-        appid: @wechat_app.appid,
-        type: @scene.effective_type
-      }
-      @wechat_replies = WechatReply.where(q_params)
-    end
-
     def update
       @scene.assign_attributes(scene_params)
 
@@ -45,8 +37,8 @@ module Wechat
     end
 
     def sync
-      r= Wechat.api(@wechat_app.account).menu_create @wechat_app.menu
-      redirect_to admin_wechat_app_wechat_menus_url(@wechat_app), notice: r.to_s
+      r= @wechat_app.api.menu_create @wechat_app.menu
+      render 'sync', locals: { notice: r.to_s }
     end
 
     def destroy

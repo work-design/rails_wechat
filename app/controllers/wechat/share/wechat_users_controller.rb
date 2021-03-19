@@ -1,11 +1,13 @@
 module Wechat
-  class Admin::WechatUsersController < Admin::BaseController
+  class Share::WechatUsersController < Share::BaseController
     before_action :set_wechat_app
+    before_action :set_scene
     before_action :set_wechat_user, only: [:show, :edit, :update, :destroy]
 
     def index
-      q_params = {}
-      q_params.merge! params.permit('wechat_user_tags.wechat_tag_id')
+      q_params = {
+        'wechat_user_tags.wechat_tag_id': @scene.wechat_tag&.id
+      }
 
       @wechat_users = @wechat_app.wechat_users.default_where(q_params).page(params[:page])
     end
@@ -30,6 +32,14 @@ module Wechat
     end
 
     private
+    def set_wechat_app
+      @wechat_app = WechatApp.shared.find(params[:wechat_app_id])
+    end
+
+    def set_scene
+      @scene = Scene.find params[:scene_id]
+    end
+
     def set_wechat_user
       @wechat_user = @wechat_app.wechat_users.find params[:id]
     end

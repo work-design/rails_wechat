@@ -1,0 +1,5 @@
+<%= form_with model: @wechat_user, url: { action: 'update' } do |f| %>
+  <%= f.collection_select :wechat_tag_ids, @wechat_tags, :id, :name, {}, { multiple: true, data: { controller: 'choice' } } %>
+  <%= f.text_field :remark %>
+  <%= f.submit %>
+<% end %>
