@@ -27,6 +27,9 @@
   <% end %>
 </td>
 <td>
+  <%= link_to({ controller: 'scenes', wechat_app_id: model.id }, aria: { label: t('wechat.share.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
+    <i class="fas fa-qrcode"></i>
+  <% end %>
   <%= link_to({ controller: 'wechat_menus', appid: model.appid }, aria: { label: t('wechat.share.wechat_menus.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-bars"></i>
   <% end %>

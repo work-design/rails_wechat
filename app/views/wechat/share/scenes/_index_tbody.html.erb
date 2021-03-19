@@ -3,12 +3,6 @@
   <%= image_tag model.qrcode_file, class: 'image is-32x32' if model.qrcode_file.attached? %>
 </td>
 <td>
-  <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
-    <%= f.check_box :contain, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
-    <label data-action="click->input#check"></label>
-  <% end %>
-</td>
-<td>
   <p><time data-controller="time"><%= model.created_at.to_s(:rfc822) %></time></p>
   <p><time data-controller="time" class="<%= model.expire_at && model.expire_at < Time.current ? 'has-text-danger' : 'has-text-success' %>"><%= model.expire_at.to_s(:rfc822) if model.expire_at %></time></p>
 </td>
