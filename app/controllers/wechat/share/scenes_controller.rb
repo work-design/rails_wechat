@@ -1,7 +1,7 @@
 module Wechat
   class Share::ScenesController < Share::BaseController
     before_action :set_wechat_app
-    before_action :set_scene, only: [:show, :edit, :edit_reply, :update, :destroy]
+    before_action :set_scene, only: [:show, :edit, :update, :destroy]
 
     def index
       q_params = {}
