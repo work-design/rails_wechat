@@ -129,7 +129,7 @@ module Wechat
       elsif wechat_agency
         @api = Wechat::Api::Public.new(wechat_agency)
       else
-        @api = nil
+        raise 'Must has secrect or under agency'
       end
     end
 

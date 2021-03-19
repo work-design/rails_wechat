@@ -1,0 +1,5 @@
+<%= turbo_stream.update 'modal' do %>
+  <%= render layout: 'modal' do %>
+    <p><%= simple_format @result %></p>
+  <% end %>
+<% end %>

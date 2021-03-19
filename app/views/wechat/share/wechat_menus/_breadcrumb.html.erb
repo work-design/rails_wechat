@@ -1,9 +1,9 @@
 <div class="breadcrumb has-succeeds-separator">
   <ul>
     <li><%= link_to t('wechat.admin.wechat_apps.index.title'), { controller: 'wechat_apps' } %></li>
-    <% if @wechat_app %>
-      <li><%= link_to @wechat_app.name, { controller: 'wechat_apps', id: @wechat_app.id } %></li>
-    <% end %>
+    <li><%= link_to @wechat_app.name, { controller: 'wechat_apps', id: @wechat_app.id } %></li>
+    <li><%= link_to t('wechat.share.scenes.index.title'), { controller: 'scenes' } %></li>
+    <li><%= link_to @scene.match_value, { controller: 'scenes', id: @scene.id } %></li>
     <li class="is-active"><%= t('.title') %></li>
   </ul>
 </div>

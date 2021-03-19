@@ -2,7 +2,7 @@ module Wechat
   class Share::WechatUsersController < Share::BaseController
     before_action :set_wechat_app
     before_action :set_scene
-    before_action :set_wechat_user, only: [:show, :edit, :update, :destroy]
+    before_action :set_wechat_user, only: [:show, :edit, :update, :try_match, :destroy]
 
     def index
       q_params = {
@@ -25,6 +25,10 @@ module Wechat
       unless @wechat_user.save
         render :edit, locals: { model: @wechat_user }, status: :unprocessable_entity
       end
+    end
+
+    def try_match
+      @result = @wechat_user.try_match
     end
 
     def destroy

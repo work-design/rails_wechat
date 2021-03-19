@@ -22,6 +22,10 @@ module Wechat
       super.blank? ? "WechatUser_#{id}" : super
     end
 
+    def try_match
+      wechat_app.api.menu_trymatch(uid)
+    end
+
     def sync_remark_later
       WechatUserJob.perform_later(self)
     end

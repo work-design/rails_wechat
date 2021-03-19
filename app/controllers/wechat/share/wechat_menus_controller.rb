@@ -1,6 +1,7 @@
 module Wechat
   class Share::WechatMenusController < Share::BaseController
     before_action :set_wechat_app
+    before_action :set_scene
     before_action :set_wechat_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
     before_action :prepare_form, only: [:new, :create, :edit, :update]
 
@@ -9,6 +10,8 @@ module Wechat
       q_params.merge! appid: [@wechat_app.appid, nil].uniq
 
       @wechat_menus = WechatMenu.where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
+
+      @scene_wechat_menu_ids = @scene.scene_menus.pluck(:wechat_menu_id)
     end
 
     def new
@@ -58,6 +61,10 @@ module Wechat
     end
 
     private
+    def set_scene
+      @scene = Scene.find params[:scene_id]
+    end
+
     def set_wechat_menu
       @wechat_menu = WechatMenu.find(params[:id])
     end

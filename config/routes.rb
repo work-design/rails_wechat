@@ -55,7 +55,11 @@ Rails.application.routes.draw do
         member do
           patch :sync
         end
-        resources :wechat_users
+        resources :wechat_users do
+          member do
+            patch :try_match
+          end
+        end
         resources :wechat_menus do
           collection do
             get :default

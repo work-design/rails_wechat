@@ -9,6 +9,7 @@ module Wechat
       attribute :qrcode_ticket, :string
       attribute :qrcode_url, :string
       attribute :appid, :string, index: true
+      attribute :menu_id, :string
 
       belongs_to :organ, class_name: 'Org::Organ'
 
@@ -67,6 +68,31 @@ module Wechat
         to_qrcode
       end
       self
+    end
+
+    def sync_menu
+      menu_delete
+      r = wechat_app.api.menu_addconditional menu
+      self.menu_id = r['menuid']
+      self.save
+      r
+    end
+
+    def menu_delete
+      wechat_app.api.menu_delconditional(menu_id) if menu_id.present?
+    end
+
+    def scene_menus
+      wechat_menus.as_json
+    end
+
+    def menu
+      {
+        button: wechat_app.default_menus + wechat_app.within_menus + scene_menus,
+        matchrule: {
+          tag_id: wechat_tag.tag_id.to_s
+        }
+      }
     end
 
   end
