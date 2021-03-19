@@ -8,7 +8,7 @@ module Wechat
       attribute :request_types, :string, array: true
       attribute :match_value, :string
       attribute :contain, :boolean, default: true
-      attribute :expire_seconds, :integer
+      attribute :enabled, :boolean, default: true
       attribute :expire_at, :datetime
       attribute :appid, :string, index: true
 
@@ -22,7 +22,6 @@ module Wechat
 
       before_validation do
         self.match_value ||= "#{effective_type}_#{effective_id}"
-        self.expire_at ||= Time.current + expire_seconds if expire_seconds
       end
       after_save_commit :sync_to_response_requests, if: -> { saved_change_to_request_types? }
     end
@@ -35,10 +34,6 @@ module Wechat
       end
     end
 
-    def expired?
-      expire_at && expire_at < Time.current
-    end
-
     def sync_to_response_requests
       types = wechat_response_requests.pluck(:request_type)
       adds = request_types - types
@@ -47,10 +42,6 @@ module Wechat
         self.wechat_response_requests.create(request_type: add) unless add.blank?
       end
       self.wechat_response_requests.where(request_type: removes).delete_all
-    end
-
-    def effective?(time = Time.now)
-      time < expire_at
     end
 
     def invoke_effect(request)

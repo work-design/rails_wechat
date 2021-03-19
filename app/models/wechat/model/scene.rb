@@ -13,6 +13,7 @@ module Wechat
       belongs_to :organ, class_name: 'Org::Organ'
 
       belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid
+      belongs_to :wechat_response, optional: true
 
       has_one_attached :qrcode_file
 
@@ -54,8 +55,12 @@ module Wechat
       r
     end
 
+    def expired?(time = Time.current)
+      expire_at && expire_at < time
+    end
+
     def refresh
-      unless effective?
+      if expired?
         to_qrcode
       end
       self
