@@ -1,5 +1,5 @@
 module Wechat
-  module Model::Effective
+  module Ext::Effective
     extend ActiveSupport::Concern
     include Model::EffectiveModule
 
