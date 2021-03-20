@@ -29,7 +29,7 @@ module Wechat
     end
 
     def to_qrcode
-      commit_to_wechat if expired?
+      commit_to_wechat
       persist_to_file
     end
 
@@ -46,12 +46,9 @@ module Wechat
     def commit_to_wechat
       if expire_seconds
         r = wechat_app.api.qrcode_create_scene self.match_value, expire_seconds
-      elsif true#self.qrcode_ticket.blank?
-        r = wechat_app.api.qrcode_create_limit_scene self.match_value
       else
-        r = {}
+        r = wechat_app.api.qrcode_create_limit_scene self.match_value
       end
-      binding.pry
 
       self.qrcode_ticket = r['ticket']
       self.qrcode_url = r['url']
@@ -65,6 +62,7 @@ module Wechat
 
     def refresh
       if expired?
+        self.expire_at = Time.current + expire_seconds
         to_qrcode
       end
       self
