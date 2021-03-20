@@ -15,18 +15,6 @@
   <% end if model.mch_id.present? %>
 </td>
 <td>
-  <%= form_with theme: nil, model: model, scope: :wechat_app, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
-    <%= f.check_box :encrypt_mode, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
-    <label data-action="click->input#check"></label>
-  <% end %>
-</td>
-<td>
-  <%= form_with theme: nil, model: model, scope: :wechat_app, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
-    <%= f.check_box :enabled, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
-    <label data-action="click->input#check"></label>
-  <% end %>
-</td>
-<td>
   <%= link_to({ controller: 'scenes', wechat_app_id: model.id }, aria: { label: t('wechat.share.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-qrcode"></i>
   <% end %>
