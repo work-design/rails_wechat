@@ -1,5 +1,5 @@
 module Wechat
-  class MiniProgramMenu < WechatMenu
-    include Model::WechatMenu::MiniProgramMenu
+  class MiniProgramMenu < Menu
+    include Model::Menu::MiniProgramMenu
   end
 end

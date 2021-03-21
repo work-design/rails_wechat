@@ -4,7 +4,7 @@ module Wechat
 
     include Model::EffectiveModule
     included do
-      has_one :wechat_response, as: :effective
+      has_one :response, as: :effective
     end
 
     def invoke_effect(wechat_user)

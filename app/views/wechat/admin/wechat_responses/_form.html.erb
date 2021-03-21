@@ -1,12 +1,12 @@
-<%= render 'shared/error_messages', target: @wechat_response %>
+<%= render 'shared/error_messages', target: @response %>
 <%= f.text_field :match_value %>
 <%= f.check_box :contain %>
 <%= f.number_field :expire_seconds, step: 1, placeholder: '2592000' %>
-<%= f.select :effective_type, options_for_select(Wechat::WechatReply.options_i18n(:type), @wechat_response.effective_type) %>
+<%= f.select :effective_type, options_for_select(Wechat::Reply.options_i18n(:type), @response.effective_type) %>
 <%=
   f.select(
       :request_types,
-      options_for_select(Wechat::WechatRequest.options_i18n(:type), @wechat_response.request_types),
+      options_for_select(Wechat::WechatRequest.options_i18n(:type), @response.request_types),
       {},
       { multiple: true, data: { controller: 'choice' } }
   )

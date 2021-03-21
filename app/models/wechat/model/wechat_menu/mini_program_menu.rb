@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatMenu::MiniProgramMenu
+  module Model::Menu::MiniProgramMenu
     extend ActiveSupport::Concern
 
     included do

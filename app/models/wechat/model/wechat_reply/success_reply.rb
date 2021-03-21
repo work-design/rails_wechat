@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatReply::SuccessReply
+  module Model::Reply::SuccessReply
 
     def to_wechat
       {}

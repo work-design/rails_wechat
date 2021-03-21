@@ -1,6 +1,6 @@
 FactoryBot.define do
 
-  factory :wechat_response do
+  factory :response do
     app
     effective_type { 'MyString' }
     effective_id { 1 }

@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatAgency
+  module Model::Agency
     SERVICE_TYPE = {
       '0' => 'WechatRead',
       '1' => 'WechatRead',
@@ -46,7 +46,7 @@ module Wechat
     end
 
     def store_info_later
-      WechatAgencyJob.perform_later(self)
+      AgencyJob.perform_later(self)
     end
 
     def store_info

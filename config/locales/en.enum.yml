@@ -22,7 +22,7 @@ en:
       tag_default:
         default_type:
           WechatUser: Wechat User
-      wechat/wechat_response:
+      wechat/response:
         effective_type:
           Wechat::NewsReply: 新闻
           Wechat::TextReply: 文字

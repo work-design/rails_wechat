@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatReply::VoiceReply
+  module Model::Reply::VoiceReply
     extend ActiveSupport::Concern
 
     included do

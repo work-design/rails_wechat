@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatMenu::ParentMenu
+  module Model::Menu::ParentMenu
     extend ActiveSupport::Concern
 
     included do

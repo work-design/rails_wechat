@@ -1,5 +1,5 @@
 module Wechat
-  class VideoReply < WechatReply
-    include Model::WechatReply::VideoReply
+  class VideoReply < Reply
+    include Model::Reply::VideoReply
   end
 end

@@ -1,5 +1,5 @@
 module Wechat
-  class SuccessReply < WechatReply
-    include Model::WechatReply::SuccessReply
+  class SuccessReply < Reply
+    include Model::Reply::SuccessReply
   end
 end

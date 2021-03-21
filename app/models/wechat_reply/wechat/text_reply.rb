@@ -1,5 +1,5 @@
 module Wechat
-  class TextReply < WechatReply
-    include Model::WechatReply::TextReply
+  class TextReply < Reply
+    include Model::Reply::TextReply
   end
 end

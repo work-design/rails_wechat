@@ -27,10 +27,10 @@ module Wechat
       wa = app
       wa = backup_wechat_app if wa.nil?
 
-      if wechat_response
-        wechat_response.effective? ? wechat_response : wechat_response.refresh
+      if response
+        response.effective? ? response : response.refresh
       else
-        create_wechat_response(type: 'TempScanResponse', wechat_app_id: wa.id) if wa
+        create_response(type: 'TempScanResponse', wechat_app_id: wa.id) if wa
       end
     end
 

@@ -1,6 +1,6 @@
 module Wechat
-  class WechatAgency < ApplicationRecord
-    include Model::WechatAgency
+  class Agency < ApplicationRecord
+    include Model::Agency
     include Model::AppSync
   end
 end

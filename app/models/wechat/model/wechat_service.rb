@@ -13,7 +13,7 @@ module Wechat
       belongs_to :wechat_request, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
-      belongs_to :wechat_agency, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :agency, foreign_key: :appid, primary_key: :appid, optional: true
 
       after_initialize if: :new_record? do
         if wechat_request
@@ -24,7 +24,7 @@ module Wechat
     end
 
     def do_send
-      wechat_agency.api.message_custom_send to_wechat
+      agency.api.message_custom_send to_wechat
     end
 
     def content

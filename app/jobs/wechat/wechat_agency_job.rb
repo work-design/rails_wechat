@@ -1,8 +1,8 @@
 module Wechat
-  class WechatAgencyJob < ApplicationJob
+  class AgencyJob < ApplicationJob
 
-    def perform(wechat_agency)
-      wechat_agency.store_info
+    def perform(agency)
+      agency.store_info
     end
 
   end

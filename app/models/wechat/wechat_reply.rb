@@ -1,5 +1,5 @@
 module Wechat
-  class WechatReply < ApplicationRecord
-    include Model::WechatReply
+  class Reply < ApplicationRecord
+    include Model::Reply
   end
 end

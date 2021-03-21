@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatExtractor
+  module Model::Extractor
     extend ActiveSupport::Concern
 
     included do
@@ -14,7 +14,7 @@ module Wechat
       attribute :valid_response, :string
       attribute :invalid_response, :string
 
-      belongs_to :wechat_response
+      belongs_to :response
       has_many :wechat_extractions, dependent: :nullify
     end
 

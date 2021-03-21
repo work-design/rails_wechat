@@ -1,6 +1,6 @@
 # https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html
 module Wechat
-  module Model::WechatReply
+  module Model::Reply
     extend ActiveSupport::Concern
 
     included do

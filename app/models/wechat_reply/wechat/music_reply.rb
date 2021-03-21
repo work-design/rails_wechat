@@ -1,5 +1,5 @@
 module Wechat
-  class MusicReply < WechatReply
-    include Model::WechatReply::MusicReply
+  class MusicReply < Reply
+    include Model::Reply::MusicReply
   end
 end

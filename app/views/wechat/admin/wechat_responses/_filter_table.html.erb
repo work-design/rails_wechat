@@ -1,6 +1,6 @@
 <table class="as-search">
   <tr>
-    <th><%= Wechat::WechatResponse.human_attribute_name(:request_type) %></th>
+    <th><%= Wechat::Response.human_attribute_name(:request_type) %></th>
     <td>
       <%= link_to t('.all'), filter_params(except: [:request_type]), class: active_params(request_type: '', active: 'button is-info', item: 'button is-light') %>
       <% Wechat::WechatRequest.options_i18n(:request_type).each do |text, value| %>

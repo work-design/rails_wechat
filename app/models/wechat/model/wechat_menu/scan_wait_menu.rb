@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatMenu::ScanWaitMenu
+  module Model::Menu::ScanWaitMenu
     extend ActiveSupport::Concern
 
     included do

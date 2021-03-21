@@ -1,15 +1,15 @@
 module Wechat
-  module Model::WechatResponseRequest
+  module Model::ResponseRequest
     extend ActiveSupport::Concern
 
     included do
       attribute :request_type, :string, comment: '用户发送消息类型'
       attribute :appid, :string
 
-      belongs_to :wechat_response
+      belongs_to :response
 
       before_validation do
-        self.appid = wechat_response.appid
+        self.appid = response.appid
       end
     end
 

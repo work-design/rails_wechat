@@ -1,5 +1,5 @@
 module Wechat
-  class Share::WechatMenusController < Share::BaseController
+  class Share::MenusController < Share::BaseController
     before_action :set_wechat_app
     before_action :set_scene
     before_action :set_wechat_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
@@ -9,7 +9,7 @@ module Wechat
       q_params = {}
       q_params.merge! appid: [@app.appid, nil].uniq
 
-      @wechat_menus = WechatMenu.where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
+      @wechat_menus = Menu.where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
 
       @scene_wechat_menu_ids = @scene.scene_menus.pluck(:wechat_menu_id)
     end
@@ -18,11 +18,11 @@ module Wechat
       @wechat_menu = @app.wechat_menus.build(type: 'Wechat::ViewMenu')
       @wechat_menu.scene_menus.build
 
-      @parents = WechatMenu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: params[:appid])
+      @parents = Menu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: params[:appid])
     end
 
     def new_parent
-      @wechat_menu = WechatMenu.new(appid: params[:appid])
+      @wechat_menu = Menu.new(appid: params[:appid])
     end
 
     def create
@@ -42,7 +42,7 @@ module Wechat
     end
 
     def edit
-      @parents = WechatMenu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @wechat_menu.appid)
+      @parents = Menu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @wechat_menu.appid)
     end
 
     def edit_parent
@@ -66,11 +66,11 @@ module Wechat
     end
 
     def set_wechat_menu
-      @wechat_menu = WechatMenu.find(params[:id])
+      @wechat_menu = Menu.find(params[:id])
     end
 
     def prepare_form
-      @types = WechatMenu.options_i18n(:type)
+      @types = Menu.options_i18n(:type)
       @types.reject! { |_, v| v == :ParentMenu }
     end
 

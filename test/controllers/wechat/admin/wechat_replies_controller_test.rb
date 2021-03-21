@@ -16,7 +16,7 @@ class Wechat::Admin::WechatRepliesControllerTest < ActionDispatch::IntegrationTe
   end
 
   test 'create ok' do
-    assert_difference('WechatReply.count') do
+    assert_difference('Reply.count') do
       post admin_wechat_replies_url, params: { wechat_reply: { } }
     end
 
@@ -39,7 +39,7 @@ class Wechat::Admin::WechatRepliesControllerTest < ActionDispatch::IntegrationTe
   end
 
   test 'destroy ok' do
-    assert_difference('WechatReply.count', -1) do
+    assert_difference('Reply.count', -1) do
       delete admin_wechat_reply_url(@wechat_reply)
     end
 

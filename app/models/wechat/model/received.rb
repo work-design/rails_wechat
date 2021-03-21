@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatReceived
+  module Model::Received
     # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
     MSG_TYPE = {
       'text' => 'Wechat::TextRequest',

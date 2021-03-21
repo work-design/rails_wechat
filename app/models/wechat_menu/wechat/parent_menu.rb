@@ -1,5 +1,5 @@
 module Wechat
-  class ParentMenu < WechatMenu
-    include Model::WechatMenu::ParentMenu
+  class ParentMenu < Menu
+    include Model::Menu::ParentMenu
   end
 end

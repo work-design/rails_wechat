@@ -41,15 +41,15 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :panel, module: 'wechat/panel', as: :panel, defaults: { business: 'wechat', namespace: 'panel' } do
+  scope 'wechat/panel', module: 'wechat/panel', as: :panel, defaults: { business: 'wechat', namespace: 'panel' } do
     resources :template_configs
     resources :apps
     resources :wechat_platforms do
-      resources :wechat_agencies, shallow: true, as: :agencies
+      resources :agencies, shallow: true, as: :agencies
     end
   end
 
-  scope :share, module: 'wechat/share', defaults: { business: 'wechat', namespace: 'share' } do
+  scope 'wechat/share', module: 'wechat/share', defaults: { business: 'wechat', namespace: 'share' } do
     resources :apps do
       resources :scenes do
         member do
@@ -74,7 +74,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :admin, module: 'wechat/admin', as: :admin, defaults: { business: 'wechat', namespace: 'admin' } do
+  scope 'wechat/admin', module: 'wechat/admin', as: :admin, defaults: { business: 'wechat', namespace: 'admin' } do
     resources :wechat_registers do
       member do
         get 'app' => :edit_app
@@ -93,7 +93,7 @@ Rails.application.routes.draw do
         get 'cert' => :edit_cert
         patch 'cert' => :update_cert
       end
-      resources :wechat_responses do
+      resources :responses do
         member do
           post :sync
           get 'reply' => :edit_reply
@@ -120,8 +120,8 @@ Rails.application.routes.draw do
         resources :wechat_notices
       end
     end
-    resources :wechat_responses, only: [] do
-      resources :wechat_extractors
+    resources :responses, only: [] do
+      resources :extractors
     end
     resources :wechat_menus do
       collection do

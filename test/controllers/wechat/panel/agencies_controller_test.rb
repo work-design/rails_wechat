@@ -2,11 +2,11 @@ require 'test_helper'
 class Wechat::Panel::WechatAgenciesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @wechat_panel_wechat_agency = create wechat_panel_wechat_agencies
+    @wechat_panel_agency = create wechat_panel_agencies
   end
 
   test 'index ok' do
-    get panel_wechat_agencies_url
+    get panel_agencies_url
     assert_response :success
   end
 
@@ -16,8 +16,8 @@ class Wechat::Panel::WechatAgenciesControllerTest < ActionDispatch::IntegrationT
   end
 
   test 'create ok' do
-    assert_difference('WechatAgency.count') do
-      post panel_wechat_agencies_url, params: { #{singular_table_name}: { #{attributes_string} } }
+    assert_difference('Agency.count') do
+      post panel_agencies_url, params: { }
     end
 
     assert_response :success
@@ -34,12 +34,12 @@ class Wechat::Panel::WechatAgenciesControllerTest < ActionDispatch::IntegrationT
   end
 
   test 'update ok' do
-    patch panel_wechat_agency_url(@wechat_panel_wechat_agency), params: { #{singular_table_name}: { #{attributes_string} } }
+    patch panel_wechat_agency_url(@wechat_panel_wechat_agency), params: { }
     assert_response :success
   end
 
   test 'destroy ok' do
-    assert_difference('WechatAgency.count', -1) do
+    assert_difference('Agency.count', -1) do
       delete panel_wechat_agency_url(@wechat_panel_wechat_agency)
     end
 

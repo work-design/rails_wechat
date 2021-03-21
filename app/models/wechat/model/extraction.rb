@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatExtraction
+  module Model::Extraction
     extend ActiveSupport::Concern
 
     included do
@@ -8,12 +8,12 @@ module Wechat
       attribute :serial_number, :integer
 
       belongs_to :wechat_request
-      belongs_to :wechat_extractor
+      belongs_to :extractor
     end
 
     def respond_text
       if serial_number.present?
-        "#{wechat_extractor.valid_response}#{serial_number}"
+        "#{extractor.valid_response}#{serial_number}"
       end
     end
 

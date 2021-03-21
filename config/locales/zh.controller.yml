@@ -14,7 +14,7 @@ zh:
       wechat_menus:
         index:
           title: 菜单
-      wechat_responses:
+      responses:
         index:
           title: 回复设置
       wechat_replies:
@@ -26,7 +26,7 @@ zh:
       wechat_users:
         index:
           title: 微信用户
-      wechat_extractors:
+      extractors:
         index:
           title: 解析回复内容
       wechat_templates:
@@ -43,7 +43,7 @@ zh:
       template_configs:
         index:
           title: 模板设置
-      wechat_agencies:
+      agencies:
         index:
           title: 授权公众号
       wechat_platforms:

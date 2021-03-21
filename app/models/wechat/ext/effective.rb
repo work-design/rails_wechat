@@ -4,7 +4,7 @@ module Wechat
     include Model::EffectiveModule
 
     included do
-      has_one :wechat_response, class_name: 'Wechat::WechatResponse', as: :effective
+      has_one :response, class_name: 'Wechat::Response', as: :effective
     end
 
   end

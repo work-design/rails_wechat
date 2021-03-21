@@ -46,7 +46,7 @@
   <%= link_to({ controller: 'wechat_menus', appid: model.appid }, aria: { label: t('wechat.admin.wechat_menus.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-bars"></i>
   <% end %>
-  <%= link_to({ controller: 'wechat_responses', app_id: model.id }, aria: { label: t('wechat.admin.wechat_responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
+  <%= link_to({ controller: 'responses', app_id: model.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-reply-all"></i>
   <% end %>
   <%= link_to({ controller: 'wechat_requests', app_id: model.id }, aria: { label: t('wechat.admin.wechat_requests.index.title') }, class: 'button is-small is-rounded is-light') do %>

@@ -1,5 +1,5 @@
 module Wechat
-  class ImageReply < WechatReply
-    include Model::WechatReply::ImageReply
+  class ImageReply < Reply
+    include Model::Reply::ImageReply
   end
 end

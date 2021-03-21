@@ -1,5 +1,5 @@
 module Wechat
-  class WechatResponseRequest < ApplicationRecord
-    include Model::WechatResponseRequest
+  class ResponseRequest < ApplicationRecord
+    include Model::ResponseRequest
   end
 end

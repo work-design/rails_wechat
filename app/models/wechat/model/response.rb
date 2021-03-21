@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatResponse
+  module Model::Response
     extend ActiveSupport::Concern
 
     included do
@@ -14,9 +14,9 @@ module Wechat
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :effective, polymorphic: true, optional: true
-      has_many :wechat_extractors, dependent: :delete_all
-      has_many :wechat_response_requests, dependent: :delete_all
-      accepts_nested_attributes_for :wechat_response_requests, allow_destroy: true
+      has_many :extractors, dependent: :delete_all
+      has_many :response_requests, dependent: :delete_all
+      accepts_nested_attributes_for :response_requests, allow_destroy: true
 
       validates :match_value, presence: true
 
@@ -35,13 +35,13 @@ module Wechat
     end
 
     def sync_to_response_requests
-      types = wechat_response_requests.pluck(:request_type)
+      types = response_requests.pluck(:request_type)
       adds = request_types - types
       removes = types - request_types
       adds.each do |add|
-        self.wechat_response_requests.create(request_type: add) unless add.blank?
+        self.response_requests.create(request_type: add) unless add.blank?
       end
-      self.wechat_response_requests.where(request_type: removes).delete_all
+      self.response_requests.where(request_type: removes).delete_all
     end
 
     def invoke_effect(request)
@@ -52,22 +52,22 @@ module Wechat
     end
 
     def do_extract(request)
-      wechat_extractors.map do |wechat_extractor|
-        matched = request.body.scan(wechat_extractor.scan_regexp)
+      extractors.map do |extractor|
+        matched = request.body.scan(extractor.scan_regexp)
         if matched.blank?
           next
         else
-          logger.debug "=====> Matched: #{matched.inspect}, Extractor: #{wechat_extractor.name}/#{wechat_extractor.id}"
+          logger.debug "=====> Matched: #{matched.inspect}, Extractor: #{extractor.name}/#{extractor.id}"
         end
 
-        ex = request.wechat_extractions.find_or_initialize_by(wechat_extractor_id: wechat_extractor.id)
-        ex.name = wechat_extractor.name
+        ex = request.wechat_extractions.find_or_initialize_by(extractor_id: extractor.id)
+        ex.name = extractor.name
         ex.matched = matched.join(', ')
-        if wechat_extractor.serial && wechat_extractor.effective?(request.created_at)
-          ex.serial_number ||= wechat_extractor.serial_number
+        if extractor.serial && extractor.effective?(request.created_at)
+          ex.serial_number ||= extractor.serial_number
           r = ex.respond_text
         else
-          r = wechat_extractor.invalid_response.presence
+          r = extractor.invalid_response.presence
         end
         ex.save
 

@@ -1,5 +1,5 @@
 module Wechat
-  class WechatMenu < ApplicationRecord
-    include Model::WechatMenu
+  class Menu < ApplicationRecord
+    include Model::Menu
   end
 end

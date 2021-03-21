@@ -1,5 +1,5 @@
 module Wechat
-  class WechatAuth < ApplicationRecord
-    include Model::WechatAuth
+  class Auth < ApplicationRecord
+    include Model::Auth
   end
 end

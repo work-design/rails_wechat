@@ -1,10 +1,10 @@
 module Wechat
   class Panel::WechatAgenciesController < Panel::BaseController
     before_action :set_wechat_platform
-    before_action :set_wechat_agency, only: [:show, :edit, :update]
+    before_action :set_agency, only: [:show, :edit, :update]
 
     def index
-      @wechat_agencies = @wechat_platform.wechat_agencies.order(id: :desc).page(params[:page])
+      @agencies = @wechat_platform.agencies.order(id: :desc).page(params[:page])
     end
 
     def show
@@ -14,10 +14,10 @@ module Wechat
     end
 
     def update
-      @wechat_agency.assign_attributes(wechat_agency_params)
+      @agency.assign_attributes(agency_params)
 
-      unless @wechat_agency.save
-        render :edit, locals: { model: @wechat_agency }, status: :unprocessable_entity
+      unless @agency.save
+        render :edit, locals: { model: @agency }, status: :unprocessable_entity
       end
     end
 
@@ -26,12 +26,12 @@ module Wechat
       @wechat_platform = WechatPlatform.find params[:wechat_platform_id]
     end
 
-    def set_wechat_agency
-      @wechat_agency = WechatAgency.find(params[:id])
+    def set_agency
+      @agency = Agency.find(params[:id])
     end
 
-    def wechat_agency_params
-      params.fetch(:wechat_agency, {}).permit(
+    def agency_params
+      params.fetch(:agency, {}).permit(
         :app
       )
     end

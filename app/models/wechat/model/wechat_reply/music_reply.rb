@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatReply::MusicReply
+  module Model::Reply::MusicReply
     extend ActiveSupport::Concern
 
     included do

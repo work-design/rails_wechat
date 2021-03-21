@@ -36,8 +36,8 @@ module Wechat
       has_many :post_syncs, as: :synced, dependent: :delete_all
       has_many :posts, through: :post_syncs
       has_many :organ_domains, class_name: 'Org::OrganDomain', foreign_key: :appid, primary_key: :appid
-      has_one :wechat_agency, foreign_key: :appid, primary_key: :appid
-      has_many :wechat_agencies, foreign_key: :appid, primary_key: :appid
+      has_one :agency, foreign_key: :appid, primary_key: :appid
+      has_many :agencies, foreign_key: :appid, primary_key: :appid
       has_many :scenes, foreign_key: :appid, primary_key: :appid
 
       scope :valid, -> { where(enabled: true) }
@@ -71,7 +71,7 @@ module Wechat
       else
         limit = 3
       end
-      WechatMenu.where(parent_id: nil, appid: nil).limit(limit).as_json
+      Menu.where(parent_id: nil, appid: nil).limit(limit).as_json
     end
 
     def within_menus
@@ -126,8 +126,8 @@ module Wechat
       return @api if defined? @api
       if secret.present?
         @api = Wechat::Api::Public.new(self)
-      elsif wechat_agency
-        @api = Wechat::Api::Public.new(wechat_agency)
+      elsif agency
+        @api = Wechat::Api::Public.new(agency)
       else
         raise 'Must has secrect or under agency'
       end

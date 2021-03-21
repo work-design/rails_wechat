@@ -1,5 +1,5 @@
 module Wechat
-  class ScanPushMenu < WechatMenu
-    include Model::WechatMenu::ScanPushMenu
+  class ScanPushMenu < Menu
+    include Model::Menu::ScanPushMenu
   end
 end

@@ -1,5 +1,5 @@
 require 'test_helper'
-class Wechat::Admin::WechatMenusControllerTest < ActionDispatch::IntegrationTest
+class Wechat::Admin::MenusControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @wechat_menu = create :wechat_menu
@@ -16,7 +16,7 @@ class Wechat::Admin::WechatMenusControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create ok' do
-    assert_difference('WechatMenu.count') do
+    assert_difference('Menu.count') do
       post admin_wechat_menus_url, params: { wechat_menu: { name: 'test', value: '1' } }, xhr: true
     end
 
@@ -39,11 +39,11 @@ class Wechat::Admin::WechatMenusControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'destroy ok' do
-    assert_difference('WechatMenu.count', -1) do
+    assert_difference('Menu.count', -1) do
       delete admin_wechat_menu_url(@wechat_menu), xhr: true
     end
 
     assert_response :success
   end
-  
+
 end

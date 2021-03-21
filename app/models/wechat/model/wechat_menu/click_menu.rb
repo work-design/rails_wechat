@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatMenu::ClickMenu
+  module Model::Menu::ClickMenu
     extend ActiveSupport::Concern
 
     included do

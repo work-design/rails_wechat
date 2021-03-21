@@ -1,5 +1,5 @@
 module Wechat
-  class Admin::WechatMenusController < Admin::BaseController
+  class Admin::MenusController < Admin::BaseController
     before_action :set_app
     before_action :set_wechat_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
     before_action :prepare_form, only: [:new, :create, :edit, :update]
@@ -7,7 +7,7 @@ module Wechat
     def default
       q_params = {}
       q_params.merge! params.permit(:name)
-      @wechat_menus = WechatMenu.where(appid: nil).default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
+      @wechat_menus = Menu.where(appid: nil).default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
 
       render 'index'
     end
@@ -16,20 +16,20 @@ module Wechat
       q_params = {}
       q_params.merge! appid: [params[:appid], nil].uniq
 
-      @wechat_menus = WechatMenu.where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
+      @wechat_menus = Menu.where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
     end
 
     def new
-      @wechat_menu = WechatMenu.new(appid: params[:appid], type: 'Wechat::ViewMenu')
-      @parents = WechatMenu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: params[:appid])
+      @wechat_menu = Menu.new(appid: params[:appid], type: 'Wechat::ViewMenu')
+      @parents = Menu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: params[:appid])
     end
 
     def new_parent
-      @wechat_menu = WechatMenu.new(appid: params[:appid])
+      @wechat_menu = Menu.new(appid: params[:appid])
     end
 
     def create
-      @wechat_menu = WechatMenu.new(wechat_menu_params)
+      @wechat_menu = Menu.new(wechat_menu_params)
 
       unless @wechat_menu.save
         render :new, locals: { model: @wechat_menu }, status: :unprocessable_entity
@@ -45,7 +45,7 @@ module Wechat
     end
 
     def edit
-      @parents = WechatMenu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @wechat_menu.appid)
+      @parents = Menu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @wechat_menu.appid)
     end
 
     def edit_parent
@@ -69,11 +69,11 @@ module Wechat
     end
 
     def set_wechat_menu
-      @wechat_menu = WechatMenu.find(params[:id])
+      @wechat_menu = Menu.find(params[:id])
     end
 
     def prepare_form
-      @types = WechatMenu.options_i18n(:type)
+      @types = Menu.options_i18n(:type)
       @types.reject! { |_, v| v == :ParentMenu }
     end
 

@@ -31,7 +31,7 @@ zh:
         wechat_user_id: 微信用户
         body: 内容
         extractions: 内容解析
-      wechat/wechat_response:
+      wechat/response:
         match_value: 关键词
         contain: 是否包含
         request_type: 用户消息类型
@@ -41,7 +41,7 @@ zh:
         qrcode: 二维码
         expire_seconds: 过期（单位：秒）
         expire_at: 过期时间
-      wechat/wechat_extractor:
+      wechat/extractor:
         prefix: 前缀
         suffix: 后缀
         more: 尽可能多的匹配

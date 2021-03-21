@@ -11,7 +11,7 @@ en:
       wechat_menus:
         index:
           title: 菜单
-      wechat_responses:
+      responses:
         index:
           title: 回复设置
       tags:
