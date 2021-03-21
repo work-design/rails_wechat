@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatApp::WechatMobile
+  module Model::App::MobileApp
     extend ActiveSupport::Concern
 
     included do

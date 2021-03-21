@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatApp::WechatPublic
+  module Model::App::PublicApp
 
     def sync_wechat_templates
       templates = api.templates
