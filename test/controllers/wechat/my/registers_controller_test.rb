@@ -1,8 +1,8 @@
 require 'test_helper'
-class Wechat::My::WechatRegistersControllerTest < ActionDispatch::IntegrationTest
+class Wechat::My::RegistersControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @wechat_my_wechat_register = create wechat_my_wechat_registers
+    @register = create registers
   end
 
   test 'index ok' do
@@ -17,30 +17,30 @@ class Wechat::My::WechatRegistersControllerTest < ActionDispatch::IntegrationTes
 
   test 'create ok' do
     assert_difference('WechatRegister.count') do
-      post my_wechat_registers_url, params: { #{singular_table_name}: { #{attributes_string} } }
+      post my_wechat_registers_url, params: { }
     end
 
     assert_response :success
   end
 
   test 'show ok' do
-    get my_wechat_register_url(@wechat_my_wechat_register)
+    get my_wechat_register_url(@register)
     assert_response :success
   end
 
   test 'edit ok' do
-    get edit_my_wechat_register_url(@wechat_my_wechat_register)
+    get edit_my_wechat_register_url(@register)
     assert_response :success
   end
 
   test 'update ok' do
-    patch my_wechat_register_url(@wechat_my_wechat_register), params: { #{singular_table_name}: { #{attributes_string} } }
+    patch my_wechat_register_url(@register), params: { }
     assert_response :success
   end
 
   test 'destroy ok' do
     assert_difference('WechatRegister.count', -1) do
-      delete my_wechat_register_url(@wechat_my_wechat_register)
+      delete my_wechat_register_url(@register)
     end
 
     assert_response :success

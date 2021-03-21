@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatPlatform
+  module Model::Platform
     extend ActiveSupport::Concern
 
     included do
@@ -65,7 +65,7 @@ module Wechat
       url.query = {
         component_appid: appid,
         pre_auth_code: pre_auth_code,
-        redirect_uri: url_helpers.callback_wechat_platform_url(self)
+        redirect_uri: url_helpers.callback_platform_url(self)
       }.to_query
       url.to_s
     end
@@ -80,7 +80,7 @@ module Wechat
         no_scan: 1,
         component_appid: appid,
         pre_auth_code: pre_auth_code,
-        redirect_uri: url_helpers.callback_wechat_platform_url(self)
+        redirect_uri: url_helpers.callback_platform_url(self)
       }.to_query
       url.to_s
     end

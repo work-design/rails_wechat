@@ -23,7 +23,7 @@ module Wechat
       attribute :service_type, :string
       attribute :verify_type, :string
 
-      belongs_to :wechat_platform
+      belongs_to :platform
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       after_create_commit :store_info_later
@@ -41,7 +41,7 @@ module Wechat
     end
 
     def refresh_access_token
-      r = wechat_platform.api.authorizer_token(appid, refresh_token)
+      r = platform.api.authorizer_token(appid, refresh_token)
       store_access_token(r)
     end
 
@@ -50,7 +50,7 @@ module Wechat
     end
 
     def store_info
-      r = wechat_platform.api.get_authorizer_info(appid)
+      r = platform.api.get_authorizer_info(appid)
       self.assign_attributes r.slice('nick_name', 'head_img', 'user_name', 'principal_name', 'qrcode_url', 'business_info')
       self.alias_name = r['alias']
       self.service_type = r.dig('service_type_info', 'id')

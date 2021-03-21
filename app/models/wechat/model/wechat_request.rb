@@ -21,7 +21,7 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :wechat_received
 
-      has_one :wechat_platform, through: :wechat_received
+      has_one :platform, through: :wechat_received
       has_many :wechat_services, dependent: :nullify
       has_many :tags, primary_key: :appid, foreign_key: :appid
       has_many :wechat_extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
@@ -73,10 +73,10 @@ module Wechat
     end
 
     def do_encrypt
-      if wechat_platform
-        token = wechat_platform.token
-        encoding_aes_key = wechat_platform.encoding_aes_key
-        encrypt_appid = wechat_platform.appid
+      if platform
+        token = platform.token
+        encoding_aes_key = platform.encoding_aes_key
+        encrypt_appid = platform.appid
       elsif app.encrypt_mode
         token = app.token
         encoding_aes_key = app.encoding_aes_key

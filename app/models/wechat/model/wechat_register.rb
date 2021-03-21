@@ -122,7 +122,7 @@ module Wechat
         user: user,
         code: 'auth',
         title: '授权服务',
-        link: WechatPlatform.first.click_auth_url,
+        link: Platform.first.click_auth_url,
         organ_id: organ_id
       )
     end

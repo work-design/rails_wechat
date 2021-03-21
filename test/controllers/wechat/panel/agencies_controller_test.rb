@@ -1,5 +1,5 @@
 require 'test_helper'
-class Wechat::Panel::WechatAgenciesControllerTest < ActionDispatch::IntegrationTest
+class Wechat::Panel::AgenciesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @wechat_panel_agency = create wechat_panel_agencies
@@ -24,23 +24,23 @@ class Wechat::Panel::WechatAgenciesControllerTest < ActionDispatch::IntegrationT
   end
 
   test 'show ok' do
-    get panel_wechat_agency_url(@wechat_panel_wechat_agency)
+    get panel_wechat_agency_url(@agency)
     assert_response :success
   end
 
   test 'edit ok' do
-    get edit_panel_wechat_agency_url(@wechat_panel_wechat_agency)
+    get edit_panel_wechat_agency_url(@agency)
     assert_response :success
   end
 
   test 'update ok' do
-    patch panel_wechat_agency_url(@wechat_panel_wechat_agency), params: { }
+    patch panel_wechat_agency_url(@agency), params: { }
     assert_response :success
   end
 
   test 'destroy ok' do
     assert_difference('Agency.count', -1) do
-      delete panel_wechat_agency_url(@wechat_panel_wechat_agency)
+      delete panel_wechat_agency_url(@agency)
     end
 
     assert_response :success

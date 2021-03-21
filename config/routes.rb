@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     controller :wechat do
       post 'wechat/auth' => :auth
     end
-    resources :wechat_platforms, only: [:show] do
+    resources :platforms, only: [:show] do
       member do
         get :callback
         post 'callback/:appid' => :message
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   scope 'wechat/panel', module: 'wechat/panel', as: :panel, defaults: { business: 'wechat', namespace: 'panel' } do
     resources :template_configs
     resources :apps
-    resources :wechat_platforms do
+    resources :platforms do
       resources :agencies, shallow: true, as: :agencies
     end
   end

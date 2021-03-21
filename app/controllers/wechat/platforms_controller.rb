@@ -1,9 +1,9 @@
 module Wechat
-  class WechatPlatformsController < BaseController
+  class PlatformsController < BaseController
     skip_before_action :verify_authenticity_token, raise: false
-    before_action :set_wechat_platform, only: [:show, :message, :callback]
+    before_action :set_platform, only: [:show, :message, :callback]
 
-    # 授权事件接收URL: wechat_platforms/notice
+    # 授权事件接收URL: platforms/notice
     def notice
       @wechat_ticket = WechatTicket.new(ticket_params)
       r = Hash.from_xml(request.raw_post)['xml']
@@ -21,15 +21,15 @@ module Wechat
     end
 
     def callback
-      @wechat_auth = @wechat_platform.wechat_auths.build
+      @wechat_auth = @platform.wechat_auths.build
       @wechat_auth.auth_code = params[:auth_code]
       @wechat_auth.auth_code_expires_at = Time.current + params[:expires_in].to_i
       @wechat_auth.save
     end
 
-    # 消息与事件接收URL: wechat_platforms/:id/callback/$APPID$
+    # 消息与事件接收URL: platforms/:id/callback/$APPID$
     def message
-      @wechat_received = @wechat_platform.wechat_receiveds.build
+      @wechat_received = @platform.wechat_receiveds.build
       @wechat_received.appid = params[:appid]
       r = Hash.from_xml(request.body.read)['xml']
       @wechat_received.encrypt_data = r['Encrypt']
@@ -49,12 +49,12 @@ module Wechat
       )
     end
 
-    def set_wechat_platform
-      @wechat_platform = WechatPlatform.find(params[:id])
+    def set_platform
+      @platform = Platform.find(params[:id])
     end
 
     def set_wechat_app
-      @app = @wechat_platform.agencies.find_by(appid: params[:appid]).app
+      @app = @platform.agencies.find_by(appid: params[:appid]).app
     end
 
   end

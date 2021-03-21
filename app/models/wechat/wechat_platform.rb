@@ -1,5 +1,5 @@
 module Wechat
-  class WechatPlatform < ApplicationRecord
-    include Model::WechatPlatform
+  class Platform < ApplicationRecord
+    include Model::Platform
   end
 end

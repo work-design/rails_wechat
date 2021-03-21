@@ -1,10 +1,10 @@
 module Wechat
   class Panel::WechatAgenciesController < Panel::BaseController
-    before_action :set_wechat_platform
+    before_action :set_platform
     before_action :set_agency, only: [:show, :edit, :update]
 
     def index
-      @agencies = @wechat_platform.agencies.order(id: :desc).page(params[:page])
+      @agencies = @platform.agencies.order(id: :desc).page(params[:page])
     end
 
     def show
@@ -22,8 +22,8 @@ module Wechat
     end
 
     private
-    def set_wechat_platform
-      @wechat_platform = WechatPlatform.find params[:wechat_platform_id]
+    def set_platform
+      @platform = Platform.find params[:platform_id]
     end
 
     def set_agency
