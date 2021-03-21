@@ -9,22 +9,22 @@ module Wechat
       WechatQrcodeJob.perform_later(self)
     end
 
-    def wechat_app
+    def app
       if self.respond_to? :organ_id
         _organ_id = organ_id
       else
         _organ_id = nil
       end
 
-      if WechatApp.column_names.include?('organ_id')
-        WechatApp.find_by(organ_id: _organ_id, primary: true)
+      if App.column_names.include?('organ_id')
+        App.find_by(organ_id: _organ_id, primary: true)
       else
-        WechatApp.find_by(primary: true)
+        App.find_by(primary: true)
       end
     end
 
     def qrcode
-      wa = wechat_app
+      wa = app
       wa = backup_wechat_app if wa.nil?
 
       if wechat_response

@@ -7,15 +7,15 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit(:name)
 
-      @wechat_tags = @wechat_app.wechat_tags.default_where(q_params).order(id: :asc).page(params[:page])
+      @wechat_tags = @app.wechat_tags.default_where(q_params).order(id: :asc).page(params[:page])
     end
 
     def new
-      @wechat_tag = @wechat_app.wechat_tags.build
+      @wechat_tag = @app.wechat_tags.build
     end
 
     def create
-      @wechat_tag = @wechat_app.wechat_tags.build(wechat_tag_params)
+      @wechat_tag = @app.wechat_tags.build(wechat_tag_params)
 
       unless @wechat_tag.save
         render :new, locals: { model: @wechat_tag }, status: :unprocessable_entity
@@ -23,8 +23,8 @@ module Wechat
     end
 
     def sync
-      @wechat_app.sync_wechat_tags
-      redirect_to admin_wechat_app_wechat_tags_url(@wechat_app)
+      @app.sync_wechat_tags
+      redirect_to admin_wechat_app_wechat_tags_url(@app)
     end
 
     def show
@@ -47,7 +47,7 @@ module Wechat
 
     private
     def set_wechat_tag
-      @wechat_tag = @wechat_app.wechat_tags.find(params[:id])
+      @wechat_tag = @app.wechat_tags.find(params[:id])
     end
 
     def wechat_tag_params

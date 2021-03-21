@@ -6,7 +6,7 @@ module Wechat
       attribute :provider, :string, default: 'wechat'
       attribute :remark, :string
 
-      belongs_to :wechat_app, foreign_key: :app_id, primary_key: :appid, optional: true
+      belongs_to :app, foreign_key: :app_id, primary_key: :appid, optional: true
 
       has_many :wechat_requests, foreign_key: :open_id, primary_key: :uid, dependent: :delete_all
       has_many :wechat_subscribeds, dependent: :delete_all
@@ -23,7 +23,7 @@ module Wechat
     end
 
     def try_match
-      wechat_app.api.menu_trymatch(uid)
+      app.api.menu_trymatch(uid)
     end
 
     def sync_remark_later
@@ -31,8 +31,8 @@ module Wechat
     end
 
     def sync_remark_to_wechat
-      return unless wechat_app
-      wechat_app.api.user_update_remark(uid, remark)
+      return unless app
+      app.api.user_update_remark(uid, remark)
     rescue Wechat::WechatError => e
       logger.info e.message
     end

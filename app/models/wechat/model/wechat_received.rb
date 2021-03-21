@@ -43,7 +43,7 @@ module Wechat
       attribute :message_hash, :json
 
       belongs_to :wechat_platform, optional: true
-      belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 
       has_one :wechat_request
@@ -56,7 +56,7 @@ module Wechat
     end
 
     def decrypt_data
-      aes_key = wechat_platform ? wechat_platform.encoding_aes_key : wechat_app.encoding_aes_key
+      aes_key = wechat_platform ? wechat_platform.encoding_aes_key : app.encoding_aes_key
       r = Wechat::Cipher.decrypt(Base64.decode64(encrypt_data), aes_key)
       content, _ = Wechat::Cipher.unpack(r)
 
@@ -119,7 +119,7 @@ module Wechat
     end
 
     def check_wechat_app
-      wechat_app.update user_name: message_hash['ToUserName'] if wechat_app
+      app.update user_name: message_hash['ToUserName'] if app
     end
 
     def reply

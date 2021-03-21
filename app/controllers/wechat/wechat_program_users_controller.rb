@@ -6,7 +6,7 @@ module Wechat
     skip_before_action :verify_authenticity_token
 
     def create
-      info = @wechat_app.api.jscode2session(session_params[:code])
+      info = @app.api.jscode2session(session_params[:code])
       @wechat_program_user = WechatProgramUser.create_or_find_by!(uid: info['openid']) do |wechat_program_user|
         wechat_program_user.app_id = params[:appid]
         wechat_program_user.unionid = info['unionId']
@@ -52,7 +52,7 @@ module Wechat
 
     private
     def set_wechat_app
-      @wechat_app = WechatApp.find_by(appid: params[:appid])
+      @app = App.find_by(appid: params[:appid])
     end
 
     def set_wechat_program_user

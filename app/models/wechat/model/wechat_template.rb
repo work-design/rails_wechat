@@ -9,7 +9,7 @@ module Wechat
       attribute :example, :string
       attribute :template_type, :integer
 
-      belongs_to :wechat_app
+      belongs_to :app
       belongs_to :template_config, optional: true
       has_many :wechat_notices, dependent: :delete_all
 
@@ -19,7 +19,7 @@ module Wechat
     end
 
     def init_template_config
-      if wechat_app.is_a?(WechatPublic)
+      if app.is_a?(WechatPublic)
         config = TemplatePublic.find_or_initialize_by(content: content)
         config.title = title
         self.template_config = config
@@ -34,7 +34,7 @@ module Wechat
     def sync_to_wechat
       sync_from_wechat
       return if content.present?
-      r = wechat_app.api.add_template(template_config.tid, template_config.kid_list)
+      r = app.api.add_template(template_config.tid, template_config.kid_list)
       if r['errcode'] == 0
         self.template_id = r['priTmplId'] || r['template_id']
       else
@@ -45,8 +45,8 @@ module Wechat
     end
 
     def sync_from_wechat
-      r_content = wechat_app.api.templates.find do |i|
-        tid = wechat_app.is_a?(WechatPublic) ? i['template_id'] : i['priTmplId']
+      r_content = app.api.templates.find do |i|
+        tid = app.is_a?(WechatPublic) ? i['template_id'] : i['priTmplId']
         tid == self.template_id
       end
       return if r_content.blank?
@@ -61,7 +61,7 @@ module Wechat
     end
 
     def del_to_wechat
-      r = wechat_app.api.del_template(template_id)
+      r = app.api.del_template(template_id)
       logger.debug(r['errmsg'])
     end
 

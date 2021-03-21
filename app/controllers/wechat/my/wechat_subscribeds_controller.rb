@@ -4,7 +4,7 @@ module Wechat
     def create
       r = wechat_subscribeds_params.to_h.map do |k, v|
         next if k.blank?
-        wechat_template = current_wechat_user.wechat_app.wechat_templates.find_by template_id: k
+        wechat_template = current_wechat_user.app.wechat_templates.find_by template_id: k
         wechat_subscribed = current_wechat_user.wechat_subscribeds.build(status: v)
         wechat_subscribed.wechat_template = wechat_template
         wechat_subscribed.save

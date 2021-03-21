@@ -1,5 +1,5 @@
 module Wechat
-  class Admin::WechatAppsController < Admin::BaseController
+  class Admin::AppsController < Admin::BaseController
     before_action :set_wechat_app, only: [:show, :info, :edit, :edit_cert, :update_cert, :update, :destroy]
 
     def index
@@ -7,22 +7,22 @@ module Wechat
       q_params.merge! default_params
       q_params.merge! params.permit(:id)
 
-      @wechat_apps = WechatApp.default_where(q_params).order(id: :asc).page(params[:page])
+      @wechat_apps = App.default_where(q_params).order(id: :asc).page(params[:page])
     end
 
     def new
-      @wechat_app = WechatApp.new
+      @app = App.new
     end
 
     def create
-      @wechat_app = WechatApp.find_or_initialize_by(appid: wechat_app_params[:appid])
-      if @wechat_app.organ
-        @wechat_app.errors.add :base, '该账号已在其他组织添加，请联系客服'
+      @app = App.find_or_initialize_by(appid: wechat_app_params[:appid])
+      if @app.organ
+        @app.errors.add :base, '该账号已在其他组织添加，请联系客服'
       end
-      @wechat_app.assign_attributes wechat_app_params
+      @app.assign_attributes wechat_app_params
 
-      unless @wechat_app.save
-        render :new, locals: { model: @wechat_app }, status: :unprocessable_entity
+      unless @app.save
+        render :new, locals: { model: @app }, status: :unprocessable_entity
       end
     end
 
@@ -36,35 +36,35 @@ module Wechat
     end
 
     def update_cert
-      pkcs12 = WxPay.set_apiclient_by_pkcs12(params[:cert].read, @wechat_app.mch_id)
+      pkcs12 = WxPay.set_apiclient_by_pkcs12(params[:cert].read, @app.mch_id)
 
-      @wechat_app.apiclient_cert = pkcs12.certificate
-      @wechat_app.apiclient_key = pkcs12.key
-      @wechat_app.save
+      @app.apiclient_cert = pkcs12.certificate
+      @app.apiclient_key = pkcs12.key
+      @app.save
     end
 
     def edit
     end
 
     def update
-      @wechat_app.assign_attributes(wechat_app_params)
+      @app.assign_attributes(wechat_app_params)
 
-      unless @wechat_app.save
-        render :edit, locals: { model: @wechat_app }, status: :unprocessable_entity
+      unless @app.save
+        render :edit, locals: { model: @app }, status: :unprocessable_entity
       end
     end
 
     def destroy
-      @wechat_app.destroy
+      @app.destroy
     end
 
     private
     def set_wechat_app
-      @wechat_app = WechatApp.default_where(default_params).find(params[:id])
+      @app = App.default_where(default_params).find(params[:id])
     end
 
     def wechat_app_params
-      p = params.fetch(:wechat_app, {}).permit(
+      p = params.fetch(:app, {}).permit(
         :type,
         :name,
         :enabled,

@@ -7,17 +7,17 @@ module Wechat
     end
 
     def to_wechat
-      r = wechat_app.api.material_add_news xx
+      r = app.api.material_add_news xx
       if r['media_id']
-        post_sync = wechat_app.post_syncs.find_or_initialize_by(source_id: r['media_id'])
+        post_sync = app.post_syncs.find_or_initialize_by(source_id: r['media_id'])
         post_sync.post = self
         post_sync.save
       end
     end
 
-    def wechat_app
-      return @wechat_app if defined? @wechat_app
-      @wechat_app = WechatApp.first
+    def app
+      return @app if defined? @app
+      @app = WechatApp.first
     end
 
     def xx

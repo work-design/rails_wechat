@@ -36,7 +36,7 @@ zh:
           Wechat::TextReply: 文字
           Wechat::ImageReply: 图片
           Wechat::SuccessReply: 成功
-      wechat/wechat_app:
+      wechat/app:
         type:
           Wechat::WechatPublic: 服务号
           Wechat::WechatRead: 订阅号

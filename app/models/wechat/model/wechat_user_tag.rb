@@ -22,7 +22,7 @@ module Wechat
     end
 
     def wechat_api
-      @wechat_api ||= wechat_user.wechat_app&.api
+      @wechat_api ||= wechat_user.app&.api
     end
 
     def remove_from_wechat

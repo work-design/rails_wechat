@@ -1,5 +1,5 @@
 module Wechat
-  class WechatProgram < WechatApp
-    include Model::WechatApp::WechatProgram
+  class WechatProgram < App
+    include Model::App::WechatProgram
   end
 end

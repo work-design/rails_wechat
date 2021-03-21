@@ -1,5 +1,5 @@
 json.extract!(
-  wechat_app,
+  app,
   :id,
   :environment,
   :account,

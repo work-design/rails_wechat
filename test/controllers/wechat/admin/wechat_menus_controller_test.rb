@@ -6,12 +6,12 @@ class Wechat::Admin::WechatMenusControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'index ok' do
-    get admin_wechat_menus_url(wechat_app_id: @wechat_menu.wechat_app)
+    get admin_wechat_menus_url(wechat_app_id: @wechat_menu.app)
     assert_response :success
   end
 
   test 'new ok' do
-    get new_admin_wechat_menu_url(wechat_app_id: @wechat_menu.wechat_app), xhr: true
+    get new_admin_wechat_menu_url(wechat_app_id: @wechat_menu.app), xhr: true
     assert_response :success
   end
 

@@ -11,7 +11,7 @@ module Wechat
       attribute :tag_id, :integer
 
       belongs_to :tagging, polymorphic: true, optional: true
-      belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid
+      belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :user_tag, optional: true
       has_many :wechat_user_tags, dependent: :destroy
       has_many :wechat_users, through: :wechat_user_tags
@@ -29,7 +29,7 @@ module Wechat
     end
 
     def sync_to_wechat
-      r = wechat_app.api.tag_create(self.name, self.tag_id)
+      r = app.api.tag_create(self.name, self.tag_id)
       return unless r
       tag = r['tag']
       self.tag_id = tag['id']
@@ -39,7 +39,7 @@ module Wechat
     end
 
     def remove_from_wechat
-      wechat_app.api.tag_delete(self.tag_id)
+      app.api.tag_delete(self.tag_id)
     rescue Wechat::WechatError => e
       logger.info e.message
     end

@@ -3,7 +3,7 @@ module Wechat
     BASE = 'https://api.weixin.qq.com/cgi-bin/'
 
     def do_send
-      r = wechat_app.api.post 'message/template/send', **message_hash, base: BASE
+      r = app.api.post 'message/template/send', **message_hash, base: BASE
       if r['errcode'] == 0
         self.update msg_id: r['msgid']
         wechat_subscribed.update sending_at: Time.now if wechat_subscribed

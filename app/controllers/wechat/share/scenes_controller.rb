@@ -7,15 +7,15 @@ module Wechat
       q_params = {}
       q_params.merge! default_params
 
-      @scenes = @wechat_app.scenes.default_where(q_params).order(id: :desc).page(params[:page])
+      @scenes = @app.scenes.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def new
-      @scene = @wechat_app.scenes.build
+      @scene = @app.scenes.build
     end
 
     def create
-      @scene = @wechat_app.scenes.build(scene_params)
+      @scene = @app.scenes.build(scene_params)
 
       unless @scene.save
         render :new, locals: { model: @scene }, status: :unprocessable_entity
@@ -37,7 +37,7 @@ module Wechat
     end
 
     def sync
-      r= @wechat_app.api.menu_create @wechat_app.menu
+      r= @app.api.menu_create @app.menu
       render 'sync', locals: { notice: r.to_s }
     end
 
@@ -47,11 +47,11 @@ module Wechat
 
     private
     def set_wechat_app
-      @wechat_app = WechatApp.shared.find(params[:wechat_app_id])
+      @app = WechatApp.shared.find(params[:wechat_app_id])
     end
 
     def set_scene
-      @scene = @wechat_app.scenes.find(params[:id])
+      @scene = @app.scenes.find(params[:id])
     end
 
     def scene_params

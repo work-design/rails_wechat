@@ -2,15 +2,15 @@
 <td><%= model.name %></td>
 <td>
   <%= content_tag :dl do %>
-    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::WechatApp.human_attribute_name(:appid) %></dt>
+    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::App.human_attribute_name(:appid) %></dt>
     <dd><%= model.appid %></dd>
   <% end if model.appid.present? %>
   <%= content_tag :dl do %>
-    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::WechatApp.human_attribute_name(:agentid) %></dt>
+    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::App.human_attribute_name(:agentid) %></dt>
     <dd><%= model.agentid %></dd>
   <% end if model.agentid.present? %>
   <%= content_tag :dl do %>
-    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::WechatApp.human_attribute_name(:mch_id) %></dt>
+    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::App.human_attribute_name(:mch_id) %></dt>
     <dd><%= model.mch_id %></dd>
   <% end if model.mch_id.present? %>
 </td>

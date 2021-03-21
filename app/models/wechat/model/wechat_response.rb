@@ -12,7 +12,7 @@ module Wechat
       attribute :expire_at, :datetime
       attribute :appid, :string, index: true
 
-      belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid
+      belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :effective, polymorphic: true, optional: true
       has_many :wechat_extractors, dependent: :delete_all
       has_many :wechat_response_requests, dependent: :delete_all

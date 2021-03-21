@@ -1,9 +1,9 @@
 module Wechat
-  class WechatAppsController < BaseController
-    before_action :set_wechat_app, only: [:show]
+  class AppsController < BaseController
+    before_action :set_app, only: [:show]
 
     def show
-      @oauth_user = @wechat_app.generate_wechat_user(params[:code])
+      @oauth_user = @app.generate_wechat_user(params[:code])
       if @oauth_user.account.nil? && current_account
         @oauth_user.account = current_account
       end
@@ -23,8 +23,8 @@ module Wechat
     end
 
     private
-    def set_wechat_app
-      @wechat_app = WechatApp.find params[:id]
+    def set_app
+      @app = App.find params[:id]
     end
 
   end

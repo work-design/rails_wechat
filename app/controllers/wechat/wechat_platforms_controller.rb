@@ -54,7 +54,7 @@ module Wechat
     end
 
     def set_wechat_app
-      @wechat_app = @wechat_platform.wechat_agencies.find_by(appid: params[:appid]).wechat_app
+      @app = @wechat_platform.wechat_agencies.find_by(appid: params[:appid]).app
     end
 
   end

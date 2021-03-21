@@ -1,6 +1,6 @@
 module Wechat
   class Admin::WechatMenusController < Admin::BaseController
-    before_action :set_wechat_app
+    before_action :set_app
     before_action :set_wechat_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
     before_action :prepare_form, only: [:new, :create, :edit, :update]
 
@@ -37,7 +37,7 @@ module Wechat
     end
 
     def sync
-      r = @wechat_app.sync_menu
+      r = @app.sync_menu
       render 'sync', locals: { notice: r.to_s }
     end
 
@@ -64,8 +64,8 @@ module Wechat
     end
 
     private
-    def set_wechat_app
-      @wechat_app = WechatApp.default_where(default_params).find_by appid: params[:appid]
+    def set_app
+      @app = App.default_where(default_params).find_by appid: params[:appid]
     end
 
     def set_wechat_menu

@@ -23,9 +23,9 @@
 ## 使用
 * 调用api
 ```ruby
-# 或 wechat_app = WechatApp.find params[:id]
-wechat_app = WechatApp.take
-wechat_app.api.msg_sec_check('test data')
+# 或 app = Wechat::App.find params[:id]
+app = Wechat::App.take
+app.api.msg_sec_check('test data')
 ```
 
 ## 许可证

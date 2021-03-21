@@ -1,7 +1,7 @@
 FactoryBot.define do
-  
+
   factory :wechat_menu do
-    wechat_app
+    app
     type { 'ViewMenu' }
     menu_type { 'MyString' }
     name { 'MyString' }
@@ -9,5 +9,5 @@ FactoryBot.define do
     appid { 'MyString' }
     pagepath { 'MyString' }
   end
-  
+
 end

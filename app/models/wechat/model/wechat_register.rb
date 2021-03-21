@@ -16,7 +16,7 @@ module Wechat
 
       belongs_to :user, optional: true
       belongs_to :organ, optional: true
-      belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       validates :mobile, presence: true, uniqueness: true
 

@@ -1,7 +1,7 @@
 FactoryBot.define do
-  
+
   factory :wechat_response do
-    wechat_app
+    app
     effective_type { 'MyString' }
     effective_id { 1 }
     type { 'TextResponse' }
@@ -10,5 +10,5 @@ FactoryBot.define do
     qrcode_url { 'MyString' }
     expire_seconds { 1888 }
   end
-  
+
 end

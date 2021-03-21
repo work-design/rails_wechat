@@ -9,7 +9,7 @@ en:
           Wechat::ClickMenu: Click Event
           Wechat::ViewMenu: Link
           Wechat::MiniProgramMenu: Mini Program
-      wechat/wechat_app:
+      wechat/app:
         type:
           Wechat::WechatPublic: Public Wechat
           Wechat::WechatRead: Read Wechat

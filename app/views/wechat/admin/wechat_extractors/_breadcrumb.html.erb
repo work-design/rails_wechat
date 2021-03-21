@@ -1,8 +1,8 @@
 <div class="breadcrumb has-succeeds-separator">
   <ul>
     <li><%= link_to t('wechat.admin.wechat_apps.index.title'), { controller: 'wechat_apps' } %></li>
-    <li><%= link_to @wechat_response.wechat_app.name, { controller: 'wechat_apps', action: 'show', id: @wechat_response.wechat_app } %></li>
-    <li><%= link_to t('wechat.admin.wechat_responses.index.title'), { controller: 'wechat_responses', wechat_app_id: @wechat_response.wechat_app } %></li>
+    <li><%= link_to @wechat_response.app.name, { controller: 'wechat_apps', action: 'show', id: @wechat_response.app } %></li>
+    <li><%= link_to t('wechat.admin.wechat_responses.index.title'), { controller: 'wechat_responses', wechat_app_id: @wechat_response.app } %></li>
     <li class="is-active"><%= t('.title') %></li>
   </ul>
 </div>

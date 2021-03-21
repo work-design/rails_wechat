@@ -13,7 +13,7 @@ module Wechat
 
       belongs_to :organ, class_name: 'Org::Organ'
 
-      belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid
+      belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :wechat_response, optional: true
 
       has_one :wechat_tag, ->(o){ where(name: o.match_value) }, primary_key: :appid, foreign_key: :appid
@@ -45,9 +45,9 @@ module Wechat
 
     def commit_to_wechat
       if expire_seconds
-        r = wechat_app.api.qrcode_create_scene self.match_value, expire_seconds
+        r = app.api.qrcode_create_scene self.match_value, expire_seconds
       else
-        r = wechat_app.api.qrcode_create_limit_scene self.match_value
+        r = app.api.qrcode_create_limit_scene self.match_value
       end
 
       self.qrcode_ticket = r['ticket']
@@ -70,14 +70,14 @@ module Wechat
 
     def sync_menu
       menu_delete
-      r = wechat_app.api.menu_addconditional menu
+      r = app.api.menu_addconditional menu
       self.menu_id = r['menuid']
       self.save
       r
     end
 
     def menu_delete
-      wechat_app.api.menu_delconditional(menu_id) if menu_id.present?
+      app.api.menu_delconditional(menu_id) if menu_id.present?
     end
 
     def scene_menus
@@ -86,7 +86,7 @@ module Wechat
 
     def menu
       {
-        button: wechat_app.default_menus + wechat_app.within_menus + scene_menus,
+        button: app.default_menus + app.within_menus + scene_menus,
         matchrule: {
           tag_id: wechat_tag.tag_id.to_s
         }

@@ -1,1 +1,1 @@
-json.array! @wechat_apps, partial: 'wechat_app', as: :wechat_app
+json.array! @wechat_apps, partial: 'app', as: :app

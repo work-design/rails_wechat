@@ -1,6 +1,6 @@
-<%= link_to new_admin_wechat_app_wechat_tag_path(@wechat_app), class: 'button is-link' do %>
+<%= link_to new_admin_wechat_app_wechat_tag_path(@app), class: 'button is-link' do %>
   <i class="fas fa-plus"></i><span><%= t('.new') %></span>
 <% end %>
-<%= button_to sync_admin_wechat_app_wechat_tags_path(@wechat_app), method: :post, class: 'button is-link' do %>
+<%= button_to sync_admin_wechat_app_wechat_tags_path(@app), method: :post, class: 'button is-link' do %>
   <i class="fas fa-sync-alt"></i><span><%= t('.sync') %></span>
 <% end %>

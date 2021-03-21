@@ -1,6 +1,6 @@
 module Wechat
   class Admin::WechatResponsesController < Admin::BaseController
-    before_action :set_wechat_app
+    before_action :set_app
     before_action :set_wechat_response, only: [:show, :edit, :edit_reply, :update, :destroy]
     before_action :prepare_form, only: [:new, :create, :edit, :update]
 
@@ -9,15 +9,15 @@ module Wechat
         type: ['TextResponse', 'PersistScanResponse', 'EventResponse']
       }
       q_params.merge! params.permit(:type)
-      @wechat_responses = @wechat_app.wechat_responses.includes(:wechat_response_requests).default_where(q_params).order(id: :desc).page(params[:page])
+      @wechat_responses = @app.wechat_responses.includes(:wechat_response_requests).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def new
-      @wechat_response = @wechat_app.wechat_responses.build
+      @wechat_response = @app.wechat_responses.build
     end
 
     def create
-      @wechat_response = @wechat_app.wechat_responses.build(wechat_response_params)
+      @wechat_response = @app.wechat_responses.build(wechat_response_params)
 
       unless @wechat_response.save
         render :new, locals: { model: @wechat_response }, status: :unprocessable_entity
@@ -32,7 +32,7 @@ module Wechat
 
     def edit_reply
       q_params = {
-        appid: @wechat_app.appid,
+        appid: @app.appid,
         type: @wechat_response.effective_type
       }
       @wechat_replies = WechatReply.where(q_params)
@@ -52,7 +52,7 @@ module Wechat
 
     private
     def set_wechat_response
-      @wechat_response = @wechat_app.wechat_responses.find(params[:id])
+      @wechat_response = @app.wechat_responses.find(params[:id])
     end
 
     def prepare_form

@@ -11,7 +11,7 @@ module Wechat
       attribute :body, :json
       attribute :appid, :string, index: true
 
-      belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :messaging, polymorphic: true, optional: true
 
       has_one_attached :media
@@ -31,7 +31,7 @@ module Wechat
         MsgType: msg_type,
         CreateTime: Time.current.to_i
       }.merge! content
-      r.merge!(FromUserName: wechat_app.user_name) if wechat_app
+      r.merge!(FromUserName: app.user_name) if app
       r
     end
 

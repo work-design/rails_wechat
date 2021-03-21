@@ -1,1 +1,1 @@
-json.partial! 'wechat_app', wechat_app: @wechat_app
+json.partial! 'app', app: @app

@@ -18,7 +18,7 @@ module Wechat
 
       belongs_to :wechat_reply, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
-      belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :wechat_received
 
       has_one :wechat_platform, through: :wechat_received
@@ -56,7 +56,7 @@ module Wechat
     # Typing
     # CancelTyping
     def typing(command = 'Typing')
-      wechat_app.api.message_custom_typing(wechat_user.uid, command)
+      app.api.message_custom_typing(wechat_user.uid, command)
     end
 
     def get_reply_body
@@ -65,7 +65,7 @@ module Wechat
       elsif wechat_reply
         self.reply_body = wechat_reply.to_wechat
         self.reply_body.merge!(ToUserName: open_id)
-        self.reply_body.merge!(FromUserName: wechat_app.user_name) if wechat_app
+        self.reply_body.merge!(FromUserName: app.user_name) if app
       else
         self.reply_body = {}
       end
@@ -77,9 +77,9 @@ module Wechat
         token = wechat_platform.token
         encoding_aes_key = wechat_platform.encoding_aes_key
         encrypt_appid = wechat_platform.appid
-      elsif wechat_app.encrypt_mode
-        token = wechat_app.token
-        encoding_aes_key = wechat_app.encoding_aes_key
+      elsif app.encrypt_mode
+        token = app.token
+        encoding_aes_key = app.encoding_aes_key
         encrypt_appid = appid
       else
         return

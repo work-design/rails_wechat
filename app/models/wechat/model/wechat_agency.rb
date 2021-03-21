@@ -24,7 +24,7 @@ module Wechat
       attribute :verify_type, :string
 
       belongs_to :wechat_platform
-      belongs_to :wechat_app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       after_create_commit :store_info_later
       before_save :init_wechat_app, if: -> { appid_changed? && appid }
@@ -36,8 +36,8 @@ module Wechat
     end
 
     def init_wechat_app
-      wechat_app || build_wechat_app
-      wechat_app.save
+      app || build_wechat_app
+      app.save
     end
 
     def refresh_access_token

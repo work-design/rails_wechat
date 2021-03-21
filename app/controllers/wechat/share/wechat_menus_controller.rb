@@ -7,7 +7,7 @@ module Wechat
 
     def index
       q_params = {}
-      q_params.merge! appid: [@wechat_app.appid, nil].uniq
+      q_params.merge! appid: [@app.appid, nil].uniq
 
       @wechat_menus = WechatMenu.where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
 
@@ -15,7 +15,7 @@ module Wechat
     end
 
     def new
-      @wechat_menu = @wechat_app.wechat_menus.build(type: 'Wechat::ViewMenu')
+      @wechat_menu = @app.wechat_menus.build(type: 'Wechat::ViewMenu')
       @wechat_menu.scene_menus.build
 
       @parents = WechatMenu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: params[:appid])
@@ -26,7 +26,7 @@ module Wechat
     end
 
     def create
-      @wechat_menu = @wechat_app.wechat_menus.new(wechat_menu_params)
+      @wechat_menu = @app.wechat_menus.new(wechat_menu_params)
 
       unless @wechat_menu.save
         render :new, locals: { model: @wechat_menu }, status: :unprocessable_entity
@@ -34,7 +34,7 @@ module Wechat
     end
 
     def sync
-      r = @wechat_app.sync_menu
+      r = @app.sync_menu
       render 'sync', locals: { notice: r.to_s }
     end
 

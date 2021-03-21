@@ -5,8 +5,8 @@ module Wechat
     before_action :verify_signature
 
     def show
-      if @wechat_app.is_a?(WechatWork)
-        echostr, _corp_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(params[:echostr]), @wechat_app.encoding_aes_key))
+      if @app.is_a?(WechatWork)
+        echostr, _corp_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(params[:echostr]), @app.encoding_aes_key))
         render plain: echostr
       else
         render plain: params[:echostr]
@@ -15,7 +15,7 @@ module Wechat
 
     def create
       r = Hash.from_xml(request.raw_post).fetch('xml', {})
-      @wechat_received = @wechat_app.wechat_receiveds.build
+      @wechat_received = @app.wechat_receiveds.build
       if r['Encrypt']
         @wechat_received.encrypt_data = r['Encrypt']
       else
@@ -29,16 +29,16 @@ module Wechat
 
     private
     def set_wechat_app
-      @wechat_app = WechatApp.valid.find(params[:id])
+      @app = App.valid.find(params[:id])
     end
 
     def verify_signature
-      if @wechat_app
+      if @app
         msg_encrypt = nil
-        #msg_encrypt = params[:echostr] || request_encrypt_content if @wechat_app.encrypt_mode
+        #msg_encrypt = params[:echostr] || request_encrypt_content if @app.encrypt_mode
         signature = params[:signature] || params[:msg_signature]
 
-        forbidden = (signature != Wechat::Signature.hexdigest(@wechat_app.token, params[:timestamp], params[:nonce], msg_encrypt))
+        forbidden = (signature != Wechat::Signature.hexdigest(@app.token, params[:timestamp], params[:nonce], msg_encrypt))
       else
         forbidden = true
       end

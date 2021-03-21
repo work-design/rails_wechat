@@ -7,14 +7,14 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit('wechat_user_tags.wechat_tag_id')
 
-      @wechat_users = @wechat_app.wechat_users.default_where(q_params).page(params[:page])
+      @wechat_users = @app.wechat_users.default_where(q_params).page(params[:page])
     end
 
     def show
     end
 
     def edit
-      @wechat_tags = @wechat_app.wechat_tags
+      @wechat_tags = @app.wechat_tags
     end
 
     def update
@@ -31,7 +31,7 @@ module Wechat
 
     private
     def set_wechat_user
-      @wechat_user = @wechat_app.wechat_users.find params[:id]
+      @wechat_user = @app.wechat_users.find params[:id]
     end
 
     def wechat_user_params

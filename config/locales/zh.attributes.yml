@@ -1,7 +1,7 @@
 zh:
   activerecord:
     attributes:
-      wechat/wechat_app:
+      wechat/app:
         appid: 开发者ID（AppID）
         secret: 开发者密码（AppSecret）
         token: 令牌（Token）

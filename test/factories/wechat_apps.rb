@@ -1,6 +1,6 @@
 FactoryBot.define do
-  
-  factory :wechat_app do
+
+  factory :app do
     name { 'MyString' }
     type { 'WechatPublic' }
     enabled { true }
@@ -21,5 +21,5 @@ FactoryBot.define do
     help_without_user { 'MyString' }
     help_feedback { 'MyString' }
   end
-  
+
 end
