@@ -22,14 +22,14 @@ zh:
           Wechat::MusicReply: 音乐
           Wechat::VioceReply: 语音
           Wechat::VideoReply: 视频
-      wechat/wechat_request:
+      wechat/request:
         type:
           Wechat::TextRequest: 文字
           Wechat::SubscribeRequest: 关注
           Wechat::UnsubscribeRequest: 取消关注
           Wechat::ScanRequest: 扫描事件
           Wechat::ViewRequest: 菜单
-          Wechat::WechatRequest: 其他
+          Wechat::Request: 其他
       wechat/response:
         effective_type:
           Wechat::NewsReply: 新闻

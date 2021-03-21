@@ -1,5 +1,5 @@
 module Wechat
-  class SubscribeRequest < WechatRequest
-    include Model::WechatRequest::SubscribeRequest
+  class SubscribeRequest < Request
+    include Model::Request::SubscribeRequest
   end
 end

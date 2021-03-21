@@ -3,33 +3,33 @@ module Wechat
     # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
     MSG_TYPE = {
       'text' => 'Wechat::TextRequest',
-      'image' => 'Wechat::WechatRequestImage',
-      'voice' => 'Wechat::WechatRequestVoice',
-      'video' => 'Wechat::WechatRequestVideo',
-      'shortvideo' => 'Wechat::WechatRequestShortVideo',
-      'location' => 'Wechat::WechatRequestLocation',
-      'link' => 'Wechat::WechatRequestLink',
-      'event' => 'Wechat::WechatRequestEvent'
+      'image' => 'Wechat::RequestImage',
+      'voice' => 'Wechat::RequestVoice',
+      'video' => 'Wechat::RequestVideo',
+      'shortvideo' => 'Wechat::RequestShortVideo',
+      'location' => 'Wechat::RequestLocation',
+      'link' => 'Wechat::RequestLink',
+      'event' => 'Wechat::RequestEvent'
     }.freeze
     # https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_event_pushes.html
     # https://work.weixin.qq.com/api/doc/90000/90135/90240
     EVENT = {
       'subscribe' => 'Wechat::SubscribeRequest',
       'unsubscribe' => 'Wechat::UnsubscribeRequest',
-      'LOCATION' => 'Wechat::WechatRequestLocation', # 公众号与企业微信通用
-      'CLICK' => 'Wechat::WechatRequestClick',
+      'LOCATION' => 'Wechat::RequestLocation', # 公众号与企业微信通用
+      'CLICK' => 'Wechat::RequestClick',
       'VIEW' => 'Wechat::ViewRequest',
       'SCAN' => 'Wechat::ScanRequest',
-      'click' => 'Wechat::WechatRequest',
-      'view' => 'Wechat::WechatRequest',  # 企业微信使用
-      'scancode_push' => 'Wechat::WechatRequest',
-      'scancode_waitmsg' => 'Wechat::WechatRequest',
-      'pic_sysphoto' => 'Wechat::WechatRequest',
-      'pic_photo_or_album' => 'Wechat::WechatRequest',
-      'pic_weixin' => 'Wechat::WechatRequest',
-      'location_select' => 'Wechat::WechatRequest',
-      'enter_agent' => 'Wechat::WechatRequest',
-      'batch_job_result' => 'Wechat::WechatRequest'  # 企业微信使用
+      'click' => 'Wechat::Request',
+      'view' => 'Wechat::Request',  # 企业微信使用
+      'scancode_push' => 'Wechat::Request',
+      'scancode_waitmsg' => 'Wechat::Request',
+      'pic_sysphoto' => 'Wechat::Request',
+      'pic_photo_or_album' => 'Wechat::Request',
+      'pic_weixin' => 'Wechat::Request',
+      'location_select' => 'Wechat::Request',
+      'enter_agent' => 'Wechat::Request',
+      'batch_job_result' => 'Wechat::Request'  # 企业微信使用
     }.freeze
     extend ActiveSupport::Concern
 
@@ -46,7 +46,7 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 
-      has_one :wechat_request
+      has_one :request
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
@@ -84,33 +84,33 @@ module Wechat
     end
 
     def parse_content
-      build_wechat_request(type: compute_type)
-      wechat_request.appid = appid
-      wechat_request.open_id = open_id
-      wechat_request.msg_type = msg_type
-      wechat_request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
+      build_request(type: compute_type)
+      request.appid = appid
+      request.open_id = open_id
+      request.msg_type = msg_type
+      request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
 
       case msg_type
       when 'text'
-        wechat_request.body = message_hash['Content']
+        request.body = message_hash['Content']
       when 'event'
-        wechat_request.event = message_hash['Event']
-        wechat_request.event_key = message_hash['EventKey'] || message_hash.dig('ScanCodeInfo', 'ScanResult')
-        if wechat_request.event == 'subscribe'
-          wechat_request.body = wechat_request.event_key.delete_prefix('qrscene_')
+        request.event = message_hash['Event']
+        request.event_key = message_hash['EventKey'] || message_hash.dig('ScanCodeInfo', 'ScanResult')
+        if request.event == 'subscribe'
+          request.body = request.event_key.delete_prefix('qrscene_')
         else
-          wechat_request.body = wechat_request.event_key
+          request.body = request.event_key
         end
       when 'image'
-        wechat_request.body = message_hash['PicUrl']
+        request.body = message_hash['PicUrl']
       when 'voice'
-        wechat_request.body = message_hash['Recognition'].presence || message_hash['MediaId']
+        request.body = message_hash['Recognition'].presence || message_hash['MediaId']
       when 'video', 'shortvideo'
-        wechat_request.body = message_hash['MediaId']
+        request.body = message_hash['MediaId']
       when 'location'
-        wechat_request.body = "#{message_hash['Location_X']}:#{message_hash['Location_Y']}"
+        request.body = "#{message_hash['Location_X']}:#{message_hash['Location_Y']}"
       when 'link'
-        wechat_request.body = message_hash['Url']
+        request.body = message_hash['Url']
       else
         warn "Don't know how to parse message as #{message_hash['MsgType']}", uplevel: 1
       end
@@ -123,9 +123,9 @@ module Wechat
     end
 
     def reply
-      wechat_request.reply
-      wechat_request.save
-      wechat_request
+      request.reply
+      request.save
+      request
     end
 
   end

@@ -6,7 +6,7 @@
 <%=
   f.select(
       :request_types,
-      options_for_select(Wechat::WechatRequest.options_i18n(:type), @response.request_types),
+      options_for_select(Wechat::Request.options_i18n(:type), @response.request_types),
       {},
       { multiple: true, data: { controller: 'choice' } }
   )

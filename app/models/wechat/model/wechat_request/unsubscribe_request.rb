@@ -1,4 +1,4 @@
 module Wechat
-  module Model::WechatRequest::UnsubscribeRequest
+  module Model::Request::UnsubscribeRequest
   end
 end

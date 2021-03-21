@@ -1,7 +1,7 @@
 module Wechat
-  class Admin::WechatRequestsController < Admin::BaseController
+  class Admin::RequestsController < Admin::BaseController
     before_action :set_wechat_app
-    before_action :set_wechat_request, only: [:show, :update, :destroy]
+    before_action :set_request, only: [:show, :update, :destroy]
 
     def index
       q_params = {
@@ -11,27 +11,27 @@ module Wechat
       if q_params['created_at-lte']
         q_params['created_at-lte'] = q_params['created_at-lte'].to_time.end_of_day
       end
-      @wechat_requests = @app.wechat_requests.default_where(q_params).order(id: :desc).page(params[:page])
+      @requests = @app.requests.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def show
     end
 
     def update
-      @wechat_request.assign_attributes(wechat_request_params)
+      @request.assign_attributes(request_params)
 
-      unless @wechat_request.save
-        render :update, locals: { model: @wechat_request }, status: :unprocessable_entity
+      unless @request.save
+        render :update, locals: { model: @request }, status: :unprocessable_entity
       end
     end
 
     def destroy
-      @wechat_request.destroy
+      @request.destroy
     end
 
     private
-    def set_wechat_request
-      @wechat_request = @app.wechat_requests.find(params[:id])
+    def set_request
+      @request = @app.requests.find(params[:id])
     end
 
   end

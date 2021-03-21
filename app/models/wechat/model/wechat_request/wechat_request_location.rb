@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatRequest::WechatRequestLocation
+  module Model::Request::RequestLocation
     extend ActiveSupport::Concern
 
     included do

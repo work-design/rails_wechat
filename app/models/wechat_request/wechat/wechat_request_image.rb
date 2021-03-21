@@ -1,5 +1,5 @@
 module Wechat
-  class WechatRequestImage < WechatRequest
-    include Model::WechatRequest::WechatRequestImage
+  class RequestImage < Request
+    include Model::Request::RequestImage
   end
 end

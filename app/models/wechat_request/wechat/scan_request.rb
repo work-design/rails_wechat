@@ -1,5 +1,5 @@
 module Wechat
-  class ScanRequest < WechatRequest
-    include Model::WechatRequest::ScanRequest
+  class ScanRequest < Request
+    include Model::Request::ScanRequest
   end
 end

@@ -1,5 +1,5 @@
 module Wechat
-  class WechatRequestClick < WechatRequest
-    include Model::WechatRequest::WechatRequestClick
+  class RequestClick < Request
+    include Model::Request::RequestClick
   end
 end

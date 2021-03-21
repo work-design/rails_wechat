@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatRequest::WechatRequestLink
+  module Model::Request::RequestLink
     extend ActiveSupport::Concern
 
     included do

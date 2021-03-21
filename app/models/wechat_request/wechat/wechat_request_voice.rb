@@ -1,5 +1,5 @@
 module Wechat
-  class WechatRequestVoice < WechatRequest
-    include Model::WechatRequest::WechatRequestVoice
+  class RequestVoice < Request
+    include Model::Request::RequestVoice
   end
 end

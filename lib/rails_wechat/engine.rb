@@ -9,7 +9,7 @@ module RailsWechat
       "#{config.root}/app/models/wechat_menu",
       "#{config.root}/app/models/wechat_notice",
       "#{config.root}/app/models/wechat_reply",
-      "#{config.root}/app/models/wechat_request",
+      "#{config.root}/app/models/request",
       "#{config.root}/app/models/wechat_service"
     ]
 

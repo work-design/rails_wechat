@@ -18,7 +18,7 @@
   <%= link_to({ controller: 'scenes', app_id: model.id }, aria: { label: t('wechat.share.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-qrcode"></i>
   <% end %>
-  <%= link_to({ controller: 'admin/wechat_requests', app_id: model.id }, aria: { label: t('wechat.admin.wechat_requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
+  <%= link_to({ controller: 'admin/requests', app_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-comments"></i>
   <% end %>
   <%= link_to({ controller: 'admin/wechat_tags', app_id: model.id }, aria: { label: t('wechat.admin.wechat_tags.index.title') }, class: 'button is-small is-rounded is-light') do %>

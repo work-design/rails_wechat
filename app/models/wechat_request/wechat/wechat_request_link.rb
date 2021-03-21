@@ -1,5 +1,5 @@
 module Wechat
-  class WechatRequestLink < WechatRequest
-    include Model::WechatRequest::WechatRequestLink
+  class RequestLink < Request
+    include Model::Request::RequestLink
   end
 end

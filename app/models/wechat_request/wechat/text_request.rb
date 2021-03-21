@@ -1,5 +1,5 @@
 module Wechat
-  class TextRequest < WechatRequest
-    include Model::WechatRequest::TextRequest
+  class TextRequest < Request
+    include Model::Request::TextRequest
   end
 end

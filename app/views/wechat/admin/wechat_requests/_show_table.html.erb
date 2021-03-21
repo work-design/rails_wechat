@@ -1,18 +1,18 @@
 <tr>
-  <td class="has-text-right"><%= Wechat::WechatRequest.human_attribute_name(:wechat_user_id) %></td>
+  <td class="has-text-right"><%= Wechat::Request.human_attribute_name(:wechat_user_id) %></td>
   <td>
-    <% if @wechat_request.wechat_user.user %>
-      <%= link_to @wechat_request.wechat_user.user.name, panel_user_path(@wechat_request.wechat_user.user_id), text: true %>
+    <% if @request.wechat_user.user %>
+      <%= link_to @request.wechat_user.user.name, panel_user_path(@request.wechat_user.user_id), text: true %>
     <% else %>
-      <%= link_to @wechat_request.wechat_user.name, admin_oauth_user_path(@wechat_request.wechat_user), text: true %>
+      <%= link_to @request.wechat_user.name, admin_oauth_user_path(@request.wechat_user), text: true %>
     <% end %>
   </td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::WechatRequest.human_attribute_name(:body) %></td>
-  <td><%= simple_format @wechat_request.body %></td>
+  <td class="has-text-right"><%= Wechat::Request.human_attribute_name(:body) %></td>
+  <td><%= simple_format @request.body %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::WechatRequest.human_attribute_name(:wechat_reply_id) %></td>
-  <td><%= @wechat_request.wechat_reply&.value %></td>
+  <td class="has-text-right"><%= Wechat::Request.human_attribute_name(:wechat_reply_id) %></td>
+  <td><%= @request.wechat_reply&.value %></td>
 </tr>

@@ -1,4 +1,4 @@
-<%= form_with theme: 'search', model: Wechat::WechatRequest.new do |f| %>
+<%= form_with theme: 'search', model: Wechat::Request.new do |f| %>
   <div class="field-body">
     <%= f.date_field 'created_at-gte', value: params['created_at-gte'] %>
     <%= f.date_field 'created_at-lte', value: params['created_at-lte'] %>

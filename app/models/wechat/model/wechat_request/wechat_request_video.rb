@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatRequest::WechatRequestVideo
+  module Model::Request::RequestVideo
     extend ActiveSupport::Concern
 
     included do

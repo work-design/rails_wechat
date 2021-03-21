@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatRequest::SubscribeRequest
+  module Model::Request::SubscribeRequest
     extend ActiveSupport::Concern
 
     included do

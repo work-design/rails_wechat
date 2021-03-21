@@ -1,4 +1,4 @@
 module Wechat
-  module Model::WechatRequest::ViewRequest
+  module Model::Request::ViewRequest
   end
 end

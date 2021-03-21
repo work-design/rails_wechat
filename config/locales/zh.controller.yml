@@ -8,7 +8,7 @@ zh:
           title: 我的公众号
         info:
           title: 如何设置
-      wechat_requests:
+      requests:
         index:
           title: 用户消息
       wechat_menus:

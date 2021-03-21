@@ -11,7 +11,7 @@
 </td>
 <td>
   <% model.response_requests.each do |response_request| %>
-    <p><%= Wechat::WechatRequest.enum_i18n(:type, response_request.request_type) %></p>
+    <p><%= Wechat::Request.enum_i18n(:type, response_request.request_type) %></p>
   <% end %>
 </td>
 <td>

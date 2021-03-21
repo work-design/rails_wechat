@@ -5,7 +5,7 @@ en:
         index:
           title: 微信设置
           info: 如何设置
-      wechat_requests:
+      requests:
         index:
           title: 用户消息
       wechat_menus:

@@ -7,7 +7,7 @@ module Wechat
       attribute :matched, :string
       attribute :serial_number, :integer
 
-      belongs_to :wechat_request
+      belongs_to :request
       belongs_to :extractor
     end
 

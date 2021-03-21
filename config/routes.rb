@@ -100,7 +100,7 @@ Rails.application.routes.draw do
           patch 'reply' => :update_reply
         end
       end
-      resources :wechat_requests, except: [:new, :create]
+      resources :requests, except: [:new, :create]
       resources :wechat_replies do
         member do
           get 'news' => :edit_news

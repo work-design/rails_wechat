@@ -8,7 +8,7 @@ module Wechat
 
       belongs_to :app, foreign_key: :app_id, primary_key: :appid, optional: true
 
-      has_many :wechat_requests, foreign_key: :open_id, primary_key: :uid, dependent: :delete_all
+      has_many :requests, foreign_key: :open_id, primary_key: :uid, dependent: :delete_all
       has_many :wechat_subscribeds, dependent: :delete_all
       has_many :user_tags, dependent: :destroy
       has_many :tags, through: :user_tags

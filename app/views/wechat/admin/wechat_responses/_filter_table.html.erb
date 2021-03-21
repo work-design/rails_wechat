@@ -3,7 +3,7 @@
     <th><%= Wechat::Response.human_attribute_name(:request_type) %></th>
     <td>
       <%= link_to t('.all'), filter_params(except: [:request_type]), class: active_params(request_type: '', active: 'button is-info', item: 'button is-light') %>
-      <% Wechat::WechatRequest.options_i18n(:request_type).each do |text, value| %>
+      <% Wechat::Request.options_i18n(:request_type).each do |text, value| %>
         <%= link_to text, filter_params(request_type: value), class: active_params(request_type: value, active: 'button is-info', item: 'button is-light') %>
       <% end %>
     </td>

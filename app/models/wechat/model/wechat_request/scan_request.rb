@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatRequest::ScanRequest
+  module Model::Request::ScanRequest
 
     def reply
       r = reply_from_rule

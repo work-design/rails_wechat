@@ -1,5 +1,5 @@
 module Wechat
-  class WechatRequestLocation < WechatRequest
-    include Model::WechatRequest::WechatRequestLocation
+  class RequestLocation < Request
+    include Model::Request::RequestLocation
   end
 end
