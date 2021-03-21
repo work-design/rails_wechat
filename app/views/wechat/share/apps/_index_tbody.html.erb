@@ -15,13 +15,13 @@
   <% end if model.mch_id.present? %>
 </td>
 <td>
-  <%= link_to({ controller: 'scenes', wechat_app_id: model.id }, aria: { label: t('wechat.share.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
+  <%= link_to({ controller: 'scenes', app_id: model.id }, aria: { label: t('wechat.share.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-qrcode"></i>
   <% end %>
-  <%= link_to admin_wechat_app_wechat_requests_path(model), aria: { label: t('wechat.admin.wechat_requests.index.title') }, class: 'button is-small is-rounded is-light' do %>
+  <%= link_to({ controller: 'admin/wechat_requests', app_id: model.id }, aria: { label: t('wechat.admin.wechat_requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-comments"></i>
   <% end %>
-  <%= link_to admin_wechat_app_wechat_tags_path(model), aria: { label: t('wechat.admin.wechat_tags.index.title') }, class: 'button is-small is-rounded is-light' do %>
+  <%= link_to({ controller: 'admin/wechat_tags', app_id: model.id }, aria: { label: t('wechat.admin.wechat_tags.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-user-tag"></i>
   <% end %>
 </td>

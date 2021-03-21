@@ -43,14 +43,14 @@ Rails.application.routes.draw do
 
   scope :panel, module: 'wechat/panel', as: :panel, defaults: { business: 'wechat', namespace: 'panel' } do
     resources :template_configs
-    resources :wechat_apps
+    resources :apps
     resources :wechat_platforms do
       resources :wechat_agencies, shallow: true, as: :agencies
     end
   end
 
   scope :share, module: 'wechat/share', defaults: { business: 'wechat', namespace: 'share' } do
-    resources :wechat_apps do
+    resources :apps do
       resources :scenes do
         member do
           patch :sync
@@ -87,7 +87,7 @@ Rails.application.routes.draw do
         put :code
       end
     end
-    resources :wechat_apps do
+    resources :apps do
       member do
         get :info
         get 'cert' => :edit_cert

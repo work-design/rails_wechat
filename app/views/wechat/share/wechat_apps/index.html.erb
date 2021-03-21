@@ -1,5 +1,0 @@
-<%= render layout: 'index_table', locals: { cache_key: Wechat::App.column_names.hash } do %>
-  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @wechat_apps, as: :model %>
-<% end %>
-
-<%= paginate @wechat_apps %>

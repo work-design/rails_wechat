@@ -5,7 +5,7 @@ module Wechat
     included do
       delegate :url_helpers, to: 'Rails.application.routes'
 
-      attribute :type, :string, default: 'Wechat::WechatPublic'
+      attribute :type, :string, default: 'Wechat::PublicApp'
       attribute :name, :string
       attribute :enabled, :boolean, default: true
       attribute :shared, :boolean, default: false
