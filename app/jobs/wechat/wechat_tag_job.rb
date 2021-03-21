@@ -3,7 +3,7 @@ module Wechat
   class WechatTagJob < ApplicationJob
 
     def perform(user_tag)
-      user_tag.sync_wechat_tag
+      user_tag.sync_tag
     end
 
   end

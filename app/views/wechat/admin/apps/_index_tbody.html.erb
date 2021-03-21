@@ -52,7 +52,7 @@
   <%= link_to({ controller: 'wechat_requests', app_id: model.id }, aria: { label: t('wechat.admin.wechat_requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-comments"></i>
   <% end %>
-  <%= link_to({ controller: 'wechat_tags', app_id: model.id }, aria: { label: t('wechat.admin.wechat_tags.index.title') }, class: 'button is-small is-rounded is-light') do %>
+  <%= link_to({ controller: 'tags', app_id: model.id }, aria: { label: t('wechat.admin.tags.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-user-tag"></i>
   <% end %>
   <%= link_to({ controller: 'wechat_templates', app_id: model.id }, aria: { label: t('wechat.admin.wechat_templates.index.title') }, class: 'button is-small is-rounded is-light') do %>

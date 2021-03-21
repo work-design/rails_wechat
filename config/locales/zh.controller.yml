@@ -20,7 +20,7 @@ zh:
       wechat_replies:
         index:
           title: 回复内容
-      wechat_tags:
+      tags:
         index:
           title: 用户标签
       wechat_users:

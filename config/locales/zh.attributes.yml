@@ -55,7 +55,7 @@ zh:
         value: 值
         mp_appid: 小程序APPID
         mp_pagepath: 小程序路径
-      wechat/wechat_tag:
+      wechat/tag:
         tag_id: 标签ID
         count: 微信用户数
         wechat_user_tags_count: 系统用户数

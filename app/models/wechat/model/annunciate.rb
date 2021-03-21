@@ -15,7 +15,7 @@ module Wechat
 
       return unless app
 
-      tag_ids = app.wechat_tags.where(user_tag_id: user_tag_id).pluck(:tag_id)
+      tag_ids = app.tags.where(user_tag_id: user_tag_id).pluck(:tag_id)
       if tag_ids.present?
         api = app.api
         tag_ids.each do |tag_id|

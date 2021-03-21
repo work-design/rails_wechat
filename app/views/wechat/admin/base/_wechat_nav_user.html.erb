@@ -1,14 +1,18 @@
-<% content_for :breadcrumb do %>
+<div class="breadcrumb has-succeeds-separator">
   <ul>
-    <li><%= link_to t('wechat.admin.wechat_apps.index.title'), admin_wechat_apps_path %></li>
-    <li><%= link_to @app.name, admin_wechat_apps_path(id: @app.id) %></li>
+    <li><%= link_to t('wechat.admin.wechat_apps.index.title'), { controller: 'apps' } %></li>
+    <li><%= link_to @app.name, { controller: 'apps', id: @app.id } %></li>
     <li class="is-active"><%= t('.title') %></li>
   </ul>
-<% end %>
+</div>
 
 <div class="tabs">
   <ul>
-    <li class="<%= active_helper(controllers: 'wechat_tags', active: 'is-active') %>"><%= link_to t('wechat.admin.wechat_tags.index.title'), admin_wechat_app_wechat_tags_path(@app) %></li>
-    <li class="<%= active_helper(controllers: 'wechat_users', active: 'is-active') %>"><%= link_to t('wechat.admin.wechat_users.index.title'), admin_wechat_app_wechat_users_path(@app) %></li>
+    <li class="<%= active_helper(controllers: 'tags', active: 'is-active') %>">
+      <%= link_to t('wechat.admin.tags.index.title'), { controller: 'tags' } %>
+    </li>
+    <li class="<%= active_helper(controllers: 'wechat_users', active: 'is-active') %>">
+      <%= link_to t('wechat.admin.wechat_users.index.title'), { controller: 'wechat_users' } %>
+    </li>
   </ul>
 </div>

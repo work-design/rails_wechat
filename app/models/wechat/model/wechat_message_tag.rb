@@ -4,7 +4,7 @@ module Wechat
 
     included do
       belongs_to :wechat_message
-      belongs_to :wechat_tag
+      belongs_to :tag
     end
 
   end

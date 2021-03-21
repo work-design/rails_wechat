@@ -1,8 +1,8 @@
 require 'test_helper'
-class Wechat::Admin::WechatTagsControllerTest < ActionDispatch::IntegrationTest
+class Wechat::Admin::TagsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @wechat_tag = create :wechat_tag
+    @tag = create :tag
   end
 
   test 'index ok' do
@@ -16,7 +16,7 @@ class Wechat::Admin::WechatTagsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create ok' do
-    assert_difference('WechatTag.count') do
+    assert_difference('Tag.count') do
       post admin_wechat_app_wechat_tags_url(@wechat_tag.app), params: { wechat_tag: { tag_id: 1, name: 'test' } }, xhr: true
     end
 
@@ -39,11 +39,11 @@ class Wechat::Admin::WechatTagsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'destroy ok' do
-    assert_difference('WechatTag.count', -1) do
+    assert_difference('Tag.count', -1) do
       delete admin_wechat_app_wechat_tag_url(@wechat_tag.app, @wechat_tag), xhr: true
     end
-    
+
     assert_response :success
   end
-  
+
 end

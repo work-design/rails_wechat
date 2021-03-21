@@ -19,7 +19,7 @@ en:
         encrypt_mode:
           true: Encrypt Mode
           false: Text Mode
-      wechat_tag_default:
+      tag_default:
         default_type:
           WechatUser: Wechat User
       wechat/wechat_response:

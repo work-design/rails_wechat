@@ -16,7 +16,7 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :wechat_response, optional: true
 
-      has_one :wechat_tag, ->(o){ where(name: o.match_value) }, primary_key: :appid, foreign_key: :appid
+      has_one :tag, ->(o){ where(name: o.match_value) }, primary_key: :appid, foreign_key: :appid
       has_many :scene_menus, dependent: :destroy
       has_many :wechat_menus, through: :scene_menus
 
@@ -88,7 +88,7 @@ module Wechat
       {
         button: app.default_menus + app.within_menus + scene_menus,
         matchrule: {
-          tag_id: wechat_tag.tag_id.to_s
+          tag_id: tag.tag_id.to_s
         }
       }
     end

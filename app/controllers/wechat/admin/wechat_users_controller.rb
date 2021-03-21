@@ -1,11 +1,11 @@
 module Wechat
   class Admin::WechatUsersController < Admin::BaseController
-    before_action :set_wechat_app
+    before_action :set_app
     before_action :set_wechat_user, only: [:show, :edit, :update, :destroy]
 
     def index
       q_params = {}
-      q_params.merge! params.permit('wechat_user_tags.wechat_tag_id')
+      q_params.merge! params.permit('wechat_user_tags.tag_id')
 
       @wechat_users = @app.wechat_users.default_where(q_params).page(params[:page])
     end
@@ -14,7 +14,7 @@ module Wechat
     end
 
     def edit
-      @wechat_tags = @app.wechat_tags
+      @tags = @app.tags
     end
 
     def update
@@ -38,7 +38,7 @@ module Wechat
       params.fetch(:wechat_user, {}).permit(
         :name,
         :remark,
-        wechat_tag_ids: []
+        tag_ids: []
       )
     end
 

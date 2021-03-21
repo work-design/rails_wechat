@@ -1,5 +1,5 @@
 module Wechat
-  module Model::WechatTag
+  module Model::Tag
     SYS_TAG = ['2'].freeze
     extend ActiveSupport::Concern
 
@@ -13,8 +13,8 @@ module Wechat
       belongs_to :tagging, polymorphic: true, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :user_tag, optional: true
-      has_many :wechat_user_tags, dependent: :destroy
-      has_many :wechat_users, through: :wechat_user_tags
+      has_many :user_tags, dependent: :destroy
+      has_many :wechat_users, through: :user_tags
 
       validates :name, uniqueness: { scope: :appid }
 

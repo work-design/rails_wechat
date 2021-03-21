@@ -106,7 +106,7 @@ Rails.application.routes.draw do
           get 'news' => :edit_news
         end
       end
-      resources :wechat_tags do
+      resources :tags do
         collection do
           post :sync
         end

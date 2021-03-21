@@ -10,8 +10,8 @@ module Wechat
 
       has_many :wechat_requests, foreign_key: :open_id, primary_key: :uid, dependent: :delete_all
       has_many :wechat_subscribeds, dependent: :delete_all
-      has_many :wechat_user_tags, dependent: :destroy
-      has_many :wechat_tags, through: :wechat_user_tags
+      has_many :user_tags, dependent: :destroy
+      has_many :tags, through: :user_tags
       has_many :wechat_notices, foreign_key: :open_id, primary_key: :uid
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }

@@ -14,7 +14,7 @@ en:
       wechat_responses:
         index:
           title: 回复设置
-      wechat_tags:
+      tags:
         index:
           title: 用户标签
       wechat_users:
