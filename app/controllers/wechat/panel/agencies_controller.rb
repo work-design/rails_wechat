@@ -1,5 +1,5 @@
 module Wechat
-  class Panel::WechatAgenciesController < Panel::BaseController
+  class Panel::AgenciesController < Panel::BaseController
     before_action :set_platform
     before_action :set_agency, only: [:show, :edit, :update]
 
