@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 module Wechat
-  class WechatAnnunciateJob < ApplicationJob
+  class AnnunciateJob < ApplicationJob
 
     def perform(annunciate)
       annunciate.to_wechat
