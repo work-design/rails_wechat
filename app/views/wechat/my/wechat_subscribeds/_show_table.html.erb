@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th class="six wide">
-        <%= link_to t('.edit'), edit_my_wechat_subscribed_path(@wechat_subscribed), class: 'ui mini blue right floated button' %>
+        <%= link_to t('.edit'), edit_my_subscribe_path(@subscribe), class: 'ui mini blue right floated button' %>
       </th>
       <th class="ten wide"></th>
     </tr>
@@ -10,15 +10,15 @@
   <tbody>
     <tr>
       <td class="has-text-right"><%= Subscribed.human_attribute_name(:template) %></td>
-      <td><%= @wechat_subscribed.template %></td>
+      <td><%= @subscribe.template %></td>
     </tr>
     <tr>
       <td class="has-text-right"><%= Subscribed.human_attribute_name(:status) %></td>
-      <td><%= @wechat_subscribed.status %></td>
+      <td><%= @subscribe.status %></td>
     </tr>
     <tr>
       <td class="has-text-right"><%= Subscribed.human_attribute_name(:sending_at) %></td>
-      <td><%= @wechat_subscribed.sending_at %></td>
+      <td><%= @subscribe.sending_at %></td>
     </tr>
   </tbody>
 </table>

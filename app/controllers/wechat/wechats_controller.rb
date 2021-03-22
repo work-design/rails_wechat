@@ -5,7 +5,7 @@ module Wechat
     before_action :verify_signature
 
     def show
-      if @app.is_a?(WechatWork)
+      if @app.is_a?(WorkApp)
         echostr, _corp_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(params[:echostr]), @app.encoding_aes_key))
         render plain: echostr
       else
@@ -15,14 +15,14 @@ module Wechat
 
     def create
       r = Hash.from_xml(request.raw_post).fetch('xml', {})
-      @wechat_received = @app.wechat_receiveds.build
+      @receive = @app.receives.build
       if r['Encrypt']
-        @wechat_received.encrypt_data = r['Encrypt']
+        @receive.encrypt_data = r['Encrypt']
       else
-        @wechat_received.message_hash = r
+        @receive.message_hash = r
       end
-      @wechat_received.save
-      request = @wechat_received.reply
+      @receive.save
+      request = @receive.reply
 
       render plain: request.to_wechat
     end

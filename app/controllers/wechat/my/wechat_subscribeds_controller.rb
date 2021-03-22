@@ -2,21 +2,21 @@ module Wechat
   class My::SubscribedsController < My::BaseController
 
     def create
-      r = wechat_subscribeds_params.to_h.map do |k, v|
+      r = subscribes_params.to_h.map do |k, v|
         next if k.blank?
         template = current_wechat_user.app.templates.find_by template_id: k
-        wechat_subscribed = current_wechat_user.wechat_subscribeds.build(status: v)
-        wechat_subscribed.template = template
-        wechat_subscribed.save
-        wechat_subscribed
+        subscribe = current_wechat_user.subscribes.build(status: v)
+        subscribe.template = template
+        subscribe.save
+        subscribe
       end
 
       render json: r.as_json
     end
 
     private
-    def wechat_subscribeds_params
-      params.fetch(:wechat_subscribeds, {}).permit!
+    def subscribes_params
+      params.fetch(:subscribes, {}).permit!
     end
 
   end

@@ -4,7 +4,7 @@ module Wechat
 
     included do
       has_many :menus, foreign_key: :appid, primary_key: :appid
-      has_many :wechat_receiveds, foreign_key: :appid, primary_key: :appid
+      has_many :receives, foreign_key: :appid, primary_key: :appid
       has_many :wechat_replies, foreign_key: :appid, primary_key: :appid
       has_many :requests, foreign_key: :appid, primary_key: :appid
       has_many :responses, foreign_key: :appid, primary_key: :appid

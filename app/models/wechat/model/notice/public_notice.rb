@@ -6,7 +6,7 @@ module Wechat
       r = app.api.post 'message/template/send', **message_hash, base: BASE
       if r['errcode'] == 0
         self.update msg_id: r['msgid']
-        wechat_subscribed.update sending_at: Time.now if wechat_subscribed
+        subscribe.update sending_at: Time.now if subscribe
       else
         r
       end

@@ -14,12 +14,12 @@ module Wechat
       belongs_to :template
       belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :wechat_user, class_name: 'OauthUser', foreign_key: :open_id, primary_key: :uid
-      belongs_to :wechat_subscribed, optional: true
+      belongs_to :subscribe, optional: true
 
       before_validation do
         self.link = notification.link
         self.app ||= template.app
-        #self.wechat_subscribed = wechat_user.wechat_subscribed  todo  deal with
+        #self.subscribe = wechat_user.subscribe  todo  deal with
       end
       after_create_commit :do_send_later
     end
@@ -46,7 +46,7 @@ module Wechat
       r = do_send
       if r['errcode'] == 0
         self.update msg_id: r['msgid']
-        wechat_subscribed.update sending_at: Time.current if wechat_subscribed
+        subscribe.update sending_at: Time.current if subscribe
       else
         r
       end

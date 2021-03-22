@@ -29,13 +29,13 @@ module Wechat
 
     # 消息与事件接收URL: platforms/:id/callback/$APPID$
     def message
-      @wechat_received = @platform.wechat_receiveds.build
-      @wechat_received.appid = params[:appid]
+      @receive = @platform.receives.build
+      @receive.appid = params[:appid]
       r = Hash.from_xml(request.body.read)['xml']
-      @wechat_received.encrypt_data = r['Encrypt']
-      @wechat_received.save
+      @receive.encrypt_data = r['Encrypt']
+      @receive.save
 
-      request = @wechat_received.reply
+      request = @receive.reply
       render plain: request.to_wechat
     end
 

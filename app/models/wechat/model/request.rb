@@ -19,9 +19,9 @@ module Wechat
       belongs_to :reply, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
-      belongs_to :received
+      belongs_to :receive
 
-      has_one :platform, through: :wechat_received
+      has_one :platform, through: :receive
       has_many :services, dependent: :nullify
       has_many :tags, primary_key: :appid, foreign_key: :appid
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
