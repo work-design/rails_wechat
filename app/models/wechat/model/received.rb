@@ -52,7 +52,7 @@ module Wechat
       before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
       before_save :init_wechat_user, if: -> { open_id_changed? && open_id.present? }
       after_create :parse_content
-      after_create_commit :check_wechat_app
+      after_create_commit :check_app
     end
 
     def decrypt_data
@@ -118,7 +118,7 @@ module Wechat
       self.save  # will auto save wechat request
     end
 
-    def check_wechat_app
+    def check_app
       app.update user_name: message_hash['ToUserName'] if app
     end
 

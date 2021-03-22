@@ -136,7 +136,7 @@ module Wechat
     def oauth2_qrcode_url
       q = {
         appid: appid,
-        redirect_uri: url_helpers.wechat_app_url(id, **host_options),
+        redirect_uri: url_helpers.app_url(id, **host_options),
         scope: 'snsapi_login',
         response_type: 'code',
         state: SecureRandom.hex(16)

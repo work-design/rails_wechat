@@ -1,12 +1,12 @@
 module Wechat
   class Panel::AppsController < Panel::BaseController
-    before_action :set_wechat_app, only: [:show, :edit, :update, :destroy]
+    before_action :set_app, only: [:show, :edit, :update, :destroy]
 
     def index
       q_params = {}
       q_params.merge! params.permit(:id)
 
-      @wechat_apps = App.default_where(q_params).order(id: :asc).page(params[:page])
+      @apps = App.default_where(q_params).order(id: :asc).page(params[:page])
     end
 
     def new
@@ -14,11 +14,11 @@ module Wechat
     end
 
     def create
-      @app = App.find_or_initialize_by(appid: wechat_app_params[:appid])
+      @app = App.find_or_initialize_by(appid: app_params[:appid])
       if @app.organ
         @app.errors.add :base, '该账号已在其他组织添加，请联系客服'
       end
-      @app.assign_attributes wechat_app_params
+      @app.assign_attributes app_params
 
       unless @app.save
         render :new, locals: { model: @app }, status: :unprocessable_entity
@@ -32,7 +32,7 @@ module Wechat
     end
 
     def update
-      @app.assign_attributes(wechat_app_params)
+      @app.assign_attributes(app_params)
 
       unless @app.save
         render :edit, locals: { model: @app }, status: :unprocessable_entity
@@ -44,11 +44,11 @@ module Wechat
     end
 
     private
-    def set_wechat_app
+    def set_app
       @app = App.find(params[:id])
     end
 
-    def wechat_app_params
+    def app_params
       params.fetch(:app, {}).permit(
         :type,
         :name,

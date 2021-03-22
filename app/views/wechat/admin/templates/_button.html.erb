@@ -1,4 +1,4 @@
-<% if params[:wechat_app_id] %>
+<% if params[:app_id] %>
   <%= button_to({ action: 'sync' }, method: :post, class: 'button is-link is-small') do %>
     <i class="fas fa-sync"></i><% t('.sync') %>
   <% end %>

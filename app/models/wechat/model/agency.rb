@@ -27,7 +27,7 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       after_create_commit :store_info_later
-      before_save :init_wechat_app, if: -> { appid_changed? && appid }
+      before_save :init_app, if: -> { appid_changed? && appid }
     end
 
     def api
@@ -35,8 +35,8 @@ module Wechat
       @api = Wechat::Api::Public.new(self)
     end
 
-    def init_wechat_app
-      app || build_wechat_app
+    def init_app
+      app || build_app
       app.save
     end
 

@@ -1,7 +1,7 @@
 en:
   wechat:
     admin:
-      wechat_apps:
+      apps:
         index:
           title: 微信设置
           info: 如何设置

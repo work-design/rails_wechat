@@ -13,9 +13,9 @@ module Wechat
     end
 
     def sync_tag
-      _wechat_app = app
-      return unless _wechat_app
-      wt = tags.find_or_initialize_by(wechat_app_id: _wechat_app.id)
+      _app = app
+      return unless _app
+      wt = tags.find_or_initialize_by(app_id: _app.id)
       wt.name = self.name
       wt.save
     end

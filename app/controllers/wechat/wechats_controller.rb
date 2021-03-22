@@ -1,7 +1,7 @@
 module Wechat
   class WechatsController < BaseController
     skip_before_action :verify_authenticity_token, raise: false
-    before_action :set_wechat_app
+    before_action :set_app
     before_action :verify_signature
 
     def show
@@ -28,7 +28,7 @@ module Wechat
     end
 
     private
-    def set_wechat_app
+    def set_app
       @app = App.valid.find(params[:id])
     end
 

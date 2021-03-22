@@ -1,6 +1,6 @@
 module Wechat
   class Admin::RequestsController < Admin::BaseController
-    before_action :set_wechat_app
+    before_action :set_app
     before_action :set_request, only: [:show, :update, :destroy]
 
     def index

@@ -9,7 +9,7 @@
 <td><%= model.body %></td>
 <td>
   <table class="table is-fullwidth is-borderless">
-  <% model.wechat_extractions.each do |ex| %>
+  <% model.extractions.each do |ex| %>
     <tr>
       <td><%= ex.name %></td>
       <td><%= ex.matched %></td>

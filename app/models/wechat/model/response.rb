@@ -60,7 +60,7 @@ module Wechat
           logger.debug "=====> Matched: #{matched.inspect}, Extractor: #{extractor.name}/#{extractor.id}"
         end
 
-        ex = request.wechat_extractions.find_or_initialize_by(extractor_id: extractor.id)
+        ex = request.extractions.find_or_initialize_by(extractor_id: extractor.id)
         ex.name = extractor.name
         ex.matched = matched.join(', ')
         if extractor.serial && extractor.effective?(request.created_at)

@@ -10,7 +10,7 @@ module Wechat
 
     def sync_to_wechat_user_tag
       user.oauth_users.where(type: 'WechatUser').each do |wechat_user|
-        tag = tags.find_by(wechat_app_id: wechat_user.app&.id)
+        tag = tags.find_by(app_id: wechat_user.app&.id)
         next unless tag
 
         wut = wechat_user.wechat_user_tags.build(tag_id: tag.id)

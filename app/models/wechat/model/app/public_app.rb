@@ -13,7 +13,7 @@ module Wechat
     def oauth2_url(scope = 'snsapi_userinfo', **host_options)
       h = {
         appid: appid,
-        redirect_uri: url_helpers.wechat_app_url(id, **host_options),
+        redirect_uri: url_helpers.app_url(id, **host_options),
         response_type: 'code',
         scope: scope,
         state: SecureRandom.hex(16)

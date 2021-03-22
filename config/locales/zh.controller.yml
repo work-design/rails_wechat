@@ -3,7 +3,7 @@ zh:
     title: 微信平台
     admin:
       title: 微信公众平台
-      wechat_apps:
+      apps:
         index:
           title: 我的公众号
         info:
@@ -17,7 +17,7 @@ zh:
       responses:
         index:
           title: 回复设置
-      wechat_replies:
+      replies:
         index:
           title: 回复内容
       tags:
@@ -32,7 +32,7 @@ zh:
       templates:
         index:
           title: 消息模板
-      wechat_registers:
+      registers:
         index:
           title: 公众号申请
           bind: 绑定二维码
@@ -49,11 +49,11 @@ zh:
       platforms:
         index:
           title: 微信第三方平台
-      wechat_apps:
+      apps:
         index:
           title: 微信公众号
     share:
-      wechat_apps:
+      apps:
         index:
           title: 其他公众号
       menus:
@@ -68,7 +68,7 @@ zh:
           test: 测试
     my:
       title: 微信公众号
-      wechat_registers:
+      registers:
         index:
           title: 公众号申请
       users:

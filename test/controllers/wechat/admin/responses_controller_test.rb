@@ -6,35 +6,35 @@ class Wechat::Admin::ResponsesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'index ok' do
-    get admin_wechat_app_responses_url(@response.app)
+    get admin_app_responses_url(@response.app)
     assert_response :success
   end
 
   test 'new ok' do
-    get new_admin_wechat_app_response_url(@response.app), xhr: true
+    get new_admin_app_response_url(@response.app), xhr: true
     assert_response :success
   end
 
   test 'create ok' do
     assert_difference('Response.count') do
-      post admin_wechat_app_responses_url(@response.app), params: { response: { match_value: 'test' } }, xhr: true
+      post admin_app_responses_url(@response.app), params: { response: { match_value: 'test' } }, xhr: true
     end
 
     assert_response :success
   end
 
   test 'show ok' do
-    get admin_wechat_app_response_url(@response.app, @response), xhr: true
+    get admin_app_response_url(@response.app, @response), xhr: true
     assert_response :success
   end
 
   test 'edit ok' do
-    get edit_admin_wechat_app_response_url(@response.app, @response), xhr: true
+    get edit_admin_app_response_url(@response.app, @response), xhr: true
     assert_response :success
   end
 
   test 'update ok' do
-    patch admin_wechat_app_response_url(@response.app, @response), params: { response: { match_value: 'test1' } }, xhr: true
+    patch admin_app_response_url(@response.app, @response), params: { response: { match_value: 'test1' } }, xhr: true
 
     @response.reload
     assert_equal 'test1', @response.match_value
@@ -43,7 +43,7 @@ class Wechat::Admin::ResponsesControllerTest < ActionDispatch::IntegrationTest
 
   test 'destroy ok' do
     assert_difference('Response.count', -1) do
-      delete admin_wechat_app_response_url(@response.app, @response), xhr: true
+      delete admin_app_response_url(@response.app, @response), xhr: true
     end
 
     assert_response :success

@@ -11,7 +11,7 @@ module Wechat
       options = Rails.application.routes.default_url_options
       h = {
         appid: appid,
-        redirect_uri: url_helpers.wechat_app_url(id, **options),
+        redirect_uri: url_helpers.app_url(id, **options),
         response_type: 'code',
         scope: scope,
         state: SecureRandom.hex(16)

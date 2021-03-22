@@ -1,6 +1,6 @@
 module Wechat
   class Share::WechatUsersController < Share::BaseController
-    before_action :set_wechat_app
+    before_action :set_app
     before_action :set_scene
     before_action :set_wechat_user, only: [:show, :edit, :update, :try_match, :destroy]
 
@@ -36,8 +36,8 @@ module Wechat
     end
 
     private
-    def set_wechat_app
-      @app = WechatApp.shared.find(params[:wechat_app_id])
+    def set_app
+      @app = WechatApp.shared.find(params[:app_id])
     end
 
     def set_scene

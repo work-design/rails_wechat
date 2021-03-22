@@ -76,7 +76,7 @@ module Wechat
     end
 
     def organ_app
-      organ.wechat_apps.default
+      organ.apps.default
     end
 
     def promoter

@@ -1,6 +1,6 @@
 module Wechat
   class Share::MenusController < Share::BaseController
-    before_action :set_wechat_app
+    before_action :set_app
     before_action :set_scene
     before_action :set_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
     before_action :prepare_form, only: [:new, :create, :edit, :update]
