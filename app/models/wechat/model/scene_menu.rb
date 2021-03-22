@@ -4,8 +4,8 @@ module Wechat
 
     included do
       belongs_to :scene
-      belongs_to :wechat_tag, optional: true
-      belongs_to :wechat_menu
+      belongs_to :tag, optional: true
+      belongs_to :menu
     end
 
   end
