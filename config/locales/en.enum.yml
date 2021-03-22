@@ -3,7 +3,7 @@ en:
     enum:
       wechat/wechat_user:
         type: Wechat User
-      wechat/wechat_menu:
+      wechat/menu:
         type:
           Wechat::ParentMenu: Root Menu
           Wechat::ClickMenu: Click Event

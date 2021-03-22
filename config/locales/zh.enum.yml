@@ -1,7 +1,7 @@
 zh:
   activerecord:
     enum:
-      wechat/wechat_menu:
+      wechat/menu:
         type:
           Wechat::ParentMenu: 一级目录
           Wechat::ClickMenu: 点击事件

@@ -66,7 +66,7 @@ module Wechat
     end
 
     def default_menus
-      if organ && organ.respond_to?(:limit_wechat_menu)
+      if organ && organ.respond_to?(:limit_menu)
         limit = 3 - organ.limit_wechat_menu
       else
         limit = 3
@@ -76,9 +76,9 @@ module Wechat
 
     def within_menus
       if organ && organ.respond_to?(:limit_wechat_menu)
-        self.wechat_menus.limit(organ.limit_wechat_menu).where(parent_id: nil).order(position: :asc).as_json
+        self.menus.limit(organ.limit_menu).where(parent_id: nil).order(position: :asc).as_json
       else
-        self.wechat_menus.where(parent_id: nil).order(position: :asc).as_json
+        self.menus.where(parent_id: nil).order(position: :asc).as_json
       end
     end
 

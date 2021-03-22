@@ -1,6 +1,6 @@
 FactoryBot.define do
 
-  factory :wechat_menu do
+  factory :menu do
     app
     type { 'ViewMenu' }
     menu_type { 'MyString' }

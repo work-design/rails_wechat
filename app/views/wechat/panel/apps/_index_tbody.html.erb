@@ -37,7 +37,7 @@
   <% end %>
 </td>
 <td>
-  <%= link_to admin_wechat_menus_path(appid: model.appid), aria: { label: t('wechat.admin.wechat_menus.index.title') }, class: 'button is-small is-rounded is-light' do %>
+  <%= link_to admin_menus_path(appid: model.appid), aria: { label: t('wechat.admin.menus.index.title') }, class: 'button is-small is-rounded is-light' do %>
     <i class="fas fa-bars"></i>
   <% end %>
   <%= link_to admin_wechat_app_responses_path(model), aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light' do %>

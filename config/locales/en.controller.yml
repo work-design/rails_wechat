@@ -8,7 +8,7 @@ en:
       requests:
         index:
           title: 用户消息
-      wechat_menus:
+      menus:
         index:
           title: 菜单
       responses:

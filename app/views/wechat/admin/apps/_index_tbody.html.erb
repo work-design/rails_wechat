@@ -43,7 +43,7 @@
   <% end %>
 </td>
 <td>
-  <%= link_to({ controller: 'wechat_menus', appid: model.appid }, aria: { label: t('wechat.admin.wechat_menus.index.title') }, class: 'button is-small is-rounded is-light') do %>
+  <%= link_to({ controller: 'menus', appid: model.appid }, aria: { label: t('wechat.admin.menus.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-bars"></i>
   <% end %>
   <%= link_to({ controller: 'responses', app_id: model.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>

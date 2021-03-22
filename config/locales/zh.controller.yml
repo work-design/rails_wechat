@@ -11,7 +11,7 @@ zh:
       requests:
         index:
           title: 用户消息
-      wechat_menus:
+      menus:
         index:
           title: 菜单
       responses:
@@ -56,7 +56,7 @@ zh:
       wechat_apps:
         index:
           title: 其他公众号
-      wechat_menus:
+      menus:
         index:
           title: 我的菜单
       scenes:

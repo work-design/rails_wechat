@@ -49,7 +49,7 @@ zh:
         serial_start: 初始序列号
         valid_response: 有效应答语
         invalid_response: 无效应答语
-      wechat/wechat_menu:
+      wechat/menu:
         parent_id: 一级目录
         menu_type: 菜单类型
         value: 值

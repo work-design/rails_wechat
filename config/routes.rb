@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope module: :wechat, defaults: { business: 'wechat' } do
+  scope 'wechat', module: :wechat, defaults: { business: 'wechat' } do
     resources :wechats, only: [:show] do
       member do
         post '' => :create
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         post :info
       end
     end
-    resources :wechat_apps, only: [:show]
+    resources :apps, only: [:show]
     controller :wechat do
       post 'wechat/auth' => :auth
     end
@@ -27,13 +27,13 @@ Rails.application.routes.draw do
     end
   end
 
-  scope :my, module: 'wechat/my', as: :my, defaults: { business: 'wechat', namespace: 'my' } do
+  scope 'wechat/my', module: 'wechat/my', as: :my, defaults: { business: 'wechat', namespace: 'my' } do
     resource :user, only: [] do
       collection do
         get :invite_qrcode
       end
     end
-    resources :wechat_subscribeds
+    resources :subscribeds
     resources :registers do
       member do
         get 'code' => :edit_code
@@ -60,7 +60,7 @@ Rails.application.routes.draw do
             patch :try_match
           end
         end
-        resources :wechat_menus do
+        resources :menus do
           collection do
             get :default
             get :new_parent
@@ -101,7 +101,7 @@ Rails.application.routes.draw do
         end
       end
       resources :requests, except: [:new, :create]
-      resources :wechat_replies do
+      resources :replies do
         member do
           get 'news' => :edit_news
         end
@@ -123,7 +123,7 @@ Rails.application.routes.draw do
     resources :responses, only: [] do
       resources :extractors
     end
-    resources :wechat_menus do
+    resources :menus do
       collection do
         get :default
         get :new_parent

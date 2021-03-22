@@ -18,7 +18,7 @@ module Wechat
 
       has_one :tag, ->(o){ where(name: o.match_value) }, primary_key: :appid, foreign_key: :appid
       has_many :scene_menus, dependent: :destroy
-      has_many :wechat_menus, through: :scene_menus
+      has_many :menus, through: :scene_menus
 
       has_one_attached :qrcode_file
 
@@ -81,7 +81,7 @@ module Wechat
     end
 
     def scene_menus
-      wechat_menus.as_json
+      menus.as_json
     end
 
     def menu
