@@ -14,7 +14,7 @@ zh:
           init: 处理中
           doing: 开始处理
           done: 已完成
-      wechat/wechat_reply:
+      wechat/reply:
         type:
           Wechat::NewsReply: 图文
           Wechat::TextReply: 文本

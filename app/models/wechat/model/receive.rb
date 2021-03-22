@@ -3,21 +3,21 @@ module Wechat
     # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
     MSG_TYPE = {
       'text' => 'Wechat::TextRequest',
-      'image' => 'Wechat::RequestImage',
-      'voice' => 'Wechat::RequestVoice',
-      'video' => 'Wechat::RequestVideo',
-      'shortvideo' => 'Wechat::RequestShortVideo',
-      'location' => 'Wechat::RequestLocation',
-      'link' => 'Wechat::RequestLink',
-      'event' => 'Wechat::RequestEvent'
+      'image' => 'Wechat::ImageRequest',
+      'voice' => 'Wechat::VoiceRequest',
+      'video' => 'Wechat::VideoRequest',
+      'shortvideo' => 'Wechat::ShortVideoRequest',
+      'location' => 'Wechat::LocationRequest',
+      'link' => 'Wechat::LinkRequest',
+      'event' => 'Wechat::EventRequest'
     }.freeze
     # https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_event_pushes.html
     # https://work.weixin.qq.com/api/doc/90000/90135/90240
     EVENT = {
       'subscribe' => 'Wechat::SubscribeRequest',
       'unsubscribe' => 'Wechat::UnsubscribeRequest',
-      'LOCATION' => 'Wechat::RequestLocation', # 公众号与企业微信通用
-      'CLICK' => 'Wechat::RequestClick',
+      'LOCATION' => 'Wechat::LocationRequest', # 公众号与企业微信通用
+      'CLICK' => 'Wechat::ClickRequest',
       'VIEW' => 'Wechat::ViewRequest',
       'SCAN' => 'Wechat::ScanRequest',
       'click' => 'Wechat::Request',

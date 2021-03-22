@@ -28,11 +28,11 @@ module Wechat
       has_many :response_requests, ->(o){ where(request_type: o.type) }, primary_key: :appid, foreign_key: :appid
       has_many :responses, through: :response_requests
 
-      before_save :get_reply_body, if: -> { (wechat_reply_id_changed? || new_record? || wechat_reply&.new_record?) && wechat_reply }
+      before_save :get_reply_body, if: -> { (reply_id_changed? || new_record? || reply&.new_record?) && reply }
     end
 
     def reply
-      self.wechat_reply = reply_from_rule
+      self.reply = reply_from_rule
     end
 
     def rule_tag
@@ -60,10 +60,10 @@ module Wechat
     end
 
     def get_reply_body
-      if wechat_reply.is_a?(SuccessReply)
+      if reply.is_a?(SuccessReply)
         self.reply_body = {}
-      elsif wechat_reply
-        self.reply_body = wechat_reply.to_wechat
+      elsif reply
+        self.reply_body = reply.to_wechat
         self.reply_body.merge!(ToUserName: open_id)
         self.reply_body.merge!(FromUserName: app.user_name) if app
       else

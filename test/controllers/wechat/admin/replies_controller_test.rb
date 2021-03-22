@@ -2,7 +2,7 @@ require 'test_helper'
 class Wechat::Admin::WechatRepliesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @wechat_reply = create wechat_admin_wechat_replies
+    @reply = create wechat_admin_wechat_replies
   end
 
   test 'index ok' do
@@ -11,36 +11,36 @@ class Wechat::Admin::WechatRepliesControllerTest < ActionDispatch::IntegrationTe
   end
 
   test 'new ok' do
-    get new_admin_wechat_reply_url
+    get new_admin_reply_url
     assert_response :success
   end
 
   test 'create ok' do
     assert_difference('Reply.count') do
-      post admin_wechat_replies_url, params: { wechat_reply: { } }
+      post admin_wechat_replies_url, params: { reply: { } }
     end
 
     assert_response :success
   end
 
   test 'show ok' do
-    get admin_wechat_reply_url(@wechat_reply)
+    get admin_reply_url(@reply)
     assert_response :success
   end
 
   test 'edit ok' do
-    get edit_admin_wechat_reply_url(@wechat_reply)
+    get edit_admin_reply_url(@reply)
     assert_response :success
   end
 
   test 'update ok' do
-    patch admin_wechat_reply_url(@wechat_reply), params: { wechat_reply: { } }
+    patch admin_reply_url(@reply), params: { reply: { } }
     assert_response :success
   end
 
   test 'destroy ok' do
     assert_difference('Reply.count', -1) do
-      delete admin_wechat_reply_url(@wechat_reply)
+      delete admin_reply_url(@reply)
     end
 
     assert_response :success
