@@ -29,7 +29,7 @@ zh:
       extractors:
         index:
           title: 解析回复内容
-      wechat_templates:
+      templates:
         index:
           title: 消息模板
       wechat_registers:

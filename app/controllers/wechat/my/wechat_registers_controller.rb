@@ -1,12 +1,12 @@
 module Wechat
-  class My::WechatRegistersController < My::BaseController
-    before_action :set_wechat_register, only: [:show, :edit, :edit_code, :update, :destroy]
+  class My::RegistersController < My::BaseController
+    before_action :set_register, only: [:show, :edit, :edit_code, :update, :destroy]
 
     def index
-      @wechat_registers = current_user.wechat_registers
+      @registers = current_user.registers
 
-      if @wechat_registers.blank?
-        new_wechat_register
+      if @registers.blank?
+        new_register
         render :new
       else
         render 'index'
@@ -14,16 +14,16 @@ module Wechat
     end
 
     def new
-      new_wechat_register
+      new_register
     end
 
     def create
-      new_wechat_register
+      new_register
 
-      if @wechat_register.save
-        render 'create', locals: { return_to: my_wechat_registers_url }
+      if @register.save
+        render 'create', locals: { return_to: my_registers_url }
       else
-        render :new, locals: { model: @wechat_register }, status: :unprocessable_entity
+        render :new, locals: { model: @register }, status: :unprocessable_entity
       end
     end
 
@@ -37,9 +37,9 @@ module Wechat
     end
 
     def update
-      @wechat_register.assign_attributes(wechat_register_params)
+      @register.assign_attributes(register_params)
 
-      if @wechat_register.save
+      if @register.save
         render 'update', locals: { return_to: my_wechat_registers_url }
       else
         render :edit, locals: { model: @wechat_register }, status: :unprocessable_entity
@@ -57,7 +57,7 @@ module Wechat
     end
 
     def set_wechat_register
-      @wechat_register = WechatRegister.find(params[:id])
+      @wechat_register = Register.find(params[:id])
     end
 
     def wechat_register_params

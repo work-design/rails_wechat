@@ -40,7 +40,7 @@ module RailsWechat
       msg_type: 'event',
       event: 'templatesendjobfinish',
       proc: ->(request) {
-        r = WechatNotice.find_by(msg_id: request.raw_body['MsgID'])
+        r = Notice.find_by(msg_id: request.raw_body['MsgID'])
         r.update status: request.raw_body['Status']
         TextReply.new(value: 'SUCCESS')
       }

@@ -6,11 +6,11 @@ module RailsWechat
       "#{config.root}/app/models/oauth_user",
       "#{config.root}/app/models/template_config",
       "#{config.root}/app/models/app",
-      "#{config.root}/app/models/wechat_menu",
-      "#{config.root}/app/models/wechat_notice",
-      "#{config.root}/app/models/wechat_reply",
+      "#{config.root}/app/models/menu",
+      "#{config.root}/app/models/notice",
+      "#{config.root}/app/models/reply",
       "#{config.root}/app/models/request",
-      "#{config.root}/app/models/wechat_service"
+      "#{config.root}/app/models/service"
     ]
 
     config.generators do |g|

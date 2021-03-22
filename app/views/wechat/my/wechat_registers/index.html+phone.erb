@@ -1,12 +1,12 @@
-<% @wechat_registers.each do |wechat_register| %>
-  <% if wechat_register.done? %>
-    <%= render partial: 'wechat_register_done', locals: { wechat_register: wechat_register } %>
+<% @registers.each do |register| %>
+  <% if register.done? %>
+    <%= render partial: 'register_done', locals: { register: register } %>
   <% else %>
-    <%= render partial: 'wechat_register', locals: { wechat_register: wechat_register } %>
+    <%= render partial: 'register', locals: { register: register } %>
   <% end %>
 <% end %>
 
-<% if @wechat_registers.blank? %>
+<% if @registers.blank? %>
 <div class="weui-panel">
   <%= link_to({ action: 'new' }, class: 'weui-btn_cell weui-btn_cell-primary') do %>
     <span class="weui-btn_cell__icon"><i class="fas fa-plus"></i></span>

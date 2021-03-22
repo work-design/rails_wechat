@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 module Wechat
-  class WechatNoticeSendJob < ApplicationJob
+  class NoticeSendJob < ApplicationJob
 
-    def perform(wechat_notice)
-      wechat_notice.do_send
+    def perform(notice)
+      notice.do_send
     end
 
   end

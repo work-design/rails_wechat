@@ -1,21 +1,21 @@
 module Wechat
-  class Admin::WechatNoticesController < Admin::BaseController
-    before_action :set_wechat_template
-    before_action :set_wechat_notice, only: [:show, :edit, :update, :destroy]
+  class Admin::NoticesController < Admin::BaseController
+    before_action :set_template
+    before_action :set_notice, only: [:show, :edit, :update, :destroy]
 
     def index
-      @wechat_notices = @wechat_template.wechat_notices.page(params[:page])
+      @notices = @template.notices.page(params[:page])
     end
 
     def new
-      @wechat_notice = @wechat_template.wechat_notices.build
+      @notice = @template.notices.build
     end
 
     def create
-      @wechat_notice = @wechat_template.wechat_notices.build(wechat_notice_params)
+      @notice = @template.notices.build(notice_params)
 
-      unless @wechat_notice.save
-        render :new, locals: { model: @wechat_notice }, status: :unprocessable_entity
+      unless @notice.save
+        render :new, locals: { model: @notice }, status: :unprocessable_entity
       end
     end
 
@@ -26,28 +26,28 @@ module Wechat
     end
 
     def update
-      @wechat_notice.assign_attributes(wechat_notice_params)
+      @notice.assign_attributes(notice_params)
 
-      unless @wechat_notice.save
-        render :edit, locals: { model: @wechat_notice }, status: :unprocessable_entity
+      unless @notice.save
+        render :edit, locals: { model: @notice }, status: :unprocessable_entity
       end
     end
 
     def destroy
-      @wechat_notice.destroy
+      @notice.destroy
     end
 
     private
-    def set_wechat_template
-      @wechat_template = WechatTemplate.find params[:wechat_template_id]
+    def set_template
+      @template = Template.find params[:template_id]
     end
 
-    def set_wechat_notice
-      @wechat_notice = @wechat_template.wechat_notices.find(params[:id])
+    def set_notice
+      @notice = @template.notices.find(params[:id])
     end
 
-    def wechat_notice_params
-      params.fetch(:wechat_notice, {}).permit(
+    def notice_params
+      params.fetch(:notice, {}).permit(
         :notifiable_type,
         :code,
         mappings: {}

@@ -12,7 +12,7 @@ module Wechat
       has_many :wechat_subscribeds, dependent: :delete_all
       has_many :user_tags, dependent: :destroy
       has_many :tags, through: :user_tags
-      has_many :wechat_notices, foreign_key: :open_id, primary_key: :uid
+      has_many :notices, foreign_key: :open_id, primary_key: :uid
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :sync_user_info_later, if: -> { saved_change_to_access_token? && (attributes['name'].blank? && attributes['avatar_url'].blank?) }

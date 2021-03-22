@@ -11,7 +11,7 @@ class WechatMailbox < ApplicationMailbox
   def forwarder
     return @forwarder if defined? @forwarder
     ident = mail.to[0].to_s.split('@')[0]
-    @forwarder = WechatRegister.find_by(mobile: ident)
+    @forwarder = Register.find_by(mobile: ident)
   end
 
 end

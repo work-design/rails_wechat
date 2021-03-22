@@ -26,7 +26,7 @@ module Wechat
       end
 
       return if content.blank?
-      data_keys = WechatTemplate.new(content: content).data_keys
+      data_keys = Template.new(content: content).data_keys
       data_keys.each do |key|
         tkw = template_key_words.find_or_initialize_by(name: key)
         tkw.save

@@ -1,6 +1,6 @@
 module Wechat
-  class Admin::WechatRegistersController < Admin::BaseController
-    before_action :set_wechat_register, only: [
+  class Admin::RegistersController < Admin::BaseController
+    before_action :set_register, only: [
       :show, :code, :qrcode,
       :edit, :edit_app, :edit_bind, :update_bind, :edit_assign, :update_assign, :edit_qrcode,
       :update, :destroy
@@ -10,18 +10,18 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit(:id_name, :id_number)
 
-      @wechat_registers = WechatRegister.default_where(q_params).order(id: :desc).page(params[:page])
+      @registers = Register.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def new
-      @wechat_register = WechatRegister.new
+      @register = Register.new
     end
 
     def create
-      @wechat_register = WechatRegister.new(wechat_register_params)
+      @register = Register.new(register_params)
 
-      unless @wechat_register.save
-        render :new, locals: { model: @wechat_register }, status: :unprocessable_entity
+      unless @register.save
+        render :new, locals: { model: @register }, status: :unprocessable_entity
       end
     end
 
@@ -29,7 +29,7 @@ module Wechat
     end
 
     def code
-      @wechat_register.notify_mobile_code
+      @register.notify_mobile_code
     end
 
     def qrcode
@@ -45,8 +45,8 @@ module Wechat
     end
 
     def update_bind
-      @wechat_register.assign_attributes wechat_register_params
-      if @wechat_register.save
+      @register.assign_attributes register_params
+      if @register.save
         @wechat_register.notify_qrcode
       end
       render 'update'
@@ -82,7 +82,7 @@ module Wechat
 
     private
     def set_wechat_register
-      @wechat_register = WechatRegister.find(params[:id])
+      @wechat_register = Register.find(params[:id])
     end
 
     def wechat_register_params

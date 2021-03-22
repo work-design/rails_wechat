@@ -16,7 +16,7 @@ zh:
         help_without_user: 未注册提示
         help_user_disabled: 用户被禁提示
         help_feedback: 收到反馈后提示
-      wechat/wechat_register:
+      wechat/register:
         id_name: 真实姓名
         id_number: 身份证号
         verify_status: 验证结果

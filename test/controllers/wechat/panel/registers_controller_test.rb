@@ -16,7 +16,7 @@ class Wechat::Panel::RegistersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create ok' do
-    assert_difference('WechatRegister.count') do
+    assert_difference('Register.count') do
       post panel_wechat_registers_url, params: { }
     end
 
@@ -39,7 +39,7 @@ class Wechat::Panel::RegistersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'destroy ok' do
-    assert_difference('WechatRegister.count', -1) do
+    assert_difference('Register.count', -1) do
       delete panel_wechat_register_url(@register)
     end
 

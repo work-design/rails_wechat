@@ -9,7 +9,7 @@ zh:
           Wechat::MiniProgramMenu: 小程序
           Wechat::ScanPushMenu: 扫码推事件
           Wechat::ScanWaitMenu: 扫码带提示
-      wechat/wechat_register:
+      wechat/register:
         state:
           init: 处理中
           doing: 开始处理

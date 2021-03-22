@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       end
     end
     resources :wechat_subscribeds
-    resources :wechat_registers do
+    resources :registers do
       member do
         get 'code' => :edit_code
       end
@@ -75,7 +75,7 @@ Rails.application.routes.draw do
   end
 
   scope 'wechat/admin', module: 'wechat/admin', as: :admin, defaults: { business: 'wechat', namespace: 'admin' } do
-    resources :wechat_registers do
+    resources :registers do
       member do
         get 'app' => :edit_app
         get 'bind' => :edit_bind
@@ -112,12 +112,12 @@ Rails.application.routes.draw do
         end
       end
       resources :wechat_users
-      resources :wechat_templates do
+      resources :templates do
         collection do
           get :default
           post :sync
         end
-        resources :wechat_notices
+        resources :notices
       end
     end
     resources :responses, only: [] do

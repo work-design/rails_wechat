@@ -5,9 +5,9 @@
 <table class="table is-hoverable is-fullwidth">
   <thead>
     <tr>
-      <th><%= Wechat::WechatSubscribed.human_attribute_name(:wechat_template) %></th>
-      <th><%= Wechat::WechatSubscribed.human_attribute_name(:status) %></th>
-      <th><%= Wechat::WechatSubscribed.human_attribute_name(:sending_at) %></th>
+      <th><%= Wechat::Subscribed.human_attribute_name(:template) %></th>
+      <th><%= Wechat::Subscribed.human_attribute_name(:status) %></th>
+      <th><%= Wechat::Subscribed.human_attribute_name(:sending_at) %></th>
       <th>
         <%= link_to new_my_wechat_subscribed_path, class: 'button is-link is-small' do %>
           <i class="fas fa-plus"></i><%= t('.new') %>
@@ -18,7 +18,7 @@
   <tbody>
   <% @wechat_subscribeds.each do |wechat_subscribed| %>
     <tr>
-      <td><%= wechat_subscribed.wechat_template %></td>
+      <td><%= wechat_subscribed.template %></td>
       <td><%= wechat_subscribed.status %></td>
       <td><%= wechat_subscribed.sending_at %></td>
       <td>

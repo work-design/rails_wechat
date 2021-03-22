@@ -5,12 +5,12 @@ module Wechat
 
     # 授权事件接收URL: platforms/notice
     def notice
-      @wechat_ticket = WechatTicket.new(ticket_params)
+      @ticket = Ticket.new(ticket_params)
       r = Hash.from_xml(request.raw_post)['xml']
-      @wechat_ticket.appid = r['AppId']
-      @wechat_ticket.ticket_data = r['Encrypt']
+      @ticket.appid = r['AppId']
+      @ticket.ticket_data = r['Encrypt']
 
-      if @wechat_ticket.save
+      if @ticket.save
         render plain: 'success'
       else
         head :no_content

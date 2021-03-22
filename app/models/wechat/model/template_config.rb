@@ -14,7 +14,7 @@ module Wechat
       validates :code, uniqueness: { scope: :notifiable_type }
 
       has_many :template_key_words, -> { order(position: :asc) }, inverse_of: :template_config, dependent: :delete_all
-      has_many :wechat_templates, dependent: :nullify
+      has_many :templates, dependent: :nullify
       accepts_nested_attributes_for :template_key_words
 
       after_create_commit :sync_key_words

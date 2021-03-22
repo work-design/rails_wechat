@@ -1,6 +1,6 @@
 <%= form_with model: @wechat_subscribed do |f| %>
   <%= render 'shared/error_messages', target: @wechat_subscribed %>
-  <%= f.text_field :wechat_template %>
+  <%= f.text_field :template %>
   <%= f.text_field :status %>
   <%= f.text_field :sending_at %>
   <%= f.submit %>

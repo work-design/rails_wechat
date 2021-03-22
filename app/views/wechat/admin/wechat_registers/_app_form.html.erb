@@ -1,5 +1,5 @@
-<%= form_with model: [:admin, @wechat_register] do |f| %>
-  <%= render 'shared/error_messages', target: @wechat_register %>
+<%= form_with model: [:admin, @register] do |f| %>
+  <%= render 'shared/error_messages', target: @register %>
   <%= f.text_field :appid %>
   <%= f.submit %>
 <% end %>

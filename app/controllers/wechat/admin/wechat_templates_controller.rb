@@ -1,25 +1,25 @@
 module Wechat
-  class Admin::WechatTemplatesController < Admin::BaseController
+  class Admin::TemplatesController < Admin::BaseController
     before_action :set_app
-    before_action :set_wechat_template, only: [:show, :edit, :update, :destroy]
+    before_action :set_template, only: [:show, :edit, :update, :destroy]
 
     def index
       q_params = {}
-      @wechat_templates = @app.wechat_templates.default_where(q_params).page(params[:page])
-      template_config_ids = @wechat_templates.pluck(:template_config_id)
+      @templates = @app.templates.default_where(q_params).page(params[:page])
+      template_config_ids = @templates.pluck(:template_config_id)
       @template_configs = TemplateConfig.where.not(id: template_config_ids)
     end
 
     def create
-      @wechat_template = @app.wechat_templates.build(wechat_template_params)
+      @template = @app.templates.build(template_params)
 
-      unless @wechat_template.save
-        render :new, locals: { model: @wechat_template }, status: :unprocessable_entity
+      unless @template.save
+        render :new, locals: { model: @template }, status: :unprocessable_entity
       end
     end
 
     def sync
-      r = @app.sync_wechat_templates
+      r = @app.sync_templates
     end
 
     def show
@@ -29,15 +29,15 @@ module Wechat
     end
 
     def update
-      @wechat_template.assign_attributes(wechat_template_params)
+      @template.assign_attributes(template_params)
 
-      unless @wechat_template.save
-        render :edit, locals: { model: @wechat_template }, status: :unprocessable_entity
+      unless @template.save
+        render :edit, locals: { model: @template }, status: :unprocessable_entity
       end
     end
 
     def destroy
-      @wechat_template.destroy
+      @template.destroy
     end
 
     private
@@ -45,12 +45,12 @@ module Wechat
       @app = App.default_where(default_params).find_by id: params[:app_id]
     end
 
-    def set_wechat_template
-      @wechat_template = WechatTemplate.find(params[:id])
+    def set_template
+      @template = Template.find(params[:id])
     end
 
-    def wechat_template_params
-      params.fetch(:wechat_template, {}).permit(
+    def template_params
+      params.fetch(:template, {}).permit(
         :app_id,
         :template_config_id,
         :template_id,

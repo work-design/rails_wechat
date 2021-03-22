@@ -32,7 +32,7 @@ module Wechat
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
       has_many :tags, foreign_key: :appid, primary_key: :appid, dependent: :destroy
-      has_many :wechat_templates, dependent: :destroy
+      has_many :templates, dependent: :destroy
       has_many :post_syncs, as: :synced, dependent: :delete_all
       has_many :posts, through: :post_syncs
       has_many :organ_domains, class_name: 'Org::OrganDomain', foreign_key: :appid, primary_key: :appid
@@ -156,13 +156,13 @@ module Wechat
     end
 
     # 小程序
-    def sync_wechat_templates
+    def sync_templates
       templates = api.templates
       templates.each do |template|
-        wechat_template = wechat_templates.find_or_initialize_by(template_id: template['priTmplId'])
-        wechat_template.template_type = template['type']
-        wechat_template.assign_attributes template.slice('title', 'content', 'example')
-        wechat_template.save
+        template = templates.find_or_initialize_by(template_id: template['priTmplId'])
+        template.template_type = template['type']
+        template.assign_attributes template.slice('title', 'content', 'example')
+        template.save
       end
     end
 
@@ -171,7 +171,7 @@ module Wechat
       templates = api.templates
       templates.each do |template|
         template_config = TemplatePublic.new(title: template['title'])
-        data_keys = WechatTemplate.new(content: template['content']).data_keys
+        data_keys = Template.new(content: template['content']).data_keys
         data_keys.each do |key|
           template_config.template_key_words.build(name: key)
         end
@@ -181,7 +181,7 @@ module Wechat
 
     def template_ids(notifiable_type, *code)
       ids = TemplateConfig.where(notifiable_type: notifiable_type, code: code).pluck(:id)
-      wechat_templates.where(template_config_id: ids).pluck(:template_id)
+      templates.where(template_config_id: ids).pluck(:template_id)
     end
 
     def host

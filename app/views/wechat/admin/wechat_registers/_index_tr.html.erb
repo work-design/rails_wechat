@@ -2,13 +2,13 @@
   <%= yield %>
   <td>
     <span data-show-target="item" style="visibility: hidden">
-      <%= link_to assign_admin_wechat_register_path(model), aria: { label: '分配' }, class: 'button is-small is-rounded is-light' do %>
+      <%= link_to assign_admin_register_path(model), aria: { label: '分配' }, class: 'button is-small is-rounded is-light' do %>
         <i class="fas fa-hand-point-right"></i>
       <% end %>
-      <%= link_to app_admin_wechat_register_path(model), aria: { label: t('.app') }, class: 'button is-small is-rounded is-light' do %>
+      <%= link_to app_admin_register_path(model), aria: { label: t('.app') }, class: 'button is-small is-rounded is-light' do %>
         <i class="fab fa-weixin"></i>
       <% end %>
-      <%= link_to({ controller: 'bench/me/tasks', tasking_type: 'WechatRegister', tasking_id: model.id }, aria: { label: t('.tasks') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'bench/me/tasks', tasking_type: 'Register', tasking_id: model.id }, aria: { label: t('.tasks') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fas fa-tasks"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>

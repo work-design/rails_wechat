@@ -5,8 +5,8 @@ module Wechat
     included do
       has_many :wechat_users, class_name: 'Wechat::WechatUser'
       has_many :wechat_program_users, class_name: 'Wechat::WechatProgramUser'
-      has_many :wechat_subscribeds, ->{ where(sending_at: nil).order(id: :asc) }, class_name: 'Wechat::WechatSubscribed', through: :wechat_program_users
-      has_many :wechat_registers, class_name: 'Wechat::WechatRegister', dependent: :destroy
+      has_many :wechat_subscribeds, ->{ where(sending_at: nil).order(id: :asc) }, class_name: 'Wechat::Subscribed', through: :wechat_program_users
+      has_many :registers, class_name: 'Wechat::Register', dependent: :destroy
     end
 
     def invite_qrcode(app)

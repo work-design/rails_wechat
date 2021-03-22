@@ -1,4 +1,4 @@
-<%= form_with model: @wechat_register, url: { action: 'create' } do |f| %>
+<%= form_with model: @register, url: { action: 'create' } do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
   <%= f.submit %>
 <% end %>
