@@ -40,28 +40,28 @@ module Wechat
       @register.assign_attributes(register_params)
 
       if @register.save
-        render 'update', locals: { return_to: my_wechat_registers_url }
+        render 'update', locals: { return_to: my_registers_url }
       else
-        render :edit, locals: { model: @wechat_register }, status: :unprocessable_entity
+        render :edit, locals: { model: @register }, status: :unprocessable_entity
       end
     end
 
     def destroy
-      @wechat_register.destroy
+      @register.destroy
     end
 
     private
-    def new_wechat_register
-      @wechat_register = current_user.wechat_registers.build(wechat_register_params)
-      @wechat_register.mobile ||= current_account.identity if current_account.is_a?(Auth::MobileAccount)
+    def new_register
+      @register = current_user.registers.build(register_params)
+      @register.mobile ||= current_account.identity if current_account.is_a?(::Auth::MobileAccount)
     end
 
-    def set_wechat_register
-      @wechat_register = Register.find(params[:id])
+    def set_register
+      @register = Register.find(params[:id])
     end
 
-    def wechat_register_params
-      p = params.fetch(:wechat_register, {}).permit(
+    def register_params
+      p = params.fetch(:register, {}).permit(
         :id_name,
         :id_number,
         :mobile,

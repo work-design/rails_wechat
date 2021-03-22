@@ -1,5 +1,5 @@
 module Wechat
-  class My::SubscribedsController < My::BaseController
+  class My::SubscribesController < My::BaseController
 
     def create
       r = subscribes_params.to_h.map do |k, v|
@@ -12,11 +12,6 @@ module Wechat
       end
 
       render json: r.as_json
-    end
-
-    private
-    def subscribes_params
-      params.fetch(:subscribes, {}).permit!
     end
 
   end

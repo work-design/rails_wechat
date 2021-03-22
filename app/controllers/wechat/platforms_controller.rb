@@ -21,10 +21,10 @@ module Wechat
     end
 
     def callback
-      @wechat_auth = @platform.wechat_auths.build
-      @wechat_auth.auth_code = params[:auth_code]
-      @wechat_auth.auth_code_expires_at = Time.current + params[:expires_in].to_i
-      @wechat_auth.save
+      @auth = @platform.auths.build
+      @auth.auth_code = params[:auth_code]
+      @auth.auth_code_expires_at = Time.current + params[:expires_in].to_i
+      @auth.save
     end
 
     # 消息与事件接收URL: platforms/:id/callback/$APPID$
@@ -53,7 +53,7 @@ module Wechat
       @platform = Platform.find(params[:id])
     end
 
-    def set_wechat_app
+    def set_app
       @app = @platform.agencies.find_by(appid: params[:appid]).app
     end
 
