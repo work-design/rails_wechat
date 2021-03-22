@@ -1,5 +1,5 @@
 module Wechat
-  class Received < ApplicationRecord
-    include Model::Received
+  class Receive < ApplicationRecord
+    include Model::Receive
   end
 end
