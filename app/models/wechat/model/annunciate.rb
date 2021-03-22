@@ -7,11 +7,11 @@ module Wechat
     end
 
     def to_wechat_later
-      WechatAnnunciateJob.perform_later(self)
+      AnnunciateJob.perform_later(self)
     end
 
     def to_wechat
-      app = WechatPublic.valid.find_by(organ_id: annunciation.organ_id, primary: true)
+      app = PublicApp.valid.find_by(organ_id: annunciation.organ_id, primary: true)
 
       return unless app
 

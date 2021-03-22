@@ -5,10 +5,10 @@ module Wechat
     included do
       has_many :menus, foreign_key: :appid, primary_key: :appid
       has_many :receives, foreign_key: :appid, primary_key: :appid
-      has_many :wechat_replies, foreign_key: :appid, primary_key: :appid
+      has_many :replies, foreign_key: :appid, primary_key: :appid
       has_many :requests, foreign_key: :appid, primary_key: :appid
       has_many :responses, foreign_key: :appid, primary_key: :appid
-      has_many :wechat_services, foreign_key: :appid, primary_key: :appid
+      has_many :services, foreign_key: :appid, primary_key: :appid
       has_many :wechat_users, foreign_key: :app_id, primary_key: :appid
     end
 
