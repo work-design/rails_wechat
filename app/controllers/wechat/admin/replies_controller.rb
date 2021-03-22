@@ -1,5 +1,5 @@
 module Wechat
-  class Admin::WechatRepliesController < Admin::BaseController
+  class Admin::RepliesController < Admin::BaseController
     before_action :set_app
     before_action :set_reply, only: [:show, :edit, :edit_news, :update, :destroy]
 
