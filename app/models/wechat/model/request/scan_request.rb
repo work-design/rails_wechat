@@ -1,7 +1,7 @@
 module Wechat
   module Model::Request::ScanRequest
 
-    def reply
+    def get_reply
       r = reply_from_rule
       return r if r
 

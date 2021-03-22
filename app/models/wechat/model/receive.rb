@@ -123,7 +123,7 @@ module Wechat
     end
 
     def reply
-      request.reply
+      request.get_reply
       request.save
       request
     end

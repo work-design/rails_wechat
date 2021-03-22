@@ -31,7 +31,7 @@ module Wechat
       before_save :get_reply_body, if: -> { (reply_id_changed? || new_record? || reply&.new_record?) && reply }
     end
 
-    def reply
+    def get_reply
       self.reply = reply_from_rule
     end
 
