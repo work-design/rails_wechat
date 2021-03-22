@@ -37,19 +37,16 @@
   <% end %>
 </td>
 <td>
-  <%= link_to admin_menus_path(appid: model.appid), aria: { label: t('wechat.admin.menus.index.title') }, class: 'button is-small is-rounded is-light' do %>
-    <i class="fas fa-bars"></i>
-  <% end %>
-  <%= link_to admin_app_responses_path(model), aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light' do %>
+  <%= link_to({ controller: 'admin/responses', app_id: model.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-reply-all"></i>
   <% end %>
-  <%= link_to admin_app_wechat_requests_path(model), aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light' do %>
+  <%= link_to({ controller: 'admin/requests', app_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-comments"></i>
   <% end %>
-  <%= link_to admin_app_wechat_tags_path(model), aria: { label: t('wechat.admin.wechat_tags.index.title') }, class: 'button is-small is-rounded is-light' do %>
+  <%= link_to({ controller: 'admin/tags', app_id: model.id }, aria: { label: t('wechat.admin.tags.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-user-tag"></i>
   <% end %>
-  <%= link_to admin_app_templates_path(model), aria: { label: t('wechat.admin.templates.index.title') }, class: 'button is-small is-rounded is-light' do %>
+  <%= link_to({ controller: 'admin/templates', app_id: model.id }, aria: { label: t('wechat.admin.templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fas fa-inbox"></i>
   <% end %>
 </td>
