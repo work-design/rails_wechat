@@ -19,7 +19,7 @@ module Wechat
     end
 
     def init_template_config
-      if app.is_a?(WechatPublic)
+      if app.is_a?(PublicApp)
         config = TemplatePublic.find_or_initialize_by(content: content)
         config.title = title
         self.template_config = config
@@ -46,7 +46,7 @@ module Wechat
 
     def sync_from_wechat
       r_content = app.api.templates.find do |i|
-        tid = app.is_a?(WechatPublic) ? i['template_id'] : i['priTmplId']
+        tid = app.is_a?(PublicApp) ? i['template_id'] : i['priTmplId']
         tid == self.template_id
       end
       return if r_content.blank?

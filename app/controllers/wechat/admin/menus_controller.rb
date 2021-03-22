@@ -7,8 +7,8 @@ module Wechat
     def default
       q_params = {}
       q_params.merge! params.permit(:name)
-      @menus = Menu.where(appid: nil).default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
 
+      @menus = Menu.where(appid: nil).default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
       render 'index'
     end
 

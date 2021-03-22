@@ -16,13 +16,13 @@ module Wechat
       attribute :reply_body, :json
       attribute :reply_encrypt, :json
 
-      belongs_to :wechat_reply, optional: true
+      belongs_to :reply, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
-      belongs_to :wechat_received
+      belongs_to :received
 
       has_one :platform, through: :wechat_received
-      has_many :wechat_services, dependent: :nullify
+      has_many :services, dependent: :nullify
       has_many :tags, primary_key: :appid, foreign_key: :appid
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
       has_many :response_requests, ->(o){ where(request_type: o.type) }, primary_key: :appid, foreign_key: :appid

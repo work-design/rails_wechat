@@ -1,15 +1,15 @@
 module Wechat
-  module Model::UserTag
+  module Ext::UserTag
     extend ActiveSupport::Concern
 
     included do
-      has_many :tags, dependent: :destroy
+      has_many :tags, class_name: 'Wechat::Tag', dependent: :destroy
 
       after_save_commit :sync_tag_later, if: -> { saved_change_to_name? }
     end
 
     def sync_tag_later
-      WechatTagJob.perform_later(self)
+      Wechat::TagJob.perform_later(self)
     end
 
     def sync_tag

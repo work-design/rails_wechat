@@ -47,7 +47,7 @@ module Wechat
     def update_bind
       @register.assign_attributes register_params
       if @register.save
-        @wechat_register.notify_qrcode
+        @register.notify_qrcode
       end
       render 'update'
     end
@@ -59,34 +59,34 @@ module Wechat
       q_params = {
         organ_id: current_organ&.id
       }
-      @members = @wechat_register.members.default_where(q_params)
-      @task_templates = @wechat_register.task_templates.default_where(member_id: params[:member_id])
+      @members = @register.members.default_where(q_params)
+      @task_templates = @register.task_templates.default_where(member_id: params[:member_id])
     end
 
     def update_assign
-      @wechat_register.to_task!(params[:member_id], params[:task_template_id])
+      @register.to_task!(params[:member_id], params[:task_template_id])
       render 'update'
     end
 
     def update
-      @wechat_register.assign_attributes(wechat_register_params)
+      @register.assign_attributes(register_params)
 
-      unless @wechat_register.save
-        render :edit, locals: { model: @wechat_register }, status: :unprocessable_entity
+      unless @register.save
+        render :edit, locals: { model: @register }, status: :unprocessable_entity
       end
     end
 
     def destroy
-      @wechat_register.destroy
+      @register.destroy
     end
 
     private
-    def set_wechat_register
-      @wechat_register = Register.find(params[:id])
+    def set_register
+      @register = Register.find(params[:id])
     end
 
-    def wechat_register_params
-      params.fetch(:wechat_register, {}).permit(
+    def register_params
+      params.fetch(:register, {}).permit(
         :id_name,
         :id_number,
         :mobile,

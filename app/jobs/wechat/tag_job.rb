@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 module Wechat
-  class WechatTagJob < ApplicationJob
+  class TagJob < ApplicationJob
 
     def perform(user_tag)
       user_tag.sync_tag

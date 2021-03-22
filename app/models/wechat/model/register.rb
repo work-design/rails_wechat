@@ -15,7 +15,8 @@ module Wechat
       attribute :mobile_code, :string
 
       belongs_to :user, optional: true
-      belongs_to :organ, optional: true
+      belongs_to :organ, class_name: 'Wechat::Organ', optional: true
+
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       validates :mobile, presence: true, uniqueness: true

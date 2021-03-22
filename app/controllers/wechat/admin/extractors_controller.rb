@@ -5,6 +5,7 @@ module Wechat
 
     def index
       q_params = {}
+
       @extractors = @response.extractors.default_where(q_params).page(params[:page])
     end
 
