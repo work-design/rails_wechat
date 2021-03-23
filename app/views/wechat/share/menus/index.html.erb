@@ -1,5 +1,4 @@
-<%= render layout: 'index_table', locals: { cache_key: Wechat::Menu.column_names.hash } do %>
+<%= render layout: 'index_tree_table', locals: { cache_key: Wechat::Menu.column_names.hash } do %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @default_menus, as: :model %>
   <%= render partial: 'index_tbody', layout: 'index_tr', collection: @menus, as: :model %>
 <% end %>
-
-<%= paginate @menus %>

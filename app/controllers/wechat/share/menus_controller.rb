@@ -7,9 +7,10 @@ module Wechat
 
     def index
       q_params = {}
-      q_params.merge! appid: [@app.appid, nil].uniq
+      q_params.merge! params.permit(:name)
 
-      @menus = Menu.where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
+      @default_menus = Menu.roots.where(appid: nil).where(q_params).order(parent_id: :desc, position: :asc)
+      @menus = @app.menus.roots.where(q_params).order(parent_id: :desc, position: :asc)
 
       @scene_menu_ids = @scene.scene_menus.pluck(:menu_id)
     end

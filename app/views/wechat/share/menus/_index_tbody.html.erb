@@ -1,11 +1,18 @@
-<td><%= model.type_i18n %></td>
+<td>
+  <span style="width: <%= model.parent_id ? 1.43 : 0 %>em; display: inline-block"></span>
+  <% if model.children.size > 0 %>
+    <i class="fas fa-fw fa-caret-down" data-action="click->tree#collapse" style="cursor: pointer"></i>
+  <% else %>
+    <i class="fas fa-fw fa-minus"></i>
+  <% end %>
+  <%= model.type_i18n %>
+</td>
 <td><%= model.name %></td>
 <td><%= model.value %></td>
 <td>
   <p><%= model.mp_appid %></p>
   <p><%= model.mp_pagepath %></p>
 </td>
-<td><%= model.position %></td>
 <td>
   <% if @scene_menu_ids.include?(model.id) %>
     <i class="fas fa-clone has-text-success"></i>
