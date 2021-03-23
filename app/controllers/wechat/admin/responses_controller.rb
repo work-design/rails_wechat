@@ -67,7 +67,7 @@ module Wechat
       params.fetch(:response, {}).permit(
         :match_value,
         :contain,
-        :expire_seconds,
+        :expire_at,
         :effective_type,
         :effective_id,
         request_types: [],
