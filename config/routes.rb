@@ -119,19 +119,18 @@ Rails.application.routes.draw do
         end
         resources :notices
       end
+      resources :menus do
+        collection do
+          get :new_parent
+          post :sync
+        end
+        member do
+          get :edit_parent
+        end
+      end
     end
     resources :responses, only: [] do
       resources :extractors
-    end
-    resources :menus do
-      collection do
-        get :default
-        get :new_parent
-        post :sync
-      end
-      member do
-        get :edit_parent
-      end
     end
     resources :accounts, only: [] do
       member do

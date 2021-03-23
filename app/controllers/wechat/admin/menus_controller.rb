@@ -4,19 +4,13 @@ module Wechat
     before_action :set_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
     before_action :prepare_form, only: [:new, :create, :edit, :update]
 
-    def default
+    def index
       q_params = {}
       q_params.merge! params.permit(:name)
 
-      @menus = Menu.where(appid: nil).default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
-      render 'index'
-    end
+      @default_menus = Menu.where(appid: nil).default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
 
-    def index
-      q_params = {}
-      q_params.merge! appid: [params[:appid], nil].uniq
-
-      @menus = Menu.where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
+      @menus = @app.menus.default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
     end
 
     def new
@@ -25,11 +19,11 @@ module Wechat
     end
 
     def new_parent
-      @menu = Menu.new(appid: params[:appid])
+      @menu = @app.menus.build
     end
 
     def create
-      @menu = Menu.new(menu_params)
+      @menu = @app.menus.build(menu_params)
 
       unless @menu.save
         render :new, locals: { model: @menu }, status: :unprocessable_entity
@@ -45,7 +39,7 @@ module Wechat
     end
 
     def edit
-      @parents = Menu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @menu.appid)
+      @parents = @app.menus.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @menu.appid)
     end
 
     def edit_parent
@@ -64,10 +58,6 @@ module Wechat
     end
 
     private
-    def set_app
-      @app = App.default_where(default_params).find_by appid: params[:appid]
-    end
-
     def set_menu
       @menu = Menu.find(params[:id])
     end
