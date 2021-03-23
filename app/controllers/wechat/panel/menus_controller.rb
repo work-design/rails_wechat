@@ -7,12 +7,12 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit(:name)
 
-      @menus = Menu.where(appid: nil).default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
+      @menus = Menu.where(appid: nil).roots.default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
     end
 
     def new
       @menu = Menu.new(appid: params[:appid], type: 'Wechat::ViewMenu')
-      @parents = Menu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: params[:appid])
+      @parents = Menu.roots.where(type: 'Wechat::ParentMenu')
     end
 
     def new_parent
@@ -61,7 +61,6 @@ module Wechat
 
     def menu_params
       params.fetch(:menu, {}).permit(
-        :appid,
         :parent_id,
         :type,
         :name,

@@ -19,6 +19,8 @@ module Wechat
       has_many :scene_menus, dependent: :destroy
       accepts_nested_attributes_for :scene_menus, allow_destroy: true
 
+      scope :roots, -> { where(parent_id: nil) }
+
       acts_as_list scope: [:parent_id, :appid]
     end
 
