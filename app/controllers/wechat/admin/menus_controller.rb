@@ -8,9 +8,9 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit(:name)
 
-      @default_menus = Menu.where(appid: nil).default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
+      @default_menus = Menu.includes(:children).where(appid: nil).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
 
-      @menus = @app.menus.default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
+      @menus = @app.menus.includes(:children).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
     end
 
     def new

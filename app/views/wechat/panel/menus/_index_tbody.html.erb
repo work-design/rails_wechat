@@ -1,7 +1,7 @@
 <td>
   <span style="width: <%= model.parent_id ? 1.43 : 0 %>em; display: inline-block"></span>
-  <% if model.parent_id.blank? %>
-    <i class="fas fa-fw fa-caret-right" data-action="click->tree#expand" style="cursor: pointer"></i>
+  <% if model.children.size > 0 %>
+    <i class="fas fa-fw fa-caret-down" data-action="click->tree#collapse" style="cursor: pointer"></i>
   <% else %>
     <i class="fas fa-fw fa-minus"></i>
   <% end %>
