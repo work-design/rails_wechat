@@ -46,10 +46,6 @@ module Wechat
     end
 
     private
-    def set_app
-      @app = App.shared.find(params[:app_id])
-    end
-
     def set_scene
       @scene = @app.scenes.find(params[:id])
     end

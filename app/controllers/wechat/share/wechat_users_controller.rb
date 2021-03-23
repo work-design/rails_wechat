@@ -6,7 +6,7 @@ module Wechat
 
     def index
       q_params = {
-        'wechat_user_tags.wechat_tag_id': @scene.wechat_tag&.id
+        'wechat_user_tags.tag_id': @scene.wechat_tag&.id
       }
 
       @wechat_users = @app.wechat_users.default_where(q_params).page(params[:page])
@@ -36,10 +36,6 @@ module Wechat
     end
 
     private
-    def set_app
-      @app = WechatApp.shared.find(params[:app_id])
-    end
-
     def set_scene
       @scene = Scene.find params[:scene_id]
     end
