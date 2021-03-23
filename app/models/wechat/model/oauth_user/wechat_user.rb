@@ -38,7 +38,7 @@ module Wechat
     end
 
     def sync_user_info_later
-      WechatUserInfoJob.perform_later(self)
+      UserInfoJob.perform_later(self)
     end
 
     def sync_user_info

@@ -12,7 +12,7 @@ module Wechat
     end
 
     def sync_create_later
-      WechatUserTagJob.perform_later(self)
+      UserTagJob.perform_later(self)
     end
 
     def sync_to_wechat

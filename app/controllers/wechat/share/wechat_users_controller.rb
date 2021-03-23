@@ -6,7 +6,7 @@ module Wechat
 
     def index
       q_params = {
-        'wechat_user_tags.tag_id': @scene.tag&.id
+        'user_tags.tag_id': @scene.tag&.id
       }
 
       @wechat_users = @app.wechat_users.default_where(q_params).page(params[:page])
