@@ -1,22 +1,22 @@
 <%= render layout: 'modal' do %>
-<table class="table is-fullwidth">
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= Wechat::WechatApp.human_attribute_name(:url) %></td>
-      <td><%= @app.url %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Wechat::WechatApp.human_attribute_name(:token) %></td>
-      <td><%= @app.token %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Wechat::WechatApp.human_attribute_name(:encoding_aes_key) %></td>
-      <td><%= @app.encoding_aes_key %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Wechat::WechatApp.human_attribute_name(:encrypt_mode) %></td>
-      <td><%= @app.encrypt_mode_i18n %></td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table is-fullwidth">
+    <tbody>
+      <tr>
+        <td class="has-text-right"><%= Wechat::App.human_attribute_name(:url) %></td>
+        <td><%= @app.url %></td>
+      </tr>
+      <tr>
+        <td class="has-text-right"><%= Wechat::App.human_attribute_name(:token) %></td>
+        <td><%= @app.token %></td>
+      </tr>
+      <tr>
+        <td class="has-text-right"><%= Wechat::App.human_attribute_name(:encoding_aes_key) %></td>
+        <td><%= @app.encoding_aes_key %></td>
+      </tr>
+      <tr>
+        <td class="has-text-right"><%= Wechat::App.human_attribute_name(:encrypt_mode) %></td>
+        <td><%= @app.encrypt_mode_i18n %></td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>
