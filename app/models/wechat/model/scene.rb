@@ -28,6 +28,14 @@ module Wechat
       after_save_commit :to_qrcode, if: -> { saved_change_to_match_value? }
     end
 
+    def xx
+      res.effective_type = 'Wechat::TextReply'
+      res.request_types = [
+        'Wechat::SubscribeRequest',
+        'Wechat::ScanRequest'
+      ]
+    end
+
     def to_qrcode
       commit_to_wechat
       persist_to_file

@@ -13,15 +13,11 @@ module Wechat
         appid: app.appid,
         match_value: "invite_by_#{id}"
       }
-      res = Response.find_or_initialize_by(p)
-      res.effective_type = 'Wechat::TextReply'
-      res.request_types = [
-        'Wechat::SubscribeRequest',
-        'Wechat::ScanRequest'
-      ]
-      res.expire_seconds ||= 2592000
-      res.save
-      res.qrcode_file_url
+      scene = Scene.find_or_initialize_by(p)
+      scene.expire_seconds ||= 2592000
+      scene.organ_id = app.organ_id
+      scene.save
+      scene.qrcode_file_url
     end
 
   end
