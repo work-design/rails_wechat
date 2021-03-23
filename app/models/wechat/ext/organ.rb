@@ -1,5 +1,5 @@
 module Wechat
-  module Model::Organ
+  module Ext::Organ
     extend ActiveSupport::Concern
 
     included do
