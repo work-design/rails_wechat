@@ -1,5 +1,4 @@
 <span class="menu-label"><%= t('wechat.my.title') %></span>
 <div class="menu-list">
-  <%= link_to t('wechat.my.registers.index.title'), { controller: 'wechat/my/registers' }, class: active_helper(controllers: 'wechat/my/registers', active: 'is-active') %>
   <%= link_to t('wechat.my.users.invite_qrcode.title'), { controller: 'wechat/my/users', action: 'invite_qrcode' },  class: active_helper('wechat/my/users': ['invite_qrcode'], active: 'is-active') %>
 </div>

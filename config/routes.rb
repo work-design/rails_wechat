@@ -83,18 +83,6 @@ Rails.application.routes.draw do
   end
 
   scope 'wechat/admin', module: 'wechat/admin', as: :admin, defaults: { business: 'wechat', namespace: 'admin' } do
-    resources :registers do
-      member do
-        get 'app' => :edit_app
-        get 'bind' => :edit_bind
-        patch 'bind' => :update_bind
-        get 'qrcode' => :edit_qrcode
-        get 'assign' => :edit_assign
-        patch 'assign' => :update_assign
-        put :qrcode
-        put :code
-      end
-    end
     resources :apps do
       member do
         get :info

@@ -1,12 +1,11 @@
 module Wechat
-  module Model::User
+  module Ext::User
     extend ActiveSupport::Concern
 
     included do
       has_many :wechat_users, class_name: 'Wechat::WechatUser'
       has_many :wechat_program_users, class_name: 'Wechat::WechatProgramUser'
-      has_many :subscribes, ->{ where(sending_at: nil).order(id: :asc) }, class_name: 'Wechat::Subscribed', through: :wechat_program_users
-      has_many :registers, class_name: 'Wechat::Register', dependent: :destroy
+      has_many :subscribes, ->{ where(sending_at: nil).order(id: :asc) }, class_name: 'Wechat::Subscribe', through: :wechat_program_users
     end
 
     def invite_qrcode(app)
