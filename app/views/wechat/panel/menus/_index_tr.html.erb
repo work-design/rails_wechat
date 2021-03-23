@@ -17,4 +17,6 @@
     </span>
   </td>
 </tr>
-<%= draw_tree(partial: 'index_tbody', layout: 'index_tr', locals: { model: model, display: 'table-row' }) %>
+<% model.children.each do |child| %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', locals: { model: child, display: 'table-row' } %>
+<% end %>

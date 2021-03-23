@@ -11,8 +11,8 @@ module Wechat
     end
 
     def new
-      @menu = Menu.new(appid: params[:appid], type: 'Wechat::ViewMenu')
-      @parents = Menu.roots.where(type: 'Wechat::ParentMenu')
+      @menu = Menu.new(type: 'Wechat::ViewMenu')
+      @parents = Menu.roots.where(appid: nil).where(type: 'Wechat::ParentMenu')
     end
 
     def new_parent

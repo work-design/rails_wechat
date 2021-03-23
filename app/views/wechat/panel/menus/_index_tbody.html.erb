@@ -1,9 +1,9 @@
 <td>
   <span style="width: <%= model.parent_id ? 1.43 : 0 %>em; display: inline-block"></span>
   <% if model.parent_id.blank? %>
-    <i class="fas fa-fw fa-minus"></i>
-  <% else %>
     <i class="fas fa-fw fa-caret-right" data-action="click->tree#expand" style="cursor: pointer"></i>
+  <% else %>
+    <i class="fas fa-fw fa-minus"></i>
   <% end %>
   <%= model.type_i18n %>
 </td>
