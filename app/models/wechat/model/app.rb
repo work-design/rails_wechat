@@ -77,7 +77,7 @@ module Wechat
 
     def within_menus
       if organ && organ.respond_to?(:limit_wechat_menu)
-        self.menus.limit(organ.limit_menu).where(parent_id: nil).order(position: :asc).as_json
+        self.menus.limit(organ.limit_wechat_menu).where(parent_id: nil).order(position: :asc).as_json
       else
         self.menus.where(parent_id: nil).order(position: :asc).as_json
       end

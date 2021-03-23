@@ -40,7 +40,7 @@ class Wechat::Admin::MenusControllerTest < ActionDispatch::IntegrationTest
 
   test 'destroy ok' do
     assert_difference('Menu.count', -1) do
-      delete admin_wechat_menu_url(@wechat_menu), xhr: true
+      delete admin_menu_url(@menu), xhr: true
     end
 
     assert_response :success

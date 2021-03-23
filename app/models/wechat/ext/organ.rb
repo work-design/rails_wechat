@@ -5,7 +5,7 @@ module Wechat
     included do
       attribute :limit_wechat, :integer, default: 1
       attribute :limit_wechat_menu, :integer, default: 1
-      has_many :apps, class_name: 'Wechat::WechatApp', dependent: :destroy
+      has_many :apps, class_name: 'Wechat::App', dependent: :destroy
 
       validates :limit_wechat_menu, inclusion: { in: [1, 2, 3] }
     end
