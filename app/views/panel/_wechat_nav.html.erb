@@ -1,8 +1,9 @@
 <div class="<%= active_helper(modules: 'wechat/panel', active: 'menu ex-accordion is-active', item: 'menu ex-accordion') %>" data-controller="menu">
   <%= content_tag :div, class: 'menu-list' do %>
     <%= link_to t('wechat.panel.template_configs.index.title'), { controller: 'wechat/panel/template_configs' }, class: active_helper(controllers: 'template_configs', active: 'is-active') %>
-    <%= link_to t('wechat.panel.platforms.index.title'), { controller: 'wechat/panel/platforms' }, class: active_helper(controllers: 'platforms', active: 'is-active') -%>
-    <%= link_to t('wechat.panel.apps.index.title'), { controller: 'wechat/panel/apps' }, class: active_helper(controllers: 'apps', active: 'is-active') %>
+    <%= link_to t('wechat.panel.platforms.index.title'), { controller: 'wechat/panel/platforms' }, class: active_helper(controllers: 'platforms', active: 'is-active') %>
+    <%= link_to t('wechat.panel.menus.index.title'), { controller: 'wechat/panel/menus' }, class: active_helper(controllers: 'menus', active: 'is-active') %>
+    <%= link_to t('wechat.panel.apps.index.title'), { controller: 'wechat/panel/apps' }, class: active_helper(controllers: 'apps', active: 'is-active') -%>
 <% end %>
   <a class="menu-label" data-action="menu#toggle">
     <i class="fab fa-weixin"></i>

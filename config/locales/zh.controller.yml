@@ -52,6 +52,9 @@ zh:
       apps:
         index:
           title: 微信公众号
+      menus:
+        index:
+          title: 通用菜单
     share:
       apps:
         index:
