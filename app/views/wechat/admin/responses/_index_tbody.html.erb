@@ -1,4 +1,4 @@
-<td><%= model.match_value %></td>
+<td><%= link_to model.match_value, { action: 'show', id: model.id }, text: true %></td>
 <td>
   <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
     <%= f.check_box :contain, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>

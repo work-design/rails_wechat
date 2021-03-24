@@ -1,7 +1,7 @@
 <%= render layout: 'modal' do %>
-  <%= form_with model: @reply, scope: :reply, url: admin_app_reply_path(@app, @reply) do |f| %>
+  <%= form_with model: @reply, scope: :reply, url: { action: 'update' } do |f| %>
     <%= render 'shared/error_messages', target: @reply %>
-    <%= f.fields :expense_items, can: { wrap_all: false, label: false, placeholder: true }, css: { wrap_input: 'field' } do |ef| %>
+    <%= f.fields :expense_items, can: { wrap_all: false, label: false, placeholder: true }, wrap: { input: 'field' } do |ef| %>
       <%= render partial: 'item_form', locals: { ef: ef } %>
     <% end %>
     <%= f.submit %>

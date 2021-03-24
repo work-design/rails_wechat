@@ -9,6 +9,7 @@ module Wechat
         type: ['TextResponse', 'PersistScanResponse', 'EventResponse']
       }
       q_params.merge! params.permit(:type)
+
       @responses = @app.responses.includes(:response_requests).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
@@ -35,7 +36,8 @@ module Wechat
         appid: @app.appid,
         type: @response.effective_type
       }
-      @wechat_replies = Reply.where(q_params)
+
+      @replies = Reply.where(q_params)
     end
 
     def update

@@ -14,8 +14,8 @@ module Wechat
       belongs_to :organ, class_name: 'Org::Organ'
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
-      belongs_to :response, optional: true
 
+      has_one :response, ->(o){ where(match_value: o.match_value) }, primary_key: :appid, foreign_key: :appid
       has_one :tag, ->(o){ where(name: o.match_value) }, primary_key: :appid, foreign_key: :appid
       has_many :scene_menus, dependent: :destroy
       has_many :menus, through: :scene_menus
@@ -28,12 +28,15 @@ module Wechat
       after_save_commit :to_qrcode, if: -> { saved_change_to_match_value? }
     end
 
-    def xx
+    def init_response
+      res = response || build_response
       res.effective_type = 'Wechat::TextReply'
       res.request_types = [
         'Wechat::SubscribeRequest',
         'Wechat::ScanRequest'
       ]
+      res.save
+      res
     end
 
     def to_qrcode
