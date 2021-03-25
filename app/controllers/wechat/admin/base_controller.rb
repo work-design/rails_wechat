@@ -3,7 +3,7 @@ module Wechat
 
     private
     def set_app
-      @app = App.default_where(default_params).find(params[:app_id])
+      @app = App.find(params[:app_id])
     end
 
   end

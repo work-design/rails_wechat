@@ -1,7 +1,7 @@
 module Wechat
   class Admin::RepliesController < Admin::BaseController
     before_action :set_app
-    before_action :set_reply, only: [:show, :edit, :edit_news, :update, :destroy]
+    before_action :set_reply, only: [:show, :edit, :update, :destroy]
 
     def index
       q_params = {}
@@ -27,9 +27,6 @@ module Wechat
     def edit
     end
 
-    def edit_news
-    end
-
     def update
       @reply.assign_attributes(reply_params)
 
@@ -43,10 +40,6 @@ module Wechat
     end
 
     private
-    def set_app
-      @app = App.find params[:app_id]
-    end
-
     def set_reply
       @reply = @app.replies.find(params[:id])
     end

@@ -2,3 +2,6 @@
 <%= f.select :type, options_for_select(Wechat::Reply.options_i18n(:type), f.object.type) %>
 <%= f.text_area :value %>
 <%= f.file_field :media %>
+<%= f.fields :news_reply_items, label: false, placeholder: true, wrap: { all: nil, input: 'field' } do |ef| %>
+  <%= render partial: 'item_form', locals: { ef: ef } %>
+<% end %>

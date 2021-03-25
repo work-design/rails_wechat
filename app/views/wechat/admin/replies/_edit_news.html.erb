@@ -1,7 +1,0 @@
-<%= form_with model: @reply, scope: :reply, url: { action: 'update' } do |f| %>
-  <%= render 'shared/error_messages', target: @reply %>
-  <%= f.fields :expense_items, label: false, placeholder: true, wrap: { all: nil, input: 'field' } do |ef| %>
-    <%= render partial: 'item_form', locals: { ef: ef } %>
-  <% end %>
-  <%= f.submit %>
-<% end %>
