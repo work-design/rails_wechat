@@ -4,6 +4,7 @@ module Wechat
 
     included do
       attribute :msg_type, :string, default: 'image'
+
       after_create_commit :upload_file_later
     end
 

@@ -5,10 +5,11 @@ module Wechat
     included do
       attribute :title, :string
       attribute :description, :string
-      attribute :pic_url, :string
       attribute :url, :string
 
       belongs_to :news_reply
+
+      has_one_attached :pic
     end
 
     def to_wechat
@@ -18,6 +19,10 @@ module Wechat
         PicUrl: pic_url,
         Url: url
       }
+    end
+
+    def pic_url
+      pic.url
     end
 
   end
