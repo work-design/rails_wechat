@@ -1,3 +1,11 @@
 <td><%= model.type_i18n %></td>
-<td><%= model.value %></td>
-<td><%= model.body %></td>
+<td>
+  <% if model.is_a?(Wechat::NewsReply) %>
+    <% model.news_reply_items.each do |item| %>
+      <p><%= item.title %></p>
+      <p><%= item.description %></p>
+    <% end %>
+  <% else %>
+    <%= model.value %>
+  <% end %>
+</td>
