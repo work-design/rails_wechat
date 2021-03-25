@@ -1,4 +1,4 @@
-<%= form_with model: @reply, url: { action: 'create' } do |f| %>
+<%= form_with model: @reply, url: { action: 'build' } do |f| %>
   <%= f.select :type, options_for_select(Wechat::Reply.options_i18n(:type), f.object.type) %>
   <%= f.submit %>
 <% end %>

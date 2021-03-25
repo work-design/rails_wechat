@@ -13,11 +13,15 @@ module Wechat
       @reply = @app.replies.build
     end
 
-    def create
+    def build
       @reply = @app.replies.build(reply_params)
       if @reply.is_a?(NewsReply)
         @reply.news_reply_items.build
       end
+    end
+
+    def create
+      @reply = @app.replies.build(reply_params)
 
       if @reply.save
         render 'create'

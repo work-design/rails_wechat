@@ -98,8 +98,8 @@ Rails.application.routes.draw do
       end
       resources :requests, except: [:new, :create]
       resources :replies do
-        member do
-          get 'news' => :edit_news
+        collection do
+          post :build
         end
       end
       resources :tags do

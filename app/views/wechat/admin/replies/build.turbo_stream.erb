@@ -1,5 +1,6 @@
 <%= turbo_stream.update 'modal' do %>
-  <%= form_with model: @reply, scope: :reply, url: { action: 'update', id: @reply.id } do |f| %>
+  <%= form_with model: @reply, scope: :reply, url: { action: 'create' } do |f| %>
+    <%= f.hidden_field :type, value: @reply.type %>
     <%= render partial: "#{@reply.msg_type}_form", locals: { f: f } %>
     <%= f.submit %>
   <% end %>
