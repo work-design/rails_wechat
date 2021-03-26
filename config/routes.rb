@@ -93,6 +93,7 @@ Rails.application.routes.draw do
         member do
           post :sync
           get 'reply' => :edit_reply
+          get :filter_reply
           patch 'reply' => :update_reply
         end
       end

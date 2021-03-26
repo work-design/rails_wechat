@@ -1,4 +1,4 @@
 <%= form_with model: @reply, scope: :reply, url: { action: 'update' } do |f| %>
-  <%= render partial: 'form', locals: { f: f } %>
+  <%= render partial: "#{@reply.msg_type}_form", locals: { f: f } %>
   <%= f.submit %>
 <% end %>

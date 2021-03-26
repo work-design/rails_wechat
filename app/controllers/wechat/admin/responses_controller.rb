@@ -40,6 +40,10 @@ module Wechat
       @replies = Reply.where(q_params)
     end
 
+    def filter_reply
+
+    end
+
     def update
       @response.assign_attributes(response_params)
 

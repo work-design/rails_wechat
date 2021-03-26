@@ -20,6 +20,14 @@
   </td>
 </tr>
 <tr>
-  <td><%= Wechat::Response.human_attribute_name(:match_value) %></td>
-  <td><%= @response.match_value %></td>
+  <td><%= Wechat::Response.human_attribute_name(:effective) %></td>
+  <td>
+    <turbo-frame id="reply">
+      <span><%= @response.effective_type_i18n %></span>
+      <%= link_to({ action: 'edit_reply', id: @response.id }, data: { turbo_frame: 'reply' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fas fa-pencil-alt"></i>
+      <% end %>
+    </turbo-frame>
+    <p><%= @response.effective_id %></p>
+  </td>
 </tr>

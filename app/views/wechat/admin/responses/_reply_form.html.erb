@@ -1,5 +1,5 @@
 <%= form_with model: @response, scope: :response, url: { action: 'update' } do |f| %>
-  <%= f.select :effective_type, options_for_select(Wechat::Reply.options_i18n(:type), f.object.effective_type) %>
-  <%= f.collection_select :effective_id, @replies, :id, :value %>
-  <%= f.submit %>
+  <div data-controller="common" data-common-url-value="<%= url_for(action: 'filter_reply') %>">
+    <%= f.select :effective_type, options_for_select(Wechat::Reply.options_i18n(:type), f.object.effective_type), { wrap: { all: nil }, label: nil }, { data: { action: 'common#stream' } } %>
+  </div>
 <% end %>
