@@ -25,8 +25,7 @@ module Wechat
       has_many :services, dependent: :nullify
       has_many :tags, primary_key: :appid, foreign_key: :appid
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
-      has_many :response_requests, ->(o){ where(request_type: o.type) }, primary_key: :appid, foreign_key: :appid
-      has_many :responses, through: :response_requests
+      has_many :responses, ->(o){ default_where('request_types-any': o.type) }, primary_key: :appid, foreign_key: :appid
 
       before_save :get_reply_body, if: -> { (reply_id_changed? || new_record? || reply&.new_record?) && reply }
     end

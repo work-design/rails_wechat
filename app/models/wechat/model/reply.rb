@@ -18,7 +18,7 @@ module Wechat
     end
 
     def invoke_effect(request_from = nil, **options)
-      self.value += options[:value]
+      self.value = value.to_s + options[:value].to_s
       self
     end
 
