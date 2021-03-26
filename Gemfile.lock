@@ -49,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_ui.git
-  revision: 09f64dedc3ba0cf670e34e891aad9eb82cc7d106
+  revision: 89c7b656dc4c425ac5f854468db45754d7a68e48
   specs:
     rails_ui (0.1.0)
       rails
