@@ -1,5 +1,5 @@
 module Wechat
-  module Model::OauthUser::WechatProgramUser
+  module Model::OauthUser::ProgramUser
     extend ActiveSupport::Concern
 
     included do
