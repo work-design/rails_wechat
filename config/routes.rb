@@ -102,6 +102,10 @@ Rails.application.routes.draw do
         collection do
           post :build
         end
+        member do
+          get :add
+        end
+        resources :news_reply_items, only: [:destroy]
       end
       resources :tags do
         collection do

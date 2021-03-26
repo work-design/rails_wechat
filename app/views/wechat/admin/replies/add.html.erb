@@ -1,0 +1,11 @@
+<%= turbo_frame_tagged 'modal' do %>
+  <%= form_with model: @reply, scope: :reply, url: { action: 'update' } do |f| %>
+    <%= f.fields :news_reply_items, model: @reply.news_reply_items.select(&:new_record?) do |ef| %>
+      <%= ef.text_field :title %>
+      <%= ef.text_area :description %>
+      <%= ef.text_field :url %>
+      <%= ef.file_field :pic %>
+    <% end %>
+    <%= f.submit %>
+  <% end %>
+<% end %>
