@@ -16,7 +16,7 @@ module Wechat
     end
 
     def sync_source_kind
-      self.source_kind = source.class.name
+      self.source_kind ||= source.class.name
     end
 
     def sync_create_later
