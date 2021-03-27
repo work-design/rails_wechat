@@ -1,8 +1,13 @@
 <th><%= Wechat::WechatUser.human_attribute_name(:name) %></th>
-<th><%= Wechat::WechatUser.human_attribute_name(:uid) %></th>
+<th>
+  <p><%= Wechat::WechatUser.human_attribute_name(:uid) %></p>
+  <p class="has-text-grey"><%= Wechat::WechatUser.human_attribute_name(:unionid) %></p>
+</th>
 <th><%= Wechat::WechatUser.human_attribute_name(:tags) %></th>
 <th><%= Wechat::WechatUser.human_attribute_name(:remark) %></th>
-<th><%= Wechat::WechatUser.human_attribute_name(:unionid) %></th>
-<th><%= Wechat::WechatUser.human_attribute_name(:account_id) %></th>
-<th><%= Wechat::WechatUser.human_attribute_name(:user_id) %></th>
+<th>
+  <p><%= Wechat::WechatUser.human_attribute_name(:account_id) %></p>
+  <p><%= Wechat::WechatUser.human_attribute_name(:user_id) %></p>
+</th>
+<th><%= Wechat::WechatUser.human_attribute_name(:created_at) %></th>
 <th></th>

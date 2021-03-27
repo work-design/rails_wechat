@@ -1,11 +1,16 @@
 <td><%= model.name %></td>
-<td><%= model.uid %></td>
+<td>
+  <p><%= model.uid %></p>
+  <p class="has-text-grey"><%= model.unionid %></p>
+</td>
 <td>
   <% model.tags.each do |tag| %>
     <span class="tag"><%= tag.name %></span>
   <% end %>
 </td>
 <td><%= model.remark %></td>
-<td><%= model.unionid %></td>
-<td><%= model.account_id %></td>
-<td><%= model.user_id %></td>
+<td>
+  <p><%= model.account_id %></p>
+  <p><%= model.user_id %></p>
+</td>
+<td><time data-controller="time"><%= model.created_at.to_s(:rfc822) %></time></td>
