@@ -60,11 +60,7 @@ module Wechat
     end
 
     def bind_url
-      if wechat_user.attributes['name'].blank?
-        app.oauth2_url
-      else
-        Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', uid: wechat_user.uid, host: app.host)
-      end
+      Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', uid: wechat_user.uid, host: app.host)
     end
 
     def sync_to_tag
