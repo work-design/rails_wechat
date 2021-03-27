@@ -61,7 +61,7 @@ module Wechat
 
     def bind_url
       if wechat_user.attributes['name'].blank?
-        Rails.application.routes.url_for(controller: 'wechat/apps', action: 'show', id: app.id)
+        app.oauth2_url
       else
         Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', uid: wechat_user.uid, host: app.host)
       end
