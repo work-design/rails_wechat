@@ -50,7 +50,10 @@ module Wechat
         end
       end
 
-      filtered[1][:proc].call(self) if filtered.present?
+      if filtered.present?
+        logger.debug "  -----> Filter Key: #{filtered[1]}"
+        filtered[1][:proc].call(self)
+      end
     end
 
     # Typing
