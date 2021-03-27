@@ -3,8 +3,6 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      has_many :user_tags, as: :source
-
       after_create_commit :sync_to_tag
     end
 
