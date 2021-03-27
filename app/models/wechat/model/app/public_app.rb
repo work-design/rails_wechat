@@ -18,6 +18,7 @@ module Wechat
         scope: scope,
         state: SecureRandom.hex(16)
       }
+      logger.debug "  \e[35m-----> Detail: #{h}\e[0m"
       "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
     end
 
