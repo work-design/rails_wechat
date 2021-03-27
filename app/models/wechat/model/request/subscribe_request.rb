@@ -26,12 +26,5 @@ module Wechat
       res.invoke_effect(self) if res
     end
 
-    def sync_to_tag
-      tag = tags.find_or_create_by(name: body)
-      if wechat_user
-        wechat_user.user_tags.find_or_create_by(tag_id: tag.id)
-      end
-    end
-
   end
 end

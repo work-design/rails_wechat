@@ -1,5 +1,10 @@
 module Wechat
   module Model::Request::ScanRequest
+    extend ActiveSupport::Concern
+
+    included do
+      after_create_commit :sync_to_tag
+    end
 
     def get_reply
       r = reply_from_rule

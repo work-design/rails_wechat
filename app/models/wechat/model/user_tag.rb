@@ -3,6 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      belongs_to :source, polymorphic: true, optional: true
       belongs_to :wechat_user
       belongs_to :tag, counter_cache: true
       belongs_to :user_tagged, optional: true

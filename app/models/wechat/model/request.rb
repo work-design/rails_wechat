@@ -22,10 +22,11 @@ module Wechat
       belongs_to :receive
 
       has_one :platform, through: :receive
+      has_one :tag, ->(o){ where(name: o.body) }, primary_key: :appid, foreign_key: :appid
       has_many :services, dependent: :nullify
-      has_many :tags, primary_key: :appid, foreign_key: :appid
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
       has_many :responses, ->(o){ default_where('request_types-any': o.type) }, primary_key: :appid, foreign_key: :appid
+      has_many :user_tags, as: :source
 
       before_save :get_reply_body, if: -> { (reply_id_changed? || new_record? || reply&.new_record?) && reply }
     end
@@ -56,6 +57,13 @@ module Wechat
     # CancelTyping
     def typing(command = 'Typing')
       app.api.message_custom_typing(wechat_user.uid, command)
+    end
+
+    def sync_to_tag
+      tag || create_tag
+      if wechat_user
+        user_tags.find_or_create_by(tag_id: tag.id, wechat_user_id: wechat_user.id)
+      end
     end
 
     def get_reply_body
