@@ -14,8 +14,8 @@ module Wechat
         redirect_to session[:return_to] || RailsAuth.config.default_return_path
         session.delete :return_to
       else
-        subdomain = ActionDispatch::Http::URL.extract_subdomain session[:return_to].sub(/(http|https):\/\//, ''), 1
-        redirect_to sign_url(uid: @oauth_user.uid, subdomain: subdomain)
+        host = URI(session[:return_to]).host
+        redirect_to url_for(controller: 'auth/sign', action: 'sign', uid: @oauth_user.uid, host: host)
       end
     end
 

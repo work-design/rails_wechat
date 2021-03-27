@@ -7,7 +7,7 @@ module RailsWechat
         {
           title: '请绑定',
           description: '绑定信息',
-          url: request.url_helpers.bind_board_oauth_users_url(uid: request.wechat_user.uid, subdomain: request.app.subdomain)
+          url: Rails.application.routes.url_for(controller: 'board/oauth_users', action: 'bind', uid: request.wechat_user.uid, host: request.app.host)
         }
       ]
     }
