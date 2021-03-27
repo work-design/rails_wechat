@@ -12,7 +12,7 @@ module Wechat
 
       before_save :sync_source_kind, if: -> { (source_type_changed? || source_id_changed?) && source }
       after_create_commit :sync_create_later
-      after_destroy_commit :remove_from_wechat
+      after_destroy_commit :remove_from_wechat_later
     end
 
     def sync_source_kind
@@ -21,6 +21,10 @@ module Wechat
 
     def sync_create_later
       UserTagJob.perform_later(self)
+    end
+
+    def remove_from_wechat_later
+      UserTagRemoveJob.perform_later(self)
     end
 
     def sync_to_wechat
