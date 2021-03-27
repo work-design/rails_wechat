@@ -14,8 +14,10 @@ module Wechat
         redirect_to session[:return_to] || RailsAuth.config.default_return_path
         session.delete :return_to
       else
-        host = URI(session[:return_to]).host
-        redirect_to url_for(controller: 'auth/sign', action: 'sign', uid: @oauth_user.uid, host: host)
+        url_options = {}
+        url_options.merge! host: URI(session[:return_to]).host if session[:return_to]
+
+        redirect_to url_for(controller: 'auth/sign', action: 'sign', uid: @oauth_user.uid, **url_options)
       end
     end
 
