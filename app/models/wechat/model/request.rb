@@ -62,7 +62,9 @@ module Wechat
     def sync_to_tag
       tag || create_tag
       if wechat_user
-        user_tags.find_or_create_by(tag_id: tag.id, wechat_user_id: wechat_user.id)
+        ut = wechat_user.user_tags.find_or_initialize_by(tag_id: tag.id)
+        ut.source = self
+        ut.save
       end
     end
 
