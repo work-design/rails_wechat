@@ -45,7 +45,7 @@ module Wechat
 
     def reply_from_rule
       filtered = RailsWechat.config.rules.find do |_, rule|
-        if rule.slice(:msg_type, :event, :event_key) == self.rule_tag && rule[:body]
+        if rule.slice(:msg_type, :event, :event_key) <= self.rule_tag && rule[:body]
           rule[:body].match? self.body
         end
       end

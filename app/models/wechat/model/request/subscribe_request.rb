@@ -21,8 +21,7 @@ module Wechat
     end
 
     def qr_response
-      key = body.delete_prefix('qrscene_')
-      res = responses.find_by(match_value: key)
+      res = responses.find_by(match_value: body)
       res.invoke_effect(self) if res
     end
 
