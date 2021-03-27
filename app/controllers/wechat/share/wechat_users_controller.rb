@@ -8,6 +8,7 @@ module Wechat
       q_params = {
         'user_tags.tag_id': @scene.tag&.id
       }
+      q_params.merge! params.permit(:name)
 
       @wechat_users = @app.wechat_users.default_where(q_params).page(params[:page])
     end
