@@ -7,16 +7,16 @@ module Wechat
     end
 
     def get_reply
-      r = reply_from_rule
-      return r if r
+      self.reply = reply_from_rule
+      return self.reply if self.reply
 
       if body.present?
-        qr_response
+        self.reply = qr_response
       else
         r = responses.map do |wr|
           wr.invoke_effect(self)
         end
-        r[0]
+        self.reply = r[0]
       end
     end
 
