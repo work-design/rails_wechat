@@ -12,7 +12,7 @@ module RailsWechat
       ]
     }
 
-    NewsReply.new(reply_params)
+    Wechat::NewsReply.new(reply_params)
   }
 
   configure do |config|
@@ -33,16 +33,16 @@ module RailsWechat
         else
           value = ''
         end
-        TextReply.new value: value
+        Wechat::TextReply.new value: value
       }
     }
     config.rules.a = {
       msg_type: 'event',
       event: 'templatesendjobfinish',
       proc: ->(request) {
-        r = Notice.find_by(msg_id: request.raw_body['MsgID'])
+        r = Wechat::Notice.find_by(msg_id: request.raw_body['MsgID'])
         r.update status: request.raw_body['Status']
-        TextReply.new(value: 'SUCCESS')
+        Wechat::TextReply.new(value: 'SUCCESS')
       }
     }
     config.rules.b = { msg_type: 'event', event: 'click', body: 'bind', proc: bind_proc }
@@ -62,14 +62,14 @@ module RailsWechat
           ]
         }
 
-        NewsReply.new(reply_params)
+        Wechat::NewsReply.new(reply_params)
       }
     }
     config.rules.e = {
       msg_type: 'text',
       body: 'TESTCOMPONENT_MSG_TYPE_TEXT',
       proc: ->(request) {
-        TextReply.new(value: 'TESTCOMPONENT_MSG_TYPE_TEXT_callback')
+        Wechat::TextReply.new(value: 'TESTCOMPONENT_MSG_TYPE_TEXT_callback')
       }
     }
     config.rules.f = {
@@ -81,7 +81,7 @@ module RailsWechat
         wechat_auth.request = request
         wechat_auth.testcase = true
         wechat_auth.save
-        SuccessReply.new
+        Wechat::SuccessReply.new
       }
     }
   end
