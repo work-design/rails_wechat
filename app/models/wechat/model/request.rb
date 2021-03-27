@@ -59,6 +59,14 @@ module Wechat
       app.api.message_custom_typing(wechat_user.uid, command)
     end
 
+    def bind_url
+      if wechat_user.attributes['name'].blank?
+        Rails.application.routes.url_for(controller: 'wechat/apps', action: 'show', id: app.id)
+      else
+        Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', uid: wechat_user.uid, host: app.host)
+      end
+    end
+
     def sync_to_tag
       tag || create_tag
       if wechat_user
