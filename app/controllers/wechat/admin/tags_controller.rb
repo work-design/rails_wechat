@@ -24,7 +24,6 @@ module Wechat
 
     def sync
       @app.sync_tags
-      redirect_to admin_app_tags_url(@app)
     end
 
     def show
