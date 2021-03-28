@@ -148,11 +148,11 @@ module Wechat
     end
 
     def sync_tags
-      result = api.tags
-      result.fetch('tags', []).each do |tag|
-        tag = tags.find_or_initialize_by(name: tag['name'])
-        tag.count = tag['count']
-        tag.tag_id = tag['id']
+      results = api.tags
+      results.fetch('tags', []).each do |result|
+        tag = tags.find_or_initialize_by(name: result['name'])
+        tag.count = result['count']
+        tag.tag_id = result['id']
         tag.save
       end
     end
