@@ -1,6 +1,6 @@
 <div class="box">
   <p class="has-text-centered"><%= current_user.name %></p>
   <figure class="image is-128x128">
-    <%= image_tag @qrcode_url if @qrcode_url %>
+    <%= image_tag @scene.qrcode_file_url if @scene %>
   </figure>
 </div>

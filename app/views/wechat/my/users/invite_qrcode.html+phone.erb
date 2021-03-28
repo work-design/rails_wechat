@@ -1,6 +1,26 @@
 <div class="box">
   <p class="has-text-centered"><%= current_user.name %></p>
   <figure class="image">
-    <%= image_tag @qrcode_url if @qrcode_url %>
+    <%= image_tag @scene.qrcode_file_url if @scene %>
   </figure>
+</div>
+<div class="weui-panel">
+  <div class="weui-panel__hd">用户列表</div>
+  <div class="weui-panel__bd">
+    <div class="weui-cells mt-0">
+    <% @scene.tag && @scene.tag.wechat_users.each do |wechat_user| %>
+      <div class="weui-cell">
+        <div class="weui-cell__hd">
+        <% if wechat_user.avatar_url %>
+          <%= image_tag wechat_user.avatar_url, class: 'image is-24x24' %>
+        <% else %>
+          <%= image_pack_tag 'avatar.png', class: 'image is-24x24' %>
+        <% end %>
+        </div>
+        <div class="weui-cell__bd weui-cell_primary"><%= wechat_user.name %></div>
+        <div class="weui-cell__ft"><time data-controller="time"><%= wechat_user.created_at.to_s(:rfc822) %></time></div>
+      </div>
+    <% end %>
+    </div>
+  </div>
 </div>
