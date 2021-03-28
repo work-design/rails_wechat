@@ -7,7 +7,7 @@ module Wechat
       attribute :appid, :string
       attribute :name, :string
       attribute :count, :integer, default: 0
-      attribute :wechat_user_tags_count, :integer, default: 0
+      attribute :user_tags_count, :integer, default: 0
       attribute :tag_id, :integer
 
       belongs_to :tagging, polymorphic: true, optional: true
@@ -28,11 +28,14 @@ module Wechat
       self.name = tagging.name if tagging
     end
 
+    def sync_to_wechat_later
+      TagJob.perform_later(self)
+    end
+
     def sync_to_wechat
       r = app.api.tag_create(self.name, self.tag_id)
       return unless r
-      tag = r['tag']
-      self.tag_id = tag['id']
+      self.tag_id = r.dig('tag', 'id')
       self.save
     rescue Wechat::WechatError => e
       logger.info e.message

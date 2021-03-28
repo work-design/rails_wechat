@@ -2,8 +2,8 @@
 module Wechat
   class TagJob < ApplicationJob
 
-    def perform(user_tag)
-      user_tag.sync_tag
+    def perform(tag)
+      tag.sync_to_wechat
     end
 
   end

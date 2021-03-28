@@ -155,6 +155,9 @@ module Wechat
         tag.tag_id = result['id']
         tag.save
       end
+      tags.where(tag_id: nil).each do |tag|
+        tag.sync_to_wechat_later
+      end
     end
 
     # 小程序
