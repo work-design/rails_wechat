@@ -24,4 +24,5 @@ end
 
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'receive', 'receives'
+  inflect.irregular 'media', 'medias'
 end
