@@ -35,7 +35,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 2bb69ef9e37167e064adecfa524f47577dff5b52
+  revision: 71f4925dbe0445a8e48d39a8587249f54fed02ab
   specs:
     rails_com (1.2.9)
       acme-client
@@ -49,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_ui.git
-  revision: 6ae1af7a7c0119b12b66ecd9d0f170a80d0ce941
+  revision: 37d3ce60697704959c2dce74d087a46a25458080
   specs:
     rails_ui (0.1.0)
       rails
@@ -160,7 +160,7 @@ GEM
       activesupport (>= 5)
     http-2-next (0.4.0)
     http-form_data (2.3.0)
-    httpx (0.12.0)
+    httpx (0.13.1)
       http-2-next (>= 0.1.2)
       timers
     i18n (1.8.9)

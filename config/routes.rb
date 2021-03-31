@@ -39,6 +39,7 @@ Rails.application.routes.draw do
         get 'code' => :edit_code
       end
     end
+    resources :medias
   end
 
   scope 'wechat/panel', module: 'wechat/panel', as: :panel, defaults: { business: 'wechat', namespace: 'panel' } do
