@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors = ['qinmingyuan']
   s.email = ['mingyuan0715@foxmail.com']
   s.homepage = 'https://github.com/work-design/rails_wechat'
-  s.summary = 'Summary of RailsWechat.'
+  s.summary = 'Wechat Master'
   s.description = 'Description of RailsWechat.'
   s.license = 'LGPL-3.0'
 
