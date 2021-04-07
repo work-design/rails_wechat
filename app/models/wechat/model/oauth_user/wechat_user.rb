@@ -10,7 +10,7 @@ module Wechat
 
       has_many :requests, foreign_key: :open_id, primary_key: :uid
       has_many :subscribes, dependent: :delete_all
-      has_many :user_tags, dependent: :destroy
+      has_many :user_tags, foreign_key: :open_id, primary_key: :uid, dependent: :destroy
       has_many :tags, through: :user_tags
       has_many :notices, foreign_key: :open_id, primary_key: :uid
 
