@@ -16,17 +16,17 @@ module Wechat
       attribute :reply_body, :json
       attribute :reply_encrypt, :json
 
+      belongs_to :receive
       belongs_to :reply, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
-      belongs_to :receive
+      belongs_to :user_tag, optional: true
 
       has_one :platform, through: :receive
       has_one :tag, ->(o){ where(name: o.body) }, primary_key: :appid, foreign_key: :appid
       has_many :services, dependent: :nullify
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
       has_many :responses, ->(o){ default_where('request_types-any': o.type) }, primary_key: :appid, foreign_key: :appid
-      has_many :user_tags, as: :source
 
       before_save :get_reply_body, if: -> { (reply_id_changed? || new_record? || reply&.new_record?) && reply }
     end
@@ -71,7 +71,13 @@ module Wechat
       if wechat_user
         ut = wechat_user.user_tags.find_or_initialize_by(tag_id: tag.id)
         ut.source = self if ut.new_record?
-        ut.save
+
+        self.user_tag = ut
+
+        self.class.transation do
+          ut.save!
+          self.save!
+        end
       end
     end
 
