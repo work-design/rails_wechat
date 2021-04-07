@@ -5,7 +5,13 @@
   </figure>
 </div>
 <div class="weui-panel">
-  <div class="weui-panel__hd">邀请列表</div>
+  <div class="weui-panel__hd p-0">
+    <div class="weui-navbar">
+      <%= link_to({ action: 'invite_qrcode' }, class: 'weui-navbar__item') do %>
+        邀请列表
+      <% end %>
+    </div>
+  </div>
   <div class="weui-panel__bd">
     <div class="weui-cells mt-0">
     <% @scene.tag && @scene.tag.wechat_users.each do |wechat_user| %>

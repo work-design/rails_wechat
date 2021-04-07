@@ -15,6 +15,7 @@ module Wechat
       belongs_to :user_tag, optional: true
       has_many :user_tags, dependent: :destroy
       has_many :wechat_users, through: :user_tags
+      has_many :requests, ->(o){ where(type: ['Wechat::ScanRequest', 'Wechat::SubscribeRequest'], body: o.name).order(id: :desc) }, foreign_key: :appid, primary_key: :appid
 
       validates :name, uniqueness: { scope: :appid }
 
