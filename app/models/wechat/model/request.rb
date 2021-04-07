@@ -70,11 +70,14 @@ module Wechat
       tag || create_tag
       if wechat_user
         ut = wechat_user.user_tags.find_or_initialize_by(tag_id: tag.id)
-        ut.source = self if ut.new_record?
+        if ut.new_record?
+          ut.source = self
+          self.xx = 'x'
+        end
 
         self.user_tag = ut
 
-        self.class.transation do
+        self.class.transaction do
           ut.save!
           self.save!
         end

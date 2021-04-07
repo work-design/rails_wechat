@@ -3,20 +3,12 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :source_kind, :string
-
-      belongs_to :source, polymorphic: true, optional: true
       belongs_to :wechat_user
       belongs_to :tag, counter_cache: true
       belongs_to :user_tagged, optional: true
 
-      before_save :sync_source_kind, if: -> { (source_type_changed? || source_id_changed?) && source }
       after_create_commit :sync_create_later
       after_destroy_commit :remove_from_wechat_later
-    end
-
-    def sync_source_kind
-      self.source_kind ||= source.class.name
     end
 
     def sync_create_later
