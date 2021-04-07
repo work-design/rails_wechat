@@ -1,0 +1,29 @@
+<div class="box">
+  <p class="has-text-centered"><%= current_user.name %></p>
+  <figure class="image">
+    <%= image_tag @scene.qrcode_file_url if @scene %>
+  </figure>
+</div>
+<div class="weui-panel" style="padding-top: 1px">
+  <div class="weui-panel__hd p-0">
+    <div class="weui-navbar">
+      <%= link_to({ action: 'invite_qrcode' }, class: 'weui-navbar__item') do %>
+        邀请列表
+      <% end %>
+      <%= link_to({ action: 'requests' }, class: 'weui-navbar__item weui-bar__item_on') do %>
+        邀请记录
+      <% end %>
+    </div>
+  </div>
+  <div class="weui-panel__bd">
+    <div class="weui-cells mt-0">
+    <% @scene.tag && @scene.tag.requests.each do |request| %>
+      <div class="weui-cell">
+        <div class="weui-cell__hd"></div>
+        <div class="weui-cell__bd weui-cell_primary"><%= request.type_i18n %></div>
+        <div class="weui-cell__ft"><time data-controller="time"><%= request.created_at.to_s(:rfc822) %></time></div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

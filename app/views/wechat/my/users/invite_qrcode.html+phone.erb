@@ -4,10 +4,10 @@
     <%= image_tag @scene.qrcode_file_url if @scene %>
   </figure>
 </div>
-<div class="weui-panel">
+<div class="weui-panel" style="padding-top: 1px">
   <div class="weui-panel__hd p-0">
     <div class="weui-navbar">
-      <%= link_to({ action: 'invite_qrcode' }, class: 'weui-navbar__item') do %>
+      <%= link_to({ action: 'invite_qrcode' }, class: 'weui-navbar__item weui-bar__item_on') do %>
         邀请列表
       <% end %>
       <%= link_to({ action: 'requests' }, class: 'weui-navbar__item') do %>
