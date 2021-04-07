@@ -30,7 +30,7 @@ module Wechat
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
       has_many :responses, ->(o){ default_where('request_types-any': o.type) }, primary_key: :appid, foreign_key: :appid
 
-      before_save :init_wechat_user, if: -> { open_id_changed? && open_id.present? }
+      before_save :generate_wechat_user, if: -> { open_id_changed? && open_id.present? }
       before_save :get_reply_body, if: -> { (reply_id_changed? || new_record? || reply&.new_record?) && reply }
     end
 
@@ -69,7 +69,7 @@ module Wechat
       Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', uid: wechat_user.uid, host: app.host)
     end
 
-    def init_wechat_user
+    def generate_wechat_user
       wechat_user || build_wechat_user
       wechat_user.app_id = appid
 

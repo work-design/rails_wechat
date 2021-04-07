@@ -19,8 +19,18 @@
     <div class="weui-cells mt-0">
     <% @requests.each do |request| %>
       <div class="weui-cell">
-        <div class="weui-cell__hd"></div>
-        <div class="weui-cell__bd weui-cell_primary"><%= request.type_i18n %></div>
+        <div class="weui-cell__hd">
+        <% if request.is_a?(Wechat::SubscribeRequest) %>
+          <i class="fas fa-user-plus fa-lg has-text-success"></i>
+        <% else %>
+          <i class="fas fa-user fa-lg"></i>
+        <% end %>
+        </div>
+        <div class="weui-cell__bd weui-cell_primary">
+        <% if request.init_wechat_user %>
+          <span><%= request.wechat_user.name %></span>
+        <% end %>
+        </div>
         <div class="weui-cell__ft"><time data-controller="time"><%= request.created_at.to_s(:rfc822) %></time></div>
       </div>
     <% end %>
