@@ -17,7 +17,7 @@
   </div>
   <div class="weui-panel__bd">
     <div class="weui-cells mt-0">
-    <% @scene.tag && @scene.tag.requests.each do |request| %>
+    <% @requests.each do |request| %>
       <div class="weui-cell">
         <div class="weui-cell__hd"></div>
         <div class="weui-cell__bd weui-cell_primary"><%= request.type_i18n %></div>
@@ -27,3 +27,5 @@
     </div>
   </div>
 </div>
+
+<%= paginate @requests, window: 1 %>
