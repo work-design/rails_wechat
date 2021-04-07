@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resource :user, only: [] do
         collection do
           get :invite_qrcode
+          get :requests
         end
       end
       resources :subscribeds
