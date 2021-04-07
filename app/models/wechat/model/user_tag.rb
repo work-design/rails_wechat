@@ -9,19 +9,11 @@ module Wechat
 
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
       belongs_to :tag, ->(o){ where(name: o.tag_name) }, primary_key: :appid, foreign_key: :appid, counter_cache: true
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :user_tagged, optional: true
 
-      before_save :sync_tag_name, if: -> { tag_id_changed? }
       after_create_commit :sync_create_later
       after_destroy_commit :remove_from_wechat_later
-    end
-
-    def sync_tag_name
-      self.tag_name = tag.name
-    end
-
-    def sync_appid
-      self.appid = wechat_user.app_id
     end
 
     def sync_create_later
@@ -39,7 +31,7 @@ module Wechat
     end
 
     def wechat_api
-      @wechat_api ||= wechat_user.app&.api
+      @wechat_api ||= app&.api
     end
 
     def remove_from_wechat

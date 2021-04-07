@@ -8,7 +8,7 @@ module Wechat
     def requests
       @scene = current_user.invite_scene(current_wechat_app)
       if @scene.tag
-        @requests =  @scene.tag.requests.page(params[:page]).per(3)
+        @requests =  @scene.tag.requests.page(params[:page])
       else
         @requests = Request.none
       end
