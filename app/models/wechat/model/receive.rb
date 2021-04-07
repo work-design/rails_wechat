@@ -50,7 +50,6 @@ module Wechat
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
-      before_save :init_wechat_user, if: -> { open_id_changed? && open_id.present? }
       after_create :parse_content
       after_create_commit :check_app
     end
@@ -67,12 +66,6 @@ module Wechat
       self.open_id = message_hash['FromUserName']
       self.msg_type = message_hash['MsgType']
       self.msg_id = message_hash['MsgId']
-    end
-
-    def init_wechat_user
-      wechat_user || build_wechat_user
-      wechat_user.app_id = appid
-      wechat_user.save
     end
 
     def compute_type

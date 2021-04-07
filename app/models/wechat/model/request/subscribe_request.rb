@@ -3,7 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      after_create_commit :sync_to_tag
+      before_save :sync_to_tag
     end
 
     def get_reply
