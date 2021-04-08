@@ -118,7 +118,7 @@ module Wechat
         encoding_aes_key = app.encoding_aes_key
         encrypt_appid = appid
       else
-        return
+        return self.reply_body
       end
 
       nonce = SecureRandom.hex(10)
