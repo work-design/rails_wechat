@@ -106,6 +106,7 @@ module Wechat
       else
         self.reply_body = {}
       end
+      self.created_at ||= Time.current
       do_encrypt
     end
 
