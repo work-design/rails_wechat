@@ -9,7 +9,7 @@
           <p><%= item.url %></p>
         </div>
         <div class="media-right">
-          <%= image_tag item.pic_url, class: 'image is-64x64' %>
+          <%= image_tag item.pic_url, class: 'image is-64x64' if item.pic_url.present? %>
           <%= button_to({ controller: 'news_reply_items', action: 'destroy', reply_id: model.id, id: item.id }, method: :delete) do %>
             <i class="fas fa-times"></i>
           <% end %>
