@@ -46,9 +46,7 @@ module Wechat
     end
 
     def invoke_effect(request)
-      r = extractors.map do |extractor|
-        extractor.invoke_effect(request)
-      end.compact
+      r = extractors.map(&->(extractor){ extractor.invoke_effect(request) }).compact
 
       if reply
         reply.invoke_effect(request, value: r.join(','))
