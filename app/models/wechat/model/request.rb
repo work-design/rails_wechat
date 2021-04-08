@@ -143,21 +143,15 @@ module Wechat
           children: 'item',
           skip_instruct: true,
           skip_types: true)
-      else
-        to_xml
-      end
-    end
-
-    def to_xml
-      if reply_body.blank?
-        'success'
-      else
+      elsif reply_body.present?
         reply_body.to_xml(
           root: 'xml',
           children: 'item',
           skip_instruct: true,
           skip_types: true
         )
+      else
+        'success'
       end
     end
 
