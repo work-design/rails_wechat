@@ -2,7 +2,6 @@ module Wechat
   module Model::Account
     extend ActiveSupport::Concern
 
-    include Model::EffectiveModule
     included do
       has_one :response, as: :effective
     end
