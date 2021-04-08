@@ -22,9 +22,8 @@ module Wechat
         @receive.message_hash = r
       end
       @receive.save
-      request = @receive.reply
 
-      render plain: request.to_wechat
+      render plain: @receive.request.to_wechat
     end
 
     private

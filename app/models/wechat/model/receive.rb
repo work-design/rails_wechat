@@ -107,18 +107,13 @@ module Wechat
       else
         warn "Don't know how to parse message as #{message_hash['MsgType']}", uplevel: 1
       end
+      request.get_reply
 
       self.save  # will auto save wechat request
     end
 
     def check_app
       app.update user_name: message_hash['ToUserName'] if app
-    end
-
-    def reply
-      request.get_reply
-      request.save
-      request
     end
 
   end
