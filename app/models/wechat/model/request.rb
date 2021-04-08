@@ -53,6 +53,16 @@ module Wechat
       end
     end
 
+    def reply_from_response
+      if body.present?
+        res = responses.find_by(match_value: body)
+      else
+        res = responses[0]
+      end
+
+      res.invoke_effect(self) if res
+    end
+
     # Typing
     # CancelTyping
     def typing(command = 'Typing')
