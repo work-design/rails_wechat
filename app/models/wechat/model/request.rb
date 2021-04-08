@@ -91,7 +91,7 @@ module Wechat
       end
     end
 
-    def get_reply_body
+    def get_reply
       reply = reply_from_rule
       unless reply
         reply = reply_from_response
