@@ -24,7 +24,6 @@ module Wechat
       before_validation do
         self.match_value ||= "#{effective_type}_#{effective_id}"
       end
-      after_save_commit :sync_to_response_requests, if: -> { saved_change_to_request_types? }
     end
 
     def scan_regexp(body)
@@ -33,16 +32,6 @@ module Wechat
       else
         !body.match?(Regexp.new match_value)
       end
-    end
-
-    def sync_to_response_requests
-      types = response_requests.pluck(:request_type)
-      adds = request_types - types
-      removes = types - request_types
-      adds.each do |add|
-        self.response_requests.create(request_type: add) unless add.blank?
-      end
-      self.response_requests.where(request_type: removes).delete_all
     end
 
     def invoke_effect(request)
