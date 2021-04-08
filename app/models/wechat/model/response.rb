@@ -57,7 +57,7 @@ module Wechat
         if matched.blank?
           next
         else
-          logger.debug "=====> Matched: #{matched.inspect}, Extractor: #{extractor.name}/#{extractor.id}"
+          logger.debug "  \e[35m=====> Matched: #{matched.inspect}, Extractor: #{extractor.name}(#{extractor.id})\e[0m"
         end
 
         ex = request.extractions.find_or_initialize_by(extractor_id: extractor.id)
@@ -69,8 +69,6 @@ module Wechat
         else
           r = extractor.invalid_response.presence
         end
-        ex.save
-
         r
       end.compact
     end
