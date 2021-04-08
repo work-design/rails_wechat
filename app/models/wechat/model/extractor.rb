@@ -26,6 +26,27 @@ module Wechat
       end
     end
 
+    def invoke_effect(request)
+      matched = request.body.scan(scan_regexp)
+      if matched.blank?
+        return
+      else
+        logger.debug "  \e[35m=====> Matched: #{matched.inspect}, Extractor: #{name}(#{id})\e[0m"
+      end
+
+      # 这里不用 find_or_initialize_by，因为可以建立 ex.extractor, 减少 belongs_to validation present 的数据库查询
+      ex = request.extractions.find_by(extractor_id: id) || request.extractions.build(extractor: self)
+      ex.name = name
+      ex.matched = matched.join(', ')
+      if serial && effective?(request.created_at)
+        ex.serial_number ||= serial_number
+        r = ex.respond_text
+      else
+        r = invalid_response.presence
+      end
+      r
+    end
+
     def effective?(time = Time.current)
       time > start_at.change(time.to_date.parts) && time < finish_at.change(time.to_date.parts)
     end

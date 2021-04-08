@@ -13,6 +13,7 @@ module Wechat
       attribute :appid, :string, index: true
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
+      belongs_to :reply, optional: true
       belongs_to :effective, polymorphic: true, optional: true
       has_many :extractors, dependent: :delete_all
       has_many :response_requests, dependent: :delete_all
@@ -45,33 +46,13 @@ module Wechat
     end
 
     def invoke_effect(request)
-      r = do_extract(request)
-      if effective
-        effective.invoke_effect(request, value: r.join(','))
-      end
-    end
-
-    def do_extract(request)
-      extractors.map do |extractor|
-        matched = request.body.scan(extractor.scan_regexp)
-        if matched.blank?
-          next
-        else
-          logger.debug "  \e[35m=====> Matched: #{matched.inspect}, Extractor: #{extractor.name}(#{extractor.id})\e[0m"
-        end
-
-        # 这里不用 find_or_initialize_by，因为可以建立 ex.extractor, 减少 belongs_to validation present 的数据库查询
-        ex = request.extractions.find_by(extractor_id: extractor.id) || request.extractions.build(extractor: extractor)
-        ex.name = extractor.name
-        ex.matched = matched.join(', ')
-        if extractor.serial && extractor.effective?(request.created_at)
-          ex.serial_number ||= extractor.serial_number
-          r = ex.respond_text
-        else
-          r = extractor.invalid_response.presence
-        end
-        r
+      r = extractors.map do |extractor|
+        extractor.invoke_effect(request)
       end.compact
+
+      if reply
+        reply.invoke_effect(request, value: r.join(','))
+      end
     end
 
   end
