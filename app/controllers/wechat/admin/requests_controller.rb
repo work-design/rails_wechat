@@ -11,7 +11,7 @@ module Wechat
       if q_params['created_at-lte']
         q_params['created_at-lte'] = q_params['created_at-lte'].to_time.end_of_day
       end
-      @requests = @app.requests.includes(extractions: :extractor).default_where(q_params).order(id: :desc).page(params[:page])
+      @requests = @app.requests.includes(wechat_user: :user, extractions: :extractor).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def show
