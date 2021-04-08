@@ -1,17 +1,12 @@
 module Wechat
   module Model::Request::TextRequest
 
-    def get_reply
-      self.reply = reply_from_rule
-      return if self.reply
-
+    def reply_from_response
       responses.find do |wr|
         if wr.scan_regexp(body)
-          self.reply = wr.invoke_effect(self)
+          wr.invoke_effect(self)
         end
       end
-
-      self
     end
 
     def reply_from_rule

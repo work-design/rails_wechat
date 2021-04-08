@@ -116,7 +116,7 @@ module Wechat
     end
 
     def reply
-      request.get_reply
+      request.get_reply_body
       request.save
       request
     end

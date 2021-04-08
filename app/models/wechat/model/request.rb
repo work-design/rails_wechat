@@ -19,7 +19,6 @@ module Wechat
       attribute :init_user_tag, :boolean
 
       belongs_to :receive
-      belongs_to :reply, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
@@ -31,11 +30,6 @@ module Wechat
       has_many :responses, ->(o){ default_where('request_types-any': o.type) }, primary_key: :appid, foreign_key: :appid
 
       before_save :generate_wechat_user, if: -> { open_id_changed? && open_id.present? }
-      before_save :get_reply_body, if: -> { (reply_id_changed? || new_record? || reply&.new_record?) && reply }
-    end
-
-    def get_reply
-      self.reply = reply_from_rule
     end
 
     def rule_tag
@@ -88,6 +82,11 @@ module Wechat
     end
 
     def get_reply_body
+      reply = reply_from_rule
+      unless reply
+        reply = reply_from_response
+      end
+
       if reply.is_a?(SuccessReply)
         self.reply_body = {}
       elsif reply
