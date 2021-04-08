@@ -100,7 +100,7 @@ module Wechat
 
       if reply.is_a?(SuccessReply)
         self.reply_body = {}
-      elsif reply
+      elsif reply.is_a? Reply
         self.reply_body = reply.to_wechat
         self.reply_body.merge!(ToUserName: open_id)
         self.reply_body.merge!(FromUserName: app.user_name) if app
