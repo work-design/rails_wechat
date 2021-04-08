@@ -26,7 +26,7 @@ module Wechat
       has_one :tag, ->(o){ where(name: o.body) }, primary_key: :appid, foreign_key: :appid
       has_one :user_tag, ->(o){ where(tag_name: o.body, open_id: o.open_id) }, primary_key: :appid, foreign_key: :appid
       has_many :services, dependent: :nullify
-      has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all  # 解析 request body 内容，主要针对文字
+      has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all, inverse_of: :request  # 解析 request body 内容，主要针对文字
       has_many :responses, ->(o){ default_where('request_types-any': o.type) }, primary_key: :appid, foreign_key: :appid
 
       before_save :generate_wechat_user, if: -> { open_id_changed? && open_id.present? }
