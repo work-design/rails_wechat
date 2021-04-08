@@ -94,6 +94,7 @@ module Wechat
     def get_reply
       reply = reply_from_rule
       unless reply
+        self.created_at ||= Time.current  # for extractor
         reply = reply_from_response
       end
 
@@ -106,7 +107,6 @@ module Wechat
       else
         self.reply_body = {}
       end
-      self.created_at ||= Time.current  # for extractor
       do_encrypt
     end
 
