@@ -9,13 +9,11 @@ module Wechat
     def reply_from_response
       if body.present?
         res = responses.find_by(match_value: body)
-        res.invoke_effect(self) if res
       else
-        r = responses.map do |wr|
-          wr.invoke_effect(self)
-        end
-        r[0]
+        res = responses[0]
       end
+
+      res.invoke_effect(self) if res
     end
 
   end

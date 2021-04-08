@@ -47,7 +47,7 @@ module Wechat
     def invoke_effect(request)
       r = do_extract(request)
       if effective
-        request.reply = effective.invoke_effect(request, value: r.join(','))
+        effective.invoke_effect(request, value: r.join(','))
       end
     end
 
