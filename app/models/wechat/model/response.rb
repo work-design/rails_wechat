@@ -60,7 +60,8 @@ module Wechat
           logger.debug "  \e[35m=====> Matched: #{matched.inspect}, Extractor: #{extractor.name}(#{extractor.id})\e[0m"
         end
 
-        ex = request.extractions.find_or_initialize_by(extractor_id: extractor.id)
+        # 这里不用 find_or_initialize_by，因为可以建立 ex.extractor, 减少 belongs_to validation present 的数据库查询
+        ex = request.extractions.find_by(extractor_id: extractor.id) || request.extractions.build(extractor: extractor)
         ex.name = extractor.name
         ex.matched = matched.join(', ')
         if extractor.serial && extractor.effective?(request.created_at)
