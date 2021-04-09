@@ -3,8 +3,6 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      delegate :url_helpers, to: 'Rails.application.routes'
-
       attribute :type, :string, default: 'Wechat::PublicApp'
       attribute :name, :string
       attribute :enabled, :boolean, default: true
@@ -53,7 +51,7 @@ module Wechat
     end
 
     def url
-      url_helpers.wechat_url(self.id, host: host)
+      Rails.application.routes.url_for(controller: 'wechat/wechats', action: 'show', id: self.id, host: host)
     end
 
     def sync_menu
@@ -135,10 +133,10 @@ module Wechat
       end
     end
 
-    def oauth2_qrcode_url
+    def oauth2_qrcode_url(**host_options)
       q = {
         appid: appid,
-        redirect_uri: url_helpers.app_url(id, **host_options),
+        redirect_uri: Rails.application.routes.url_for(controller: 'wechat/apps', action: 'show', id: id, **host_options),
         scope: 'snsapi_login',
         response_type: 'code',
         state: SecureRandom.hex(16)
