@@ -14,20 +14,22 @@
 <tr>
   <td><%= Wechat::Response.human_attribute_name(:request_type) %></td>
   <td>
-    <% @response.response_requests.each do |response_request| %>
-      <p><%= Wechat::Request.enum_i18n(:type, response_request.request_type) %></p>
+    <% @response.request_types.each do |request_type| %>
+      <p><%= Wechat::Request.enum_i18n(:type, request_type) %></p>
     <% end %>
   </td>
 </tr>
 <tr>
-  <td><%= Wechat::Response.human_attribute_name(:effective) %></td>
+  <td><%= Wechat::Response.human_attribute_name(:reply_id) %></td>
   <td>
+  <% if @response.reply %>
     <turbo-frame id="reply">
-      <span><%= @response.effective_type_i18n %></span>
+      <span><%= @response.reply.type_i18n %></span>
       <%= link_to({ action: 'edit_reply', id: @response.id }, data: { turbo_frame: 'reply' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fas fa-pencil-alt"></i>
       <% end %>
     </turbo-frame>
-    <p><%= @response.effective_id %></p>
+    <p><%= @response.reply.value %></p>
+  <% end %>
   </td>
 </tr>
