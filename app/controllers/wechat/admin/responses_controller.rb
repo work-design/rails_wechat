@@ -33,9 +33,9 @@ module Wechat
 
     def edit_reply
       q_params = {
-        appid: @app.appid,
-        type: @response.effective_type
+        appid: @app.appid
       }
+      q_params.merge! type: @response.reply.type if @response.reply
 
       @replies = Reply.where(q_params)
     end
