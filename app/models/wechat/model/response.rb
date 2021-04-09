@@ -16,8 +16,6 @@ module Wechat
       belongs_to :reply, optional: true
       belongs_to :effective, polymorphic: true, optional: true
       has_many :extractors, dependent: :delete_all
-      has_many :response_requests, dependent: :delete_all
-      accepts_nested_attributes_for :response_requests, allow_destroy: true
 
       validates :match_value, presence: true
 

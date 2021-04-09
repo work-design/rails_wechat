@@ -10,7 +10,7 @@ module Wechat
       }
       q_params.merge! params.permit(:type)
 
-      @responses = @app.responses.includes(:response_requests).default_where(q_params).order(id: :desc).page(params[:page])
+      @responses = @app.responses.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def new

@@ -10,8 +10,8 @@
   <p><time data-controller="time" class="<%= model.expire_at && model.expire_at < Time.current ? 'has-text-danger' : 'has-text-success' %>"><%= model.expire_at.to_s(:rfc822) if model.expire_at %></time></p>
 </td>
 <td>
-  <% model.response_requests.each do |response_request| %>
-    <p><%= Wechat::Request.enum_i18n(:type, response_request.request_type) %></p>
+  <% model.request_types.each do |request_type| %>
+    <p><%= Wechat::Request.enum_i18n(:type, request_type) %></p>
   <% end %>
 </td>
 <td>
