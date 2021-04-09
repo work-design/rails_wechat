@@ -6,7 +6,7 @@
 </th>
 <th><%= Wechat::Response.human_attribute_name(:request_type) %></th>
 <th>
-  <%= Wechat::Response.human_attribute_name(:effective) %>
+  <%= Wechat::Response.human_attribute_name(:reply_id) %>
   <%= link_to({ controller: 'replies' }, aria: { label: t('wechat.admin.replies.index.title') }, target: '_blank') do %>
     <i class="fas fa-cog"></i>
   <% end %>

@@ -15,11 +15,13 @@
   <% end %>
 </td>
 <td>
+<% if model.reply %>
   <p>
-    <span><%= model.effective_type_i18n %></span>
+    <span><%= model.reply.type_i18n %></span>
     <%= link_to({ action: 'edit_reply', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fas fa-pencil-alt"></i>
     <% end %>
   </p>
-  <p><%= model.effective_id %></p>
+  <p><%= model.reply.value %></p>
+<% end %>
 </td>
