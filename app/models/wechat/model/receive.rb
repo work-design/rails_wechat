@@ -80,7 +80,7 @@ module Wechat
       build_request(type: compute_type)
       request.appid = appid
       request.open_id = open_id
-      request.generate_wechat_user
+      request.generate_wechat_user  # Should before get reply
       request.msg_type = msg_type
       request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
 
