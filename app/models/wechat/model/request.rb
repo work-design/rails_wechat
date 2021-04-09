@@ -3,8 +3,6 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      delegate :url_helpers, to: 'Rails.application.routes'
-
       attribute :type, :string
       attribute :body, :string
       attribute :raw_body, :json
