@@ -3,8 +3,6 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      delegate :url_helpers, to: 'Rails.application.routes'
-
       attribute :request_types, :string, array: true
       attribute :match_value, :string
       attribute :contain, :boolean, default: true
