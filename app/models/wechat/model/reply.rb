@@ -17,7 +17,7 @@ module Wechat
       has_one_attached :media
     end
 
-    def invoke_effect(request_from = nil, **options)
+    def invoke_effect(request = nil, **options)
       self.value = value.to_s + options[:value].to_s
       self
     end

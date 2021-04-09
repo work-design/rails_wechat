@@ -12,8 +12,8 @@ module Wechat
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :reply, optional: true
-      belongs_to :effective, polymorphic: true, optional: true
       has_many :extractors, dependent: :delete_all
+      has_many :effectives, as: :effective
 
       validates :match_value, presence: true
 
