@@ -35,7 +35,7 @@ zh:
         match_value: 关键词
         contain: 是否包含
         request_type: 用户消息类型
-        effective: 自动回复
+        reply_id: 被动回复
       wechat/scene:
         match_value: 关键词
         qrcode: 二维码
