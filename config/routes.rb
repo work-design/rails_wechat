@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         post '' => :create
       end
     end
-    resources :wechat_program_users do
+    resources :program_users do
       collection do
         post :mobile
         post :info

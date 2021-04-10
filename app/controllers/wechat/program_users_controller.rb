@@ -1,5 +1,5 @@
 module Wechat
-  class WechatProgramUsersController < BaseController
+  class ProgramUsersController < BaseController
     before_action :set_app, only: [:create]
     before_action :require_authorized_token, only: [:info, :mobile]
     before_action :set_wechat_program_user, only: [:info, :mobile]
