@@ -4,6 +4,7 @@ module Wechat
 
     included do
       has_one :response, as: :effective
+      has_one :wechat_user, class_name: 'Wechat::WechatUser'
     end
 
     def invoke_effect(wechat_user)
