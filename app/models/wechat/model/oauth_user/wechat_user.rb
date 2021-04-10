@@ -17,6 +17,7 @@ module Wechat
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :sync_user_info_later, if: -> { saved_change_to_access_token? && (attributes['name'].blank? && attributes['avatar_url'].blank?) }
+      after_save_commit :sync_inviter, if: -> { saved_change_to_request_id? && request }
     end
 
     def name
@@ -27,8 +28,10 @@ module Wechat
       app.api.menu_trymatch(uid)
     end
 
-    def xx
-
+    def sync_inviter
+      inviter_id = request.body.delete_prefix 'invite_by_'
+      self.account&.update inviter_id: inviter_id
+      self.user&.update inviter_id: inviter_id
     end
 
     def sync_remark_later
