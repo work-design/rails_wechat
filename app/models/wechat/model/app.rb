@@ -40,8 +40,6 @@ module Wechat
       has_one :agency, foreign_key: :appid, primary_key: :appid
       has_many :agencies, foreign_key: :appid, primary_key: :appid
       has_many :scenes, foreign_key: :appid, primary_key: :appid
-      has_many :receives, foreign_key: :appid, primary_key: :appid
-      has_many :menus, foreign_key: :appid, primary_key: :appid
 
       scope :valid, -> { where(enabled: true) }
       scope :shared, -> { where(shared: true) }
