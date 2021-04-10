@@ -91,7 +91,6 @@ module Wechat
       self.unionid = raw_info['unionid']
       self.app_id ||= raw_info['app_id']
       if self.unionid && self.same_oauth_user
-        self.user_id ||= same_oauth_user.user_id
         self.account_id ||= same_oauth_user.account_id
       end
 
