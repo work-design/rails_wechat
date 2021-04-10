@@ -31,8 +31,8 @@ zh:
           Wechat::ViewRequest: 菜单
           Wechat::Request: 其他
         init_wechat_user:
-          true: 已关注
-          false: 未关注
+          true: 首次关注
+          false: 已关注
         init_user_tag:
           true: 已注册
           false: 未注册

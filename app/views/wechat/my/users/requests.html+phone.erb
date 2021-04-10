@@ -20,7 +20,7 @@
     <% @requests.each do |request| %>
       <div class="weui-media-box weui-media-box_appmsg">
         <div class="weui-media-box__hd">
-        <% if request.wechat_user && request.wechat_user.avatar_url.present? %>
+        <% if request.wechat_user.avatar_url.present? %>
           <%= image_tag request.wechat_user.avatar_url, class: 'weui-media-box__thumb' %>
         <% end %>
         </div>
@@ -28,10 +28,20 @@
           <h4 class="weui-media-box__title">
             <span><%= request.wechat_user.name %></span>
             <span class="weui-badge"><%= request.type_i18n %></span>
+            <% if request.wechat_user.request_id == request.id %>
+              <span class="tag is-success">邀请成功</span>
+            <% else %>
+              <span class="tag">曾注册用户</span>
+            <% end %>
           </h4>
           <ul class="weui-media-box__info">
-            <li class="weui-media-box__info__meta"><%= request.init_wechat_user_i18n %></li>
-            <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><time data-controller="time"><%= request.created_at.to_s(:rfc822) %></time></li>
+            <li class="weui-media-box__info__meta">
+              <span><%= request.init_wechat_user_i18n %></span>
+              <% unless request.init_wechat_user %>
+                <time data-controller="time"><%= request.wechat_user.created_at.to_s(:rfc822) %></time>
+              <% end %>
+            </li>
+            <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><time data-controller="time" data-format="MM-DD HH:mm:ss"><%= request.created_at.to_s(:rfc822) %></time></li>
           </ul>
         </div>
       </div>
