@@ -28,6 +28,7 @@ module Wechat
       has_many :responses, ->(o){ default_where('request_types-any': o.type) }, foreign_key: :appid, primary_key: :appid
 
       before_save :generate_wechat_user, if: -> { open_id_changed? && open_id.present? }
+      after_create :get_reply!
     end
 
     def rule_tag
@@ -87,6 +88,11 @@ module Wechat
       if user_tag.new_record?
         self.init_user_tag = true
       end
+    end
+
+    def get_reply!
+      get_reply
+      save
     end
 
     def get_reply

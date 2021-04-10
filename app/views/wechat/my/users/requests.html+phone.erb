@@ -27,7 +27,7 @@
         <% end %>
         </div>
         <div class="weui-cell__bd weui-cell_primary">
-        <% if request.init_wechat_user %>
+        <% if request.init_wechat_user && request.wechat_user %>
           <span><%= request.wechat_user.name %></span>
         <% end %>
         </div>

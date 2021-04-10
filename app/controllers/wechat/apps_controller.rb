@@ -15,6 +15,7 @@ module Wechat
         session.delete :return_to
       else
         url_options = {}
+        url_options.merge! params.except(:code, :state)
         url_options.merge! host: URI(session[:return_to]).host if session[:return_to]
 
         redirect_to url_for(controller: 'auth/sign', action: 'sign', uid: @oauth_user.uid, **url_options)

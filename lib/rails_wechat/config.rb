@@ -2,8 +2,8 @@ module RailsWechat
   include ActiveSupport::Configurable
   bind_proc = ->(request) {
     if request.wechat_user.attributes['name'].blank?
-      reply_params = { appid: request.appid, news_reply_items_attributes: [{ title: '请绑定', description: '授权您的信息', url: request.app.oauth2_url }] }
-    elsif request.wechat_user.user_id.blank?
+      reply_params = { appid: request.appid, news_reply_items_attributes: [{ title: '请绑定', description: '授权您的信息', url: request.app.oauth2_url(request_id: request.id) }] }
+    elsif request.wechat_user.user.blank?
       reply_params = { appid: request.appid, news_reply_items_attributes: [{ title: '请绑定', description: '绑定信息', url: request.bind_url }] }
     else
       return nil

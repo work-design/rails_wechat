@@ -108,7 +108,6 @@ module Wechat
       else
         warn "Don't know how to parse message as #{message_hash['MsgType']}", uplevel: 1
       end
-      request.get_reply
 
       self.save  # will auto save wechat request
     end
