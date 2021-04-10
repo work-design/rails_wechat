@@ -30,6 +30,12 @@ zh:
           Wechat::ScanRequest: 扫描事件
           Wechat::ViewRequest: 菜单
           Wechat::Request: 其他
+        init_wechat_user:
+          true: 已关注
+          false: 未关注
+        init_user_tag:
+          true: 已注册
+          false: 未注册
       wechat/response:
         effective_type:
           Wechat::NewsReply: 新闻

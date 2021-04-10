@@ -18,20 +18,22 @@
   <div class="weui-panel__bd">
     <div class="weui-cells mt-0">
     <% @requests.each do |request| %>
-      <div class="weui-cell">
-        <div class="weui-cell__hd">
-        <% if request.is_a?(Wechat::SubscribeRequest) %>
-          <i class="fas fa-user-plus fa-lg has-text-success"></i>
-        <% else %>
-          <i class="fas fa-user fa-lg"></i>
+      <div class="weui-media-box weui-media-box_appmsg">
+        <div class="weui-media-box__hd">
+        <% if request.wechat_user && request.wechat_user.avatar_url.present? %>
+          <%= image_tag request.wechat_user.avatar_url, class: 'weui-media-box__thumb' %>
         <% end %>
         </div>
-        <div class="weui-cell__bd weui-cell_primary">
-        <% if request.init_wechat_user && request.wechat_user %>
-          <span><%= request.wechat_user.name %></span>
-        <% end %>
+        <div class="weui-media-box__bd">
+          <h4 class="weui-media-box__title">
+            <span><%= request.wechat_user.name %></span>
+            <span class="weui-badge"><%= request.type_i18n %></span>
+          </h4>
+          <ul class="weui-media-box__info">
+            <li class="weui-media-box__info__meta"><%= request.init_wechat_user_i18n %></li>
+            <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><time data-controller="time"><%= request.created_at.to_s(:rfc822) %></time></li>
+          </ul>
         </div>
-        <div class="weui-cell__ft"><time data-controller="time"><%= request.created_at.to_s(:rfc822) %></time></div>
       </div>
     <% end %>
     </div>

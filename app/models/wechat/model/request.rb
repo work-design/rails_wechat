@@ -13,8 +13,8 @@ module Wechat
       attribute :open_id, :string, index: true
       attribute :reply_body, :json, default: {}
       attribute :reply_encrypt, :json, default: {}
-      attribute :init_wechat_user, :boolean
-      attribute :init_user_tag, :boolean
+      attribute :init_wechat_user, :boolean, default: false
+      attribute :init_user_tag, :boolean, default: false
 
       belongs_to :receive
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
