@@ -8,7 +8,7 @@ module Wechat
       attribute :open_id, :string, index: true
 
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
-      belongs_to :tag, ->(o){ where(name: o.tag_name) }, primary_key: :appid, foreign_key: :appid, counter_cache: true
+      belongs_to :tag, ->(o){ where(appid: o.appid) }, foreign_key: :tag_name, primary_key: :name, counter_cache: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :user_tagged, optional: true
 

@@ -73,7 +73,7 @@ module Wechat
 
     def generate_wechat_user
       wechat_user || build_wechat_user
-      wechat_user.app_id = appid
+      wechat_user.appid = appid
 
       if wechat_user.new_record?
         self.init_wechat_user = true

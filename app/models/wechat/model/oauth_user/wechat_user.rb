@@ -19,11 +19,15 @@ module Wechat
     end
 
     def name
-      super.blank? ? "WechatUser_#{id}" : super
+      super.blank? ? "Wechat #{id}" : super
     end
 
     def try_match
       app.api.menu_trymatch(uid)
+    end
+
+    def xx
+
     end
 
     def sync_remark_later
