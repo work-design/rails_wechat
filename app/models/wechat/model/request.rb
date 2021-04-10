@@ -69,7 +69,7 @@ module Wechat
     end
 
     def bind_url
-      Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', request_id: uid, host: app.host)
+      Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', request_id: id, host: app.host)
     end
 
     def generate_wechat_user
