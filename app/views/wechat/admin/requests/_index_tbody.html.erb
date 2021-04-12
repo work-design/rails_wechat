@@ -1,6 +1,6 @@
 <td>
   <% if model.wechat_user.user %>
-    <%= link_to model.wechat_user.user.name, { controller: 'auth/panel/users', action: 'show', id: model.wechat_user.user_id }, text: true, data: { turbo_frame: 'modal' } %>
+    <%= link_to model.wechat_user.user.name, { controller: 'auth/panel/users', action: 'show', id: model.wechat_user.user.id }, text: true, data: { turbo_frame: 'modal' } %>
   <% else %>
     <%= link_to model.wechat_user.name, { controller: 'auth/panel/oauth_users', action: 'show', id: model.wechat_user.id }, text: true, data: { turbo_frame: 'modal' } %>
   <% end %>
