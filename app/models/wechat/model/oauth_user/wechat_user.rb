@@ -33,6 +33,7 @@ module Wechat
       if self.unionid && self.same_oauth_user
         self.account ||= same_oauth_user.account
       end
+      self.save
     end
 
     def sync_inviter
