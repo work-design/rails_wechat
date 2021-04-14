@@ -18,6 +18,7 @@ module Wechat
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :sync_user_info_later, if: -> { saved_change_to_access_token? && (attributes['name'].blank? && attributes['avatar_url'].blank?) }
       after_save_commit :sync_inviter, if: -> { saved_change_to_request_id? && request }
+      after_create_commit :auto_link, if: -> { unionid.present? }
     end
 
     def name
@@ -26,6 +27,12 @@ module Wechat
 
     def try_match
       app.api.menu_trymatch(uid)
+    end
+
+    def auto_link
+      if self.unionid && self.same_oauth_user
+        self.account ||= same_oauth_user.account
+      end
     end
 
     def sync_inviter
@@ -90,9 +97,6 @@ module Wechat
       raw_info = oauth_params.dig('extra', 'raw_info') || {}
       self.unionid = raw_info['unionid']
       self.app_id ||= raw_info['app_id']
-      if self.unionid && self.same_oauth_user
-        self.account_id ||= same_oauth_user.account_id
-      end
 
       credential_params = oauth_params.fetch('credentials', {})
       self.access_token = credential_params['token']
