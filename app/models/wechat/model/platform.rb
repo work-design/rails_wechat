@@ -17,8 +17,6 @@ module Wechat
       has_many :agencies
       has_many :wechat_auths
       has_many :receives, dependent: :nullify
-
-      delegate :url_helpers, to: 'Rails.application.routes'
     end
 
     def api
@@ -65,7 +63,7 @@ module Wechat
       url.query = {
         component_appid: appid,
         pre_auth_code: pre_auth_code,
-        redirect_uri: url_helpers.callback_platform_url(self)
+        redirect_uri: Rails.application.routes.url_for(controller: 'wechat/platforms', action: 'callback', id: self.id)
       }.to_query
       url.to_s
     end
@@ -80,7 +78,7 @@ module Wechat
         no_scan: 1,
         component_appid: appid,
         pre_auth_code: pre_auth_code,
-        redirect_uri: url_helpers.callback_platform_url(self)
+        redirect_uri: Rails.application.routes.url_for(controller: 'wechat/platforms', action: 'callback', id: self.id)
       }.to_query
       url.to_s
     end
