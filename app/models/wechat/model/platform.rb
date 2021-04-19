@@ -15,7 +15,7 @@ module Wechat
       attribute :pre_auth_code_expires_at, :datetime
 
       has_many :agencies
-      has_many :wechat_auths
+      has_many :auths
       has_many :receives, dependent: :nullify
     end
 
