@@ -22,6 +22,11 @@ module Wechat
       "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
     end
 
+    def oauth2_data_url(scope = 'snsapi_userinfo', **host_options)
+      r = oauth2_url(scope, **host_options)
+      QrcodeHelper.data_url(r)
+    end
+
     def generate_wechat_user(code)
       h = {
         appid: appid,
