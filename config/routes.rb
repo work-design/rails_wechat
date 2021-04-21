@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :apps, only: [:show]
     controller :wechat do
       post 'wechat/auth' => :auth
+      get :login
     end
     resources :platforms, only: [:show] do
       member do
