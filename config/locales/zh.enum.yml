@@ -29,6 +29,7 @@ zh:
           Wechat::UnsubscribeRequest: 取消关注
           Wechat::ScanRequest: 扫描事件
           Wechat::ViewRequest: 菜单
+          Wechat::LocationRequest: 位置
           Wechat::Request: 其他
         init_wechat_user:
           true: 首次关注
