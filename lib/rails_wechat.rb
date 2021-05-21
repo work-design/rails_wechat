@@ -10,18 +10,6 @@ require 'rails_wechat/helpers'
 #require 'omniauth/strategies/wechat_qiye'
 #require 'omniauth/strategies/wechat_qr'
 
-module Wechat
-
-  def self.use_relative_model_naming?
-    true
-  end
-
-  def self.table_name_prefix
-    'wechat_'
-  end
-
-end
-
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'receive', 'receives'
   inflect.irregular 'media', 'medias'
