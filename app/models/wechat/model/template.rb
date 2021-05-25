@@ -8,8 +8,9 @@ module Wechat
       attribute :content, :string
       attribute :example, :string
       attribute :template_type, :integer
+      attribute :appid, :string, index: true
 
-      belongs_to :app
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :template_config, optional: true
       has_many :notices, dependent: :delete_all
 
