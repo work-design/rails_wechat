@@ -23,8 +23,7 @@ module Wechat
       end
       @receive.save
 
-      #render plain: @receive.request.to_wechat
-      render plain: 'success'
+      render plain: @receive.request.to_wechat
     end
 
     private
