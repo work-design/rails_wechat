@@ -29,8 +29,6 @@ module Wechat
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
-      has_many :tags, foreign_key: :appid, primary_key: :appid, dependent: :destroy
-      has_many :templates, dependent: :destroy
       has_many :post_syncs, as: :synced, dependent: :delete_all
       has_many :posts, through: :post_syncs
 
@@ -40,6 +38,8 @@ module Wechat
       has_one :agency, foreign_key: :appid, primary_key: :appid
       has_many :agencies, foreign_key: :appid, primary_key: :appid
       has_many :scenes, foreign_key: :appid, primary_key: :appid
+      has_many :tags, foreign_key: :appid, primary_key: :appid
+      has_many :templates, foreign_key: :appid, primary_key: :appid
 
       scope :valid, -> { where(enabled: true) }
       scope :shared, -> { where(shared: true) }
