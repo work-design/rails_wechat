@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.email = ['mingyuan0715@foxmail.com']
   s.homepage = 'https://github.com/work-design/rails_wechat'
   s.summary = 'Wechat Master'
-  s.description = 'Description of RailsWechat.'
-  s.license = 'LGPL-3.0'
+  s.description = '微信集成一揽子解决方案'
+  s.license = 'MIT'
 
   s.files = Dir[
     '{app,config,db,lib}/**/*',
@@ -21,5 +21,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails_com', '~> 1.2'
   s.add_dependency 'rails_auth'
   s.add_dependency 'rqrcode'
-  s.add_development_dependency 'sqlite3'
 end
