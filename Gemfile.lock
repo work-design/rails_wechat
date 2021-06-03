@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/qinmingyuan/default_form.git
-  revision: e8208662f2b700778e16e73931f024370aa54e08
+  revision: a2a743a744574795db74331b52bf46942dd3bb2d
   specs:
     default_form (1.5.1)
       rails_com (~> 1.2)
@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 9c61b778fc1459b9815794350d8ae246336bc0a8
+  revision: bcc6729a90b280b1d9413fd0f19d49cab18adba0
   specs:
     rails_auth (1.1.0)
       bcrypt (~> 3.1)
@@ -35,7 +35,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 1731aa31ed942471701ca29c194a419bf80501a4
+  revision: 8d90901e7eaec2db0def7257f5d125f3cbbcc5e3
   specs:
     rails_com (1.2.9)
       acme-client
@@ -49,7 +49,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_ui.git
-  revision: c1ae392a1835e726ae0642ecd8fbb2cf16e16bfd
+  revision: 7bca558075382dde9d53578aa31501351403da7a
   specs:
     rails_ui (0.1.0)
       rails
@@ -168,7 +168,7 @@ GEM
       activesupport (>= 5)
     http-2-next (0.4.3)
     http-form_data (2.3.0)
-    httpx (0.14.0)
+    httpx (0.14.4)
       http-2-next (>= 0.4.1)
       timers
     i18n (1.8.10)
@@ -263,7 +263,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     thor (1.1.0)
     timers (4.3.3)
     tzinfo (2.0.4)
@@ -294,7 +293,6 @@ DEPENDENCIES
   rails_ui!
   rails_wechat!
   sdoc
-  sqlite3
   turbo-rails!
   webpacker!
 
