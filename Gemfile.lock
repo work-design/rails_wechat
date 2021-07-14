@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/hotwired/turbo-rails.git
-  revision: 2945dcb7c5fc634ad7d459e0872cf04cf8a3576d
-  branch: main
-  specs:
-    turbo-rails (0.5.9)
-      rails (>= 6.0.0)
-
-GIT
   remote: https://github.com/qinmingyuan/default_form.git
   revision: d0fbf0383bf8f9ec7941f79ad2dabd95a478e53b
   specs:
@@ -14,18 +6,8 @@ GIT
       rails_com (~> 1.2)
 
 GIT
-  remote: https://github.com/rails/webpacker.git
-  revision: ad8010fbeb20a767fb1a0dc2a0dea5890f41e4a7
-  specs:
-    webpacker (6.0.0.beta.7)
-      activesupport (>= 5.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 5.2)
-      semantic_range (>= 2.3.0)
-
-GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 37b0d3022bee4203ed1f16ea5e16e3c653d6f2bf
+  revision: c7cf3436642c9ad8e9a8d5a9fe4e2e85c42aad4a
   specs:
     rails_auth (1.1.0)
       bcrypt (~> 3.1)
@@ -35,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: a88963ae6dbf8c8fb4909aba65c607e8adbb17a4
+  revision: ff2fa793ea78f7c6b1d824a86c4910dab26223cd
   specs:
     rails_com (1.2.9)
       acme-client
@@ -46,10 +28,11 @@ GIT
       httpx (~> 0.8)
       kaminari
       rails (~> 6.0)
+      turbo-rails
 
 GIT
   remote: https://github.com/work-design/rails_ui.git
-  revision: f3539f894f230e7546d7f5cc0ab4be598a75cfaf
+  revision: b7e16e58d7d47cd6ba319a93cd49a2b8d5bc8ded
   specs:
     rails_ui (0.1.0)
       rails
@@ -134,7 +117,7 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.4)
     chunky_png (1.4.0)
-    closure_tree (7.2.0)
+    closure_tree (7.3.0)
       activerecord (>= 4.2.10)
       with_advisory_lock (>= 4.0.0)
     coderay (1.1.3)
@@ -149,26 +132,30 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faraday (1.4.2)
+    faraday (1.5.1)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
+      faraday-httpclient (~> 1.0.1)
       faraday-net_http (~> 1.0)
       faraday-net_http_persistent (~> 1.1)
+      faraday-patron (~> 1.0)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords (>= 0.0.4)
     faraday-em_http (1.0.0)
     faraday-em_synchrony (1.0.0)
     faraday-excon (1.1.0)
+    faraday-httpclient (1.0.1)
     faraday-net_http (1.0.1)
-    faraday-net_http_persistent (1.1.0)
+    faraday-net_http_persistent (1.2.0)
+    faraday-patron (1.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     groupdate (5.2.2)
       activesupport (>= 5)
     http-2-next (0.4.3)
     http-form_data (2.3.0)
-    httpx (0.14.5)
+    httpx (0.15.4)
       http-2-next (>= 0.4.1)
       timers
     i18n (1.8.10)
@@ -216,8 +203,6 @@ GEM
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
-    rack-proxy (0.6.5)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.1.3.2)
@@ -255,7 +240,6 @@ GEM
     ruby2_keywords (0.0.4)
     sdoc (2.2.0)
       rdoc (>= 5.0)
-    semantic_range (3.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -265,9 +249,11 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.1.0)
     timers (4.3.3)
+    turbo-rails (0.5.12)
+      rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    websocket-driver (0.7.3)
+    websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     with_advisory_lock (4.6.0)
@@ -293,8 +279,6 @@ DEPENDENCIES
   rails_ui!
   rails_wechat!
   sdoc
-  turbo-rails!
-  webpacker!
 
 BUNDLED WITH
-   2.2.15
+   2.2.22

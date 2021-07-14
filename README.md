@@ -29,4 +29,4 @@ app.api.msg_sec_check('test data')
 ```
 
 ## 许可证
-许可证采用 [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0)
+许可证采用 [MIT](https://opensource.org/licenses/MIT)
