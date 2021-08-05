@@ -21,6 +21,7 @@ module Wechat
 
     end
 
+    private
     def login_by_wechat_user(oauth_user)
       headers['Auth-Token'] = oauth_user.account.auth_token
       oauth_user.user.update(last_login_at: Time.current)
@@ -29,9 +30,6 @@ module Wechat
       @current_oauth_user = oauth_user
       @current_user = oauth_user.user
     end
-
-    private
-
 
   end
 end

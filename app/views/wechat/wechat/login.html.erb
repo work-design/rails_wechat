@@ -1,1 +1,1 @@
-<%= image_tag current_wechat_app.oauth2_data_url %>
+<%= image_tag current_wechat_app.oauth2_data_url(host: request.host, port: request.port) %>
