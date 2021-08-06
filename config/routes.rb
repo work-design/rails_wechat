@@ -12,7 +12,11 @@ Rails.application.routes.draw do
         post :info
       end
     end
-    resources :apps, only: [:show]
+    resources :apps, only: [:show] do
+      member do
+        get :login
+      end
+    end
     controller :wechat do
       post 'wechat/auth' => :auth
       get :login

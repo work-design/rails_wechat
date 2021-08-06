@@ -21,7 +21,7 @@ module Wechat
       end
 
       if redirect_url
-        logger.debug "  \e[35m-----> Redirect to: #{redirect_url}\e[0m"
+        logger.debug "  \e[35mRedirect to: #{redirect_url}\e[0m"
       end
 
       redirect_to redirect_url
@@ -30,7 +30,7 @@ module Wechat
     def current_wechat_app
       return @current_wechat_app if defined?(@current_wechat_app)
       @current_wechat_app = current_organ_domain&.wechat_app
-      logger.debug "  \e[35m-----> Current Wechat App is #{@current_wechat_app&.id}\e[0m"
+      logger.debug "  \e[35mCurrent Wechat App is #{@current_wechat_app&.id}\e[0m"
       @current_wechat_app
     end
 

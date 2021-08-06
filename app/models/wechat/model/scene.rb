@@ -20,8 +20,6 @@ module Wechat
       has_many :scene_menus, dependent: :destroy
       has_many :menus, through: :scene_menus
 
-      has_one_attached :qrcode_file
-
       before_validation do
         self.expire_at ||= Time.current + expire_seconds if expire_seconds
       end
@@ -41,18 +39,13 @@ module Wechat
 
     def to_qrcode
       commit_to_wechat
-      persist_to_file
     end
 
-    def persist_to_file
+    def qrcode_data_url
       return unless self.qrcode_url
-      file = QrcodeHelper.code_file self.qrcode_url
-      self.qrcode_file.attach io: file, filename: self.qrcode_url
+      QrcodeHelper.data_url(self.qrcode_url)
     end
-
-    def qrcode_file_url
-      qrcode_file.url if qrcode_file.attachment.present?
-    end
+    alias_method :qrcode_file_url, :qrcode_data_url
 
     def commit_to_wechat
       if expire_seconds
