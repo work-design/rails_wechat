@@ -1,13 +1,13 @@
 GIT
-  remote: https://github.com/qinmingyuan/default_form.git
-  revision: 476ba7231079b1071415ad4e953b55ce16ae1d0d
+  remote: https://github.com/qinmingyuan/viter.git
+  revision: f007952bb7cf5f1c30d56d0bbb9b1c37bc73317e
   specs:
-    default_form (1.5.1)
-      rails_com (~> 1.2)
+    viter (0.1.0)
+      rails
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 384e8d19a55b6438ed743fa84265d77c9efc40ce
+  revision: 0c4c96caa8ce1dd0743e6fd16808ebf23ad454b0
   specs:
     rails_auth (1.1.0)
       bcrypt (~> 3.1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_ui.git
-  revision: 79682d2fa5ccc98b1bc410c42d114a09d08aef38
+  revision: 5d3fd79f49b4cce75fe0602993b1ad174742280e
   specs:
     rails_ui (0.1.0)
       rails
@@ -110,7 +110,6 @@ GEM
       zeitwerk (~> 2.3)
     acts_as_list (1.0.4)
       activerecord (>= 4.2)
-    awesome_print (1.9.2)
     bcrypt (3.1.16)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
@@ -126,11 +125,6 @@ GEM
     default_where (2.2.0)
       activerecord (>= 4.0.0)
     erubi (1.10.0)
-    factory_bot (6.2.0)
-      activesupport (>= 5.0.0)
-    factory_bot_rails (6.2.0)
-      factory_bot (~> 6.2.0)
-      railties (>= 5.0.0)
     faraday (1.6.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -264,9 +258,6 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
-  awesome_print
-  default_form!
-  factory_bot_rails
   jbuilder
   kaminari
   pg
@@ -278,6 +269,7 @@ DEPENDENCIES
   rails_ui!
   rails_wechat!
   sdoc
+  viter!
 
 BUNDLED WITH
    2.2.22
