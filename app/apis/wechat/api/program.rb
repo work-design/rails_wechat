@@ -3,8 +3,9 @@
 module Wechat::Api
   class Program < Base
     include Base::Sns
-    include Program::Wxaapi
-    include Program::Wxa
+    include Public::Base
+    include Wxaapi
+    include Wxa
 
   end
 end
