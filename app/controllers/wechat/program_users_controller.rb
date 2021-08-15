@@ -8,7 +8,7 @@ module Wechat
     def create
       info = @app.api.jscode2session(session_params[:code])
       @program_user = ProgramUser.create_or_find_by!(uid: info['openid']) do |program_user|
-        program_user.app_id = params[:appid]
+        program_user.appid = params[:appid]
         program_user.unionid = info['unionId']
       end
 
