@@ -18,22 +18,10 @@ module Wechat
       end
     end
 
-    def get_authorized_token(session_key = nil)
-      authorized_token = authorized_tokens.order(expire_at: :desc).first
-      if authorized_token
-        if authorized_token.verify_token?
-          authorized_token
-        else
-          authorized_token.session_key ||= session_key
-          authorized_token.update_token!
-        end
-      else
-        authorized_tokens.create(session_key: session_key)
-      end
-    end
-
     def auth_token(session_key = nil)
-      get_authorized_token(session_key).token
+      at = authorized_tokens.valid.take || authorized_tokens.build # fixme create is not working
+      at.update(session_key: session_key)
+      at.token
     end
 
   end
