@@ -32,7 +32,7 @@ module Wechat
     def mobile
       session_key = current_authorized_token.session_key
 
-      phone_number = @program_user.get_phone_number(params[:encrypted_data], params[:iv], session_key)
+      phone_number = @program_user.get_phone_number(params[:encryptedData], params[:iv], session_key)
       if phone_number
         @account = Account.find_by(identity: phone_number) || Account.create_with_identity(phone_number)
         @account.confirmed = true
