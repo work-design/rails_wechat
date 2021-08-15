@@ -1,5 +1,5 @@
 module Wechat
-  class ProgramUser < ::Auth::WechatUser
+  class ProgramUser < WechatUser
     include Model::OauthUser::ProgramUser
   end
 end

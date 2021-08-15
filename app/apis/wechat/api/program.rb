@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-class Wechat::Api::Program < Wechat::Api::Base
+module Wechat::Api
+  class Program < Base
+    include Base::Sns
+    include Program::Wxaapi
+    include Program::Wxa
 
-
-
+  end
 end

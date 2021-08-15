@@ -1,17 +1,14 @@
 # frozen_string_literal: true
+module Wechat::Api
+  class Work < Base
+    include Agent
+    include Menu
+    include User
 
-class Wechat::Api::Work < Wechat::Api::Base
-  require 'wechat/api/work/agent'
-  require 'wechat/api/work/menu'
-  require 'wechat/api/work/user'
+    def initialize(app)
+      super
+      @agentid = app.agentid
+    end
 
-  include Agent
-  include Menu
-  include User
-
-  def initialize(app)
-    super
-    @agentid = app.agentid
   end
-
 end
