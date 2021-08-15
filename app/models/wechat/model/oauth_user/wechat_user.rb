@@ -17,7 +17,7 @@ module Wechat
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :sync_user_info_later, if: -> { saved_change_to_access_token? && (attributes['name'].blank? && attributes['avatar_url'].blank?) }
-      after_save_commit :sync_inviter, if: -> { saved_change_to_request_id? && request }
+      after_save_commit :sync_inviter, if: -> { request && saved_change_to_request_id? }
       after_create_commit :auto_link, if: -> { unionid.present? }
     end
 
