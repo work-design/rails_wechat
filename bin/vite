@@ -8,8 +8,10 @@ require 'bundler/setup' if File.exist?(ENV['BUNDLE_GEMFILE'])
 
 require 'pry'
 require 'viter'
+require_relative '../test/dummy/config/application'
 require 'viter/dev_server_runner'
 
+Viter::Exporter.export
 APP_ROOT = File.expand_path('../test/dummy', __dir__)
 Dir.chdir(APP_ROOT) do
   Viter::DevServerRunner.run(ARGV)
