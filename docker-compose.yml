@@ -8,20 +8,18 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
     ports:
-      - 127.0.0.1:5432:5432
-
+      - '5432:5432'
   redis:
     image: redis:6.2.5-alpine
     restart: always
-
   web:
     image: rails_wechat
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile
-    restart: always
     ports:
-      - 127.0.0.1:3000:3000
+      - '3000:3000'
     depends_on:
       - postgres
       - redis
@@ -29,8 +27,8 @@ services:
       RAILS_ENV: development
       REDIS_URL: redis://redis:6379
       SKIP_TEST_DATABASE: 'true'
-
-  workers:
+    command: bash -c "rm -f test/dummy/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+  sidekiq:
     image: rails_wechat
     restart: always
     depends_on:
@@ -38,4 +36,4 @@ services:
     environment:
       RAILS_ENV: development
       REDIS_URL: redis://redis:6379
-    entrypoint: bundle exec sidekiq
+    entrypoint: bundle exec sidekiq -r test/dummy

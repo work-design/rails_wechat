@@ -1,5 +1,5 @@
 FROM ruby:3.0.2-alpine
-RUN apk --update add build-base nodejs npm less git libffi-dev postgresql-dev postgresql-client sqlite-dev libxslt-dev libxml2-dev tzdata
+RUN apk --update add build-base git nodejs npm postgresql-dev libxml2-dev libxslt-dev tzdata
 
 COPY . /app
 WORKDIR /app
@@ -10,9 +10,9 @@ RUN bundle install
 
 # 设置 Node.js 编译环境
 RUN npm install -g yarn
-RUN cd test/dummy && yarn
+RUN yarn install --cwd test/dummy
 
 # 预先编译前端
 RUN bin/vite build
 
-CMD [ './docker/wait-for-postgres.sh', 'bash', './docker/entrypoint.sh']
+CMD ['./docker/entrypoint.sh']
