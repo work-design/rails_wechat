@@ -11,7 +11,7 @@ services:
       - 127.0.0.1:5432:5432
 
   redis:
-    image: redis:6-alpine
+    image: redis:6.2.5-alpine
     restart: always
 
   web:
@@ -31,7 +31,7 @@ services:
       SKIP_TEST_DATABASE: 'true'
 
   workers:
-    image: fork-stack
+    image: rails_wechat
     restart: always
     depends_on:
       - web

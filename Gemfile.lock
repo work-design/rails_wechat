@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/qinmingyuan/viter.git
-  revision: 47594bda46a49633caf9de38c358164bfdca0d44
+  revision: 60c4bce0d749ff51a27143d1efe935333fc55065
   specs:
     viter (0.1.0)
       rails
@@ -127,6 +127,7 @@ GEM
       with_advisory_lock (>= 4.0.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     debug_inspector (1.1.0)
     default_where (2.3.0)
@@ -233,6 +234,7 @@ GEM
       thor (~> 1.0)
     rake (13.0.6)
     rdoc (6.3.2)
+    redis (4.4.0)
     rqrcode (2.0.0)
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
@@ -240,6 +242,10 @@ GEM
     ruby2_keywords (0.0.5)
     sdoc (2.2.0)
       rdoc (>= 5.0)
+    sidekiq (6.2.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -277,6 +283,7 @@ DEPENDENCIES
   rails_ui!
   rails_wechat!
   sdoc
+  sidekiq
   viter!
 
 BUNDLED WITH

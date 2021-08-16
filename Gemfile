@@ -4,6 +4,7 @@ gemspec
 
 gem 'pg'
 gem 'puma'
+gem 'sidekiq'
 
 gem 'viter', github: 'qinmingyuan/viter'
 gem 'rails_com', github: 'work-design/rails_com'
