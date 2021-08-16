@@ -28,6 +28,8 @@ module Wechat
       }
 
       @program_user.save
+
+      render json: { program_user: @program_user.as_json(only: [:id, :identity, :name, :avatar_url]) }
     end
 
     def mobile
