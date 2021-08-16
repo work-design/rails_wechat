@@ -14,5 +14,3 @@ RUN yarn install --cwd test/dummy
 
 # 预先编译前端
 RUN bin/vite build
-
-CMD ['./docker/entrypoint.sh']
