@@ -35,17 +35,14 @@ module Wechat
 
       phone_number = @program_user.get_phone_number(params[:encryptedData], params[:iv], session_key)
       if phone_number
-        @account = Account.find_by(identity: phone_number) || Account.create_with_identity(phone_number)
+        @program_user.identity = phone_number
+        @account = @program_user.account || @program_user.build_account
         @account.confirmed = true
-        @account.join(name: @program_user.name, invited_code: params[:invited_code])
-
-        @program_user.account = @account
-        current_authorized_token.account = @account
-
+        #@account.join(name: @program_user.name, invited_code: params[:invited_code])
         @program_user.save
-        current_authorized_token.save
+        @account.save
 
-        @program_user.reload
+        render json: { program_user: @program_user.as_json(only: [:id, :identity]) }
       else
         current_authorized_token.destroy  # 触发重新授权逻辑
         render :mobile_err, locals: { model: @program_user }, status: :unprocessable_entity
