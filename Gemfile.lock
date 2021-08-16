@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/qinmingyuan/viter.git
-  revision: 60c4bce0d749ff51a27143d1efe935333fc55065
+  revision: b7abc75f39a10bb17d892b2dfc2285163ded5739
   specs:
     viter (0.1.0)
       rails
@@ -44,7 +44,7 @@ GIT
       rails
 
 PATH
-  remote: ../..
+  remote: .
   specs:
     rails_wechat (0.1)
       rails_auth
