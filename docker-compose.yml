@@ -1,7 +1,7 @@
 version: '3'
 services:
   postgres:
-    image: postgres:13
+    image: postgres:13-alpine
     restart: always
     volumes:
       - ./.persistence/db:/var/lib/postgresql/data
