@@ -1,13 +1,10 @@
 FROM ruby:3.0.2-alpine
-#RUN apk --update add git nodejs libxslt-dev libxml2-dev
-#RUN apt-get install -y git nodejs npm
 RUN apk --update add build-base nodejs npm less git libffi-dev postgresql-dev postgresql-client sqlite-dev libxslt-dev libxml2-dev tzdata
 
 COPY . /app
 WORKDIR /app
 
 # 设置 Ruby
-#RUN git submodule update --init
 RUN bundle config set --local path 'vendor/bundle'
 RUN bundle install
 
@@ -16,7 +13,6 @@ RUN npm install -g yarn
 RUN cd test/dummy && yarn
 
 # 预先编译前端
-#RUN bundle exec rake yarn
 RUN bin/vite build
 
 CMD [ './docker/wait-for-postgres.sh', 'bash', './docker/entrypoint.sh']
