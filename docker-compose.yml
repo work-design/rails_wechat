@@ -1,0 +1,41 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:13-alpine
+    restart: always
+    volumes:
+      - ./.persistence/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 127.0.0.1:5432:5432
+
+  redis:
+    image: redis:6-alpine
+    restart: always
+
+  web:
+    image: rails_wechat
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 127.0.0.1:3000:3000
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      RAILS_ENV: development
+      REDIS_URL: redis://redis:6379
+      SKIP_TEST_DATABASE: 'true'
+
+  workers:
+    image: fork-stack
+    restart: always
+    depends_on:
+      - web
+    environment:
+      RAILS_ENV: development
+      REDIS_URL: redis://redis:6379
+    entrypoint: bundle exec sidekiq

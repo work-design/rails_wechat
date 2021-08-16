@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 1180574f4e41c78d277a8c0eb37644ef2eafd8cc
+  revision: 07cf26b5001f8be4e7653d196db2e274ee31b43d
   specs:
     rails_auth (1.1.0)
       bcrypt (~> 3.1)
@@ -46,7 +46,7 @@ GIT
 PATH
   remote: .
   specs:
-    rails_wechat (0.1.0)
+    rails_wechat (0.1)
       rails_auth
       rails_com (~> 1.2)
       rqrcode
