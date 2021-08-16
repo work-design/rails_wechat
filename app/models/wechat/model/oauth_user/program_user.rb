@@ -19,8 +19,8 @@ module Wechat
     end
 
     def auth_token(session_key = nil)
-      at = authorized_tokens.valid.take || authorized_tokens.build  # fixme create is not working
-      at.session_key = session_key
+      at = authorized_tokens.valid.take || authorized_tokens.build
+      at.session_key = session_key if session_key.present?
       at.save
       at.token
     end
