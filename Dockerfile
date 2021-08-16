@@ -17,6 +17,6 @@ RUN cd test/dummy && yarn
 
 # 预先编译前端
 #RUN bundle exec rake yarn
-RUN bin/vite compile
+RUN bin/vite build
 
 CMD [ './docker/wait-for-postgres.sh', 'bash', './docker/entrypoint.sh']
