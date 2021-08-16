@@ -44,7 +44,7 @@ GIT
       rails
 
 PATH
-  remote: .
+  remote: ../..
   specs:
     rails_wechat (0.1)
       rails_auth

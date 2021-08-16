@@ -1,14 +1,14 @@
 version: '3'
 services:
   postgres:
-    image: postgres:13-alpine
+    image: postgres:13
     restart: always
     volumes:
       - ./.persistence/db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgres
     ports:
-      - '5432:5432'
+      - 5432:5432
   redis:
     image: redis:6.2.5-alpine
     restart: always
@@ -19,15 +19,16 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - 3000:3000
     depends_on:
       - postgres
       - redis
     environment:
       RAILS_ENV: development
       REDIS_URL: redis://redis:6379
+      POSTGRES_URL: postgres://postgres:postgres@postgres/dummy_development
       SKIP_TEST_DATABASE: 'true'
-    command: bash -c "rm -f test/dummy/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: sh -c "rm -f test/dummy/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
   sidekiq:
     image: rails_wechat
     restart: always
