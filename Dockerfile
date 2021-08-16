@@ -1,22 +1,19 @@
 FROM ruby:3.0.2-alpine
+#RUN apk --update add git nodejs libxslt-dev libxml2-dev
+#RUN apt-get install -y git nodejs npm
 RUN apk --update add build-base nodejs npm less git libffi-dev postgresql-dev postgresql-client sqlite-dev libxslt-dev libxml2-dev tzdata
-RUN mkdir /app
+
+COPY . /app
 WORKDIR /app
 
 # 设置 Ruby
+#RUN git submodule update --init
 RUN bundle config set --local path 'vendor/bundle'
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
-COPY rails_wechat.gemspec /app/rails_wechat.gemspec
 RUN bundle install
 
 # 设置 Node.js 编译环境
 RUN npm install -g yarn
-COPY package.json /app/package.json
-COPY yarn.lock /app/yarn.lock
-RUN yarn
-
-COPY . /app
+RUN cd test/dummy && yarn
 
 # 预先编译前端
 #RUN bundle exec rake yarn
