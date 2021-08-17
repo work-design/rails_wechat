@@ -14,7 +14,3 @@ RUN yarn install --cwd test/dummy
 
 # 预先编译前端
 RUN bin/vite build
-
-# 初始化数据库
-RUN bin/rails g rails_com:migrations -f
-
