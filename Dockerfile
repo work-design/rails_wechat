@@ -1,4 +1,4 @@
-FROM ruby:3.0.2-alpine
+FROM ruby:3.0.2-alpine as build
 RUN apk --update add build-base git nodejs npm postgresql-dev libxml2-dev libxslt-dev tzdata
 
 COPY . /app
@@ -14,3 +14,6 @@ RUN yarn install --cwd test/dummy
 
 # 预先编译前端
 RUN bin/vite build
+
+FROM ruby:3.0.2-alpine
+COPY --from=build . /app
