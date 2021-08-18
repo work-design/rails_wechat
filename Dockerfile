@@ -16,4 +16,4 @@ RUN yarn install --cwd test/dummy
 RUN bin/vite build
 
 FROM ruby:3.0.2-alpine
-COPY --from=build . /app
+COPY --from=build /app /app
