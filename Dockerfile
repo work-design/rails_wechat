@@ -30,3 +30,5 @@ RUN ls -al
 RUN ls -al test/dummy/
 
 EXPOSE 3000:3000
+ENTRYPOINT ['./entrypoint.sh']
+CMD bin/rails s -b 0.0.0.0
