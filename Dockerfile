@@ -24,6 +24,7 @@ RUN rm -rf $APP_HOME/test/dummy/node_modules
 FROM ruby:3.0.2-alpine
 COPY --from=build /app /app
 WORKDIR /app
+RUN bundle config set --local path 'vendor/bundle'
 RUN ls -al
 RUN ls -al test/dummy/
 
