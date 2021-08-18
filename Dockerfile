@@ -28,7 +28,7 @@ WORKDIR /app
 RUN bundle config set --local path 'vendor/bundle'
 RUN ls -al
 RUN ls -al test/dummy/
+RUN chmod +x entrypoint.sh
 
 EXPOSE 3000:3000
-ENTRYPOINT ['./entrypoint.sh']
-CMD bin/rails s -b 0.0.0.0
+CMD ./entrypoint.sh

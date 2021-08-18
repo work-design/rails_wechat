@@ -1,5 +1,4 @@
 version: '3'
-container_name: rails_wechat
 services:
   postgres:
     image: postgres:13-alpine
