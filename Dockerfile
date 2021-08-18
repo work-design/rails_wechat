@@ -16,7 +16,6 @@ RUN bundle install
 
 
 COPY . /app
-RUN ls -al
 RUN yarn install --cwd test/dummy --check-files
 RUN bin/vite build # 预先编译前端
 
@@ -24,5 +23,8 @@ RUN rm -rf $APP_HOME/test/dummy/node_modules
 
 FROM ruby:3.0.2-alpine
 COPY --from=build /app /app
+WORKDIR /app
+RUN ls -al
+RUN ls -al test/dummy/
 
 EXPOSE 3000:3000
