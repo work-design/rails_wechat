@@ -1,19 +1,28 @@
 FROM ruby:3.0.2-alpine as build
-RUN apk --update add build-base git nodejs npm postgresql-dev libxml2-dev libxslt-dev tzdata
+RUN apk update && apk upgrade
+RUN apk --update add build-base git nodejs yarn postgresql-dev libxml2-dev libxslt-dev tzdata && rm -rf /var/cache/apk/*
 
-COPY . /app
-WORKDIR /app
+ENV APP_HOME /app
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
 
 # 设置 Ruby
+COPY Gemfile* rails_wechat.gemspec $APP_HOME/
 RUN bundle config set --local path 'vendor/bundle'
 RUN bundle install
 
 # 设置 Node.js 编译环境
-RUN npm install -g yarn
-RUN yarn install --cwd test/dummy
+#COPY test/dummy/package.json test/dummy/yarn.lock $APP_HOME/
 
-# 预先编译前端
-RUN bin/vite build
+
+COPY . /app
+RUN ls -al
+RUN yarn install --cwd test/dummy --check-files
+RUN bin/vite build # 预先编译前端
+
+RUN rm -rf $APP_HOME/test/dummy/node_modules
 
 FROM ruby:3.0.2-alpine
 COPY --from=build /app /app
+
+EXPOSE 3000:3000
