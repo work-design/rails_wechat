@@ -1,6 +1,6 @@
 FROM ruby:3.0.2-alpine as build
 RUN apk update && apk upgrade
-RUN apk --update add build-base git nodejs yarn postgresql-dev libxml2-dev libxslt-dev tzdata && rm -rf /var/cache/apk/*
+RUN apk --update add --no-cache build-base git nodejs yarn postgresql-dev libxml2-dev libxslt-dev tzdata
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
@@ -22,7 +22,7 @@ RUN bin/vite build # 预先编译前端
 RUN rm -rf $APP_HOME/test/dummy/node_modules
 
 FROM ruby:3.0.2-alpine
-RUN apk --update add postgresql-dev libxml2-dev libxslt-dev tzdata && rm -rf /var/cache/apk/*
+RUN apk --update add --no-cache postgresql-dev libxml2-dev libxslt-dev tzdata
 COPY --from=build /app /app
 WORKDIR /app
 RUN bundle config set --local path 'vendor/bundle'
