@@ -1,0 +1,5 @@
+.git
+node_modules
+test/dummy/node_modules
+test/dummy/config/credentials
+db/migrate
