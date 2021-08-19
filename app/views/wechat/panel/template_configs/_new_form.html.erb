@@ -1,5 +1,5 @@
 <%= form_with model: @template_config, url: { action: 'create' } do |f| %>
-  <%= render 'shared/error_messages', target: @template_config %>
+  <%= render 'error_messages', target: @template_config %>
   <%= f.select :type, options_for_select(Wechat::TemplateConfig.options_i18n(:type)) %>
   <%= f.text_field :tid %>
   <%= f.text_field :description %>

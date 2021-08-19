@@ -1,5 +1,5 @@
 <%= form_with model: @wechat_register, url: bind_admin_wechat_register_path(@wechat_register) do |f| %>
-  <%= render 'shared/error_messages', target: @wechat_register %>
+  <%= render 'error_messages', target: @wechat_register %>
   <%= f.file_field :bind_qrcode %>
   <%= f.submit %>
 <% end %>

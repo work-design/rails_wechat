@@ -1,5 +1,5 @@
 <%= form_with model: @menu, scope: :menu, url: { action: 'update' } do |f| %>
-  <%= render 'shared/error_messages', target: @menu %>
+  <%= render 'error_messages', target: @menu %>
   <%= f.hidden_field :appid %>
   <%= render partial: 'form', locals: { f: f } %>
   <%= f.submit %>

@@ -7,23 +7,23 @@ GIT
 
 GIT
   remote: https://github.com/qinmingyuan/viter.git
-  revision: 177947509000b53236f7e03e19a3df4a911c5a12
+  revision: 997cbc807babe4380f76ad0051518de12135702e
   specs:
     viter (0.1.0)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 3c828c45dc771f8f417775e5a9190b3e553a2970
+  revision: 0d4f6adb73969f3104b75197629fb51e8fe245f1
   specs:
-    rails_auth (1.1.0)
+    rails_auth (1.2.0)
       bcrypt (~> 3.1)
       jwt (>= 2.0, <= 3.0)
       rails_com (~> 1.2)
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 00a5b948e5945e574d15b8944cba01d38dc9b1ca
+  revision: 4829a61208ab5a358d43f43795c3e998b636a5b1
   specs:
     rails_com (1.2.9)
       acme-client

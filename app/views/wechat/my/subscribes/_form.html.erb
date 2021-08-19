@@ -1,5 +1,5 @@
 <%= form_with model: @subscribe do |f| %>
-  <%= render 'shared/error_messages', target: f.object %>
+  <%= render 'error_messages', target: f.object %>
   <%= f.text_field :template %>
   <%= f.text_field :status %>
   <%= f.text_field :sending_at %>
