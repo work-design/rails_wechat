@@ -16,8 +16,8 @@ services:
     image: rails_wechat
     restart: always
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: docker/Dockerfile
     ports:
       - 3000:3000
     depends_on:

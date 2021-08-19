@@ -7,7 +7,7 @@ RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
 # 设置 Ruby
-COPY ../Gemfile* $APP_HOME/
+COPY Gemfile* $APP_HOME/
 RUN ls -al $APP_HOME
 
 RUN bundle config set --local path 'vendor/bundle'
@@ -18,7 +18,7 @@ RUN bundle install
 #COPY test/dummy/package.json test/dummy/yarn.lock $APP_HOME/
 
 
-COPY .. /app
+COPY . $APP_HOME
 RUN yarn install --cwd test/dummy --check-files
 RUN bin/vite build # 预先编译前端
 
@@ -31,7 +31,7 @@ WORKDIR /app
 RUN bundle config set --local path 'vendor/bundle'
 RUN ls -al
 RUN ls -al test/dummy/
-RUN chmod +x entrypoint.sh
+RUN chmod +x docker/entrypoint.sh
 
 EXPOSE 3000:3000
-CMD ./entrypoint.sh
+CMD docker/entrypoint.sh
