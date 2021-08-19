@@ -8,9 +8,9 @@ WORKDIR $APP_HOME
 
 # 设置 Ruby
 COPY ../Gemfile* $APP_HOME/
-RUN bundle config set --local path 'vendor/bundle'
-
 RUN ls -al $APP_HOME
+
+RUN bundle config set --local path 'vendor/bundle'
 
 RUN bundle install
 
