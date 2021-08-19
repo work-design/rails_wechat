@@ -19,24 +19,6 @@ module Wechat
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @notice.assign_attributes(notice_params)
-
-      unless @notice.save
-        render :edit, locals: { model: @notice }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @notice.destroy
-    end
-
     private
     def set_template
       @template = Template.find params[:template_id]

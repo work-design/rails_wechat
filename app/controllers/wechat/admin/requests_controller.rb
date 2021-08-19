@@ -14,21 +14,6 @@ module Wechat
       @requests = @app.requests.includes(wechat_user: :user, extractions: :extractor).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
-    def show
-    end
-
-    def update
-      @request.assign_attributes(request_params)
-
-      unless @request.save
-        render :update, locals: { model: @request }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @request.destroy
-    end
-
     private
     def set_request
       @request = @app.requests.find(params[:id])

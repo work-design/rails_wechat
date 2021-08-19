@@ -26,24 +26,6 @@ module Wechat
       @app.sync_tags
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @tag.assign_attributes(tag_params)
-
-      unless @tag.save
-        render :edit, locals: { model: @tag }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @tag.destroy
-    end
-
     private
     def set_tag
       @tag = @app.tags.find(params[:id])

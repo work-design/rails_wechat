@@ -23,24 +23,6 @@ module Wechat
       r = @app.sync_templates
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @template.assign_attributes(template_params)
-
-      unless @template.save
-        render :edit, locals: { model: @template }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @template.destroy
-    end
-
     private
     def set_app
       @app = App.default_where(default_params).find_by id: params[:app_id]

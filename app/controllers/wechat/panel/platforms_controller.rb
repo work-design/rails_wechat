@@ -18,24 +18,6 @@ module Wechat
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @platform.assign_attributes(platform_params)
-
-      unless @platform.save
-        render :edit, locals: { model: @platform }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @platform.destroy
-    end
-
     private
     def set_platform
       @platform = Platform.find(params[:id])

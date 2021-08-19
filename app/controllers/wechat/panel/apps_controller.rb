@@ -25,24 +25,6 @@ module Wechat
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @app.assign_attributes(app_params)
-
-      unless @app.save
-        render :edit, locals: { model: @app }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @app.destroy
-    end
-
     private
     def set_app
       @app = App.find(params[:id])

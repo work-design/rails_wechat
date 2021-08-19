@@ -3,10 +3,6 @@ module Wechat
     before_action :set_reply
     before_action :set_news_reply_item
 
-    def destroy
-      @news_reply_item.destroy
-    end
-
     private
     def set_reply
       @reply = Reply.find(params[:reply_id])

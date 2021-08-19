@@ -24,18 +24,11 @@ module Wechat
         render :new, locals: { model: @register }, status: :unprocessable_entity
       end
     end
-
-    def show
-    end
-
     def code
       @register.notify_mobile_code
     end
 
     def qrcode
-    end
-
-    def edit
     end
 
     def edit_app
@@ -66,18 +59,6 @@ module Wechat
     def update_assign
       @register.to_task!(params[:member_id], params[:task_template_id])
       render 'update'
-    end
-
-    def update
-      @register.assign_attributes(register_params)
-
-      unless @register.save
-        render :edit, locals: { model: @register }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @register.destroy
     end
 
     private

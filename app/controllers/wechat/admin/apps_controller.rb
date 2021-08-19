@@ -26,9 +26,6 @@ module Wechat
       end
     end
 
-    def show
-    end
-
     def info
     end
 
@@ -41,21 +38,6 @@ module Wechat
       @app.apiclient_cert = pkcs12.certificate
       @app.apiclient_key = pkcs12.key
       @app.save
-    end
-
-    def edit
-    end
-
-    def update
-      @app.assign_attributes(app_params)
-
-      unless @app.save
-        render :edit, locals: { model: @app }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @app.destroy
     end
 
     private

@@ -25,12 +25,6 @@ module Wechat
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
     def edit_reply
       q_params = {
         appid: @app.appid
@@ -41,19 +35,6 @@ module Wechat
     end
 
     def filter_reply
-
-    end
-
-    def update
-      @response.assign_attributes(response_params)
-
-      unless @response.save
-        render :edit, locals: { model: @response }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @response.destroy
     end
 
     private

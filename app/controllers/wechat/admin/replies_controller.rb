@@ -31,26 +31,8 @@ module Wechat
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
     def add
       @reply.news_reply_items.build
-    end
-
-    def update
-      @reply.assign_attributes(reply_params)
-
-      unless @reply.save
-        render :edit, locals: { model: @reply }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @reply.destroy
     end
 
     private

@@ -21,24 +21,6 @@ module Wechat
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @extractor.assign_attributes(extractor_params)
-
-      unless @extractor.save
-        render :edit, locals: { model: @extractor }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @extractor.destroy
-    end
-
     private
     def set_response
       @response = Response.find params[:response_id]

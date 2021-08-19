@@ -7,20 +7,6 @@ module Wechat
       @agencies = @platform.agencies.order(id: :desc).page(params[:page])
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @agency.assign_attributes(agency_params)
-
-      unless @agency.save
-        render :edit, locals: { model: @agency }, status: :unprocessable_entity
-      end
-    end
-
     private
     def set_platform
       @platform = Platform.find params[:platform_id]

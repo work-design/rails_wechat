@@ -18,24 +18,6 @@ module Wechat
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @template_config.assign_attributes(template_config_params)
-
-      unless @template_config.save
-        render :edit, locals: { model: @template_config }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @template_config.destroy
-    end
-
     private
     def set_template_config
       @template_config = TemplateConfig.find(params[:id])
