@@ -7,15 +7,18 @@ RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
 # 设置 Ruby
-COPY Gemfile* rails_wechat.gemspec $APP_HOME/
+COPY ../Gemfile* $APP_HOME/
 RUN bundle config set --local path 'vendor/bundle'
+
+RUN ls -al $APP_HOME
+
 RUN bundle install
 
 # 设置 Node.js 编译环境
 #COPY test/dummy/package.json test/dummy/yarn.lock $APP_HOME/
 
 
-COPY . /app
+COPY .. /app
 RUN yarn install --cwd test/dummy --check-files
 RUN bin/vite build # 预先编译前端
 

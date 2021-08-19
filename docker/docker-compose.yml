@@ -37,3 +37,13 @@ services:
       RAILS_ENV: development
       REDIS_URL: redis://redis:6379
     entrypoint: bundle exec sidekiq -r test/dummy
+  nginx:
+    image: 1.21-alpine
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./.persistence/conf.d:/etc/nginx/conf.d
+      - ./.persistence/log:/var/log/nginx
+      - ./.persistence/www:/var/www
