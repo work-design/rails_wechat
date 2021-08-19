@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-gem 'rails_wechat', github: 'work-design/rails_wechat'
+gemspec
 
 gem 'pg'
 gem 'puma'
