@@ -7,14 +7,14 @@ GIT
 
 GIT
   remote: https://github.com/qinmingyuan/viter.git
-  revision: 997cbc807babe4380f76ad0051518de12135702e
+  revision: a6c36456e695b32d427179c1bfc1c0df2c66792c
   specs:
-    viter (0.1.0)
+    viter (0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: cbc8144402963b2628488307a0056cea0367c3fd
+  revision: 6232cd410cbdae4dfd7a5a48093758150d49e00d
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 71c4b772b70c2bb74e6715e3def6090b75365ea0
+  revision: 1456a72388757cd4a97b0932c9d046910412efb2
   specs:
     rails_com (1.2.9)
       acme-client
@@ -33,14 +33,14 @@ GIT
       http-form_data (~> 2.3)
       httpx (~> 0.16)
       kaminari
-      rails (~> 6.1)
+      rails (>= 6.1)
       turbo-rails
 
 GIT
   remote: https://github.com/work-design/rails_ui.git
-  revision: 60778d85c650357871ece6410ff61bbd9f9ebdec
+  revision: 75f6e0066cd052b2c050ff1103a05099f4ef984e
   specs:
-    rails_ui (0.1.0)
+    rails_ui (0.0.1)
       rails
 
 PATH
@@ -54,7 +54,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    acme-client (2.0.8)
+    acme-client (2.0.9)
       faraday (>= 0.17, < 2.0.0)
     actioncable (6.1.4.1)
       actionpack (= 6.1.4.1)
@@ -118,22 +118,20 @@ GEM
     acts_as_list (1.0.4)
       activerecord (>= 4.2)
     bcrypt (3.1.16)
-    binding_of_caller (1.0.0)
-      debug_inspector (>= 0.0.1)
     builder (3.2.4)
     chunky_png (1.4.0)
     closure_tree (7.3.0)
       activerecord (>= 4.2.10)
       with_advisory_lock (>= 4.0.0)
-    coderay (1.1.3)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
     crass (1.0.6)
-    debug_inspector (1.1.0)
+    debug (1.0.0.beta8)
+      irb
     default_where (2.3.0)
       activerecord (>= 4.0, <= 7.0)
     erubi (1.10.0)
-    faraday (1.7.0)
+    faraday (1.7.1)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -156,11 +154,14 @@ GEM
       activesupport (>= 5.0)
     http-2-next (0.5.0)
     http-form_data (2.3.0)
-    httpx (0.16.1)
+    httpx (0.17.0)
       http-2-next (>= 0.4.1)
       timers
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    io-console (0.5.9)
+    irb (1.3.7)
+      reline (>= 0.2.7)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jwt (2.2.3)
@@ -183,7 +184,7 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
     method_source (1.0.0)
-    mini_mime (1.1.0)
+    mini_mime (1.1.1)
     mini_portile2 (2.6.1)
     minitest (5.14.4)
     multipart-post (2.1.1)
@@ -192,14 +193,6 @@ GEM
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     pg (1.2.3)
-    pry (0.14.1)
-      coderay (~> 1.1)
-      method_source (~> 1.0)
-    pry-rails (0.3.9)
-      pry (>= 0.10.4)
-    pry-stack_explorer (0.6.1)
-      binding_of_caller (~> 1.0)
-      pry (~> 0.13)
     puma (5.4.0)
       nio4r (~> 2.0)
     racc (1.5.2)
@@ -235,6 +228,8 @@ GEM
     rake (13.0.6)
     rdoc (6.3.2)
     redis (4.4.0)
+    reline (0.2.7)
+      io-console (~> 0.5)
     rqrcode (2.0.0)
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
@@ -255,7 +250,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.1.0)
     timers (4.3.3)
-    turbo-rails (0.7.4)
+    turbo-rails (0.7.10)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -271,12 +266,11 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  debug (>= 1.0.0.beta)
   default_form!
   jbuilder
   kaminari
   pg
-  pry-rails
-  pry-stack_explorer
   puma
   rails_auth!
   rails_com!

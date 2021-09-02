@@ -16,6 +16,8 @@ gem 'jbuilder'
 gem 'kaminari'
 gem 'acts_as_list'
 
-gem 'pry-rails'
-gem 'pry-stack_explorer'
 gem 'sdoc'
+
+group :development, :test do
+  gem 'debug', '>= 1.0.0.beta'
+end
