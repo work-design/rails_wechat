@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 6232cd410cbdae4dfd7a5a48093758150d49e00d
+  revision: f5000580f1b505c125f8045d825942497d23df60
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -23,7 +23,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 1456a72388757cd4a97b0932c9d046910412efb2
+  revision: d78f7f63629118dadf113de4e8d60c7f42b320bd
   specs:
     rails_com (1.2.9)
       acme-client
@@ -189,7 +189,7 @@ GEM
     minitest (5.14.4)
     multipart-post (2.1.1)
     nio4r (2.5.8)
-    nokogiri (1.12.3)
+    nokogiri (1.12.4)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     pg (1.2.3)
@@ -217,7 +217,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.4.1)
+    rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
     railties (6.1.4.1)
       actionpack (= 6.1.4.1)
@@ -230,14 +230,14 @@ GEM
     redis (4.4.0)
     reline (0.2.7)
       io-console (~> 0.5)
-    rqrcode (2.0.0)
+    rqrcode (2.1.0)
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
-    rqrcode_core (1.1.0)
+    rqrcode_core (1.2.0)
     ruby2_keywords (0.0.5)
     sdoc (2.2.0)
       rdoc (>= 5.0)
-    sidekiq (6.2.1)
+    sidekiq (6.2.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
