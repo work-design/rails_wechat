@@ -18,7 +18,7 @@ module Wechat
         scope: scope,
         state: state
       }
-      logger.debug "  \e[35mDetail: #{h}\e[0m"
+      logger.debug "\e[35m  Detail: #{h}  \e[0m"
       "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
     end
 

@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from '@hotwired/stimulus'
 
 class WechatReplyController extends Controller {
   static targets = [ 'output' ]
