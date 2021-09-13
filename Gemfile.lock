@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 8949509c4f26ecf76adecfdbb2e221535ee47ac0
+  revision: 0fa82f6df70ac2222a9a5fdeb8f0d209ba01eeb7
   specs:
     rails_com (1.2.9)
       acme-client
@@ -31,23 +31,23 @@ GIT
       turbo-rails
 
 GIT
+  remote: https://github.com/work-design/rails_design.git
+  revision: 092a58af67ee302612df8cb5416149f6b9c7890a
+  specs:
+    rails_design (0.0.1)
+      rails
+
+GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: 48e8b20f65097c981b8ecc3b9b35d2082512d9e8
+  revision: c7ce04eaa13e09fc5156b8938a71e17821b7fe59
   specs:
     rails_extend (1.0.0)
       rails (>= 6.0)
 
-GIT
-  remote: https://github.com/work-design/rails_ui.git
-  revision: c8d7bfe6d598c9433373e4e8c0e7c17ebc98b17a
-  specs:
-    rails_ui (0.0.1)
-      rails
-
 PATH
   remote: .
   specs:
-    rails_wechat (0.1)
+    rails_wechat (0.1.1)
       rails_auth
       rails_com (~> 1.2)
       rqrcode
@@ -133,7 +133,7 @@ GEM
     default_where (2.3.0)
       activerecord (>= 4.0, <= 7.0)
     erubi (1.10.0)
-    faraday (1.7.1)
+    faraday (1.7.2)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -267,14 +267,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  debug (>= 1.0.0.beta)
+  debug
   jbuilder
   pg
   puma
   rails_auth!
   rails_com!
+  rails_design!
   rails_extend!
-  rails_ui!
   rails_wechat!
   sdoc
   sidekiq

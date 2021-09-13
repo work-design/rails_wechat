@@ -10,7 +10,7 @@ gem 'jbuilder'
 gem 'viter', github: 'qinmingyuan/viter'
 
 gem 'rails_com', github: 'work-design/rails_com'
-gem 'rails_ui', github: 'work-design/rails_ui'
+gem 'rails_design', github: 'work-design/rails_design'
 gem 'rails_auth', github: 'work-design/rails_auth'
 gem 'rails_extend', github: 'work-design/rails_extend'
 
@@ -19,5 +19,5 @@ group :development do
 end
 
 group :development, :test do
-  gem 'debug', '>= 1.0.0.beta'
+  gem 'debug'
 end
