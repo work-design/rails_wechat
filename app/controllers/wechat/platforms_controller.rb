@@ -4,7 +4,7 @@ module Wechat
     before_action :set_platform, only: [:show, :message, :callback]
 
     # 授权事件接收URL: platforms/notice
-    def notice
+    def notify
       @ticket = Ticket.new(ticket_params)
       r = Hash.from_xml(request.raw_post)['xml']
       @ticket.appid = r['AppId']

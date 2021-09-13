@@ -27,7 +27,7 @@ Rails.application.routes.draw do
         post 'callback/:appid' => :message
       end
       collection do
-        post :notice
+        post :notify
       end
     end
 
