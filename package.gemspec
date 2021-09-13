@@ -1,8 +1,6 @@
-$:.push File.expand_path('lib', __dir__)
-
 Gem::Specification.new do |s|
   s.name = 'rails_wechat'
-  s.version = '0.1'
+  s.version = '0.1.1'
   s.authors = ['qinmingyuan']
   s.email = ['mingyuan0715@foxmail.com']
   s.homepage = 'https://github.com/work-design/rails_wechat'
