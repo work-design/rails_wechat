@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 0fa82f6df70ac2222a9a5fdeb8f0d209ba01eeb7
+  revision: 953ef46899c750d41ea6e09aba71c9376363e1ce
   specs:
     rails_com (1.2.9)
       acme-client
@@ -39,10 +39,10 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: c7ce04eaa13e09fc5156b8938a71e17821b7fe59
+  revision: ef2aa3492d3d214a8d60cb6322c39d2e568adb74
   specs:
     rails_extend (1.0.0)
-      rails (>= 6.0)
+      rails (>= 5.0)
 
 PATH
   remote: .

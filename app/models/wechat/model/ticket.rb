@@ -13,6 +13,7 @@ module Wechat
       belongs_to :platform, foreign_key: :appid, primary_key: :appid, optional: true
 
       after_create_commit :parsed_data, if: -> { platform.present? }
+      after_create_commit :clean_last
     end
 
     def parsed_data
@@ -22,6 +23,10 @@ module Wechat
       data = Hash.from_xml(content).fetch('xml', {})
       platform.update(verify_ticket: data['ComponentVerifyTicket'])
       data
+    end
+
+    def clean_last
+      TicketCleanJob.perform_later(self)
     end
 
   end
