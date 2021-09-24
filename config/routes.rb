@@ -59,7 +59,7 @@ Rails.application.routes.draw do
         end
       end
       resources :platforms do
-        resources :agencies, shallow: true, as: :agencies
+        resources :agencies, as: :agencies
       end
     end
 

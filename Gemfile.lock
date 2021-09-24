@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/qinmingyuan/viter.git
-  revision: a6c36456e695b32d427179c1bfc1c0df2c66792c
+  revision: 82d46c2eed89cc27b89811e3ded0cb6797f3b807
   specs:
     viter (0.1)
       rails
@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 953ef46899c750d41ea6e09aba71c9376363e1ce
+  revision: 2377ede7104b675247bf7b26bc279591d54d0a21
   specs:
     rails_com (1.2.9)
       acme-client
@@ -25,6 +25,7 @@ GIT
       default_where (~> 2.2)
       http-form_data (~> 2.3)
       httpx (~> 0.16)
+      jbuilder
       kaminari
       rails (>= 6.1)
       rails_extend
@@ -32,14 +33,14 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 092a58af67ee302612df8cb5416149f6b9c7890a
+  revision: 383e4a7423663c8233b14d1eeaec2507569310ca
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: ef2aa3492d3d214a8d60cb6322c39d2e568adb74
+  revision: c51aad1277fff57c53409a2c4c6c4e90461463d5
   specs:
     rails_extend (1.0.0)
       rails (>= 5.0)
@@ -133,7 +134,7 @@ GEM
     default_where (2.3.0)
       activerecord (>= 4.0, <= 7.0)
     erubi (1.10.0)
-    faraday (1.7.2)
+    faraday (1.8.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -252,7 +253,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.1.0)
     timers (4.3.3)
-    turbo-rails (0.7.11)
+    turbo-rails (0.7.14)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
