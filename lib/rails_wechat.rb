@@ -3,7 +3,6 @@
 # engine
 require 'rails_wechat/engine'
 require 'rails_wechat/config'
-require 'rails_wechat/helpers'
 
 # omniauth
 #require 'omniauth/strategies/wechat'
