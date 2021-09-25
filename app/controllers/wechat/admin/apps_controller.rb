@@ -33,7 +33,7 @@ module Wechat
     end
 
     def update_cert
-      pkcs12 = WxPay.set_apiclient_by_pkcs12(params[:cert].read, @app.mch_id)
+      pkcs12 = WxPay::Utils.set_apiclient_by_pkcs12(params[:cert].read, @app.mch_id)
 
       @app.apiclient_cert = pkcs12.certificate
       @app.apiclient_key = pkcs12.key
