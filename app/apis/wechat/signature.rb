@@ -24,7 +24,7 @@ module Wechat
         jsapi_ticket: ticket,
         url: url
       }
-      result = Digest::SHA1.hexdigest params.to_qeury
+      result = Digest::SHA1.hexdigest params.to_query
       params.merge(signature: result)
     end
 
