@@ -24,7 +24,11 @@ module Wechat
         jsapi_ticket: ticket,
         url: url
       }
-      result = Digest::SHA1.hexdigest params.to_query
+      pairs = params.sort.map do |key, value|
+        "#{key}=#{value}"
+      end.join('&')
+
+      result = Digest::SHA1.hexdigest pairs
       params.merge(signature: result)
     end
 
