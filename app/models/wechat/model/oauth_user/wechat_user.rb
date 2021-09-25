@@ -7,7 +7,7 @@ module Wechat
       attribute :remark, :string
 
       belongs_to :request, optional: true
-      belongs_to :app, foreign_key: :app_id, primary_key: :appid, optional: true
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       has_many :requests, foreign_key: :open_id, primary_key: :uid
       has_many :subscribes, dependent: :delete_all
@@ -77,7 +77,7 @@ module Wechat
 
     def refresh_access_token
       params = {
-        appid: app_id,
+        appid: appid,
         grant_type: 'refresh_token',
         refresh_token: refresh_token
       }
@@ -97,7 +97,7 @@ module Wechat
 
       raw_info = oauth_params.dig('extra', 'raw_info') || {}
       self.unionid = raw_info['unionid']
-      self.app_id ||= raw_info['app_id']
+      self.appid ||= raw_info['app_id']
 
       credential_params = oauth_params.fetch('credentials', {})
       self.access_token = credential_params['token']
