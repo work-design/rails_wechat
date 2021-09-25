@@ -1,6 +1,6 @@
 module Wechat
   class Admin::AppsController < Admin::BaseController
-    before_action :set_app, only: [:show, :info, :edit, :edit_cert, :update_cert, :update, :destroy]
+    before_action :set_app, only: [:show, :info, :edit, :edit_pay, :edit_cert, :update_cert, :update, :destroy]
 
     def index
       q_params = {}

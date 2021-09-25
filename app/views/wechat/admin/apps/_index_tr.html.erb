@@ -5,6 +5,9 @@
       <%= link_to({ action: 'info', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fas fa-cog"></i>
       <% end %>
+      <%= link_to({ action: 'edit_pay', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.edit_pay.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fab fa-amazon-pay"></i>
+      <% end %>
       <%= link_to({ action: 'edit_cert', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.edit_cert.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fas fa-certificate"></i>
       <% end %>

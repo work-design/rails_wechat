@@ -94,6 +94,7 @@ Rails.application.routes.draw do
           get :info
           get 'cert' => :edit_cert
           patch 'cert' => :update_cert
+          get 'pay' => :edit_pay
         end
         resources :responses do
           member do

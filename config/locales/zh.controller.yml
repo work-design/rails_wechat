@@ -8,6 +8,10 @@ zh:
           title: 我的公众号
         info:
           title: 如何设置
+        edit_pay:
+          title: 支付设置
+        edit_cert:
+          title: 支付证书
       requests:
         index:
           title: 用户消息
