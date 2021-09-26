@@ -15,7 +15,7 @@ module Wechat
       if current_wechat_user && current_wechat_user.user.nil?
         redirect_url = sign_url(uid: current_wechat_user.uid)
       elsif current_wechat_app && current_wechat_app.respond_to?(:oauth2_url)
-        redirect_url = current_wechat_app.oauth2_url(host: request.host, port: request.port, protocol: request.protocol, controller: params[:controller], action: params[:action])
+        redirect_url = current_wechat_app.oauth2_url(host: request.host, port: request.port, protocol: request.protocol)
       else
         redirect_url = sign_url
       end
