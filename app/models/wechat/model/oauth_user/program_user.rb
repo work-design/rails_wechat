@@ -22,7 +22,7 @@ module Wechat
       at = authorized_tokens.valid.take || authorized_tokens.build
       at.session_key = session_key if session_key.present?
       at.save
-      at.token
+      at
     end
 
   end

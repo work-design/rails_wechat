@@ -12,10 +12,10 @@ module Wechat
         program_user.identity = info['openid']
         program_user.unionid = info['unionId']
       end
-      token = @program_user.auth_token(info['session_key'])
+      auth_token = @program_user.auth_token(info['session_key'])
 
-      headers['Auth-Token'] = token
-      render json: { auth_token: token }
+      headers['Auth-Token'] = auth_token.token
+      render json: { auth_token: auth_token, account: auth_token.account, user: auth_token.user }
     end
 
     def info
