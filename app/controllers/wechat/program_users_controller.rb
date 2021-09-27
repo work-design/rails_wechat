@@ -46,7 +46,7 @@ module Wechat
         @program_user.save
         @account.save
 
-        render json: { program_user: @program_user.as_json(only: [:id, :identity]) }
+        render json: { program_user: @program_user.as_json(only: [:id, :identity]), user: @program_user.user }
       else
         current_authorized_token.destroy  # 触发重新授权逻辑
         render :mobile_err, locals: { model: @program_user }, status: :unprocessable_entity
