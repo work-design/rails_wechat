@@ -42,20 +42,4 @@
     <label data-action="click->input#check"></label>
   <% end %>
 </td>
-<td>
-  <%= link_to({ controller: 'menus', app_id: model.id }, aria: { label: t('wechat.admin.menus.index.title') }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fas fa-bars"></i>
-  <% end %>
-  <%= link_to({ controller: 'responses', app_id: model.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fas fa-reply-all"></i>
-  <% end %>
-  <%= link_to({ controller: 'requests', app_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fas fa-comments"></i>
-  <% end %>
-  <%= link_to({ controller: 'tags', app_id: model.id }, aria: { label: t('wechat.admin.tags.index.title') }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fas fa-user-tag"></i>
-  <% end %>
-  <%= link_to({ controller: 'templates', app_id: model.id }, aria: { label: t('wechat.admin.templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fas fa-inbox"></i>
-  <% end %>
-</td>
+<td><%= model.domain %></td>

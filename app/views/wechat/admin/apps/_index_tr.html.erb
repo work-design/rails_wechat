@@ -1,7 +1,24 @@
 <tr id="tr_<%= model.id %>" data-controller="show" data-action="mouseenter->show#show mouseleave->show#hide">
   <%= yield %>
   <td>
-    <span data-show-target="item" style="visibility: hidden">
+    <div data-show-target="item" style="visibility: hidden">
+      <%= link_to({ controller: 'menus', app_id: model.id }, aria: { label: t('wechat.admin.menus.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fas fa-bars"></i>
+      <% end %>
+      <%= link_to({ controller: 'responses', app_id: model.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fas fa-reply-all"></i>
+      <% end %>
+      <%= link_to({ controller: 'requests', app_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fas fa-comments"></i>
+      <% end %>
+      <%= link_to({ controller: 'tags', app_id: model.id }, aria: { label: t('wechat.admin.tags.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fas fa-user-tag"></i>
+      <% end %>
+      <%= link_to({ controller: 'templates', app_id: model.id }, aria: { label: t('wechat.admin.templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fas fa-inbox"></i>
+      <% end %>
+    </div>
+    <div data-show-target="item" style="visibility: hidden">
       <%= link_to({ action: 'info', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fas fa-cog"></i>
       <% end %>
@@ -20,6 +37,6 @@
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fas fa-trash-alt"></i>
       <% end %>
-    </span>
+    </div>
   </td>
 </tr>

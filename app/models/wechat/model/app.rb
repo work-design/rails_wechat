@@ -26,6 +26,7 @@ module Wechat
       attribute :apiclient_cert, :string
       attribute :apiclient_key, :string
       attribute :serial_no, :string
+      attribute :domain, :string
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
@@ -190,7 +191,7 @@ module Wechat
 
     def host
       if oauth_enable
-        organ_domain&.identifier || organ_domains.first&.identifier
+        domain.presence || organ_domain&.identifier || organ_domains.first&.identifier
       end
     end
 
