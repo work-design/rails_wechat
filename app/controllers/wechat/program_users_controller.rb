@@ -41,7 +41,8 @@ module Wechat
         @program_user.identity = phone_number
         @account = @program_user.account || @program_user.build_account(type: 'Auth::MobileAccount')
         @account.confirmed = true
-        #@account.join(name: @program_user.name, invited_code: params[:invited_code])
+        @account.user || @account.build_user 
+        @account.user.assign_attributes name: @program_user.name, invited_code: params[:invited_code]
         @program_user.save
         @account.save
 
