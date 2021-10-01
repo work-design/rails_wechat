@@ -9,7 +9,6 @@ module Wechat
       info = @app.api.jscode2session(session_params[:code])
       @program_user = ProgramUser.create_or_find_by!(uid: info['openid']) do |program_user|
         program_user.appid = params[:appid]
-        program_user.identity = info['openid']
         program_user.unionid = info['unionId']
       end
       auth_token = @program_user.auth_token(info['session_key'])
