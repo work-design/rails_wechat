@@ -43,8 +43,11 @@ module Wechat
         @account.confirmed = true
         @account.user || @account.build_user
         @account.user.assign_attributes name: @program_user.name, invited_code: params[:invited_code]
-        @program_user.save
-        @account.save
+
+        @program_user.class.transaction do
+          @program_user.save!
+          @account.save!
+        end
 
         render json: { program_user: @program_user.as_json(only: [:id, :identity]), user: @program_user.user }
       else
