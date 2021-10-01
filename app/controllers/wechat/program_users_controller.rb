@@ -14,7 +14,7 @@ module Wechat
       auth_token = @program_user.auth_token(info['session_key'])
 
       headers['Auth-Token'] = auth_token.token
-      render json: { auth_token: auth_token.token, account: auth_token.account, user: auth_token.user }
+      render json: { auth_token: auth_token.token, account: @program_user.account, user: @program_user.user }
     end
 
     def info
@@ -41,7 +41,7 @@ module Wechat
         @program_user.identity = phone_number
         @account = @program_user.account || @program_user.build_account(type: 'Auth::MobileAccount')
         @account.confirmed = true
-        @account.user || @account.build_user 
+        @account.user || @account.build_user
         @account.user.assign_attributes name: @program_user.name, invited_code: params[:invited_code]
         @program_user.save
         @account.save
