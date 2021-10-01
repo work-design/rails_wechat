@@ -1,13 +1,6 @@
 GIT
-  remote: https://github.com/qinmingyuan/viter.git
-  revision: 82d46c2eed89cc27b89811e3ded0cb6797f3b807
-  specs:
-    viter (0.1)
-      rails
-
-GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 94b24f83e9ac5e8ecf374a9163d76ebbd89ac050
+  revision: 4dd3ab91166d41c09e33c5393fa6a1aaa9bce2b7
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -16,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 2377ede7104b675247bf7b26bc279591d54d0a21
+  revision: 061b45039cc66ffff0fb798c19717761897e451f
   specs:
     rails_com (1.2.9)
       acme-client
@@ -33,17 +26,24 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 383e4a7423663c8233b14d1eeaec2507569310ca
+  revision: 9dd45dbb2fe715bbe68c3502e3d198d3fdefa73a
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: c51aad1277fff57c53409a2c4c6c4e90461463d5
+  revision: a01f5bcfbe28b070f92ef4edefe781497cc69a23
   specs:
     rails_extend (1.0.0)
       rails (>= 5.0)
+
+GIT
+  remote: https://github.com/work-design/rails_vite.git
+  revision: 231c4cf7eb14fc610ffd8d36b686df8e5d2351cd
+  specs:
+    rails_vite (0.0.1)
+      rails
 
 PATH
   remote: .
@@ -128,8 +128,8 @@ GEM
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
     crass (1.0.6)
-    debug (1.0.0.rc2)
-      irb
+    debug (1.2.2)
+      irb (>= 1.3.6)
       reline (>= 0.2.7)
     default_where (2.3.0)
       activerecord (>= 4.0, <= 7.0)
@@ -185,18 +185,18 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    marcel (1.0.1)
+    marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.1)
     mini_portile2 (2.6.1)
     minitest (5.14.4)
     multipart-post (2.1.1)
     nio4r (2.5.8)
-    nokogiri (1.12.4)
+    nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     pg (1.2.3)
-    puma (5.4.0)
+    puma (5.5.0)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -253,7 +253,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.1.0)
     timers (4.3.3)
-    turbo-rails (0.7.14)
+    turbo-rails (0.8.1)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -269,17 +269,16 @@ PLATFORMS
 
 DEPENDENCIES
   debug
-  jbuilder
   pg
   puma
   rails_auth!
   rails_com!
   rails_design!
   rails_extend!
+  rails_vite!
   rails_wechat!
   sdoc
   sidekiq
-  viter!
 
 BUNDLED WITH
    2.2.22
