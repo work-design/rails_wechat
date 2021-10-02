@@ -20,5 +20,9 @@ module Wechat
       }
     end
 
+    def has_content?
+      content[:Articles].present?
+    end
+
   end
 end

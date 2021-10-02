@@ -22,6 +22,10 @@ module Wechat
       self
     end
 
+    def has_content?
+      value.present?
+    end
+
     def content
       {}
     end

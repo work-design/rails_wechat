@@ -5,5 +5,9 @@ module Wechat
       {}
     end
 
+    def has_content?
+      true
+    end
+
   end
 end
