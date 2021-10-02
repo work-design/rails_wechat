@@ -47,7 +47,7 @@ module Wechat
             {
               title: '请绑定',
               description: '授权您的信息',
-              url: app.oauth2_url(request_id: request.id)
+              url: app.oauth2_url(request_id: id)
             }
           ]
         }
