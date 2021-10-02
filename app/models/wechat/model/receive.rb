@@ -77,13 +77,11 @@ module Wechat
     end
 
     def parse_content
-      build_request(type: compute_type)
+      request || build_request(type: compute_type)
       request.appid = appid
       request.open_id = open_id
-      request.generate_wechat_user  # Should before get reply
       request.msg_type = msg_type
       request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
-
       case msg_type
       when 'text'
         request.body = message_hash['Content']
@@ -108,6 +106,7 @@ module Wechat
       else
         warn "Don't know how to parse message as #{message_hash['MsgType']}", uplevel: 1
       end
+      request.generate_wechat_user  # Should before get reply
 
       self.save  # will auto save wechat request
     end
