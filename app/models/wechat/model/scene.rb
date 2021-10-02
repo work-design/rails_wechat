@@ -69,8 +69,8 @@ module Wechat
     end
 
     def get_program_qrcode
-      r = app.api.generate_scheme
-      self.qrcode_url = r['openlink']
+      r = app.api.generate_url
+      self.qrcode_url = r['url_link']
     end
 
     def expired?(time = Time.current)
