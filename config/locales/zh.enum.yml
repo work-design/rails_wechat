@@ -58,7 +58,8 @@ zh:
           WechatUser: 微信已绑定用户
       auth/oauth_user:
         type:
-          Wechat::WechatUser: 微信用户
+          Wechat::WechatUser: 微信公众号
+          Wechat::ProgramUser: 微信小程序
       wechat/template_config:
         type:
           Wechat::TemplatePublic: 公众号
