@@ -6,10 +6,10 @@ module Wechat
       attribute :provider, :string, default: 'wechat'
       attribute :remark, :string
 
-      belongs_to :request, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
-      has_many :requests, foreign_key: :open_id, primary_key: :uid
+      has_one :request, -> { where(init_wechat_user: true) }, foreign_key: :open_id, primary_key: :uid
+      has_many :requests, foreign_key: :open_id, primary_key: :uid, dependent: :destroy
       has_many :subscribes, dependent: :delete_all
       has_many :user_tags, foreign_key: :open_id, primary_key: :uid, dependent: :destroy
       has_many :tags, through: :user_tags
