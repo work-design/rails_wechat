@@ -7,6 +7,8 @@ module Wechat
       attribute :remark, :string
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :user_inviter, class_name: 'Auth::User', optional: true
+      belongs_to :member_inviter, class_name: 'Org::Member', optional: true
 
       has_one :request, -> { where(init_wechat_user: true) }, foreign_key: :open_id, primary_key: :uid
       has_many :requests, foreign_key: :open_id, primary_key: :uid, dependent: :destroy
@@ -17,7 +19,6 @@ module Wechat
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :sync_user_info_later, if: -> { saved_change_to_access_token? && (attributes['name'].blank? && attributes['avatar_url'].blank?) }
-      after_save_commit :sync_inviter, if: -> { request && saved_change_to_request_id? }
       after_create_commit :auto_link, if: -> { unionid.present? }
     end
 
@@ -34,12 +35,6 @@ module Wechat
         self.account ||= same_oauth_user.account
       end
       self.save
-    end
-
-    def sync_inviter
-      inviter_id = request.body.delete_prefix 'invite_by_'
-      self.account&.update inviter_id: inviter_id
-      self.user&.update inviter_id: inviter_id
     end
 
     def sync_remark_later

@@ -29,6 +29,16 @@ module Wechat
 
       before_save :generate_wechat_user, if: -> { open_id_changed? && open_id.present? }
       after_create :get_reply!
+      after_save_commit :sync_invite_info, if: -> { init_wechat_user && saved_change_to_body? }
+    end
+
+    def sync_invite_info
+      if body.start_with? 'invite_by_'
+        wechat_user.user_inviter_id = body.delete_prefix('invite_by_')
+      elsif body.start_with? 'invite_member_'
+        wechat_user.member_inviter_id = body.delete_prefix('invite_member_')
+      end
+      wechat_user.save
     end
 
     def rule_tag
@@ -58,7 +68,7 @@ module Wechat
             {
               title: '请绑定',
               description: '绑定信息',
-              url: Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', request_id: id, uid: open_id, host: app.host)
+              url: Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', uid: open_id, host: app.host)
             }
           ]
         }
