@@ -75,7 +75,7 @@ module Wechat
       end
 
       if filtered.present?
-        logger.debug "  -----> Filter Key: #{filtered[1]}"
+        logger.debug "\e[35m  Filter Key: #{filtered[1]}  \e[0m"
         r = filtered[1][:proc].call(self)
         if r.has_content?
           r
