@@ -31,7 +31,7 @@ module Wechat
     end
 
     def remove_from_wechat
-      wechat_api.tag_del_user(tag.tag_id, wechat_user.uid) if wechat_api
+      wechat_api.tag_del_user(tag.tag_id, open_id) if wechat_api
     end
 
   end
