@@ -102,10 +102,10 @@ module Wechat
       wechat_user || build_wechat_user
       wechat_user.appid = appid
       if ['SCAN', 'subscribe'].include?(event)
-        if event_key.to_s.start_with?('invite_by_')
-          wechat_user.user_inviter_id = event_key.delete_prefix('invite_by_')
-        elsif event_key.to_s.start_with? 'invite_member_'
-          wechat_user.member_inviter_id = event_key.delete_prefix('invite_member_')
+        if body.to_s.start_with?('invite_by_')
+          wechat_user.user_inviter_id = body.delete_prefix('invite_by_')
+        elsif body.to_s.start_with? 'invite_member_'
+          wechat_user.member_inviter_id = body.delete_prefix('invite_member_')
         end
       end
 
