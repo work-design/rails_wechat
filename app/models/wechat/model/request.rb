@@ -39,6 +39,38 @@ module Wechat
       }.compact
     end
 
+    def reply_params
+      if wechat_user.attributes['name'].blank?
+        {
+          appid: appid,
+          news_reply_items_attributes: [
+            {
+              title: '请绑定',
+              description: '授权您的信息',
+              url: app.oauth2_url(request_id: request.id)
+            }
+          ]
+        }
+      elsif wechat_user.user.blank?
+        {
+          appid: appid,
+          news_reply_items_attributes: [
+            {
+              title: '请绑定',
+              description: '绑定信息',
+              url: Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', request_id: id, uid: open_id, host: app.host)
+            }
+          ]
+        }
+      else
+        {}
+      end
+    end
+
+    def program_reply_params
+
+    end
+
     def reply_from_rule
       filtered = RailsWechat.config.rules.find do |_, rule|
         if rule.slice(:msg_type, :event, :event_key) <= self.rule_tag && rule[:body]
@@ -66,10 +98,6 @@ module Wechat
     # CancelTyping
     def typing(command = 'Typing')
       app.api.message_custom_typing(wechat_user.uid, command)
-    end
-
-    def bind_url
-      Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', request_id: id, uid: open_id, host: app.host)
     end
 
     def generate_wechat_user
