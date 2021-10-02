@@ -48,16 +48,29 @@ module Wechat
     alias_method :qrcode_file_url, :qrcode_data_url
 
     def commit_to_wechat
+      if ['Wechat::PublicApp', 'Wechat::ReadApp'].include? app.type
+        get_public_qrcode
+      elsif ['Wechat::ProgramApp'].include? app.type
+        get_program_qrcode
+      end
+
+      self.save
+      self
+    end
+
+    def get_public_qrcode
       if expire_seconds
         r = app.api.qrcode_create_scene self.match_value, expire_seconds
       else
         r = app.api.qrcode_create_limit_scene self.match_value
       end
-
       self.qrcode_ticket = r['ticket']
       self.qrcode_url = r['url']
-      self.save
-      r
+    end
+
+    def get_program_qrcode
+      r = app.api.generate_url
+      self.qrcode_url = r['url_link']
     end
 
     def expired?(time = Time.current)
