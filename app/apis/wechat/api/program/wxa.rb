@@ -21,5 +21,16 @@ module Wechat::Api
       post 'generate_urllink', path: path, **options, base: BASE
     end
 
+    def generate_scheme(path: '/pages/index/index', **options)
+      p = {
+        jump_wxa: {
+          path: path,
+          **options.slice(:query, :env_version)
+        },
+        **options.slice(:is_expire, :expire_type, :expire_time, :expire_interval)
+      }
+      post 'generatescheme', **p, base: BASE
+    end
+
   end
 end
