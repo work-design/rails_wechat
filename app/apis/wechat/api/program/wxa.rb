@@ -17,5 +17,9 @@ module Wechat::Api
       post 'getwxacodeunlimit', **p, base: BASE
     end
 
+    def generate_url(path: '/pages/index/index', **options)
+      post 'generate_urllink', path: path, **options, base: BASE
+    end
+
   end
 end
