@@ -27,6 +27,7 @@ module Wechat
       attribute :apiclient_key, :string
       attribute :serial_no, :string
       attribute :domain, :string
+      attribute :url_link, :string
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
@@ -42,7 +43,7 @@ module Wechat
       has_many :tags, foreign_key: :appid, primary_key: :appid
       has_many :templates, foreign_key: :appid, primary_key: :appid
 
-      scope :valid, -> { where(enabled: true) }
+      scope :enabled, -> { where(enabled: true) }
       scope :shared, -> { where(shared: true) }
 
       validates :appid, presence: true, uniqueness: true
