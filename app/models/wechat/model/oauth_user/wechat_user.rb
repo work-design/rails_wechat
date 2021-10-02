@@ -20,6 +20,7 @@ module Wechat
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :sync_user_info_later, if: -> { saved_change_to_access_token? && (attributes['name'].blank? && attributes['avatar_url'].blank?) }
       after_create_commit :auto_link, if: -> { unionid.present? }
+      after_create_commit :auto_join_organ, if: -> { member_inviter && saved_change_to_identity? }
     end
 
     def name
@@ -35,6 +36,11 @@ module Wechat
         self.account ||= same_oauth_user.account
       end
       self.save
+    end
+
+    def auto_join_organ
+      member = members.find_by(organ_id: member_inviter.organ_id) || members.build(organ_id: member_inviter.organ_id)
+      member.save
     end
 
     def sync_remark_later
