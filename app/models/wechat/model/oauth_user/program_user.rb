@@ -20,6 +20,7 @@ module Wechat
 
     def auth_token(session_key = nil)
       at = authorized_tokens.valid.take || authorized_tokens.build
+      at.identity = identity if identity.present?
       at.session_key = session_key if session_key.present?
       at.save
       at
