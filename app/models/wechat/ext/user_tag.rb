@@ -3,7 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      has_many :tags, class_name: 'Wechat::Tag', dependent: :destroy
+      has_many :tags, class_name: 'Wechat::Tag', dependent: :destroy_async
 
       after_save_commit :sync_tag_later, if: -> { saved_change_to_name? }
     end

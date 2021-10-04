@@ -17,7 +17,7 @@ module Wechat
 
       has_one :response, ->(o){ where(match_value: o.match_value) }, primary_key: :appid, foreign_key: :appid
       has_one :tag, ->(o){ where(name: o.match_value) }, primary_key: :appid, foreign_key: :appid
-      has_many :scene_menus, dependent: :destroy
+      has_many :scene_menus, dependent: :destroy_async
       has_many :menus, through: :scene_menus
 
       before_validation do
