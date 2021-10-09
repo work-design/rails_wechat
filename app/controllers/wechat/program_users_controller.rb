@@ -7,10 +7,9 @@ module Wechat
 
     def create
       info = @app.api.jscode2session(session_params[:code])
-      @program_user = ProgramUser.create_or_find_by!(uid: info['openid']) do |program_user|
-        program_user.appid = params[:appid]
-        program_user.unionid = info['unionid']
-      end
+      @program_user = ProgramUser.create_or_find_by!(uid: info['openid'])
+      @program_user.appid = params[:appid]
+      @program_user.unionid = info['unionid']
       auth_token = @program_user.auth_token(info['session_key'])
 
       headers['Auth-Token'] = auth_token.token
@@ -27,7 +26,6 @@ module Wechat
         province: userinfo_params[:province],
         country: userinfo_params[:country]
       }
-
       @program_user.save
 
       render json: { program_user: @program_user.as_json(only: [:id, :identity, :name, :avatar_url]) }
