@@ -1,14 +1,9 @@
 module Wechat
   module Model::Menu::ScanPushMenu
-    extend ActiveSupport::Concern
-
-    included do
-      attribute :menu_type, :string, default: 'scancode_push'
-    end
 
     def as_json
       {
-        type: menu_type,
+        type: 'scancode_push',
         name: name,
         key: value
       }

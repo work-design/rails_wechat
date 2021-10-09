@@ -4,7 +4,6 @@ module Wechat
 
     included do
       attribute :type, :string
-      attribute :menu_type, :string
       attribute :name, :string
       attribute :value, :string
       attribute :appid, :string

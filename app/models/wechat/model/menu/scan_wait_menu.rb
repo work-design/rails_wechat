@@ -1,14 +1,9 @@
 module Wechat
   module Model::Menu::ScanWaitMenu
-    extend ActiveSupport::Concern
-
-    included do
-      attribute :menu_type, :string, default: 'scancode_waitmsg'
-    end
 
     def as_json
       {
-        type: menu_type,
+        type: 'scancode_waitmsg',
         name: name,
         key: value
       }

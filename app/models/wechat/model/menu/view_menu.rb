@@ -3,7 +3,6 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :menu_type, :string, default: 'view'
       after_initialize if: :new_record? do
         self.value ||= host
       end
@@ -11,7 +10,7 @@ module Wechat
 
     def as_json
       {
-        type: menu_type,
+        type: 'view',
         name: name,
         url: url
       }

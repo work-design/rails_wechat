@@ -1,14 +1,9 @@
 module Wechat
   module Model::Menu::ClickMenu
-    extend ActiveSupport::Concern
-
-    included do
-      attribute :menu_type, :string, default: 'click'
-    end
 
     def as_json
       {
-        type: menu_type,
+        type: 'click',
         name: name,
         key: value
       }
