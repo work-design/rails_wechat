@@ -27,7 +27,7 @@ zh:
           Wechat::TextRequest: 文字
           Wechat::SubscribeRequest: 关注
           Wechat::UnsubscribeRequest: 取消关注
-          Wechat::ScanRequest: 扫描事件
+          Wechat::ScanRequest: 扫码
           Wechat::ViewRequest: 菜单
           Wechat::LocationRequest: 位置
           Wechat::Request: 其他

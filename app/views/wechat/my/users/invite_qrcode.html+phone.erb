@@ -5,17 +5,8 @@
   </figure>
 </div>
 <div class="weui-panel" style="padding-top: 1px">
-  <div class="weui-panel__hd p-0">
-    <div class="weui-navbar">
-      <%= link_to({ action: 'invite_qrcode' }, class: 'weui-navbar__item weui-bar__item_on') do %>
-        邀请列表
-      <% end %>
-      <%= link_to({ action: 'requests' }, class: 'weui-navbar__item') do %>
-        邀请记录
-      <% end %>
-    </div>
-  </div>
   <div class="weui-panel__bd">
+    <%= render 'menu' %>
     <div class="weui-cells mt-0">
     <% @scene.tag && @scene.tag.wechat_users.each do |wechat_user| %>
       <div class="weui-cell">
@@ -27,7 +18,7 @@
         <% end %>
         </div>
         <div class="weui-cell__bd weui-cell_primary"><%= wechat_user.name %></div>
-        <div class="weui-cell__ft"><time data-controller="time"><%= wechat_user.created_at.to_s(:rfc822) %></time></div>
+        <div class="weui-cell__ft"><time data-controller="time" data-format="YYYY-MM-DD HH:mm:ss"><%= wechat_user.created_at.to_s(:rfc822) %></time></div>
       </div>
     <% end %>
     </div>
