@@ -23,7 +23,7 @@
         <% if wechat_user.avatar_url %>
           <%= image_tag wechat_user.avatar_url, class: 'image is-24x24' %>
         <% else %>
-          <%= image_pack_tag 'avatar.png', class: 'image is-24x24' %>
+          <%= image_vite_tag 'avatar.png', class: 'image is-24x24' %>
         <% end %>
         </div>
         <div class="weui-cell__bd weui-cell_primary"><%= wechat_user.name %></div>
