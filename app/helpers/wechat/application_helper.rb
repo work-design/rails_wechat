@@ -14,7 +14,8 @@ module Wechat
     timestamp: '#{js_hash[:timestamp]}',
     nonceStr: '#{js_hash[:noncestr]}',
     signature: '#{js_hash[:signature]}',
-    jsApiList: ['#{apis.join("','")}']
+    jsApiList: ['#{apis.join("','")}'],
+    openTagList: ['wx-open-subscribe']
   })
   WECHAT_CONFIG_JS
     rescue => e

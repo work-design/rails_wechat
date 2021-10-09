@@ -2,8 +2,7 @@ module Wechat
   module Model::App::PublicApp
 
     def sync_templates
-      templates = api.templates
-      templates.each do |template|
+      api.templates.each do |template|
         template = templates.find_or_initialize_by(template_id: template['template_id'])
         template.assign_attributes template.slice('title', 'content', 'example')
         template.save
