@@ -28,7 +28,7 @@
           <h4 class="weui-media-box__title">
             <span><%= request.wechat_user.name %></span>
             <span class="weui-badge"><%= request.type_i18n %></span>
-            <% if request.wechat_user.request_id == request.id %>
+            <% if request.wechat_user.user_inviter_id == current_user.id %>
               <span class="tag is-success">邀请成功</span>
             <% else %>
               <span class="tag">曾注册用户</span>
@@ -41,7 +41,9 @@
                 <time data-controller="time"><%= request.wechat_user.created_at.to_s(:rfc822) %></time>
               <% end %>
             </li>
-            <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><time data-controller="time" data-format="MM-DD HH:mm:ss"><%= request.created_at.to_s(:rfc822) %></time></li>
+            <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">
+              <time data-controller="time" data-format="MM-DD HH:mm:ss"><%= request.created_at.to_s(:rfc822) %></time>
+            </li>
           </ul>
         </div>
       </div>
