@@ -33,7 +33,7 @@ module Wechat
 
     def auto_link
       if self.unionid && self.same_oauth_user
-        self.account ||= same_oauth_user.account
+        self.identity ||= same_oauth_user.identity
       end
       self.save
     end
