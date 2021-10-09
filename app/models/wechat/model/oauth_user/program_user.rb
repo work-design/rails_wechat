@@ -4,8 +4,6 @@ module Wechat
 
     included do
       attribute :provider, :string, default: 'wechat_program'
-
-      belongs_to :app, foreign_key: :appid, primary_key: :appid
     end
 
     def get_phone_number(encrypted_data, iv, session_key)
