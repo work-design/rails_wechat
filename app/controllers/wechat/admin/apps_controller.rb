@@ -5,7 +5,7 @@ module Wechat
     def index
       q_params = {}
       q_params.merge! default_params
-      q_params.merge! params.permit(:id)
+      q_params.merge! params.permit(:id, :type)
 
       @apps = App.default_where(q_params).order(id: :asc).page(params[:page])
     end
