@@ -10,9 +10,11 @@ module Wechat
       attribute :notifiable_type, :string
       attribute :code, :string, default: 'default'
       attribute :content, :string
+      attribute :appid, :string
 
       validates :code, uniqueness: { scope: :notifiable_type }
 
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       has_many :template_key_words, -> { order(position: :asc) }, inverse_of: :template_config, dependent: :delete_all
       has_many :templates, dependent: :nullify
       accepts_nested_attributes_for :template_key_words

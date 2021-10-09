@@ -14,7 +14,7 @@ module Wechat
       r
     end
 
-    def sync_key_words(app = WechatPublic.default)
+    def sync_key_words
       if tid.present? && app
         template = app.api.templates.find { |i| i['template_id'] == tid }
         if template.blank?
