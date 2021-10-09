@@ -34,6 +34,8 @@ module Wechat
     def auto_link
       if self.unionid && self.same_oauth_user
         self.identity ||= same_oauth_user.identity
+        self.name ||= same_oauth_user.name
+        self.avatar_url ||= same_oauth_user.avatar_url
       end
       self.save
     end
