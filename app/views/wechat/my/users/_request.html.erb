@@ -1,0 +1,26 @@
+<div class="weui-media-box weui-media-box_appmsg">
+  <div class="weui-media-box__hd">
+    <% if request.wechat_user.avatar_url.present? %>
+      <%= image_tag request.wechat_user.avatar_url, class: 'weui-media-box__thumb' %>
+    <% else %>
+      <%= image_vite_tag 'avatar.png', class: 'weui-media-box__thumb' %>
+    <% end %>
+  </div>
+  <div class="weui-media-box__bd">
+    <h4 class="weui-media-box__title">
+      <span><%= request.wechat_user.name %></span>
+      <span class="weui-badge"><%= request.type_i18n %></span>
+      <% if request.wechat_user.user_inviter_id == current_user.id %>
+        <span class="tag is-success">邀请成功</span>
+      <% else %>
+        <span class="tag">曾注册用户</span>
+      <% end %>
+    </h4>
+    <ul class="weui-media-box__info">
+      <li class="weui-media-box__info__meta">
+        <span><%= request.init_wechat_user_i18n %></span>
+        <time data-controller="time" data-format="YYYY-MM-DD HH:mm:ss"><%= request.wechat_user.created_at.to_s(:rfc822) %></time>
+      </li>
+    </ul>
+  </div>
+</div>
