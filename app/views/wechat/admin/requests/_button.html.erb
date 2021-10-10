@@ -1,3 +1,3 @@
 <%= link_to({ controller: 'datum/panel/table_lists', action: 'find', data_list_id: 'RequestDailyExport', **params.permit('created_at-gte', 'created_at-lte') }, data: { turbo_frame: 'modal' }, class: 'button is-link is-small') do %>
-  <i class="fas fa-file-excel"></i><span><%= t('.export') %></span>
+  <i class="fa-light fa-file-excel"></i><span><%= t('.export') %></span>
 <% end %>
