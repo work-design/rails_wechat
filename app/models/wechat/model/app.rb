@@ -8,7 +8,7 @@ module Wechat
       attribute :enabled, :boolean, default: true
       attribute :shared, :boolean, default: false, comment: '可与其他或下级机构公用'
       attribute :oauth_enable, :boolean, default: true
-      attribute :inviting, :boolean, default: true, comment: '可邀请加入'
+      attribute :inviting, :boolean, default: false, comment: '可邀请加入'
       attribute :appid, :string
       attribute :secret, :string
       attribute :token, :string, default: -> { SecureRandom.hex }
