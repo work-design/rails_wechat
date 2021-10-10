@@ -50,6 +50,7 @@ module Wechat
         :type,
         :name,
         :enabled,
+        :inviting,
         :appid,
         :secret,
         :agentid,

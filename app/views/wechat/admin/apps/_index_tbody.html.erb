@@ -41,5 +41,9 @@
     <%= f.check_box :enabled, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
     <label data-action="click->input#check"></label>
   <% end %>
+  <%= form_with theme: nil, model: model, scope: :app, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :inviting, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
 </td>
 <td><%= model.domain %></td>
