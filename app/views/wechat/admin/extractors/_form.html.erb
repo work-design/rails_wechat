@@ -10,12 +10,12 @@
 <div class="field is-horizontal">
   <%= f.label :start_at %>
   <div class="field-body">
-    <%= f.time_select :start_at, start_hour: 0, end_hour: 23, minute_step: 30, default: { hour: 0, min: 0 }, wrap: { all: 'field is-narrow', select: 'select' }, on: { label: false } %>
+    <%= f.time_select :start_at, start_hour: 0, end_hour: 23, minute_step: 30, default: { hour: 0, min: 0 }, wrap: { all: 'field is-narrow', select: 'select' }, label: nil %>
   </div>
 </div>
 <div class="field is-horizontal">
   <%= f.label :finish_at %>
   <div class="field-body">
-    <%= f.time_select :finish_at, start_hour: 0, end_hour: 23, minute_step: 30, default: { hour: 23, min: 59 }, wrap: { all: 'field is-narrow', select: 'select' }, on: { label: false } %>
+    <%= f.time_select :finish_at, start_hour: 0, end_hour: 23, minute_step: 30, default: { hour: 23, min: 59 }, wrap: { all: 'field is-narrow', select: 'select' }, label: nil %>
   </div>
 </div>
