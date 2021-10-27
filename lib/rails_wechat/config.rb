@@ -1,7 +1,7 @@
 module RailsWechat
   include ActiveSupport::Configurable
   bind_proc = ->(request) {
-    Wechat::NewsReply.new(request.reply_params )
+    Wechat::NewsReply.new(request.reply_params)
   }
   auto_join = ->(request) {
 
