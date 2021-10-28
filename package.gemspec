@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
     'README.md'
   ]
 
-  s.add_dependency 'rails_com', '~> 1.2'
-  s.add_dependency 'rails_auth'
+  s.add_dependency 'rails_extend'
   s.add_dependency 'rqrcode'
 end
