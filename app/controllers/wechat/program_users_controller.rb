@@ -3,7 +3,7 @@ module Wechat
     before_action :set_app, only: [:create]
     before_action :require_authorized_token, only: [:info, :mobile]
     before_action :set_wechat_program_user, only: [:info, :mobile]
-    skip_before_action :verify_authenticity_token if respond_to? :verify_authenticity_token
+    skip_before_action :verify_authenticity_token
 
     def create
       info = @app.api.jscode2session(session_params[:code])

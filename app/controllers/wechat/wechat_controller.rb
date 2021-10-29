@@ -1,6 +1,6 @@
 module Wechat
   class WechatController < BaseController
-    skip_before_action :verify_authenticity_token if respond_to? :verify_authenticity_token
+    skip_before_action :verify_authenticity_token
 
     def auth
       @wechat_user = WechatUser.find_or_initialize_by(uid: params[:openid])
