@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: e0f15078a44d48d4c22ded8d8026a23e66d475b1
+  revision: d6c81db26d66fb6bb548a5cc20c0c8c78becfa99
   specs:
     rails_com (1.3.0)
       acme-client
@@ -26,16 +26,16 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 130c1c2b456012082b2684277c3ff2253f5e400b
+  revision: 2eb9418bce99b413732b8f9b53552e1e2477d730
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: f4272ff3208aa34dfe53efd7a9afb82618c7ea4f
+  revision: ac9fc256372c9cbbb70bceecc853b87bc5cb70b2
   specs:
-    rails_extend (1.0.0)
+    rails_extend (1.0.1)
       rails (>= 5.0)
 
 GIT
@@ -49,6 +49,8 @@ PATH
   remote: .
   specs:
     rails_wechat (0.1.1)
+      http-form_data (~> 2.3)
+      httpx (~> 0.18)
       rails_extend
       rqrcode
 

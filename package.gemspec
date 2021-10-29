@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'rails_wechat'
-  s.version = '0.1.1'
+  s.version = '0.1.2'
   s.authors = ['qinmingyuan']
   s.email = ['mingyuan0715@foxmail.com']
   s.homepage = 'https://github.com/work-design/rails_wechat'
@@ -17,4 +17,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails_extend'
   s.add_dependency 'rqrcode'
+  s.add_dependency 'httpx', '~> 0.18'
+  s.add_dependency 'http-form_data', '~> 2.3'
 end

@@ -5,6 +5,14 @@ module Wechat
     included do
       attribute :provider, :string, default: 'wechat'
       attribute :remark, :string
+      attribute :name, :string
+      attribute :avatar_url, :string
+      attribute :appid, :string
+      attribute :uid, :string, index: true
+      attribute :unionid, :string, index: true
+      attribute :access_token, :string
+      attribute :expires_at, :datetime
+      attribute :refresh_token, :string
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :user_inviter, class_name: 'Auth::User', optional: true
