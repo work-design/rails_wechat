@@ -22,7 +22,7 @@ module Wechat
         @receive.message_hash = r
       end
       @receive.save
-      binding.b
+
       render plain: @receive.request.to_wechat
     end
 
