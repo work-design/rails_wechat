@@ -32,7 +32,6 @@ module Wechat
 
     def to_wechat
       r = {
-        MsgType: msg_type,
         CreateTime: Time.current.to_i
       }.merge! content
       r.merge!(FromUserName: app.user_name) if app

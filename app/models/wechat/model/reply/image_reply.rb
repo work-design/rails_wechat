@@ -3,13 +3,12 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :msg_type, :string, default: 'image'
-
       after_create_commit :upload_file_later
     end
 
     def content
       {
+        MsgType: 'image',
         Image: { MediaId: value }
       }
     end

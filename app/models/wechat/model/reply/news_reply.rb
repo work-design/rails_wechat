@@ -3,8 +3,6 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :msg_type, :string, default: 'news'
-
       has_many :news_reply_items, dependent: :delete_all
       accepts_nested_attributes_for :news_reply_items
     end
@@ -15,6 +13,7 @@ module Wechat
       end
 
       {
+        MsgType: 'news',
         ArticleCount: items.count,
         Articles: items
       }

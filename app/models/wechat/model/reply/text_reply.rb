@@ -1,13 +1,11 @@
 module Wechat
   module Model::Reply::TextReply
-    extend ActiveSupport::Concern
-
-    included do
-      attribute :msg_type, :string, default: 'text'
-    end
 
     def content
-      { Content: value }
+      {
+        MsgType: 'text',
+        Content: value
+      }
     end
 
   end

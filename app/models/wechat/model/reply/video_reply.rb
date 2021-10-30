@@ -1,13 +1,9 @@
 module Wechat
   module Model::Reply::VideoReply
-    extend ActiveSupport::Concern
-
-    included do
-      attribute :msg_type, :string, default: 'video'
-    end
 
     def content
       {
+        MsgType: 'video',
         Video: {
           MediaId: value,
           Title: title,
