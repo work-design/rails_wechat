@@ -1,6 +1,6 @@
 module Wechat
   class WechatsController < BaseController
-    skip_before_action :verify_authenticity_token, raise: false
+    skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
     before_action :set_app
     before_action :verify_signature
 
