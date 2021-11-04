@@ -81,7 +81,7 @@ module Wechat
     def refresh_when_expired
       if expire_seconds == 2592000
         SceneRefreshJob.set(wait_until: expire_at - 3.days).perform_later(self)
-      else
+      elsif match_value.start_with?('session_')
         SceneCleanJob.set(wait_until: expire_at).perform_later(self)
       end
     end
