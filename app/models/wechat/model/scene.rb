@@ -24,6 +24,7 @@ module Wechat
         self.expire_at ||= Time.current + expire_seconds if expire_seconds
       end
       after_save_commit :to_qrcode, if: -> { saved_change_to_match_value? }
+      after_save_commit :refresh_when_expired, if: -> { saved_change_to_expire_at? }
     end
 
     def init_response
@@ -77,8 +78,12 @@ module Wechat
       expire_at && expire_at < time
     end
 
-    def refresh
-      if expired?
+    def refresh_when_expired
+      SceneRefreshJob.set(wait_until: expire_at - 3.days).perform_later(self)
+    end
+
+    def refresh(now = false)
+      if expired? || now
         self.expire_at = Time.current + expire_seconds
         to_qrcode
       end
