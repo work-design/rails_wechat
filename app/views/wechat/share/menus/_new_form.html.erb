@@ -1,5 +1,4 @@
 <%= form_with model: @menu, scope: :menu, url: { action: 'create' } do |f| %>
-  <%= render 'error_messages', target: @menu %>
   <%= render partial: 'form', locals: { f: f } %>
   <%= f.submit %>
 <% end %>
