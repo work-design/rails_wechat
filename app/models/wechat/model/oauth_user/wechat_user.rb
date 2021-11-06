@@ -31,10 +31,6 @@ module Wechat
       after_save_commit :auto_link, if: -> { unionid.present? && saved_change_to_unionid? }
     end
 
-    def name
-      super.blank? ? "Wechat #{id}" : super
-    end
-
     def try_match
       app.api.menu_trymatch(uid)
     end
