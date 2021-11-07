@@ -119,6 +119,7 @@ Rails.application.routes.draw do
           end
         end
         resources :wechat_users
+        resources :user_tags
         resources :templates do
           collection do
             get :default

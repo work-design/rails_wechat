@@ -1,0 +1,5 @@
+<%= render layout: 'index_table', locals: { cache_key: Wechat::UserTag.column_names.hash } do %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @user_tags, as: :model %>
+<% end %>
+
+<%= paginate @user_tags %>

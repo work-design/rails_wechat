@@ -4,8 +4,11 @@
   <p class="has-text-grey"><%= model.unionid %></p>
 </td>
 <td>
-  <% model.tags.each do |tag| %>
-    <span class="tag"><%= tag.name %></span>
+  <% model.user_tags.each do |user_tag| %>
+    <span class="tag is-success">
+      <span><%= user_tag.tag.name %></span>
+      <%= button_to({ controller: 'user_tags', action: 'destroy', id: user_tag.id }, method: :delete, data: { confirm: t('.confirm') }, class: 'delete is-small') do %><% end %>
+    </span>
   <% end %>
 </td>
 <td><%= model.remark %></td>
