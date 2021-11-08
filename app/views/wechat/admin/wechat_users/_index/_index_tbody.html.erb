@@ -20,6 +20,6 @@
     <%= model.identity %>
   <% end %>
   </p>
-  <p><%= model.user&.id %></p>
+  <p><%= model.account.user&.id %></p>
 </td>
 <td><time data-controller="time"><%= model.created_at.to_s(:rfc822) %></time></td>
