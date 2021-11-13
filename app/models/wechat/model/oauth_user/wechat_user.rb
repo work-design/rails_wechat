@@ -60,6 +60,7 @@ module Wechat
       }
       user_response = HTTPX.get('https://api.weixin.qq.com/sns/userinfo', params: params)
       res = JSON.parse(user_response.to_s)
+      logger.debug "\e[35m  Result: #{res}  \e[0m"
 
       if res['errcode'].present?
         self.errors.add :base, "#{res['errcode']}, #{res['errmsg']}"
@@ -67,8 +68,7 @@ module Wechat
 
       self.name = res['nickname']
       self.avatar_url = res['headimgurl']
-      self.save
-      res
+      self
     end
 
     def refresh_access_token
