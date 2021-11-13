@@ -1,6 +1,6 @@
 module Wechat
   class AppsController < BaseController
-    before_action :set_app, only: [:show, :login]
+    before_action :set_app, only: [:show, :login, :qrcode]
     before_action :set_scene, only: [:login]
 
     def show
