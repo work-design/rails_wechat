@@ -26,7 +26,6 @@ module Wechat
       has_many :notices, foreign_key: :open_id, primary_key: :uid
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
-      after_save_commit :sync_user_info_later, if: -> { saved_change_to_access_token? && (attributes['name'].blank? && attributes['avatar_url'].blank?) }
       after_save_commit :auto_link, if: -> { unionid.present? && saved_change_to_unionid? }
     end
 
@@ -52,10 +51,6 @@ module Wechat
       app.api.user_update_remark(uid, remark)
     rescue Wechat::WechatError => e
       logger.info e.message
-    end
-
-    def sync_user_info_later
-      UserInfoJob.perform_later(self)
     end
 
     def sync_user_info

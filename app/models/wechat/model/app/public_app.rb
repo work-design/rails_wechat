@@ -38,6 +38,7 @@ module Wechat
       wechat_user = wechat_users.find_or_initialize_by(uid: result['openid'])
       wechat_user.assign_attributes result.slice('access_token', 'refresh_token', 'unionid')
       wechat_user.expires_at = Time.current + result['expires_in'].to_i
+      wechat_user.sync_user_info if wechat_user.access_token.present? && (attributes['name'].blank? && attributes['avatar_url'].blank?)
       wechat_user
     end
 
