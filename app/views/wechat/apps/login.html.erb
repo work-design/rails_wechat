@@ -1,4 +1,4 @@
 <%# image_tag @scene.qrcode_data_url %>
 <%= turbo_stream.append 'body' do %>
-  <div data-controller="visit" data-visit-url-value="<%= session[:return_to].presence || root_url %>"></div>
+  <div data-controller="visit" data-visit-url-value="<%= url %>"></div>
 <% end %>
