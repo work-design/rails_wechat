@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :apps, only: [:show] do
       member do
         get :login
+        get :qrcode
       end
     end
     controller :wechat do

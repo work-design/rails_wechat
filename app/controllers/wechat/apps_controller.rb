@@ -42,6 +42,11 @@ module Wechat
       end
     end
 
+    def qrcode
+      r = @app.api.get_wxacode(params[:path])
+      send_data r
+    end
+
     def create
     end
 
