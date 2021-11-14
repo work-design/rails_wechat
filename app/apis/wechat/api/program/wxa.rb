@@ -22,7 +22,12 @@ module Wechat::Api
       r['url_link']
     end
 
-    def generate_scheme(path: '/pages/index/index', **options)
+    def generate_short(path = '/pages/index/index', **options)
+      r = post 'genwxashortlink', page_url: path, **options, base: BASE
+      r['link']
+    end
+
+    def generate_scheme(path = '/pages/index/index', **options)
       p = {
         jump_wxa: {
           path: path,
