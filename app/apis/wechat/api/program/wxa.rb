@@ -18,7 +18,8 @@ module Wechat::Api
     end
 
     def generate_url(path = '/pages/index/index', **options)
-      post 'generate_urllink', path: path, **options, base: BASE
+      r = post 'generate_urllink', path: path, **options, base: BASE
+      r['url_link']
     end
 
     def generate_scheme(path: '/pages/index/index', **options)
