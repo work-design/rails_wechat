@@ -59,7 +59,8 @@ module Wechat
         :key_v3,
         :encrypt_mode,
         :serial_no,
-        :domain
+        :domain,
+        :weapp_id
       )
       p.merge! default_form_params
     end

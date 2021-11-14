@@ -1,5 +1,12 @@
 module Wechat
   module Model::App::PublicApp
+    extend ActiveSupport::Concern
+
+    included do
+      attribute :weapp_id, :string, comment: '关联的小程序'
+
+      belongs_to :weapp, class_name: 'ProgramApp', foreign_key: :weapp_id, primary_key: :appid, optional: true
+    end
 
     def sync_templates
       api.templates.each do |template|
