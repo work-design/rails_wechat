@@ -24,7 +24,12 @@ module Wechat::Api
 
     def generate_short(path = '/pages/index/index', **options)
       r = post 'genwxashortlink', page_url: path, **options, base: BASE
-      r['link']
+
+      if r['errcode'] == 0
+        r['link']
+      else
+        r
+      end
     end
 
     def generate_scheme(path = '/pages/index/index', **options)
