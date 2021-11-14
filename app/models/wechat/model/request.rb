@@ -39,7 +39,19 @@ module Wechat
     end
 
     def reply_params
-      if wechat_user.attributes['name'].blank?
+      if app.weapp
+        url = app.weapp.api.generate_url('/pages/index/index')
+        {
+          appid: appid,
+          news_reply_items_attributes: [
+            {
+              title: '请绑定',
+              description: '授权您的信息',
+              url: url
+            }
+          ]
+        }
+      elsif wechat_user.attributes['name'].blank?
         {
           appid: appid,
           news_reply_items_attributes: [
