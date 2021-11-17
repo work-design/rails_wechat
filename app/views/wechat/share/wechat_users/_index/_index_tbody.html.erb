@@ -8,4 +8,4 @@
   <p><%= model.account_id %></p>
   <p><%= model.user_id %></p>
 </td>
-<td><time data-controller="time"><%= model.created_at.to_s(:rfc822) %></time></td>
+<td><time data-controller="time"><%= model.created_at.to_s(:iso8601) %></time></td>
