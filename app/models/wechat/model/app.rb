@@ -32,8 +32,8 @@ module Wechat
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
-      has_many :post_syncs, as: :synced, dependent: :delete_all
-      has_many :posts, through: :post_syncs
+      #has_many :post_syncs, as: :synced, dependent: :delete_all
+      #has_many :posts, through: :post_syncs
 
       has_one :organ_domain, -> { where(default: true) }, class_name: 'Org::OrganDomain', foreign_key: :appid, primary_key: :appid
       has_many :organ_domains, class_name: 'Org::OrganDomain', foreign_key: :appid, primary_key: :appid
