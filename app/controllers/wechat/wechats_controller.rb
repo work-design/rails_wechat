@@ -14,7 +14,11 @@ module Wechat
     end
 
     def create
-      r = Hash.from_xml(request.raw_post).fetch('xml', {})
+      if params['ToUserName']
+        r = params.permit('Encrypt')
+      else
+        r = Hash.from_xml(request.raw_post).fetch('xml', {})
+      end
       @receive = @app.receives.build
       if r['Encrypt']
         @receive.encrypt_data = r['Encrypt']
