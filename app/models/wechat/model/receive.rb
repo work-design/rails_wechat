@@ -46,6 +46,11 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 
+      enum msg_format: {
+        json: 'json',
+        xml: 'xml'
+      }, _default: 'xml'
+
       has_one :request
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
@@ -59,7 +64,11 @@ module Wechat
       r = Wechat::Cipher.decrypt(Base64.decode64(encrypt_data), aes_key)
       content, _ = Wechat::Cipher.unpack(r)
 
-      self.message_hash = Hash.from_xml(content).fetch('xml', {})
+      if self.xml?
+        self.message_hash = Hash.from_xml(content).fetch('xml', {})
+      else
+        self.message_hash = JSON.parse(content)
+      end
     end
 
     def parse_message_hash
