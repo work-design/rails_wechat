@@ -13,7 +13,7 @@ module Wechat
       belongs_to :notification
       belongs_to :template
       belongs_to :app, foreign_key: :appid, primary_key: :appid
-      belongs_to :wechat_user, class_name: 'OauthUser', foreign_key: :open_id, primary_key: :uid
+      belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid
       belongs_to :subscribe, optional: true
 
       before_validation do
