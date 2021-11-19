@@ -30,6 +30,7 @@ zh:
           Wechat::ScanRequest: 扫码
           Wechat::ViewRequest: 菜单
           Wechat::LocationRequest: 位置
+          Wechat::MsgRequest: 订阅消息
           Wechat::Request: 其他
         init_wechat_user:
           true: 首次关注
