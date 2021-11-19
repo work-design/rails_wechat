@@ -29,7 +29,8 @@ module Wechat
       'pic_weixin' => 'Wechat::Request',
       'location_select' => 'Wechat::Request',
       'enter_agent' => 'Wechat::Request',
-      'batch_job_result' => 'Wechat::Request'  # 企业微信使用
+      'batch_job_result' => 'Wechat::Request',  # 企业微信使用
+      'subscribe_msg_popup_event' => 'Wechat::MsgRequest'  # 小程序订阅消息
     }.freeze
     extend ActiveSupport::Concern
 
