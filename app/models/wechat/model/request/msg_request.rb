@@ -1,8 +1,10 @@
 module Wechat
   module Model::Request::MsgRequest
-    extend ActiveSupport::Concern
 
-    included do
+    def set_body
+      if raw_body.dig('List', 'SubscribeStatusString') == 'accept'
+        self.body = raw_body.dig('List', 'TemplateId')
+      end
     end
 
   end
