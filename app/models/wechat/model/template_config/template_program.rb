@@ -15,7 +15,6 @@ module Wechat
     end
 
     def sync_key_words
-      app = WechatProgram.default
       return unless app
       key_words = app.api.template_key_words tid
       key_words.each do |kw|
