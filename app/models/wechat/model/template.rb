@@ -13,7 +13,7 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :template_config, optional: true
       has_many :notices, dependent: :delete_all
-      has_many :msg_requests, ->(o){ where(appid: o.appid) }, foreign_key: :body, foreign_key: :template_id
+      has_many :msg_requests, ->(o){ where(appid: o.appid) }, foreign_key: :body, primary_key: :template_id
 
       before_save :sync_from_template_config, if: -> { template_config_id_changed? || template_config }
       before_save :sync_to_wechat, if: -> { template_id_changed? && template_id.present? }
