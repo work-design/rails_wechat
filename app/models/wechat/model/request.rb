@@ -27,7 +27,13 @@ module Wechat
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all, inverse_of: :request  # 解析 request body 内容，主要针对文字
       has_many :responses, ->(o){ default_where('request_types-any': o.type) }, foreign_key: :appid, primary_key: :appid
 
+      before_validation :set_body
       after_create :get_reply!
+    end
+
+    def set_body
+      self.event_key = raw_body['EventKey'] || raw_body.dig('ScanCodeInfo', 'ScanResult')
+      self.body = self.event_key
     end
 
     def rule_tag

@@ -22,7 +22,7 @@ module Wechat
       'SCAN' => 'Wechat::ScanRequest',
       'click' => 'Wechat::Request',
       'view' => 'Wechat::Request',  # 企业微信使用
-      'scancode_push' => 'Wechat::Request',
+      'scancode_push' => 'Wechat::ScancodePushRequest',
       'scancode_waitmsg' => 'Wechat::Request',
       'pic_sysphoto' => 'Wechat::Request',
       'pic_photo_or_album' => 'Wechat::Request',
@@ -92,30 +92,6 @@ module Wechat
       request.open_id = open_id
       request.msg_type = msg_type
       request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
-      case msg_type
-      when 'text'
-        request.body = message_hash['Content']
-      when 'event'
-        request.event = message_hash['Event']
-        request.event_key = message_hash['EventKey'] || message_hash.dig('ScanCodeInfo', 'ScanResult')
-        if request.event == 'subscribe'
-          request.body = request.event_key.delete_prefix('qrscene_')
-        else
-          request.body = request.event_key
-        end
-      when 'image'
-        request.body = message_hash['PicUrl']
-      when 'voice'
-        request.body = message_hash['Recognition'].presence || message_hash['MediaId']
-      when 'video', 'shortvideo'
-        request.body = message_hash['MediaId']
-      when 'location'
-        request.body = "#{message_hash['Location_X']}:#{message_hash['Location_Y']}"
-      when 'link'
-        request.body = message_hash['Url']
-      else
-        warn "Don't know how to parse message as #{message_hash['MsgType']}", uplevel: 1
-      end
       request.generate_wechat_user  # Should before get reply
 
       self.save  # will auto save wechat request

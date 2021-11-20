@@ -1,8 +1,8 @@
 module Wechat
   module Model::Request::LinkRequest
-    extend ActiveSupport::Concern
 
-    included do
+    def set_body
+      self.body = self.raw_body['Url']
     end
 
   end

@@ -1,8 +1,8 @@
 module Wechat
   module Model::Request::VideoRequest
-    extend ActiveSupport::Concern
 
-    included do
+    def set_body
+      self.body = raw_body['MediaId']
     end
 
   end
