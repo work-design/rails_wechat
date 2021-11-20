@@ -13,6 +13,10 @@ module Wechat::Api
       end
     end
 
+    def pub_templates
+      r = get 'newtmpl/getpubtemplatetitles', base: BASE
+    end
+
     # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getPubTemplateKeyWordsById.html
     def template_key_words(tid)
       r = get 'newtmpl/getpubtemplatekeywords', params: { tid: tid }, base: BASE
