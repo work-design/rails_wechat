@@ -4,7 +4,13 @@ module Wechat
 
     # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.send.html
     def do_send
-      app.api.post 'message/subscribe/send', **message_hash, base: BASE
+      r = app.api.post 'message/subscribe/send', **message_hash, base: BASE
+      if r['errcode'] == 0
+        self.update msg_id: r['msgid']
+        msg_request.update sent_at: Time.current if msg_request
+      else
+        r
+      end
     end
 
     def message_hash

@@ -23,7 +23,7 @@ module Wechat
       has_many :subscribes, dependent: :delete_all
       has_many :user_tags, foreign_key: :open_id, primary_key: :uid, dependent: :destroy_async
       has_many :tags, through: :user_tags
-      has_many :notices, foreign_key: :open_id, primary_key: :uid
+      has_many :notices, ->(o){ where(appid: o.appid) }, foreign_key: :open_id, primary_key: :uid
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :auto_link, if: -> { unionid.present? && saved_change_to_unionid? }

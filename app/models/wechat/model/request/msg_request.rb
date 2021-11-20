@@ -3,6 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :sent_at, :datetime
       belongs_to :template, ->(o){ where(appid: o.appid) }, foreign_key: :body, primary_key: :template_id, optional: true
     end
 
