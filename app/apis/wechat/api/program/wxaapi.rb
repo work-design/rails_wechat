@@ -17,6 +17,7 @@ module Wechat::Api
     def template_key_words(tid)
       r = get 'newtmpl/getpubtemplatekeywords', params: { tid: tid }, base: BASE
       r['data']
+      r
     end
 
     def add_template(tid, kid_list, description: 'tst')
