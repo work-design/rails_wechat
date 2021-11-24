@@ -27,6 +27,7 @@ module Wechat
       member = wechat_user.members.find_by(organ_id: member_inviter.organ_id) || wechat_user.members.build(organ_id: member_inviter.organ_id, state: 'pending_trial')
       member.set_current_cart(app.organ_id)
       member.save
+      member
     end
 
     def sync_create_later
