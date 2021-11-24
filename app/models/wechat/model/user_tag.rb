@@ -14,20 +14,12 @@ module Wechat
       belongs_to :user_tagged, optional: true
 
       before_save :sync_inviter, if: -> { tag_name.start_with?('invite_member_') && tag_name_changed? }
-      after_create_commit :auto_join_organ, if: -> { tag_name.start_with?('invite_member_') && saved_change_to_tag_name? }
       after_create_commit :sync_create_later
       after_destroy_commit :remove_from_wechat
     end
 
     def sync_inviter
       self.member_inviter_id = tag_name.delete_prefix('invite_member_')
-    end
-
-    def auto_join_organ
-      member = wechat_user.members.find_by(organ_id: member_inviter.organ_id) || wechat_user.members.build(organ_id: member_inviter.organ_id, state: 'pending_trial')
-      member.set_current_cart(app.organ_id)
-      member.save
-      member
     end
 
     def sync_create_later

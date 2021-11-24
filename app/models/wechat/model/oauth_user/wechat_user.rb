@@ -27,6 +27,16 @@ module Wechat
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :auto_link, if: -> { unionid.present? && saved_change_to_unionid? }
+      after_save_commit :auto_join_organ, if: -> { saved_change_to_identity? }
+    end
+
+    def auto_join_organ
+      user_tags.each do |user_tag|
+        next unless user_tag.tag_name.start_with?('invite_member_')
+        member = members.find_by(organ_id: user_tag.member_inviter.organ_id) || members.build(organ_id: user_tag.member_inviter.organ_id, state: 'pending_trial')
+        member.set_current_cart(user_tag.app.organ_id)
+        member.save
+      end
     end
 
     def try_match
