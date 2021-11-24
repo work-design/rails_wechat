@@ -20,7 +20,6 @@ module Wechat
 
       has_one :request, -> { where(init_wechat_user: true) }, foreign_key: :open_id, primary_key: :uid
       has_many :requests, foreign_key: :open_id, primary_key: :uid, dependent: :destroy_async
-      has_many :subscribes, dependent: :delete_all
       has_many :user_tags, foreign_key: :open_id, primary_key: :uid, dependent: :destroy_async
       has_many :tags, through: :user_tags
       has_many :notices, ->(o){ where(appid: o.appid) }, foreign_key: :open_id, primary_key: :uid
