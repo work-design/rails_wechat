@@ -1,9 +1,5 @@
 module Wechat
   module Model::Request::ClickRequest
-    extend ActiveSupport::Concern
-
-    included do
-    end
 
     def rule_tag
       {
