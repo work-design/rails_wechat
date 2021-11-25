@@ -1,4 +1,3 @@
-<%= render 'error_messages', target: f.object %>
 <%= f.select :type, options_for_select(Wechat::App.options_i18n(:type), f.object.type) %>
 <%= f.text_field :name %>
 <%= f.text_field :appid %>
