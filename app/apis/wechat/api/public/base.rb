@@ -65,9 +65,5 @@ module Wechat::Api
       post 'message/mass/get', msg_id: msg_id, base: BASE
     end
 
-    def wxa_create_qrcode(path, width = 430)
-      post 'wxaapp/createwxaqrcode', path: path, width: width, base: BASE
-    end
-
   end
 end
