@@ -6,6 +6,7 @@ module Wechat::Api
     include Public::Base
     include Wxaapi
     include Wxa
+    include CgiBin
 
   end
 end
