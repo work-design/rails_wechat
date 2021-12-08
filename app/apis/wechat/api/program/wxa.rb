@@ -8,7 +8,15 @@ module Wechat::Api
     end
 
     def get_wxacode(path = '/pages/index/index', width = 430)
-      post 'getwxacode', path: path, width: width, base: BASE
+      r = post 'getwxacode', path: path, width: width, base: BASE
+
+      if r.is_a?(Tempfile) && defined? Com::BlobTemp
+        blob = Com::BlobTemp.new(note: path)
+        blob.file.attach io: r, filename: path
+        blob.save
+      else
+        r
+      end
     end
 
     def get_wxacode_unlimit(scene, **options)
