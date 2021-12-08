@@ -19,7 +19,12 @@ module Wechat::Api
 
     def generate_url(path = '/pages/index/index', **options)
       r = post 'generate_urllink', path: path, **options, base: BASE
-      r['url_link']
+
+      if r['errcode'] == 0
+        r['url_link']
+      else
+        r
+      end
     end
 
     def generate_short(path = '/pages/index/index', **options)
