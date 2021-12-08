@@ -7,7 +7,7 @@ module Wechat::Api
       post 'msg_sec_check', content: content, base: BASE
     end
 
-    def get_wxacode(path, width = 430)
+    def get_wxacode(path = '/pages/index/index', width = 430)
       post 'getwxacode', path: path, width: width, base: BASE
     end
 
