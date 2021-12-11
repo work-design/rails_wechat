@@ -13,27 +13,12 @@ module Wechat
       @wechat_users = @app.wechat_users.default_where(q_params).page(params[:page])
     end
 
-    def show
-    end
-
     def edit
       @wechat_tags = @app.wechat_tags
     end
 
-    def update
-      @wechat_user.assign_attributes(wechat_user_params)
-
-      unless @wechat_user.save
-        render :edit, locals: { model: @wechat_user }, status: :unprocessable_entity
-      end
-    end
-
     def try_match
       @result = @wechat_user.try_match
-    end
-
-    def destroy
-      @wechat_user.destroy
     end
 
     private

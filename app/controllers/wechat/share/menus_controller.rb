@@ -39,26 +39,11 @@ module Wechat
       render 'sync', locals: { notice: r.to_s }
     end
 
-    def show
-    end
-
     def edit
       @parents = Menu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @menu.appid)
     end
 
     def edit_parent
-    end
-
-    def update
-      @menu.assign_attributes(menu_params)
-
-      unless @menu.save
-        render :edit, locals: { model: @menu }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @menu.destroy
     end
 
     private

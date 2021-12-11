@@ -96,6 +96,11 @@ Rails.application.routes.draw do
           patch 'cert' => :update_cert
           get 'pay' => :edit_pay
         end
+        resources :scenes do
+          member do
+            patch :sync
+          end
+        end
         resources :responses do
           member do
             post :sync
