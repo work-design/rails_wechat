@@ -14,7 +14,7 @@ module Wechat
 
       belongs_to :template
       belongs_to :app, foreign_key: :appid, primary_key: :appid
-      belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid
+      belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
       belongs_to :msg_request, optional: true
 
       before_validation do
