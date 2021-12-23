@@ -16,6 +16,8 @@ module Wechat
       has_many :hooks, dependent: :delete_all
       has_many :request_responses, ->(o){ where(appid: o.appid) }, dependent: :destroy_async
 
+      accepts_nested_attributes_for :request_responses
+
       validates :match_value, presence: true
 
       before_validation do
