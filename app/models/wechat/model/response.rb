@@ -14,6 +14,8 @@ module Wechat
       belongs_to :reply, optional: true
       has_many :extractors, dependent: :delete_all
       has_many :hooks, dependent: :delete_all
+      has_many :request_responses, dependent: :destroy_async
+
       validates :match_value, presence: true
 
       before_validation do
