@@ -1,14 +1,13 @@
-<div class="box is-radiusless">
-  <p class="has-text-centered"><%= current_user.name %></p>
-  <figure class="image">
-    <%= image_tag @scene.qrcode_file_url if @scene %>
-  </figure>
-</div>
-<div class="weui-panel" style="padding-top: 1px">
-  <div class="weui-panel__hd">邀请记录</div>
+<%= render 'head' %>
+
+<div class="weui-panel mt-0" style="padding-top: 1px">
   <div class="weui-panel__bd">
     <div class="weui-cells mt-0">
+    <% if @requests.blank? %>
+      <%= render partial: 'gift_content' %>
+    <% else %>
       <%= render partial: 'request', collection: @requests, as: :request %>
+    <% end %>
     </div>
   </div>
 </div>

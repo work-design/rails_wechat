@@ -1,0 +1,11 @@
+<div class="box is-radiusless">
+  <p class="has-text-centered"><%= current_user.name %></p>
+  <figure class="image">
+    <%= image_tag @scene.qrcode_file_url if @scene %>
+  </figure>
+</div>
+
+<div class="weui-navbar">
+  <%= link_to '邀请记录', { action: 'invite_qrcode' }, class: active_helper(action: 'invite_qrcode', item: 'weui-navbar__item', active: 'weui-navbar__item weui-bar__item_on') %>
+  <%= link_to '邀请有礼', { action: 'gift' }, class: active_helper(action: 'gift', item: 'weui-navbar__item', active: 'weui-navbar__item weui-bar__item_on') %>
+</div>
