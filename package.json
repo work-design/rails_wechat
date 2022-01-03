@@ -13,6 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hotwired/stimulus": "^3.0.0-beta.1"
+    "@hotwired/stimulus": "^3.0.1"
   }
 }
