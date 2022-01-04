@@ -14,11 +14,13 @@ module Wechat
     end
 
     def message_hash
-      {
+      r = {
         template_id: template.template_id,
         touser: wechat_user.uid,
         data: data
       }
+      r.merge! page: link if link.present?
+      r
     end
 
   end
