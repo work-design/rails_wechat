@@ -13,9 +13,10 @@ module Wechat::Cipher
     cipher.encrypt
 
     cipher.padding = 0
-    key_data = Base64.decode64(encoding_aes_key + '=')
-    cipher.key = key_data
-    cipher.iv = [key_data].pack('H*')
+
+    aes_key = Base64.decode64(encoding_aes_key + '=')
+    cipher.key = aes_key
+    cipher.iv = [aes_key].pack('H*')
 
     cipher.update(plain) + cipher.final
   end
@@ -26,9 +27,10 @@ module Wechat::Cipher
     cipher.decrypt
 
     cipher.padding = 0
-    key_data = Base64.decode64(encoding_aes_key + '=')
-    cipher.key = key_data
-    cipher.iv = [key_data].pack('H*')
+
+    aes_key = Base64.decode64(encoding_aes_key + '=')
+    cipher.key = aes_key
+    cipher.iv = [aes_key].pack('H*')
 
     plain = cipher.update(msg) + cipher.final
     decode_padding(plain)
