@@ -11,7 +11,6 @@ module Wechat::Cipher
   def encrypt(plain, encoding_aes_key)
     cipher = OpenSSL::Cipher.new(CIPHER)
     cipher.encrypt
-
     cipher.padding = 0
 
     aes_key = Base64.decode64(encoding_aes_key + '=')
@@ -25,7 +24,6 @@ module Wechat::Cipher
   def decrypt(msg, encoding_aes_key)
     cipher = OpenSSL::Cipher.new(CIPHER)
     cipher.decrypt
-
     cipher.padding = 0
 
     aes_key = Base64.decode64(encoding_aes_key + '=')

@@ -30,14 +30,14 @@ module Wechat
 
     # 消息与事件接收URL: /wechat/providers/callback/$CORPID$
     def message
-      binding.b
-      @receive = @platform.receives.build
-      @receive.appid = params[:appid]
-      r = Hash.from_xml(request.body.read)['xml']
-      @receive.encrypt_data = r['Encrypt']
-      @receive.save
+      r = @provider.decrypt(params[:echostr])
+      # @receive = @platform.receives.build
+      # @receive.appid = params[:appid]
+      # r = Hash.from_xml(request.body.read)['xml']
+      # @receive.encrypt_data = r['Encrypt']
+      # @receive.save
 
-      render plain: @receive.request.to_wechat
+      render plain: r
     end
 
     private
@@ -60,13 +60,9 @@ module Wechat
 
     def verify_signature
       if @provider
-        msg_encrypt = params[:echostr]
-        signature = params[:msg_signature]
-
         # 消息体签名校验: https://open.work.weixin.qq.com/api/doc/90000/90139/90968#消息体签名校验
-        dev_signature = Wechat::Signature.hexdigest(@provider.token, params[:timestamp], params[:nonce], msg_encrypt)
-        
-        forbidden = (signature != dev_signature)
+        dev_signature = Wechat::Signature.hexdigest(@provider.token, params[:timestamp], params[:nonce], params[:echostr])
+        forbidden = (params[:msg_signature] != dev_signature)
       else
         forbidden = true
       end

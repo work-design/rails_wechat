@@ -6,3 +6,8 @@
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.0.1.tgz#141f15645acaa3b133b7c247cad58ae252ffae85"
   integrity sha512-oHsJhgY2cip+K2ED7vKUNd2P+BEswVhrCYcJ802DSsblJFv7mPFVk3cQKvm2vHgHeDVdnj7oOKrBbzp1u8D+KA==
+
+"@wecom/crypto@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@wecom/crypto/-/crypto-1.0.1.tgz#6918ed9829043b06075eaa8cff84de2475476a58"
+  integrity sha512-K4Ilkl1l64ceJDbj/kflx8ND/J88pcl8tKx4Ivp7IiCrshRJU+Uo5uWCjAa+PjUiLIdcQSZ4m4d0t1npMPCX5A==
