@@ -1,13 +1,12 @@
 module Wechat
   class ProvidersController < BaseController
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
-    before_action :set_provider, only: [:message, :notify]
-    before_action :verify_signature, only: [:message, :notify]
+    before_action :set_provider, only: [:verify, :notify, :callback]
+    before_action :verify_signature, only: [:verify]
 
     # 指令回调URL: /wechat/providers/notify
     def notify
       binding.b
-      r = @provider.decrypt(params[:echostr])
 
       if r
         render plain: r
@@ -16,24 +15,13 @@ module Wechat
       end
     end
 
-    def show
-    end
-
     def callback
-      @auth = @platform.auths.build
-      @auth.auth_code = params[:auth_code]
-      @auth.auth_code_expires_at = Time.current + params[:expires_in].to_i
-      @auth.save
+
     end
 
     # 消息与事件接收URL: /wechat/providers/callback/$CORPID$
-    def message
+    def verify
       r = @provider.decrypt(params[:echostr])
-      # @receive = @platform.receives.build
-      # @receive.appid = params[:appid]
-      # r = Hash.from_xml(request.body.read)['xml']
-      # @receive.encrypt_data = r['Encrypt']
-      # @receive.save
 
       render plain: r
     end
@@ -49,7 +37,7 @@ module Wechat
     end
 
     def set_provider
-      @provider = Provider.find_by(corp_id: params[:corp_id])
+      @provider = Provider.find(params[:id])
     end
 
     def set_app

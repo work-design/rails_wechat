@@ -32,9 +32,11 @@ Rails.application.routes.draw do
       end
     end
     resources :providers, only: [:show] do
-      collection do
-        match 'callback/:corp_id' => :message, via: [:get, :post]
-        match 'notify/:corp_id' => :notify, via: [:get, :post]
+      member do
+        get 'callback' => :verify
+        post :callback
+        get 'notify' => :verify
+        post :notify
       end
     end
 
