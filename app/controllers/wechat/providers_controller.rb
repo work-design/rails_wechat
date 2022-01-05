@@ -62,10 +62,10 @@ module Wechat
       if @provider
         msg_encrypt = params[:echostr]
         signature = params[:msg_signature]
+
+        # 消息体签名校验: https://open.work.weixin.qq.com/api/doc/90000/90139/90968#消息体签名校验
         dev_signature = Wechat::Signature.hexdigest(@provider.token, params[:timestamp], params[:nonce], msg_encrypt)
-
-        binding.b
-
+        
         forbidden = (signature != dev_signature)
       else
         forbidden = true
