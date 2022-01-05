@@ -6,10 +6,14 @@ module Wechat
 
     # 指令回调URL: /wechat/providers/notify
     def notify
-      binding.b
+      @provider_ticket = ProviderTicket.new(ticket_params)
+      r = Hash.from_xml(request.raw_post)['xml']
+      @provider_ticket.suite_id = r['ToUserName']
+      @provider_ticket.ticket_data = r['Encrypt']
+      @provider_ticket.agent_id = r['AgentID']
 
-      if r
-        render plain: r
+      if @provider_ticket.save
+        render plain: 'success'
       else
         head :no_content
       end
@@ -29,7 +33,6 @@ module Wechat
     private
     def ticket_params
       params.permit(
-        :signature,
         :timestamp,
         :nonce,
         :msg_signature
