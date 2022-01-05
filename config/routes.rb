@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    namespace :panel do
+      resources :providers
+    end
+  end
 
   namespace :wechat, defaults: { business: 'wechat' } do
     resources :wechats, only: [:show] do

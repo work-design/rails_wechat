@@ -31,6 +31,7 @@ module RailsWechat
         system_tests: false,
         jbuilder: true
       }
+      g.resource_route false
       g.test_unit = {
         fixture: true,
         fixture_replacement: :factory_girl
