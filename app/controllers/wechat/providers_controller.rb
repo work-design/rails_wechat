@@ -1,18 +1,16 @@
 module Wechat
   class ProvidersController < BaseController
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
-    before_action :set_provider, only: [:show, :message, :callback]
-    before_action :verify_signature, only: [:message]
+    before_action :set_provider, only: [:message, :notify]
+    before_action :verify_signature, only: [:message, :notify]
 
-    # 授权事件接收URL: platforms/notice
+    # 指令回调URL: /wechat/providers/notify
     def notify
-      @ticket = Ticket.new(ticket_params)
-      r = Hash.from_xml(request.raw_post)['xml']
-      @ticket.appid = r['AppId']
-      @ticket.ticket_data = r['Encrypt']
+      binding.b
+      r = @provider.decrypt(params[:echostr])
 
-      if @ticket.save
-        render plain: 'success'
+      if r
+        render plain: r
       else
         head :no_content
       end
