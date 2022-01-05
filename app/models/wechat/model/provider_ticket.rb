@@ -22,6 +22,7 @@ module Wechat
       data = Hash.from_xml(content).fetch('xml', {})
       provider.suite_ticket_pre = provider.suite_ticket
       provider.suite_ticket = data['SuiteTicket']
+      provider.save
       data
     end
 
