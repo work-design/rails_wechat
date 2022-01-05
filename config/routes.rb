@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    namespace :panel do
-      resources :providers
-    end
-  end
 
   namespace :wechat, defaults: { business: 'wechat' } do
     resources :wechats, only: [:show] do
@@ -34,6 +29,11 @@ Rails.application.routes.draw do
       end
       collection do
         post :notify
+      end
+    end
+    resources :providers, only: [:show] do
+      collection do
+        match 'callback/:corp_id' => :message, via: [:get, :post]
       end
     end
 
@@ -67,6 +67,7 @@ Rails.application.routes.draw do
       resources :platforms do
         resources :agencies, as: :agencies
       end
+      resources :providers
     end
 
     namespace :share, defaults: { namespace: 'share' } do

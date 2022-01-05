@@ -7,7 +7,7 @@ module Wechat::Cipher
   BLOCK_SIZE = 32
   CIPHER = 'AES-256-CBC'
   extend self
-  
+
   def encrypt(plain, encoding_aes_key)
     cipher = OpenSSL::Cipher.new(CIPHER)
     cipher.encrypt
@@ -40,7 +40,7 @@ module Wechat::Cipher
     cipher.key = Base64.decode64(session_key)
     cipher.iv = Base64.decode64(iv)
     decrypted_data = Base64.decode64(encrypted_data)
-    
+
     JSON.parse(cipher.update(decrypted_data) + cipher.final)
   rescue Exception => e
     { errcode: 41003, errmsg: e.message }
@@ -78,5 +78,5 @@ module Wechat::Cipher
     pad = 0 if pad < 1 || pad > BLOCK_SIZE
     plain[0...(plain.length - pad)]
   end
-  
+
 end
