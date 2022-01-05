@@ -20,6 +20,7 @@ module Wechat::Cipher
     cipher.update(plain) + cipher.final
   end
 
+  # 第三方平台：https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Before_Develop/Technical_Plan.html#加密解密技术方案
   def decrypt(msg, encoding_aes_key)
     cipher = OpenSSL::Cipher.new(CIPHER)
     cipher.decrypt
