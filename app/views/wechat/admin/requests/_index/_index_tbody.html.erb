@@ -6,7 +6,11 @@
   <% end %>
 </td>
 <td><%= model.type_i18n %></td>
-<td><%= model.body %></td>
+<td>
+  <p><%= model.body %></p>
+  <p><%= model.event %></p>
+  <p><%= model.event_key %></p>
+</td>
 <td>
   <table class="table is-fullwidth is-borderless">
   <% model.extractions.each do |ex| %>

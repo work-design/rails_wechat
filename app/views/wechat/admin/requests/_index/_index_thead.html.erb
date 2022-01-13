@@ -1,5 +1,9 @@
 <th><%= Wechat::Request.human_attribute_name(:wechat_user_id) %></th>
 <th><%= Wechat::Request.human_attribute_name(:type) %></th>
-<th style="width: 30%"><%= Wechat::Request.human_attribute_name(:body) %></th>
+<th style="width: 30%">
+  <p><%= Wechat::Request.human_attribute_name(:body) %></p>
+  <p><%= Wechat::Request.human_attribute_name(:event) %></p>
+  <p><%= Wechat::Request.human_attribute_name(:event_key) %></p>
+</th>
 <th><%= Wechat::Request.human_attribute_name(:extractions) %></th>
 <th><%= Wechat::Request.human_attribute_name(:created_at) %></th>

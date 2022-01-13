@@ -19,6 +19,7 @@ module Wechat
       'LOCATION' => 'Wechat::LocationRequest', # 公众号与企业微信通用
       'CLICK' => 'Wechat::ClickRequest',
       'VIEW' => 'Wechat::ViewRequest',
+      'view_miniprogram' => 'Wechat::ViewRequest',
       'SCAN' => 'Wechat::ScanRequest',
       'click' => 'Wechat::Request',
       'view' => 'Wechat::Request',  # 企业微信使用
