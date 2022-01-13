@@ -47,18 +47,16 @@ module RailsWechat
       msg_type: 'text',
       body: '退出',
       proc: ->(request) {
-        reply_params = {
+        Wechat::NewsReply.new(
           appid: request.appid,
           news_reply_items_attributes: [
             {
               title: '退出登录',
               description: '绑定信息',
-              url: request.url_helpers.logout_url
+              url: Rails.application.routes.url_for(controller: 'auth/sign', action: 'logout')
             }
           ]
-        }
-
-        Wechat::NewsReply.new(reply_params)
+        )
       }
     }
     config.rules.e = {

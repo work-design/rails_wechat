@@ -46,43 +46,47 @@ module Wechat
     end
 
     def reply_params
+      params = reply_params_detail
+
+      {
+        appid: appid,
+        news_reply_items_attributes: [
+          {
+            title: params[0],
+            description: params[1],
+            url: params[2]
+          }
+        ]
+      }
+    end
+
+    def reply_params_detail
+      url = Rails.application.routes.url_for(controller: 'home', action: 'index')
+      if wechat_user.attributes['name'].present?
+        title = "您好，#{wechat_user.attributes['name']}"
+        if wechat_user.user
+          description = '欢迎您回来'
+        else
+          description = '您还未完成注册，请点击链接完成'
+        end
+      elsif wechat_user.attributes['name'].blank?
+        title = '授权您的信息（微信昵称，头像）'
+        description = '您的信息将被用于个人中心的用户展示'
+        url = app.oauth2_url
+      elsif wechat_user.user.blank?
+        title = '请绑定'
+        description = '绑定已有账号或注册新账号'
+        url = Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', uid: open_id, host: app.host)
+      else
+        title = '欢迎您'
+        description = '开始使用'
+      end
+
       if app.weapp
         url = app.weapp.api.generate_url('/pages/index/index')
-        {
-          appid: appid,
-          news_reply_items_attributes: [
-            {
-              title: '请绑定',
-              description: '授权您的信息',
-              url: url
-            }
-          ]
-        }
-      elsif wechat_user.attributes['name'].blank?
-        {
-          appid: appid,
-          news_reply_items_attributes: [
-            {
-              title: '请绑定',
-              description: '授权您的信息',
-              url: app.oauth2_url
-            }
-          ]
-        }
-      elsif wechat_user.user.blank?
-        {
-          appid: appid,
-          news_reply_items_attributes: [
-            {
-              title: '请绑定',
-              description: '绑定信息',
-              url: Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', uid: open_id, host: app.host)
-            }
-          ]
-        }
-      else
-        {}
       end
+
+      [title, description, url]
     end
 
     def reply_from_rule
