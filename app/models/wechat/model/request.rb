@@ -54,7 +54,8 @@ module Wechat
           {
             title: params[0],
             description: params[1],
-            url: params[2]
+            url: params[2],
+            raw_pic_url: ApplicationController.helpers.image_vite_path('logo_avatar.jpg', protocol: 'https')
           }
         ]
       }

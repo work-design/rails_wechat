@@ -6,6 +6,7 @@ module Wechat
       attribute :title, :string
       attribute :description, :string
       attribute :url, :string
+      attribute :raw_pic_url, :string
 
       belongs_to :news_reply
 
@@ -22,7 +23,7 @@ module Wechat
     end
 
     def pic_url
-      pic.url
+      raw_pic_url.presence || pic.url
     end
 
   end
