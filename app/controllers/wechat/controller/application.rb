@@ -24,7 +24,7 @@ module Wechat
         logger.debug "\e[35m  Redirect to: #{redirect_url}  \e[0m"
       end
 
-      redirect_to redirect_url
+      redirect_to redirect_url, allow_other_host: true
     end
 
     def current_wechat_app
