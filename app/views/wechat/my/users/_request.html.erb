@@ -19,7 +19,7 @@
     <ul class="weui-media-box__info">
       <li class="weui-media-box__info__meta">
         <span><%= request.init_wechat_user_i18n %></span>
-        <time data-controller="time" data-format="yyyy-MM-dd HH:mm:ss"><%= request.wechat_user.created_at.to_s(:iso8601) %></time>
+        <time data-controller="time" data-format="yyyy-MM-dd HH:mm:ss"><%= request.wechat_user.created_at.to_formatted_s(:iso8601) %></time>
       </li>
     </ul>
   </div>

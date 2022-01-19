@@ -32,5 +32,5 @@
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::App.human_attribute_name(:created_at) %></td>
-  <td><time data-controller="time"><%= @app.created_at.to_s(:iso8601) %></time></td>
+  <td><time data-controller="time"><%= @app.created_at.to_formatted_s(:iso8601) %></time></td>
 </tr>

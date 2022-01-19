@@ -1,7 +1,7 @@
 <td><%= model.appid %></td>
 <td>
   <pre><%= model.access_token %></pre>
-  <p><time data-controller="time"><%= model.access_token_expires_at.to_s(:iso8601) %></time></p>
+  <p><time data-controller="time"><%= model.access_token_expires_at.to_formatted_s(:iso8601) %></time></p>
   <pre><%= model.refresh_token %></pre>
 </td>
 <td><%= simple_format model.func_infos %></td>
