@@ -57,7 +57,7 @@ module Wechat
       }, _default: 'xml'
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
-      #before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
+      before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
       #after_create :parse_content
       #after_create_commit :check_app
     end
@@ -75,9 +75,13 @@ module Wechat
     end
 
     def parse_message_hash
-      self.open_id = message_hash['FromUserName']
+      self.corp_id = message_hash['ToUserName']
+      self.user_id = message_hash['FromUserName']
       self.msg_type = message_hash['MsgType']
       self.msg_id = message_hash['MsgId']
+      self.agent_id = message_hash['AgentID']
+      self.event = message_hash['Event']
+      self.event_key = message_hash['EventKey']
     end
 
     def compute_type
