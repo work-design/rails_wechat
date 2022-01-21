@@ -31,6 +31,7 @@ module Wechat
       @provider_receive.content = r['Content']
       @provider_receive.event = r['Event']
       @provider_receive.event_key = r['EventKey']
+      @provider_receive.encrypt_data = r['Encrypt']
 
       if @provider_receive.save
         render plain: 'success'
