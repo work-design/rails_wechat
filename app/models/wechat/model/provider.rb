@@ -32,6 +32,17 @@ module Wechat
       content
     end
 
+    def oauth2_url(scope = 'snsapi_userinfo', state: SecureRandom.hex(16), host: self.host, **host_options)
+      h = {
+        appid: suite_id,
+        redirect_uri: Rails.application.routes.url_for(controller: 'wechat/apps', action: 'login', id: id, host: host, **host_options),
+        response_type: 'code',
+        scope: scope,
+        state: state
+      }
+      logger.debug "\e[35m  Detail: #{h}  \e[0m"
+      "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
+    end
 
   end
 end

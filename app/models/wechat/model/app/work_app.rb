@@ -15,7 +15,7 @@ module Wechat
     end
 
     def wechat_corp_oauth2(oauth2_params, account = nil)
-      userid   = cookies.signed_or_encrypted[:we_userid]
+      userid = cookies.signed_or_encrypted[:we_userid]
       deviceid = cookies.signed_or_encrypted[:we_deviceid]
       if userid.present? && deviceid.present?
         yield userid, { 'UserId' => userid, 'DeviceId' => deviceid }
