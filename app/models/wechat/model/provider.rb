@@ -12,6 +12,8 @@ module Wechat
       attribute :encoding_aes_key, :string
       attribute :suite_ticket, :string
       attribute :suite_ticket_pre, :string
+
+      has_many :provider_receives
     end
 
     # 密文解密得到msg的过程
