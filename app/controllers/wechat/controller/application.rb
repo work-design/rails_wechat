@@ -29,7 +29,12 @@ module Wechat
 
     def current_wechat_app
       return @current_wechat_app if defined?(@current_wechat_app)
-      @current_wechat_app = current_organ_domain&.wechat_app
+      if request.user_agent =~ /wxwork/
+        @current_wechat_app = Provider.first
+      else
+        @current_wechat_app = current_organ_domain&.wechat_app
+      end
+
       logger.debug "\e[35m  Current Wechat App is #{@current_wechat_app&.id}  \e[0m"
       @current_wechat_app
     end
