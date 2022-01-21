@@ -56,14 +56,14 @@ module Wechat
         xml: 'xml'
       }, _default: 'xml'
 
-      #before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
+      before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       #before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
       #after_create :parse_content
       #after_create_commit :check_app
     end
 
     def decrypt_data
-      aes_key = platform ? platform.encoding_aes_key : app.encoding_aes_key
+      aes_key = provider.encoding_aes_key
       r = Wechat::Cipher.decrypt(Base64.decode64(encrypt_data), aes_key)
       content, _ = Wechat::Cipher.unpack(r)
 
