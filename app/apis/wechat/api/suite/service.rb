@@ -14,6 +14,18 @@ module Wechat::Api
       r = post 'get_permanent_code', auth_code: auth_code, base: BASE
     end
 
+    # auth_type 1, 测试授权
+    def set_session_info(pre_auth_code, auth_type: 1, appid: [])
+      post(
+        'set_session_info',
+        pre_auth_code: pre_auth_code,
+        session_info: {
+          appid: appid,
+          auth_type: auth_type
+        }
+      )
+    end
+
   end
 end
 
