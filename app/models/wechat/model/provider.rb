@@ -72,7 +72,7 @@ module Wechat
     def generate_corp_user(code)
       h = {
         code: code,
-        suite_access_token: suite_access_token
+        suite_access_token: access_token
       }
       r = HTTPX.get "https://qyapi.weixin.qq.com/cgi-bin/service/getuserinfo3rd?#{h.to_query}"
       result = JSON.parse(r.body.to_s)
