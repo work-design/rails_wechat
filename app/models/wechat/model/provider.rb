@@ -82,8 +82,8 @@ module Wechat
     end
 
     def pre_auth_code_valid?
-      return false unless pre_auth_token_expires_at.acts_like?(:time)
-      pre_auth_token_expires_at > Time.current
+      return false unless pre_auth_code_expires_at.acts_like?(:time)
+      pre_auth_code_expires_at > Time.current
     end
 
     def refresh_access_token
