@@ -53,7 +53,7 @@ module Wechat
     end
 
     def install_url(state: SecureRandom.hex(16), host:, **host_options)
-      refresh_pre_auth_token unless pre_auth_token_valid?
+      refresh_pre_auth_code unless pre_auth_code_valid?
       h = {
         suite_id: suite_id,
         pre_auth_code: pre_auth_code,
@@ -70,11 +70,11 @@ module Wechat
       @api = Wechat::Api::Suite.new(self)
     end
 
-    def refresh_pre_auth_token
-      r = api.pre_auth_token
+    def refresh_pre_auth_code
+      r = api.pre_auth_code
       if r['pre_auth_code']
-        self.pre_auth_token = token_hash['pre_auth_token']
-        self.pre_auth_token_expires_at = Time.current + token_hash['expires_in'].to_i
+        self.pre_auth_code = r['pre_auth_code']
+        self.pre_auth_code_expires_at = Time.current + r['expires_in'].to_i
         self.save
       else
         logger.debug "\e[35m  #{r['errmsg']}  \e[0m"
