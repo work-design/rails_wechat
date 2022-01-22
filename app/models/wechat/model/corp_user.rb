@@ -9,6 +9,7 @@ module Wechat
       attribute :user_ticket, :string
       attribute :ticket_expires_at, :datetime
       attribute :open_userid, :string
+      attribute :open_id, :string
 
       belongs_to :provider, optional: true
     end
