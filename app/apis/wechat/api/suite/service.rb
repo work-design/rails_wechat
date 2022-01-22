@@ -7,11 +7,11 @@ module Wechat::Api
     end
 
     def pre_auth_code
-      get 'get_pre_auth_code'
+      get 'get_pre_auth_code', base: BASE
     end
 
     def permanent_code(auth_code)
-      r = post 'get_permanent_code', auth_code: auth_code
+      r = post 'get_permanent_code', auth_code: auth_code, base: BASE
     end
 
   end
