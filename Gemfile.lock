@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: bdffceccb3622ed70ff749b7373eb08f660b5b82
+  revision: 02e4c5e4d7d7a630af6b9e7d3b0e8b41bef3bb66
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 9124284146ee5dafac98585abb56e677b9f980eb
+  revision: 1d731900c8db88d83341d1720ea0e2e3106ffc63
   specs:
     rails_com (1.3.0)
       acme-client
@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 6c6698789e772aefa2f88b3cec69f75874b60516
+  revision: b60ba94696232a5e6759b6fc0efc57388939023e
   specs:
     rails_design (0.0.1)
       rails
@@ -282,7 +282,7 @@ GEM
     strscan (3.0.1)
     thor (1.2.1)
     timeout (0.2.0)
-    turbo-rails (1.0.0)
+    turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     tzinfo (2.0.4)
