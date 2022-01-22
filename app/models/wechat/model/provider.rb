@@ -13,7 +13,7 @@ module Wechat
       attribute :suite_ticket, :string
       attribute :suite_ticket_pre, :string
       attribute :access_token, :string
-      attribute :access_token_expire_at, :datetime
+      attribute :access_token_expires_at, :datetime
 
       has_many :provider_receives
       has_many :corp_users
