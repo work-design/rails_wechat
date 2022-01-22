@@ -12,6 +12,11 @@ module Wechat
       attribute :open_id, :string
 
       belongs_to :provider, optional: true
+      belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id, optional: true
+    end
+
+    def xx
+
     end
 
   end

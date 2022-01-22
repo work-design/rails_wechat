@@ -3,7 +3,10 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :name, :string
+      attribute :corp_id, :string, index: true
 
+      belongs_to :organ, class_name: 'Org::Organ'
     end
 
 

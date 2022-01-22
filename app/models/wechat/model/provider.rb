@@ -14,6 +14,8 @@ module Wechat
       attribute :suite_ticket_pre, :string
       attribute :access_token, :string
       attribute :access_token_expires_at, :datetime
+      attribute :pre_auth_code, :string
+      attribute :pre_auth_code_expires_at, :datetime
 
       has_many :provider_receives
       has_many :corp_users
@@ -37,7 +39,7 @@ module Wechat
       content
     end
 
-    def oauth2_url(scope = 'snsapi_userinfo', state: SecureRandom.hex(16), host: self.host, **host_options)
+    def oauth2_url(scope = 'snsapi_userinfo', state: SecureRandom.hex(16), host:, **host_options)
       h = {
         appid: suite_id,
         redirect_uri: Rails.application.routes.url_for(controller: 'wechat/providers', action: 'login', id: id, host: host, **host_options),
@@ -45,13 +47,43 @@ module Wechat
         scope: scope,
         state: state
       }
+
       logger.debug "\e[35m  Detail: #{h}  \e[0m"
       "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
+    end
+
+    def install_url(state: SecureRandom.hex(16), host:, **host_options)
+      refresh_pre_auth_token unless pre_auth_token_valid?
+      h = {
+        suite_id: suite_id,
+        pre_auth_code: pre_auth_code,
+        redirect_uri: Rails.application.routes.url_for(controller: 'wechat/providers', action: 'login', id: id, host: host, **host_options),
+        state: state
+      }
+
+      logger.debug "\e[35m  Detail: #{h}  \e[0m"
+      "https://open.work.weixin.qq.com/3rdapp/install?#{h.to_query}"
     end
 
     def api
       return @api if defined? @api
       @api = Wechat::Api::Suite.new(self)
+    end
+
+    def refresh_pre_auth_token
+      r = api.pre_auth_token
+      if r['pre_auth_code']
+        self.pre_auth_token = token_hash['pre_auth_token']
+        self.pre_auth_token_expires_at = Time.current + token_hash['expires_in'].to_i
+        self.save
+      else
+        logger.debug "\e[35m  #{r['errmsg']}  \e[0m"
+      end
+    end
+
+    def pre_auth_token_valid?
+      return false unless pre_auth_token_expires_at.acts_like?(:time)
+      pre_auth_token_expires_at > Time.current
     end
 
     def refresh_access_token

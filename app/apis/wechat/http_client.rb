@@ -61,11 +61,12 @@ module Wechat
       case data['errcode']
       when 0 # for request didn't expect results
         data
-        # 42001: access_token timeout
-        # 40014: invalid access_token
-        # 40001, invalid credential, access_token is invalid or not latest hint
-        # 48001, api unauthorized hint, should not handle here # GH-230
-      when 42001, 40014, 40001, 41001
+      # 42001: access_token timeout
+      # 40014: invalid access_token
+      # 40001, invalid credential, access_token is invalid or not latest hint
+      # 48001, api unauthorized hint, should not handle here # GH-230
+      # 40082, 企业微信
+      when 42001, 40014, 40001, 41001, 40082
         raise Wechat::AccessTokenExpiredError
         # 40029, invalid code for mp # GH-225
         # 43004, require subscribe hint # GH-214
