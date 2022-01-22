@@ -22,7 +22,8 @@ module Wechat::Api
         session_info: {
           appid: appid,
           auth_type: auth_type
-        }
+        },
+        base: BASE
       )
     end
 
