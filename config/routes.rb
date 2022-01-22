@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         post :callback
         get 'notify' => :verify
         post :notify
+        get :login
       end
     end
 
