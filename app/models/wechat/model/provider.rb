@@ -77,11 +77,13 @@ module Wechat
       r = HTTPX.get "https://qyapi.weixin.qq.com/cgi-bin/service/getuserinfo3rd?#{h.to_query}"
       result = JSON.parse(r.body.to_s)
 
-      corp_user = corp_users.find_or_initialize_by(uid: result['openid'])
-      wechat_user.assign_attributes result.slice('access_token', 'refresh_token', 'unionid')
-      wechat_user.expires_at = Time.current + result['expires_in'].to_i
-      wechat_user.sync_user_info if wechat_user.access_token.present? && (wechat_user.attributes['name'].blank? && wechat_user.attributes['avatar_url'].blank?)
-      wechat_user
+      corp_user = corp_users.find_or_initialize_by(open_userid: result['open_userid'])
+      corp_user.corp_id = result['CorpId']
+      corp_user.user_id = result['UserId']
+      corp_user.device_id = result['DeviceId']
+      corp_user.user_ticket = result['user_ticket']
+      corp_user.ticket_expires_at = Time.current + result['expires_in'].to_i
+      corp_user
     end
 
   end

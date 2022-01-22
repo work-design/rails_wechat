@@ -47,24 +47,12 @@ module Wechat
     end
 
     def login
-      @oauth_user = @provider.generate_corp_user(params[:code])
-      if @oauth_user.account.nil? && current_account
-        @oauth_user.account = current_account
-      end
-      @oauth_user.save
+      @corp_user = @provider.generate_corp_user(params[:code])
+      @corp_user.save
 
-      if @oauth_user.user
-        login_by_oauth_user(@oauth_user)
-        Com::SessionChannel.broadcast_to(params[:state], auth_token: current_authorized_token.token)
-        url = url_for(controller: 'my/home')
-
+      if @corp_user
         render :login, locals: { url: url }
       else
-        url_options = {}
-        url_options.merge! params.except(:controller, :action, :id, :business, :namespace, :code, :state).permit!
-        url_options.merge! host: URI(session[:return_to]).host if session[:return_to]
-        url = url_for(controller: 'auth/sign', action: 'sign', uid: @oauth_user.uid, **url_options)
-
         render :login, locals: { url: url }
       end
     end
