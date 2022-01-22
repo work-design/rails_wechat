@@ -63,6 +63,11 @@ module Wechat
       end
     end
 
+    def access_token_valid?
+      return false unless access_token_expires_at.acts_like?(:time)
+      access_token_expires_at > Time.current
+    end
+
     def store_access_token(token_hash)
       self.access_token = token_hash['suite_access_token']
       self.access_token_expires_at = Time.current + token_hash['expires_in'].to_i
@@ -70,6 +75,8 @@ module Wechat
     end
 
     def generate_corp_user(code)
+      refresh_access_token unless access_token_valid?
+
       h = {
         code: code,
         suite_access_token: access_token
