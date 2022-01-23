@@ -10,6 +10,7 @@ module Wechat
       attribute :ticket_data, :string
       attribute :agent_id, :string
       attribute :message_hash, :json
+      attribute :info_type, :string
 
       belongs_to :provider, foreign_key: :suite_id, primary_key: :suite_id, optional: true
 
@@ -24,6 +25,7 @@ module Wechat
       provider.suite_ticket_pre = provider.suite_ticket
       provider.suite_ticket = data['SuiteTicket']
       provider.save
+      self.info_type = data['InfoType']
       self.message_hash = data
       self.save
       data
