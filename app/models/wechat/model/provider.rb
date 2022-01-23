@@ -17,6 +17,7 @@ module Wechat
       attribute :pre_auth_code, :string
       attribute :pre_auth_code_expires_at, :datetime
 
+      has_many :provider_tickets, foreign_key: :suite_id, primary_key: :suite_id
       has_many :provider_receives
       has_many :corp_users
     end

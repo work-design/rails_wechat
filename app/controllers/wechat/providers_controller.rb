@@ -40,6 +40,8 @@ module Wechat
       end
     end
 
+    # get /notify
+    # get /callback
     def verify
       r = @provider.decrypt(params[:echostr])
 

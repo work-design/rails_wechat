@@ -9,10 +9,11 @@ module Wechat
       attribute :suite_id, :string
       attribute :ticket_data, :string
       attribute :agent_id, :string
+      attribute :message_hash, :json
 
       belongs_to :provider, foreign_key: :suite_id, primary_key: :suite_id, optional: true
 
-      after_create_commit :parsed_data, if: -> { provider.present? }
+      after_create :parsed_data, if: -> { provider.present? }
       after_create_commit :clean_last
     end
 
@@ -23,6 +24,8 @@ module Wechat
       provider.suite_ticket_pre = provider.suite_ticket
       provider.suite_ticket = data['SuiteTicket']
       provider.save
+      self.message_hash = data
+      self.save
       data
     end
 
