@@ -157,7 +157,7 @@ module Wechat
       self.auth_code = nil
       self.auth_code_expires_at = nil
 
-      self.class.transcation do
+      self.class.transaction do
         self.save!
         corp.save!
       end
