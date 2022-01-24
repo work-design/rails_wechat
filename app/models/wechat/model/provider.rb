@@ -143,7 +143,10 @@ module Wechat
       raise 'auth code expires' unless auth_code_valid?
 
       r = api.permanent_code(auth_code)
-      corps
+      corp_id = r.dig('auth_corp_info', 'corpid')
+      corp = corps.find_or_initialize_by(corp_id: corp_id)
+      corp.assign_info(r)
+      corp.save
     end
 
   end

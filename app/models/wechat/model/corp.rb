@@ -18,11 +18,24 @@ module Wechat
       attribute :auth_user_info, :json
       attribute :register_code_info, :json
       attribute :agent, :json
+      attribute :access_token, :string
+      attribute :access_token_expires_at, :datetime
+      attribute :permanent_code, :string
 
       belongs_to :organ, class_name: 'Org::Organ'
       belongs_to :provider, optional: true
     end
 
+    def assign_info(info)
+      self.assign_attributes info.slice('access_token', 'permanent_code', 'auth_corp_info', 'auth_user_info')
+      self.access_token_expires_at = Time.current + info['expires_in'].to_i
+      self.agent = info.fetch('auth_info', {}).fetch('agent', [])[0]
+
+      corp_info = info.fetch('auth_corp_info', {})
+      self.assign_attributes corp_info.slice('corp_type', 'subject_type')
+      self.assign_attributes corp_info.transform_keys(&->(i){ i.delete_prefix('corp_') }).slice('name', 'square_logo_url', 'user_max', 'wxqrcode', 'full_name', 'industry', 'sub_industry', 'location')
+      self.verified_end_at = Time.at(corp_info['verified_end_time'])
+    end
 
   end
 end
