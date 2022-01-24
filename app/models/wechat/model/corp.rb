@@ -14,6 +14,7 @@ module Wechat
       attribute :wxqrcode, :string
       attribute :industry, :string
       attribute :sub_industry, :string
+      attribute :location, :string
       attribute :auth_corp_info, :json
       attribute :auth_user_info, :json
       attribute :register_code_info, :json
