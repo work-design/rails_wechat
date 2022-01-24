@@ -15,6 +15,7 @@ module Wechat
       belongs_to :provider, foreign_key: :suite_id, primary_key: :suite_id, optional: true
 
       after_create :parsed_data, if: -> { provider.present? }
+      after_save :sync_auth_code, if: -> { ['create_auth'].include?(info_type) && saved_change_to_info_type? }
       after_create_commit :clean_last
     end
 
@@ -29,6 +30,12 @@ module Wechat
       self.message_hash = data
       self.save
       data
+    end
+
+    def sync_auth_code
+      provider.auth_code = message_hash.dig('AuthCode')
+      provider.auth_code_expires_at = 10.minutes.since
+      provider.save
     end
 
     def clean_last
