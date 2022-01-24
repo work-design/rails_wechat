@@ -65,6 +65,9 @@ zh:
       menus:
         index:
           title: 通用菜单
+      corps:
+        index:
+          title: 授权企业
     share:
       apps:
         index:
