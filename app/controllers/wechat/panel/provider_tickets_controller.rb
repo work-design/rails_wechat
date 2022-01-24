@@ -3,7 +3,7 @@ module Wechat
     before_action :set_provider
 
     def index
-      @provider_tickets = @provider.provider_tickets.page(params[:page])
+      @provider_tickets = @provider.provider_tickets.order(id: :desc).page(params[:page])
     end
 
     private
