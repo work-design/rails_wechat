@@ -23,7 +23,7 @@ module Wechat
       attribute :access_token_expires_at, :datetime
       attribute :permanent_code, :string
 
-      belongs_to :organ, class_name: 'Org::Organ'
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
       belongs_to :provider, optional: true
     end
 
