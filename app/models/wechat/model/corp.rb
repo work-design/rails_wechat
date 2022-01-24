@@ -27,6 +27,11 @@ module Wechat
       belongs_to :provider, optional: true
     end
 
+    def init_organ
+      organ || build_organ(name_short: name)
+      organ.name = full_name
+    end
+
     def assign_info(info)
       self.assign_attributes info.slice('access_token', 'permanent_code', 'auth_corp_info', 'auth_user_info')
       self.access_token_expires_at = Time.current + info['expires_in'].to_i if info['access_token']
