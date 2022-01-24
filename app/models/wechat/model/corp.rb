@@ -29,7 +29,7 @@ module Wechat
 
     def assign_info(info)
       self.assign_attributes info.slice('access_token', 'permanent_code', 'auth_corp_info', 'auth_user_info')
-      self.access_token_expires_at = Time.current + info['expires_in'].to_i
+      self.access_token_expires_at = Time.current + info['expires_in'].to_i if info['access_token']
       self.agent = info.fetch('auth_info', {}).fetch('agent', [])[0]
 
       corp_info = info.fetch('auth_corp_info', {})
@@ -39,8 +39,9 @@ module Wechat
     end
 
     def auth_info
-      r = provider.api.auth_info(corp_id, permanent_code)
-      
+      info = provider.api.auth_info(corp_id, permanent_code)
+      assign_info(info)
+      save
     end
 
   end
