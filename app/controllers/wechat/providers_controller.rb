@@ -8,6 +8,8 @@ module Wechat
     def notify
       @provider_ticket = ProviderTicket.new(ticket_params)
       r = Hash.from_xml(request.raw_post)['xml']
+      logger.debug "\e[35m  body is: #{r}  \e[0m"
+
       @provider_ticket.suite_id = r['ToUserName']
       @provider_ticket.ticket_data = r['Encrypt']
       @provider_ticket.agent_id = r['AgentID']
