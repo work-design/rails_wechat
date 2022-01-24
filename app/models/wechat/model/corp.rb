@@ -38,5 +38,10 @@ module Wechat
       self.verified_end_at = Time.at(corp_info['verified_end_time'])
     end
 
+    def auth_info
+      r = provider.api.auth_info(corp_id, permanent_code)
+      
+    end
+
   end
 end
