@@ -161,6 +161,7 @@ module Wechat
         self.save!
         corp.save!
       end
+      corp
     end
 
   end
