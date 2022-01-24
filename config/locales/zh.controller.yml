@@ -59,6 +59,12 @@ zh:
       providers:
         index:
           title: 企业微信服务商
+      provider_tickets:
+        index:
+          title: 回调消息
+      provider_receives:
+        index:
+          title: 消息
       apps:
         index:
           title: 微信公众号
