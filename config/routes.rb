@@ -69,9 +69,14 @@ Rails.application.routes.draw do
         end
       end
       resources :platforms do
-        resources :agencies, as: :agencies
+        resources :agencies
       end
-      resources :providers
+      resources :providers do
+        resources :corps
+        resources :provider_tickets
+        resources :provider_receives
+        resources :corp_users
+      end
     end
 
     namespace :share, defaults: { namespace: 'share' } do

@@ -20,6 +20,7 @@ module Wechat
       attribute :agent, :json
 
       belongs_to :organ, class_name: 'Org::Organ'
+      belongs_to :provider, optional: true
     end
 
 

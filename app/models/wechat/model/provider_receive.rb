@@ -1,38 +1,5 @@
 module Wechat
   module Model::ProviderReceive
-    # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
-    MSG_TYPE = {
-      'text' => 'Wechat::TextRequest',
-      'image' => 'Wechat::ImageRequest',
-      'voice' => 'Wechat::VoiceRequest',
-      'video' => 'Wechat::VideoRequest',
-      'shortvideo' => 'Wechat::ShortVideoRequest',
-      'location' => 'Wechat::LocationRequest',
-      'link' => 'Wechat::LinkRequest',
-      'event' => 'Wechat::EventRequest'
-    }.freeze
-    # https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_event_pushes.html
-    # https://work.weixin.qq.com/api/doc/90000/90135/90240
-    EVENT = {
-      'subscribe' => 'Wechat::SubscribeRequest',
-      'unsubscribe' => 'Wechat::UnsubscribeRequest',
-      'LOCATION' => 'Wechat::LocationRequest', # 公众号与企业微信通用
-      'CLICK' => 'Wechat::ClickRequest',
-      'VIEW' => 'Wechat::ViewRequest',
-      'view_miniprogram' => 'Wechat::ViewRequest',
-      'SCAN' => 'Wechat::ScanRequest',
-      'click' => 'Wechat::Request',
-      'view' => 'Wechat::Request',  # 企业微信使用
-      'scancode_push' => 'Wechat::ScancodePushRequest',
-      'scancode_waitmsg' => 'Wechat::Request',
-      'pic_sysphoto' => 'Wechat::Request',
-      'pic_photo_or_album' => 'Wechat::Request',
-      'pic_weixin' => 'Wechat::Request',
-      'location_select' => 'Wechat::Request',
-      'enter_agent' => 'Wechat::Request',
-      'batch_job_result' => 'Wechat::Request',  # 企业微信使用
-      'subscribe_msg_popup_event' => 'Wechat::MsgRequest'  # 小程序订阅消息
-    }.freeze
     extend ActiveSupport::Concern
 
     included do

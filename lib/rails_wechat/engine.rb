@@ -28,7 +28,7 @@ module RailsWechat
         assets: false,
         stylesheets: false,
         helper: false,
-        system_tests: false,
+        system_tests: nil,
         jbuilder: true
       }
       g.resource_route false
