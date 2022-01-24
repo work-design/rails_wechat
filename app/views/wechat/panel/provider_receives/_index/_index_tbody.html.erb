@@ -9,3 +9,4 @@
 </td>
 <td><%= model.content %></td>
 <td><%= simple_format model.message_hash %></td>
+<td><time data-controller="time"><%= model.created_at.to_formatted_s(:iso8601) %></time></td>

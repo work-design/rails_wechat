@@ -1,7 +1,16 @@
-<td><%= model.name %></td>
-<td><%= model.full_name %></td>
+<td>
+  <div class="is-several">
+    <%= image_tag model.square_logo_url, class: 'image is-36x36' if model.square_logo_url.present? %>
+    <span><%= model.name %></span>
+  </div>
+  <p><%= model.full_name %></p>
+</td>
 <td><%= model.corp_id %></td>
-<td><%= model.crop_type %></td>
-<td><%= model.subject_type %></td>
-<td><%= model.square_logo_url %></td>
-<td><%= model.industry %></td>
+<td>
+  <p><%= model.corp_type %></p>
+  <p><%= model.subject_type %></p>
+</td>
+<td>
+  <p><%= model.industry %></p>
+  <p><%= model.sub_industry %></p>
+</td>
