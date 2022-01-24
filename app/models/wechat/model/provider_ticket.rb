@@ -31,7 +31,7 @@ module Wechat
 
     def sync_suite_ticket
       provider.suite_ticket_pre = provider.suite_ticket
-      provider.suite_ticket = data['SuiteTicket']
+      provider.suite_ticket = message_hash['SuiteTicket']
       provider.save
     end
 
