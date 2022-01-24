@@ -47,7 +47,7 @@ module Wechat
     def refresh_access_token
       info = provider.api.corp_token(corp_id, permanent_code)
       self.access_token = info['access_token']
-      self.access_token_expires_at = Time.current + info['expires_in'].to_i if info['access_token']
+      self.access_token_expires_at = Time.current + info['expires_in'].to_i if info['access_token'] && self.access_token_changed?
       self.save
     end
 
