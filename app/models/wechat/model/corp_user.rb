@@ -10,22 +10,30 @@ module Wechat
       attribute :ticket_expires_at, :datetime
       attribute :open_userid, :string
       attribute :open_id, :string
+      attribute :identity, :string
 
       belongs_to :provider, optional: true
       belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id, optional: true
+
+      has_one :member, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity
+      has_one :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity
+
+      validates :identity, presence: true
+
+      before_validation :sync_identity, -> { user_id_changed? }
     end
 
-    def xx
+    def sync_identity
+      self.identity = [corp_id, user_id].join('_')
+    end
 
+    def init_account
+      
     end
 
     def auto_join_organ
-      user_tags.each do |user_tag|
-        next unless user_tag.tag_name.start_with?('invite_member_')
-        member = members.find_by(organ_id: user_tag.member_inviter.organ_id) || members.build(organ_id: user_tag.member_inviter.organ_id, state: 'pending_trial')
-        member.set_current_cart(user_tag.app.organ_id)
-        member.save
-      end
+      member = members.find_by(organ_id: user_tag.member_inviter.organ_id) || members.build(organ_id: user_tag.member_inviter.organ_id, state: 'pending_trial')
+      member.save
     end
 
   end
