@@ -11,12 +11,17 @@ module Wechat
       attribute :open_userid, :string
       attribute :open_id, :string
       attribute :identity, :string
+      attribute :name, :string
+      attribute :gender, :string
+      attribute :avatar_url, :string
+      attribute :qr_code, :string
 
       belongs_to :provider, optional: true
       belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id, optional: true
 
       has_one :member, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity
       has_one :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity
+      has_one :user, through: :account
 
       validates :identity, presence: true
 
@@ -35,6 +40,10 @@ module Wechat
     def auto_join_organ
       member = members.find_by(organ_id: user_tag.member_inviter.organ_id) || members.build(organ_id: user_tag.member_inviter.organ_id, state: 'pending_trial')
       member.save
+    end
+
+    def get_detail
+      r = provider.api.user_detail(user_ticket)
     end
 
   end

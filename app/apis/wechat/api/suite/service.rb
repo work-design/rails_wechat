@@ -35,6 +35,11 @@ module Wechat::Api
       post 'get_corp_token', auth_corpid: auth_corpid, permanent_code:permanent_code, base: BASE
     end
 
+    # https://developer.work.weixin.qq.com/document/path/91122
+    def user_detail(user_ticket)
+      post 'getuserdetail3rd', user_ticket: user_ticket, base: BASE
+    end
+
   end
 end
 
