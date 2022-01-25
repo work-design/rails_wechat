@@ -52,12 +52,11 @@ module Wechat
 
     def login
       @corp_user = @provider.generate_corp_user(params[:code])
-      @corp_user.save
 
-      if @corp_user
-        render :login, locals: { url: url }
+      if @corp_user.save
+        render :login
       else
-        render :login, locals: { url: url }
+        render :login
       end
     end
 
