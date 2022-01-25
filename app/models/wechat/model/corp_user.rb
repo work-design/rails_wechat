@@ -21,7 +21,7 @@ module Wechat
       validates :identity, presence: true
 
       before_validation :sync_identity, -> { user_id_changed? }
-      after_create :init_account
+      before_create :init_account
     end
 
     def sync_identity
