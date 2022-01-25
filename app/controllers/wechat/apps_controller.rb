@@ -11,7 +11,7 @@ module Wechat
       @oauth_user.save
 
       if @oauth_user.user
-        login_by_oauth_user(@oauth_user)
+        login_by_account(@oauth_user.account)
         redirect_to session[:return_to] || RailsAuth.config.default_return_path
         session.delete :return_to
       else
@@ -31,7 +31,7 @@ module Wechat
       @oauth_user.save
 
       if @oauth_user.user
-        login_by_oauth_user(@oauth_user)
+        login_by_account(@oauth_user.account)
         Com::SessionChannel.broadcast_to(params[:state], auth_token: current_authorized_token.token)
         url = url_for(controller: 'my/home')
 

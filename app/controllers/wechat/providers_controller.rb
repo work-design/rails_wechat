@@ -54,6 +54,7 @@ module Wechat
       @corp_user = @provider.generate_corp_user(params[:code])
 
       if @corp_user.save
+        login_by_account(@corp_user.account)
         render :login
       else
         render :login
