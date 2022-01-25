@@ -28,7 +28,7 @@ module Wechat
     end
 
     def init_account
-      
+      account || build_account(type: 'Auth::ThirdpartyAccount')
     end
 
     def auto_join_organ
