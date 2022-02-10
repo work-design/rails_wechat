@@ -27,6 +27,9 @@ module Wechat
       belongs_to :provider, optional: true
 
       has_many :corp_users, foreign_key: :corp_id, primary_key: :corp_id
+      has_many :members, class_name: 'Org::Member', foreign_key: :organ_id, primary_key: :organ_id
+
+      after_validation :init_organ, if: :new_record?
     end
 
     def init_organ

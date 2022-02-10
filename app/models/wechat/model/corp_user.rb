@@ -15,6 +15,7 @@ module Wechat
       attribute :gender, :string
       attribute :avatar_url, :string
       attribute :qr_code, :string
+      attribute :department, :integer, array: []
 
       belongs_to :provider, optional: true
       belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id, optional: true
@@ -27,6 +28,7 @@ module Wechat
 
       before_validation :sync_identity, -> { user_id_changed? }
       before_create :init_account
+      after_save_commit :auto_join_organ, if: -> { saved_change_to_identity? }
     end
 
     def sync_identity
@@ -38,7 +40,7 @@ module Wechat
     end
 
     def auto_join_organ
-      member = members.find_by(organ_id: user_tag.member_inviter.organ_id) || members.build(organ_id: user_tag.member_inviter.organ_id, state: 'pending_trial')
+      member || build_member
       member.save
     end
 
