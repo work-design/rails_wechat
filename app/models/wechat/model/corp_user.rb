@@ -37,7 +37,7 @@ module Wechat
     end
 
     def init_corp
-      corp || build_corp
+      corp || build_corp(provider_id: provider_id)
     end
 
     def init_account
