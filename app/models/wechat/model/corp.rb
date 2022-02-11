@@ -35,6 +35,7 @@ module Wechat
     def init_organ
       organ || build_organ(name_short: name)
       organ.name = full_name
+      organ
     end
 
     def assign_info(info)
