@@ -18,7 +18,7 @@ module Wechat
       attribute :department, :integer, array: []
 
       belongs_to :provider, optional: true
-      belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id, optional: true
+      belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id
 
       has_one :member, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity
       has_one :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity
@@ -27,12 +27,17 @@ module Wechat
       validates :identity, presence: true
 
       before_validation :sync_identity, -> { user_id_changed? }
+      before_validation :init_corp
       before_create :init_account
       after_save_commit :auto_join_organ, if: -> { saved_change_to_identity? }
     end
 
     def sync_identity
       self.identity = [corp_id, user_id].join('_')
+    end
+
+    def init_corp
+      corp || build_corp
     end
 
     def init_account

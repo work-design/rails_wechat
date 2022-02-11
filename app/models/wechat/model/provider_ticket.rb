@@ -35,10 +35,10 @@ module Wechat
       provider.save
     end
 
+    # auth code exppires after 10 minutes
     def sync_auth_code
-      provider.auth_code = message_hash.dig('AuthCode')
-      provider.auth_code_expires_at = 10.minutes.since
-      provider.save
+      auth_code = message_hash.dig('AuthCode')
+      provider.generate_corp(auth_code)
     end
 
     def clean_last

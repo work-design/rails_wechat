@@ -16,15 +16,11 @@ module Wechat
       attribute :access_token_expires_at, :datetime
       attribute :pre_auth_code, :string
       attribute :pre_auth_code_expires_at, :datetime
-      attribute :auth_code, :string
-      attribute :auth_code_expires_at, :datetime
 
       has_many :provider_tickets, foreign_key: :suite_id, primary_key: :suite_id
       has_many :provider_receives
       has_many :corp_users
       has_many :corps
-
-      after_save_commit :generate_corp, if: ->{ saved_change_to_auth_code? && auth_code.present? }
     end
 
     # 密文解密得到msg的过程
@@ -74,11 +70,6 @@ module Wechat
     def api
       return @api if defined? @api
       @api = Wechat::Api::Suite.new(self)
-    end
-
-    def auth_code_valid?
-      return false unless auth_code_expires_at.acts_like?(:time)
-      auth_code_expires_at > Time.current
     end
 
     def refresh_pre_auth_code
@@ -141,9 +132,7 @@ module Wechat
       corp_user
     end
 
-    def generate_corp
-      raise 'auth code expires' unless auth_code_valid?
-
+    def generate_corp(auth_code)
       r = api.permanent_code(auth_code)
       if r['errcode']
         logger.debug "#{r['errmsg']}"
@@ -153,14 +142,7 @@ module Wechat
       corp_id = r.dig('auth_corp_info', 'corpid')
       corp = corps.find_or_initialize_by(corp_id: corp_id)
       corp.assign_info(r)
-
-      self.auth_code = nil
-      self.auth_code_expires_at = nil
-
-      self.class.transaction do
-        self.save!
-        corp.save!
-      end
+      corp.save
       corp
     end
 
