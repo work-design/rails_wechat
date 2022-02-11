@@ -29,7 +29,7 @@ module Wechat
       before_validation :sync_identity, -> { user_id_changed? }
       before_validation :init_corp
       before_create :init_account
-      after_save_commit :auto_join_organ, if: -> { saved_change_to_identity? }
+      after_save :auto_join_organ, if: -> { saved_change_to_identity? }
     end
 
     def sync_identity
@@ -45,7 +45,7 @@ module Wechat
     end
 
     def auto_join_organ
-      member || build_member
+      member || build_member(organ_id: corp.organ_id)
       member.save
     end
 
