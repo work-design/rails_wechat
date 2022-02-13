@@ -94,7 +94,7 @@ module Wechat
 
     def api
       return @api if defined? @api
-      @api = Wechat::Api::Suite.new(self)
+      @api = Wechat::Api::Work.new(self)
     end
 
   end
