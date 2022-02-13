@@ -102,14 +102,6 @@ module Wechat
       self.save
     end
 
-    def jsapi_ticket
-      if jsapi_ticket_valid?
-        super
-      else
-        refresh_jsapi_ticket
-      end
-    end
-
     def jsapi_ticket_valid?
       return false unless jsapi_ticket_expires_at.acts_like?(:time)
       jsapi_ticket_expires_at > Time.current

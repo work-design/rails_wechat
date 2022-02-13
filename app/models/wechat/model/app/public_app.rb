@@ -9,6 +9,7 @@ module Wechat
     end
 
     def js_config(url = '/')
+      refresh_jsapi_ticket unless jsapi_ticket_valid?
       page_url = url.delete_suffix('#')
       js_hash = Wechat::Signature.signature(jsapi_ticket, page_url)
       js_hash.merge! appid: appid
