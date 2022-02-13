@@ -21,6 +21,8 @@ module Wechat
       attribute :agent, :json
       attribute :access_token, :string
       attribute :access_token_expires_at, :datetime
+      attribute :jsapi_ticket, :string
+      attribute :jsapi_ticket_expires_at, :datetime
       attribute :permanent_code, :string
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
@@ -55,11 +57,44 @@ module Wechat
       save
     end
 
+    def agentid
+      agent['agentid']
+    end
+
+    def agent_config(url = '/')
+      refresh_access_token unless jsapi_ticket_valid?
+      page_url = url.delete_suffix('#')
+      js_hash = Wechat::Signature.signature(jsapi_ticket, page_url)
+      js_hash.merge!(
+        corpid: corp_id,
+        agentid: agentid
+      )
+
+      logger.debug "\e[35m  Current page is: #{page_url}, Hash: #{js_hash.inspect}  \e[0m"
+      js_hash
+    rescue => e
+      logger.debug e.message
+    end
+
     def refresh_access_token
       info = provider.api.corp_token(corp_id, permanent_code)
       self.access_token = info['access_token']
       self.access_token_expires_at = Time.current + info['expires_in'].to_i if info['access_token'] && self.access_token_changed?
       self.save
+    end
+
+    def refresh_jsapi_ticket
+      r = api.agent_ticket
+    end
+
+    def jsapi_ticket_valid?
+      return false unless jsapi_ticke_expires_at.acts_like?(:time)
+      jsapi_ticke_expires_at > Time.current
+    end
+
+    def api
+      return @api if defined? @api
+      @api = Wechat::Api::Suite.new(self)
     end
 
   end
