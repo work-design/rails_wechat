@@ -62,7 +62,7 @@ module Wechat
     end
 
     def agent_config(url = '/')
-      refresh_access_token unless jsapi_ticket_valid?
+      refresh_jsapi_ticket unless jsapi_ticket_valid?
       page_url = url.delete_suffix('#')
       js_hash = Wechat::Signature.signature(jsapi_ticket, page_url)
       js_hash.merge!(
@@ -89,7 +89,10 @@ module Wechat
     end
 
     def refresh_jsapi_ticket
-      r = api.agent_ticket
+      info = api.jsapi_ticket
+      self.jsapi_ticket = info['ticket']
+      self.jsapi_ticket_expires_at = Time.current + info['expires_in'].to_i if info['ticket'] && self.jsapi_ticket_changed?
+      self.save
     end
 
     def jsapi_ticket_valid?
