@@ -7,7 +7,7 @@ module Wechat::Api
     end
 
     def jsapi_ticket
-      get 'get_jsapi_ticket'
+      get 'get_jsapi_ticket', base: BASE
     end
 
     def agent_list
