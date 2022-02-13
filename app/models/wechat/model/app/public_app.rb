@@ -8,6 +8,16 @@ module Wechat
       belongs_to :weapp, class_name: 'ProgramApp', foreign_key: :weapp_id, primary_key: :appid, optional: true
     end
 
+    def js_config(url = '/')
+      page_url = url.delete_suffix('#')
+      js_hash = Wechat::Signature.signature(jsapi_ticket, page_url)
+      js_hash.merge! appid: appid
+      logger.debug "\e[35m  Current page is: #{page_url}, Hash: #{js_hash.inspect}  \e[0m"
+      js_hash
+    rescue => e
+      logger.debug e.message
+    end
+
     def sync_templates
       api.templates.each do |template|
         template = templates.find_or_initialize_by(template_id: template['template_id'])
