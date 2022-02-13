@@ -96,8 +96,8 @@ module Wechat
     end
 
     def jsapi_ticket_valid?
-      return false unless jsapi_ticke_expires_at.acts_like?(:time)
-      jsapi_ticke_expires_at > Time.current
+      return false unless jsapi_ticket_expires_at.acts_like?(:time)
+      jsapi_ticket_expires_at > Time.current
     end
 
     def api
