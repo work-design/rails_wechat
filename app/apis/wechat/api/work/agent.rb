@@ -15,7 +15,7 @@ module Wechat::Api
     end
 
     def agent_ticket
-      get 'ticket/get', base: BASE
+      get 'ticket/get', params: { type: 'agent_config' }, base: BASE
     end
 
     def agent(agentid)

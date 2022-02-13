@@ -89,7 +89,7 @@ module Wechat
     end
 
     def refresh_jsapi_ticket
-      info = api.jsapi_ticket
+      info = api.agent_ticket
       self.jsapi_ticket = info['ticket']
       self.jsapi_ticket_expires_at = Time.current + info['expires_in'].to_i if info['ticket'] && self.jsapi_ticket_changed?
       self.save
