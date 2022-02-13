@@ -54,7 +54,11 @@ module Wechat
 
     def current_corp_user
       return @current_corp_user if defined? @current_corp_user
-      @current_corp_user = current_account.corp_users[0]
+      if current_account.respond_to? :corp_users
+        @current_corp_user = current_account.corp_users[0]
+      else
+        @current_corp_user = nil
+      end
     end
 
     # 需要微信授权获取openid, 但并不需要注册为用户
