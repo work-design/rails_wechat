@@ -4,7 +4,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      helper_method :current_wechat_app
+      helper_method :current_wechat_app, :current_corp_user
     end
 
     def require_login(return_to: nil)
@@ -50,6 +50,11 @@ module Wechat
     def current_wechat_user
       return @current_wechat_user if defined?(@current_wechat_user)
       @current_wechat_user = current_account&.wechat_user
+    end
+
+    def current_corp_user
+      return @current_corp_user if defined? @current_corp_user
+      @current_corp_user = current_account.corp_users[0]
     end
 
     # 需要微信授权获取openid, 但并不需要注册为用户
