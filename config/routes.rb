@@ -38,6 +38,7 @@ Rails.application.routes.draw do
         get 'notify' => :verify
         post :notify
         get :login
+        get :auth
       end
     end
 

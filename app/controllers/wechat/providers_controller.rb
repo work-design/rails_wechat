@@ -1,7 +1,7 @@
 module Wechat
   class ProvidersController < BaseController
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
-    before_action :set_provider, only: [:verify, :notify, :callback, :login]
+    before_action :set_provider, only: [:verify, :notify, :callback, :login, :auth]
     before_action :verify_signature, only: [:verify]
 
     # 指令回调URL: /wechat/providers/notify
@@ -58,6 +58,19 @@ module Wechat
         render :login
       else
         render :login
+      end
+    end
+
+    # https://developer.work.weixin.qq.com/document/path/91125
+    # 业务设置URL
+    def auth
+      @corp_user = @provider.init_by_auth_code(params[:auth_code])
+
+      if @corp_user.save
+        login_by_account(@corp_user.account)
+        render :auth
+      else
+        render :auth
       end
     end
 

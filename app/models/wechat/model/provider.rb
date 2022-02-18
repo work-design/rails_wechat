@@ -169,5 +169,20 @@ module Wechat
       corp
     end
 
+    def init_by_auth_code(auth_code)
+      r = provider_api.login_info(auth_code)
+      if r['errcode']
+        logger.debug "#{r['errmsg']}"
+        return
+      end
+
+      user_info = r.dig('user_info')
+      corp_user = corp_users.find_or_initialize_by(open_userid: user_info['open_userid'])
+      corp_user.corp_id = r.dig('corp_info', 'corpid')
+      corp_user.user_id = user_info['userid']
+      corp_user.avatar_url = user_info['avatar']
+      corp_user
+    end
+
   end
 end
