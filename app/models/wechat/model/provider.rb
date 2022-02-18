@@ -118,8 +118,8 @@ module Wechat
     def refresh_provider_access_token
       r = provider_api.token
       if r['provider_access_token']
-        self.provider_access_token = token_hash['provider_access_token']
-        self.provider_access_token_expires_at = Time.current + token_hash['expires_in'].to_i
+        self.provider_access_token = r['provider_access_token']
+        self.provider_access_token_expires_at = Time.current + r['expires_in'].to_i
         self.save
       else
         logger.debug "\e[35m  #{r['errmsg']}  \e[0m"
