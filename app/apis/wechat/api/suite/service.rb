@@ -27,6 +27,10 @@ module Wechat::Api
       )
     end
 
+    def login_info(auth_code)
+      post 'get_login_info', auth_code: auth_code, base: BASE
+    end
+
     def auth_info(auth_corpid, permanent_code)
       post 'get_auth_info', auth_corpid: auth_corpid, permanent_code:permanent_code, base: BASE
     end
