@@ -16,6 +16,8 @@ module Wechat
       attribute :access_token_expires_at, :datetime
       attribute :pre_auth_code, :string
       attribute :pre_auth_code_expires_at, :datetime
+      attribute :provider_access_token, :string
+      attribute :provider_access_token_expires_at, :datetime
 
       has_many :provider_tickets, foreign_key: :suite_id, primary_key: :suite_id
       has_many :provider_receives
@@ -72,6 +74,11 @@ module Wechat
       @api = Wechat::Api::Suite.new(self)
     end
 
+    def provider_api
+      return @provider_api if defined? @provider_api
+      @provider_api = Wechat::Api::Provider.new(self)
+    end
+
     def refresh_pre_auth_code
       r = api.pre_auth_code
       if r['pre_auth_code']
@@ -106,6 +113,22 @@ module Wechat
       self.access_token = token_hash['suite_access_token']
       self.access_token_expires_at = Time.current + token_hash['expires_in'].to_i
       self.save
+    end
+
+    def refresh_provider_access_token
+      r = provider_api.token
+      if r['provider_access_token']
+        self.provider_access_token = token_hash['provider_access_token']
+        self.provider_access_token_expires_at = Time.current + token_hash['expires_in'].to_i
+        self.save
+      else
+        logger.debug "\e[35m  #{r['errmsg']}  \e[0m"
+      end
+    end
+
+    def provider_access_token_valid?
+      return false unless provider_access_token_expires_at.acts_like?(:time)
+      provider_access_token_expires_at > Time.current
     end
 
     def generate_corp_user(code)
