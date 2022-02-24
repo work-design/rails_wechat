@@ -42,7 +42,8 @@ module Wechat
         :key,
         :key_v3,
         :encrypt_mode,
-        :serial_no
+        :serial_no,
+        :global
       )
     end
 

@@ -40,7 +40,7 @@ module Wechat
           @current_wechat_app = Provider.first
         end
       else
-        @current_wechat_app = current_organ_domain&.wechat_app
+        @current_wechat_app = current_organ_domain&.wechat_app || App.global.take
       end
 
       logger.debug "\e[35m  Current Wechat App is #{@current_wechat_app&.id}  \e[0m"

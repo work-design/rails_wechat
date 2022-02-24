@@ -7,6 +7,7 @@ module Wechat
       attribute :name, :string
       attribute :enabled, :boolean, default: true
       attribute :shared, :boolean, default: false, comment: '可与其他或下级机构公用'
+      attribute :global, :boolean, default: false
       attribute :oauth_enable, :boolean, default: true
       attribute :inviting, :boolean, default: false, comment: '可邀请加入'
       attribute :appid, :string
@@ -47,12 +48,14 @@ module Wechat
       scope :enabled, -> { where(enabled: true) }
       scope :shared, -> { where(shared: true) }
       scope :inviting, -> { where(inviting: true) }
+      scope :global,  -> { where(global: true) }
 
       validates :appid, presence: true, uniqueness: true
 
       before_validation do
         self.encoding_aes_key ||= SecureRandom.alphanumeric(43) if encrypt_mode
       end
+      after_update :set_global, if: -> { global? && saved_change_to_global? }
     end
 
     def url
@@ -181,6 +184,10 @@ module Wechat
       if oauth_enable
         domain.presence || organ_domain&.identifier || organ_domains.first&.identifier
       end
+    end
+
+    def set_global
+      self.class.where.not(id: self.id).global.update_all(global: false)
     end
 
   end
