@@ -14,8 +14,8 @@ module Wechat
 
       if current_wechat_user && current_wechat_user.user.nil?
         redirect_url = url_for(controller: '/auth/sign', action: 'sign', uid: current_wechat_user.uid)
-      elsif current_wechat_app && current_wechat_app.respond_to?(:oauth2_url)
-        redirect_url = current_wechat_app.oauth2_url(host: request.host, port: request.port, protocol: request.protocol)
+      elsif current_oauth_app && current_oauth_app.respond_to?(:oauth2_url)
+        redirect_url = current_oauth_app.oauth2_url(host: request.host, port: request.port, protocol: request.protocol)
       else
         redirect_url = url_for(controller: '/auth/sign', action: 'sign')
       end
@@ -31,17 +31,33 @@ module Wechat
       end
     end
 
+    def current_oauth_app
+      return @current_oauth_app if defined? @current_oauth_app
+      if request.user_agent =~ /wxwork/
+        @current_oauth_app = Provider.first
+      else
+        @current_oauth_app = current_organ_domain&.wechat_app
+      end
+
+      logger.debug "\e[35m  Current Oauth App is #{@current_oauth_app.class_name}/#{@current_oauth_app&.id}  \e[0m"
+      @current_oauth_app
+    end
+
+    def current_js_app
+      return @current_js_app if defined?(@current_js_app)
+      if request.user_agent =~ /wxwork/ && current_account
+        @current_js_app = current_account.corp_users[0]&.corp
+      else
+        @current_js_app = current_organ_domain&.wechat_app
+      end
+
+      logger.debug "\e[35m  Current Js App is #{@current_js_app&.id}  \e[0m"
+      @current_js_app
+    end
+
     def current_wechat_app
       return @current_wechat_app if defined?(@current_wechat_app)
-      if request.user_agent =~ /wxwork/
-        if current_account
-          @current_wechat_app = current_account.corp_users[0]&.corp
-        else
-          @current_wechat_app = Provider.first
-        end
-      else
-        @current_wechat_app = current_organ_domain&.wechat_app || App.global.take
-      end
+      @current_wechat_app = current_organ_domain&.wechat_app || App.global.take
 
       logger.debug "\e[35m  Current Wechat App is #{@current_wechat_app&.id}  \e[0m"
       @current_wechat_app
