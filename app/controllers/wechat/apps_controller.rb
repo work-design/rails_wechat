@@ -53,7 +53,7 @@ module Wechat
       @oauth_user.save
 
       login_by_account(@oauth_user.account)
-      url = url_for(controller: 'me/home')
+      url = url_for(controller: 'me/home', host: @oauth_user.account.organs[0]&.host)
 
       render :bind, locals: { url: url }
     end
