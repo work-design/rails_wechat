@@ -34,4 +34,4 @@
   <p><%= model.state_i18n %></p>
   <p><%= model.appid %></p>
 </td>
-<td><time data-controller="time"><%= model.created_at.to_formatted_s(:iso8601) %></time></td>
+<td><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></td>
