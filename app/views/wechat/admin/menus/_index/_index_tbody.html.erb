@@ -13,4 +13,10 @@
   <p><%= model.mp_appid %></p>
   <p><%= model.mp_pagepath %></p>
 </td>
-<td><%= model.position %></td>
+<td>
+<% if model.parent_id.blank? %>
+  <%= model.position %>
+<% else %>
+  <span class="has-text-grey"><%= model.position %></span>
+<% end %>
+</td>
