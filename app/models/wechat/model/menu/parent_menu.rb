@@ -5,7 +5,7 @@ module Wechat
     def as_json
       {
         name: name,
-        sub_button: children.order(position: :desc).as_json
+        sub_button: children.as_json
       }
     end
 
