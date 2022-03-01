@@ -41,7 +41,7 @@ module Wechat
     end
 
     def oauth2_data_url(scope = 'snsapi_userinfo', **host_options)
-      r = oauth2_url(scope, **host_options)
+      r = oauth2_url(scope: scope, **host_options)
       QrcodeHelper.data_url(r)
     end
 
@@ -54,7 +54,9 @@ module Wechat
       }
       r = HTTPX.get "https://api.weixin.qq.com/sns/oauth2/access_token?#{h.to_query}"
       result = JSON.parse(r.body.to_s)
-      wechat_user = wechat_users.find_or_initialize_by(uid: result['openid'])
+
+      wechat_user = WechatUser.find_or_initialize_by(uid: result['openid'])
+      wechat_user.appid = appid
       wechat_user.assign_attributes result.slice('access_token', 'refresh_token', 'unionid')
       wechat_user.expires_at = Time.current + result['expires_in'].to_i
       wechat_user.sync_user_info if wechat_user.access_token.present? && (wechat_user.attributes['name'].blank? && wechat_user.attributes['avatar_url'].blank?)
