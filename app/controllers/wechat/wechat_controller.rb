@@ -27,7 +27,7 @@ module Wechat
 
     private
     def login_by_wechat_user(oauth_user)
-      headers['Auth-Token'] = oauth_user.account.auth_token
+      headers['Authorization'] = oauth_user.account.auth_token
       oauth_user.user.update(last_login_at: Time.current)
 
       logger.debug "Login by oauth user as user: #{oauth_user.user_id}"

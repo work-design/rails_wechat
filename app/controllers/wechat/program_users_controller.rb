@@ -12,7 +12,7 @@ module Wechat
       @program_user.unionid = info['unionid']
       auth_token = @program_user.auth_token(info['session_key'])
 
-      headers['Auth-Token'] = auth_token.token
+      headers['Authorization'] = auth_token.token
       render json: { auth_token: auth_token.token, account: @program_user.account, user: @program_user.user }
     end
 
