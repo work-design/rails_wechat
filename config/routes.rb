@@ -45,8 +45,8 @@ Rails.application.routes.draw do
     resources :suites, only: [] do
       member do
         get 'callback' => :verify
-        post :callback
         get 'notify' => :verify
+        post :callback
         post :notify
         get :login
       end

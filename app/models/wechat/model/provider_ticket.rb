@@ -12,7 +12,7 @@ module Wechat
       attribute :message_hash, :json
       attribute :info_type, :string
 
-      belongs_to :provider, foreign_key: :suite_id, primary_key: :suite_id, optional: true
+      belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
 
       before_save :parsed_data
       after_save :sync_suite_ticket, if: -> { ['suite_ticket'].include?(info_type) && saved_change_to_info_type? }
