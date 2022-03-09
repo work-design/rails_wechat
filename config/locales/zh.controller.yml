@@ -74,6 +74,9 @@ zh:
       corps:
         index:
           title: 授权企业
+      suites:
+        index:
+          title: 应用
     share:
       apps:
         index:

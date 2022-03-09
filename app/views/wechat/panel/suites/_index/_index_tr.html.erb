@@ -2,9 +2,6 @@
   <%= yield %>
   <td>
     <span data-show-target="item" style="visibility: hidden">
-      <%= link_to({ controller: 'suites', provider_id: model.id }, aria: { label: t('wechat.panel.suites.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-folder"></i>
-      <% end %>
       <%= link_to({ controller: 'corps', provider_id: model.id }, aria: { label: t('wechat.panel.corps.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-light fa-buildings"></i>
       <% end %>

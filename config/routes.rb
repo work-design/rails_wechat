@@ -78,6 +78,7 @@ Rails.application.routes.draw do
         resources :provider_tickets
         resources :provider_receives
         resources :corp_users
+        resources :suites
       end
     end
 
