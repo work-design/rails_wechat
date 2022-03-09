@@ -42,6 +42,7 @@ Rails.application.routes.draw do
         get :auth
       end
     end
+    resources :suites
 
     namespace :my, defaults: { namespace: 'my' } do
       resource :user, only: [] do
