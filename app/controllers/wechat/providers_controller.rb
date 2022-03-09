@@ -54,6 +54,7 @@ module Wechat
       @corp_user = @provider.generate_corp_user(params[:code])
       if session[:return_to].present?
         url = session[:return_to]
+        session.delete :return_to
       else
         url = url_for(controller: '/my/home')
       end
