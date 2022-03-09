@@ -52,12 +52,17 @@ module Wechat
 
     def login
       @corp_user = @provider.generate_corp_user(params[:code])
+      if session[:return_to].present?
+        url = session[:return_to]
+      else
+        url = url_for(controller: '/my/home')
+      end
 
       if @corp_user.save
         login_by_account(@corp_user.account)
-        render :login
+        render :login, locals: { url: url }
       else
-        render :login
+        render :login, locals: { url: url }
       end
     end
 
