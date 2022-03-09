@@ -1,10 +1,10 @@
 module Wechat
-  class Panel::CorpsController < Panel::BaseController
+  class Panel::SuiteReceivesController < Panel::BaseController
     before_action :set_provider
     before_action :set_suite
 
     def index
-      @corps = @suite.corps.page(params[:page])
+      @provider_receives = @suite.provider_receives.order(id: :desc).page(params[:page])
     end
 
     private

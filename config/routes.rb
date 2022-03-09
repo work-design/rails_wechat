@@ -34,9 +34,7 @@ Rails.application.routes.draw do
     end
     resources :providers, only: [:show] do
       member do
-        get 'callback' => :verify
         post :callback
-        get 'notify' => :verify
         post :notify
         get :login
         get :auth
@@ -83,11 +81,12 @@ Rails.application.routes.draw do
         resources :agencies
       end
       resources :providers do
-        resources :corps
-        resources :provider_tickets
-        resources :provider_receives
-        resources :corp_users
-        resources :suites
+        resources :suites do
+          resources :corps
+          resources :provider_tickets
+          resources :provider_receives
+          resources :corp_users
+        end
       end
     end
 

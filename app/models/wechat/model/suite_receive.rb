@@ -1,5 +1,5 @@
 module Wechat
-  module Model::ProviderReceive
+  module Model::SuiteReceive
     extend ActiveSupport::Concern
 
     included do

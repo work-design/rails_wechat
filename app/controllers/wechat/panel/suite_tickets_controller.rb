@@ -1,10 +1,10 @@
 module Wechat
-  class Panel::CorpsController < Panel::BaseController
+  class Panel::SuiteTicketsController < Panel::BaseController
     before_action :set_provider
     before_action :set_suite
 
     def index
-      @corps = @suite.corps.page(params[:page])
+      @provider_tickets = @suite.provider_tickets.order(id: :desc).page(params[:page])
     end
 
     private
@@ -15,6 +15,5 @@ module Wechat
     def set_suite
       @suite = Suite.find params[:suite_id]
     end
-
   end
 end

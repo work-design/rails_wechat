@@ -1,5 +1,5 @@
 module Wechat
-  module Model::ProviderTicket
+  module Model::SuiteTicket
     extend ActiveSupport::Concern
 
     included do
