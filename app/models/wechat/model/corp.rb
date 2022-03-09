@@ -25,19 +25,19 @@ module Wechat
       attribute :jsapi_ticket_expires_at, :datetime
       attribute :permanent_code, :string
 
-      belongs_to :organ, class_name: 'Org::Organ', optional: true
+      belongs_to :organ, class_name: 'Org::Organ', foreign_key: :corp_id, primary_key: :corp_id, optional: true
       belongs_to :provider, optional: true
       belongs_to :suite, optional: true
 
       has_many :corp_users, foreign_key: :corp_id, primary_key: :corp_id
-      has_many :members, class_name: 'Org::Member', foreign_key: :organ_id, primary_key: :organ_id
 
-      after_validation :init_organ, if: :new_record?
+      after_validation :init_organ, if: -> { corp_id_changed? }
     end
 
     def init_organ
-      organ || build_organ(name_short: name)
-      organ.name = full_name || corp_id
+      organ || build_organ
+      organ.name_short = name
+      organ.name = full_name
       organ
     end
 

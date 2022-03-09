@@ -17,7 +17,6 @@ module Wechat
       attribute :qr_code, :string
       attribute :department, :integer, array: []
 
-      belongs_to :provider, optional: true
       belongs_to :suite, optional: true
       belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id
 
@@ -38,7 +37,7 @@ module Wechat
     end
 
     def init_corp
-      corp || build_corp(provider_id: provider_id)
+      corp || build_corp(suite_id: suite_id)
     end
 
     def init_account
@@ -46,13 +45,13 @@ module Wechat
     end
 
     def auto_join_organ
-      member || build_member(organ_id: corp.organ_id)
+      member || build_member(organ_id: corp.organ.id)
       member.name = user_id
       member.save
     end
 
     def get_detail
-      r = provider.api.user_detail(user_ticket)
+      r = suite.api.user_detail(user_ticket)
       if r['errcode'] == 0
         self.assign_attributes r.slice('name', 'gender')
         self.avatar_url = r['avatar']
