@@ -93,7 +93,9 @@ module Wechat
     def refresh_access_token
       r = api.token
       if r['suite_access_token']
-        store_access_token(r)
+        self.access_token = r['suite_access_token']
+        self.access_token_expires_at = Time.current + r['expires_in'].to_i
+        self.save
       else
         logger.debug "\e[35m  #{r['errmsg']}  \e[0m"
       end
@@ -102,12 +104,6 @@ module Wechat
     def access_token_valid?
       return false unless access_token_expires_at.acts_like?(:time)
       access_token_expires_at > Time.current
-    end
-
-    def store_access_token(token_hash)
-      self.access_token = token_hash['suite_access_token']
-      self.access_token_expires_at = Time.current + token_hash['expires_in'].to_i
-      self.save
     end
 
     def generate_corp_user(code)
