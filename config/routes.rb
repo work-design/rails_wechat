@@ -42,7 +42,15 @@ Rails.application.routes.draw do
         get :auth
       end
     end
-    resources :suites
+    resources :suites, only: [] do
+      member do
+        get 'callback' => :verify
+        post :callback
+        get 'notify' => :verify
+        post :notify
+        get :login
+      end
+    end
 
     namespace :my, defaults: { namespace: 'my' } do
       resource :user, only: [] do
