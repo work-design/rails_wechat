@@ -15,6 +15,7 @@ module Wechat
       attribute :message_hash, :json
 
       belongs_to :provider, optional: true
+      belongs_to :suite, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 

@@ -18,6 +18,7 @@ module Wechat
       attribute :department, :integer, array: []
 
       belongs_to :provider, optional: true
+      belongs_to :suite, optional: true
       belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id
 
       has_one :member, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity
