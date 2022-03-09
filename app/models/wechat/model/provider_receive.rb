@@ -31,7 +31,7 @@ module Wechat
     end
 
     def decrypt_data
-      aes_key = provider.encoding_aes_key
+      aes_key = suite.encoding_aes_key
       r = Wechat::Cipher.decrypt(Base64.decode64(encrypt_data), aes_key)
       content, _ = Wechat::Cipher.unpack(r)
 
