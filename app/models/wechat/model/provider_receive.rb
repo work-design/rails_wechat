@@ -16,8 +16,6 @@ module Wechat
 
       belongs_to :provider, optional: true
       belongs_to :suite, optional: true
-      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
-      belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 
       enum msg_format: {
         json: 'json',
@@ -26,8 +24,6 @@ module Wechat
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
-      #after_create :parse_content
-      #after_create_commit :check_app
     end
 
     def decrypt_data
@@ -58,21 +54,6 @@ module Wechat
       else
         MSG_TYPE[msg_type]
       end
-    end
-
-    def parse_content
-      request || build_request(type: compute_type)
-      request.appid = appid
-      request.open_id = open_id
-      request.msg_type = msg_type
-      request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
-      request.generate_wechat_user  # Should before get reply
-
-      self.save  # will auto save wechat request
-    end
-
-    def check_app
-      app.update user_name: message_hash['ToUserName'] if app
     end
 
   end
