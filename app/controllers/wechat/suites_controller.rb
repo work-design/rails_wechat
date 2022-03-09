@@ -6,7 +6,7 @@ module Wechat
 
     # 指令回调URL: /wechat/providers/notify
     def notify
-      @provider_ticket = ProviderTicket.new(ticket_params)
+      @provider_ticket = ProviderTicket.new
       r = Hash.from_xml(request.raw_post)['xml']
       logger.debug "\e[35m  body is: #{r}  \e[0m"
 

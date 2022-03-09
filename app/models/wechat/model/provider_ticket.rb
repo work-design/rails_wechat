@@ -3,9 +3,6 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :timestamp, :integer
-      attribute :nonce, :string
-      attribute :msg_signature, :string
       attribute :suite_id, :string
       attribute :ticket_data, :string
       attribute :agent_id, :string
