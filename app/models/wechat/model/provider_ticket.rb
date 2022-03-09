@@ -17,11 +17,11 @@ module Wechat
       before_save :parsed_data
       after_save :sync_suite_ticket, if: -> { ['suite_ticket'].include?(info_type) && saved_change_to_info_type? }
       after_save :sync_auth_code, if: -> { ['create_auth'].include?(info_type) && saved_change_to_info_type? }
-      after_create_commit :clean_last
+      after_create_commit :clean_last, if: -> { ['suite_ticket'].include?(info_type) }
     end
 
     def parsed_data
-      content = provider.decrypt(ticket_data)
+      content = suite.decrypt(ticket_data)
       data = Hash.from_xml(content).fetch('xml', {})
 
       self.info_type = data['InfoType']
@@ -30,15 +30,15 @@ module Wechat
     end
 
     def sync_suite_ticket
-      provider.suite_ticket_pre = provider.suite_ticket
-      provider.suite_ticket = message_hash['SuiteTicket']
-      provider.save
+      suite.suite_ticket_pre = suite.suite_ticket
+      suite.suite_ticket = message_hash['SuiteTicket']
+      suite.save
     end
 
-    # auth code exppires after 10 minutes
+    # auth code expires after 10 minutes
     def sync_auth_code
       auth_code = message_hash.dig('AuthCode')
-      provider.generate_corp(auth_code)
+      suite.generate_corp(auth_code)
     end
 
     def clean_last
