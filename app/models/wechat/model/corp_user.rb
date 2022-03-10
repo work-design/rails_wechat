@@ -18,7 +18,7 @@ module Wechat
       attribute :department, :integer, array: []
 
       belongs_to :suite, optional: true
-      belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id
+      belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
 
       has_one :member, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity
       has_one :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity
