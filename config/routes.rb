@@ -82,10 +82,11 @@ Rails.application.routes.draw do
       end
       resources :providers do
         resources :suites do
-          resources :corps
+          resources :corps do
+            resources :corp_users
+          end
           resources :suite_tickets
           resources :suite_receives
-          resources :corp_users
         end
       end
     end
