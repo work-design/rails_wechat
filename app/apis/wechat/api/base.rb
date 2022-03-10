@@ -9,9 +9,9 @@ module Wechat::Api
       @client = Wechat::HttpClient.new
     end
 
-    def get(path, params: {}, headers: {}, base: nil, debug: nil, as: nil)
+    def get(path, params: {}, headers: {}, base: nil, debug: nil)
       with_access_token(params) do |with_token_params|
-        @client.get path, headers: headers, params: with_token_params, base: base, debug: debug, as: as
+        @client.get path, headers: headers, params: with_token_params, base: base, debug: debug
       end
     end
 
@@ -21,9 +21,9 @@ module Wechat::Api
       end
     end
 
-    def post_file(path, file, params: {}, headers: {}, base: nil)
+    def post_file(path, file, params: {}, headers: {}, base: nil, debug: nil)
       with_access_token(params) do |with_token_params|
-        @client.post_file path, file, headers: headers, params: with_token_params, base: base
+        @client.post_file path, file, headers: headers, params: with_token_params, base: base, debug: debug
       end
     end
 
