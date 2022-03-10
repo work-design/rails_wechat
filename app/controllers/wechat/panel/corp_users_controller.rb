@@ -1,5 +1,5 @@
 module Wechat
-  class Panel::CorpsController < Panel::BaseController
+  class Panel::CorpUsersController < Panel::BaseController
     before_action :set_provider
     before_action :set_suite
     before_action :set_corp
