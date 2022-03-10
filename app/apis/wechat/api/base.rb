@@ -9,15 +9,15 @@ module Wechat::Api
       @client = Wechat::HttpClient.new
     end
 
-    def get(path, params: {}, headers: {}, base: nil, as: nil)
+    def get(path, params: {}, headers: {}, base: nil, debug: nil, as: nil)
       with_access_token(params) do |with_token_params|
-        @client.get path, headers: headers, params: with_token_params, base: base, as: as
+        @client.get path, headers: headers, params: with_token_params, base: base, debug: debug, as: as
       end
     end
 
-    def post(path, params: {}, headers: {}, base: nil, **payload)
+    def post(path, params: {}, headers: {}, base: nil, debug: nil, **payload)
       with_access_token(params) do |with_token_params|
-        @client.post path, payload.to_json, headers: headers, params: with_token_params, base: base
+        @client.post path, payload.to_json, headers: headers, params: with_token_params, debug: debug, base: base
       end
     end
 
