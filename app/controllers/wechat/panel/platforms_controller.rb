@@ -6,18 +6,6 @@ module Wechat
       @platforms = Platform.page(params[:page])
     end
 
-    def new
-      @platform = Platform.new
-    end
-
-    def create
-      @platform = Platform.new(platform_params)
-
-      unless @platform.save
-        render :new, locals: { model: @platform }, status: :unprocessable_entity
-      end
-    end
-
     private
     def set_platform
       @platform = Platform.find(params[:id])
