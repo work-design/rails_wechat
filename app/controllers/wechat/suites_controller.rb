@@ -1,7 +1,7 @@
 module Wechat
   class SuitesController < BaseController
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
-    before_action :set_suite, only: [:verify, :notify, :callback, :login]
+    before_action :set_suite, only: [:verify, :notify, :callback, :login, :redirect]
     before_action :verify_signature, only: [:verify]
 
     # 指令回调URL: /wechat/providers/notify
