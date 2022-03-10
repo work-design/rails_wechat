@@ -39,7 +39,7 @@ module Wechat
     end
 
     def clean_last
-      ProviderTicketCleanJob.perform_later(self)
+      SuiteTicketCleanJob.perform_later(self)
     end
 
   end
