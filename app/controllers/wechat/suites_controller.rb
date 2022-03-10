@@ -57,9 +57,9 @@ module Wechat
       if @corp_user.save
         login_by_account(@corp_user.account)
         url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token)
-        render :login, locals: { url: url }
+        render :login, locals: { url: url }, layout: 'raw'
       else
-        render :login, locals: { url: root_url }
+        render :login, locals: { url: root_url }, layout: 'raw'
       end
     end
 
@@ -70,9 +70,9 @@ module Wechat
       end
       corp = @suite.corps.find_by corp_id: params[:corp_id]
       if corp&.organ
-        render 'redirect', locals: { url: url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token) }
+        render 'redirect', layout: 'raw', locals: { url: url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token) }
       else
-        render 'redirect', locals: { url: root_url }
+        render 'redirect', layout: 'raw', locals: { url: root_url }
       end
     end
 
