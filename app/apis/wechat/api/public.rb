@@ -2,7 +2,7 @@
 
 module Wechat::Api
   class Public < Base
-    include Base
+    include Common
     include Material
     include Menu
     include Mp

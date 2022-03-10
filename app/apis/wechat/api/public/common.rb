@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Wechat::Api
-  module Public::Base
+  module Public::Common
     BASE = 'https://api.weixin.qq.com/cgi-bin/'
 
     def callbackip

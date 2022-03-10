@@ -1,5 +1,5 @@
 module Wechat::Api
-  module Suite::Contact
+  module Work::Contact
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/externalcontact/'
 
     def add_contact_way(type: 1, scene: 2, **options)

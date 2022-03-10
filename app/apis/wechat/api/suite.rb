@@ -1,7 +1,6 @@
 module Wechat::Api
   class Suite < Wechat::Api::Base
     include Service
-    include Contact
 
     protected
     def with_access_token(params = {}, tries = 2)

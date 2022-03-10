@@ -4,6 +4,7 @@ module Wechat::Api
     include Agent
     include Menu
     include User
+    include Contact
 
     def initialize(app)
       super
