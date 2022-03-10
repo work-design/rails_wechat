@@ -13,7 +13,7 @@ module Wechat::Api
     end
 
     def list_contact_way
-      post 'list_contact_way'
+      post 'list_contact_way', base: BASE
     end
 
   end
