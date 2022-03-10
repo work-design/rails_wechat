@@ -10,24 +10,33 @@ module Wechat
     end
 
     def get(path, headers: {}, params: {}, base: nil, **options)
-      headers['Accept'] ||= 'application/json'
+      headers.with_defaults! 'Accept' => 'application/json'
       url = base + path
 
       response = @http.with_headers(headers).get(url, params: params)
-      parse_response(response, options[:as])
+
+      if options[:debug]
+        response
+      else
+        parse_response(response)
+      end
     end
 
     def post(path, payload, headers: {}, params: {}, base: nil, **options)
-      headers['Accept'] ||= 'application/json'
-      headers['Content-Type'] ||= 'application/json'
+      headers.with_defaults! 'Accept' => 'application/json', 'Content-Type' => 'application/json'
       url = base + path
 
       response = @http.with_headers(headers).post(url, params: params, body: payload)
-      parse_response(response, options[:as])
+
+      if options[:debug]
+        response
+      else
+        parse_response(response)
+      end
     end
 
     def post_file(path, file, headers: {}, params: {}, base: nil, **options)
-      headers['Accept'] ||= 'application/json'
+      headers.with_defaults! 'Accept' => 'application/json'
       url = base + path
 
       form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file)
@@ -36,11 +45,15 @@ module Wechat
         params: params,
         form: { media: form_file }
       )
-      parse_response(response, options[:as])
+      if options[:debug]
+        response
+      else
+        parse_response(response)
+      end
     end
 
     private
-    def parse_response(response, parse_as)
+    def parse_response(response)
       raise "Request get fail, response status #{response.status}" if response.status != 200
 
       content_type = response.content_type.mime_type
