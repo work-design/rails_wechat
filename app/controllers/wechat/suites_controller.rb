@@ -52,18 +52,28 @@ module Wechat
 
     def login
       @corp_user = @suite.generate_corp_user(params[:code])
-      if session[:return_to].present?
-        url = session[:return_to]
-        session.delete :return_to
-      else
-        url = url_for(controller: '/my/home')
-      end
+
+      corp = @suite.corps.find_by corp_id: params[:corp_id]
+      url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token)
 
       if @corp_user.save
         login_by_account(@corp_user.account)
         render :login, locals: { url: url }
       else
         render :login, locals: { url: url }
+      end
+    end
+
+    # 应用主页，自动跳转
+    def direct
+      unless current_user
+        redirect_to @suite.oauth2_url(host: request.host, port: request.port, protocol: request.protocol, corp_id: params[:corp_id])
+      end
+      corp = @suite.corps.find_by corp_id: params[:corp_id]
+      if corp&.organ
+        render 'direct', locals: { url: url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token) }
+      else
+        render 'direct', locals: { url: root_url }
       end
     end
 

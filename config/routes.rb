@@ -36,7 +36,6 @@ Rails.application.routes.draw do
       member do
         post :callback
         post :notify
-        get :login
         get :auth
       end
     end
@@ -47,6 +46,7 @@ Rails.application.routes.draw do
         post :callback
         post :notify
         get :login
+        get 'redirect/:corp_id' => :redirect
       end
     end
 
