@@ -12,8 +12,8 @@ module Wechat::Api
       )
     end
 
-    def list_contact_way
-      post 'list_contact_way', base: BASE
+    def list_contact_way(**options)
+      post 'list_contact_way', base: BASE, **options
     end
 
   end
