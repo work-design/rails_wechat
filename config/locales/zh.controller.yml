@@ -74,6 +74,9 @@ zh:
       corps:
         index:
           title: 授权企业
+      corp_users:
+        index:
+          title: 已登录用户
       suites:
         index:
           title: 应用
