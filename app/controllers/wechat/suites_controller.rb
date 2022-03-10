@@ -52,15 +52,14 @@ module Wechat
 
     def login
       @corp_user = @suite.generate_corp_user(params[:code])
-
       corp = @suite.corps.find_by corp_id: params[:corp_id]
-      url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token)
 
       if @corp_user.save
         login_by_account(@corp_user.account)
+        url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token)
         render :login, locals: { url: url }
       else
-        render :login, locals: { url: url }
+        render :login, locals: { url: root_url }
       end
     end
 
