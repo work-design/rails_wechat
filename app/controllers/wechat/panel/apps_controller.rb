@@ -9,10 +9,6 @@ module Wechat
       @apps = App.default_where(q_params).order(id: :asc).page(params[:page])
     end
 
-    def new
-      @app = App.new
-    end
-
     def create
       @app = App.find_or_initialize_by(appid: app_params[:appid])
       if @app.organ
