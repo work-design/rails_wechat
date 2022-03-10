@@ -34,7 +34,7 @@ module Wechat
     def current_oauth_app
       return @current_oauth_app if defined? @current_oauth_app
       if request.user_agent =~ /wxwork/
-        @current_oauth_app = Provider.first
+        @current_oauth_app = Suite.first
       else
         @current_oauth_app = current_organ_domain&.wechat_app
       end

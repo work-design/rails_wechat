@@ -15,6 +15,8 @@ module Wechat
       attribute :access_token_expires_at, :datetime
       attribute :pre_auth_code, :string
       attribute :pre_auth_code_expires_at, :datetime
+      attribute :redirect_controller, :string
+      attribute :redirect_action, :string, default: 'index', comment: '默认跳转'
 
       belongs_to :provider, foreign_key: :corp_id, primary_key: :corp_id
 

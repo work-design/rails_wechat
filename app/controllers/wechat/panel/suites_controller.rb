@@ -17,7 +17,15 @@ module Wechat
     end
 
     def suite_params
-      params.fetch(:suite, {}).permit!
+      params.fetch(:suite, {}).permit(
+        :corp_id,
+        :suite_id,
+        :secret,
+        :token,
+        :encoding_aes_key,
+        :redirect_controller,
+        :redirect_action
+      )
     end
 
   end
