@@ -6,15 +6,15 @@ module Wechat
 
     # 指令回调URL: /wechat/providers/notify
     def notify
-      @provider_ticket = ProviderTicket.new
+      @suite_ticket = SuiteTicket.new
       r = Hash.from_xml(request.raw_post)['xml']
       logger.debug "\e[35m  body is: #{r}  \e[0m"
 
-      @provider_ticket.suite_id = r['ToUserName']
-      @provider_ticket.ticket_data = r['Encrypt']
-      @provider_ticket.agent_id = r['AgentID']
+      @suite_ticket.suite_id = r['ToUserName']
+      @suite_ticket.ticket_data = r['Encrypt']
+      @suite_ticket.agent_id = r['AgentID']
 
-      if @provider_ticket.save
+      if @suite_ticket.save
         render plain: 'success'
       else
         head :no_content
@@ -24,18 +24,18 @@ module Wechat
     # 消息与事件接收URL: /wechat/providers/:id/callback
     def callback
       r = Hash.from_xml(request.raw_post)['xml']
-      @provider_receive = @suite.provider_receives.build
-      @provider_receive.corp_id = r['ToUserName']
-      @provider_receive.user_id = r['FromUserName']
-      @provider_receive.agent_id = r['AgentID']
-      @provider_receive.msg_type = r['MsgType']
-      @provider_receive.msg_id = r['MsgId']
-      @provider_receive.content = r['Content']
-      @provider_receive.event = r['Event']
-      @provider_receive.event_key = r['EventKey']
-      @provider_receive.encrypt_data = r['Encrypt']
+      @suite_receive = @suite.suite_receives.build
+      @suite_receive.corp_id = r['ToUserName']
+      @suite_receive.user_id = r['FromUserName']
+      @suite_receive.agent_id = r['AgentID']
+      @suite_receive.msg_type = r['MsgType']
+      @suite_receive.msg_id = r['MsgId']
+      @suite_receive.content = r['Content']
+      @suite_receive.event = r['Event']
+      @suite_receive.event_key = r['EventKey']
+      @suite_receive.encrypt_data = r['Encrypt']
 
-      if @provider_receive.save
+      if @suite_receive.save
         render plain: 'success'
       else
         head :no_content

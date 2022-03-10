@@ -1,8 +1,7 @@
 module Wechat
   class ProvidersController < BaseController
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
-    before_action :set_provider, only: [:verify, :notify, :callback, :login, :auth]
-    before_action :verify_signature, only: [:verify]
+    before_action :set_provider, only: [:notify, :callback, :login, :auth]
 
     # 指令回调URL: /wechat/providers/notify
     def notify
@@ -40,14 +39,6 @@ module Wechat
       else
         head :no_content
       end
-    end
-
-    # get /notify
-    # get /callback
-    def verify
-      r = @provider.decrypt(params[:echostr])
-
-      render plain: r
     end
 
     def login
