@@ -67,7 +67,7 @@ module Wechat
     # 应用主页，自动跳转
     def redirect
       unless current_user
-        redirect_to @suite.oauth2_url(host: request.host, port: request.port, protocol: request.protocol, corp_id: params[:corp_id])
+        redirect_to @suite.oauth2_url(host: request.host, port: request.port, protocol: request.protocol, corp_id: params[:corp_id]), allow_other_host: true
       end
       corp = @suite.corps.find_by corp_id: params[:corp_id]
       if corp&.organ
