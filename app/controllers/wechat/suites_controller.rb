@@ -70,7 +70,9 @@ module Wechat
       end
       corp = @suite.corps.find_by corp_id: params[:corp_id]
       if corp&.organ
-        render 'redirect', layout: 'raw', locals: { url: url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token) }
+        url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token)
+        logger.debug "\e[35m  redirect to: #{url}  \e[0m"
+        render 'redirect', layout: 'raw', locals: { url: url }
       else
         render 'redirect', layout: 'raw', locals: { url: root_url }
       end
