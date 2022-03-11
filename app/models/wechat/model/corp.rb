@@ -65,8 +65,8 @@ module Wechat
         r = api.get_contact_way(item['config_id'])
         info = r['contact_way']
         info['user'].each do |user|
-          contact = self.contacts.find_or_initialize_by(user_id: user)
-          contact.assign_attributes info.slice('qr_code', 'remark', 'config_id', 'skip_verify')
+          contact = self.contacts.find_or_initialize_by(user_id: user, config_id: item['config_id'])
+          contact.assign_attributes info.slice('qr_code', 'remark', 'skip_verify')
           contact.save
         end
       end
