@@ -27,27 +27,7 @@ module Wechat
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
     def edit_code
-    end
-
-    def update
-      @register.assign_attributes(register_params)
-
-      if @register.save
-        render 'update', locals: { return_to: my_registers_url }
-      else
-        render :edit, locals: { model: @register }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @register.destroy
     end
 
     private

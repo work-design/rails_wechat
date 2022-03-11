@@ -20,24 +20,6 @@ module Wechat
       end
     end
 
-    def show
-    end
-
-    def edit
-    end
-
-    def update
-      @media.assign_attributes(media_params)
-
-      unless @media.save
-        render :edit, locals: { model: @media }, status: :unprocessable_entity
-      end
-    end
-
-    def destroy
-      @media.destroy
-    end
-
     private
     def set_media
       @media = Media.find(params[:id])
