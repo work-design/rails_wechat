@@ -60,7 +60,7 @@ module Wechat
     end
 
     def contact_me
-      suite.api.add_contact_way(user: user_id)
+      corp.api.add_contact_way(user: user_id)
     end
 
   end
