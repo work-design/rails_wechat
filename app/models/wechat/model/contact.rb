@@ -14,12 +14,22 @@ module Wechat
 
       belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id, optional: true
 
+      after_create_commit :add_to_wx
       after_save_commit :sync_to_wx, if: -> { (saved_changes.keys & ['remark', 'state', 'skip_verify']).present? }
       after_destroy_commit :prune
     end
 
     def prune
       corp && corp.api.del_contact_way(config_id)
+    end
+
+    def add_to_wx
+      return unless corp
+      corp.api.add_contact_way(
+        remark: remark,
+        state: state,
+        skip_verify: skip_verify
+      )
     end
 
     def sync_to_wx
