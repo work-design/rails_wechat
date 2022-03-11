@@ -58,7 +58,7 @@ module Wechat
         login_by_account(@corp_user.account)
         url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token)
         logger.debug "\e[35m  redirect to: #{url}  \e[0m"
-        redirect_to url
+        redirect_to url, allow_other_host: true
       else
         render :login, locals: { url: root_url }, layout: 'raw'
       end
