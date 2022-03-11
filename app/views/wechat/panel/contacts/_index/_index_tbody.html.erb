@@ -6,5 +6,8 @@
   <p><%= model.config_id %></p>
   <p><%= image_tag model.qr_code, class: 'image is-64x64' %></p>
 </td>
-<td><%= model.remark %></td>
+<td>
+  <p><%= model.remark %></p>
+  <p><%= model.state %></p>
+</td>
 <td><%= model.skip_verify %></td>
