@@ -10,6 +10,24 @@ module Wechat
       attribute :qr_code, :string
       attribute :remark, :string
       attribute :skip_verify, :boolean, default: true
+
+      belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id, optional: true
+
+      after_save_commit :sync_to_wx, if: -> { (saved_changes.keys & ['remark', 'skip_verify']).present? }
+      after_destroy_commit :prune
+    end
+
+    def prune
+      corp && corp.api.del_contact_way(config_id)
+    end
+
+    def sync_to_wx
+      return unless corp
+      corp.api.update_contact_way(
+        config_id,
+        remark: remark,
+        skip_verify: skip_verify
+      )
     end
 
   end

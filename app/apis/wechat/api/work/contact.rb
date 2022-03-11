@@ -24,6 +24,14 @@ module Wechat::Api
       get 'get_follow_user_list', base: BASE
     end
 
+    def del_contact_way(config_id, **options)
+      post 'del_contact_way', config_id: config_id, base: BASE, **options
+    end
+
+    def update_contact_way(config_id, **options)
+      post 'update_contact_way', config_id: config_id, base: BASE, **options
+    end
+
   end
 end
 
