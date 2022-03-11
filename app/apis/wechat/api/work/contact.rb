@@ -16,6 +16,10 @@ module Wechat::Api
       post 'list_contact_way', base: BASE, **options
     end
 
+    def get_follow_user_list
+      get 'get_follow_user_list', base: BASE
+    end
+
   end
 end
 
