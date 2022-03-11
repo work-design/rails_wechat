@@ -1,0 +1,10 @@
+<td>
+  <p><%= model.user_id %></p>
+  <p class="has-text-grey"><%= model.corp_id %></p>
+</td>
+<td>
+  <p><%= model.config_id %></p>
+  <p><%= image_tag model.qr_code, class: 'image is-64x64' %></p>
+</td>
+<td><%= model.remark %></td>
+<td><%= model.skip_verify %></td>

@@ -80,6 +80,7 @@ Rails.application.routes.draw do
       resources :platforms do
         resources :agencies
       end
+      resources :contacts
       resources :providers do
         resources :suites do
           resources :corps do

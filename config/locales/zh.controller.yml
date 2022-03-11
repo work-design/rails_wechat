@@ -77,6 +77,9 @@ zh:
       corp_users:
         index:
           title: 已登录用户
+      contacts:
+        index:
+          title: 联系我码
       suites:
         index:
           title: 应用
