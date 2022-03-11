@@ -30,6 +30,7 @@ module Wechat
       belongs_to :suite, optional: true
 
       has_many :corp_users, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
+      has_many :contacts, foreign_key: :corp_id, primary_key: :corp_id
 
       after_validation :init_organ, if: -> { corp_id_changed? }
     end
@@ -56,6 +57,19 @@ module Wechat
       info = provider.api.auth_info(corp_id, permanent_code)
       assign_info(info)
       save
+    end
+
+    def sync_contacts
+      items = api.list_contact_way.fetch('contact_way', [])
+      items.each do |item|
+        r = api.get_contact_way(item['config_id'])
+        info = r['contact_way']
+        info['user'].each do |user|
+          contact = self.contacts.find_or_initialize_by(user_id: user)
+          contact.assign_attributes info.slice('qr_code', 'remark', 'config_id', 'skip_verify')
+          contact.save
+        end
+      end
     end
 
     def agentid

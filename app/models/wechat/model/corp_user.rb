@@ -24,6 +24,8 @@ module Wechat
       has_one :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity
       has_one :user, through: :account
 
+      has_many :contacts, ->(o){ where(corp_id: o.corp_id) }, foreign_key: :user_id, primary_key: :user_id
+
       validates :identity, presence: true
 
       before_validation :sync_identity, -> { user_id_changed? }
