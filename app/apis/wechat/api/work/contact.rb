@@ -41,6 +41,10 @@ module Wechat::Api
       get 'get', params: { external_userid: external_userid }, base: BASE
     end
 
+    def batch(userid, **options)
+      post 'batch/get_by_user', userid_list: [userid], base: BASE, **options
+    end
+
   end
 end
 
