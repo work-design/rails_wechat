@@ -25,6 +25,7 @@ module Wechat
       has_one :user, through: :account
 
       has_many :contacts, ->(o){ where(corp_id: o.corp_id) }, foreign_key: :user_id, primary_key: :user_id
+      has_many :externals, ->(o){ where(corp_id: o.corp_id) }, foreign_key: :userid, primary_key: :user_id
 
       validates :identity, presence: true
 
@@ -63,6 +64,17 @@ module Wechat
 
     def contact_me
       corp.api.add_contact_way(user: user_id)
+    end
+
+    def sync_externals
+      r = corp.api.batch(user_id)
+      list = r.fetch('external_contact_list', [])
+      list.each do |item|
+        external = externals.build
+        external.assign_attributes item.fetch('follow_info', {}).slice('remark', 'description', 'state', 'add_way')
+        external.assign_attributes item.fetch('external_contact', {}).slice('name', 'gender', 'external_userid')
+        external.save
+      end
     end
 
   end

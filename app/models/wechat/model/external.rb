@@ -3,6 +3,8 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :userid, :string
+      attribute :corp_id, :string
       attribute :name, :string
       attribute :remark, :string
       attribute :state, :string
@@ -10,7 +12,9 @@ module Wechat
       attribute :gender, :string
       attribute :description, :string
 
-      belongs_to :crm_tag, foreign_key: :state, primary_key: :name
+      belongs_to :corp_user, foreign_key: :userid, primary_key: :user_id
+
+      belongs_to :crm_tag, class_name: 'Crm::Tag', foreign_key: :state, primary_key: :name, optional: true
     end
 
   end
