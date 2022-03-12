@@ -32,8 +32,8 @@ module Wechat::Api
       post 'update_contact_way', config_id: config_id, base: BASE, **options
     end
 
-    def list
-      r = get 'list', base: BASE
+    def list(userid)
+      r = get 'list', userid: userid, base: BASE
       r['external_userid']
     end
 
