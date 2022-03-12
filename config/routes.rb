@@ -50,6 +50,10 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :me, defaults: { namespace: 'me' } do
+      resource :corp_users
+    end
+
     namespace :my, defaults: { namespace: 'my' } do
       resource :user, only: [] do
         collection do

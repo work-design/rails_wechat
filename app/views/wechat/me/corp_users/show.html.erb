@@ -1,0 +1,7 @@
+<div class="weui-panel">
+<% @corp_user.contacts.each do |contact| %>
+  <div>
+    <%= image_tag contact.qr_code %>
+  </div>
+<% end %>
+</div>

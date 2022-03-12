@@ -56,7 +56,7 @@ module Wechat
 
       if @corp_user.save
         login_by_account(@corp_user.account)
-        url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token)
+        url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token, suite_id: @suite.id)
         logger.debug "\e[35m  redirect to: #{url}  \e[0m"
         redirect_to url, allow_other_host: true
       else
@@ -70,7 +70,7 @@ module Wechat
       corp_user = current_account && current_account.corp_users.find_by(suite_id: @suite.id, corp_id: params[:corp_id])
 
       if corp_user
-        url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token)
+        url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token, suite_id: @suite.id)
         logger.debug "\e[35m  redirect to: #{url}  \e[0m"
         redirect_to url, allow_other_host: true
       else
