@@ -3,7 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      belongs_to :corp_user
+      belongs_to :corp_user, class_name: 'Wechat::CorpUser', optional: true
     end
 
   end
