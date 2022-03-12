@@ -12,7 +12,7 @@ module Wechat
     end
 
     def persist_corp_user
-      @corp_user = current_account.corp_users.where(suite_id: params[:suite_id])
+      @corp_user = current_account.corp_users.find_by(suite_id: params[:suite_id])
       current_authorized_token.update corp_user_id: @corp_user.id
     end
 
