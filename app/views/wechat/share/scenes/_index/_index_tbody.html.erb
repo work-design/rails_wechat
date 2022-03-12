@@ -1,6 +1,6 @@
 <td>
   <%= model.match_value %>
-  <%= image_tag model.qrcode_file, class: 'image is-32x32' if model.qrcode_file.attached? %>
+  <%= image_tag model.qrcode_data_url, class: 'image is-32x32' %>
 </td>
 <td>
   <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
