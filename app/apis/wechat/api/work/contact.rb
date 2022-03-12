@@ -33,12 +33,12 @@ module Wechat::Api
     end
 
     def list(userid)
-      r = get 'list', userid: userid, base: BASE
+      r = get 'list', params: { userid: userid }, base: BASE
       r['external_userid']
     end
 
     def item(external_userid)
-      get 'get', external_userid: external_userid, base: BASE
+      get 'get', params: { external_userid: external_userid }, base: BASE
     end
 
   end
