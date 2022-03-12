@@ -3,11 +3,11 @@ module Wechat
     before_action :set_corp_user, only: [:show]
 
     def show
-      persist_corp_user
     end
 
     private
     def set_corp_user
+      persist_corp_user
       @corp_user = current_corp_user
     end
 
