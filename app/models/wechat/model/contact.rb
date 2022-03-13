@@ -12,7 +12,9 @@ module Wechat
       attribute :state, :string
       attribute :skip_verify, :boolean, default: true
 
-      belongs_to :corp, foreign_key: :corp_id, primary_key: :corp_id, optional: true
+      belongs_to :suite
+      belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
+      belongs_to :corp_user, ->(o){ where(suite_id: o.suite_id, corp_id: o.corp_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
 
       before_create :add_to_wx
       after_save_commit :sync_to_wx, if: -> { (saved_changes.keys & ['remark', 'state', 'skip_verify']).present? }

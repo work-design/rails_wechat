@@ -30,7 +30,7 @@ module Wechat
       belongs_to :suite, optional: true
 
       has_many :corp_users, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
-      has_many :contacts, foreign_key: :corp_id, primary_key: :corp_id
+      has_many :contacts, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
 
       after_validation :init_organ, if: -> { corp_id_changed? }
     end
