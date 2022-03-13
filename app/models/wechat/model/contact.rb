@@ -25,6 +25,10 @@ module Wechat
       corp && corp.api.del_contact_way(config_id)
     end
 
+    def info
+      corp.api.get_contact_way(config_id)
+    end
+
     def add_to_wx
       return unless corp
       r = corp.api.add_contact_way(
