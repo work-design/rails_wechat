@@ -34,6 +34,7 @@ module Wechat
         skip_verify: skip_verify
       )
       self.assign_attributes r.slice('config_id', 'qr_code')
+      self
     end
 
     def sync_to_wx
