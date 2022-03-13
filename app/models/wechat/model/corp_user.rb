@@ -62,10 +62,6 @@ module Wechat
       end
     end
 
-    def contact_me
-      corp.api.add_contact_way(user: user_id)
-    end
-
     def sync_externals
       r = corp.api.batch(user_id)
       list = r.fetch('external_contact_list', [])

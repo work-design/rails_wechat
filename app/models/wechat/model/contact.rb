@@ -26,6 +26,7 @@ module Wechat
     def add_to_wx
       return unless corp
       corp.api.add_contact_way(
+        user: user_id,
         remark: remark,
         state: state,
         skip_verify: skip_verify
