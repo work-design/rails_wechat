@@ -16,8 +16,11 @@ module Wechat
       belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
       belongs_to :corp_user, ->(o){ where(suite_id: o.suite_id, corp_id: o.corp_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
 
+      has_one_attached :file
+
       before_create :add_to_wx
       after_save_commit :sync_to_wx, if: -> { (saved_changes.keys & ['remark', 'state', 'skip_verify']).present? }
+      after_save_commit :sync_to_storage, if: -> { saved_change_to_qr_code? }
       after_destroy_commit :prune
     end
 
@@ -39,6 +42,10 @@ module Wechat
       )
       self.assign_attributes r.slice('config_id', 'qr_code')
       self
+    end
+
+    def sync_to_storage
+      self.file.url_sync(qr_code)
     end
 
     def sync_to_wx
