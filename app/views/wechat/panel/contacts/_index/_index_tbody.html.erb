@@ -6,7 +6,7 @@
   <p><%= model.config_id %></p>
   <p><%= image_tag model.qr_code, class: 'image is-64x64' %></p>
 </td>
-<td><%= image_tag model.file if model.file.attached? %></td>
+<td><%= image_tag model.file, class: 'image is-64x64' if model.file.attached? %></td>
 <td>
   <p><%= model.remark %></p>
   <p><%= model.state %></p>
