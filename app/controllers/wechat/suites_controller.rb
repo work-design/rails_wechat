@@ -56,8 +56,8 @@ module Wechat
 
       if @corp_user.save
         login_by_account(@corp_user.account)
+        current_authorized_token.update corp_user_id: corp_user.id
         url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token, suite_id: @suite.id)
-        logger.debug "\e[35m  redirect to: #{url}  \e[0m"
         redirect_to url, allow_other_host: true
       else
         render :login, locals: { url: root_url }, layout: 'raw'
@@ -71,7 +71,7 @@ module Wechat
 
       if corp_user
         url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token, suite_id: @suite.id)
-        logger.debug "\e[35m  redirect to: #{url}  \e[0m"
+        current_authorized_token.update corp_user_id: corp_user.id
         redirect_to url, allow_other_host: true
       else
         redirect_to @suite.oauth2_url(host: request.host, port: request.port, protocol: request.protocol, corp_id: params[:corp_id]), allow_other_host: true
