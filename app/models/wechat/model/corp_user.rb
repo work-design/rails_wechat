@@ -66,9 +66,9 @@ module Wechat
       r = corp.api.batch(user_id)
       list = r.fetch('external_contact_list', [])
       list.each do |item|
-        external = externals.build
+        external = externals.find_or_initialize_by(external_userid: item.dig('external_contact', 'external_userid'))
         external.assign_attributes item.fetch('follow_info', {}).slice('remark', 'description', 'state', 'add_way')
-        external.assign_attributes item.fetch('external_contact', {}).slice('name', 'avatar', 'gender', 'external_userid')
+        external.assign_attributes item.fetch('external_contact', {}).slice('name', 'avatar', 'gender')
         external.save
       end
     end
