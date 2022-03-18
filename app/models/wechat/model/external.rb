@@ -11,6 +11,7 @@ module Wechat
       attribute :external_userid, :string
       attribute :gender, :string
       attribute :description, :string
+      attribute :add_way, :string
 
       belongs_to :corp_user, foreign_key: :userid, primary_key: :user_id
 
