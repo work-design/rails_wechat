@@ -68,7 +68,7 @@ module Wechat
       list.each do |item|
         external = externals.build
         external.assign_attributes item.fetch('follow_info', {}).slice('remark', 'description', 'state', 'add_way')
-        external.assign_attributes item.fetch('external_contact', {}).slice('name', 'gender', 'external_userid')
+        external.assign_attributes item.fetch('external_contact', {}).slice('name', 'avatar', 'gender', 'external_userid')
         external.save
       end
     end

@@ -6,6 +6,7 @@ module Wechat
       attribute :userid, :string
       attribute :corp_id, :string
       attribute :name, :string
+      attribute :avatar, :string
       attribute :remark, :string
       attribute :state, :string
       attribute :external_userid, :string

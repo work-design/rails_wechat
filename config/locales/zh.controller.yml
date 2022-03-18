@@ -105,3 +105,7 @@ zh:
       users:
         invite_qrcode:
           title: 邀请二维码
+    me:
+      externals:
+        index:
+          title: 客户列表
