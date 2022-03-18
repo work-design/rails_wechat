@@ -18,6 +18,7 @@ module Wechat
       belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
       belongs_to :corp_user, ->(o){ where(suite_id: o.suite_id, corp_id: o.corp_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
 
+      has_one :source_contact, ->(o){ where(source_id: o.source.id) }, class_name: 'Crm::SourceContact'
       has_many :source_contacts, ->(o){ where(source_id: o.source.id) }, class_name: 'Crm::SourceContact'
 
       has_one_attached :file
