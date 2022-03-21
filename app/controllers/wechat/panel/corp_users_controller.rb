@@ -14,7 +14,7 @@ module Wechat
     end
 
     def set_suite
-      @suite = Suite.find params[:suite_id]
+      @suite = Suite.find_by suite_id: params[:suite_id]
     end
 
     def set_corp

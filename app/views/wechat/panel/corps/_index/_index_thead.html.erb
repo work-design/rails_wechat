@@ -2,7 +2,10 @@
   <p><%= Wechat::Corp.human_attribute_name(:name) %></p>
   <p><%= Wechat::Corp.human_attribute_name(:full_name) %></p>
 </th>
-<th><%= Wechat::Corp.human_attribute_name(:corp_id) %></th>
+<th>
+  <p><%= Wechat::Corp.human_attribute_name(:corp_id) %></p>
+  <p class="has-text-grey"><%= Wechat::Corp.human_attribute_name(:suite_id) %></p>
+</th>
 <th>
   <p><%= Wechat::Corp.human_attribute_name(:corp_type) %></p>
   <p><%= Wechat::Corp.human_attribute_name(:subject_type) %></p>
