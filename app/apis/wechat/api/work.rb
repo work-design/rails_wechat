@@ -5,6 +5,7 @@ module Wechat::Api
     include Menu
     include User
     include Contact
+    include Media
 
     def initialize(app)
       super

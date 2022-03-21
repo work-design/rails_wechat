@@ -39,7 +39,7 @@ module Wechat
       headers.with_defaults! 'Accept' => 'application/json'
       url = base + path
 
-      form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file)
+      form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file, content_type: options[:content_type])
       response = @http.plugin(:multipart).with_headers(headers).post(
         url,
         params: params,

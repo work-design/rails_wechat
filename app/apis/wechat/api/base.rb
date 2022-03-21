@@ -21,9 +21,9 @@ module Wechat::Api
       end
     end
 
-    def post_file(path, file, params: {}, headers: {}, base: nil, debug: nil)
+    def post_file(path, file, params: {}, headers: {}, base: nil, **options)
       with_access_token(params) do |with_token_params|
-        @client.post_file path, file, headers: headers, params: with_token_params, base: base, debug: debug
+        @client.post_file path, file, headers: headers, params: with_token_params, base: base, **options
       end
     end
 
