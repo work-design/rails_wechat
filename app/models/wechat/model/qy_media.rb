@@ -9,7 +9,7 @@ module Wechat
       attribute :url, :string
       attribute :medium_attach, :string
 
-      belongs_to :medium, polymorphic: true
+      belongs_to :medium, polymorphic: true, optional: true
 
       belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id
