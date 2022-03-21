@@ -42,7 +42,7 @@ module Wechat
     def current_js_app
       return @current_js_app if defined?(@current_js_app)
       if request.user_agent =~ /wxwork/ && current_account
-        @current_js_app = current_account.corp_users[0]&.corp
+        @current_js_app = current_corp_user&.corp
       else
         @current_js_app = current_organ_domain&.wechat_app
       end
