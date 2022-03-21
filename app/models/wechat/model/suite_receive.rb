@@ -5,6 +5,7 @@ module Wechat
     included do
       attribute :corp_id, :string, index: true
       attribute :user_id, :string, index: true
+      attribute :suite_id, :string
       attribute :agent_id, :string
       attribute :msg_id, :string
       attribute :msg_type, :string
@@ -15,7 +16,7 @@ module Wechat
       attribute :message_hash, :json
 
       belongs_to :provider, optional: true
-      belongs_to :suite, optional: true
+      belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
 
       enum msg_format: {
         json: 'json',
