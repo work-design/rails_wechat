@@ -7,6 +7,10 @@
   <td><%= @external.state %></td>
 </tr>
 <tr>
+  <td class="has-text-right"><%= Wechat::External.human_attribute_name(:add_way) %></td>
+  <td><%= @external.add_way_i18n %></td>
+</tr>
+<tr>
   <td class="has-text-right"><%= Wechat::External.human_attribute_name(:gender) %></td>
-  <td><%= @external.gender %></td>
+  <td><%= @external.gender_i18n %></td>
 </tr>

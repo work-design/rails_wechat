@@ -64,3 +64,6 @@ zh:
         unionid: 微信开放平台UnionID
         account_id: 账号
         user_id: 用户
+      wechat/external:
+        state: 来源
+        add_way: 添加方式
