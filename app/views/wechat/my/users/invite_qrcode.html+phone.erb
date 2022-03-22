@@ -22,5 +22,7 @@
   data-wx-timeline-link-value="<%= request.original_url %>"
   data-wx-timeline-image-value="https://static.meal.design/assets/logo_reverse.f19dcfe0.png"
 >
-
 </div>
+<% content_for :reload do %>
+  <meta name="turbo-visit-control" content="reload">
+<% end %>
