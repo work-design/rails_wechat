@@ -67,11 +67,35 @@ module Wechat
       r = corp.api.batch(user_id)
       list = r.fetch('external_contact_list', [])
       list.each do |item|
-        external = externals.find_or_initialize_by(external_userid: item.dig('external_contact', 'external_userid'))
-        external.assign_attributes item.fetch('follow_info', {}).slice('remark', 'description', 'state', 'add_way')
-        external.assign_attributes item.fetch('external_contact', {}).slice('name', 'avatar', 'gender')
+        contact = item.fetch('external_contact', {})
+        external = externals.find_or_initialize_by(external_userid: contact['external_userid'])
+        external.external_type = contact['type']
+        external.assign_attributes contact.slice('name', 'position', 'avatar', 'corp_name', 'corp_full_name', 'gender', 'unionid')
+
+        info = item.fetch('follow_info', {})
+        follow = external.follows.find_or_initialize_by(userid: info['userid'])
+        follow.assign_attributes info.slice('remark', 'description', 'state', 'oper_userid', 'add_way')
+
         external.save
       end
+    end
+
+    def sync_external(external_userid)
+      r = corp.api.item(external_userid)
+      item = r.fetch('external_contact', {})
+      follow_infos = r.fetch('follow_user', [])
+
+      external = externals.find_or_initialize_by(external_userid: item['external_userid'])
+      external.external_type = item['type']
+      external.assign_attributes item.slice('name', 'avatar', 'gender', 'unionid', 'position')
+
+      follow_infos.each do |info|
+        follow = external.follows.find_or_initialize_by(userid: info['userid'])
+        follow.assign_attributes info.slice('remark', 'description', 'state', 'oper_userid', 'add_way')
+      end
+
+      external.save
+      r
     end
 
   end

@@ -8,8 +8,8 @@
   <% end %>
 </td>
 <td>
-  <p><%= model.start_at.to_s(:time) if model.start_at %></p>
-  <p><%= model.finish_at.to_s(:time) if model.finish_at %></p>
+  <p><%= model.start_at.to_fs(:time) if model.start_at %></p>
+  <p><%= model.finish_at.to_fs(:time) if model.finish_at %></p>
 </td>
 <td>
   <p class="has-text-success"><%= model.valid_response %></p>
