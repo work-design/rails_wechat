@@ -65,7 +65,7 @@ zh:
         type:
           Wechat::TemplatePublic: 公众号
           Wechat::TemplateProgram: 小程序
-      wechat/external:
+      wechat/follow:
         add_way:
           '0': 未知来源
           '1': 扫描二维码
@@ -79,6 +79,7 @@ zh:
           '10': 视频号添加
           '201': 内部成员共享
           '202': 管理员/负责人分配
+      wechat/external:
         gender:
           '0': 未知
           '1': 男性
