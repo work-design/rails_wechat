@@ -15,7 +15,7 @@ module Wechat
       attribute :unionid, :string
 
       belongs_to :corp_user, foreign_key: :userid, primary_key: :user_id
-      has_many :follows, ->(o){ where(corp_id: o.corp_id) }, foreign_key: :external_userid, primary_key: :external_userid, autosave: true
+      has_many :follows, ->(o){ where(corp_id: o.corp_id) }, foreign_key: :external_userid, primary_key: :external_userid, inverse_of: :external, autosave: true
     end
 
   end
