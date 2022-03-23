@@ -112,3 +112,6 @@ zh:
       externals:
         index:
           title: 客户列表
+      follows:
+        index:
+          title: 我的客户
