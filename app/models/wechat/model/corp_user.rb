@@ -96,7 +96,7 @@ module Wechat
       end
 
       external.save
-      r
+      external
     end
 
   end
