@@ -29,8 +29,8 @@ module Wechat
       self.message_hash = data
 
       # 同步 userid 和 corpid
-      self.userid = message_hash['UserID']
-      self.corp_id = message_hash['AuthCorpId']
+      self.user_id = message_hash['UserID']
+      self.auth_corp_id = message_hash['AuthCorpId']
 
       data
     end
