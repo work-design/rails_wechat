@@ -4,7 +4,6 @@ gemspec
 
 gem 'pg'
 gem 'puma'
-gem 'sidekiq'
 
 gem 'rails_com', github: 'work-design/rails_com'
 gem 'rails_vite', github: 'work-design/rails_vite'
