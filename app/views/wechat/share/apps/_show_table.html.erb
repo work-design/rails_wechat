@@ -11,26 +11,10 @@
   <td><%= @app.appid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::App.human_attribute_name(:secret) %></td>
-  <td><%= @app.secret %></td>
-</tr>
-<tr>
   <td class="has-text-right"><%= Wechat::App.human_attribute_name(:agentid) %></td>
   <td><%= @app.agentid %></td>
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::App.human_attribute_name(:encrypt_mode) %></td>
   <td><%= @app.encrypt_mode %></td>
-</tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::App.human_attribute_name(:encoding_aes_key) %></td>
-  <td><%= @app.encoding_aes_key %></td>
-</tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::App.human_attribute_name(:token) %></td>
-  <td><%= @app.token %></td>
-</tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::App.human_attribute_name(:created_at) %></td>
-  <td><time data-controller="time"><%= @app.created_at.to_fs(:iso8601) %></time></td>
 </tr>
