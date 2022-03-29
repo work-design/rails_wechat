@@ -125,6 +125,14 @@ Rails.application.routes.draw do
     end
 
     namespace :admin, defaults: { namespace: 'admin' } do
+      resources :menus do
+        collection do
+          get :new_parent
+        end
+        member do
+          get :edit_parent
+        end
+      end
       resources :apps do
         member do
           get :info
@@ -169,13 +177,9 @@ Rails.application.routes.draw do
           end
           resources :notices
         end
-        resources :menus do
+        resources :app_menus do
           collection do
-            get :new_parent
             post :sync
-          end
-          member do
-            get :edit_parent
           end
         end
       end

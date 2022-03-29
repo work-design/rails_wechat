@@ -11,12 +11,13 @@ module Wechat
       attribute :mp_pagepath, :string
       attribute :position, :integer
 
-      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
+
       belongs_to :parent, class_name: self.base_class.name, optional: true
       has_many :children, -> { order(position: :asc) }, class_name: self.base_class.name, foreign_key: :parent_id, dependent: :nullify
 
-      has_many :scene_menus, dependent: :destroy_async
-      accepts_nested_attributes_for :scene_menus, allow_destroy: true
+      has_many :app_menus, dependent: :destroy_async
+      accepts_nested_attributes_for :app_menus, allow_destroy: true
 
       scope :roots, -> { where(parent_id: nil) }
 
