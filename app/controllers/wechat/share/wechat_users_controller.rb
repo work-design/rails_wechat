@@ -6,7 +6,7 @@ module Wechat
 
     def index
       q_params = {
-        'user_tags.tag_id': @scene.tag&.id
+        'user_tags.tag_name': @scene.match_value
       }
       q_params.merge! params.permit(:name)
 
