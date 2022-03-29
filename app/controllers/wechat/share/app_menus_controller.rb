@@ -1,15 +1,13 @@
 module Wechat
-  class Share::MenusController < Share::BaseController
+  class Share::AppMenusController < Share::BaseController
     before_action :set_app
     before_action :set_scene
-    before_action :set_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
-    before_action :prepare_form, only: [:new, :create, :edit, :update]
+    before_action :set_app_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
 
     def index
       q_params = {}
       q_params.merge! params.permit(:name)
 
-      @default_menus = Menu.roots.where(appid: nil).where(q_params).order(parent_id: :desc, position: :asc)
       @menus = @app.menus.roots.where(q_params).order(parent_id: :desc, position: :asc)
 
       @scene_menu_ids = @scene.scene_menus.pluck(:menu_id)
@@ -51,26 +49,21 @@ module Wechat
       @scene = Scene.find params[:scene_id]
     end
 
-    def set_menu
-      @menu = Menu.find(params[:id])
+    def set_default_menus
+      q_params = {}
+      q_params.merge! params.permit(:name)
+
+      @default_menus = Menu.roots.where(organ_id: nil).where(q_params).order(parent_id: :desc, position: :asc)
     end
 
-    def prepare_form
-      @types = Menu.options_i18n(:type)
-      @types.reject! { |_, v| v == :ParentMenu }
+    def set_app_menu
+      @app_menu = @app.app_menus.find(params[:id])
     end
 
     def menu_params
-      params.fetch(:menu, {}).permit(
-        :appid,
-        :parent_id,
-        :type,
-        :name,
-        :value,
-        :mp_appid,
-        :mp_pagepath,
-        :position,
-        scene_menus_attributes: {}
+      params.fetch(:app_menu, {}).permit(
+        :menu_id,
+        :scene_id
       )
     end
 

@@ -110,14 +110,10 @@ Rails.application.routes.draw do
               patch :try_match
             end
           end
-          resources :menus do
+          resources :app_menus do
             collection do
               get :default
-              get :new_parent
               post :sync
-            end
-            member do
-              get :edit_parent
             end
           end
         end
