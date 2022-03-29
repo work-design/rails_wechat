@@ -3,14 +3,16 @@ module Wechat
     before_action :set_app
     before_action :set_scene
     before_action :set_app_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
+    before_action :set_default_menus, only: [:index]
 
     def index
       q_params = {}
+      q_params.merge! default_params
       q_params.merge! params.permit(:name)
 
-      @menus = @app.menus.roots.where(q_params).order(parent_id: :desc, position: :asc)
+      @menus = Menu.roots.where(q_params).order(parent_id: :desc, position: :asc)
 
-      @scene_menu_ids = @scene.scene_menus.pluck(:menu_id)
+      @scene_menu_ids = @scene.app_menus.pluck(:menu_id)
     end
 
     def new

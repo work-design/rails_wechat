@@ -17,8 +17,8 @@ module Wechat
 
       has_one :response, ->(o){ where(match_value: o.match_value) }, primary_key: :appid, foreign_key: :appid
       has_one :tag, ->(o){ where(name: o.match_value) }, primary_key: :appid, foreign_key: :appid
-      has_many :scene_menus, dependent: :destroy_async
-      has_many :menus, through: :scene_menus
+      has_many :app_menus, ->(o){ where(appid: o.appid) }, dependent: :destroy_async
+      has_many :menus, through: :app_menus
 
       before_validation do
         self.expire_at ||= Time.current + expire_seconds if expire_seconds
