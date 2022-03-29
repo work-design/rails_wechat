@@ -39,11 +39,11 @@ module Wechat
       has_one :organ_domain, -> { where(default: true) }, class_name: 'Org::OrganDomain', foreign_key: :appid, primary_key: :appid
       has_many :organ_domains, class_name: 'Org::OrganDomain', foreign_key: :appid, primary_key: :appid
 
-      has_one :agency, foreign_key: :appid, primary_key: :appid
-      has_many :agencies, foreign_key: :appid, primary_key: :appid
-      has_many :scenes, foreign_key: :appid, primary_key: :appid
-      has_many :tags, foreign_key: :appid, primary_key: :appid
-      has_many :templates, foreign_key: :appid, primary_key: :appid
+      has_one :agency, primary_key: :appid, foreign_key: :appid
+      has_many :agencies, primary_key: :appid, foreign_key: :appid
+      has_many :scenes, primary_key: :appid, foreign_key: :appid
+      has_many :tags, primary_key: :appid, foreign_key: :appid
+      has_many :templates, primary_key: :appid, foreign_key: :appid
 
       scope :enabled, -> { where(enabled: true) }
       scope :shared, -> { where(shared: true) }

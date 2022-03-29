@@ -1,0 +1,10 @@
+<tr id="tr_<%= model.id %>" data-depth="<%= model.parent_id.blank? ? '10' : '0' %>" data-controller="tree show" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="<%= 'has-background-white-ter' if model.appid.blank? %>">
+  <%= yield %>
+  <td>
+    <span data-show-target="item" style="visibility: hidden">
+    </span>
+  </td>
+</tr>
+<% model.children.each do |child| %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', locals: { model: child } %>
+<% end %>

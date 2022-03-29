@@ -1,14 +1,14 @@
 module Wechat
   class Admin::AppMenusController < Admin::BaseController
     before_action :set_app
-    before_action :set_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
+    before_action :set_app_menu, only: [:show, :edit, :update, :destroy]
     before_action :set_default_menus, only: [:index]
 
     def index
       q_params = {}
       q_params.merge! params.permit(:name)
 
-      @menus = @app.menus.includes(:children).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
+      @menus = Menu.includes(:children).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
     end
 
     def new
@@ -21,9 +21,9 @@ module Wechat
     end
 
     def create
-      @menu = @app.menus.build(menu_params)
+      @app_menu = @app.app_menus.build(menu_params)
 
-      unless @menu.save
+      unless @app_menu.save
         render :new, locals: { model: @menu }, status: :unprocessable_entity
       end
     end
@@ -41,8 +41,8 @@ module Wechat
     end
 
     private
-    def set_menu
-      @menu = Menu.find(params[:id])
+    def set_app_menu
+      @app_menu = @app.app_menus.find(params[:id])
     end
 
     def set_default_menus
@@ -58,15 +58,8 @@ module Wechat
     end
 
     def menu_params
-      params.fetch(:menu, {}).permit(
-        :appid,
-        :parent_id,
-        :type,
-        :name,
-        :value,
-        :mp_appid,
-        :mp_pagepath,
-        :position
+      params.fetch(:app_menu, {}).permit(
+        :menu_id
       )
     end
 

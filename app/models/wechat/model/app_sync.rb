@@ -3,13 +3,14 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      has_many :menus, foreign_key: :appid, primary_key: :appid
-      has_many :receives, foreign_key: :appid, primary_key: :appid
-      has_many :replies, foreign_key: :appid, primary_key: :appid
-      has_many :requests, foreign_key: :appid, primary_key: :appid
-      has_many :responses, foreign_key: :appid, primary_key: :appid
-      has_many :services, foreign_key: :appid, primary_key: :appid
-      has_many :wechat_users, foreign_key: :appid, primary_key: :appid
+      has_many :app_menus, primary_key: :appid, foreign_key: :appid
+      has_many :menus, through: :app_menus
+      has_many :receives, primary_key: :appid, foreign_key: :appid
+      has_many :replies, primary_key: :appid, foreign_key: :appid
+      has_many :requests, primary_key: :appid, foreign_key: :appid
+      has_many :responses, primary_key: :appid, foreign_key: :appid
+      has_many :services, primary_key: :appid, foreign_key: :appid
+      has_many :wechat_users, primary_key: :appid, foreign_key: :appid
     end
 
     def access_token_valid?
