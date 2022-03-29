@@ -106,13 +106,13 @@ module Wechat
       app.api.menu_delconditional(menu_id) if menu_id.present?
     end
 
-    def scene_menus
+    def had_menus
       menus.as_json
     end
 
     def menu
       {
-        button: app.default_menus + app.within_menus + scene_menus,
+        button: app.default_menus + app.within_menus + had_menus,
         matchrule: {
           tag_id: tag.tag_id.to_s
         }
