@@ -1,0 +1,74 @@
+module Wechat
+  class Admin::AppMenusController < Admin::BaseController
+    before_action :set_app
+    before_action :set_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
+    before_action :set_default_menus, only: [:index]
+
+    def index
+      q_params = {}
+      q_params.merge! params.permit(:name)
+
+      @menus = @app.menus.includes(:children).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
+    end
+
+    def new
+      @menu = @app.menus.build(type: 'Wechat::ViewMenu')
+      @parents = @app.menus.where(type: 'Wechat::ParentMenu', parent_id: nil)
+    end
+
+    def new_parent
+      @menu = @app.menus.build
+    end
+
+    def create
+      @menu = @app.menus.build(menu_params)
+
+      unless @menu.save
+        render :new, locals: { model: @menu }, status: :unprocessable_entity
+      end
+    end
+
+    def sync
+      r = @app.sync_menu
+      render 'sync', locals: { notice: r.to_s }
+    end
+
+    def edit
+      @parents = @app.menus.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @menu.appid)
+    end
+
+    def edit_parent
+    end
+
+    private
+    def set_menu
+      @menu = Menu.find(params[:id])
+    end
+
+    def set_default_menus
+      q_params = {}
+      q_params.merge! default_params
+
+      @default_menus = Menu.includes(:children).where(organ_id: nil).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
+    end
+
+    def set_types
+      @types = Menu.options_i18n(:type)
+      @types.reject! { |_, v| v == :ParentMenu }
+    end
+
+    def menu_params
+      params.fetch(:menu, {}).permit(
+        :appid,
+        :parent_id,
+        :type,
+        :name,
+        :value,
+        :mp_appid,
+        :mp_pagepath,
+        :position
+      )
+    end
+
+  end
+end

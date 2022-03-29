@@ -1,0 +1,4 @@
+<%= button_to({ action: 'sync', appid: params[:appid] }, method: :post, class: 'button is-link') do %>
+  <i class="fa-light fa-sync"></i>
+  <span><% t('.sync') %></span>
+<% end %>
