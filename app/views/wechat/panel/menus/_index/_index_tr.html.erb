@@ -1,4 +1,4 @@
-<tr id="tr_<%= model.id %>" data-controller="show" data-action="mouseenter->show#show mouseleave->show#hide">
+<tr id="tr_<%= model.id %>" data-depth="<%= model.parent_id.blank? ? '10' : '0' %>" data-controller="show tree" data-action="mouseenter->show#show mouseleave->show#hide">
   <%= yield %>
   <td>
     <span data-show-target="item" style="visibility: hidden">
