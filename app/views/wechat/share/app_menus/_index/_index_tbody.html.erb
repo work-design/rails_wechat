@@ -14,7 +14,17 @@
   <p><%= model.mp_pagepath %></p>
 </td>
 <td>
-<% if @scene_menu_ids.include?(model.id) %>
-  <i class="fa-light fa-clone has-text-success"></i>
+<% app_menu = @scene.app_menus.find(&->(i){ i.menu_id == model.id }) %>
+<% if app_menu %>
+  <%= form_with theme: nil, url: { action: 'destroy', id: app_menu.id }, method: :delete, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :disabled, checked: true, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
+<% else %>
+  <%= form_with theme: nil, scope: :app_menu, url: { action: 'create' }, data: { controller: 'input' } do |f| %>
+    <%= f.hidden_field :menu_id, value: model.id %>
+    <%= f.check_box :disabled, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
 <% end %>
 </td>

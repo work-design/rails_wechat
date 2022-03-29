@@ -27,10 +27,10 @@ module Wechat
     end
 
     def create
-      @menu = @app.menus.new(menu_params)
+      @app_menu = @scene.app_menus.build(menu_params)
 
-      unless @menu.save
-        render :new, locals: { model: @menu }, status: :unprocessable_entity
+      unless @app_menu.save
+        render :new, locals: { model: @app_menu }, status: :unprocessable_entity
       end
     end
 
