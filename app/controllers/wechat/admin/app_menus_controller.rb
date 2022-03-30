@@ -6,6 +6,7 @@ module Wechat
 
     def index
       q_params = {}
+      q_params.merge! default_params
       q_params.merge! params.permit(:name)
 
       @menus = Menu.includes(:children).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
@@ -47,7 +48,7 @@ module Wechat
 
     def set_default_menus
       q_params = {}
-      q_params.merge! default_params
+      q_params.merge! params.permit(:name)
 
       @default_menus = Menu.includes(:children).where(organ_id: nil).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
     end
