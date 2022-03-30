@@ -23,6 +23,7 @@ module Wechat
       after_create_commit :sync_to_wechat, if: -> { tag_id.blank? }
       after_update_commit :sync_to_wechat, if: -> { saved_change_to_name? }
       after_destroy_commit :remove_from_wechat, if: -> { tag_id.present? }
+      after_save_commit :sync_to_wechat_later, if: -> { tag_id.blank? && saved_change_to_name? }
     end
 
     def sync_name
