@@ -24,7 +24,6 @@ module Wechat
     end
 
     def host
-      organ = app&.organ
       if organ
         organ.host
       else
