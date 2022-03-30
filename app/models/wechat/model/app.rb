@@ -79,7 +79,7 @@ module Wechat
       else
         limit = 3
       end
-      Menu.where(parent_id: nil, organ_id: nil).order(position: :asc).limit(limit).as_json
+      Menu.includes(:children).where(parent_id: nil, organ_id: nil).order(position: :asc).limit(limit).as_json
     end
 
     def within_menus
