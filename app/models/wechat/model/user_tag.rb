@@ -6,6 +6,7 @@ module Wechat
       attribute :tag_name, :string, index: true
       attribute :appid, :string, index: true
       attribute :open_id, :string, index: true
+      attribute :synced, :boolean, default: false
 
       belongs_to :member_inviter, class_name: 'Org::Member', optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid
@@ -27,8 +28,11 @@ module Wechat
     end
 
     def sync_to_wechat
-      if wechat_api
-        wechat_api.tag_add_user(tag.tag_id, wechat_user.uid)
+      if wechat_api && tag.tag_id.present?
+        r = wechat_api.tag_add_user(tag.tag_id, wechat_user.uid)
+        if r['errcode'] == 0
+          self.update synced: true
+        end
       end
     end
 
