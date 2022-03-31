@@ -16,7 +16,11 @@ module Wechat
     def login_user
       r = body.delete_prefix!('session_')
       auth_token = wechat_user.authorized_tokens.valid.first || wechat_user.account&.authorized_tokens&.valid&.first
-      Com::SessionChannel.broadcast_to(r, auth_token: auth_token.token) if r && auth_token
+      if auth_token
+        Com::SessionChannel.broadcast_to r, auth_token: auth_token.token
+      else
+        Com::SessionChannel.broadcast_to r, url: Rails.application.routes.url_for(controller: '/auth/sign', action: 'sign', uid: wechat_user.uid)
+      end
     end
 
   end
