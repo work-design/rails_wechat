@@ -10,12 +10,13 @@ module Wechat
     def require_login(return_to: nil)
       return if current_user
       return super unless request.variant.any?(:wechat)
-      store_location(return_to)
 
       if current_wechat_user && current_wechat_user.user.nil?
+        store_location(return_to)
         redirect_url = url_for(controller: '/auth/sign', action: 'sign', uid: current_wechat_user.uid)
       elsif current_oauth_app && current_oauth_app.respond_to?(:oauth2_url)
-        redirect_url = current_oauth_app.oauth2_url(port: request.port, protocol: request.protocol)
+        state = "#{controller_path}##{action_name}"
+        redirect_url = current_oauth_app.oauth2_url(state: state, port: request.port, protocol: request.protocol)
       else
         redirect_url = url_for(controller: '/auth/sign', action: 'sign')
       end
