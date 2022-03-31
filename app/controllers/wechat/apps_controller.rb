@@ -33,13 +33,21 @@ module Wechat
       if @oauth_user.user
         login_by_account(@oauth_user.account)
         Com::SessionChannel.broadcast_to(params[:state], auth_token: current_authorized_token.token)
-        url = url_for(controller: 'my/home')
+
+        r = params[:state].split('#')
+        url_options = {
+          host: r[0],
+          controller: r[1],
+          action: r[2]
+        }
+        url_options.merge!
+        url = url_for(**url_options)
 
         render :login, locals: { url: url }, layout: 'raw'
       else
         url_options = {}
         url_options.merge! params.except(:controller, :action, :id, :business, :namespace, :code, :state).permit!
-        url_options.merge! host: URI(session[:return_to]).host if session[:return_to]
+        url_options.merge! host: params[:state].split('#')[0]
         url = url_for(controller: 'auth/sign', action: 'sign', uid: @oauth_user.uid, **url_options)
 
         render :login, locals: { url: url }, layout: 'raw'
