@@ -102,6 +102,11 @@ module Wechat
       r
     end
 
+    def get_menu
+      r = app.api.menu
+      Array(r['conditionalmenu']).find(&->(i){ i['menuid'].to_s == menu_id })
+    end
+
     def menu_delete
       app.api.menu_delconditional(menu_id) if menu_id.present?
     end
