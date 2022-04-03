@@ -3,7 +3,7 @@
     <% if request.wechat_user.avatar_url.present? %>
       <%= image_tag request.wechat_user.avatar_url, class: 'weui-media-box__thumb' %>
     <% else %>
-      <%= image_vite_tag 'avatar.png', class: 'weui-media-box__thumb' %>
+      <%= image_tag 'avatar.png', class: 'weui-media-box__thumb' %>
     <% end %>
   </div>
   <div class="weui-media-box__bd">
