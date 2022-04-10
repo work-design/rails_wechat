@@ -3,6 +3,7 @@
     <%= link_to t('wechat.admin.menus.index.title'), { controller: 'wechat/admin/menus' }, class: active_helper(controllers: 'wechat/admin/menus', active: 'is-active') %>
     <%= link_to t('wechat.admin.apps.index.title'), { controller: 'wechat/admin/apps' }, class: active_helper(controllers: 'wechat/admin/apps', active: 'is-active') %>
     <%= link_to t('wechat.share.apps.index.title'), { controller: 'wechat/share/apps' }, class: active_helper(controllers: ['wechat/share/apps', 'wechat/share/menus', 'wechat/share/scenes', 'wechat/share/wechat_users'], active: 'is-active') %>
+    <%= link_to t('wechat.admin.organs.show.title'), { controller: 'wechat/admin/organs', action: 'show' }, class: active_helper(controllers: ['organs'], active: 'is-active') -%>
   <% end %>
   <a class="menu-label" data-action="menu#toggle">
     <i class="fa-brands fa-fw fa-weixin"></i>

@@ -121,6 +121,7 @@ Rails.application.routes.draw do
     end
 
     namespace :admin, defaults: { namespace: 'admin' } do
+      resource :organ
       resources :menus do
         collection do
           get :new_parent
