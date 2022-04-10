@@ -45,7 +45,7 @@ module Wechat
       if request.user_agent =~ /wxwork/ && current_account
         @current_js_app = current_corp_user&.corp
       else
-        @current_js_app = current_organ_domain&.wechat_app
+        @current_js_app = current_wechat_app
       end
 
       logger.debug "\e[35m  Current Js App is #{@current_js_app&.id}  \e[0m"
