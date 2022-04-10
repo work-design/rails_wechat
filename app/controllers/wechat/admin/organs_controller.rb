@@ -1,6 +1,7 @@
 module Wechat
   class Admin::OrgansController < Admin::BaseController
     before_action :set_organ
+    before_action :set_corp_users, only: [:edit, :update]
 
     def show
     end
@@ -8,6 +9,14 @@ module Wechat
     private
     def set_organ
       @organ = current_organ
+    end
+
+    def set_corp_users
+      if RailsWechat.config.suite_id.present?
+        @corp_users = CorpUser.where(suite_id: RailsWechat.config.suite_id, corp_id: @organ.corp_id)
+      else
+        @corp_users = CorpUser.none
+      end
     end
 
     def organ_params

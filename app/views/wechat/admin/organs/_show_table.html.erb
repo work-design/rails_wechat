@@ -6,3 +6,7 @@
   <td class="has-text-right"><%= Org::Organ.human_attribute_name(:corp_id) %></td>
   <td><%= @organ.corp_id %></td>
 </tr>
+<tr>
+  <td class="has-text-right"><%= Org::Organ.human_attribute_name(:corp_user_id) %></td>
+  <td><%= @organ.corp_user&.user_id %></td>
+</tr>

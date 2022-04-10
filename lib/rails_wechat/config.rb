@@ -14,6 +14,7 @@ module RailsWechat
       }
     }
     config.email_domain = 'mail.work.design'
+    config.suite_id = ''
     config.rules = ActiveSupport::OrderedOptions.new
     config.rules.xx = {
       msg_type: 'text',
