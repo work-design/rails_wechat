@@ -27,6 +27,7 @@ module Wechat
     end
 
     def friend
+      render :friend, layout: 'my'
     end
 
     private
