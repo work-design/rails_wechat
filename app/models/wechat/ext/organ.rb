@@ -8,7 +8,7 @@ module Wechat
       attribute :corp_id, :string
 
       has_many :apps, class_name: 'Wechat::App', dependent: :destroy_async
-      has_many :corps, class_name: 'Wechat::Corp'
+      has_many :corps, class_name: 'Wechat::Corp', primary_key: :corp_id, foreign_key: :corp_id
 
       validates :limit_wechat_menu, inclusion: { in: [1, 2, 3] }
     end
