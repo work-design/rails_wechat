@@ -25,14 +25,13 @@
 >
 </div>
 
-<div data-controller="weui-actionsheet">
-  <div
-    data-weui-actionsheet-target="mask"
-    data-action="click->weui-actionsheet#close"
-    class="weui-mask weui-mask-share"
-    style="display: none"
-  >
-  </div>
+<div
+  data-controller="mask"
+  data-action="click->mask#close"
+  class="weui-mask weui-mask-share"
+  id="mask"
+  style="display: none"
+>
 </div>
 
 <% content_for :reload do %>
