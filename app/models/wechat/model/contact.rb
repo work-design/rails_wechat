@@ -22,6 +22,7 @@ module Wechat
       has_one :source_contact, ->(o){ where(source_id: o.source.id) }, class_name: 'Crm::SourceContact'
       has_many :source_contacts, ->(o){ where(source_id: o.source.id) }, class_name: 'Crm::SourceContact'
 
+      # 需要作为水印素材使用，故需要同步到对象存储服务
       has_one_attached :file
 
       before_create :add_to_wx
