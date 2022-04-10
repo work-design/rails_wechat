@@ -5,7 +5,18 @@
   </figure>
 </div>
 
-<div class="weui-navbar">
+<div class="weui-panel">
+  <div class="weui-panel__bd">
+    <div class="weui-cells">
+      <div class="weui-cell weui-cell_active weui-cell_access">
+        <div class="weui-cell__bd weui-cell_primary">分享好友/发个朋友圈</div>
+        <div class="weui-cell__ft"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="weui-navbar mt-4">
   <%= link_to '邀请记录', { action: 'invite_qrcode' }, class: active_helper(action: 'invite_qrcode', item: 'weui-navbar__item', active: 'weui-navbar__item weui-bar__item_on') %>
   <%= link_to '邀请有礼', { action: 'gift' }, class: active_helper(action: 'gift', item: 'weui-navbar__item', active: 'weui-navbar__item weui-bar__item_on') %>
 </div>
