@@ -26,6 +26,9 @@ module Wechat
       @scene
     end
 
+    def friend
+    end
+
     private
     def login_by_wechat_user(oauth_user)
       headers['Authorization'] = oauth_user.account.auth_token

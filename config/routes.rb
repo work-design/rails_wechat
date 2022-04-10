@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
   namespace :wechat, defaults: { business: 'wechat' } do
+    controller :wechat do
+      post 'wechat/auth' => :auth
+      get :login
+      get :friend
+    end
     resources :wechats, only: [:show] do
       member do
         post '' => :create
@@ -18,10 +23,6 @@ Rails.application.routes.draw do
         get :bind
         patch :qrcode
       end
-    end
-    controller :wechat do
-      post 'wechat/auth' => :auth
-      get :login
     end
     resources :platforms, only: [:show] do
       member do
