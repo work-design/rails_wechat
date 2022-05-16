@@ -51,11 +51,12 @@ module Wechat
       time > start_at.change(time.to_date.parts) && time < finish_at.change(time.to_date.parts)
     end
 
-    def serial_number(now = Time.current)
-      begin_at = now.beginning_of_month - 1.day
-      end_at = now.next_month.beginning_of_month - 1.day
-      serial_init = serial_start.presence || (now.strftime('%Y%m') + '0001').to_i
+    def serial_number(now = Time.current, pad: -1.day, init_start: serial_start)
+      begin_at = now.beginning_of_month + pad
+      end_at = now.next_month.beginning_of_month + pad
+
       if now < end_at
+        serial_init = init_start.presence || (now.strftime('%Y%m') + '0001').to_i
         last_item = last_item(begin_at)
         if last_item
           last_item.serial_number + 1
