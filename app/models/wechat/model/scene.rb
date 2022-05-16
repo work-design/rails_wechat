@@ -46,7 +46,6 @@ module Wechat
       return unless self.qrcode_url
       QrcodeHelper.data_url(self.qrcode_url)
     end
-    alias_method :qrcode_file_url, :qrcode_data_url
 
     def commit_to_wechat
       if ['Wechat::PublicApp', 'Wechat::ReadApp'].include? app.type

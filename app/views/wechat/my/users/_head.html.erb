@@ -1,7 +1,7 @@
 <div class="box is-radiusless">
   <p class="has-text-centered"><%= current_user.name %></p>
   <figure class="image">
-    <%= image_tag @scene.qrcode_file_url if @scene %>
+    <%= image_tag @scene.qrcode_data_url if @scene %>
   </figure>
 </div>
 
