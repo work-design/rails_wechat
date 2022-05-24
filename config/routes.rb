@@ -75,7 +75,11 @@ Rails.application.routes.draw do
 
     namespace :panel, defaults: { namespace: 'panel' } do
       resources :template_configs
-      resources :apps
+      resources :apps do
+        member do
+          get :key
+        end
+      end
       resources :menus do
         collection do
           get :new_parent

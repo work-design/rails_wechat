@@ -71,6 +71,8 @@ zh:
       apps:
         index:
           title: 微信公众号
+        key:
+          title: 编辑
       menus:
         index:
           title: 通用菜单
