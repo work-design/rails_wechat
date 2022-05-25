@@ -20,9 +20,9 @@ module Wechat
 
     def scan_regexp
       if more
-        /(?<=#{prefix}).*(?=#{suffix})/
+        RegexpUtil.more_between(prefix, suffix)
       else
-        /(?<=#{prefix}).*?(?=#{suffix})/
+        RegexpUtil.between(prefix, suffix)
       end
     end
 
