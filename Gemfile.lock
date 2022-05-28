@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 587617099a34f7311a5b50b02527ac759877dbd3
+  revision: b6c72e56596e81d8efdfa3eb5fe78f7e7c99260a
   specs:
     rails_com (1.3.0)
       acme-client
@@ -17,19 +17,16 @@ GIT
       closure_tree (>= 7.3)
       default_where (~> 2.2)
       http-form_data (~> 2.3)
-      httpx (~> 0.16)
+      httpx
       kaminari
       net-http
-      net-imap
-      net-pop
-      net-smtp
-      rails (>= 6.1)
+      rails (>= 7.0)
       rails_extend
       turbo-rails
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 2b32d4e98d6ebcaa5837cc637cdebc55c339afb0
+  revision: 5bb92649f75d1be5671e0645aed92e3f22893fb6
   specs:
     rails_design (0.0.1)
       rails
@@ -208,7 +205,7 @@ GEM
     puma (5.6.4)
       nio4r (~> 2.0)
     racc (1.6.0)
-    rack (2.2.3)
+    rack (2.2.3.1)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (7.0.3)
@@ -252,7 +249,7 @@ GEM
     stringio (3.0.2)
     strscan (3.0.3)
     thor (1.2.1)
-    timeout (0.2.0)
+    timeout (0.3.0)
     turbo-rails (1.1.1)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
