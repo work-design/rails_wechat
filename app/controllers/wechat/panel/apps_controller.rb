@@ -41,7 +41,9 @@ module Wechat
         :serial_no,
         :global,
         :token,
-        :encoding_aes_key
+        :encoding_aes_key,
+        :domain,
+        :weapp_id
       )
     end
 
