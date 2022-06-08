@@ -126,6 +126,7 @@ Rails.application.routes.draw do
     end
 
     namespace :admin, defaults: { namespace: 'admin' } do
+      root 'home#index'
       resource :organ, only: [:show, :edit, :update]
       resources :menus do
         collection do
