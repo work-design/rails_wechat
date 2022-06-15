@@ -1,5 +1,5 @@
 module Wechat
-  class Into::AppMenusController < Into::BaseController
+  class In::AppMenusController < In::BaseController
     before_action :set_app
     before_action :set_scene
     before_action :set_app_menu, only: [:show, :edit, :edit_parent, :update, :destroy]

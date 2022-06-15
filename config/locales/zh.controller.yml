@@ -91,7 +91,7 @@ zh:
       suites:
         index:
           title: 应用
-    into:
+    in:
       title: 平台微信
       apps:
         index:

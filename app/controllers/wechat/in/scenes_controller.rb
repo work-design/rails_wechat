@@ -1,5 +1,5 @@
 module Wechat
-  class Into::ScenesController < Into::BaseController
+  class In::ScenesController < In::BaseController
     before_action :set_app
     before_action :set_scene, only: [:show, :edit, :update, :destroy]
 

@@ -1,5 +1,5 @@
 module Wechat
-  class Into::WechatUsersController < Into::BaseController
+  class In::WechatUsersController < In::BaseController
     before_action :set_app
     before_action :set_scene
     before_action :set_wechat_user, only: [:show, :edit, :update, :try_match, :destroy]
