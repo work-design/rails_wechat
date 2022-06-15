@@ -1,5 +1,5 @@
 module Wechat
-  class Share::AppsController < Share::BaseController
+  class Into::AppsController < Into::BaseController
     before_action :set_app, only: [:show]
 
     def index

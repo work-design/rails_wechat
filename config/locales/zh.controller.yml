@@ -91,7 +91,8 @@ zh:
       suites:
         index:
           title: 应用
-    share:
+    into:
+      title: 平台微信
       apps:
         index:
           title: 平台公众号

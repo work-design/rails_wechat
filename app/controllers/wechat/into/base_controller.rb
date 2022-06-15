@@ -1,5 +1,5 @@
 module Wechat
-  class Share::BaseController < AdminController
+  class Into::BaseController < IntoController
 
     private
     def set_app

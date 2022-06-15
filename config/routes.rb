@@ -104,7 +104,7 @@ Rails.application.routes.draw do
       end
     end
 
-    namespace :share, defaults: { namespace: 'share' } do
+    namespace :into, defaults: { namespace: 'into' } do
       resources :apps do
         resources :scenes do
           member do
