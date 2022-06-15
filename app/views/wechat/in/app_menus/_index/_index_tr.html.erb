@@ -1,7 +1,7 @@
 <tr id="tr_<%= model.id %>" data-depth="<%= model.parent_id.blank? ? '10' : '0' %>" data-controller="tree show" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="<%= 'has-background-white-ter' if model.appid.blank? %>">
   <%= yield %>
   <td>
-    <span data-show-target="item" style="visibility: hidden">
+    <div data-show-target="item" style="visibility: hidden">
       <% if model.appid.to_s == @app.appid %>
         <% if model.type == 'Wechat::ParentMenu' %>
         <% else %>
@@ -13,7 +13,7 @@
           <i class="fa-light fa-trash"></i>
         <% end %>
       <% end %>
-    </span>
+    </div>
   </td>
 </tr>
 
