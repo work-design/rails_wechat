@@ -39,7 +39,8 @@ module Wechat
           host: r[0],
           controller: r[1],
           action: r[2],
-          disposable_token: @oauth_user.account.once_token
+          disposable_token: @oauth_user.account.once_token,
+          **r[3].to_s.split('&').map(&->(i){ i.split('=') }).to_h
         }
         url_options.merge!
         url = url_for(**url_options)
