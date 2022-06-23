@@ -14,19 +14,22 @@ module Wechat
       @api = Wechat::Api::Work.new(self)
     end
 
-    def wechat_corp_oauth2(oauth2_params, account = nil)
-      userid = cookies.signed_or_encrypted[:we_userid]
-      deviceid = cookies.signed_or_encrypted[:we_deviceid]
-      if userid.present? && deviceid.present?
-        yield userid, { 'UserId' => userid, 'DeviceId' => deviceid }
-      elsif params[:code].present? && params[:state] == oauth2_params[:state]
-        userinfo = wechat(account).getuserinfo(params[:code])
-        cookies.signed_or_encrypted[:we_userid] = { value: userinfo['UserId'], expires: self.class.oauth2_cookie_duration.from_now }
-        cookies.signed_or_encrypted[:we_deviceid] = { value: userinfo['DeviceId'], expires: self.class.oauth2_cookie_duration.from_now }
-        yield userinfo['UserId'], userinfo
-      else
-        redirect_to generate_oauth2_url(oauth2_params)
-      end
+    def oauth2_url(scope: 'snsapi_privateinfo', state: SecureRandom.hex(16), **url_options)
+      url_options.with_defaults! controller: 'wechat/apps', action: 'login', id: id, host: self.host
+      h = {
+        appid: appid,
+        redirect_uri: Rails.application.routes.url_for(**url_options),
+        response_type: 'code',
+        scope: scope,
+        state: state,
+        agentid: agentid
+      }
+      logger.debug "\e[35m  Oauth2 Options: #{h}  \e[0m"
+      "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
+    end
+
+    def generate_wechat_user(code)
+      r = api.getuserinfo(code)
     end
 
   end

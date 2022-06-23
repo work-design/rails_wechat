@@ -34,7 +34,11 @@ module Wechat
 
     def current_oauth_app
       return @current_oauth_app if defined? @current_oauth_app
-      @current_oauth_app = current_organ_domain&.wechat_app || App.global.take
+      if request.variant.include?(:work_wechat)
+        WorkApp.default_where(default_params).take
+      else
+        @current_oauth_app = current_organ_domain&.wechat_app || App.global.take
+      end
 
       logger.debug "\e[35m  Current Oauth App is #{@current_oauth_app&.class_name}/#{@current_oauth_app&.id}  \e[0m"
       @current_oauth_app
@@ -42,7 +46,7 @@ module Wechat
 
     def current_js_app
       return @current_js_app if defined?(@current_js_app)
-      if request.user_agent =~ /wxwork/ && current_account
+      if request.variant.include?(:work_wechat) && current_account
         @current_js_app = current_corp_user&.corp
       else
         @current_js_app = current_wechat_app
