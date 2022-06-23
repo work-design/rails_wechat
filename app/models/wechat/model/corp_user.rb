@@ -50,6 +50,7 @@ module Wechat
     end
 
     def auto_join_organ
+      return unless corp
       member || build_member(organ_id: corp.organ.id)
       member.name = user_id
       member.save
