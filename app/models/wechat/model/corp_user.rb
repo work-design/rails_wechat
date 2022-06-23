@@ -32,7 +32,7 @@ module Wechat
       validates :identity, presence: true
 
       before_validation :sync_identity, -> { user_id_changed? }
-      before_validation :init_corp
+      before_validation :init_corp, if: -> { suite_id.present? && suite_id_changed? }
       before_create :init_account
       after_save :auto_join_organ, if: -> { saved_change_to_identity? }
     end

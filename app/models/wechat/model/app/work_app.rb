@@ -8,14 +8,11 @@ module Wechat
       alias_attribute :corpid, :appid
       alias_attribute :corpsecret, :secret
 
-      has_one :corp
-
-      before_validation :init_corp
+      has_many :corp_users, ->{ where(suite_id: nil) }, primary_key: :appid, foreign_key: :corp_id
     end
 
-
     def init_corp
-      corp || build_corp(suite_id: nil)
+      self.organ.update corp_id: self.appid
     end
 
     def api
@@ -38,7 +35,12 @@ module Wechat
     end
 
     def generate_wechat_user(code)
-      r = api.getuserinfo(code)
+      result = api.getuserinfo(code)
+
+      corp_user = corp_users.find_or_initialize_by(user_id: result['UserId'])
+      corp_user.device_id = result['DeviceId']
+      corp_user.user_ticket = result['user_ticket']
+      corp_user.save
     end
 
   end
