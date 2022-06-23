@@ -60,7 +60,8 @@ module Wechat
     def get_detail
       r = (suite || app).api.user_detail(user_ticket)
       if r['errcode'] == 0
-        self.assign_attributes r.slice('name', 'gender')
+        self.assign_attributes r.slice('name', 'gender', 'qr_code')
+        self.identity = r['mobile'] if r['mobile']
         self.avatar_url = r['avatar']
         self.save
       end
