@@ -41,6 +41,7 @@ module Wechat
       corp_user.device_id = result['DeviceId']
       corp_user.user_ticket = result['user_ticket']
       corp_user.save
+      corp_user
     end
 
   end
