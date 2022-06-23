@@ -3,19 +3,19 @@ module Wechat::Api
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
     def getuserinfo(code)
-      get 'user/getuserinfo', params: { code: code }
+      get 'user/getuserinfo', params: { code: code }, base: BASE
     end
 
     def convert_to_openid(userid)
-      post 'user/convert_to_openid', userid: userid, agentid: @agentid
+      post 'user/convert_to_openid', userid: userid, agentid: @agentid, base: BASE
     end
 
     def invite_user(userid)
-      post 'invite/send', userid: userid
+      post 'invite/send', userid: userid, base: BASE
     end
 
     def user_auth_success(userid)
-      get 'user/authsucc', params: { userid: userid }
+      get 'user/authsucc', params: { userid: userid }, base: BASE
     end
 
     ## 成员管理
@@ -26,7 +26,7 @@ module Wechat::Api
 
     # 读取成员
     def user(userid)
-      get 'user/get', params: { userid: userid }
+      get 'user/get', params: { userid: userid }, base: BASE
     end
 
     # 更新成员
@@ -36,36 +36,36 @@ module Wechat::Api
 
     # 删除成员
     def user_delete(userid)
-      get 'user/delete', params: { userid: userid }
+      get 'user/delete', params: { userid: userid }, base: BASE
     end
 
     # 批量删除成员
     def user_batchdelete(useridlist)
-      post 'user/batchdelete', useridlist: useridlist
+      post 'user/batchdelete', useridlist: useridlist, base: BASE
     end
 
     def batch_job_result(jobid)
-      get 'batch/getresult', params: { jobid: jobid }
+      get 'batch/getresult', params: { jobid: jobid }, base: BASE
     end
 
     def batch_replaceparty(media_id)
-      post 'batch/replaceparty', media_id: media_id
+      post 'batch/replaceparty', media_id: media_id, base: BASE
     end
 
     def batch_syncuser(media_id)
-      post 'batch/syncuser', media_id: media_id
+      post 'batch/syncuser', media_id: media_id, base: BASE
     end
 
     def batch_replaceuser(media_id)
-      post 'batch/replaceuser', media_id: media_id
+      post 'batch/replaceuser', media_id: media_id, base: BASE
     end
 
     def department_create(name, parentid)
-      post 'department/create', name: name, parentid: parentid
+      post 'department/create', name: name, parentid: parentid, base: BASE
     end
 
     def department_delete(departmentid)
-      get 'department/delete', params: { id: departmentid }
+      get 'department/delete', params: { id: departmentid }, base: BASE
     end
 
     def department_update(departmentid, name = nil, parentid = nil, order = nil)
@@ -73,43 +73,43 @@ module Wechat::Api
     end
 
     def department(departmentid = 1)
-      get 'department/list', params: { id: departmentid }
+      get 'department/list', params: { id: departmentid }, base: BASE
     end
 
     def user_simplelist(department_id, fetch_child = 0, status = 0)
-      get 'user/simplelist', params: { department_id: department_id, fetch_child: fetch_child, status: status }
+      get 'user/simplelist', params: { department_id: department_id, fetch_child: fetch_child, status: status }, base: BASE
     end
 
     def user_list(department_id, fetch_child = 0, status = 0)
-      get 'user/list', params: { department_id: department_id, fetch_child: fetch_child, status: status }
+      get 'user/list', params: { department_id: department_id, fetch_child: fetch_child, status: status }, base: BASE
     end
 
     def tag_create(tagname, tagid = nil)
-      post 'tag/create', tagname: tagname, tagid: tagid
+      post 'tag/create', tagname: tagname, tagid: tagid, base: BASE
     end
 
     def tag_update(tagid, tagname)
-      post 'tag/update', tagid: tagid, tagname: tagname
+      post 'tag/update', tagid: tagid, tagname: tagname, base: BASE
     end
 
     def tag_delete(tagid)
-      get 'tag/delete', params: { tagid: tagid }
+      get 'tag/delete', params: { tagid: tagid }, base: BASE
     end
 
     def tags
-      get 'tag/list'
+      get 'tag/list', base: BASE
     end
 
     def tag(tagid)
-      get 'tag/get', params: { tagid: tagid }
+      get 'tag/get', params: { tagid: tagid }, base: BASE
     end
 
     def tag_add_user(tagid, userids = nil, departmentids = nil)
-      post 'tag/addtagusers', tagid: tagid, userlist: userids, partylist: departmentids
+      post 'tag/addtagusers', tagid: tagid, userlist: userids, partylist: departmentids, base: BASE
     end
 
     def tag_del_user(tagid, userids = nil, departmentids = nil)
-      post 'tag/deltagusers', tagid: tagid, userlist: userids, partylist: departmentids
+      post 'tag/deltagusers', tagid: tagid, userlist: userids, partylist: departmentids, base: BASE
     end
 
   end

@@ -3,7 +3,7 @@ module Wechat::Api
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
     def token
-      client.get 'gettoken', params: { corpid: app.appid, corpsecret: app.secret }
+      client.get 'gettoken', params: { corpid: app.appid, corpsecret: app.secret }, base: BASE
     end
 
     def jsapi_ticket
@@ -22,7 +22,7 @@ module Wechat::Api
       get 'agent/get', params: { agentid: agentid }, base: BASE
     end
 
-    def checkin(useridlist, starttime = Time.now.beginning_of_day, endtime = Time.now.end_of_day, opencheckindatatype = 3)
+    def checkin(useridlist, starttime = Time.current.beginning_of_day, endtime = Time.current.end_of_day, opencheckindatatype = 3)
       post 'checkin/getcheckindata', opencheckindatatype: opencheckindatatype, starttime: starttime.to_i, endtime: endtime.to_i, useridlist: useridlist, base: BASE
     end
 
