@@ -7,6 +7,15 @@ module Wechat
 
       alias_attribute :corpid, :appid
       alias_attribute :corpsecret, :secret
+
+      has_one :corp
+
+      before_validation :init_corp
+    end
+
+
+    def init_corp
+      corp || build_corp(suite_id: nil)
     end
 
     def api
