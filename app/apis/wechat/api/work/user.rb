@@ -10,6 +10,10 @@ module Wechat::Api
       post 'user/convert_to_openid', userid: userid, agentid: @agentid, base: BASE
     end
 
+    def user_detail(user_ticket)
+      post 'user/getuserdetail', user_ticket: user_ticket, base: BASE
+    end
+
     def invite_user(userid)
       post 'invite/send', userid: userid, base: BASE
     end
