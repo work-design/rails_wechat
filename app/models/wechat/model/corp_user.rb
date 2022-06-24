@@ -22,6 +22,7 @@ module Wechat
       belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
       belongs_to :app, foreign_key: :corp_id, primary_key: :appid, optional: true
 
+      belongs_to :organ, class_name: 'Org::Organ'
       has_one :member, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity
       has_one :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity
       has_one :user, class_name: 'Auth::User', through: :account

@@ -71,7 +71,9 @@ module Wechat
 
     def current_corp_user
       return @current_corp_user if defined? @current_corp_user
-      @current_corp_user = current_authorized_token&.corp_user if request.variant.any?(:work_wechat)
+      if request.variant.any?(:work_wechat)
+        @current_corp_user = current_account.corp_users.find_by(organ_id: current_organ&.id)
+      end
 
       logger.debug "\e[35m  Login as Corp User: #{@current_corp_user&.id}  \e[0m"
       @current_corp_user

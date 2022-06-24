@@ -8,7 +8,7 @@ module Wechat
       alias_attribute :corpid, :appid
       alias_attribute :corpsecret, :secret
 
-      has_many :corp_users, ->{ where(suite_id: nil) }, primary_key: :appid, foreign_key: :corp_id
+      has_many :corp_users, ->(o){ where(suite_id: nil, organ_id: o.organ_id) }, primary_key: :appid, foreign_key: :corp_id
     end
 
     def init_corp
