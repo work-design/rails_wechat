@@ -39,7 +39,7 @@ module Wechat
     end
 
     def sync_identity
-      self.identity = [corp_id, user_id].join('_')
+      self.identity ||= [corp_id, user_id].join('_')
     end
 
     def init_corp
@@ -57,8 +57,9 @@ module Wechat
       member.save
     end
 
-    def get_detail
-      r = (suite || app).api.user_detail(user_ticket)
+    def get_detail_by_suite
+      return unless suite
+      r = suite.api.user_detail(user_ticket)
       if r['errcode'] == 0
         self.assign_attributes r.slice('name', 'gender', 'qr_code')
         self.identity = r['mobile'] if r['mobile']

@@ -40,6 +40,16 @@ module Wechat
       corp_user = corp_users.find_or_initialize_by(user_id: result['UserId'])
       corp_user.device_id = result['DeviceId']
       corp_user.user_ticket = result['user_ticket']
+
+      if result['user_ticket']
+        detail = api.user_detail(result['user_ticket'])
+        if detail['errcode'] == 0
+          self.assign_attributes detail.slice('gender', 'qr_code')
+          self.identity = detail['mobile']
+          self.avatar_url = detail['avatar']
+        end
+      end
+
       corp_user.save
       corp_user
     end
