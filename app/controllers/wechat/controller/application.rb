@@ -71,7 +71,7 @@ module Wechat
 
     def current_corp_user
       return @current_corp_user if defined? @current_corp_user
-      if request.variant.any?(:work_wechat)
+      if request.variant.any?(:work_wechat) && current_account
         @current_corp_user = current_account.corp_users.find_by(organ_id: current_organ&.id)
       end
 
