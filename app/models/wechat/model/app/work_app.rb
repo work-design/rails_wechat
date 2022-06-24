@@ -44,9 +44,9 @@ module Wechat
       if result['user_ticket']
         detail = api.user_detail(result['user_ticket'])
         if detail['errcode'] == 0
-          self.assign_attributes detail.slice('gender', 'qr_code')
-          self.identity = detail['mobile']
-          self.avatar_url = detail['avatar']
+          corp_user.assign_attributes detail.slice('gender', 'qr_code')
+          corp_user.identity = detail['mobile']
+          corp_user.avatar_url = detail['avatar']
         end
       end
 
