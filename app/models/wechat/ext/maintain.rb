@@ -1,9 +1,11 @@
 module Wechat
-  module Model::Follow
+  module Ext::Maintain
     extend ActiveSupport::Concern
 
     included do
+      attribute :type, :string
       attribute :userid, :string
+
       attribute :remark, :string
       attribute :description, :string
       attribute :state, :string
