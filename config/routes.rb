@@ -54,7 +54,11 @@ Rails.application.routes.draw do
     namespace :me, defaults: { namespace: 'me' } do
       resource :corp_users
       resources :externals
-      resources :follows
+      resources :follows do
+        member do
+          patch :actions
+        end
+      end
     end
 
     namespace :my, defaults: { namespace: 'my' } do
