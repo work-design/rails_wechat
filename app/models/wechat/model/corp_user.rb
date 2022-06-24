@@ -70,7 +70,7 @@ module Wechat
     end
 
     def sync_externals
-      r = corp.api.batch(user_id)
+      r = (corp || app).api.batch(user_id)
       list = r.fetch('external_contact_list', [])
       list.each do |item|
         contact = item.fetch('external_contact', {})
@@ -87,7 +87,7 @@ module Wechat
     end
 
     def sync_external(external_userid)
-      r = corp.api.item(external_userid)
+      r = (corp || app).api.item(external_userid)
       item = r.fetch('external_contact', {})
       follow_infos = r.fetch('follow_user', [])
 
