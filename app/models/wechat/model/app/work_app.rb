@@ -46,13 +46,14 @@ module Wechat
 
     def generate_wechat_user(code)
       result = api.getuserinfo(code)
-
+      logger.debug "\e[35m  generate user #{result}  \e[0m"
       corp_user = corp_users.find_or_initialize_by(user_id: result['UserId'])
       corp_user.device_id = result['DeviceId']
       corp_user.user_ticket = result['user_ticket']
 
       if result['user_ticket']
         detail = api.user_detail(result['user_ticket'])
+        logger.debug "\e[35m  generate user detail #{detail}  \e[0m"
         if detail['errcode'] == 0
           corp_user.assign_attributes detail.slice('gender', 'qr_code')
           corp_user.identity = detail['mobile']
