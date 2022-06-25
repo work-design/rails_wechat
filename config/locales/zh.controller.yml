@@ -21,6 +21,9 @@ zh:
       menus:
         index:
           title: 菜单
+      app_menus:
+        index:
+          title: 菜单
       responses:
         index:
           title: 回复设置
