@@ -61,21 +61,23 @@ module Wechat
     end
 
     def auto_join_organ
+      return if member
       return unless corp || organ
       if organ
-        unless member
-          temp_member = organ.members.find_by(identity: temp_identity)
-          if temp_member
-            temp_member.identity = self.identity
-          else
-            build_member(organ_id: organ.id)
-          end
+        temp_member = organ.members.find_by(identity: temp_identity)
+        if temp_member
+          temp_member.identity = self.identity
+          temp_member.save
+        else
+          build_member(organ_id: organ.id)
+          member.name = user_id
+          member.save
         end
-      elsif corp
-        member || build_member(organ_id: corp.organ.id)
+      else
+        build_member(organ_id: corp.organ.id)
+        member.name = user_id
+        member.save
       end
-      member.name = user_id
-      member.save
     end
 
     def get_detail_by_suite
