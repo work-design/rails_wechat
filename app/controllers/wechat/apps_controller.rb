@@ -34,7 +34,7 @@ module Wechat
         login_by_account(@oauth_user.account)
         Com::SessionChannel.broadcast_to(params[:state], auth_token: current_authorized_token.token)
 
-        r = params[:state].split('#')
+        r = Base64.urlsafe_decode64(params[:state]).split('#')
         url_options = {
           host: r[0],
           controller: r[1],
