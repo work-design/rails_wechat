@@ -7,7 +7,6 @@ module Wechat
       attribute :userid, :string
 
       attribute :remark, :string
-      attribute :description, :string
       attribute :state, :string
       attribute :oper_userid, :string
       attribute :add_way, :string

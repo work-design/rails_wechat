@@ -81,7 +81,8 @@ module Wechat
 
         info = item.fetch('follow_info', {})
         follow = external.follows.find_or_initialize_by(userid: info['userid'])
-        follow.assign_attributes info.slice('remark', 'description', 'state', 'oper_userid', 'add_way')
+        follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way')
+        follow.note = info['description']
 
         external.save
       end
@@ -98,7 +99,8 @@ module Wechat
 
       follow_infos.each do |info|
         follow = external.follows.find_or_initialize_by(userid: info['userid'])
-        follow.assign_attributes info.slice('remark', 'description', 'state', 'oper_userid', 'add_way')
+        follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way')
+        follow.note = info['description']
       end
 
       external.save
