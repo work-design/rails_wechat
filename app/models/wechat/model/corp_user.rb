@@ -40,8 +40,12 @@ module Wechat
       after_save :auto_join_organ, if: -> { saved_change_to_identity? }
     end
 
+    def temp_identity
+      [corp_id, user_id].join('-')
+    end
+
     def sync_identity
-      self.identity = [corp_id, user_id].join('-')
+      self.identity = temp_identity
     end
 
     def init_account
@@ -58,10 +62,17 @@ module Wechat
 
     def auto_join_organ
       return unless corp || organ
-      if corp
+      if organ
+        unless member
+          temp_member = orgam.members.find_by(identity: temp_identity)
+          if temp_member
+            temp_member.identity = self.identity
+          else
+            build_member(organ_id: organ.id)
+          end
+        end
+      elsif corp
         member || build_member(organ_id: corp.organ.id)
-      else
-        member || build_member(organ_id: organ.id)
       end
       member.name = user_id
       member.save
