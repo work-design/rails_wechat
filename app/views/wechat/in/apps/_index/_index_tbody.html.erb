@@ -15,7 +15,7 @@
   <% end if model.mch_id.present? %>
 </td>
 <td>
-  <%= link_to({ controller: 'scenes', app_id: model.id }, aria: { label: t('wechat.into.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
+  <%= link_to({ controller: 'scenes', app_id: model.id }, aria: { label: t('wechat.in.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fa-light fa-qrcode"></i>
   <% end %>
   <%= link_to({ controller: 'admin/requests', app_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
