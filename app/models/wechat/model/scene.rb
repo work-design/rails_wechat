@@ -11,7 +11,7 @@ module Wechat
       attribute :appid, :string, index: true
       attribute :menu_id, :string
 
-      belongs_to :organ, class_name: 'Org::Organ'
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
 
@@ -20,11 +20,18 @@ module Wechat
       has_many :app_menus, ->(o){ where(appid: o.appid) }, dependent: :destroy_async
       has_many :menus, -> { roots }, through: :app_menus
 
-      before_validation do
-        self.expire_at ||= Time.current + expire_seconds if expire_seconds
-      end
+      before_validation :init_expire_at, if: -> { expire_seconds.present? && expire_seconds_changed? }
+      before_validation :sync_from_app, if: -> { appid.present? && appid_changed? }
       after_save_commit :to_qrcode, if: -> { saved_change_to_match_value? }
       after_save_commit :refresh_when_expired, if: -> { saved_change_to_expire_at? }
+    end
+
+    def init_expire_at
+      self.expire_at ||= Time.current + expire_seconds
+    end
+
+    def sync_from_app
+      self.organ_id = app&.organ_id
     end
 
     def init_response
