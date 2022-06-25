@@ -53,7 +53,7 @@ module Wechat
       if identity.include?('-')
         build_account(type: 'Auth::ThirdpartyAccount')
       else
-        temp_account = Auth::ThirdpartyAccount.find_by(identity: temp_identity)
+        temp_account = Account.find_by(identity: temp_identity)
         if temp_account
           temp_account.type = 'Auth::MobileAccount'
           temp_account.identity = self.identity
