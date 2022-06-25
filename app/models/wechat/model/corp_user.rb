@@ -35,16 +35,20 @@ module Wechat
       validates :identity, presence: true
 
       before_validation :sync_identity, -> { user_id_changed? }
+      before_validation :init_account, -> { identity_changed? }
       before_validation :init_corp, if: -> { suite_id.present? && suite_id_changed? }
       after_save :auto_join_organ, if: -> { saved_change_to_identity? }
     end
 
     def sync_identity
-      if identity
-        account || build_account(type: 'Auth::MobileAccount', confirmed: true)
-      else
-        self.identity = [corp_id, user_id].join('_')
+      self.identity = [corp_id, user_id].join('-')
+    end
+
+    def init_account
+      if identity.include?('-')
         account || build_account(type: 'Auth::ThirdpartyAccount')
+      else
+        account || build_account(type: 'Auth::MobileAccount', confirmed: true)
       end
     end
 
