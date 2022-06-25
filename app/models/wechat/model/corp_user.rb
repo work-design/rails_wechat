@@ -64,7 +64,7 @@ module Wechat
       return unless corp || organ
       if organ
         unless member
-          temp_member = orgam.members.find_by(identity: temp_identity)
+          temp_member = organ.members.find_by(identity: temp_identity)
           if temp_member
             temp_member.identity = self.identity
           else
