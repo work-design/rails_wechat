@@ -59,6 +59,7 @@ module Wechat
           temp_account.identity = self.identity
           temp_account.confirmed = true
           temp_account.save
+          self.account = temp_account
         else
           build_account(type: 'Auth::MobileAccount', confirmed: true)
         end
