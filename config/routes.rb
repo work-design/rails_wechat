@@ -6,6 +6,9 @@ Rails.application.routes.draw do
       get :login
       get :friend
     end
+    scope path: 'qy_wechat', controller: :qy_wechat do
+      get :login
+    end
     resources :wechats, only: [:show] do
       member do
         post '' => :create

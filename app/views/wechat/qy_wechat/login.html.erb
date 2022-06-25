@@ -1,0 +1,18 @@
+<div class="column is-6"></div>
+<div class="column is-6">
+  <div class="panel" style="width: 300px">
+    <div class="panel-block has-background-white has-text-centered">
+      <div
+        id="wx_reg"
+        data-controller="qy-login"
+        data-qy-login-options-value="<%= @app.js_login.to_json %>"
+      ></div>
+    </div>
+    <div class="panel-block has-background-white is-justify-content-center">
+      <%= link_to({ controller: 'auth/sign', action: 'sign' }) do %>
+        <i class="fa-solid fa-user"></i>
+        <span class="has-text-grey">账号密码登录</span>
+      <% end if defined? RailsAuth %>
+    </div>
+  </div>
+</div>

@@ -15,6 +15,16 @@ module Wechat
       self.organ.update corp_id: self.appid
     end
 
+    def js_login(state: SecureRandom.hex(16),  **url_options)
+      url_options.with_defaults! controller: 'wechat/apps', action: 'login', id: id, host: self.host
+      {
+        appid: appid,
+        agentid: agentid,
+        redirect_uri: ERB::Util.url_encode(Rails.application.routes.url_for(**url_options)),
+        state: state
+      }
+    end
+
     def api
       return @api if defined? @api
       @api = Wechat::Api::Work.new(self)
