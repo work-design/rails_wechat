@@ -49,10 +49,19 @@ module Wechat
     end
 
     def init_account
+      return if account
       if identity.include?('-')
-        account || build_account(type: 'Auth::ThirdpartyAccount')
+        build_account(type: 'Auth::ThirdpartyAccount')
       else
-        account || build_account(type: 'Auth::MobileAccount', confirmed: true)
+        temp_account = Auth::ThirdpartyAccount.find_by(identity: temp_identity)
+        if temp_account
+          temp_account.type = 'Auth::MobileAccount'
+          temp_account.identity = self.identity
+          temp_account.confirmed = true
+          temp_account.save
+        else
+          build_account(type: 'Auth::MobileAccount', confirmed: true)
+        end
       end
     end
 
