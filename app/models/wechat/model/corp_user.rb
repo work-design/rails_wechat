@@ -106,7 +106,7 @@ module Wechat
       list = r.fetch('external_contact_list', [])
       list.each do |item|
         contact = item.fetch('external_contact', {})
-        external = externals.find_by(external_userid: contact['external_userid']) || External.new(external_userid: contact['external_userid'])
+        external = External.find_or_initialize_by(external_userid: contact['external_userid'])
         external.external_type = contact['type']
         external.assign_attributes contact.slice('name', 'position', 'avatar', 'corp_name', 'corp_full_name', 'gender', 'unionid')
 
@@ -126,18 +126,19 @@ module Wechat
       item = r.fetch('external_contact', {})
       follow_infos = r.fetch('follow_user', [])
 
-      external = externals.find_or_initialize_by(external_userid: item['external_userid'])
+      external = External.find_or_initialize_by(external_userid: item['external_userid'])
       external.external_type = item['type']
       external.assign_attributes item.slice('name', 'avatar', 'gender', 'unionid', 'position')
 
       follow_infos.each do |info|
-        follow = external.follows.find_or_initialize_by(userid: info['userid'])
+        follow = follows.find_or_initialize_by(external_userid: item['external_userid'])
         follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way')
         follow.note = info['description']
         follow.member_id = member.id
+        follow.client = external
       end
 
-      external.save
+      self.save
       external
     end
 
