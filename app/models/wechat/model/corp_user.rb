@@ -30,7 +30,7 @@ module Wechat
       has_many :maintains, through: :member
       has_many :contacts, ->(o){ where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :user_id, primary_key: :user_id
       has_many :follows, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :userid, primary_key: :user_id
-      has_many :externals, through: :follows
+      has_many :externals, through: :follows, source: 'client', source_type: 'Wechat::External'
 
       validates :identity, presence: true
 
