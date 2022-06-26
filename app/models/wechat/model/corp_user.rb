@@ -29,7 +29,7 @@ module Wechat
 
       has_many :maintains, through: :member
       has_many :contacts, ->(o){ where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :user_id, primary_key: :user_id
-      has_many :follows, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :userid, primary_key: :user_id
+      has_many :follows, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :userid, primary_key: :user_id, autosave: true
       has_many :externals, through: :follows, source: :client, source_type: 'Wechat::External'
 
       validates :identity, presence: true
@@ -116,9 +116,9 @@ module Wechat
         follow.note = info['description']
         follow.member_id = member.id
         follow.client = external
-
-        follow.save
       end
+
+      save
     end
 
     def sync_external(external_userid)
