@@ -30,7 +30,7 @@ module Wechat
       has_many :maintains, through: :member
       has_many :contacts, ->(o){ where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :user_id, primary_key: :user_id
       has_many :follows, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :userid, primary_key: :user_id
-      has_many :externals, through: :follows, source: 'client', source_type: 'Wechat::External'
+      has_many :externals, through: :follows, source: :client, source_type: 'Wechat::External'
 
       validates :identity, presence: true
 
@@ -106,17 +106,18 @@ module Wechat
       list = r.fetch('external_contact_list', [])
       list.each do |item|
         contact = item.fetch('external_contact', {})
-        external = externals.find_or_initialize_by(external_userid: contact['external_userid'])
+        external = externals.find_by(external_userid: contact['external_userid']) || External.new(external_userid: contact['external_userid'])
         external.external_type = contact['type']
         external.assign_attributes contact.slice('name', 'position', 'avatar', 'corp_name', 'corp_full_name', 'gender', 'unionid')
 
         info = item.fetch('follow_info', {})
-        follow = external.follows.find_or_initialize_by(userid: info['userid'])
+        follow = follows.find_or_initialize_by(external_userid: contact['external_userid'])
         follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way')
         follow.note = info['description']
         follow.member_id = member.id
+        follow.client = external
 
-        external.save
+        follow.save
       end
     end
 
