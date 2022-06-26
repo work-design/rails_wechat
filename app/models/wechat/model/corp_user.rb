@@ -104,7 +104,7 @@ module Wechat
     def sync_externals
       r = (corp || app).api.batch(user_id)
       list = r.fetch('external_contact_list', [])
-      list.each do |item|
+      fs = list.map do |item|
         contact = item.fetch('external_contact', {})
         external = External.find_or_initialize_by(external_userid: contact['external_userid'])
         external.external_type = contact['type']
@@ -116,9 +116,11 @@ module Wechat
         follow.note = info['description']
         follow.member_id = member.id
         follow.client = external
+        follow
       end
-
-      save
+      self.class.transaction do
+        fs.each(&:save)
+      end
     end
 
     def sync_external(external_userid)
