@@ -14,7 +14,7 @@ module Wechat
       attribute :gender, :string
       attribute :unionid, :string
 
-      has_many :follows, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :external_userid, primary_key: :external_userid, inverse_of: :client, autosave: true, dependent: :delete_all
+      has_many :follows, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :external_userid, primary_key: :external_userid, inverse_of: :client, dependent: :delete_all
     end
 
   end
