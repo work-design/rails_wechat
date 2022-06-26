@@ -114,6 +114,7 @@ module Wechat
         follow = external.follows.find_or_initialize_by(userid: info['userid'])
         follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way')
         follow.note = info['description']
+        follow.member_id = member.id
 
         external.save
       end
@@ -132,6 +133,7 @@ module Wechat
         follow = external.follows.find_or_initialize_by(userid: info['userid'])
         follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way')
         follow.note = info['description']
+        follow.member_id = member.id
       end
 
       external.save
