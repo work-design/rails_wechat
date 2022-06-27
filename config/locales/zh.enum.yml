@@ -65,7 +65,7 @@ zh:
         type:
           Wechat::TemplatePublic: 公众号
           Wechat::TemplateProgram: 小程序
-      wechat/follow:
+      crm/maintain:
         add_way:
           '0': 未知来源
           '1': 扫描二维码

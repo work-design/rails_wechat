@@ -12,10 +12,6 @@ module Wechat
     end
 
     private
-    def set_app
-      @app = WorkApp.find_by appid: params[:appid]
-    end
-
     def set_corp_user
       @corp_user = @app.corp_users.find params[:id]
     end

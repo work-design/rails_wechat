@@ -5,6 +5,9 @@
       <%= link_to({ controller: 'follows', corp_user_id: model.id }, aria: { label: t('wechat.admin.follows.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-light fa-users-line"></i>
       <% end %>
+      <%= button_to({ action: 'sync', id: model.id }, aria: { label: t('wechat.admin.corp_users.sync.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-light fa-sync"></i>
+      <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-light fa-circle-info"></i>
       <% end %>
