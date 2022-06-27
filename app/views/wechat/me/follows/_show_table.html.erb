@@ -1,10 +1,10 @@
 <tr>
   <td class="has-text-right"><%= Wechat::External.human_attribute_name(:name) %></td>
-  <td><%= @follow.external.name %></td>
+  <td><%= @follow.client.name %></td>
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::External.human_attribute_name(:gender) %></td>
-  <td><%= @follow.external.gender_i18n %></td>
+  <td><%= @follow.client.gender_i18n %></td>
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::Follow.human_attribute_name(:state) %></td>
