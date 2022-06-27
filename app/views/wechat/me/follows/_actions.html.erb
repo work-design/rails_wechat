@@ -6,7 +6,11 @@
   <i class="fa-light fa-trash"></i>
   <span><%= t('.destroy') %></span>
 <% end %>
+<%= link_to({ controller: 'crm/admin/addresses', maintain_id: model.id }, class: 'weui-actionsheet__cell') do %>
+  <i class="fa-light fa-location-dot"></i>
+  <span><%= t('crm.admin.addresses.index.title') %></span>
+<% end %>
 <%= link_to({ controller: 'crm/admin/orders', maintain_id: model.id }, class: 'weui-actionsheet__cell') do %>
-  <i class="fa-light fa-clone"></i>
+  <i class="fa-light fa-truck-fast"></i>
   <span><%= t('crm.admin.orders.index.title') %></span>
 <% end %>
