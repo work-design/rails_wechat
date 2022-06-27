@@ -54,6 +54,8 @@ zh:
       corp_users:
         index:
           title: 企业员工
+        sync:
+          title: 同步联系人
       follows:
         index:
           title: 客户
