@@ -1,0 +1,12 @@
+<%= link_to({ action: 'edit', id: model.id }, class: 'weui-actionsheet__cell') do %>
+  <i class="fa-light fa-pencil"></i>
+  <span><%= t('.edit') %></span>
+<% end %>
+<%= button_to({ action: 'destroy', id: model.id }, method: :delete, data: { confirm: t('.confirm') }, class: 'has-text-danger', form: { class: 'weui-actionsheet__cell weui-actionsheet__cell_warn' }) do %>
+  <i class="fa-light fa-trash"></i>
+  <span><%= t('.destroy') %></span>
+<% end %>
+<%= link_to({ controller: 'crm/admin/orders', maintain_id: model.id }, class: 'weui-actionsheet__cell') do %>
+  <i class="fa-light fa-clone"></i>
+  <span><%= t('crm.admin.orders.index.title') %></span>
+<% end %>
