@@ -51,6 +51,12 @@ zh:
       organs:
         show:
           title: 企业微信
+      corp_users:
+        index:
+          title: 企业员工
+      follows:
+        index:
+          title: 客户
     panel:
       title: 公众号通用
       template_configs:

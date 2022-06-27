@@ -178,6 +178,9 @@ Rails.application.routes.draw do
             post :sync
           end
         end
+        resources :corp_users do
+          resources :follows
+        end
         resources :wechat_users
         resources :user_tags
         resources :templates do
