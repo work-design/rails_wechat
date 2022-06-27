@@ -179,6 +179,9 @@ Rails.application.routes.draw do
           end
         end
         resources :corp_users do
+          member do
+            post :sync
+          end
           resources :follows
         end
         resources :wechat_users

@@ -1,18 +1,23 @@
 module Wechat
   class Admin::CorpUsersController < Admin::BaseController
     before_action :set_app
+    before_action :set_corp_user, only: [:show, :edit, :update, :destroy, :sync]
 
     def index
       @corp_users = @app.corp_users.page(params[:page])
     end
 
-    private
-    def set_provider
-      @provider = Provider.find_by corp_id: params[:provider_id]
+    def sync
+      @corp_user.sync_externals
     end
 
-    def set_suite
+    private
+    def set_app
       @app = WorkApp.find_by appid: params[:appid]
+    end
+
+    def set_corp_user
+      @corp_user = @app.corp_users.find params[:id]
     end
 
   end
