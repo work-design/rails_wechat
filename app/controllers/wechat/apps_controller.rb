@@ -46,14 +46,13 @@ module Wechat
         url = url_for(**url_options)
 
         redirect_to url, allow_other_host: true
-        #render :login, locals: { url: url }, layout: 'raw'
       else
         url_options = {}
         url_options.merge! params.except(:controller, :action, :id, :business, :namespace, :code, :state).permit!
         url_options.merge! host: state_hash[0]
-        url = url_for(controller: 'auth/sign', action: 'sign', uid: @oauth_user.uid, **url_options)
+        url = url_for(controller: 'auth/sign', action: 'bind', uid: @oauth_user.uid, **url_options)
 
-        render :login, locals: { url: url }, layout: 'raw'
+        redirect_to url, allow_other_host: true
       end
     end
 
