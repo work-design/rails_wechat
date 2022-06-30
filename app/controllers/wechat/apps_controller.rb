@@ -42,7 +42,6 @@ module Wechat
           disposable_token: @oauth_user.account.once_token,
           **r[3].to_s.split('&').map(&->(i){ i.split('=') }).to_h
         }
-        url_options.merge!
         url = url_for(**url_options)
 
         redirect_to url, allow_other_host: true
