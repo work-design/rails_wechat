@@ -45,7 +45,8 @@ module Wechat
         url_options.merge!
         url = url_for(**url_options)
 
-        render :login, locals: { url: url }, layout: 'raw'
+        redirect_to url, allow_other_host: true
+        #render :login, locals: { url: url }, layout: 'raw'
       else
         url_options = {}
         url_options.merge! params.except(:controller, :action, :id, :business, :namespace, :code, :state).permit!
