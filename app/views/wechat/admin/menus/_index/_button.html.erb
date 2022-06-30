@@ -1,6 +1,8 @@
-<%= link_to({ action: 'new', appid: params[:appid] }, data: { turbo_frame: 'modal' }, class: 'button is-link') do %>
-  <i class="fa-light fa-plus"></i><span><% t('.new') %></span>
-<% end %>
-<%= link_to({ action: 'new_parent', appid: params[:appid] }, data: { turbo_frame: 'modal' }, class: 'button is-link') do %>
-  <i class="fa-light fa-plus"></i><span><% t('.new_parent') %></span>
-<% end %>
+<div class="buttons are-small mb-0">
+  <%= link_to({ action: 'new', appid: params[:appid] }, data: { turbo_frame: 'modal' }, class: 'button is-link') do %>
+    <i class="fa-light fa-plus"></i><span><% t('.new') %></span>
+  <% end %>
+  <%= link_to({ action: 'new_parent', appid: params[:appid] }, data: { turbo_frame: 'modal' }, class: 'button is-link') do %>
+    <i class="fa-light fa-plus"></i><span><% t('.new_parent') %></span>
+  <% end %>
+</div>
