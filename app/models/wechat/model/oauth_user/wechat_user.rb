@@ -19,11 +19,12 @@ module Wechat
       belongs_to :user_inviter, class_name: 'Auth::User', optional: true
       belongs_to :member_inviter, class_name: 'Org::Member', optional: true
 
-      has_one :request, -> { where(init_wechat_user: true) }, foreign_key: :open_id, primary_key: :uid
-      has_many :requests, foreign_key: :open_id, primary_key: :uid, dependent: :destroy_async
-      has_many :user_tags, foreign_key: :open_id, primary_key: :uid, dependent: :destroy_async
+      has_one :request, -> { where(init_wechat_user: true) }, primary_key: :uid, foreign_key: :open_id
+      has_many :requests, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
+      has_many :user_tags, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
       has_many :tags, through: :user_tags
-      has_many :notices, ->(o){ where(appid: o.appid) }, foreign_key: :open_id, primary_key: :uid
+      has_many :notices, ->(o){ where(appid: o.appid) }, primary_key: :uid, foreign_key: :open_id
+      has_many :corp_users, primary_key: :unionid, foreign_key: :unionid
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :auto_link, if: -> { unionid.present? && saved_change_to_unionid? }
