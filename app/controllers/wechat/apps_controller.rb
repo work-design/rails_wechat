@@ -30,17 +30,18 @@ module Wechat
       end
       @oauth_user.save
 
+      state_hash = Base64.urlsafe_decode64(params[:state]).split('#')
+
       if @oauth_user.user
         login_by_account(@oauth_user.account)
         Com::SessionChannel.broadcast_to(params[:state], auth_token: current_authorized_token.token)
 
-        r = Base64.urlsafe_decode64(params[:state]).split('#')
         url_options = {
-          host: r[0],
-          controller: r[1],
-          action: r[2],
+          host: state_hash[0],
+          controller: state_hash[1],
+          action: state_hash[2],
           disposable_token: @oauth_user.account.once_token,
-          **r[3].to_s.split('&').map(&->(i){ i.split('=') }).to_h
+          **state_hash[3].to_s.split('&').map(&->(i){ i.split('=') }).to_h
         }
         url = url_for(**url_options)
 
@@ -49,7 +50,7 @@ module Wechat
       else
         url_options = {}
         url_options.merge! params.except(:controller, :action, :id, :business, :namespace, :code, :state).permit!
-        url_options.merge! host: params[:state].split('#')[0]
+        url_options.merge! host: state_hash[0]
         url = url_for(controller: 'auth/sign', action: 'sign', uid: @oauth_user.uid, **url_options)
 
         render :login, locals: { url: url }, layout: 'raw'
