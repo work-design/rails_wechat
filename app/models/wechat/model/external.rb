@@ -12,7 +12,7 @@ module Wechat
       attribute :corp_full_name, :string
       attribute :external_type, :string
       attribute :gender, :string
-      attribute :unionid, :string
+      attribute :unionid, :string, index: true
 
       has_many :follows, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :external_userid, primary_key: :external_userid, inverse_of: :client, dependent: :delete_all
     end
