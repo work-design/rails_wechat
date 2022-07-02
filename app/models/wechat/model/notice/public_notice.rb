@@ -14,7 +14,7 @@ module Wechat
 
     def message_hash
       {
-        touser: wechat_user.uid,
+        touser: open_id,
         template_id: template.template_id,
         url: link,
         data: data

@@ -76,8 +76,12 @@ module Wechat::Api
       post 'department/update', { id: departmentid, name: name, parentid: parentid, order: order }.reject { |_k, v| v.nil? }
     end
 
-    def department(departmentid = 1)
-      get 'department/list', params: { id: departmentid }, base: BASE
+    def department(id = nil)
+      if id.present?
+        get 'department/list', params: { id: id }, base: BASE
+      else
+        get 'department/list', base: BASE
+      end
     end
 
     def user_simplelist(department_id, fetch_child = 0, status = 0)
