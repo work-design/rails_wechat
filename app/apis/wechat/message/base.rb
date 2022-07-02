@@ -1,6 +1,5 @@
 class Wechat::Message::Base
 
-
   def content_blank?
     case @message_hash['MsgType']
     when 'image', 'voice', 'video', 'music'

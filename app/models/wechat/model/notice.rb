@@ -17,10 +17,12 @@ module Wechat
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
       belongs_to :msg_request, optional: true
 
-      before_validation do
-        self.link = notification.link
-      end
+      before_validation :sync_link, if: -> { notification_id.present? && notification_id_changed? }
       after_create_commit :do_send_later
+    end
+
+    def sync_link
+      self.link = notification.link
     end
 
     def data
