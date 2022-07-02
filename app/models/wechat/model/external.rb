@@ -15,6 +15,7 @@ module Wechat
       attribute :unionid, :string, index: true
 
       has_many :follows, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :external_userid, primary_key: :external_userid, inverse_of: :client, dependent: :delete_all
+      has_many :wechat_users, primary_key: :unionid, foreign_key: :unionid
     end
 
   end
