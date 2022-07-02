@@ -15,6 +15,16 @@ module Wechat
       self.organ.update corp_id: self.appid
     end
 
+    def sync_departments
+      r = api.department
+      return unless r['errcode'] == 0
+      r['department'].each do |dep|
+        depart = organ.departments.find_or_initialize_by(wechat_id: dep['id'])
+        depart.name = dep['name']
+        depart.save
+      end
+    end
+
     def js_login(state: "#{host}#me/home#index", **url_options)
       url_options.with_defaults! controller: 'wechat/apps', action: 'login', id: id, host: self.host
       {
