@@ -15,7 +15,7 @@ module Wechat
         store_location(return_to)
         redirect_url = url_for(controller: '/auth/sign', action: 'sign', uid: current_wechat_user.uid)
       elsif current_oauth_app && current_oauth_app.respond_to?(:oauth2_url)
-        state = "#{request.host}##{controller_path}##{action_name}##{request.path_parameters.except(:business, :namespace, :controller, :action).to_query}"
+        state = "#{request.host}##{controller_path}##{action_name}##{request.method.downcase}##{request.path_parameters.except(:business, :namespace, :controller, :action).to_query}"
         redirect_url = current_oauth_app.oauth2_url(state: Base64.urlsafe_encode64(state), port: request.port, protocol: request.protocol)
       else
         redirect_url = url_for(controller: '/auth/sign', action: 'sign')
@@ -26,7 +26,6 @@ module Wechat
       end
 
       if request.format.html?
-        #redirect_to redirect_url, allow_other_host: true
         render 'require_login', locals: { url: redirect_url }, layout: 'raw', status: 401
       else
         render 'require_login', locals: { url: redirect_url }, status: 401

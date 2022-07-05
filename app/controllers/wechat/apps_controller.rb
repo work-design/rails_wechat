@@ -41,7 +41,7 @@ module Wechat
           controller: state_hash[1],
           action: state_hash[2],
           disposable_token: @oauth_user.account.once_token,
-          **state_hash[3].to_s.split('&').map(&->(i){ i.split('=') }).to_h
+          **state_hash[4].to_s.split('&').map(&->(i){ i.split('=') }).to_h
         }
         url = url_for(**url_options)
 
