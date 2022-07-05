@@ -38,6 +38,13 @@ GIT
     rails_extend (1.0.1)
       rails (>= 5.0)
 
+GIT
+  remote: https://github.com/work-design/rails_org.git
+  revision: 6f100faf11718cf6f596acf720290098b6364178
+  specs:
+    rails_org (0.0.1)
+      rails_com (~> 1.2)
+
 PATH
   remote: .
   specs:
@@ -276,6 +283,7 @@ DEPENDENCIES
   rails_com!
   rails_design!
   rails_extend!
+  rails_org!
   rails_wechat!
   sdoc
 
