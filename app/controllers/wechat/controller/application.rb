@@ -26,7 +26,8 @@ module Wechat
       end
 
       if request.format.html?
-        redirect_to redirect_url, allow_other_host: true
+        #redirect_to redirect_url, allow_other_host: true
+        render 'require_login', locals: { url: redirect_url }, layout: 'raw', status: 401
       else
         render 'require_login', locals: { url: redirect_url }, status: 401
       end
