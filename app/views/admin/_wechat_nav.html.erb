@@ -4,7 +4,7 @@
     <span><%= t('wechat.admin.title') %></span>
     <i class="fa-solid dropdown"></i>
   </a>
-  <div class="menu-list">
+  <div class="menu-list" data-empty-target="content">
     <%= link_to t('wechat.admin.menus.index.title'), { controller: 'wechat/admin/menus' }, class: active_helper(controllers: 'wechat/admin/menus', active: 'is-active') %>
     <%= link_to t('wechat.admin.apps.index.title'), { controller: 'wechat/admin/apps' }, class: active_helper(controllers: 'wechat/admin/apps', active: 'is-active') %>
     <%= link_to t('wechat.admin.organs.show.title'), { controller: 'wechat/admin/organs', action: 'show' }, class: active_helper(controllers: ['organs'], active: 'is-active') %>
@@ -16,7 +16,7 @@
     <span><%= t('wechat.in.title') %></span>
     <i class="fa-solid dropdown"></i>
   </a>
-  <div class="menu-list">
+  <div class="menu-list" data-empty-target="content">
     <%= link_to t('wechat.in.apps.index.title'), { controller: 'wechat/in/apps' }, class: active_helper(controllers: ['wechat/in/apps', 'wechat/in/menus', 'wechat/in/scenes', 'wechat/in/wechat_users'], active: 'is-active') %>
   </div>
 </div>
