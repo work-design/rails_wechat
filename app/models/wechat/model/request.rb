@@ -11,6 +11,7 @@ module Wechat
       attribute :event_key, :string
       attribute :appid, :string, index: true
       attribute :open_id, :string, index: true
+      attribute :userid, :string, index: true
       attribute :reply_body, :json, default: {}
       attribute :reply_encrypt, :json, default: {}
       attribute :init_wechat_user, :boolean, default: false
@@ -18,6 +19,7 @@ module Wechat
 
       belongs_to :receive
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
+      belongs_to :corp_user, ->(o){ where(corp_id: o.appid) }, foreign_key: :userid, primary_key: :user_id, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       has_one :platform, through: :receive
