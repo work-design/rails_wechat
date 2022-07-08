@@ -13,7 +13,7 @@ module Wechat
       attribute :corp_id, :string
       attribute :external_userid, :string
 
-      belongs_to :corp_user, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Wechat::CorpUser', foreign_key: :userid, primary_key: :user_id, optional: true
+      belongs_to :corp_user, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Wechat::CorpUser', foreign_key: :userid, primary_key: :user_id, counter_cache: true, optional: true
 
       belongs_to :crm_tag, class_name: 'Crm::Tag', foreign_key: :state, primary_key: :name, optional: true
     end
