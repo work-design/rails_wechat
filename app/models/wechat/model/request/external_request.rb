@@ -14,7 +14,7 @@ module Wechat
     end
 
     def sync_to_external
-      corp_user.sync_external(self.body)
+      corp_user&.sync_external(self.body)
     end
   end
 end
