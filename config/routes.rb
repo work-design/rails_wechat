@@ -9,11 +9,6 @@ Rails.application.routes.draw do
     scope path: 'qy_wechat', controller: :qy_wechat do
       get :login
     end
-    resources :wechats, only: [:show] do
-      member do
-        post '' => :create
-      end
-    end
     resources :program_users do
       collection do
         post :mobile
@@ -22,6 +17,7 @@ Rails.application.routes.draw do
     end
     resources :apps, only: [:show] do
       member do
+        post '' => :create
         get :login
         get :bind
         patch :qrcode
