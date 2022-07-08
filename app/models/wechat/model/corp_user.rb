@@ -101,8 +101,10 @@ module Wechat
       end
     end
 
-    def sync_externals
-      r = (corp || app).api.batch(user_id)
+    def sync_externals(**options)
+      r = (corp || app).api.batch(user_id, **options)
+      return unless r['errcode'] == 0
+
       list = r.fetch('external_contact_list', [])
       fs = list.map do |item|
         contact = item.fetch('external_contact', {})
@@ -122,7 +124,10 @@ module Wechat
         fs.each(&:save)
       end
 
-      list
+      next_cursor = r['next_cursor']
+      sync_externals(cursor: next_cursor) if next_cursor.present?
+
+      r
     end
 
     def sync_external(external_userid)
