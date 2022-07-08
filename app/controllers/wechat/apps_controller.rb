@@ -91,10 +91,13 @@ module Wechat
 
     def verify_signature
       if @app
-        msg_encrypt = params[:echostr].presence
-        if @app.is_a?(WorkApp)
+        if params[:echostr].present?
+          msg_encrypt = params[:echostr]
+        elsif @app.is_a?(WorkApp) && ['POST'].include?(request.request_method)
           r = Hash.from_xml(request.raw_post).fetch('xml', {})
           msg_encrypt = r['Encrypt']
+        else
+          msg_encrypt = nil
         end
         # msg_signature 为企业微信的参数名
         signature = params[:signature] || params[:msg_signature]
