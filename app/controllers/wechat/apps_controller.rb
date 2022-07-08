@@ -91,8 +91,7 @@ module Wechat
 
     def verify_signature
       if @app
-        msg_encrypt = nil
-        msg_encrypt = params[:echostr] || @app.encoding_aes_key if @app.encrypt_mode
+        msg_encrypt = params[:echostr].presence
         signature = params[:signature] || params[:msg_signature]
 
         forbidden = (signature != Wechat::Signature.hexdigest(@app.token, params[:timestamp], params[:nonce], msg_encrypt))
