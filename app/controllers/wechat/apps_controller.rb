@@ -1,27 +1,39 @@
 module Wechat
   class AppsController < BaseController
+    skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
     before_action :set_app, only: [:show, :login, :bind, :qrcode]
     before_action :set_scene, only: [:login]
+    before_action :verify_signature, only: [:show, :create]
 
     def show
-      @oauth_user = @app.generate_wechat_user(params[:code])
-      if @oauth_user.account.nil? && current_account
-        @oauth_user.account = current_account
-      end
-      @oauth_user.save
-
-      if @oauth_user.user
-        login_by_account(@oauth_user.account)
-        redirect_to session[:return_to] || RailsAuth.config.default_return_path
-        session.delete :return_to
+      if @app.is_a?(WorkApp)
+        echostr, _corp_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(params[:echostr]), @app.encoding_aes_key))
+        render plain: echostr
       else
-        url_options = {}
-        url_options.merge! params.except(:controller, :action, :id, :business, :namespace, :code, :state).permit!
-        url_options.merge! host: URI(session[:return_to]).host if session[:return_to]
-
-        redirect_to url_for(controller: 'auth/sign', action: 'sign', uid: @oauth_user.uid, **url_options)
+        render plain: params[:echostr]
       end
     end
+
+    def create
+      @receive = @app.receives.build
+
+      if params['ToUserName']
+        r = params.permit('Encrypt')
+        @receive.msg_format = 'json'
+      else
+        r = Hash.from_xml(request.raw_post).fetch('xml', {})
+      end
+
+      if r['Encrypt']
+        @receive.encrypt_data = r['Encrypt']
+      else
+        @receive.message_hash = r
+      end
+      @receive.save
+
+      render plain: @receive.request.to_wechat
+    end
+
 
     def login
       @oauth_user = @app.generate_wechat_user(params[:code])
@@ -73,12 +85,23 @@ module Wechat
       send_data r.read
     end
 
-    def create
-    end
-
     private
     def set_app
-      @app = App.find params[:id]
+      @app = App.enabled.find params[:id]
+    end
+
+    def verify_signature
+      if @app
+        msg_encrypt = nil
+        #msg_encrypt = params[:echostr] || request_encrypt_content if @app.encrypt_mode
+        signature = params[:signature] || params[:msg_signature]
+
+        forbidden = (signature != Wechat::Signature.hexdigest(@app.token, params[:timestamp], params[:nonce], msg_encrypt))
+      else
+        forbidden = true
+      end
+
+      render plain: 'Forbidden', status: 403 if forbidden
     end
 
     def set_scene(prefix = 'invite_form_scan')
