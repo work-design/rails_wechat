@@ -54,11 +54,11 @@ zh:
       corp_users:
         index:
           title: 企业员工
-        sync:
-          title: 同步联系人
       follows:
         index:
           title: 客户
+        sync:
+          title: 同步客户
     panel:
       title: 公众号通用
       template_configs:

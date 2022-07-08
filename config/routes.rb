@@ -171,10 +171,11 @@ Rails.application.routes.draw do
           end
         end
         resources :corp_users do
-          member do
-            post :sync
+          resources :follows do
+            collection do
+              post :sync
+            end
           end
-          resources :follows
         end
         resources :wechat_users
         resources :user_tags
