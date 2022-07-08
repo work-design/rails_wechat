@@ -31,7 +31,8 @@ module Wechat
       'location_select' => 'Wechat::Request',
       'enter_agent' => 'Wechat::Request',
       'batch_job_result' => 'Wechat::Request',  # 企业微信使用
-      'subscribe_msg_popup_event' => 'Wechat::MsgRequest'  # 小程序订阅消息
+      'subscribe_msg_popup_event' => 'Wechat::MsgRequest',  # 小程序订阅消息
+      'change_external_contact' => 'Wechat::ExternalRequest'
     }.freeze
     extend ActiveSupport::Concern
 
