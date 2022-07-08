@@ -3,6 +3,7 @@
     <li><%= link_to t('wechat.admin.apps.index.title'), { controller: 'apps' } %></li>
     <li><span class="px-3"><%= @corp_user.app.name %></span></li>
     <li><%= link_to t('wechat.admin.corp_users.index.title'), { controller: 'corp_users' } %></li>
+    <li><span class="px-3"><%= @corp_user.user_id %></span></li>
     <li class="is-active"><%= t('.title') %></li>
   </ul>
 </div>
