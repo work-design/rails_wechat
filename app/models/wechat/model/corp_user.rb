@@ -125,6 +125,8 @@ module Wechat
 
     def sync_external(external_userid)
       r = (corp || app).api.item(external_userid)
+      return unless r['errcode'] == 0
+
       item = r.fetch('external_contact', {})
       follow_infos = r.fetch('follow_user', [])
 
@@ -138,6 +140,7 @@ module Wechat
         follow.note = info['description']
         follow.member_id = member.id
         follow.client = external
+        follow.save
       end
 
       self.save
