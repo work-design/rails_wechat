@@ -61,7 +61,7 @@ module Wechat
     end
 
     def url
-      Rails.application.routes.url_for(controller: 'wechat/wechats', action: 'show', id: self.id, host: host)
+      Rails.application.routes.url_for(controller: 'wechat/apps', action: 'show', id: self.id, host: host)
     end
 
     def sync_menu
