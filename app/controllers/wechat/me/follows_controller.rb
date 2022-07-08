@@ -4,9 +4,9 @@ module Wechat
 
     def index
       q_params = {}
-      q_params.merge! params.permit(:state)
+      q_params.merge! params.permit(:state, 'remark-like')
 
-      @follows = current_corp_user.follows.includes(:client).default_where(q_params).page(params[:page])
+      @follows = current_corp_user.follows.includes(:client).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     private
