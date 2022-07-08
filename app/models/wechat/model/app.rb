@@ -52,7 +52,7 @@ module Wechat
 
       validates :appid, presence: true, uniqueness: true
 
-      before_validation :init_aes_key, if: -> { encrypt_mode && encrypt_mode_changed? }
+      before_validation :init_aes_key, if: -> { encrypt_mode && encoding_aes_key.blank? }
       after_update :set_global, if: -> { global? && saved_change_to_global? }
     end
 
