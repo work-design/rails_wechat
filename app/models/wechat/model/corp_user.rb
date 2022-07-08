@@ -121,6 +121,8 @@ module Wechat
       self.class.transaction do
         fs.each(&:save)
       end
+
+      list
     end
 
     def sync_external(external_userid)
@@ -134,16 +136,20 @@ module Wechat
       external.external_type = item['type']
       external.assign_attributes item.slice('name', 'avatar', 'gender', 'unionid', 'position')
 
-      follow_infos.each do |info|
+      fs = follow_infos.map do |info|
         follow = follows.find_or_initialize_by(external_userid: item['external_userid'])
         follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way')
         follow.note = info['description']
         follow.member_id = member.id
         follow.client = external
-        follow.save
+        follow
       end
 
-      self.save
+      self.class.transaction do
+        fs.each(&:save)
+        self.save
+      end
+
       external
     end
 
