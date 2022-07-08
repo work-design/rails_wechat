@@ -92,6 +92,11 @@ module Wechat
     def verify_signature
       if @app
         msg_encrypt = params[:echostr].presence
+        if @app.is_a?(WorkApp)
+          r = Hash.from_xml(request.raw_post).fetch('xml', {})
+          msg_encrypt = r['Encrypt']
+        end
+        # msg_signature 为企业微信的参数名
         signature = params[:signature] || params[:msg_signature]
 
         forbidden = (signature != Wechat::Signature.hexdigest(@app.token, params[:timestamp], params[:nonce], msg_encrypt))
