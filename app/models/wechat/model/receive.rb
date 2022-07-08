@@ -81,7 +81,7 @@ module Wechat
 
     def compute_type
       if msg_type == 'event'
-        EVENT[message_hash['Event']]
+        EVENT[message_hash['Event']] || 'Wechat::Request'
       else
         MSG_TYPE[msg_type]
       end
