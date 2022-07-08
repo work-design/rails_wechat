@@ -17,6 +17,7 @@ module Wechat
       attribute :qr_code, :string
       attribute :department, :integer, array: []
       attribute :suite_id, :string
+      attribute :follows_count, :integer, default: 0
 
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
       belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
@@ -29,7 +30,7 @@ module Wechat
 
       has_many :maintains, through: :member
       has_many :contacts, ->(o){ where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :user_id, primary_key: :user_id
-      has_many :follows, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :userid, primary_key: :user_id
+      has_many :follows, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :userid, primary_key: :user_id, counter_cache: true
       has_many :externals, through: :follows, source: :client, source_type: 'Wechat::External'
 
       validates :identity, presence: true
