@@ -6,6 +6,10 @@
   <i class="fa-solid fa-pencil"></i>
   <span><%= t('.edit') %></span>
 <% end %>
+<%= link_to({ controller: 'crm/admin/maintains', action: 'show', id: model.id }, class: 'weui-actionsheet__cell') do %>
+  <i class="fa-solid fa-circle-info"></i>
+  <span><%= t('.show') %></span>
+<% end %>
 <%= link_to({ controller: 'crm/admin/addresses', maintain_id: model.id }, class: 'weui-actionsheet__cell') do %>
   <i class="fa-solid fa-location-dot"></i>
   <span><%= t('crm.admin.addresses.index.title') %></span>
