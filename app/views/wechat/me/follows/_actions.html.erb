@@ -10,13 +10,17 @@
   <i class="fa-solid fa-circle-info"></i>
   <span><%= t('.show') %></span>
 <% end %>
-<%= link_to({ controller: 'crm/admin/addresses', maintain_id: model.id }, class: 'weui-actionsheet__cell') do %>
-  <i class="fa-solid fa-location-dot"></i>
-  <span><%= t('crm.admin.addresses.index.title') %></span>
+<%= link_to({ controller: 'crm/admin/card_templates', maintain_id: model.id }, class: 'weui-actionsheet__cell') do %>
+  <i class="fa-solid fa-cards-blank"></i>
+  <span><%= t('crm.admin.card_templates.index.title') %></span>
 <% end %>
 <%= link_to({ controller: 'crm/admin/wallet_templates', maintain_id: model.id }, class: 'weui-actionsheet__cell') do %>
   <i class="fa-solid fa-wallet"></i>
   <span><%= t('crm.admin.wallet_templates.index.title') %></span>
+<% end %>
+<%= link_to({ controller: 'crm/admin/addresses', maintain_id: model.id }, class: 'weui-actionsheet__cell') do %>
+  <i class="fa-solid fa-location-dot"></i>
+  <span><%= t('crm.admin.addresses.index.title') %></span>
 <% end %>
 <%= link_to({ controller: 'crm/admin/orders', maintain_id: model.id }, class: 'weui-actionsheet__cell') do %>
   <i class="fa-solid fa-truck-clock"></i>
