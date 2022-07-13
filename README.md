@@ -33,4 +33,4 @@ app.api.msg_sec_check('test data')
 ```
 
 ## 许可证
-许可证采用 [MIT](https://opensource.org/licenses/MIT)
+遵循 [MIT](LICENSE) 协议
