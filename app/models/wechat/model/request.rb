@@ -64,7 +64,7 @@ module Wechat
     end
 
     def reply_params_detail
-      url = Rails.application.routes.url_for(controller: 'home', action: 'index')
+      url = Rails.application.routes.url_for(controller: 'home', action: 'index', host: app.host)
       if wechat_user.attributes['name'].present?
         title = "您好，#{wechat_user.attributes['name']}"
         if wechat_user.user
