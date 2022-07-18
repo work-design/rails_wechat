@@ -91,7 +91,7 @@ module Wechat
 
     def verify_signature
       if @app
-        if params[:echostr].present?
+        if @app.is_a?(WorkApp) && params[:echostr].present?
           msg_encrypt = params[:echostr]
         elsif @app.is_a?(WorkApp) && ['POST'].include?(request.request_method)
           r = Hash.from_xml(request.raw_post).fetch('xml', {})
