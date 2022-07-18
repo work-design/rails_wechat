@@ -183,9 +183,8 @@ module Wechat
     end
 
     def host
-      if oauth_enable
-        domain.presence || organ_domain&.identifier || organ_domains.first&.identifier
-      end
+      #if oauth_enable
+      domain.presence || organ_domain&.identifier || organ_domains.first&.identifier
     end
 
     def set_global
