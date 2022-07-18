@@ -85,7 +85,7 @@ module Wechat
         description = '开始使用'
       end
 
-      if app.weapp
+      if app.respond_to?(:weapp) && app.weapp
         url = app.weapp.api.generate_url('/pages/index/index')
       end
 
