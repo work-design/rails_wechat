@@ -72,7 +72,7 @@ module Wechat
     def current_corp_user
       return @current_corp_user if defined? @current_corp_user
       if current_account
-        @current_corp_user = current_account.corp_users.find_by(organ_id: current_organ&.id)
+        @current_corp_user = current_account.corp_users.where(organ_id: current_organ&.self_and_ancestors_ids).take
       end
 
       logger.debug "\e[35m  Login as Corp User: #{@current_corp_user&.id}  \e[0m"
