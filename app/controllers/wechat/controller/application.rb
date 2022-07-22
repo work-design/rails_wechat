@@ -23,7 +23,7 @@ module Wechat
 
       if redirect_url
         logger.debug "\e[35m  Redirect to: #{redirect_url}  \e[0m"
-        redirect_to url, allow_other_host: true
+        redirect_to redirect_url, allow_other_host: true
       end
     end
 
