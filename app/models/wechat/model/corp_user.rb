@@ -39,6 +39,7 @@ module Wechat
       before_validation :init_account, if: -> { identity_changed? }
       before_validation :init_corp, if: -> { suite_id.present? && suite_id_changed? }
       after_save :auto_join_organ, if: -> { saved_change_to_identity? }
+      after_create_commit :sync_externals_later
     end
 
     def temp_identity
@@ -100,6 +101,10 @@ module Wechat
         self.avatar_url = r['avatar']
         self.save
       end
+    end
+
+    def sync_externals_later
+      CorpSyncExternalsJob.perform_later(self)
     end
 
     def sync_externals(**options)
