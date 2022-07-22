@@ -46,7 +46,7 @@ module Wechat
     end
 
     def sync_identity
-      self.identity = temp_identity
+      self.identity = identity.presence || temp_identity
     end
 
     def init_account
