@@ -151,17 +151,16 @@ module Wechat
       external.external_type = item['type']
       external.assign_attributes item.slice('name', 'avatar', 'gender', 'unionid', 'position')
 
-      fs = follow_infos.map do |info|
-        follow = follows.find_or_initialize_by(external_userid: item['external_userid'])
-        follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way')
-        follow.note = info['description']
-        follow.member_id = member.id
-        follow.client = external
-        follow
-      end
+      info = follow_infos.find(&->(i){ i['userid'] == user_id })
+      follow = follows.find_or_initialize_by(external_userid: item['external_userid'])
+      follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way')
+      follow.note = info['description']
+      follow.member_id = member.id
+      follow.client = external
+      follow
 
       self.class.transaction do
-        fs.each(&:save)
+        follow.save
         self.save
       end
 
