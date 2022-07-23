@@ -140,8 +140,8 @@ module Wechat
       r
     end
 
-    def sync_external(external_userid)
-      r = (corp || app).api.item(external_userid)
+    def sync_external(external_userid, **options)
+      r = (corp || app).api.item(external_userid, **options)
       return unless r['errcode'] == 0
 
       item = r.fetch('external_contact', {})
@@ -152,19 +152,23 @@ module Wechat
       external.assign_attributes item.slice('name', 'avatar', 'gender', 'unionid', 'position')
 
       info = follow_infos.find(&->(i){ i['userid'] == user_id })
-      follow = follows.find_or_initialize_by(external_userid: item['external_userid'])
-      follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way')
-      follow.note = info['description']
-      follow.member_id = member.id
-      follow.client = external
-      follow
+      if info
+        follow = follows.find_or_initialize_by(external_userid: item['external_userid'])
+        follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way')
+        follow.note = info['description']
+        follow.member_id = member.id
+        follow.client = external
 
-      self.class.transaction do
-        follow.save
-        self.save
+        self.class.transaction do
+          follow.save
+          self.save
+        end
+        external
+      elsif r['next_cursor']
+        sync_external(external_userid, cursor: r['next_cursor'])
+      else
+        external
       end
-
-      external
     end
 
   end

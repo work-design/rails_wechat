@@ -37,8 +37,8 @@ module Wechat::Api
       r['external_userid']
     end
 
-    def item(external_userid)
-      get 'get', params: { external_userid: external_userid }, base: BASE
+    def item(external_userid, **options)
+      get 'get', params: { external_userid: external_userid, **options }, base: BASE
     end
 
     def batch(userid, **options)
