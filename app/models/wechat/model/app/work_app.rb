@@ -60,8 +60,9 @@ module Wechat
       corp_user = corp_users.find_or_initialize_by(user_id: result['UserId'])
       corp_user.device_id = result['DeviceId'] if result['DeviceId'].present?
 
-      if result['user_ticket']
+      if result['user_ticket'] && corp_user.temp?
         corp_user.user_ticket = result['user_ticket']
+        corp_user.ticket_expires_at = Time.current + result['expires_in'].to_i
         detail = api.user_detail(result['user_ticket'])
         logger.debug "\e[35m  generate user detail #{detail}  \e[0m"
 

@@ -92,6 +92,10 @@ module Wechat
       end
     end
 
+    def temp?
+      persisted? && temp_identity == identity
+    end
+
     def get_detail_by_suite
       return unless suite
       r = suite.api.user_detail(user_ticket)
