@@ -163,12 +163,11 @@ module Wechat
           follow.save
           self.save
         end
-        external
       elsif r['next_cursor']
         sync_external(external_userid, cursor: r['next_cursor'])
-      else
-        external
       end
+
+      external
     end
 
   end
