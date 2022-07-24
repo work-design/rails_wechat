@@ -1,207 +1,206 @@
 Rails.application.routes.draw do
-
-  namespace :wechat, defaults: { business: 'wechat' } do
-    controller :wechat do
-      post 'wechat/auth' => :auth
-      get :login
-      get :friend
-    end
-    scope path: 'qy_wechat', controller: :qy_wechat do
-      get :login
-    end
-    resources :program_users do
-      collection do
-        post :mobile
-        post :info
-      end
-    end
-    resources :apps, only: [:show] do
-      member do
-        post '' => :create
+  scope RailsCom.default_routes_scope do
+    namespace :wechat, defaults: { business: 'wechat' } do
+      controller :wechat do
+        post 'wechat/auth' => :auth
         get :login
-        get :bind
-        patch :qrcode
+        get :friend
       end
-    end
-    resources :platforms, only: [:show] do
-      member do
-        get :callback
-        post 'callback/:appid' => :message
-      end
-      collection do
-        post :notify
-      end
-    end
-    resources :providers, only: [:show] do
-      member do
-        post :callback
-        post :notify
-        get :auth
-      end
-    end
-    resources :suites, only: [] do
-      member do
-        get 'callback' => :verify
-        get 'notify' => :verify
-        post :callback
-        post :notify
+      scope path: 'qy_wechat', controller: :qy_wechat do
         get :login
-        get 'redirect/:corp_id' => :redirect
       end
-    end
-
-    namespace :me, defaults: { namespace: 'me' } do
-      resource :corp_users
-      resources :externals
-      resources :follows
-    end
-
-    namespace :my, defaults: { namespace: 'my' } do
-      resource :user, only: [] do
+      resources :program_users do
         collection do
-          get :invite_qrcode
-          get :gift
+          post :mobile
+          post :info
         end
       end
-      resources :subscribeds
-      resources :registers do
+      resources :apps, only: [:show] do
         member do
-          get 'code' => :edit_code
+          post '' => :create
+          get :login
+          get :bind
+          patch :qrcode
         end
       end
-      resources :medias
-    end
-
-    namespace :panel, defaults: { namespace: 'panel' } do
-      resources :template_configs
-      resources :apps do
+      resources :platforms, only: [:show] do
         member do
-          get :key
+          get :callback
+          post 'callback/:appid' => :message
         end
-      end
-      resources :menus do
         collection do
-          get :new_parent
+          post :notify
         end
+      end
+      resources :providers, only: [:show] do
         member do
-          get :edit_parent
+          post :callback
+          post :notify
+          get :auth
         end
       end
-      resources :platforms do
-        resources :agencies
+      resources :suites, only: [] do
+        member do
+          get 'callback' => :verify
+          get 'notify' => :verify
+          post :callback
+          post :notify
+          get :login
+          get 'redirect/:corp_id' => :redirect
+        end
       end
-      resources :contacts
-      resources :providers do
-        resources :suites do
-          resources :corps do
-            resources :corp_users
-            resources :externals
+
+      namespace :me, defaults: { namespace: 'me' } do
+        resource :corp_users
+        resources :externals
+        resources :follows
+      end
+
+      namespace :my, defaults: { namespace: 'my' } do
+        resource :user, only: [] do
+          collection do
+            get :invite_qrcode
+            get :gift
           end
-          resources :suite_tickets
-          resources :suite_receives
         end
-      end
-    end
-
-    namespace :in, defaults: { namespace: 'in' } do
-      resources :apps do
-        resources :scenes do
+        resources :subscribeds
+        resources :registers do
           member do
-            patch :sync
+            get 'code' => :edit_code
           end
-          resources :wechat_users do
+        end
+        resources :medias
+      end
+
+      namespace :panel, defaults: { namespace: 'panel' } do
+        resources :template_configs
+        resources :apps do
+          member do
+            get :key
+          end
+        end
+        resources :menus do
+          collection do
+            get :new_parent
+          end
+          member do
+            get :edit_parent
+          end
+        end
+        resources :platforms do
+          resources :agencies
+        end
+        resources :contacts
+        resources :providers do
+          resources :suites do
+            resources :corps do
+              resources :corp_users
+              resources :externals
+            end
+            resources :suite_tickets
+            resources :suite_receives
+          end
+        end
+      end
+
+      namespace :in, defaults: { namespace: 'in' } do
+        resources :apps do
+          resources :scenes do
             member do
-              patch :try_match
+              patch :sync
+            end
+            resources :wechat_users do
+              member do
+                patch :try_match
+              end
+            end
+            resources :app_menus do
+              collection do
+                get :default
+                post :sync
+              end
             end
           end
-          resources :app_menus do
+        end
+      end
+
+      namespace :admin, defaults: { namespace: 'admin' } do
+        root 'home#index'
+        resource :organ, only: [:show, :edit, :update]
+        resources :menus do
+          collection do
+            get :new_parent
+          end
+          member do
+            get :edit_parent
+          end
+        end
+        resources :apps do
+          member do
+            get :info
+            get 'cert' => :edit_cert
+            patch 'cert' => :update_cert
+            get 'pay' => :edit_pay
+          end
+          resources :scenes do
+            member do
+              patch :sync
+            end
+          end
+          resources :responses do
+            member do
+              post :sync
+              get 'reply' => :edit_reply
+              get :filter_reply
+              patch 'reply' => :update_reply
+            end
+          end
+          resources :requests, except: [:new, :create]
+          resources :replies do
+            collection do
+              post :build
+            end
+            member do
+              get :add
+            end
+            resources :news_reply_items, only: [:destroy]
+          end
+          resources :tags do
+            collection do
+              post :sync
+            end
+          end
+          resources :corp_users do
+            resources :follows do
+              collection do
+                post :sync
+              end
+            end
+          end
+          resources :wechat_users
+          resources :user_tags
+          resources :templates do
             collection do
               get :default
               post :sync
             end
+            resources :notices
           end
-        end
-      end
-    end
-
-    namespace :admin, defaults: { namespace: 'admin' } do
-      root 'home#index'
-      resource :organ, only: [:show, :edit, :update]
-      resources :menus do
-        collection do
-          get :new_parent
-        end
-        member do
-          get :edit_parent
-        end
-      end
-      resources :apps do
-        member do
-          get :info
-          get 'cert' => :edit_cert
-          patch 'cert' => :update_cert
-          get 'pay' => :edit_pay
-        end
-        resources :scenes do
-          member do
-            patch :sync
-          end
-        end
-        resources :responses do
-          member do
-            post :sync
-            get 'reply' => :edit_reply
-            get :filter_reply
-            patch 'reply' => :update_reply
-          end
-        end
-        resources :requests, except: [:new, :create]
-        resources :replies do
-          collection do
-            post :build
-          end
-          member do
-            get :add
-          end
-          resources :news_reply_items, only: [:destroy]
-        end
-        resources :tags do
-          collection do
-            post :sync
-          end
-        end
-        resources :corp_users do
-          resources :follows do
+          resources :app_menus do
             collection do
               post :sync
             end
           end
         end
-        resources :wechat_users
-        resources :user_tags
-        resources :templates do
-          collection do
-            get :default
-            post :sync
-          end
-          resources :notices
+        resources :responses, only: [] do
+          resources :extractors
         end
-        resources :app_menus do
-          collection do
-            post :sync
+        resources :accounts, only: [] do
+          member do
+            get :qrcode
           end
-        end
-      end
-      resources :responses, only: [] do
-        resources :extractors
-      end
-      resources :accounts, only: [] do
-        member do
-          get :qrcode
         end
       end
     end
-
   end
-
 end
