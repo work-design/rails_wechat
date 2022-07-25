@@ -3,10 +3,6 @@
   <td><%= @app.type_i18n %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::App.human_attribute_name(:enabled) %></td>
-  <td><%= @app.enabled %></td>
-</tr>
-<tr>
   <td class="has-text-right"><%= Wechat::App.human_attribute_name(:appid) %></td>
   <td><%= @app.appid %></td>
 </tr>
@@ -14,7 +10,4 @@
   <td class="has-text-right"><%= Wechat::App.human_attribute_name(:agentid) %></td>
   <td><%= @app.agentid %></td>
 </tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::App.human_attribute_name(:encrypt_mode) %></td>
-  <td><%= @app.encrypt_mode %></td>
-</tr>
+
