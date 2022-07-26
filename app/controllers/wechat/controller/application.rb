@@ -30,7 +30,7 @@ module Wechat
     def current_oauth_app
       return @current_oauth_app if defined? @current_oauth_app
       if request.variant.include?(:work_wechat)
-        @current_oauth_app = WorkApp.default_where(default_params).take
+        @current_oauth_app = WorkApp.default_where(default_params).take || WorkApp.global.take
       else
         @current_oauth_app = current_organ_domain&.wechat_app || App.global.take
       end
