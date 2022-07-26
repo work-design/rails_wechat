@@ -89,6 +89,7 @@ module Wechat
 
       r = app.api.generate_url(query: query.to_query, **expire)
       self.qrcode_url = r['url_link']
+      r
     end
 
     def expired?(time = Time.current)
