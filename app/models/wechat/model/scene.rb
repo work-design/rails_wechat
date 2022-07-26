@@ -73,16 +73,14 @@ module Wechat
       end
       self.qrcode_ticket = r['ticket']
       self.qrcode_url = r['url']
-    end
-
-    def program_query
-      {
-        org_id: "org_#{organ_id}",
-        path: "#{match_value.delete_prefix('/')}"
-      }
+      r
     end
 
     def get_program_qrcode
+      query = {
+        org_id: "org_#{organ_id}",
+        path: "#{match_value.delete_prefix('/')}"
+      }
       if expire_seconds
         self.expire_at = Time.current + expire_seconds
         expire = { is_expire: true, expire_type: 0, expire_time: expire_at.to_i }
@@ -90,7 +88,7 @@ module Wechat
         expire = { is_expire: false }
       end
 
-      r = app.api.generate_url(query: program_query.to_query, **expire)
+      r = app.api.generate_url(query: query.to_query, **expire)
       self.qrcode_url = r['url_link']
       r
     end
