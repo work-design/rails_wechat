@@ -78,7 +78,7 @@ module Wechat
     def program_query
       {
         org_id: "org_#{organ_id}",
-        path: "/#{match_value.delete_prefix('/')}"
+        path: "#{match_value.delete_prefix('/')}"
       }
     end
 
