@@ -17,7 +17,7 @@ module Wechat::Api
 
     def post(path, params: {}, headers: {}, base: nil, debug: nil, **payload)
       with_access_token(params) do |with_token_params|
-        @client.post path, payload.to_json, headers: headers, params: with_token_params, debug: debug, base: base
+        @client.post_json path, payload, headers: headers, params: with_token_params, debug: debug, base: base
       end
     end
 

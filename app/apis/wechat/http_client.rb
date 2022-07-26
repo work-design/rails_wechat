@@ -35,6 +35,17 @@ module Wechat
       end
     end
 
+    def post_json(path, payload, headers: {}, params: {}, base: nil, **options)
+      url = base + path
+      response = @http.with_headers(headers).post(url, params: params, json: payload)
+
+      if options[:debug]
+        response
+      else
+        parse_response(response)
+      end
+    end
+
     def post_file(path, file, headers: {}, params: {}, base: nil, **options)
       headers.with_defaults! 'Accept' => 'application/json'
       url = base + path
