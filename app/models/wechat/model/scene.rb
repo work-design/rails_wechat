@@ -78,7 +78,7 @@ module Wechat
     def get_program_qrcode
       query = {
         org_id: "org_#{organ_id}",
-        path: "/#{match_value.delete_prefix('/')}"
+        path: "#{match_value.delete_prefix('/')}"
       }
       if expire_seconds
         self.expire_at = Time.current + expire_seconds
