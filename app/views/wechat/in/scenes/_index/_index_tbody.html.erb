@@ -1,7 +1,7 @@
 <td>
   <div class="is-several">
-    <span><%= model.match_value %></span>
     <%= image_tag model.qrcode_data_url, class: 'image is-32x32' if model.qrcode_data_url.present? %>
+    <span><%= model.match_value %></span>
   </div>
 </td>
 <td>
