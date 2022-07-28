@@ -7,8 +7,9 @@ module Wechat::Api
       post 'msg_sec_check', content: content, base: BASE
     end
 
-    def get_wxacode(path = '/pages/index/index', width = 430)
-      r = post 'getwxacode', path: path, width: width, base: BASE
+    def get_wxacode(path = '/pages/index/index', **options)
+      path = "#{path}?#{options[:query].to_query}" if options.key?(:query)
+      r = post 'getwxacode', path: path, **options, base: BASE
 
       if r.is_a?(Tempfile) && defined? Com::BlobTemp
         blob = Com::BlobTemp.new(note: path)
