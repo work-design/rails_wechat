@@ -8,7 +8,7 @@ module Wechat::Api
     end
 
     def get_wxacode(path = '/pages/index/index', **options)
-      path = "#{path}?#{options[:query].to_query}" if options.key?(:query)
+      path = "#{path}?#{options.delete(:query).to_query}" if options.key?(:query)
       r = post 'getwxacode', path: path, **options, base: BASE
 
       if r.is_a?(Tempfile) && defined? Com::BlobTemp
