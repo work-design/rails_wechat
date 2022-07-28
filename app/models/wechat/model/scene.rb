@@ -58,7 +58,7 @@ module Wechat
       if ['Wechat::PublicApp', 'Wechat::ReadApp'].include? app.type
         get_public_qrcode
       elsif ['Wechat::ProgramApp'].include? app.type
-        get_program_qrcode
+        get_wxa_qrcode
       end
 
       self.save
@@ -78,6 +78,8 @@ module Wechat
 
     def get_wxa_qrcode
       r = app.api.get_wxacode(query: program_query)
+      self.qrcode_url = r
+      r
     end
 
     def program_query

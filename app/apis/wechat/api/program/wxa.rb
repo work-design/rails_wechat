@@ -15,9 +15,10 @@ module Wechat::Api
         blob = Com::BlobTemp.new(note: path)
         blob.file.attach io: r, filename: path
         blob.save
+        blob.url
+      else
+        r
       end
-
-      r
     end
 
     def get_wxacode_unlimit(scene, **options)
