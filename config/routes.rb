@@ -73,7 +73,11 @@ Rails.application.routes.draw do
       end
 
       namespace :panel, defaults: { namespace: 'panel' } do
-        resources :template_configs
+        resources :template_configs do
+          collection do
+            get :apps
+          end
+        end
         resources :apps do
           member do
             get :key
