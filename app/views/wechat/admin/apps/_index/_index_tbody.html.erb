@@ -1,5 +1,7 @@
-<td><%= model.type_i18n %></td>
-<td><%= model.name %></td>
+<td>
+  <p><%= model.name %></p>
+  <p><span class="tag is-info"><%= model.type_i18n %></span></p>
+</td>
 <td>
   <%= content_tag :dl do %>
     <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::App.human_attribute_name(:appid) %></dt>
