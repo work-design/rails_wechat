@@ -1,7 +1,7 @@
 module Wechat
   class Panel::TemplateConfigsController < Panel::BaseController
-    before_action :set_app
-    before_action :set_template_config, only: [:show, :edit, :update, :destroy]
+    before_action :set_template_config, only: [:show, :edit, :update, :sync, :apps, :destroy]
+    before_action :set_app, only: [:sync]
 
     def index
       @template_configs = TemplateConfig.includes(:template_key_words).page(params[:page])
@@ -9,6 +9,10 @@ module Wechat
 
     def apps
       @apps = PublicApp.page(params[:page])
+    end
+
+    def sync
+      @template_config.sync_key_words(@app)
     end
 
     private

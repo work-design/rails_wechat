@@ -76,6 +76,7 @@ Rails.application.routes.draw do
         resources :template_configs do
           member do
             get :apps
+            post :sync
           end
         end
         resources :apps do
