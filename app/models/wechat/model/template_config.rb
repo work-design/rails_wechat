@@ -11,7 +11,7 @@ module Wechat
       attribute :code, :string, default: 'default'
       attribute :content, :string
 
-      validates :code, uniqueness: { scope: :notifiable_type }
+      validates :code, uniqueness: { scope: :notifiable_type }, unless: -> { notifiable_type.blank? }
 
       has_many :templates, primary_key: :content, foreign_key: :content
       has_many :template_key_words, -> { order(position: :asc) }, inverse_of: :template_config, dependent: :delete_all
