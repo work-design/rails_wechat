@@ -23,15 +23,9 @@ module Wechat
     def sync_key_words(app)
       temp = app.api.templates.find { |i| i['content'] == content }
       if temp.blank?
-        result = app.api.add_template tid
-        temp = app.api.templates.find { |i| i['template_id'] == result['template_id'] }
-        self.update content: temp['content']
+        app.api.add_template tid
+        app.sync_templates
       end
-
-      template = templates.find_or_initialize_by(template_id: temp['template_id'])
-      template.assign_attributes temp.slice('title', 'content', 'example')
-      template.app = app
-      template.save
 
       return if content.blank?
       data_keys.each do |key|

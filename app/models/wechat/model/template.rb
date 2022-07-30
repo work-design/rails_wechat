@@ -9,9 +9,10 @@ module Wechat
       attribute :example, :string
       attribute :template_type, :integer
       attribute :appid, :string, index: true
+      attribute :template_kind, :string
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
-      belongs_to :template_config, optional: true
+      belongs_to :template_config, foreign_key: :content, primary_key: :content, optional: true
       has_many :notices, dependent: :delete_all
       has_many :msg_requests, ->(o){ where(appid: o.appid) }, foreign_key: :body, primary_key: :template_id
 
@@ -19,12 +20,9 @@ module Wechat
     end
 
     def init_template_config
-      if app.is_a?(PublicApp)
-        config = TemplatePublic.find_or_initialize_by(content: content)
-        config.title = title
-        self.template_config = config
-        self.save
-      end
+      template_config || build_template_config
+      template_config.title = title
+      template_config.save
     end
 
     def del_to_wechat
