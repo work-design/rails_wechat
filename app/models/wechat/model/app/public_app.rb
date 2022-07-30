@@ -20,9 +20,9 @@ module Wechat
     end
 
     def sync_templates
-      api.templates.each do |template|
-        template = templates.find_or_initialize_by(template_id: template['template_id'])
-        template.assign_attributes template.slice('title', 'content', 'example')
+      api.templates.each do |temp|
+        template = templates.find_or_initialize_by(template_id: temp['template_id'])
+        template.assign_attributes temp.slice('title', 'content', 'example')
         template.save
       end
     end
