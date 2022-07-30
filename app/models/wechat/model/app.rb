@@ -164,26 +164,12 @@ module Wechat
       puts 'should implement in sub models'
     end
 
-    # 公众号
-    def sync_template_configs
-      templates = api.templates
-      templates.each do |template|
-        template_config = TemplatePublic.new(title: template['title'])
-        data_keys = Template.new(content: template['content']).data_keys
-        data_keys.each do |key|
-          template_config.template_key_words.build(name: key)
-        end
-        template_config.save
-      end
-    end
-
     def template_ids(notifiable_type, *code)
       ids = TemplateConfig.where(notifiable_type: notifiable_type, code: code).pluck(:id)
       templates.where(template_config_id: ids).pluck(:template_id)
     end
 
     def host
-      #if oauth_enable
       domain.presence || organ_domain&.identifier || organ_domains.first&.identifier
     end
 
