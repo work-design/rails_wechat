@@ -64,6 +64,8 @@ zh:
       template_configs:
         index:
           title: 模板设置
+        apps:
+          title: 开通详情
       agencies:
         index:
           title: 授权公众号
