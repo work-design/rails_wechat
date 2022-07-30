@@ -12,7 +12,7 @@ module Wechat
     end
 
     def sync
-      @template_config.sync_key_words(@app)
+      @template_config.sync_to_wechat(@app)
     end
 
     private

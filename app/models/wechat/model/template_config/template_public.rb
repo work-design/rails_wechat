@@ -20,13 +20,18 @@ module Wechat
       content.gsub(r).to_a
     end
 
-    def sync_key_words(app)
+    def sync_to_wechat(app)
       temp = app.api.templates.find { |i| i['content'] == content }
       if temp.blank?
-        app.api.add_template tid
+        result = app.api.add_template tid
         app.sync_templates
+        result
+      else
+        temp
       end
+    end
 
+    def sync_keys
       return if content.blank?
       data_keys.each do |key|
         tkw = template_key_words.find_or_initialize_by(name: key)
