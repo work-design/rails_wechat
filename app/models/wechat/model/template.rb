@@ -21,7 +21,7 @@ module Wechat
     end
 
     def init_template_config
-      template_config || build_template_config
+      template_config || build_template_config(type: 'Wechat::TemplatePublic')
       template_config.title = title
       template_config.save
     end
