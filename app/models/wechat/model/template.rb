@@ -68,7 +68,8 @@ module Wechat
     end
 
     def data_keys
-      content.gsub(/(?<={{)\w+(?=.DATA}})/).to_a
+      r = RegexpUtil.between('{{', '.D(ATA|ata)}}')
+      content.gsub(r).to_a
     end
 
     def data_mappings
