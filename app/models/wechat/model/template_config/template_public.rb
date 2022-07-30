@@ -3,7 +3,6 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      validates :tid, presence: true
       after_save_commit :sync_keys, if: -> { content.present? && saved_change_to_content? }
     end
 
@@ -22,6 +21,7 @@ module Wechat
     end
 
     def sync_to_wechat(app)
+      return if tid.blank?
       temp = app.api.templates.find { |i| i['content'] == content }
       if temp.blank?
         result = app.api.add_template tid
