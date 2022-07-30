@@ -28,8 +28,9 @@ module Wechat
         self.update content: temp['content']
       end
 
-      template = app.templates.find_or_initialize_by(template_id: temp['template_id'])
+      template = templates.find_or_initialize_by(template_id: temp['template_id'])
       template.assign_attributes temp.slice('title', 'content', 'example')
+      template.app = app
       template.save
 
       return if content.blank?

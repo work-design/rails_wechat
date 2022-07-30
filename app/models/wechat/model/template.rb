@@ -15,7 +15,6 @@ module Wechat
       has_many :notices, dependent: :delete_all
       has_many :msg_requests, ->(o){ where(appid: o.appid) }, foreign_key: :body, primary_key: :template_id
 
-      before_save :sync_from_template_config, if: -> { template_config_id_changed? || template_config }
       before_save :sync_to_wechat, if: -> { template_id_changed? && template_id.present? }
       after_destroy_commit :del_to_wechat
     end
@@ -29,10 +28,6 @@ module Wechat
       end
     end
 
-    def sync_from_template_config
-      self.template_id ||= template_config.tid
-    end
-
     def sync_to_wechat
       sync_from_wechat
       return if content.present?
@@ -40,7 +35,7 @@ module Wechat
       if r['errcode'] == 0
         self.template_id = r['priTmplId'] || r['template_id']
       else
-        logger.debug("  =========> Error is #{r['errmsg']}")
+        logger.debug("  Error is #{r['errmsg']}  ")
         return
       end
       sync_from_wechat
