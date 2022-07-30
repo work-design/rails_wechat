@@ -19,6 +19,7 @@ module Wechat
       params.fetch(:template_key_word, {}).permit(
         :name,
         :mapping,
+        :note,
         :color
       )
     end

@@ -6,6 +6,7 @@ module Wechat
       attribute :position, :integer
       attribute :kid, :integer
       attribute :name, :string
+      attribute :note, :string
       attribute :example, :string
       attribute :rule, :string
       attribute :mapping, :string
