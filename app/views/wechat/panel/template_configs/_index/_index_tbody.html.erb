@@ -1,9 +1,14 @@
-<td><%= model.type_i18n %></td>
 <td>
+  <p>
+    <span><%= model.tid %></span>
+    <span class="tag is-info"><%= model.type_i18n %></span>
+  </p>
   <p><%= model.title %></p>
-  <p class="has-text-grey"><%= model.description %></p>
 </td>
-<td><%= model.tid %></td>
+<td>
+  <p class="has-text-grey"><%= model.description %></p>
+  <p><%= model.content %></p>
+</td>
 <td>
   <p><%= model.notifiable_type %></p>
   <p><%= model.code %></p>

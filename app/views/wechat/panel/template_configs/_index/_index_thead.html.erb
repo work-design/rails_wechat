@@ -1,9 +1,11 @@
-<th><%= Wechat::TemplateConfig.human_attribute_name(:type) %></th>
 <th>
+  <p><%= Wechat::TemplateConfig.human_attribute_name(:tid) %></p>
   <p><%= Wechat::TemplateConfig.human_attribute_name(:title) %></p>
-  <p class="has-text-grey"><%= Wechat::TemplateConfig.human_attribute_name(:description) %></p>
 </th>
-<th><%= Wechat::TemplateConfig.human_attribute_name(:tid) %></th>
+<th style="width: 40%">
+  <p class="has-text-grey"><%= Wechat::TemplateConfig.human_attribute_name(:description) %></p>
+  <p><%= Wechat::TemplateConfig.human_attribute_name(:content) %></p>
+</th>
 <th>
   <p><%= Wechat::TemplateConfig.human_attribute_name(:notifiable_type) %></p>
   <p><%= Wechat::TemplateConfig.human_attribute_name(:code) %></p>
