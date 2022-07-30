@@ -24,9 +24,7 @@ module Wechat
       template = app.api.templates.find { |i| i['content'] == content }
       if template.blank?
         result = app.api.add_template tid
-        binding.b
         template = app.api.templates.find { |i| i['template_id'] == result['template_id'] }
-        #app.api.del_template result['template_id']
         self.update content: template['content']
       end
 
