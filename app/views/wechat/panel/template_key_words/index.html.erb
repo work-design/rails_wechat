@@ -1,0 +1,6 @@
+<%= render 'filter_form' %>
+<%= render 'button' %>
+
+<%= render layout: 'index_table' do %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @template_key_words, as: :model %>
+<% end %>

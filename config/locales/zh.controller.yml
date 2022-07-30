@@ -66,6 +66,9 @@ zh:
           title: 模板设置
         apps:
           title: 开通详情
+      template_key_words:
+        index:
+          title: 关键词
       agencies:
         index:
           title: 授权公众号

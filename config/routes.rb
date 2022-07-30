@@ -78,6 +78,7 @@ Rails.application.routes.draw do
             get :apps
             post :sync
           end
+          resources :template_key_words
         end
         resources :apps do
           member do

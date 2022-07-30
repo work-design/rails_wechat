@@ -5,6 +5,9 @@
       <%= link_to({ action: 'apps', id: model.id }, aria: { label: t('wechat.panel.template_configs.apps.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-regular fa-shapes"></i>
       <% end %>
+      <%= link_to({ controller: 'template_key_words', template_config_id: model.id }, aria: { label: t('wechat.panel.template_key_words.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-regular fa-gears"></i>
+      <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-regular fa-circle-info"></i>
       <% end %>
