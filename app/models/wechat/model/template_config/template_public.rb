@@ -4,6 +4,7 @@ module Wechat
 
     included do
       validates :tid, presence: true
+      after_save_commit :sync_keys, if: -> { content.present? && saved_change_to_content? }
     end
 
     def data_hash
@@ -32,7 +33,6 @@ module Wechat
     end
 
     def sync_keys
-      return if content.blank?
       data_keys.each do |key|
         tkw = template_key_words.find_or_initialize_by(name: key)
         tkw.save
