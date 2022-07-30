@@ -17,6 +17,7 @@ module Wechat
       has_many :msg_requests, ->(o){ where(appid: o.appid) }, foreign_key: :body, primary_key: :template_id
 
       after_destroy_commit :del_to_wechat
+      after_save_commit :init_template_config, if: -> { content && saved_change_to_content? }
     end
 
     def init_template_config
