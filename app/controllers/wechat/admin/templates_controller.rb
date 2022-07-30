@@ -35,7 +35,6 @@ module Wechat
     def template_params
       params.fetch(:template, {}).permit(
         :app_id,
-        :template_config_id,
         :template_id,
         :title,
         :content,

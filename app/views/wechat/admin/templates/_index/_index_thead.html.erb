@@ -1,8 +1,9 @@
-<th><%= Wechat::Template.human_attribute_name(:template_id) %></th>
-<th><%= Wechat::Template.human_attribute_name(:title) %></th>
 <th>
+  <p><%= Wechat::Template.human_attribute_name(:title) %></p>
+  <p class="has-text-grey"><%= Wechat::Template.human_attribute_name(:template_id) %></p>
+</th>
+<th style="width: 40%">
   <p><%= Wechat::Template.human_attribute_name(:content) %></p>
   <p><%= Wechat::Template.human_attribute_name(:example) %></p>
 </th>
-<th><%= Wechat::Template.human_attribute_name(:template_type) %></th>
 <th></th>
