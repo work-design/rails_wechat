@@ -15,8 +15,13 @@ module Wechat
       r
     end
 
+    def data_keys
+      r = RegexpUtil.between('{{', '.D(ATA|ata)}}')
+      content.gsub(r).to_a
+    end
+
     def sync_key_words(app)
-      template = app.api.templates.find { |i| i['template_id'] == tid }
+      template = app.api.templates.find { |i| i['content'] == content }
       if template.blank?
         result = app.api.add_template tid
         binding.b
@@ -26,7 +31,6 @@ module Wechat
       end
 
       return if content.blank?
-      data_keys = Template.new(content: content).data_keys
       data_keys.each do |key|
         tkw = template_key_words.find_or_initialize_by(name: key)
         tkw.save
