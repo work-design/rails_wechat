@@ -14,14 +14,12 @@ module Wechat
       r
     end
 
-    def sync_to_wechat
-      return if content.present?
-      r = app.api.add_template(template_config.tid, template_config.kid_list)
+    def sync_to_wechat(app)
+      r = app.api.add_template(tid, kid_list)
       if r['errcode'] == 0
         self.template_id = r['priTmplId'] || r['template_id']
       else
         logger.debug("  Error is #{r['errmsg']}  ")
-        return
       end
     end
 

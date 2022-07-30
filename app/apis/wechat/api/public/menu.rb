@@ -31,7 +31,7 @@ module Wechat::Api
       r['template_list']
     end
 
-    def add_template(template_id_short, _ = nil)
+    def add_template(template_id_short)
       post 'template/api_add_template', template_id_short: template_id_short, base: BASE
     end
 
