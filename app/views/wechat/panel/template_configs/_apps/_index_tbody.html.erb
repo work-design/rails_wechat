@@ -5,17 +5,14 @@
   </p>
   <p class="has-text-grey"><%= model.organ&.name %></p>
 </td>
+<td><%= model.appid %></td>
 <td>
-  <%= content_tag :dl do %>
-    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::App.human_attribute_name(:appid) %></dt>
-    <dd><%= model.appid %></dd>
-  <% end if model.appid.present? %>
-  <%= content_tag :dl do %>
-    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::App.human_attribute_name(:mch_id) %></dt>
-    <dd><%= model.mch_id %></dd>
-  <% end if model.mch_id.present? %>
-  <%= content_tag :dl do %>
-    <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::App.human_attribute_name(:serial_no) %></dt>
-    <dd><%= model.serial_no %></dd>
-  <% end if model.serial_no.present? %>
+<% if @appids.include?(model.appid) %>
+  <span class="tag is-success">已开通</span>
+<% else %>
+  <%= button_to({ action: 'sync' }, params: { appid: model.appid }, class: 'button is-small is-rounded is-danger') do %>
+    <i class="fa-regular fa-rotate"></i>
+    <span class="pl-1">开通</span>
+  <% end %>
+<% end %>
 </td>
