@@ -13,3 +13,9 @@
   <p><time data-controller="time" class="<%= model.expire_at && model.expire_at < Time.current ? 'has-text-danger' : 'has-text-success' %>"><%= model.expire_at&.to_fs(:iso8601) %></time></p>
 </td>
 <td></td>
+<td>
+  <%= link_to({ controller: 'wechat_users', scene_id: model.id }, aria: { label: t('wechat.in.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
+    <i class="fa-light fa-users"></i>
+    <span class="pl-1"><%= model.tag.user_tags.size %></span>
+  <% end if model.tag %>
+</td>

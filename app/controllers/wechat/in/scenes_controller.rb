@@ -7,7 +7,7 @@ module Wechat
       q_params = {}
       q_params.merge! default_params
 
-      @scenes = @app.scenes.includes(:tag).default_where(q_params).order(id: :desc).page(params[:page])
+      @scenes = @app.scenes.includes(tag: :user_tags).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def new
