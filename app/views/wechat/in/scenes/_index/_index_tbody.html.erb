@@ -1,6 +1,6 @@
 <td>
   <div class="is-several">
-    <% if model.app.is_a?(Wechat::ProgramApp) %>
+    <% if @app.is_a?(Wechat::ProgramApp) %>
       <%= image_tag model.qrcode_url, class: 'image is-32x32' if model.qrcode_url.present? %>
     <% else %>
       <%= image_tag model.qrcode_data_url, class: 'image is-32x32' if model.qrcode_data_url.present? %>
