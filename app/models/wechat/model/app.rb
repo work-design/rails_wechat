@@ -41,7 +41,7 @@ module Wechat
 
       has_one :agency, primary_key: :appid, foreign_key: :appid
       has_many :agencies, primary_key: :appid, foreign_key: :appid
-      has_many :scenes, primary_key: :appid, foreign_key: :appid
+      has_many :scenes, primary_key: :appid, foreign_key: :appid, inverse_of: :app
       has_many :tags, primary_key: :appid, foreign_key: :appid
       has_many :templates, primary_key: :appid, foreign_key: :appid
 
