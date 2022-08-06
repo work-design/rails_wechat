@@ -1,3 +1,6 @@
 <th><%= Wechat::App.human_attribute_name(:type) %></th>
-<th><%= Wechat::App.human_attribute_name(:name) %></th>
-<th></th>
+<th>
+  <p><%= Wechat::App.human_attribute_name(:name) %></p>
+  <p class="has-text-grey"><%= Wechat::App.human_attribute_name(:appid) %></p>
+</th>
+<th><%= Wechat::App.human_attribute_name(:agentid) %></th>
