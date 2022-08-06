@@ -4,16 +4,17 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :appid, :string
+      attribute :appid, :string, index: true
       attribute :name, :string
       attribute :count, :integer, default: 0
       attribute :user_tags_count, :integer, default: 0
       attribute :tag_id, :integer
 
       belongs_to :tagging, polymorphic: true, optional: true
-      belongs_to :app, foreign_key: :appid, primary_key: :appid
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :user_tag, optional: true
-      has_many :user_tags, ->(o){ where(tag_name: o.name) }, primary_key: :appid, foreign_key: :appid, dependent: :destroy_async
+
+      has_many :user_tags, ->(o){ where(appid: o.appid) }, primary_key: :name, foreign_key: :tag_name, dependent: :destroy_async
       has_many :wechat_users, through: :user_tags
       has_many :requests, ->(o){ where(type: ['Wechat::ScanRequest', 'Wechat::SubscribeRequest'], body: o.name).order(id: :desc) }, foreign_key: :appid, primary_key: :appid
 
