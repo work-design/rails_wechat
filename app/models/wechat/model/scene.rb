@@ -14,8 +14,8 @@ module Wechat
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
-      belongs_to :response, ->(o){ where(match_value: o.match_value) }, foreign_key: :appid, primary_key: :appid
-      belongs_to :tag, ->(o){ where(name: o.match_value) }, foreign_key: :appid, primary_key: :appid
+      belongs_to :response, ->(o){ where(appid: o.appid) }, foreign_key: :match_value, primary_key: :match_value
+      belongs_to :tag, ->(o){ where(appid: o.appid) }, foreign_key: :match_value, primary_key: :name
 
       has_many :app_menus, ->(o){ where(appid: o.appid) }, dependent: :destroy_async
       has_many :menus, -> { roots }, through: :app_menus
