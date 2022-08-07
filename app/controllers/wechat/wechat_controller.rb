@@ -19,11 +19,9 @@ module Wechat
     end
 
     def login
-      @scene = Scene.find_or_initialize_by(appid: current_wechat_app.appid, match_value: "session_#{session.id}")
+      @scene = current_wechat_app.scenes.find_or_initialize_by(match_value: "session_#{session.id}")
       @scene.expire_seconds ||= 600 # 默认600秒有效
-      @scene.organ_id = current_wechat_app.organ_id
       @scene.save
-      @scene
     end
 
     def friend
