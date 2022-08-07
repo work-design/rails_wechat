@@ -11,6 +11,12 @@ module Wechat
       attribute :appid, :string, index: true
       attribute :menu_id, :string
 
+      enum aim: {
+        login: 'login',
+        invite: 'invite',
+        unknown: 'unknown'
+      }, _default: 'unknown', _prefix: true
+
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid

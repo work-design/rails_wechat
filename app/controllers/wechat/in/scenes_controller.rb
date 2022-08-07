@@ -4,7 +4,9 @@ module Wechat
     before_action :set_scene, only: [:show, :edit, :update, :destroy]
 
     def index
-      q_params = {}
+      q_params = {
+        aim: ['invite', 'unknown']
+      }
       q_params.merge! default_params
 
       @scenes = @app.scenes.includes(:response, tag: :user_tags).default_where(q_params).order(id: :desc).page(params[:page])
