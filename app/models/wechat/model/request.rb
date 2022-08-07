@@ -79,7 +79,12 @@ module Wechat
       elsif wechat_user.user.blank?
         title = '请绑定'
         description = '绑定已有账号或注册新账号'
-        url = Rails.application.routes.url_for(controller: 'auth/sign', action: 'sign', uid: open_id, host: app.host)
+        url = Rails.application.routes.url_for(
+          controller: 'auth/sign',
+          action: 'bind',
+          uid: open_id,
+          host: app.host
+        )
       else
         title = '欢迎您'
         description = '开始使用'
