@@ -14,12 +14,23 @@ module Wechat
     end
 
     def login_user
-      r = body.delete_prefix!('session_')
+      session_str, url = body.split('@')
+      session = session_str.delete_prefix!('session_')
+      url_options = URI(url)
+      url = Rails.application.routes.url_for(
+        controller: '/auth/sign',
+        action: 'sign',
+        uid: wechat_user.uid,
+        host: url_options.host,
+        protocol: url_options.scheme,
+        port: url_options.port
+      )
+
       auth_token = wechat_user.authorized_tokens.valid.first || wechat_user.account&.authorized_tokens&.valid&.first
       if auth_token
-        Com::SessionChannel.broadcast_to r, auth_token: auth_token.token
+        Com::SessionChannel.broadcast_to session, auth_token: auth_token.token
       else
-        Com::SessionChannel.broadcast_to r, url: Rails.application.routes.url_for(controller: '/auth/sign', action: 'sign', uid: wechat_user.uid)
+        Com::SessionChannel.broadcast_to session, url: url
       end
     end
 
