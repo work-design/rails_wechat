@@ -18,8 +18,8 @@ module Wechat
       session = session_str.delete_prefix!('session_')
       url_options = URI(url)
       url = Rails.application.routes.url_for(
-        controller: '/auth/sign',
-        action: 'sign',
+        controller: 'auth/sign',
+        action: 'bind',
         uid: wechat_user.uid,
         host: url_options.host,
         protocol: url_options.scheme,
