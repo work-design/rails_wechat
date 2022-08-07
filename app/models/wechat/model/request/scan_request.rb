@@ -26,9 +26,8 @@ module Wechat
         port: url_options.port
       )
 
-      auth_token = wechat_user.auth_token
-      if auth_token
-        Com::SessionChannel.broadcast_to session, auth_token: auth_token
+      if wechat_user.user
+        Com::SessionChannel.broadcast_to session, auth_token: wechat_user.auth_token
       else
         Com::SessionChannel.broadcast_to session, url: url
       end
