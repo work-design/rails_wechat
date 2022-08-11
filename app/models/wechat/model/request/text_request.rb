@@ -12,7 +12,7 @@ module Wechat
 
     def reply_from_rule
       filtered = RailsWechat.config.rules.find do |_, rule|
-        rule[:msg_type] == 'text' && rule[:body] && rule[:body].match?(self.body)
+        Array(rule[:msg_type]).include?('text') && rule[:body] && rule[:body].match?(self.body)
       end
 
       filtered[1][:proc].call(self) if filtered.present?

@@ -39,14 +39,6 @@ module Wechat
       self.body = self.event_key
     end
 
-    def rule_tag
-      {
-        msg_type: msg_type,
-        event: event&.downcase,
-        event_key: event_key
-      }.compact
-    end
-
     def reply_params
       params = reply_params_detail
 
@@ -99,9 +91,11 @@ module Wechat
 
     def reply_from_rule
       filtered = RailsWechat.config.rules.find do |_, rule|
-        if rule.slice(:msg_type, :event, :event_key) <= self.rule_tag && rule[:body]
-          rule[:body].match? self.body
-        end
+        Array(rule[:msg_type]).include?(msg_type) &&
+          Array(rule[:event]).include?(event&.downcase) &&
+          rule.slice(:event, :event_key) <= self.rule_tag &&
+          rule[:body] &&
+          rule[:body].match?(self.body)
       end
 
       if filtered.present?
