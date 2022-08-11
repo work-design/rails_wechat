@@ -16,19 +16,6 @@ module RailsWechat
     config.email_domain = 'mail.work.design'
     config.suite_id = ''
     config.rules = ActiveSupport::OrderedOptions.new
-    config.rules.xx = {
-      msg_type: 'text',
-      proc: ->(request) {
-        if request.wechat_user.user.nil?
-          value = '请绑定账号，输入"绑定"根据提示操作'
-        elsif wechat_user.user.disabled?
-          value = '你的账号已被禁用'
-        else
-          value = ''
-        end
-        Wechat::TextReply.new value: value
-      }
-    }
     config.rules.a = {
       msg_type: 'event',
       event: 'templatesendjobfinish',
@@ -41,8 +28,8 @@ module RailsWechat
     config.rules.b = { msg_type: 'event', event: 'click', body: 'bind', proc: bind_proc }
     config.rules.b1 = { msg_type: 'event', event: ['subscribe', 'scan'], body: /^invite_by_/, proc: bind_proc }
     config.rules.b2 = { msg_type: 'event', event: ['subscribe', 'scan'], body: /^invite_member_/, proc: bind_proc }
-    config.rules.b0 = { msg_type: 'text', body: '绑定', proc: bind_proc }
-    config.rules.d = {
+    config.rules.c = { msg_type: 'text', body: '绑定', proc: bind_proc }
+    config.rules.c0 = {
       msg_type: 'text',
       body: '退出',
       proc: ->(request) {
@@ -58,14 +45,14 @@ module RailsWechat
         )
       }
     }
-    config.rules.e = {
+    config.rules.c1 = {
       msg_type: 'text',
       body: 'TESTCOMPONENT_MSG_TYPE_TEXT',
       proc: ->(request) {
         Wechat::TextReply.new(value: 'TESTCOMPONENT_MSG_TYPE_TEXT_callback')
       }
     }
-    config.rules.f = {
+    config.rules.c2 = {
       msg_type: 'text',
       body: /QUERY_AUTH_CODE:/,
       proc: ->(request) {
