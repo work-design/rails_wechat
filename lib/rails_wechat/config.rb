@@ -25,6 +25,7 @@ module RailsWechat
     config.rules.b = { msg_type: 'event', event: 'click', body: 'bind', proc: bind_proc }
     config.rules.b1 = { msg_type: 'event', event: ['subscribe', 'scan'], body: /^invite_by_/, proc: bind_proc }
     config.rules.b2 = { msg_type: 'event', event: ['subscribe', 'scan'], body: /^invite_member_/, proc: bind_proc }
+    config.rules.b3 = { msg_type: 'event', event: ['subscribe', 'scan'], proc: bind_proc }
     config.rules.c = { msg_type: 'text', body: '绑定', proc: bind_proc }
     config.rules.c0 = {
       msg_type: 'text',
