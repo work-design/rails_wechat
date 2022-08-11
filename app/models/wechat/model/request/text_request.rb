@@ -10,13 +10,5 @@ module Wechat
       res.invoke_effect(self) if res
     end
 
-    def reply_from_rule
-      filtered = RailsWechat.config.rules.find do |_, rule|
-        Array(rule[:msg_type]).include?('text') && rule[:body] && rule[:body].match?(self.body)
-      end
-
-      filtered[1][:proc].call(self) if filtered.present?
-    end
-
   end
 end

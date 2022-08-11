@@ -89,24 +89,6 @@ module Wechat
       [title, description, url]
     end
 
-    def reply_from_rule
-      filtered = RailsWechat.config.rules.find do |_, rule|
-        Array(rule[:msg_type]).include?(msg_type) &&
-          Array(rule[:event]).include?(event&.downcase) &&
-          rule.slice(:event, :event_key) <= self.rule_tag &&
-          rule[:body] &&
-          rule[:body].match?(self.body)
-      end
-
-      if filtered.present?
-        logger.debug "\e[35m  Filter Key: #{filtered[1]}  \e[0m"
-        r = filtered[1][:proc].call(self)
-        if r.has_content?
-          r
-        end
-      end
-    end
-
     def reply_from_response
       if body.present?
         res = responses.find_by(match_value: body)
@@ -146,6 +128,16 @@ module Wechat
       if user_tag.new_record?
         self.init_user_tag = true
       end
+    end
+
+    def reply_from_rule
+      filtered = RailsWechat.config.rules.find do |_, rule|
+        Array(rule[:msg_type]).include?(msg_type) &&
+          (rule[:event].blank? || Array(rule[:event]).include?(event&.downcase)) &&
+          (rule[:body].blank? || rule[:body].match?(self.body))
+      end
+
+      filtered[1][:proc].call(self) if filtered.present?
     end
 
     def get_reply!

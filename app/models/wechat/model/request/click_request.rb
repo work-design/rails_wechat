@@ -7,15 +7,5 @@ module Wechat
       self.body = self.event_key
     end
 
-    def reply_from_rule
-      filtered = RailsWechat.config.rules.find do |_, rule|
-        Array(rule[:msg_type]).include?(msg_type) &&
-          Array(rule[:event]).include?(event&.downcase) &&
-          rule[:body].match?(self.body)
-      end
-
-      filtered[1][:proc].call(self) if filtered.present?
-    end
-
   end
 end
