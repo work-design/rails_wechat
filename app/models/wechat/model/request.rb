@@ -67,7 +67,7 @@ module Wechat
       elsif ['Wechat::PublicApp'].include?(app.type) && wechat_user.attributes['name'].blank?
         title = '授权您的信息（微信昵称，头像）'
         description = '您的信息将被用于个人中心的用户展示'
-        url = app.oauth2_url
+        url = app.oauth2_url(state: app.base64_state(uid: open_id))
       elsif wechat_user.user.blank?
         title = '请绑定'
         description = '绑定已有账号或注册新账号'

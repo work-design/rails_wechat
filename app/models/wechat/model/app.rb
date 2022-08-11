@@ -160,6 +160,11 @@ module Wechat
       end
     end
 
+    def base64_state(host: self.host, controller_path: 'auth/sign', action_name: 'bind', method: 'get', **params)
+      state = "#{host}##{controller_path}##{action_name}##{method}##{params.to_query}"
+      Base64.urlsafe_encode64(state)
+    end
+
     def sync_templates
       puts 'should implement in sub models'
     end
