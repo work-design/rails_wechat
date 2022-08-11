@@ -3,9 +3,6 @@ module RailsWechat
   bind_proc = ->(request) {
     Wechat::NewsReply.new(request.reply_params)
   }
-  auto_join = ->(request) {
-
-  }
 
   configure do |config|
     config.httpx = {
