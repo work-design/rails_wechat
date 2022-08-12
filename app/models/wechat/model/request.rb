@@ -39,20 +39,19 @@ module Wechat
       self.body = self.event_key
     end
 
-    def reply_params
-      params = reply_params_detail
-
-      {
+    def reply_params(title:, description:, url:)
+      r = {
         appid: appid,
         news_reply_items_attributes: [
           {
-            title: params[0],
-            description: params[1],
-            url: params[2],
+            title: title,
+            description: description,
+            url: url,
             raw_pic_url: ApplicationController.helpers.image_path('logo_avatar.png', protocol: 'https')
           }
         ]
       }
+      Wechat::NewsReply.new(r)
     end
 
     def reply_params_detail
@@ -65,18 +64,9 @@ module Wechat
           description = '您还未完成注册，请点击链接完成'
         end
       elsif ['Wechat::PublicApp'].include?(app.type) && wechat_user.attributes['name'].blank?
-        title = '授权您的信息（微信昵称，头像）'
-        description = '您的信息将被用于个人中心的用户展示'
-        url = app.oauth2_url(state: app.base64_state(uid: open_id))
+
       elsif wechat_user.user.blank?
-        title = '请绑定'
-        description = '绑定已有账号或注册新账号'
-        url = Rails.application.routes.url_for(
-          controller: 'auth/sign',
-          action: 'bind',
-          uid: open_id,
-          host: app.host
-        )
+
       else
         title = '欢迎您'
         description = '开始使用'
@@ -87,6 +77,24 @@ module Wechat
       end
 
       [title, description, url]
+    end
+
+    def reply_for_blank_info
+      return if wechat_user.attributes['name'].present?
+      reply_params(
+        title: '授权信息（微信昵称，头像）',
+        description: '相关信息将用于您个人中心的用户展示',
+        url: app.oauth2_url(state: app.base64_state(uid: open_id))
+      )
+    end
+
+    def reply_for_blank_user
+      return if wechat_user.user
+      reply_params(
+        title: wechat_user.attributes['name'].present? ? "您好，#{wechat_user.attributes['name']}" : '您好',
+        description: '请绑定已有账号或注册新账号',
+        url: Rails.application.routes.url_for(controller: 'auth/sign', action: 'bind', uid: open_id, host: app.host)
+      )
     end
 
     def reply_from_response
@@ -146,7 +154,7 @@ module Wechat
     end
 
     def get_reply
-      reply = reply_from_rule || reply_from_response
+      reply = reply_from_rule || reply_from_response || reply_for_blank_info || reply_for_blank_user
 
       if reply.is_a?(Reply)
         self.reply_body = reply.to_wechat
