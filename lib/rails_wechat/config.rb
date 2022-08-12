@@ -1,8 +1,5 @@
 module RailsWechat
   include ActiveSupport::Configurable
-  bind_proc = ->(request) {
-    Wechat::NewsReply.new(request.reply_params)
-  }
 
   configure do |config|
     config.httpx = {
@@ -22,15 +19,22 @@ module RailsWechat
         Wechat::TextReply.new(value: 'SUCCESS')
       }
     }
-    config.rules.b = { msg_type: 'event', event: 'click', body: 'bind', proc: bind_proc }
-    config.rules.b1 = { msg_type: 'event', event: ['subscribe', 'scan'], body: /^invite_by_/, proc: bind_proc }
-    config.rules.b2 = { msg_type: 'event', event: ['subscribe', 'scan'], body: /^invite_member_/, proc: bind_proc }
+    config.rules.b = {
+      msg_type: 'event',
+      event: 'click',
+      body: 'bind',
+      proc: ->(request) { request.reply_for_blank_info }
+    }
+    config.rules.b2 = {
+      msg_type: 'event',
+      event: ['subscribe', 'scan'],
+      body: /^invite_(member|by)_/,
+      proc: ->(request) { request.reply_for_blank_info }
+    }
     config.rules.c1 = {
       msg_type: 'text',
       body: 'TESTCOMPONENT_MSG_TYPE_TEXT',
-      proc: ->(request) {
-        Wechat::TextReply.new(value: 'TESTCOMPONENT_MSG_TYPE_TEXT_callback')
-      }
+      proc: ->(request) { Wechat::TextReply.new(value: 'TESTCOMPONENT_MSG_TYPE_TEXT_callback') }
     }
     config.rules.c2 = {
       msg_type: 'text',
