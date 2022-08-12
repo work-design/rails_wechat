@@ -146,11 +146,7 @@ module Wechat
     end
 
     def get_reply
-      reply = reply_from_rule
-      unless reply
-        self.created_at ||= Time.current  # for extractor
-        reply = reply_from_response
-      end
+      reply = reply_from_rule || reply_from_response
 
       if reply.is_a?(Reply)
         self.reply_body = reply.to_wechat
