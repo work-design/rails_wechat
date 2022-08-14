@@ -1,11 +1,3 @@
-<%= button_to({ action: 'destroy', id: model.id }, method: :delete, class: 'has-text-danger', form: { data: { turbo_confirm: t('.confirm') }, class: 'weui-actionsheet__cell weui-actionsheet__cell_warn' }) do %>
-  <i class="fa-solid fa-trash"></i>
-  <span><%= t('.destroy') %></span>
-<% end %>
-<%= link_to({ action: 'edit', id: model.id }, class: 'weui-actionsheet__cell') do %>
-  <i class="fa-solid fa-pencil"></i>
-  <span><%= t('.edit') %></span>
-<% end %>
 <%= link_to({ controller: 'crm/admin/maintains', action: 'show', id: model.id }, class: 'weui-actionsheet__cell') do %>
   <i class="fa-solid fa-circle-info"></i>
   <span><%= t('.show') %></span>
