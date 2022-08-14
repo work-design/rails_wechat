@@ -12,6 +12,7 @@ module Wechat
       attribute :add_way, :string
       attribute :corp_id, :string
       attribute :external_userid, :string
+      attribute :remark_mobiles, :json, default: []
 
       belongs_to :corp_user, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Wechat::CorpUser', foreign_key: :userid, primary_key: :user_id, counter_cache: :follows_count, optional: true
 

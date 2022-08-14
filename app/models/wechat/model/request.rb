@@ -80,7 +80,7 @@ module Wechat
     end
 
     def reply_for_blank_info
-      return if wechat_user.attributes['name'].present?
+      return if wechat_user.attributes['name'].present? || !app.oauth_enable
       reply_params(
         title: '授权信息（微信昵称，头像）',
         description: '相关信息将用于您个人中心的用户展示',
