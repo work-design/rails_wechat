@@ -23,7 +23,7 @@ module RailsWechat
       msg_type: 'event',
       event: 'click',
       body: 'bind',
-      proc: ->(request) { request.reply_for_blank_info }
+      proc: ->(request) { request.reply_for_user }
     }
     config.rules.b2 = {
       msg_type: 'event',
