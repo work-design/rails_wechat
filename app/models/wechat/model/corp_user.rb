@@ -33,10 +33,9 @@ module Wechat
       has_one :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity
       has_one :user, class_name: 'Auth::User', through: :account
 
-      has_many :maintains, through: :member
       has_many :contacts, ->(o){ where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :user_id, primary_key: :user_id
-      has_many :follows, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :userid, primary_key: :user_id
-      has_many :externals, through: :follows, source: :client, source_type: 'Wechat::External'
+      has_many :maintains, ->(o){ where(corp_id: o.corp_id) }, class_name: 'Crm::Maintain', foreign_key: :userid, primary_key: :user_id
+      has_many :clients, through: :maintains
 
       validates :identity, presence: true
 
@@ -123,17 +122,10 @@ module Wechat
       list = r.fetch('external_contact_list', [])
       fs = list.map do |item|
         contact = item.fetch('external_contact', {})
-        external = External.find_or_initialize_by(external_userid: contact['external_userid'])
-        external.external_type = contact['type']
-        external.nick_name = contact['name']
-        external.avatar_url = contact['avatar']
-        external.assign_attributes contact.slice('position', 'corp_name', 'corp_full_name', 'unionid')
+        external = init_external(contact)
 
         info = item.fetch('follow_info', {})
-        follow = follows.find_or_initialize_by(external_userid: contact['external_userid'])
-        follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way', 'remark_mobiles')
-        follow.note = info['description']
-        follow.member_id = member.id
+        follow = init_follow(contact['external_userid'], info)
         follow.client = external
         follow
       end
@@ -152,18 +144,12 @@ module Wechat
       return unless r['errcode'] == 0
 
       item = r.fetch('external_contact', {})
+      external = init_external(item)
+
       follow_infos = r.fetch('follow_user', [])
-
-      external = External.find_or_initialize_by(external_userid: item['external_userid'])
-      external.external_type = item['type']
-      external.assign_attributes item.slice('name', 'avatar', 'gender', 'unionid', 'position')
-
       info = follow_infos.find(&->(i){ i['userid'] == user_id })
       if info
-        follow = follows.find_or_initialize_by(external_userid: item['external_userid'])
-        follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way', 'remark_mobiles')
-        follow.note = info['description']
-        follow.member_id = member.id
+        follow = init_follow(item['external_userid'], info)
         follow.client = external
 
         self.class.transaction do
@@ -175,6 +161,24 @@ module Wechat
       end
 
       external
+    end
+
+    def init_external(contact)
+      external = Profiled::Profile.find_or_initialize_by(external_userid: contact['external_userid'])
+      external.external_type = contact['type']
+      external.nick_name = contact['name']
+      external.avatar_url = contact['avatar']
+      external.gender = GENDER[contact['gender']]
+      external.assign_attributes contact.slice('position', 'corp_name', 'corp_full_name', 'unionid')
+      external
+    end
+
+    def init_follow(external_userid, info)
+      follow = maintains.find_or_initialize_by(external_userid: external_userid)
+      follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way', 'remark_mobiles')
+      follow.note = info['description']
+      follow.member_id = member.id
+      follow
     end
 
   end
