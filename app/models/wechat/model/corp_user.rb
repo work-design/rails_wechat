@@ -1,5 +1,10 @@
 module Wechat
   module Model::CorpUser
+    GENDER = {
+      '0' => 'unknown',
+      '1' => 'male',
+      '2' => 'female'
+    }
     extend ActiveSupport::Concern
 
     included do
@@ -120,7 +125,9 @@ module Wechat
         contact = item.fetch('external_contact', {})
         external = External.find_or_initialize_by(external_userid: contact['external_userid'])
         external.external_type = contact['type']
-        external.assign_attributes contact.slice('name', 'position', 'avatar', 'corp_name', 'corp_full_name', 'gender', 'unionid')
+        external.nick_name = contact['name']
+        external.avatar_url = contact['avatar']
+        external.assign_attributes contact.slice('position', 'corp_name', 'corp_full_name', 'unionid')
 
         info = item.fetch('follow_info', {})
         follow = follows.find_or_initialize_by(external_userid: contact['external_userid'])
