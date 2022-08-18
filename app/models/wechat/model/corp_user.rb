@@ -1,9 +1,9 @@
 module Wechat
   module Model::CorpUser
     GENDER = {
-      '0' => 'unknown',
-      '1' => 'male',
-      '2' => 'female'
+      0 => 'unknown',
+      1 => 'male',
+      2 => 'female'
     }
     extend ActiveSupport::Concern
 
