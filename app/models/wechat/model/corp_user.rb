@@ -34,7 +34,7 @@ module Wechat
       has_one :user, class_name: 'Auth::User', through: :account
 
       has_many :contacts, ->(o){ where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :user_id, primary_key: :user_id
-      has_many :maintains, ->(o){ where(corp_id: o.corp_id, organ_id: o.organ_id) }, class_name: 'Crm::Maintain', foreign_key: :userid, primary_key: :user_id
+      has_many :maintains, through: :member
       has_many :clients, through: :maintains
 
       validates :identity, presence: true
@@ -174,7 +174,7 @@ module Wechat
     end
 
     def init_follow(external_userid, info)
-      follow = maintains.find_or_initialize_by(external_userid: external_userid)
+      follow = member.maintains.find_or_initialize_by(external_userid: external_userid)
       follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way', 'remark_mobiles')
       follow.note = info['description']
       follow.member_id = member.id
