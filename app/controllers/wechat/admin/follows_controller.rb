@@ -7,7 +7,7 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit(:state, :userid)
 
-      @follows = @corp_user.follows.includes(:client).page(params[:page])
+      @follows = @corp_user.maintains.includes(:client).page(params[:page])
     end
 
     def sync
@@ -20,7 +20,7 @@ module Wechat
     end
 
     def set_follow
-      @follow = @corp_user.follows.find params[:id]
+      @follow = @corp_user.maintains.find params[:id]
     end
 
   end
