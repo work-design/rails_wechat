@@ -16,6 +16,7 @@ module Wechat
       attribute :open_userid, :string
       attribute :open_id, :string
       attribute :identity, :string
+      attribute :temp_identity, :string
       attribute :name, :string
       attribute :gender, :string
       attribute :avatar_url, :string
@@ -29,7 +30,9 @@ module Wechat
       belongs_to :app, foreign_key: :corp_id, primary_key: :appid, optional: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
-      has_one :member, ->(o){ where(organ_id: o.organ_id) }, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity
+      belongs_to :member, ->(o){ where(organ_id: o.organ_id) }, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity
+      belongs_to :temp_member, ->(o){ where(organ_id: o.organ_id) }, class_name: 'Org::Member', foreign_key: :temp_identity, primary_key: :identity
+      belongs_to :temp_account, class_name: 'Auth::Account', foreign_key: :temp_identity, primary_key: :identity
       has_one :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity
       has_one :user, class_name: 'Auth::User', through: :account
 
@@ -46,11 +49,8 @@ module Wechat
       after_create_commit :sync_externals_later
     end
 
-    def temp_identity
-      [corp_id, user_id].join('-')
-    end
-
     def sync_identity
+      self.temp_identity = [corp_id, user_id].join('-')
       self.identity = identity.presence || temp_identity
     end
 
@@ -59,7 +59,6 @@ module Wechat
       if identity.include?('-')
         build_account(type: 'Auth::ThirdpartyAccount')
       else
-        temp_account = ::Auth::Account.find_by(identity: temp_identity)
         if temp_account
           temp_account.type = 'Auth::MobileAccount'
           temp_account.identity = self.identity
@@ -80,7 +79,6 @@ module Wechat
       return if member
       return unless corp || organ
       if organ
-        temp_member = organ.members.find_by(identity: temp_identity)
         if temp_member
           temp_member.identity = self.identity
           temp_member.save
