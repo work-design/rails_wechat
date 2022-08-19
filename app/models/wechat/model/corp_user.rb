@@ -31,8 +31,6 @@ module Wechat
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
       has_one :member, ->(o){ where(organ_id: o.organ_id) }, class_name: 'Org::Member', primary_key: :identity, foreign_key: :identity
-      has_one :temp_member, ->(o){ where(organ_id: o.organ_id) }, class_name: 'Org::Member', primary_key: :temp_identity, foreign_key: :identity
-      has_one :temp_account, class_name: 'Auth::Account', primary_key: :temp_identity, foreign_key: :identity
       has_one :account, class_name: 'Auth::Account', primary_key: :identity, foreign_key: :identity
       has_one :user, class_name: 'Auth::User', through: :account
 
@@ -60,6 +58,7 @@ module Wechat
       if identity.include?('-')
         build_account(type: 'Auth::ThirdpartyAccount')
       else
+        temp_account = ::Auth::Account.find_by(identity: temp_identity)
         if temp_account
           temp_account.type = 'Auth::MobileAccount'
           temp_account.identity = self.identity
@@ -79,6 +78,7 @@ module Wechat
       return if member
       return unless corp || organ
       if organ
+        temp_member = organ.members.find_by(identity: temp_identity)
         if temp_member
           temp_member.identity = self.identity
           temp_member.save
