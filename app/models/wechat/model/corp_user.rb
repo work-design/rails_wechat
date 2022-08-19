@@ -42,6 +42,7 @@ module Wechat
 
       validates :identity, presence: true
 
+      after_initialize :sync_identity, if: :new_record?
       before_validation :sync_identity, if: -> { user_id_changed? }
       before_validation :init_account, if: -> { identity_changed? }
       before_validation :init_corp, if: -> { suite_id.present? && suite_id_changed? }
@@ -94,7 +95,7 @@ module Wechat
     end
 
     def temp?
-      persisted? && temp_identity == identity
+      temp_identity == identity
     end
 
     def get_detail_by_suite
