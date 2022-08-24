@@ -11,7 +11,7 @@
   <p>
     <%= model.mobile %>
     <%= link_to code_admin_register_path(model), method: :put, aria: { label: '验证码' }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fa-light fa-paper-plane"></i>
+      <i class="fa-regular fa-paper-plane"></i>
     <% end %>
   </p>
   <p><%= model.mobile_code %></p>
@@ -20,13 +20,13 @@
   <p>
     <%= image_tag model.bind_qrcode, class: 'image is-24x24' if model.bind_qrcode.attached? %>
     <%= link_to bind_admin_register_path(model), aria: { label: t('.bind') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fa-light fa-qrcode"></i>
+      <i class="fa-regular fa-qrcode"></i>
     <% end %>
   </p>
   <p>
     <%= image_tag model.qrcode, class: 'image is-24x24' if model.qrcode.attached? %>
     <%= link_to qrcode_admin_register_path(model), aria: { label: t('.qrcode') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fa-light fa-qrcode"></i>
+      <i class="fa-regular fa-qrcode"></i>
     <% end %>
   </p>
 </td>

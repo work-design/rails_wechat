@@ -3,45 +3,45 @@
   <td>
     <div data-show-target="item" style="visibility: hidden">
       <%= link_to({ controller: 'app_menus', app_id: model.id }, aria: { label: t('wechat.admin.menus.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-bars"></i>
+        <i class="fa-regular fa-bars"></i>
       <% end %>
       <%= link_to({ controller: 'responses', app_id: model.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-reply-all"></i>
+        <i class="fa-regular fa-reply-all"></i>
       <% end %>
       <%= link_to({ controller: 'requests', app_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-comments"></i>
+        <i class="fa-regular fa-comments"></i>
       <% end %>
       <%= link_to({ controller: 'tags', app_id: model.id }, aria: { label: t('wechat.admin.tags.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-user-tag"></i>
+        <i class="fa-regular fa-user-tag"></i>
       <% end %>
       <%= link_to({ controller: 'templates', app_id: model.id }, aria: { label: t('wechat.admin.templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-inbox"></i>
+        <i class="fa-regular fa-inbox"></i>
       <% end %>
       <%= link_to({ controller: 'scenes', app_id: model.id }, aria: { label: t('wechat.admin.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-qrcode"></i>
+        <i class="fa-regular fa-qrcode"></i>
       <% end %>
       <%= link_to({ controller: 'corp_users', app_id: model.id }, aria: { label: t('wechat.admin.corp_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-building-user"></i>
+        <i class="fa-regular fa-building-user"></i>
       <% end if ['Wechat::WorkApp'].include?(model.type) %>
     </div>
     <div data-show-target="item" class="mt-1" style="visibility: hidden">
       <%= link_to({ action: 'info', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-cog"></i>
+        <i class="fa-regular fa-cog"></i>
       <% end %>
       <%= link_to({ action: 'edit_pay', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.edit_pay.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-brands fa-amazon-pay"></i>
       <% end %>
       <%= link_to({ action: 'edit_cert', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.edit_cert.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-certificate"></i>
+        <i class="fa-regular fa-certificate"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-circle-info"></i>
+        <i class="fa-regular fa-circle-info"></i>
       <% end %>
       <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-pencil"></i>
+        <i class="fa-regular fa-pencil"></i>
       <% end %>
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-light fa-trash"></i>
+        <i class="fa-regular fa-trash"></i>
       <% end %>
     </div>
   </td>

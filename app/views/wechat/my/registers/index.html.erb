@@ -7,7 +7,7 @@
       <th><%= Wechat::Register.human_attribute_name(:id_number) %></th>
       <th>
         <%= link_to new_my_register_path, class: 'button is-link is-small' do %>
-          <i class="fa-light fa-plus"></i><%= t('.new') %>
+          <i class="fa-regular fa-plus"></i><%= t('.new') %>
         <% end %>
       </th>
     </tr>
@@ -19,13 +19,13 @@
       <td><%= register.id_number %></td>
       <td>
         <%= link_to my_register_path(register), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fa-light fa-circle-info"></i>
+          <i class="fa-regular fa-circle-info"></i>
         <% end %>
         <%= link_to edit_my_register_path(register), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fa-light fa-pencil"></i>
+          <i class="fa-regular fa-pencil"></i>
         <% end %>
         <%= link_to my_register_path(register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fa-light fa-trash"></i>
+          <i class="fa-regular fa-trash"></i>
         <% end %>
       </td>
     </tr>

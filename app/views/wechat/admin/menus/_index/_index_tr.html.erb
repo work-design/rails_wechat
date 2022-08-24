@@ -5,15 +5,15 @@
     <% if model.organ_id == current_organ.id %>
       <% if model.type == 'Wechat::ParentMenu' %>
         <%= link_to({ action: 'edit_parent', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-          <i class="fa-light fa-pencil"></i>
+          <i class="fa-regular fa-pencil"></i>
         <% end %>
       <% else %>
         <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-          <i class="fa-light fa-pencil"></i>
+          <i class="fa-regular fa-pencil"></i>
         <% end %>
       <% end %>
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.confirm') } }) do %>
-        <i class="fa-light fa-trash"></i>
+        <i class="fa-regular fa-trash"></i>
       <% end %>
     <% end %>
     </div>
