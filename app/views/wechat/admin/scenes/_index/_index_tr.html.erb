@@ -2,15 +2,9 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
-      <%= link_to({ controller: 'menus', scene_id: model.id }, aria: { label: t('wechat.into.menus.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'menus', scene_id: model.id }, aria: { label: t('wechat.admin.menus.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-regular fa-bars"></i>
       <% end %>
-      <%= link_to({ controller: 'wechat_users', scene_id: model.id }, aria: { label: t('wechat.into.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-users"></i>
-      <% end if model.tag %>
-      <%= link_to({ controller: 'responses', action: 'show', id: model.response.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-reply-all"></i>
-      <% end if model.response %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-regular fa-circle-info"></i>
       <% end %>
