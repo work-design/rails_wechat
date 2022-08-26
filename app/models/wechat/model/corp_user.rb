@@ -30,8 +30,8 @@ module Wechat
       belongs_to :app, foreign_key: :corp_id, primary_key: :appid, optional: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
-      has_one :member, ->(o){ where(organ_id: o.organ_id) }, class_name: 'Org::Member', primary_key: :identity, foreign_key: :identity
-      has_one :account, class_name: 'Auth::Account', primary_key: :identity, foreign_key: :identity
+      belongs_to :member, ->(o){ where(organ_id: o.organ_id) }, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity, optional: true
+      belongs_to :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity, optional: true
       has_one :user, class_name: 'Auth::User', through: :account
 
       has_many :contacts, ->(o){ where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :user_id, primary_key: :user_id
