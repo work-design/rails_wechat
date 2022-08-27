@@ -45,6 +45,10 @@ module Wechat::Api
       post 'batch/get_by_user', userid_list: [userid], base: BASE, **options
     end
 
+    def remark(userid, external_userid, **options)
+      post 'remark', userid: userid, external_userid: external_userid, base: BASE, **options
+    end
+
   end
 end
 

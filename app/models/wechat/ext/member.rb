@@ -3,6 +3,8 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      belongs_to :corp_user, ->(o) { where(organ_id: o.organ_id) }, class_name: 'Wechat::CorpUser', foreign_key: :identity, primary_key: :identity, optional: true
+
       has_many :wechat_users, class_name: 'Wechat::WechatUser', through: :account, source: :oauth_users
       has_many :program_users, class_name: 'Wechat::ProgramUser', through: :account, source: :oauth_users
       has_many :medias, class_name: 'Wechat::Media'
