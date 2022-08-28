@@ -64,7 +64,7 @@ module Wechat
           temp_account.identity = self.identity
           temp_account.confirmed = true
           temp_account.save
-          self.account = temp_account
+          self.account = temp_account # account 只有当 identity 发生变化时才会 reload
         else
           build_account(type: 'Auth::MobileAccount', confirmed: true)
         end
