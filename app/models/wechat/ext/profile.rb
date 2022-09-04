@@ -24,11 +24,15 @@ module Wechat
     end
 
     def sync_related_task
-      return if users.blank?
+      return if wechat_users.blank?
       self.identity = wechat_users.pluck(:identity).compact[0]
-      self.save
       client_maintains.each do |maintain|
         maintain.sync_user_from_client
+      end
+
+      self.class.transaction do
+        self.save
+        client_maintains.each(&:save)
       end
     end
 
