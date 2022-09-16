@@ -9,7 +9,7 @@ module Wechat
 
     def require_login(return_to: nil)
       return if current_user
-      return super unless request.variant.any?(:wechat)
+      return super if request.variant.include?(:mini_program) || request.variant.exclude?(:wechat)
 
       if current_wechat_user && current_wechat_user.user.nil?
         store_location(return_to)
