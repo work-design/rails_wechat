@@ -1,5 +1,6 @@
 module Wechat
   module Model::Developer
+    include Common
     extend ActiveSupport::Concern
 
     included do
@@ -7,7 +8,6 @@ module Wechat
       attribute :token, :string
       attribute :encoding_aes_key, :string
     end
-
 
   end
 end

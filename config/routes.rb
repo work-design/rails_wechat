@@ -49,7 +49,14 @@ Rails.application.routes.draw do
           get 'redirect/:corp_id' => :redirect
         end
       end
-      resources :developers, only: [:show]
+      resources :developers, only: [:show] do
+        member do
+          get 'callback' => :verify
+          get 'notify' => :verify
+          post :callback
+          post :notify
+        end
+      end
 
       namespace :me, defaults: { namespace: 'me' } do
         resource :corp_users
