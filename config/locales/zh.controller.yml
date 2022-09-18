@@ -107,6 +107,9 @@ zh:
       suites:
         index:
           title: 应用
+      developers:
+        index:
+          title: 代开发
     in:
       title: 平台微信
       apps:
