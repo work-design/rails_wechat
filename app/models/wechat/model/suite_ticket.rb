@@ -3,7 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :suite_id, :string
+      attribute :suiteid, :string
       attribute :ticket_data, :string
       attribute :agent_id, :string
       attribute :message_hash, :json
@@ -11,8 +11,8 @@ module Wechat
       attribute :auth_corp_id, :string
       attribute :user_id, :string
 
-      belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
-      belongs_to :corp_user, ->(o){ where(suite_id: o.suite_id, corp_id: o.auth_corp_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
+      belongs_to :suite, optional: true
+      belongs_to :corp_user, ->(o) { where(suite_id: o.suite_id, corp_id: o.auth_corp_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
 
       before_save :parsed_data
       after_save :sync_suite_ticket, if: -> { ['suite_ticket'].include?(info_type) && saved_change_to_info_type? }

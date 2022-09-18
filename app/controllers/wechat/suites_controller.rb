@@ -6,11 +6,11 @@ module Wechat
 
     # 指令回调URL: /wechat/suites/:id/notify
     def notify
-      @suite_ticket = SuiteTicket.new
+      @suite_ticket = @suite.suite_tickets.build
       r = Hash.from_xml(request.raw_post)['xml']
       logger.debug "\e[35m  body is: #{r}  \e[0m"
 
-      @suite_ticket.suite_id = r['ToUserName']
+      @suite_ticket.suiteid = r['ToUserName']
       @suite_ticket.ticket_data = r['Encrypt']
       @suite_ticket.agent_id = r['AgentID']
 

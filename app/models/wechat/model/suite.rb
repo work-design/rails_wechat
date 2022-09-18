@@ -20,7 +20,7 @@ module Wechat
 
       belongs_to :provider, foreign_key: :corp_id, primary_key: :corp_id
 
-      has_many :suite_tickets, foreign_key: :suite_id, primary_key: :suite_id
+      has_many :suite_tickets
       has_many :suite_receives, foreign_key: :suite_id, primary_key: :suite_id
       has_many :corp_users, foreign_key: :suite_id, primary_key: :suite_id
       has_many :corps, foreign_key: :suite_id, primary_key: :suite_id
