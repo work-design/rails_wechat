@@ -3,7 +3,7 @@ module Wechat
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
     before_action :set_provider, only: [:notify, :callback, :login, :auth]
 
-    # 指令回调URL: /wechat/providers/notify
+    # 指令回调URL: POST /wechat/providers/:id/notify
     def notify
       @provider_ticket = ProviderTicket.new(ticket_params)
       r = Hash.from_xml(request.raw_post)['xml']
@@ -20,7 +20,7 @@ module Wechat
       end
     end
 
-    # 消息与事件接收URL: /wechat/providers/:id/callback
+    # 消息与事件接收URL: POST /wechat/providers/:id/callback
     def callback
       r = Hash.from_xml(request.raw_post)['xml']
       @provider_receive = @provider.provider_receives.build

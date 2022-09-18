@@ -49,6 +49,7 @@ Rails.application.routes.draw do
           get 'redirect/:corp_id' => :redirect
         end
       end
+      resources :developers, only: [:show]
 
       namespace :me, defaults: { namespace: 'me' } do
         resource :corp_users
@@ -107,6 +108,7 @@ Rails.application.routes.draw do
             resources :suite_receives
           end
         end
+        resources :developers
       end
 
       namespace :in, defaults: { namespace: 'in' } do

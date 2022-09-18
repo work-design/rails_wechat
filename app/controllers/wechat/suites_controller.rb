@@ -4,7 +4,7 @@ module Wechat
     before_action :set_suite, only: [:verify, :notify, :callback, :login, :redirect]
     before_action :verify_signature, only: [:verify]
 
-    # 指令回调URL: /wechat/providers/notify
+    # 指令回调URL: /wechat/suites/:id/notify
     def notify
       @suite_ticket = SuiteTicket.new
       r = Hash.from_xml(request.raw_post)['xml']
@@ -21,7 +21,7 @@ module Wechat
       end
     end
 
-    # 消息与事件接收URL: /wechat/providers/:id/callback
+    # 消息与事件接收URL: /wechat/suites/:id/callback
     def callback
       r = Hash.from_xml(request.raw_post)['xml']
       @suite_receive = @suite.suite_receives.build
