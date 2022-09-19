@@ -98,8 +98,18 @@ module Wechat
       logger.debug e.message
     end
 
-    def oauth2_url(**url_options)
-      suite.oauth2_url(host: self.host, **url_options)
+    def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
+      url_options.with_defaults! controller: 'wechat/suites', action: 'login', id: id, host: host
+      h = {
+        appid: corp_id,
+        redirect_uri: Rails.application.routes.url_for(**url_options),
+        response_type: 'code',
+        scope: scope,
+        state: state
+      }
+
+      logger.debug "\e[35m  Detail: #{h}  \e[0m"
+      "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
     end
 
     def refresh_access_token
