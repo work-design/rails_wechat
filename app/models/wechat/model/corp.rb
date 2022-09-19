@@ -25,6 +25,7 @@ module Wechat
       attribute :jsapi_ticket_expires_at, :datetime
       attribute :permanent_code, :string
       attribute :suite_id, :string
+      attribute :host, :string
 
       belongs_to :organ, class_name: 'Org::Organ', foreign_key: :corp_id, primary_key: :corp_id, optional: true
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
@@ -35,6 +36,10 @@ module Wechat
       has_many :externals, foreign_key: :corp_id, primary_key: :corp_id
 
       after_validation :init_organ, if: -> { corp_id_changed? }
+    end
+
+    def oauth_enable
+      true
     end
 
     def init_organ
@@ -91,6 +96,10 @@ module Wechat
       js_hash
     rescue => e
       logger.debug e.message
+    end
+
+    def oauth2_url(**url_options)
+      suite.oauth2_url(host: self.host, **url_options)
     end
 
     def refresh_access_token
