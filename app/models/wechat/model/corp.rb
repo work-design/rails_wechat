@@ -98,6 +98,7 @@ module Wechat
       self.access_token = info['access_token']
       self.access_token_expires_at = Time.current + info['expires_in'].to_i if info['access_token'] && self.access_token_changed?
       self.save
+      info
     end
 
     def access_token_valid?
