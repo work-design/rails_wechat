@@ -154,10 +154,11 @@ module Wechat
       url_options.with_defaults! controller: 'wechat/corps', action: 'login', id: id, host: host
       h = {
         appid: corp_id,
-        redirect_uri: Rails.application.routes.url_for(**url_options),
+        redirect_uri: ERB::Util.url_encode(Rails.application.routes.url_for(**url_options)),
         response_type: 'code',
         scope: scope,
-        state: state
+        state: state,
+        agentid: agentid
       }
 
       logger.debug "\e[35m  Detail: #{h}  \e[0m"
