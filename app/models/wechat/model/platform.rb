@@ -16,6 +16,7 @@ module Wechat
 
       has_many :agencies
       has_many :auths
+      has_many :platform_tickets, primary_key: :appid, foreign_key: :appid
       has_many :receives, dependent: :nullify
     end
 

@@ -101,6 +101,7 @@ Rails.application.routes.draw do
         end
         resources :platforms do
           resources :agencies
+          resources :platform_tickets
         end
         resources :contacts
         resources :providers do

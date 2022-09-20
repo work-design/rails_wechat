@@ -6,9 +6,9 @@ module Wechat
     def show
     end
 
-    # 授权事件接收URL: platforms/notice
+    # 授权事件接收URL: platforms/:id/notify
     def notify
-      @ticket = Ticket.new(ticket_params)
+      @ticket = @platform.platform_tickets.build(ticket_params)
       r = Hash.from_xml(request.raw_post)['xml']
       @ticket.appid = r['AppId']
       @ticket.ticket_data = r['Encrypt']
