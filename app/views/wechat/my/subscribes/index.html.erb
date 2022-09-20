@@ -23,13 +23,13 @@
       <td><%= subscribe.sending_at %></td>
       <td>
         <%= link_to my_subscribe_path(subscribe), aria: { label: t('.show') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fa-regular fa-circle-info"></i>
+          <i class="fa-solid fa-circle-info"></i>
         <% end %>
         <%= link_to edit_my_subscribe_path(subscribe), aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fa-regular fa-pencil"></i>
+          <i class="fa-solid fa-pencil"></i>
         <% end %>
         <%= link_to my_subscribe_path(subscribe), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fa-regular fa-trash"></i>
+          <i class="fa-solid fa-trash"></i>
         <% end %>
       </td>
     </tr>

@@ -9,13 +9,13 @@
         <i class="fa-regular fa-door-open"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-circle-info"></i>
+        <i class="fa-solid fa-circle-info"></i>
       <% end %>
       <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-pencil"></i>
+        <i class="fa-solid fa-pencil"></i>
       <% end %>
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.confirm') } }) do %>
-        <i class="fa-regular fa-trash"></i>
+        <i class="fa-solid fa-trash"></i>
       <% end %>
     </div>
   </td>
