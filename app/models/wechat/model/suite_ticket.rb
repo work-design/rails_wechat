@@ -16,7 +16,7 @@ module Wechat
 
       before_save :parsed_data
       after_save :sync_suite_ticket, if: -> { ['suite_ticket'].include?(info_type) && saved_change_to_info_type? }
-      after_save :sync_auth_code, if: -> { ['create_auth'].include?(info_type) && saved_change_to_info_type? }
+      after_save :sync_auth_code, if: -> { ['create_auth', 'reset_permanent_code'].include?(info_type) && saved_change_to_info_type? }
       after_create_commit :clean_last, if: -> { ['suite_ticket'].include?(info_type) }
       after_create_commit :deal_contact, if: -> { ['change_external_contact'].include?(info_type) }
     end
