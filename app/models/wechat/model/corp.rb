@@ -81,9 +81,8 @@ module Wechat
     # todo 这个方法跟 work app 下的方法是类似的，后期合并
     def generate_corp_user(code)
       result = api.auth_user(code)
-      logger.debug "\e[35m  getuserinfo: #{result}  \e[0m"
-      corp_user = corp_users.find_or_initialize_by(user_id: result['UserId'])
-      corp_user.device_id = result['DeviceId'] if result['DeviceId'].present?
+      logger.debug "\e[35m  auth_user: #{result}  \e[0m"
+      corp_user = corp_users.find_or_initialize_by(user_id: result['userid'])
 
       if result['user_ticket'] && corp_user.temp?
         corp_user.user_ticket = result['user_ticket']
@@ -151,7 +150,7 @@ module Wechat
       logger.debug e.message
     end
 
-    def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
+    def oauth2_url(scope: 'snsapi_privateinfo', state: SecureRandom.hex(16), **url_options)
       url_options.with_defaults! controller: 'wechat/corps', action: 'login', id: id, host: host
       h = {
         appid: corp_id,
