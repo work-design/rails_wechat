@@ -6,6 +6,10 @@ module Wechat::Api
       get 'user/getuserinfo', params: { code: code }, base: BASE
     end
 
+    def auth_user(code)
+      get 'auth/getuserinfo', params: { code: code }, base: BASE
+    end
+
     def convert_to_openid(userid)
       post 'user/convert_to_openid', userid: userid, agentid: @agentid, base: BASE
     end

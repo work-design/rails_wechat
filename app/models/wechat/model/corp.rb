@@ -80,7 +80,7 @@ module Wechat
 
     # todo 这个方法跟 work app 下的方法是类似的，后期合并
     def generate_corp_user(code)
-      result = api.getuserinfo(code)
+      result = api.auth_user(code)
       logger.debug "\e[35m  getuserinfo: #{result}  \e[0m"
       corp_user = corp_users.find_or_initialize_by(user_id: result['UserId'])
       corp_user.device_id = result['DeviceId'] if result['DeviceId'].present?
