@@ -1,28 +1,7 @@
 module Wechat
   class ProvidersController < BaseController
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
-    before_action :set_provider, only: [:notify, :callback, :login, :auth]
-
-    # 消息与事件接收URL: POST /wechat/providers/:id/callback
-    def callback
-      r = Hash.from_xml(request.raw_post)['xml']
-      @provider_receive = @provider.provider_receives.build
-      @provider_receive.corp_id = r['ToUserName']
-      @provider_receive.user_id = r['FromUserName']
-      @provider_receive.agent_id = r['AgentID']
-      @provider_receive.msg_type = r['MsgType']
-      @provider_receive.msg_id = r['MsgId']
-      @provider_receive.content = r['Content']
-      @provider_receive.event = r['Event']
-      @provider_receive.event_key = r['EventKey']
-      @provider_receive.encrypt_data = r['Encrypt']
-
-      if @provider_receive.save
-        render plain: 'success'
-      else
-        head :no_content
-      end
-    end
+    before_action :set_provider, only: [:login, :auth]
 
     def login
       @corp_user = @provider.generate_corp_user(params[:code])
