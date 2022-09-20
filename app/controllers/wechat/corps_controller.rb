@@ -1,5 +1,6 @@
 module Wechat
   class CorpsController < BaseController
+    skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
     before_action :set_corp, only: [:notify, :verify]
 
     # 指令回调URL: /wechat/corps/:id/notify
