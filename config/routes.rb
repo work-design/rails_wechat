@@ -17,9 +17,9 @@ Rails.application.routes.draw do
       end
       resources :apps, only: [:show] do
         member do
-          post '' => :create
           get :login
           get :bind
+          post '' => :create
           patch :qrcode
         end
       end
@@ -39,16 +39,17 @@ Rails.application.routes.draw do
       end
       resources :suites, only: [] do
         member do
+          get :login
+          get 'redirect/:corp_id' => :redirect
           get 'callback' => :verify
           get 'notify' => :verify
           post :callback
           post :notify
-          get :login
-          get 'redirect/:corp_id' => :redirect
         end
       end
       resources :corps, only: [:show] do
         member do
+          get :login
           get 'callback' => :verify
           get 'notify' => :verify
           post :callback

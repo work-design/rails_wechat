@@ -1,7 +1,7 @@
 module Wechat
   class CorpsController < BaseController
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
-    before_action :set_corp, only: [:notify, :verify]
+    before_action :set_corp, only: [:notify, :login, :verify]
 
     # 指令回调URL: /wechat/corps/:id/notify
     def notify
@@ -39,6 +39,13 @@ module Wechat
       else
         head :no_content
       end
+    end
+
+    def login
+      @corp_user = @corp.generate_corp_user(params[:code])
+      @corp_user.save
+
+      xxx(@corp_user)
     end
 
     # get /notify

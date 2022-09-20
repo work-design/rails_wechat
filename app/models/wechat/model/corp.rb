@@ -78,6 +78,30 @@ module Wechat
       organ
     end
 
+    # todo 这个方法跟 work app 下的方法是类似的，后期合并
+    def generate_corp_user(code)
+      result = api.getuserinfo(code)
+      logger.debug "\e[35m  getuserinfo: #{result}  \e[0m"
+      corp_user = corp_users.find_or_initialize_by(user_id: result['UserId'])
+      corp_user.device_id = result['DeviceId'] if result['DeviceId'].present?
+
+      if result['user_ticket'] && corp_user.temp?
+        corp_user.user_ticket = result['user_ticket']
+        corp_user.ticket_expires_at = Time.current + result['expires_in'].to_i
+        detail = api.user_detail(result['user_ticket'])
+        logger.debug "\e[35m  user_detail: #{detail}  \e[0m"
+
+        if detail['errcode'] == 0
+          corp_user.assign_attributes detail.slice('gender', 'qr_code')
+          corp_user.identity = detail['mobile']
+          corp_user.avatar_url = detail['avatar']
+        end
+      end
+
+      corp_user.save
+      corp_user
+    end
+
     def assign_info(info)
       self.assign_attributes info.slice('access_token', 'permanent_code', 'auth_corp_info', 'auth_user_info')
       self.access_token_expires_at = Time.current + info['expires_in'].to_i if info['access_token']
@@ -128,7 +152,7 @@ module Wechat
     end
 
     def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
-      url_options.with_defaults! controller: 'wechat/suites', action: 'login', id: id, host: host
+      url_options.with_defaults! controller: 'wechat/corps', action: 'login', id: id, host: host
       h = {
         appid: corp_id,
         redirect_uri: Rails.application.routes.url_for(**url_options),
