@@ -26,7 +26,7 @@
     </div>
     <div data-show-target="item" class="mt-1" style="visibility: hidden">
       <%= link_to({ action: 'info', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-cog"></i>
+        <i class="fa-solid fa-cog"></i>
       <% end %>
       <%= link_to({ action: 'edit_pay', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.edit_pay.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-brands fa-amazon-pay"></i>
