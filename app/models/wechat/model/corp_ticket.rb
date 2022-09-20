@@ -8,21 +8,18 @@ module Wechat
       attribute :agent_id, :string
       attribute :message_hash, :json
       attribute :info_type, :string
-      attribute :auth_corp_id, :string
       attribute :user_id, :string
 
       belongs_to :corp, optional: true
       belongs_to :corp_user, ->(o) { where(suite_id: o.suite_id, corp_id: o.auth_corp_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
 
       before_save :parsed_data
-      after_save :sync_suite_ticket, if: -> { ['suite_ticket'].include?(info_type) && saved_change_to_info_type? }
       after_save :sync_auth_code, if: -> { ['create_auth'].include?(info_type) && saved_change_to_info_type? }
-      after_create_commit :clean_last, if: -> { ['suite_ticket'].include?(info_type) }
       after_create_commit :deal_contact, if: -> { ['change_external_contact'].include?(info_type) }
     end
 
     def parsed_data
-      content = suite.decrypt(ticket_data)
+      content = corp.decrypt(ticket_data)
       data = Hash.from_xml(content).fetch('xml', {})
 
       self.info_type = data['InfoType']
@@ -30,7 +27,6 @@ module Wechat
 
       # 同步 userid 和 corpid
       self.user_id = message_hash['UserID']
-      self.auth_corp_id = message_hash['AuthCorpId']
 
       data
     end
