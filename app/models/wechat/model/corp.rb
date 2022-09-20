@@ -26,7 +26,6 @@ module Wechat
       attribute :permanent_code, :string
       attribute :suite_id, :string
       attribute :host, :string
-      attribute :secret, :string
       attribute :token, :string
       attribute :encoding_aes_key, :string
 
@@ -62,6 +61,10 @@ module Wechat
 
     def oauth_enable
       true
+    end
+
+    def secret
+      permanent_code
     end
 
     def appid
