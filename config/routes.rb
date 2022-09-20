@@ -27,16 +27,14 @@ Rails.application.routes.draw do
         member do
           get :callback
           post 'callback/:appid' => :message
-        end
-        collection do
           post :notify
         end
       end
       resources :providers, only: [:show] do
         member do
+          get :auth
           post :callback
           post :notify
-          get :auth
         end
       end
       resources :suites, only: [] do
@@ -49,7 +47,7 @@ Rails.application.routes.draw do
           get 'redirect/:corp_id' => :redirect
         end
       end
-      resources :developers, only: [:show] do
+      resources :corps, only: [:show] do
         member do
           get 'callback' => :verify
           get 'notify' => :verify

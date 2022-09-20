@@ -3,6 +3,9 @@ module Wechat
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
     before_action :set_platform, only: [:show, :message, :callback]
 
+    def show
+    end
+
     # 授权事件接收URL: platforms/notice
     def notify
       @ticket = Ticket.new(ticket_params)
@@ -15,9 +18,6 @@ module Wechat
       else
         head :no_content
       end
-    end
-
-    def show
     end
 
     def callback

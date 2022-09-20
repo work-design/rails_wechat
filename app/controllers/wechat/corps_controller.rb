@@ -1,12 +1,12 @@
 module Wechat
-  class DevelopersController < BaseController
-    before_action :set_developer, only: [:show, :verify]
+  class CorpsController < BaseController
+    before_action :set_corp, only: [:show, :verify]
 
     def show
       render plain: 'success'
     end
 
-    # 消息与事件接收URL: /wechat/providers/:id/callback
+    # 消息与事件接收URL: /wechat/corps/:id/callback
     def callback
       r = Hash.from_xml(request.raw_post)['xml']
       @suite_receive = SuiteReceive.new
@@ -30,17 +30,15 @@ module Wechat
     # get /notify
     # get /callback
     def verify
-      r = @developer.decrypt(params[:echostr])
+      r = @corp.decrypt(params[:echostr])
 
       render plain: r
     end
 
 
     private
-
-
-    def set_developer
-      @developer = Developer.find(params[:id])
+    def set_corp
+      @corp = Corp.find(params[:id])
     end
 
   end
