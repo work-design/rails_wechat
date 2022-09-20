@@ -3,23 +3,6 @@ module Wechat
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
     before_action :set_provider, only: [:notify, :callback, :login, :auth]
 
-    # 指令回调URL: POST /wechat/providers/:id/notify
-    def notify
-      @provider_ticket = ProviderTicket.new(ticket_params)
-      r = Hash.from_xml(request.raw_post)['xml']
-      logger.debug "\e[35m  body is: #{r}  \e[0m"
-
-      @provider_ticket.suite_id = r['ToUserName']
-      @provider_ticket.ticket_data = r['Encrypt']
-      @provider_ticket.agent_id = r['AgentID']
-
-      if @provider_ticket.save
-        render plain: 'success'
-      else
-        head :no_content
-      end
-    end
-
     # 消息与事件接收URL: POST /wechat/providers/:id/callback
     def callback
       r = Hash.from_xml(request.raw_post)['xml']

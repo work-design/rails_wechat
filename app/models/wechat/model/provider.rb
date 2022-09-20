@@ -11,7 +11,6 @@ module Wechat
       attribute :access_token, :string
       attribute :access_token_expires_at, :datetime
 
-      has_many :provider_receives
       has_many :corp_users
       has_many :corps
       has_many :suites, foreign_key: :corp_id, primary_key: :corp_id
