@@ -17,10 +17,9 @@ module Wechat
     end
 
     def parsed_data
-      r = Wechat::Cipher.decrypt(Base64.decode64(ticket_data), platform.encoding_aes_key)
-      content, _ = Wechat::Cipher.unpack(r)
-
+      content = platform.decrypt(ticket_data)
       data = Hash.from_xml(content).fetch('xml', {})
+
       platform.update(verify_ticket: data['ComponentVerifyTicket'])
       data
     end

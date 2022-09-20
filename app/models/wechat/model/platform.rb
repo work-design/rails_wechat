@@ -24,6 +24,12 @@ module Wechat
       @api = Wechat::Api::Platform.new(self)
     end
 
+    def decrypt(msg)
+      r = Wechat::Cipher.decrypt(Base64.decode64(msg), encoding_aes_key)
+      content, _ = Wechat::Cipher.unpack(r)
+      content
+    end
+
     def refresh_pre_auth_code
       token_hash = api.create_preauthcode
       if token_hash.is_a?(Hash) && token_hash['pre_auth_code']
@@ -48,6 +54,7 @@ module Wechat
     def refresh_access_token
       r = api.component_token
       store_access_token(r)
+      r
     end
 
     def store_access_token(token_hash)
