@@ -142,7 +142,11 @@ module Wechat
     end
 
     def refresh_access_token
-      info = suite.api.corp_token(corp_id, permanent_code)
+      if suite.kind_develop?
+        info = api.token
+      else
+        info = suite.api.corp_token(corp_id, permanent_code)
+      end
       self.access_token = info['access_token']
       self.access_token_expires_at = Time.current + info['expires_in'].to_i if info['access_token'] && self.access_token_changed?
       self.save
