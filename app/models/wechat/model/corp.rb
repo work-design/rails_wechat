@@ -27,6 +27,8 @@ module Wechat
       attribute :suite_id, :string
       attribute :host, :string
       attribute :secret, :string
+      attribute :token, :string
+      attribute :encoding_aes_key, :string
 
       belongs_to :organ, class_name: 'Org::Organ', foreign_key: :corp_id, primary_key: :corp_id, optional: true
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
