@@ -26,13 +26,14 @@ module Wechat
       attribute :permanent_code, :string
       attribute :suite_id, :string
       attribute :host, :string
+      attribute :secret, :string
 
       belongs_to :organ, class_name: 'Org::Organ', foreign_key: :corp_id, primary_key: :corp_id, optional: true
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
       belongs_to :provider, optional: true
 
-      has_many :corp_users, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
-      has_many :contacts, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
+      has_many :corp_users, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
+      has_many :contacts, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
       has_many :externals, foreign_key: :corp_id, primary_key: :corp_id
 
       after_validation :init_organ, if: -> { corp_id_changed? }
@@ -40,6 +41,10 @@ module Wechat
 
     def oauth_enable
       true
+    end
+
+    def appid
+      corp_id
     end
 
     def init_organ
