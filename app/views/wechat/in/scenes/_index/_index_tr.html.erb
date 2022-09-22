@@ -3,7 +3,7 @@
   <td>
     <div data-show-target="item" style="visibility: hidden">
       <%= link_to({ controller: 'app_menus', scene_id: model.id }, aria: { label: t('wechat.in.menus.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-bars"></i>
+        <i class="fa-solid fa-bars"></i>
       <% end %>
       <%= link_to({ controller: 'admin/responses', action: 'show', id: model.response.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-regular fa-reply-all"></i>
