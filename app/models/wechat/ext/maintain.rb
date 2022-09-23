@@ -22,9 +22,13 @@ module Wechat
     end
 
     def sync_remark_to_api
-      return unless member.corp_user
-      app = member.corp_user.corp || member.corp_user.app
-      app.api.remark(member.corp_user.user_id, external_userid, remark: remark)
+      return if member.corp_users.blank?
+      member.corp_users.each do |corp_user|
+        app = corp_user.corp || corp_user.app
+        next if app.blank?
+        app.api.remark(corp_user.user_id, external_userid, remark: remark)
+        break
+      end
     end
 
   end
