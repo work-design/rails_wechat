@@ -83,7 +83,7 @@ module Wechat
       end
 
       case data['errcode']
-      when 0 # for request didn't expect results
+      when 0
         data
       # 42001: access_token timeout
       # 40014: invalid access_token
@@ -92,10 +92,6 @@ module Wechat
       # 40082, 企业微信
       when 42001, 40014, 40001, 41001, 40082
         raise Wechat::AccessTokenExpiredError
-        # 40029, invalid code for mp # GH-225
-        # 43004, require subscribe hint # GH-214
-      when 2
-        raise Wechat::ResponseError.new(data['errcode'], data['errmsg'])
       else
         data
       end
