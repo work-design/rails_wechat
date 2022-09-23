@@ -85,6 +85,7 @@ module Wechat
       result = api.auth_user(code)
       logger.debug "\e[35m  auth_user: #{result}  \e[0m"
       corp_user = corp_users.find_or_initialize_by(user_id: result['userid'])
+      corp_user.organ_id = organ&.id
 
       if result['user_ticket'] && corp_user.temp?
         corp_user.user_ticket = result['user_ticket']
