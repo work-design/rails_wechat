@@ -50,10 +50,6 @@ Rails.application.routes.draw do
       resources :corps, only: [:show] do
         member do
           get :login
-          get 'callback' => :verify
-          get 'notify' => :verify
-          post :callback
-          post :notify
         end
       end
 

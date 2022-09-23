@@ -4,7 +4,7 @@ module Wechat
 
     included do
       attribute :name, :string
-      attribute :corp_id, :string
+      attribute :corp_id, :string, index: true
       attribute :provider_secret, :string
       attribute :token, :string
       attribute :encoding_aes_key, :string

@@ -43,11 +43,7 @@ module Wechat
     end
 
     def set_provider
-      @provider = Provider.find(params[:id])
-    end
-
-    def set_app
-      @app = @platform.agencies.find_by(appid: params[:appid]).app
+      @provider = Provider.find_by corp_id: params[:id]
     end
 
     def verify_signature
