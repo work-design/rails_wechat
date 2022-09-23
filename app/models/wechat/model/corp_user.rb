@@ -9,6 +9,7 @@ module Wechat
 
     included do
       attribute :corp_id, :string
+      attribute :suite_id, :string, index: true
       attribute :user_id, :string
       attribute :device_id, :string
       attribute :user_ticket, :string
@@ -22,7 +23,6 @@ module Wechat
       attribute :avatar_url, :string
       attribute :qr_code, :string
       attribute :department, :integer, array: []
-      attribute :suite_id, :string
       attribute :follows_count, :integer, default: 0
 
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
