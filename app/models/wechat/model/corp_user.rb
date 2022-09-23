@@ -26,7 +26,7 @@ module Wechat
       attribute :follows_count, :integer, default: 0
 
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
-      belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
+      belongs_to :corp, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
       belongs_to :app, foreign_key: :corp_id, primary_key: :appid, optional: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
