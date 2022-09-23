@@ -5,10 +5,9 @@ module Wechat
     included do
       attribute :limit_wechat, :integer, default: 1
       attribute :limit_wechat_menu, :integer, default: 1
-      attribute :corp_id, :string
 
       has_many :apps, class_name: 'Wechat::App', dependent: :destroy_async
-      belongs_to :corp, class_name: 'Wechat::Corp', foreign_key: :corp_id, primary_key: :corp_id, optional: true
+      has_many :corps, class_name: 'Wechat::Corp', through: :organ_domains
       belongs_to :corp_user, class_name: 'Wechat::CorpUser', optional: true
 
       validates :limit_wechat_menu, inclusion: { in: [1, 2, 3] }
