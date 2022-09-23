@@ -6,22 +6,22 @@
         <i class="fa-solid fa-bars"></i>
       <% end %>
       <%= link_to({ controller: 'responses', app_id: model.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-reply-all"></i>
+        <i class="fa-solid fa-reply-all"></i>
       <% end %>
       <%= link_to({ controller: 'requests', app_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-comments"></i>
+        <i class="fa-solid fa-comments"></i>
       <% end %>
       <%= link_to({ controller: 'tags', app_id: model.id }, aria: { label: t('wechat.admin.tags.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-user-tag"></i>
+        <i class="fa-solid fa-user-tag"></i>
       <% end %>
       <%= link_to({ controller: 'templates', app_id: model.id }, aria: { label: t('wechat.admin.templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-inbox"></i>
+        <i class="fa-solid fa-inbox"></i>
       <% end %>
       <%= link_to({ controller: 'scenes', app_id: model.id }, aria: { label: t('wechat.admin.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-qrcode"></i>
+        <i class="fa-solid fa-qrcode"></i>
       <% end %>
       <%= link_to({ controller: 'corp_users', app_id: model.id }, aria: { label: t('wechat.admin.corp_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-building-user"></i>
+        <i class="fa-solid fa-building-user"></i>
       <% end if ['Wechat::WorkApp'].include?(model.type) %>
     </div>
     <div data-show-target="item" class="mt-1" style="visibility: hidden">
@@ -32,7 +32,7 @@
         <i class="fa-brands fa-amazon-pay"></i>
       <% end %>
       <%= link_to({ action: 'edit_cert', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.edit_cert.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-certificate"></i>
+        <i class="fa-solid fa-certificate"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info"></i>
