@@ -22,7 +22,7 @@
     <%= link_to edit_my_wechat_register_path(wechat_register), aria: { label: t('.edit') }, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
       <i class="fa-solid fa-pencil"></i>
     <% end %>
-    <%= link_to my_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { confirm: t('.confirm') }, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
+    <%= link_to my_wechat_register_path(wechat_register), method: :delete, aria: { label: t('.destroy') }, data: { turbo_confirm: t('.confirm') }, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>
       <i class="fa-solid fa-trash"></i>
     <% end %>
     <%= link_to code_my_wechat_register_path(wechat_register), aria: { label: t('.edit') }, class: 'weui-form-preview__btn weui-form-preview__btn_default' do %>

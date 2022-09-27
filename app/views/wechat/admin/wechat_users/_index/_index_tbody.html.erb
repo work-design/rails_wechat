@@ -7,7 +7,7 @@
   <% model.user_tags.each do |user_tag| %>
     <span class="tag is-success">
       <span><%= user_tag.tag.name %></span>
-      <%= button_to({ controller: 'user_tags', action: 'destroy', id: user_tag.id }, method: :delete, data: { confirm: t('.confirm') }, class: 'delete is-small') do %><% end %>
+      <%= button_to({ controller: 'user_tags', action: 'destroy', id: user_tag.id }, method: :delete, data: { turbo_confirm: t('.confirm') }, class: 'delete is-small') do %><% end %>
     </span>
   <% end %>
 </td>

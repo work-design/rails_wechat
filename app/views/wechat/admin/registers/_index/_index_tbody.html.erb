@@ -10,7 +10,7 @@
 <td>
   <p>
     <%= model.mobile %>
-    <%= link_to code_admin_register_path(model), method: :put, aria: { label: '验证码' }, data: { confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to code_admin_register_path(model), method: :put, aria: { label: '验证码' }, data: { turbo_confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
       <i class="fa-regular fa-paper-plane"></i>
     <% end %>
   </p>
