@@ -4,6 +4,7 @@ module Wechat
 
     included do
       has_one :corp, class_name: 'Wechat::Corp', primary_key: :identifier, foreign_key: :host
+      has_one :app, class_name: 'Wechat::App', primary_key: :identifier, foreign_key: :domain
     end
 
   end
