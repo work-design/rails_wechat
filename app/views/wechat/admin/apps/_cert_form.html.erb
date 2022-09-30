@@ -1,4 +1,6 @@
 <%= form_with model: @app, scope: '', url: { action: 'update_cert' } do |f| %>
+  <%= f.file_field :p12 %>
   <%= f.file_field :cert %>
+  <%= f.file_field :key %>
   <%= f.submit %>
 <% end %>
