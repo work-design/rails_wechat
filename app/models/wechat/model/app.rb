@@ -31,6 +31,8 @@ module Wechat
       attribute :domain, :string
       attribute :url_link, :string
 
+      encrypts :secret, :key, :key_v3, :apiclient_cert, :apiclient_key
+
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
       #has_many :post_syncs, as: :synced, dependent: :delete_all
