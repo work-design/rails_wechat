@@ -38,8 +38,8 @@ module Wechat
       #has_many :post_syncs, as: :synced, dependent: :delete_all
       #has_many :posts, through: :post_syncs
 
-      has_one :organ_domain, -> { where(default: true) }, class_name: 'Org::OrganDomain', foreign_key: :appid, primary_key: :appid
-      has_many :organ_domains, class_name: 'Org::OrganDomain', foreign_key: :appid, primary_key: :appid
+      has_one :organ_domain, -> { where(default: true) }, class_name: 'Org::OrganDomain', primary_key: :domain, foreign_key: :identifier
+      has_many :organ_domains, class_name: 'Org::OrganDomain', primary_key: :domain, foreign_key: :identifier
 
       has_one :agency, primary_key: :appid, foreign_key: :appid
       has_many :agencies, primary_key: :appid, foreign_key: :appid
@@ -63,7 +63,7 @@ module Wechat
     end
 
     def url
-      Rails.application.routes.url_for(controller: 'wechat/apps', action: 'show', id: self.id, host: host)
+      Rails.application.routes.url_for(controller: 'wechat/apps', action: 'show', id: self.id, host: domain) if domain.present?
     end
 
     def sync_menu
@@ -162,7 +162,7 @@ module Wechat
       end
     end
 
-    def base64_state(host: self.host, controller_path: 'auth/sign', action_name: 'bind', method: 'get', **params)
+    def base64_state(host: self.domain, controller_path: 'auth/sign', action_name: 'bind', method: 'get', **params)
       state = "#{host}##{controller_path}##{action_name}##{method}##{params.to_query}"
       Base64.urlsafe_encode64(state)
     end
@@ -174,10 +174,6 @@ module Wechat
     def template_ids(notifiable_type, *code)
       ids = TemplateConfig.where(notifiable_type: notifiable_type, code: code).pluck(:id)
       templates.where(template_config_id: ids).pluck(:template_id)
-    end
-
-    def host
-      domain.presence || organ_domain&.identifier || organ_domains.first&.identifier
     end
 
     def set_global
