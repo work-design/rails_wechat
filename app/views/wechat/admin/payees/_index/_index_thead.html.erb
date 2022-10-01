@@ -1,11 +1,2 @@
-<th><%= Payee.human_attribute_name(:mch_id) %></th>
-<th><%= Payee.human_attribute_name(:key) %></th>
-<th><%= Payee.human_attribute_name(:key_v3) %></th>
-<th><%= Payee.human_attribute_name(:serial_no) %></th>
-<th><%= Payee.human_attribute_name(:apiclient_cert) %></th>
-<th><%= Payee.human_attribute_name(:apiclient_key) %></th>
-
-
-<%= link_to({ action: 'edit_cert', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.edit_cert.title') }, class: 'button is-small is-rounded is-light') do %>
-  <i class="fa-solid fa-certificate"></i>
-<% end %>
+<th><%= Wechat::Payee.human_attribute_name(:mch_id) %></th>
+<th><%= Wechat::Payee.human_attribute_name(:serial_no) %></th>

@@ -5,7 +5,7 @@
       <%= link_to({ controller: 'scenes', app_id: model.id }, aria: { label: t('wechat.in.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-qrcode"></i>
       <% end %>
-      <%= link_to({ controller: 'admin/payees', app_id: model.id }, aria: { label: t('wechat.admin.payees.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'admin/payees', app_id: model.appid }, aria: { label: t('wechat.admin.payees.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-brands fa-amazon-pay"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
