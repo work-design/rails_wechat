@@ -1,6 +1,6 @@
 module Wechat
   class Admin::AppsController < Admin::BaseController
-    before_action :set_app, only: [:show, :info, :edit, :edit_pay, :edit_cert, :update_cert, :update, :destroy]
+    before_action :set_app, only: [:show, :info, :edit, :update, :destroy]
 
     def index
       q_params = {}
@@ -29,22 +29,6 @@ module Wechat
     def info
     end
 
-    def edit_cert
-    end
-
-    def update_cert
-      if params[:p12].present?
-        pkcs12 = WxPay::Utils.set_apiclient_by_pkcs12(params[:p12].read, @app.mch_id)
-        @app.apiclient_cert = pkcs12.certificate
-        @app.apiclient_key = pkcs12.key
-      else
-        @app.apiclient_cert = params[:cert].read
-        @app.apiclient_key = params[:key].read
-      end
-
-      @app.save
-    end
-
     private
     def set_app
       @app = App.default_where(default_params).find(params[:id])
@@ -59,9 +43,6 @@ module Wechat
         :appid,
         :secret,
         :agentid,
-        :mch_id,
-        :key,
-        :key_v3,
         :encrypt_mode,
         :serial_no,
         :domain,

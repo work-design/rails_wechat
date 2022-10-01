@@ -14,9 +14,6 @@ module Wechat
       attribute :secret, :string
       attribute :token, :string, default: -> { SecureRandom.hex }
       attribute :agentid, :string, comment: '企业微信所用'
-      attribute :mch_id, :string, comment: '支付专用、商户号'
-      attribute :key, :string, comment: '支付专用'
-      attribute :key_v3, :string, comment: '支付通知解密'
       attribute :encrypt_mode, :boolean, default: true
       attribute :encoding_aes_key, :string
       attribute :access_token, :string
@@ -25,13 +22,10 @@ module Wechat
       attribute :oauth2_state, :string
       attribute :jsapi_ticket_expires_at, :datetime
       attribute :user_name, :string
-      attribute :apiclient_cert, :string
-      attribute :apiclient_key, :string
-      attribute :serial_no, :string
       attribute :domain, :string
       attribute :url_link, :string
 
-      encrypts :secret, :key, :key_v3, :apiclient_cert, :apiclient_key
+      encrypts :secret
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
@@ -46,6 +40,7 @@ module Wechat
       has_many :scenes, primary_key: :appid, foreign_key: :appid, inverse_of: :app
       has_many :tags, primary_key: :appid, foreign_key: :appid
       has_many :templates, primary_key: :appid, foreign_key: :appid
+      has_many :payees, primary_key: :appid, foreign_key: :appid
 
       scope :enabled, -> { where(enabled: true) }
       scope :shared, -> { where(shared: true) }

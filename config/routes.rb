@@ -149,9 +149,10 @@ Rails.application.routes.draw do
         resources :apps do
           member do
             get :info
+          end
+          resources :payees do
             get 'cert' => :edit_cert
             patch 'cert' => :update_cert
-            get 'pay' => :edit_pay
           end
           resources :scenes do
             member do
