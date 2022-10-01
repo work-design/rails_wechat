@@ -9,15 +9,15 @@ module Wechat
 
     def update_cert
       if params[:p12].present?
-        pkcs12 = WxPay::Utils.set_apiclient_by_pkcs12(params[:p12].read, @app.mch_id)
-        @app.apiclient_cert = pkcs12.certificate
-        @app.apiclient_key = pkcs12.key
+        pkcs12 = WxPay::Utils.set_apiclient_by_pkcs12(params[:p12].read, @payee.mch_id)
+        @payee.apiclient_cert = pkcs12.certificate
+        @payee.apiclient_key = pkcs12.key
       else
-        @app.apiclient_cert = params[:cert].read
-        @app.apiclient_key = params[:key].read
+        @payee.apiclient_cert = params[:cert].read if params[:cert].respond_to?(:read)
+        @payee.apiclient_key = params[:key].read if params[:key].respond_to?(:read)
       end
 
-      @app.save
+      @payee.save
     end
 
     private
