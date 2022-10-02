@@ -10,6 +10,7 @@ module Wechat
       attribute :serial_no, :string
       attribute :apiclient_cert, :string
       attribute :apiclient_key, :string
+      attribute :domain, :string
 
       encrypts :key, :key_v3, :apiclient_cert, :apiclient_key
 

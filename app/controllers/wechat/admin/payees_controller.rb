@@ -40,7 +40,8 @@ module Wechat
         :key_v3,
         :serial_no,
         :apiclient_cert,
-        :apiclient_key
+        :apiclient_key,
+        :domain
       )
       p.merge! default_form_params
     end
