@@ -16,7 +16,7 @@
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:apiclient_cert) %></td>
-  <td><%= @payee.apiclient_cert %></td>
+  <td><%= @payee.apiclient_cert.to_s.truncate(20) %></td>
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:apiclient_key) %></td>
