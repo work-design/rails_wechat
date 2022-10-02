@@ -35,7 +35,7 @@ module Wechat
         @current_oauth_app = current_organ_domain.app || PublicApp.default_where(default_params).take || PublicApp.global.take
       end
 
-      logger.debug "\e[35m  Current Oauth App is #{@current_oauth_app&.class_name}/#{@current_oauth_app&.id}  \e[0m"
+      logger.debug "\e[35m  Current Oauth App: #{@current_oauth_app&.class_name}/#{@current_oauth_app&.id}  \e[0m"
       @current_oauth_app
     end
 
@@ -47,7 +47,7 @@ module Wechat
         @current_js_app = current_wechat_app
       end
 
-      logger.debug "\e[35m  Current Js App is #{@current_js_app&.id}  \e[0m"
+      logger.debug "\e[35m  Current Js App: #{@current_js_app&.id}  \e[0m"
       @current_js_app
     end
 
@@ -55,8 +55,16 @@ module Wechat
       return @current_wechat_app if defined?(@current_wechat_app)
       @current_wechat_app = current_organ_domain.app || PublicApp.default_where(default_params).take || PublicApp.global.take
 
-      logger.debug "\e[35m  Current Wechat App is #{@current_wechat_app&.id}  \e[0m"
+      logger.debug "\e[35m  Current Wechat App: #{@current_wechat_app&.id}  \e[0m"
       @current_wechat_app
+    end
+
+    def current_payee
+      return @current_payee if defined?(@current_payee)
+      @current_payee = current_organ_domain.payee
+
+      logger.debug "\e[35m  Current Payee: #{@current_payee&.id}  \e[0m"
+      @current_payee
     end
 
     def current_wechat_user
