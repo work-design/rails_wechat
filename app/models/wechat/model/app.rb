@@ -74,11 +74,13 @@ module Wechat
 
     def default_menus
       if organ && organ.respond_to?(:limit_wechat_menu)
-        limit = 3 - organ.limit_wechat_menu
+        global = 3 - organ.limit_wechat_menu
       else
-        limit = 3
+        global = 3
       end
-      Menu.includes(:children).where(parent_id: nil, organ_id: [organ_id, nil]).order(position: :asc).limit(limit).as_json
+      r1 = Menu.includes(:children).where(parent_id: nil, organ_id: nil).order(position: :asc).limit(global)
+      r2 = Menu.includes(:children).where(parent_id: nil, organ_id: organ_id).order(position: :asc).limit(organ.limit_wechat_menu)
+      (r1 + r2).as_json
     end
 
     def within_menus
