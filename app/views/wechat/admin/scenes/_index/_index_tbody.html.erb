@@ -8,9 +8,9 @@
 <td></td>
 <td>
   <%= link_to({ controller: 'wechat_users', 'user_tags.tag_name': model.match_value }, aria: { label: t('wechat.admin.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fa-regular fa-users"></i>
+    <i class="fa-solid fa-users"></i>
   <% end if model.tag %>
   <%= link_to({ controller: 'responses', action: 'show', id: model.response.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fa-regular fa-reply-all"></i>
+    <i class="fa-solid fa-reply-all"></i>
   <% end if model.response %>
 </td>
