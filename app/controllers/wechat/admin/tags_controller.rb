@@ -1,25 +1,14 @@
 module Wechat
   class Admin::TagsController < Admin::BaseController
     before_action :set_app
-    before_action :set_tag, only: [:show, :edit, :update, :destroy]
+    before_action :set_tag, only: [:show, :edit, :update, :destroy, :actions]
+    before_action :set_new_tag, only: [:new, :create]
 
     def index
       q_params = {}
       q_params.merge! params.permit(:name)
 
       @tags = @app.tags.default_where(q_params).order(id: :asc).page(params[:page])
-    end
-
-    def new
-      @tag = @app.tags.build
-    end
-
-    def create
-      @tag = @app.tags.build(tag_params)
-
-      unless @tag.save
-        render :new, locals: { model: @tag }, status: :unprocessable_entity
-      end
     end
 
     def sync
@@ -29,6 +18,10 @@ module Wechat
     private
     def set_tag
       @tag = @app.tags.find(params[:id])
+    end
+
+    def set_new_tag
+      @tag = @app.tags.build(tag_params)
     end
 
     def tag_params
