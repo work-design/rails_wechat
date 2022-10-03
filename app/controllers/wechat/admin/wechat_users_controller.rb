@@ -1,7 +1,7 @@
 module Wechat
   class Admin::WechatUsersController < Admin::BaseController
     before_action :set_app
-    before_action :set_wechat_user, only: [:show, :edit, :update, :destroy]
+    before_action :set_wechat_user, only: [:show, :edit, :update, :destroy, :actions]
 
     def index
       q_params = {}

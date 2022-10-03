@@ -14,9 +14,9 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :user_tag, optional: true
 
-      has_many :user_tags, ->(o){ where(appid: o.appid) }, primary_key: :name, foreign_key: :tag_name, dependent: :destroy_async
+      has_many :user_tags, ->(o) { where(appid: o.appid) }, primary_key: :name, foreign_key: :tag_name, dependent: :destroy_async
       has_many :wechat_users, through: :user_tags
-      has_many :requests, ->(o){ where(type: ['Wechat::ScanRequest', 'Wechat::SubscribeRequest'], body: o.name).order(id: :desc) }, foreign_key: :appid, primary_key: :appid
+      has_many :requests, ->(o) { where(type: ['Wechat::ScanRequest', 'Wechat::SubscribeRequest'], body: o.name).order(id: :desc) }, foreign_key: :appid, primary_key: :appid
 
       validates :name, uniqueness: { scope: :appid }
 
