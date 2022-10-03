@@ -1,0 +1,11 @@
+<table class="table as-search">
+  <tr>
+    <th><%= Wechat::WechatUser.human_attribute_name(:tag_id) %></th>
+    <td>
+      <%= link_to t('.all'), filter_params(except: [:state]), class: active_params(state: '', active: 'button is-info', item: 'button is-light') %>
+      <% @app.tags.each do |tag| %>
+        <%= link_to tag.name, filter_params('user_tags.tag_name': tag.name), class: active_params('user_tags.tag_name': tag.name, active: 'button is-info', item: 'button is-light') %>
+      <% end %>
+    </td>
+  </tr>
+</table>

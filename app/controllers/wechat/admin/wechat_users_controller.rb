@@ -19,6 +19,10 @@ module Wechat
       @wechat_user = @app.wechat_users.find params[:id]
     end
 
+    def set_tags
+      @tags = @app.tags
+    end
+
     def wechat_user_params
       params.fetch(:wechat_user, {}).permit(
         :name,
