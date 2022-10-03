@@ -2,6 +2,7 @@ module Wechat
   class Admin::WechatUsersController < Admin::BaseController
     before_action :set_app
     before_action :set_wechat_user, only: [:show, :edit, :update, :destroy, :actions]
+    before_action :set_tag, only: [:index]
 
     def index
       q_params = {}
@@ -19,8 +20,10 @@ module Wechat
       @wechat_user = @app.wechat_users.find params[:id]
     end
 
-    def set_tags
-      @tags = @app.tags
+    def set_tag
+      if params['user_tags.tag_name']
+        @tag = @app.tags.find_by name: params['user_tags.tag_name']
+      end
     end
 
     def wechat_user_params
