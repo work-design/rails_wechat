@@ -11,10 +11,10 @@
   <td><%= @wechat_user.unionid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::WechatUser.human_attribute_name(:account_id) %></td>
-  <td><%= @wechat_user.account_id %></td>
+  <td class="has-text-right"><%= Wechat::WechatUser.human_attribute_name(:identifier) %></td>
+  <td><%= @wechat_user.identifier %></td>
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::WechatUser.human_attribute_name(:user_id) %></td>
-  <td><%= @wechat_user.user_id %></td>
+  <td><%= @wechat_user.user&.id %></td>
 </tr>
