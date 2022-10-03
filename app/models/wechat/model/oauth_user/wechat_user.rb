@@ -23,7 +23,7 @@ module Wechat
       has_many :requests, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
       has_many :user_tags, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
       has_many :tags, through: :user_tags
-      has_many :notices, ->(o){ where(appid: o.appid) }, primary_key: :uid, foreign_key: :open_id
+      has_many :notices, ->(o) { where(appid: o.appid) }, primary_key: :uid, foreign_key: :open_id
       has_many :externals, primary_key: :unionid, foreign_key: :unionid
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
@@ -114,7 +114,7 @@ module Wechat
     end
 
     def prune_user_tags
-      user_tags.update_all(past: true)
+      user_tags.update_all(synced: false)
     end
 
   end

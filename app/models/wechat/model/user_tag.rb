@@ -7,7 +7,6 @@ module Wechat
       attribute :appid, :string, index: true
       attribute :open_id, :string, index: true
       attribute :synced, :boolean, default: false
-      attribute :past, :boolean, default: false, comment: '曾经存在，被删除了'
 
       belongs_to :member_inviter, class_name: 'Org::Member', optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid

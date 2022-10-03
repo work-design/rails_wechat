@@ -22,4 +22,7 @@
   </p>
   <p><%= model.user&.id %></p>
 </td>
-<td><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></td>
+<td>
+  <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
+  <p><time data-controller="time"><%= model.unsubscribe_at.to_fs(:iso8601) %></time></p>
+</td>
