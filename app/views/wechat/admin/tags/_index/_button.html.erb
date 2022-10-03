@@ -1,8 +1,10 @@
-<%= link_to({ action: 'new' }, class: 'button is-link') do %>
-  <i class="fa-solid fa-plus"></i>
-  <span class="pl-1"><%= t('.new') %></span>
-<% end %>
-<%= button_to({ action: 'sync' }, method: :post, class: 'button is-primary') do %>
-  <i class="fa-solid fa-sync-alt"></i>
-  <span class="pl-1"><%= t('.sync') %></span>
-<% end %>
+<div class="buttons are-small">
+  <%= link_to({ action: 'new' }, class: 'button is-link') do %>
+    <i class="fa-solid fa-plus"></i>
+    <span class="pl-1"><%= t('.new') %></span>
+  <% end %>
+  <%= button_to({ action: 'sync' }, method: :post, class: 'button is-primary') do %>
+    <i class="fa-solid fa-sync-alt"></i>
+    <span class="pl-1"><%= t('.sync') %></span>
+  <% end %>
+</div>

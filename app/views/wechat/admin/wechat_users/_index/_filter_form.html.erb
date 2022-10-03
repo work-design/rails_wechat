@@ -1,7 +1,7 @@
 <%= form_with theme: 'search', model: Wechat::WechatUser.new do |f| %>
   <div class="field-body">
     <%= f.text_field :name, value: params[:name] %>
-    <%= f.text_field :uid %>
+    <%= f.text_field :uid, style: 'width: 20em' %>
     <div class="field is-narrow">
       <%= f.submit %>
       <%= link_to t('.clear'), filter_params(except: [:name, :uid, 'wechat_user_tags.tag_id']), class: 'button is-light' %>
