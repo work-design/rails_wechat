@@ -94,7 +94,6 @@ module Wechat
       request.open_id = open_id
       request.msg_type = msg_type
       request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
-      request.generate_wechat_user  # Should before get reply
 
       self.save  # will auto save wechat request
     end

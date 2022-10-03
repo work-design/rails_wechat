@@ -31,6 +31,7 @@ module Wechat
       has_many :responses, through: :request_responses
 
       before_validation :set_body, if: -> { receive.present? }
+      before_create :check_wechat_user
       after_create :get_reply!
     end
 
@@ -125,14 +126,14 @@ module Wechat
       app.api.message_custom_typing(wechat_user.uid, command)
     end
 
-    def generate_wechat_user
+    def check_wechat_user
       wechat_user || build_wechat_user
       wechat_user.appid = appid
       if ['SCAN', 'subscribe'].include?(event)
         if body.to_s.start_with?('invite_by_')
-          wechat_user.user_inviter_id = body.delete_prefix('invite_by_')
+          wechat_user.user_inviter_id ||= body.delete_prefix('invite_by_')
         elsif body.to_s.start_with? 'invite_member_'
-          wechat_user.member_inviter_id = body.delete_prefix('invite_member_')
+          wechat_user.member_inviter_id ||= body.delete_prefix('invite_member_')
         end
       end
       if ['subscribe'].include?(event)
@@ -141,6 +142,8 @@ module Wechat
 
       if wechat_user.new_record?
         self.init_wechat_user = true
+      else
+        wechat_user.save
       end
     end
 
