@@ -56,7 +56,7 @@ module Wechat
     end
 
     def reply_params_detail
-      url = Rails.application.routes.url_for(controller: 'home', action: 'index', host: app.host)
+      url = Rails.application.routes.url_for(controller: 'home', action: 'index', host: app.domain)
       if wechat_user.attributes['name'].present?
         title = "您好，#{wechat_user.attributes['name']}"
         if wechat_user.user
@@ -94,7 +94,7 @@ module Wechat
         reply_params(
           title: '点击链接查看个人账户详情',
           description: '点击链接查看个人账户详情',
-          url: Rails.application.routes.url_for(controller: 'my/home', host: app.host, disposable_token: wechat_user.account.once_token)
+          url: Rails.application.routes.url_for(controller: 'my/home', host: app.domain, disposable_token: wechat_user.account.once_token)
         )
       else
         reply_for_blank_user
@@ -106,7 +106,7 @@ module Wechat
       reply_params(
         title: wechat_user.attributes['name'].present? ? "您好，#{wechat_user.attributes['name']}" : '您好',
         description: '请绑定已有账号或注册新账号',
-        url: Rails.application.routes.url_for(controller: 'auth/sign', action: 'bind', uid: open_id, host: app.host)
+        url: Rails.application.routes.url_for(controller: 'auth/sign', action: 'bind', uid: open_id, host: app.domain)
       )
     end
 
