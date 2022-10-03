@@ -10,7 +10,7 @@
     <h4 class="weui-media-box__title">
       <span><%= request.wechat_user.name %></span>
       <span class="weui-badge"><%= request.type_i18n %></span>
-      <% if request.wechat_user.user_inviter_id == current_user.id && request.wechat_user.init_wechat_user %>
+      <% if request.wechat_user.user_inviter_id == current_user.id && request.init_wechat_user %>
         <span class="tag is-success">邀请成功</span>
       <% end %>
     </h4>
