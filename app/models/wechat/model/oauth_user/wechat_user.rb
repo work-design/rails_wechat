@@ -114,7 +114,7 @@ module Wechat
     end
 
     def prune_user_tags
-      user_tags.delete_all
+      user_tags.update_all(past: true)
     end
 
   end
