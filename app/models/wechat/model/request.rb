@@ -19,12 +19,12 @@ module Wechat
 
       belongs_to :receive
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
-      belongs_to :corp_user, ->(o){ where(corp_id: o.appid) }, foreign_key: :userid, primary_key: :user_id, optional: true
+      belongs_to :corp_user, ->(o) { where(corp_id: o.appid) }, foreign_key: :userid, primary_key: :user_id, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       has_one :platform, through: :receive
-      has_one :tag, ->(o){ where(name: o.body) }, foreign_key: :appid, primary_key: :appid
-      has_one :user_tag, ->(o){ where(tag_name: o.body, open_id: o.open_id) }, foreign_key: :appid, primary_key: :appid
+      has_one :tag, ->(o) { where(name: o.body) }, foreign_key: :appid, primary_key: :appid
+      has_one :user_tag, ->(o) { where(tag_name: o.body, open_id: o.open_id) }, foreign_key: :appid, primary_key: :appid
       has_many :services, dependent: :nullify
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all, inverse_of: :request  # 解析 request body 内容，主要针对文字
       has_many :request_responses, foreign_key: :request_type, primary_key: :type
@@ -135,6 +135,9 @@ module Wechat
           wechat_user.member_inviter_id = body.delete_prefix('invite_member_')
         end
       end
+      if ['subscribe'].include?(event)
+        wechat_user.unsubscribe_at = nil
+      end
 
       if wechat_user.new_record?
         self.init_wechat_user = true
@@ -142,6 +145,7 @@ module Wechat
     end
 
     def sync_to_tag
+      return if body.blank?
       tag || build_tag
       user_tag || build_user_tag
 
