@@ -4,6 +4,10 @@ module Wechat
     before_action :set_payee, only: [:show, :edit, :update, :destroy, :actions, :edit_cert, :update_cert]
     before_action :set_new_payee, only: [:new, :create]
 
+    def index
+      @payees = @app.payees
+    end
+
     def edit_cert
     end
 
