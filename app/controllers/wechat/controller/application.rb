@@ -8,7 +8,7 @@ module Wechat
     end
 
     def require_login(return_to: nil)
-      return if current_user
+      return if current_user && current_wechat_user
       return super if request.variant.include?(:mini_program) || request.variant.exclude?(:wechat)
 
       if current_wechat_user && current_wechat_user.user.nil?
