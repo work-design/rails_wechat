@@ -68,7 +68,15 @@ module Wechat
 
     def current_wechat_user
       return @current_wechat_user if defined?(@current_wechat_user)
-      @current_wechat_user = current_account&.wechat_user
+
+      if request.variant.include?(:wechat) && request.variant.exclude?(:mini_program)
+        @current_wechat_user = current_account&.wechat_users.find_by(type: 'Wechat::WechatUser')
+      else
+        @current_wechat_user = current_account&.wechat_users.find_by(type: 'Wechat::ProgramUser')
+      end
+
+      logger.debug "\e[35m  Wechat User: #{@current_wechat_user&.id}  \e[0m"
+      @current_wechat_user
     end
 
     def current_corp_user
