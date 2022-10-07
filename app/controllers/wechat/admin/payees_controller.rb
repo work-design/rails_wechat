@@ -5,7 +5,10 @@ module Wechat
     before_action :set_new_payee, only: [:new, :create]
 
     def index
-      @payees = @app.payees
+      q_params = {}
+      q_params.merge! default_params
+
+      @payees = @app.payees.default_where(q_params)
     end
 
     def edit_cert
