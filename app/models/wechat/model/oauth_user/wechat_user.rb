@@ -26,8 +26,8 @@ module Wechat
       has_many :notices, ->(o) { where(appid: o.appid) }, primary_key: :uid, foreign_key: :open_id
       has_many :externals, primary_key: :unionid, foreign_key: :unionid
 
+      before_save :auto_link, if: -> { unionid.present? && unionid_changed? }
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
-      after_save_commit :auto_link, if: -> { unionid.present? && saved_change_to_unionid? }
       after_save_commit :auto_join_organ, if: -> { saved_change_to_identity? }
       after_save_commit :prune_user_tags, if: -> { unsubscribe_at.present? && saved_change_to_unsubscribe_at? }
     end
@@ -46,12 +46,11 @@ module Wechat
     end
 
     def auto_link
-      if self.unionid && self.same_oauth_user
-        self.identity ||= same_oauth_user.identity
-        self.name ||= same_oauth_user.name
-        self.avatar_url ||= same_oauth_user.avatar_url
-      end
-      self.save
+      return unless same_oauth_user
+
+      self.identity ||= same_oauth_user.identity
+      self.name ||= same_oauth_user.name
+      self.avatar_url ||= same_oauth_user.avatar_url
     end
 
     def sync_remark_later
