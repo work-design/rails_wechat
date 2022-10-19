@@ -1,0 +1,5 @@
+<%= f.select :receiver_type, options_for_select(Wechat::Receiver.options_i18n(:receiver_type)) %>
+<%= f.text_field :account %>
+<%= f.text_field :name %>
+<%= f.select :relation_type, options_for_select(Wechat::Receiver.options_i18n(:relation_type)) %>
+<%= f.text_field :custom_relation %>

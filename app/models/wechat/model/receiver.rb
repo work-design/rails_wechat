@@ -25,7 +25,9 @@ module Wechat
         user: 'user', #用户
         supplier: 'supplier', #供应商
         custom: 'custom' #自定义
-      }
+      }, _prefix: true
+
+      belongs_to :payee
     end
 
   end
