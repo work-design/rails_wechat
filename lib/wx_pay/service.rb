@@ -103,8 +103,7 @@ module WxPay
       gateway_url = options.delete(:gateway_url) || get_gateway_url
       url = "#{gateway_url}#{url}"
 
-      HTTPX.request(
-        :post,
+      HTTPX.post(
         url,
         {
           payload: payload,

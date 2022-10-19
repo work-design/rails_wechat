@@ -19,7 +19,7 @@ module WxPay
 
       url = BASE + path
       opts = {
-        headers: common_headers(params, options)
+        headers: common_headers(options)
       }
       if method != 'GET'
         opts.merge! body: params.to_json
@@ -48,7 +48,7 @@ module WxPay
       result
     end
 
-    def common_headers(params, options)
+    def common_headers(options)
       r = {
         mchid: options[:mchid],
         serial_no: options[:serial_no],
