@@ -24,8 +24,14 @@ module WxPay
     end
 
     def rsa_encrypt(data, key:)
-      cipher = OpenSSL::PKey::RSA.new(key)
-      cipher.encrypt data, rsa_padding_mode: 'oaep'
+      cipher = OpenSSL::Cipher.new('AES-256-GCM')
+      cipher.encrypt
+      cipher.padding = OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING
+      cipher.key = key
+      cipher.iv = ''
+      cipher.update(data) + cipher.final
+
+      Base64.encode64(r)
     end
 
   end

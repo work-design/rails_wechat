@@ -29,8 +29,11 @@ module Wechat
       @api = WxPay::Api::Base.new(self)
     end
 
-    def platform_key
-      WxPay::Cipher.decrypt(encrypt_certificate['ciphertext'], key: key_v3, iv: encrypt_certificate['nonce'], auth_data: encrypt_certificate['associated_data'])
+    def rsa_encrypt(data)
+      r = WxPay::Cipher.decrypt(encrypt_certificate['ciphertext'], key: key_v3, iv: encrypt_certificate['nonce'], auth_data: encrypt_certificate['associated_data'])
+      cipher = OpenSSL::X509::Certificate.new(r).public_key
+      result = cipher.encrypt data, rsa_padding_mode: 'oaep'
+      Base64.encode64(result)
     end
 
     def sync_cert!

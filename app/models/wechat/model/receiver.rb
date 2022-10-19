@@ -34,7 +34,7 @@ module Wechat
         appid: payee.appid,
         type: receiver_type.upcase,
         account: account,
-        name: WxPay::Cipher.rsa_encrypt(name, key: payee.platform_key),
+        name: payee.rsa_encrypt(name),
         relation_type: relation_type.upcase,
         custom_relation: custom_relation
       }
