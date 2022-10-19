@@ -155,7 +155,11 @@ Rails.application.routes.draw do
               get 'cert' => :edit_cert
               patch 'cert' => :update_cert
             end
-            resources :receivers
+            resources :receivers do
+              collection do
+                get :users
+              end
+            end
           end
           resources :scenes do
             member do
