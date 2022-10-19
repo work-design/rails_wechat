@@ -11,7 +11,7 @@ module WxPay
         else
           body = params.to_json
         end
-        binding.b
+
         str = [
           method,
           path,

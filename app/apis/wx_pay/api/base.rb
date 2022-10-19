@@ -28,8 +28,6 @@ module WxPay::Api
         opts.merge! body: params.to_json
       end
 
-      binding.b
-
       r = HTTPX.with(debug: STDERR, debug_level: 2).request(method, url, **opts)
       r.json
     end

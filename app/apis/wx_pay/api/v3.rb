@@ -38,12 +38,16 @@ module WxPay::Api
         method: 'post',
         path: '/v3/profitsharing/receivers/add',
         required: [:receiver]
+      },
+      certs: {
+        method: 'get',
+        path: '/v3/certificates'
       }
     }.freeze
 
     APIS.each do |key, api|
       class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
-        def #{key}(params, options = {})
+        def #{key}(params = {}, options = {})
 
           #check_required_options(params, #{api[:required]}) 
           execute('#{api[:method]}', '#{api[:path]}', params, options)     
