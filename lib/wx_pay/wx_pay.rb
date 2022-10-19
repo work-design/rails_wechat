@@ -1,5 +1,0 @@
-require 'result'
-require 'sign'
-require 'service'
-require 'openssl'
-require 'config'

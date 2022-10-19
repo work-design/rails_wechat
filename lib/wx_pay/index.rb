@@ -1,0 +1,6 @@
+require 'wx_pay/api'
+require 'wx_pay/cipher'
+require 'wx_pay/config'
+require 'wx_pay/result'
+require 'wx_pay/service'
+require 'wx_pay/sign'
