@@ -5,7 +5,7 @@ module WxPay
     module Rsa
       extend self
 
-      def generate(method, path, params, options = {})
+      def generate(method, path, params, **options)
         if method == 'GET'
           body = nil
         else

@@ -1,8 +1,5 @@
-require 'httpx'
-require 'wx_pay/api/v3'
-
-module WxPay
-  class Api
+module WxPay::Api
+  class Base
     AUTH = 'WECHATPAY2-SHA256-RSA2048'
     BASE = 'https://api.mch.weixin.qq.com'.freeze
     include V3
@@ -13,12 +10,12 @@ module WxPay
 
     def execute(method, path, params, options = {})
       method.upcase!
-      path = Utils.replace(path, params)
-      path = Utils.query(path, params) if method == 'GET'
+      path = WxPay::Utils.replace(path, params)
+      path = WxPay::Utils.query(path, params) if method == 'GET'
 
       options[:nonce_str] ||= SecureRandom.uuid.tr('-', '')
-      options[:timestamp] ||= Time.now.to_i
-      options[:signature] = sign_params(method, path, params, options)
+      options[:timestamp] ||= Time.current.to_i
+      options[:signature] = WxPay::Sign::Rsa.generate(method, path, params, key: @payee.apiclient_key, **options)
 
       url = BASE + path
       opts = {
@@ -34,27 +31,21 @@ module WxPay
 
     def generate_js_pay_req(params, options = {})
       opts = {
-        appId: payee.appid,
+        appId: @payee.appid,
         package: "prepay_id=#{params.delete(:prepayid)}",
         signType: 'RSA'
       }
       opts.merge! params
-      opts[:timeStamp] ||= Time.now.to_i.to_s
+      opts[:timeStamp] ||= Time.current.to_i.to_s
       opts[:nonceStr] ||= SecureRandom.uuid.tr('-', '')
       opts[:paySign] = WxPay::Sign.generate_sign(opts, options)
       opts
     end
 
-    def prepare_params(method, path, params, options)
-      result = {}
-      result.merge! signature: sign_params(method, path, params, options)
-      result
-    end
-
     def common_headers(options)
       r = {
-        mchid: payee.mch_id,
-        serial_no: payee.serial_no,
+        mchid: @payee.mch_id,
+        serial_no: @payee.serial_no,
         nonce_str: options[:nonce_str],
         timestamp: options[:timestamp],
         signature: options[:signature]
@@ -64,10 +55,6 @@ module WxPay
         'Content-Type': 'application/json',
         Accept: 'application/json'
       }
-    end
-
-    def sign_params(method, path, params, options)
-      Sign::Rsa.generate(method, path, params, options)
     end
 
   end
