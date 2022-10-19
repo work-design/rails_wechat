@@ -17,6 +17,7 @@ module Wechat
       belongs_to :organ, class_name: 'Org::Organ'
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, counter_cache: true
+      has_many :receivers
     end
 
   end

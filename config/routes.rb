@@ -158,6 +158,8 @@ Rails.application.routes.draw do
             resources :receivers do
               collection do
                 get :users
+                get 'openid' => :new_openid
+                delete 'openid/:uid' => :destroy_openid
               end
             end
           end

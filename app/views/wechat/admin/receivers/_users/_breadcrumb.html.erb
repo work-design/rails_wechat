@@ -4,7 +4,7 @@
     <li><span class="px-3"><%= @app.type_i18n %></span></li>
     <li><span class="px-3"><%= @app.name %></span></li>
     <li><%= link_to t('wechat.admin.payees.index.title'), { controller: 'payees', anchor: "tr_#{@payee.id}" } %></li>
-    <li><span class="px-3"><%= @payee.name %></span></li>
+    <li><span class="px-3"><%= @payee.mch_id %></span></li>
     <li class="is-active"><%= t('.title') %></li>
   </ul>
 </div>

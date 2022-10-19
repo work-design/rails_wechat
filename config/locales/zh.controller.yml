@@ -16,6 +16,8 @@ zh:
       receivers:
         index:
           title: 接收者
+        users:
+          title: 选择接收者
       scenes:
         index:
           title: 推广场景

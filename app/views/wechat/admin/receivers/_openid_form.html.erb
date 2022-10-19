@@ -1,0 +1,9 @@
+<%= form_with model: @receiver, url: { action: 'create' } do |f| %>
+  <%= render 'error_messages', target: f.object %>
+  <%= f.hidden_field :receiver_type, value: 'personal_openid' %>
+  <%= f.hidden_field :account %>
+  <%= f.text_field :name %>
+  <%= f.select :relation_type, options_for_select(Wechat::Receiver.options_i18n(:relation_type)) %>
+  <%= f.text_field :custom_relation %>
+  <%= f.submit %>
+<% end %>
