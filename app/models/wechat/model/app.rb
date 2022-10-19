@@ -24,6 +24,7 @@ module Wechat
       attribute :user_name, :string
       attribute :domain, :string
       attribute :url_link, :string
+      attribute :payees_count, :integer, default: 0
 
       encrypts :secret
 

@@ -6,8 +6,6 @@ zh:
         secret: 开发者密码（AppSecret）
         token: 令牌（Token）
         encrypt_mode: 消息加解密方式
-        mch_id: 商户号（微信支付）
-        key: KEY（微信支付）
         encoding_aes_key: 消息加解密密钥（EncodingAESKey）
         enabled: 启用
         primary: 主账号
@@ -16,6 +14,9 @@ zh:
         help_without_user: 未注册提示
         help_user_disabled: 用户被禁提示
         help_feedback: 收到反馈后提示
+      wechat/payee:
+        mch_id: 商户号
+        key: KEY
       wechat/register:
         id_name: 真实姓名
         id_number: 身份证号
