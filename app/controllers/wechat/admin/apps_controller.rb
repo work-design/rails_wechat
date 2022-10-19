@@ -1,11 +1,11 @@
 module Wechat
   class Admin::AppsController < Admin::BaseController
-    before_action :set_app, only: [:show, :info, :edit, :update, :destroy]
+    before_action :set_app, only: [:show, :info, :edit, :update, :destroy, :actions]
 
     def index
       q_params = {}
       q_params.merge! default_params
-      q_params.merge! params.permit(:id, :type)
+      q_params.merge! params.permit(:id, :type, :appid)
 
       @apps = App.default_where(q_params).order(id: :asc).page(params[:page])
     end
