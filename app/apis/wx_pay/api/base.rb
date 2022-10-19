@@ -12,18 +12,23 @@ module WxPay::Api
       method.upcase!
       path = WxPay::Utils.replace(path, params)
       path = WxPay::Utils.query(path, params) if method == 'GET'
-
-      options[:nonce_str] ||= SecureRandom.uuid.tr('-', '')
-      options[:timestamp] ||= Time.current.to_i
-      options[:signature] = WxPay::Sign::Rsa.generate(method, path, params, key: @payee.apiclient_key, **options)
-
       url = BASE + path
+      r = common_options
+      r.merge! signature: WxPay::Sign::Rsa.generate(method, path, params, key: @payee.apiclient_key, **r)
+      r = r.map(&->(k,v){ "#{k}=\"#{v}\"" }).join(',')
       opts = {
-        headers: common_headers(options)
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Wechatpay-Serial': @payee.serial_no,
+          Authorization: [AUTH, r].join(' ')
+        }
       }
       if method != 'GET'
         opts.merge! body: params.to_json
       end
+
+      binding.b
 
       r = HTTPX.with(debug: STDERR, debug_level: 2).request(method, url, **opts)
       r.json
@@ -37,23 +42,17 @@ module WxPay::Api
       }
       opts.merge! params
       opts[:timeStamp] ||= Time.current.to_i.to_s
-      opts[:nonceStr] ||= SecureRandom.uuid.tr('-', '')
+      opts[:nonceStr] ||= SecureRandom.hex
       opts[:paySign] = WxPay::Sign.generate_sign(opts, options)
       opts
     end
 
-    def common_headers(options)
-      r = {
+    def common_options
+      {
         mchid: @payee.mch_id,
         serial_no: @payee.serial_no,
-        nonce_str: options[:nonce_str],
-        timestamp: options[:timestamp],
-        signature: options[:signature]
-      }.map(&->(k,v){ "#{k}=\"#{v}\"" }).join(',')
-      {
-        Authorization: [AUTH, r].join(' '),
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
+        nonce_str: SecureRandom.hex,
+        timestamp: Time.current.to_i
       }
     end
 

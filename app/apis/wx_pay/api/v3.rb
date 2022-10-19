@@ -36,7 +36,7 @@ module WxPay::Api
       },
       add_receiver: {
         method: 'post',
-        path: '/pay/profitsharingaddreceiver',
+        path: '/v3/profitsharing/receivers/add',
         required: [:receiver]
       }
     }.freeze

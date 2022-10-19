@@ -1,4 +1,4 @@
-# https://pay.weixin.qq.com/wiki/doc/api/allocation.php?chapter=27_3&index=4
+# https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter8_1_8.shtml
 module Wechat
   module Model::Receiver
     extend ActiveSupport::Concern
@@ -14,7 +14,6 @@ module Wechat
       }
 
       enum relation_type: {
-        service_provider: 'service_provider', # 服务商
         store: 'store', # 门店
         staff: 'staff', # 员工
         store_owner: 'store_owner', # 店主
@@ -28,6 +27,21 @@ module Wechat
       }, _prefix: true
 
       belongs_to :payee
+    end
+
+    def params
+      {
+        appid: payee.appid,
+        type: receiver_type.upcase,
+        account: account,
+        name: WxPay::Sign::Rsa.sign(name, payee.apiclient_key),
+        relation_type: relation_type.upcase,
+        custom_relation: custom_relation
+      }
+    end
+
+    def sync_to_wxpay
+      payee.api.add_receiver(params)
     end
 
   end
