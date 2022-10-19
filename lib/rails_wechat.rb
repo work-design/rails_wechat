@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+require 'zeitwerk'
+require 'active_support/configurable'
+loader = Zeitwerk::Loader.for_gem
+loader.ignore("#{__dir__}/rails_wechat/config")
+loader.ignore("#{__dir__}/wx_pay/config")
+loader.setup # ready!
+
 # engine
 require 'rails_wechat/engine'
 require 'rails_wechat/config'
@@ -10,7 +17,7 @@ require 'rails_wechat/config'
 #require 'omniauth/strategies/wechat_qr'
 
 # wxpay
-
+require 'wx_pay/wx_pay'
 
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'receive', 'receives'
