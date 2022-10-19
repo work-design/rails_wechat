@@ -20,5 +20,10 @@ module Wechat
       has_many :receivers
     end
 
+    def api
+      return @api if defined? @api
+      @api = WxPay::Api.new(self)
+    end
+
   end
 end

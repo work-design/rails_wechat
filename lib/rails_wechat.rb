@@ -15,9 +15,6 @@ require 'rails_wechat/config'
 #require 'omniauth/strategies/wechat_qiye'
 #require 'omniauth/strategies/wechat_qr'
 
-# wxpay
-require 'wx_pay/index'
-
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'receive', 'receives'
   inflect.irregular 'media', 'medias'

@@ -2,11 +2,14 @@ require 'httpx'
 require 'wx_pay/api/v3'
 
 module WxPay
-  module Api
+  class Api
     AUTH = 'WECHATPAY2-SHA256-RSA2048'
     BASE = 'https://api.mch.weixin.qq.com'.freeze
     include V3
-    extend self
+
+    def initialize(payee)
+      @payee = payee
+    end
 
     def execute(method, path, params, options = {})
       method.upcase!
@@ -31,7 +34,7 @@ module WxPay
 
     def generate_js_pay_req(params, options = {})
       opts = {
-        appId: options[:appid],
+        appId: payee.appid,
         package: "prepay_id=#{params.delete(:prepayid)}",
         signType: 'RSA'
       }
@@ -50,8 +53,8 @@ module WxPay
 
     def common_headers(options)
       r = {
-        mchid: options[:mchid],
-        serial_no: options[:serial_no],
+        mchid: payee.mch_id,
+        serial_no: payee.serial_no,
         nonce_str: options[:nonce_str],
         timestamp: options[:timestamp],
         signature: options[:signature]
