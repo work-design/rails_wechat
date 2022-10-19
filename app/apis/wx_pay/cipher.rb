@@ -23,5 +23,10 @@ module WxPay
       JSON.parse r
     end
 
+    def rsa_encrypt(data, key:)
+      cipher = OpenSSL::PKey::RSA.new(key)
+      cipher.encrypt data, rsa_padding_mode: 'oaep'
+    end
+
   end
 end
