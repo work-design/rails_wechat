@@ -11,13 +11,12 @@ module Wechat
       attribute :apiclient_cert, :string
       attribute :apiclient_key, :string
       attribute :domain, :string
-      attribute :platform_algorithm, :string
       attribute :platform_effective_at, :datetime
       attribute :platform_expire_at, :datetime
       attribute :platform_serial_no, :string
-      attribute :platform_key, :string
+      attribute :encrypt_certificate, :json
 
-      encrypts :key, :key_v3, :apiclient_cert, :apiclient_key, :platform_key
+      encrypts :key, :key_v3, :apiclient_cert, :apiclient_key
 
       belongs_to :organ, class_name: 'Org::Organ'
 
@@ -30,6 +29,10 @@ module Wechat
       @api = WxPay::Api::Base.new(self)
     end
 
+    def platform_key
+      WxPay::Cipher.decrypt(encrypt_certificate['ciphertext'], key: key_v3, iv: encrypt_certificate['nonce'], auth_data: encrypt_certificate['associated_data'])
+    end
+
     def sync_cert!
       certs = api.certs['data']
       result = certs.select(&->(i){ i['effective_time'].to_time < Time.current }).min_by do |cert|
@@ -37,9 +40,8 @@ module Wechat
       end
       self.platform_effective_at = result['effective_time']
       self.platform_expire_at = result['expire_time']
-      self.platform_key = result.dig('encrypt_certificate', 'ciphertext')
-      self.platform_algorithm = result.dig('encrypt_certificate', 'algorithm')
       self.platform_serial_no = result['serial_no']
+      self.encrypt_certificate = result['encrypt_certificate']
       self.save!
     end
 

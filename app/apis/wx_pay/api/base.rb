@@ -20,7 +20,7 @@ module WxPay::Api
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          'Wechatpay-Serial': @payee.serial_no,
+          'Wechatpay-Serial': @payee.platform_serial_no,
           Authorization: [AUTH, r].join(' ')
         }
       }
