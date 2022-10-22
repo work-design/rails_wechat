@@ -28,7 +28,12 @@ module Wechat
     def js
       render json: {
         debug: false,
-        apis: ['scanQRCode', 'openUserProfile', 'shareToExternalMoments', 'openAddress', 'getLocation', 'openLocation', 'scanQRCode'],
+        apis: [
+          'scanQRCode',
+          'openUserProfile', 'shareToExternalMoments',
+          'openAddress', 'getLocation', 'openLocation',
+          'chooseImage', 'previewImage', 'uploadImage'
+        ],
         **current_js_app&.js_config(params[:url])
       }
     end
