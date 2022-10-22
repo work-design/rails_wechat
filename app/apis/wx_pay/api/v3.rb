@@ -43,6 +43,10 @@ module WxPay::Api
         method: 'post',
         path: '/v3/profitsharing/receivers/delete'
       },
+      profit_share: {
+        method: 'post',
+        path: '/v3/profitsharing/orders'
+      },
       certs: {
         method: 'get',
         path: '/v3/certificates'
