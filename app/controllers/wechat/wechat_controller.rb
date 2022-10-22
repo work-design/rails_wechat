@@ -26,7 +26,6 @@ module Wechat
     end
 
     def js
-      sleep(4)
       render json: {
         debug: true,
         apis: ['scanQRCode', 'openUserProfile', 'shareToExternalMoments', 'openAddress', 'getLocation', 'openLocation', 'scanQRCode'],
