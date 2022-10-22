@@ -7,6 +7,7 @@ module Wechat
       attribute :account, :string
       attribute :name, :string
       attribute :custom_relation, :string
+      attribute :res, :json
 
       enum receiver_type: {
         merchant_id: 'merchant_id',  # 户号（mch_id或者sub_mch_id）
@@ -27,6 +28,8 @@ module Wechat
       }, _prefix: true
 
       belongs_to :payee
+
+      after_save_commit :sync_to_wxpay, if: -> { (saved_changes.keys & ['account', 'name']).present? }
     end
 
     def params
@@ -41,7 +44,9 @@ module Wechat
     end
 
     def sync_to_wxpay
-      payee.api.add_receiver(params)
+      r = payee.api.add_receiver(params)
+      self.res = r
+      self.save
     end
 
   end
