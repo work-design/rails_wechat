@@ -39,6 +39,10 @@ module WxPay::Api
         path: '/v3/profitsharing/receivers/add',
         required: [:receiver]
       },
+      delete_receiver: {
+        method: 'post',
+        path: '/v3/profitsharing/receivers/delete'
+      },
       certs: {
         method: 'get',
         path: '/v3/certificates'

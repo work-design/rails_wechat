@@ -32,7 +32,7 @@ module Wechat
       after_save_commit :sync_to_wxpay, if: -> { (saved_changes.keys & ['account', 'name']).present? }
     end
 
-    def params
+    def add_params
       {
         appid: payee.appid,
         type: receiver_type.upcase,
@@ -44,7 +44,18 @@ module Wechat
     end
 
     def sync_to_wxpay
-      r = payee.api.add_receiver(params)
+      r = payee.api.add_receiver(add_params)
+      self.res = r
+      self.save
+    end
+
+    def remove_from_wxpay
+      params = {
+        appid: payee.appid,
+        type: receiver_type.upcase,
+        account: account
+      }
+      r = payee.api.delete_receiver(params)
       self.res = r
       self.save
     end
