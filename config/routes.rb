@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   scope RailsCom.default_routes_scope do
     namespace :wechat, defaults: { business: 'wechat' } do
       controller :wechat do
-        post 'wechat/auth' => :auth
+        post :auth
+        post :js
         get :login
         get :friend
       end

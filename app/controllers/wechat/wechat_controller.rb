@@ -25,6 +25,15 @@ module Wechat
       @scene.save
     end
 
+    def js
+      sleep(4)
+      render json: {
+        debug: true,
+        apis: ['scanQRCode', 'openUserProfile', 'shareToExternalMoments', 'openAddress', 'getLocation', 'openLocation', 'scanQRCode'],
+        **current_js_app&.js_config(params[:url])
+      }
+    end
+
     def friend
       render :friend, layout: 'my'
     end
