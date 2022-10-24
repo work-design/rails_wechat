@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 488a6d2e6e8ced689f35f06ccda2c5087d2d772f
+  revision: 6f6b759aac3418c6542875479c68930420776d7c
   specs:
     rails_com (1.3.0)
       acme-client
@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: dbf088dd9ff5cb720fde0f59806d5f3f55f7e89e
+  revision: 0a257921d454392a1b89adb3801f474a306580bb
   specs:
     rails_design (0.0.1)
       rails
@@ -187,7 +187,7 @@ GEM
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
     minitest (5.16.3)
-    net-http (0.2.2)
+    net-http (0.3.0)
       uri
     net-imap (0.3.1)
       net-protocol
@@ -256,7 +256,7 @@ GEM
     stringio (3.0.2)
     thor (1.2.1)
     timeout (0.3.0)
-    turbo-rails (1.3.1)
+    turbo-rails (1.3.2)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
