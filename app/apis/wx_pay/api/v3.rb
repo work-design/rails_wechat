@@ -55,12 +55,15 @@ module WxPay::Api
 
     APIS.each do |key, api|
       class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
-        def #{key}(params = {}, options = {})
-
-          #check_required_options(params, #{api[:required]}) 
-          execute('#{api[:method]}', '#{api[:path]}', params, options)     
+        def #{key}(params = {})
+          execute('#{api[:method]}', '#{api[:path]}', params)     
         end
       RUBY_EVAL
     end
+
+    def profit_query(transaction_id)
+      execute('get', "/v3/profitsharing/transactions/#{transaction_id}/amounts")
+    end
+
   end
 end

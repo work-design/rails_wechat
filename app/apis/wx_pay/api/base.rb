@@ -8,7 +8,7 @@ module WxPay::Api
       @payee = payee
     end
 
-    def execute(method, path, params, options = {})
+    def execute(method, path, params = {})
       method.upcase!
       path = WxPay::Utils.replace(path, params)
       path = WxPay::Utils.query(path, params) if method == 'GET'
