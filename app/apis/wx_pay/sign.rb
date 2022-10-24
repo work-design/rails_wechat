@@ -27,7 +27,7 @@ module WxPay
       end
     end
 
-    def generate_sign(params, options)
+    def generate_sign(params, key: )
       str = [
         params[:appId],
         params[:timeStamp],
@@ -35,7 +35,7 @@ module WxPay
         params[:package]
       ].join("\n") + "\n"
 
-      Rsa.sign(str, options[:key])
+      Rsa.sign(str, key)
     end
 
     def verify?(params, options = {})

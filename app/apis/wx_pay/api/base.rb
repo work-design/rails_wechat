@@ -32,7 +32,7 @@ module WxPay::Api
       r.json
     end
 
-    def generate_js_pay_req(params, options = {})
+    def generate_js_pay_req(params)
       opts = {
         appId: @payee.appid,
         package: "prepay_id=#{params.delete(:prepayid)}",
@@ -41,7 +41,8 @@ module WxPay::Api
       opts.merge! params
       opts[:timeStamp] ||= Time.current.to_i.to_s
       opts[:nonceStr] ||= SecureRandom.hex
-      opts[:paySign] = WxPay::Sign.generate_sign(opts, options)
+
+      opts[:paySign] = WxPay::Sign.generate_sign(opts, key: @payee.apiclient_key)
       opts
     end
 
