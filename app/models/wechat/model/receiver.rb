@@ -32,6 +32,16 @@ module Wechat
       after_save_commit :sync_to_wxpay, if: -> { (saved_changes.keys & ['account', 'name']).present? }
     end
 
+    def order_params(amount: 0.01, description: '冻结')
+      {
+        type: receiver_type.upcase,
+        account: account,
+        name: payee.rsa_encrypt(name),
+        amount: (amount * 100).to_i,
+        description: description
+      }
+    end
+
     def add_params
       {
         appid: payee.appid,
