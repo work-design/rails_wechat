@@ -32,7 +32,8 @@ module Wechat
           'scanQRCode',
           'openUserProfile', 'shareToExternalMoments',
           'openAddress', 'getLocation', 'openLocation',
-          'chooseImage', 'previewImage', 'uploadImage'
+          'chooseImage', 'previewImage', 'uploadImage',
+          'updateTimelineShareData', 'updateAppMessageShareData'
         ],
         **current_js_app&.js_config(params[:url])
       }
