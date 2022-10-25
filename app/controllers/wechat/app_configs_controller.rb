@@ -16,7 +16,11 @@ module Wechat
     private
     def set_app
       appid = request.user_agent&.scan /(?<=miniProgram\/).+$/
-      @app = App.find_by(appid: appid[0])
+      if appid.present?
+        @app = App.find_by(appid: appid[0])
+      else
+        @app = App.find_by appid: params[:appid]
+      end
     end
 
   end
