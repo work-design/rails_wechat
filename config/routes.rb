@@ -53,6 +53,7 @@ Rails.application.routes.draw do
           get :login
         end
       end
+      resources :app_configs, only: [:index]
 
       namespace :me, defaults: { namespace: 'me' } do
         resource :corp_users
