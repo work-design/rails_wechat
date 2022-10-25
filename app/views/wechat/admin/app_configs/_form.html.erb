@@ -1,2 +1,2 @@
-<%= f.text_field :key %>
+<%= f.select :key, options_for_select(Wechat::AppConfig.options_i18n(:key), @app_config.key) %>
 <%= f.text_field :value %>
