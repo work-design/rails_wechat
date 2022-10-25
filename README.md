@@ -4,7 +4,7 @@
 [![Docker构建](https://github.com/work-design/rails_wechat/actions/workflows/cd.yml/badge.svg)](https://github.com/work-design/rails_wechat/actions/workflows/cd.yml)
 [![Gem](https://github.com/work-design/rails_wechat/actions/workflows/gempush.yml/badge.svg)](https://github.com/work-design/rails_wechat/actions/workflows/gempush.yml)
 
-微信公众平台及微信开放平台集大成者。
+微信公众平台及微信开放平台一揽子集成方案。
 
 ## 特性
 * 对微信生态所涉及的功能支持最全：
