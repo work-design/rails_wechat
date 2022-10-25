@@ -4,9 +4,13 @@ module Wechat
     before_action :set_app
 
     def index
-      @app_configs = @app.app_configs.pluck(:key, :value).to_h
+      if @app
+        result = @app.app_configs.pluck(:key, :value).to_h
+      else
+        result = {}
+      end
 
-      render json: @app_configs
+      render json: result
     end
 
     private
