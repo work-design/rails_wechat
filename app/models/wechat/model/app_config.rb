@@ -3,7 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :appid, :string
+      attribute :appid, :string, index: true
       attribute :value, :string
 
       enum key: {
