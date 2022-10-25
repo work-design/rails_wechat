@@ -41,6 +41,7 @@ module Wechat
       has_many :scenes, primary_key: :appid, foreign_key: :appid, inverse_of: :app
       has_many :tags, primary_key: :appid, foreign_key: :appid
       has_many :templates, primary_key: :appid, foreign_key: :appid
+      has_many :app_configs, primary_key: :appid, foreign_key: :appid
       has_many :payees, primary_key: :appid, foreign_key: :appid
 
       scope :enabled, -> { where(enabled: true) }

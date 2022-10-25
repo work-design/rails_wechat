@@ -18,6 +18,9 @@ zh:
           title: 接收者
         users:
           title: 选择接收者
+      app_configs:
+        index:
+          title: 应用设置
       scenes:
         index:
           title: 推广场景

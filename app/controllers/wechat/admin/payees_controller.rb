@@ -28,10 +28,6 @@ module Wechat
     end
 
     private
-    def set_app
-      @app = App.find_by appid: params[:app_id]
-    end
-
     def set_payee
       @payee = @app.payees.find params[:id]
     end

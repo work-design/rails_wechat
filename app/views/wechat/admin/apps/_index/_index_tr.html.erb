@@ -31,9 +31,12 @@
       <%= link_to({ action: 'info', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-cog"></i>
       <% end %>
-      <%= link_to({ controller: 'payees', app_id: model.appid }, aria: { label: t('wechat.admin.payees.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'payees', app_id: model.id }, aria: { label: t('wechat.admin.payees.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-brands fa-amazon-pay"></i>
         <span class="pl-1"><%= model.payees_count %></span>
+      <% end %>
+      <%= link_to({ controller: 'app_configs', app_id: model.id }, aria: { label: t('wechat.admin.app_configs.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-cogs"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info"></i>
