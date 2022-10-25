@@ -213,6 +213,7 @@ Rails.application.routes.draw do
               post :sync
             end
           end
+          resources :app_configs
         end
         resources :responses, only: [] do
           resources :extractors
