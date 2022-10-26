@@ -162,8 +162,16 @@ module Wechat
     end
 
     def base64_state(host: self.domain, controller_path: 'auth/sign', action_name: 'bind', method: 'get', **params)
-      state = "#{host}##{controller_path}##{action_name}##{method}##{params.to_query}"
-      Base64.urlsafe_encode64(state)
+      state = [
+        host,
+        controller_path,
+        action_name,
+        method.downcase,
+        params.to_query
+      ]
+
+      state.map! { |i| Base64.urlsafe_encode64(i, padding: false) }
+      state.join('~')
     end
 
     def sync_templates

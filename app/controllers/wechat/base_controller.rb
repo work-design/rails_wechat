@@ -5,6 +5,7 @@ module Wechat
     private
     def xxx(oauth_user)
       state_hash = urlsafe_decode64(params[:state])
+      logger.debug "state hash: #{state_hash}"
 
       if oauth_user.user
         login_by_account(oauth_user.account)
