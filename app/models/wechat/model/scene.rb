@@ -13,7 +13,7 @@ module Wechat
 
       enum aim: {
         login: 'login',
-        invite: 'invite',
+        invite_user: 'invite_user',
         invite_member: 'invite_member',
         prepayment: 'prepayment',  # 钱包充值场景
         unknown: 'unknown'
@@ -30,10 +30,16 @@ module Wechat
       has_many :app_menus, ->(o){ where(appid: o.appid) }, dependent: :destroy_async
       has_many :menus, -> { roots }, through: :app_menus
 
+      after_initialize :init_match_value, if: -> { new_record? && handle }
       before_validation :init_expire_at, if: -> { expire_seconds.present? && expire_seconds_changed? }
       before_validation :sync_from_app, if: -> { appid.present? && appid_changed? }
       after_save_commit :to_qrcode!, if: -> { saved_change_to_match_value? }
       after_save_commit :refresh_when_expired, if: -> { saved_change_to_expire_at? }
+    end
+
+    def init_match_value
+      return unless handle
+      self.match_value = "#{handle_type}_#{handle_id}"
     end
 
     def init_expire_at
