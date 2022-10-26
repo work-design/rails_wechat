@@ -10,6 +10,7 @@
   </figure>
 </div>
 
+<% if request.variant.include?(:wechat) && request.variant.exclude?(:mini_program) %>
 <div class="weui-panel">
   <div class="weui-panel__bd">
     <div class="weui-cells">
@@ -29,6 +30,7 @@
     </div>
   </div>
 </div>
+<% end %>
 
 <div class="weui-navbar mt-4">
   <%= link_to '邀请记录', { action: 'invite_qrcode' }, class: active_helper(action: 'invite_qrcode', item: 'weui-navbar__item', active: 'weui-navbar__item weui-bar__item_on') %>
