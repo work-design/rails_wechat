@@ -13,7 +13,6 @@ module Wechat
       scene = Scene.find_or_initialize_by(appid: app.appid, match_value: "#{prefix}_#{id}")
       scene.aim = 'invite'
       scene.expire_seconds ||= 2592000
-      scene.organ_id = app.organ_id
       scene.save
       scene
     end
