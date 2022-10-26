@@ -15,6 +15,7 @@ module Wechat
         login: 'login',
         invite: 'invite',
         invite_member: 'invite_member',
+        prepayment: 'prepayment',  # 钱包充值场景
         unknown: 'unknown'
       }, _default: 'unknown', _prefix: true
 
@@ -118,7 +119,7 @@ module Wechat
       elsif ['login'].include?(aim)
         SceneCleanJob.set(wait_until: expire_at).perform_later(self)
       else
-        
+
       end
     end
 
