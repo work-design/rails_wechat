@@ -21,7 +21,7 @@ module Wechat
     def login
       @scene = current_wechat_app.scenes.find_or_initialize_by(match_value: "session_#{session.id}@#{request.base_url}")
       @scene.aim = 'login'
-      @scene.expire_seconds ||= 600 # 默认600秒有效
+      @scene.expire_seconds ||= 600 # 默认 600 秒有效
       @scene.save
     end
 

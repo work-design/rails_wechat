@@ -53,7 +53,8 @@ module Wechat
     end
 
     def to_qrcode!
-      commit_to_wechat!
+      commit_to_wechat
+      self.save
     end
 
     def qrcode_data_url
@@ -61,14 +62,12 @@ module Wechat
       QrcodeHelper.data_url(self.qrcode_url)
     end
 
-    def commit_to_wechat!
+    def commit_to_wechat
       if ['Wechat::PublicApp', 'Wechat::ReadApp'].include? app.type
         get_public_qrcode
       elsif ['Wechat::ProgramApp'].include? app.type
         get_wxa_qrcode
       end
-
-      self.save
       self
     end
 
@@ -116,8 +115,10 @@ module Wechat
     def refresh_when_expired
       if expire_seconds == 2592000
         SceneRefreshJob.set(wait_until: expire_at - 3.days).perform_later(self)
-      elsif match_value.start_with?('session_')
+      elsif ['login'].include?(aim)
         SceneCleanJob.set(wait_until: expire_at).perform_later(self)
+      else
+        
       end
     end
 
@@ -127,6 +128,10 @@ module Wechat
         to_qrcode!
       end
       self
+    end
+
+    def refresh
+      self.expire_at = Time.current + expire_seconds
     end
 
     def sync_menu

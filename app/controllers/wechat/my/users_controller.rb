@@ -12,8 +12,7 @@ module Wechat
 
     private
     def set_scene
-      @scene = current_user.invite_scene(current_wechat_app)
-      @scene.refresh!(true) if @scene.expired?
+      @scene = current_user.invite_scene!(current_wechat_app)
     end
 
   end
