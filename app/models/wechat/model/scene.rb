@@ -24,10 +24,10 @@ module Wechat
       belongs_to :handle, polymorphic: true, optional: true
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
-      belongs_to :response, ->(o){ where(appid: o.appid) }, foreign_key: :match_value, primary_key: :match_value, optional: true
-      belongs_to :tag, ->(o){ where(appid: o.appid) }, foreign_key: :match_value, primary_key: :name, optional: true
+      belongs_to :response, ->(o) { where(appid: o.appid) }, foreign_key: :match_value, primary_key: :match_value, optional: true
+      belongs_to :tag, ->(o) { where(appid: o.appid) }, foreign_key: :match_value, primary_key: :name, optional: true
 
-      has_many :app_menus, ->(o){ where(appid: o.appid) }, dependent: :destroy_async
+      has_many :app_menus, ->(o) { where(appid: o.appid) }, dependent: :destroy_async
       has_many :menus, -> { roots }, through: :app_menus
 
       after_initialize :init_match_value, if: -> { new_record? && handle }
@@ -39,7 +39,7 @@ module Wechat
 
     def init_match_value
       return unless handle
-      self.match_value = "#{handle_type}_#{handle_id}"
+      self.match_value = "#{handle_type.downcase.gsub('::', '_')}_#{handle_id}"
     end
 
     def init_expire_at
