@@ -29,7 +29,7 @@ module Wechat
 
       before_validation :init_expire_at, if: -> { expire_seconds.present? && expire_seconds_changed? }
       before_validation :sync_from_app, if: -> { appid.present? && appid_changed? }
-      after_save_commit :to_qrcode, if: -> { saved_change_to_match_value? }
+      after_save_commit :to_qrcode!, if: -> { saved_change_to_match_value? }
       after_save_commit :refresh_when_expired, if: -> { saved_change_to_expire_at? }
     end
 
@@ -52,8 +52,8 @@ module Wechat
       res
     end
 
-    def to_qrcode
-      commit_to_wechat
+    def to_qrcode!
+      commit_to_wechat!
     end
 
     def qrcode_data_url
@@ -61,7 +61,7 @@ module Wechat
       QrcodeHelper.data_url(self.qrcode_url)
     end
 
-    def commit_to_wechat
+    def commit_to_wechat!
       if ['Wechat::PublicApp', 'Wechat::ReadApp'].include? app.type
         get_public_qrcode
       elsif ['Wechat::ProgramApp'].include? app.type
@@ -121,10 +121,10 @@ module Wechat
       end
     end
 
-    def refresh(now = false)
+    def refresh!(now = false)
       if expired? || now
         self.expire_at = Time.current + expire_seconds
-        to_qrcode
+        to_qrcode!
       end
       self
     end
