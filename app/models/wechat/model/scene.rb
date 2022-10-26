@@ -21,6 +21,8 @@ module Wechat
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
+      belongs_to :handle, polymorphic: true, optional: true
+
       belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :response, ->(o){ where(appid: o.appid) }, foreign_key: :match_value, primary_key: :match_value, optional: true
       belongs_to :tag, ->(o){ where(appid: o.appid) }, foreign_key: :match_value, primary_key: :name, optional: true
