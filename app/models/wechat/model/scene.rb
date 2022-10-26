@@ -4,7 +4,7 @@ module Wechat
 
     included do
       attribute :match_value, :string
-      attribute :expire_seconds, :integer  # 默认: 2592000 ，即 30 天
+      attribute :expire_seconds, :integer, default: 2592000  # 默认: 2592000 ，即 30 天
       attribute :expire_at, :datetime
       attribute :qrcode_ticket, :string
       attribute :qrcode_url, :string
