@@ -38,7 +38,6 @@ module Wechat
     end
 
     def init_match_value
-      return unless handle
       self.match_value = "#{handle_type.downcase.gsub('::', '_')}_#{handle_id}"
     end
 
