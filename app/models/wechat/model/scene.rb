@@ -14,6 +14,7 @@ module Wechat
       enum aim: {
         login: 'login',
         invite: 'invite',
+        invite_member: 'invite_member',
         unknown: 'unknown'
       }, _default: 'unknown', _prefix: true
 

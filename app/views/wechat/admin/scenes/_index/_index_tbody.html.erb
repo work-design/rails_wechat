@@ -1,5 +1,6 @@
 <td>
-  <span><%= model.match_value %></span>
+  <p><%= model.match_value %></p>
+  <p><span class="tag"><%= model.aim_i18n %></span></p>
 </td>
 <td>
   <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
