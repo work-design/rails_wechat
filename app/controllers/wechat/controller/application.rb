@@ -7,7 +7,7 @@ module Wechat
       helper_method :current_wechat_app, :current_js_app, :current_corp_user
     end
 
-    def require_login(return_to: nil)
+    def require_user(return_to: nil)
       return if current_user && current_wechat_user
       return super if request.variant.include?(:mini_program) || request.variant.exclude?(:wechat)
 
