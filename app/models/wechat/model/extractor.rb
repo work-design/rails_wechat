@@ -35,7 +35,7 @@ module Wechat
       end
 
       # 这里不用 find_or_initialize_by，因为可以建立 ex.extractor, 减少 belongs_to validation present 的数据库查询
-      ex = request.extractions.find_by(extractor_id: id) || request.extractions.build(extractor: self)
+      ex = request.extractions.find(&->(i){ i.extractor_id == id }) || request.extractions.build(extractor_id: id)
       ex.name = name
       ex.matched = matched.join(', ')
       if serial && effective?(request.created_at)
