@@ -26,16 +26,23 @@ module Wechat
     end
 
     def js
+      session[:enter_url] = params[:url] if params[:url].present?
+      if params[:appid].present?
+        js_app = App.find_by appid: params[:appid]
+      else
+        js_app = current_js_app
+      end
+
       render json: {
         debug: false,
         apis: [
-          'scanQRCode',
+          'scanQRCode', 'chooseWXPay',
           'openUserProfile', 'shareToExternalMoments',
           'openAddress', 'getLocation', 'openLocation',
           'chooseImage', 'previewImage', 'uploadImage',
           'updateTimelineShareData', 'updateAppMessageShareData'
         ],
-        **current_js_app&.js_config(params[:url])
+        **js_app&.js_config(session[:enter_url])
       }
     end
 
