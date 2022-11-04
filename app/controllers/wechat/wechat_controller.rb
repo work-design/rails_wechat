@@ -33,17 +33,21 @@ module Wechat
         js_app = current_js_app
       end
 
-      render json: {
-        debug: false,
-        apis: [
-          'scanQRCode', 'chooseWXPay',
-          'openUserProfile', 'shareToExternalMoments',
-          'openAddress', 'getLocation', 'openLocation',
-          'chooseImage', 'previewImage', 'uploadImage',
-          'updateTimelineShareData', 'updateAppMessageShareData'
-        ],
-        **js_app&.js_config(session[:enter_url])
-      }
+      if js_app
+        render json: {
+          debug: false,
+          apis: [
+            'scanQRCode', 'chooseWXPay',
+            'openUserProfile', 'shareToExternalMoments',
+            'openAddress', 'getLocation', 'openLocation',
+            'chooseImage', 'previewImage', 'uploadImage',
+            'updateTimelineShareData', 'updateAppMessageShareData'
+          ],
+          **js_app.js_config(session[:enter_url])
+        }
+      else
+        render json: {}
+      end
     end
 
     def friend
