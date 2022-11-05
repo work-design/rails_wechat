@@ -47,10 +47,6 @@ module Wechat
       suite.generate_corp(auth_code)
     end
 
-    def clean_last_later
-      SuiteTicketCleanJob.perform_later(self)
-    end
-
     def clean_last
       self.class.where(suite_id: suite_id, info_type: info_type).where.not(id: id).delete_all
     end
