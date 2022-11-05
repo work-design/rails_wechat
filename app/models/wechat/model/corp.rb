@@ -112,7 +112,7 @@ module Wechat
       corp_info = info.fetch('auth_corp_info', {})
       self.assign_attributes corp_info.slice('corp_type', 'subject_type')
       self.assign_attributes corp_info.transform_keys(&->(i){ i.delete_prefix('corp_') }).slice('name', 'square_logo_url', 'user_max', 'wxqrcode', 'full_name', 'industry', 'sub_industry', 'location')
-      self.verified_end_at = Time.at(corp_info['verified_end_time'])
+      self.verified_end_at = Time.at(corp_info['verified_end_time']) if corp_info['verified_end_time'].is_a? Numeric
     end
 
     def auth_info
