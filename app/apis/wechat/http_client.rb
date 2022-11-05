@@ -91,7 +91,7 @@ module Wechat
       # 48001, api unauthorized hint, should not handle here # GH-230
       # 40082, 企业微信
       when 42001, 40014, 40001, 41001, 40082
-        raise Wechat::AccessTokenExpiredError
+        raise Wechat::AccessTokenExpiredError, data
       else
         data
       end
