@@ -143,10 +143,7 @@ module Wechat
 
     def generate_corp(auth_code)
       r = api.permanent_code(auth_code)
-      if r['errcode']
-        logger.debug "#{r['errmsg']}"
-        return
-      end
+      logger.debug r
 
       corp_id = r.dig('auth_corp_info', 'corpid')
       corp = corps.find_or_initialize_by(corp_id: corp_id)
