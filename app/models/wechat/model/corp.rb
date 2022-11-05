@@ -23,6 +23,8 @@ module Wechat
       attribute :access_token_expires_at, :datetime
       attribute :jsapi_ticket, :string
       attribute :jsapi_ticket_expires_at, :datetime
+      attribute :agent_ticket, :string
+      attribute :agent_ticket_expires_at, :datetime
       attribute :permanent_code, :string
       attribute :suite_id, :string
       attribute :host, :string
@@ -132,12 +134,26 @@ module Wechat
       end
     end
 
+    def js_config(url = '/')
+      refresh_jsapi_ticket unless jsapi_ticket_valid?
+      page_url = url.delete_suffix('#')
+      js_hash = Wechat::Signature.signature(jsapi_ticket, page_url)
+      js_hash.merge!(
+        corpid: corp_id
+      )
+
+      logger.debug "\e[35m  Current page is: #{page_url}, Hash: #{js_hash.inspect}  \e[0m"
+      js_hash
+    rescue => e
+      logger.debug e.message
+    end
+
     def agentid
       agent['agentid']
     end
 
     def agent_config(url = '/')
-      refresh_jsapi_ticket unless jsapi_ticket_valid?
+      refresh_agent_ticket unless agent_ticket_valid?
       page_url = url.delete_suffix('#')
       js_hash = Wechat::Signature.signature(jsapi_ticket, page_url)
       js_hash.merge!(
@@ -183,8 +199,20 @@ module Wechat
       access_token_expires_at > Time.current
     end
 
-    def refresh_jsapi_ticket
+    def refresh_agent_ticket
       info = api.agent_ticket
+      self.agent_ticket = info['ticket']
+      self.agent_ticket_expires_at = Time.current + info['expires_in'].to_i if info['ticket'] && self.agent_ticket_changed?
+      self.save
+      info
+    end
+
+    def agent_ticket_valid?
+      agent_ticket_expires_at.acts_like?(:time) && agent_ticket_expires_at > Time.current
+    end
+
+    def refresh_jsapi_ticket
+      info = api.jsapi_ticket
       self.jsapi_ticket = info['ticket']
       self.jsapi_ticket_expires_at = Time.current + info['expires_in'].to_i if info['ticket'] && self.jsapi_ticket_changed?
       self.save
@@ -192,8 +220,7 @@ module Wechat
     end
 
     def jsapi_ticket_valid?
-      return false unless jsapi_ticket_expires_at.acts_like?(:time)
-      jsapi_ticket_expires_at > Time.current
+      jsapi_ticket_expires_at.acts_like?(:time) && jsapi_ticket_expires_at > Time.current
     end
 
     def api
