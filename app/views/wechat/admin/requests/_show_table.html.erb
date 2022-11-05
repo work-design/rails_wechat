@@ -2,9 +2,9 @@
   <td class="has-text-right"><%= Wechat::Request.human_attribute_name(:wechat_user_id) %></td>
   <td>
     <% if @request.wechat_user.user %>
-      <%= link_to @request.wechat_user.user.name, panel_user_path(@request.wechat_user.user_id), text: true %>
+      <%= @request.wechat_user.user.name %>
     <% else %>
-      <%= link_to @request.wechat_user.name, admin_oauth_user_path(@request.wechat_user), text: true %>
+      <%= @request.wechat_user.name %>
     <% end %>
   </td>
 </tr>
