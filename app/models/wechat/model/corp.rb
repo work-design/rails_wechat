@@ -39,8 +39,6 @@ module Wechat
       has_many :corp_users, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
       has_many :contacts, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
       has_many :externals, foreign_key: :corp_id, primary_key: :corp_id
-
-      after_validation :init_organ, if: -> { corp_id_changed? }
     end
 
     # 密文解密得到msg的过程
@@ -77,7 +75,7 @@ module Wechat
       organ || build_organ
       organ.name_short = name
       organ.name = full_name
-      organ
+      organ.save
     end
 
     # todo 这个方法跟 work app 下的方法是类似的，后期合并
