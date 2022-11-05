@@ -25,10 +25,10 @@ module Wechat
 
       belongs_to :provider, foreign_key: :corp_id, primary_key: :corp_id
 
-      has_many :suite_tickets
-      has_many :suite_receives, foreign_key: :suite_id, primary_key: :suite_id
-      has_many :corp_users, foreign_key: :suite_id, primary_key: :suite_id
-      has_many :corps, foreign_key: :suite_id, primary_key: :suite_id
+      has_many :suite_tickets, primary_key: :suite_id, foreign_key: :suiteid
+      has_many :suite_receives, primary_key: :suite_id, foreign_key: :suite_id
+      has_many :corp_users, primary_key: :suite_id, foreign_key: :suite_id
+      has_many :corps, primary_key: :suite_id, foreign_key: :suite_id
     end
 
     # 密文解密得到msg的过程
