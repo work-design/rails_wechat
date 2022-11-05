@@ -10,6 +10,10 @@ module Wechat::Api
       post 'get_login_info', auth_code: auth_code, base: BASE
     end
 
+    def open_corpid(corpid)
+      provider_post 'corpid_to_opencorpid', corpid: corpid, base: BASE
+    end
+
   end
 end
 
