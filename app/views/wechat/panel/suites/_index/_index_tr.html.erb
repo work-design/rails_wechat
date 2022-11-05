@@ -3,7 +3,7 @@
   <td>
     <div data-show-target="item" style="visibility: hidden">
       <%= link_to({ controller: 'corps', provider_id: model.corp_id, suite_id: model.id }, aria: { label: t('wechat.panel.corps.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-buildings"></i>
+        <i class="fa-solid fa-building"></i>
       <% end %>
       <%= link_to({ controller: 'suite_tickets', provider_id: model.corp_id, suite_id: model.id }, aria: { label: t('wechat.panel.suite_tickets.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-envelope"></i>

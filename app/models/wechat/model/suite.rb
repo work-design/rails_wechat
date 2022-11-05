@@ -49,6 +49,10 @@ module Wechat
       content
     end
 
+    def url
+      Rails.application.routes.url_for(controller: 'wechat/suites', action: 'notify', id: self.id)
+    end
+
     def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), host:, **url_options)
       url_options.with_defaults! controller: 'wechat/suites', action: 'login', id: id, host: host
       h = {
