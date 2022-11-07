@@ -56,7 +56,7 @@ module Wechat
     end
 
     def clean_last
-      self.class.where(suite_id: suite_id, info_type: info_type).where.not(id: id).delete_all
+      self.class.where(suiteid: suiteid, info_type: info_type).where.not(id: id).delete_all
     end
 
     def deal_contact
