@@ -1,7 +1,6 @@
 module Wechat::Api
   class Suite < Wechat::Api::Base
     include Service
-    include IdConvert
 
     def raw_post(path, params: {}, headers: {}, base: nil, debug: nil, **payload)
       r = with_raw_access_token(params) do |with_token_params|

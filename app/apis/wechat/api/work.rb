@@ -6,6 +6,7 @@ module Wechat::Api
     include User
     include Contact
     include Media
+    include IdConvert
 
     def initialize(app)
       super
