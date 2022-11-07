@@ -1,5 +1,5 @@
 <td>
   <p><%= model.info_type %></p>
-  <p class="has-text-grey"><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
+  <p class="has-text-grey"><time data-controller="time" data-format="human"><%= model.created_at.to_fs(:iso8601) %></time></p>
 </td>
 <td><%= simple_format model.message_hash %></td>

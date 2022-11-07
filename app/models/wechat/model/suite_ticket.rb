@@ -4,6 +4,7 @@ module Wechat
 
     included do
       attribute :suiteid, :string
+      attribute :to, :string
       attribute :ticket_data, :string
       attribute :agent_id, :string
       attribute :message_hash, :json

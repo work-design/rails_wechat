@@ -10,7 +10,7 @@ module Wechat
       r = Hash.from_xml(request.raw_post)['xml']
       logger.debug "\e[35m  body is: #{r}  \e[0m"
 
-      @suite_ticket.suiteid = r['ToUserName']
+      @suite_ticket.to = r['ToUserName']
       @suite_ticket.ticket_data = r['Encrypt']
       @suite_ticket.agent_id = r['AgentID']
 
