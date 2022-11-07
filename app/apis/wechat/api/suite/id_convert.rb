@@ -3,8 +3,8 @@ module Wechat::Api
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/idconvert/'
 
 
-    def to_pending_id(external_userid)
-      raw_post 'external_userid_to_pending_id', external_userid: external_userid, base: BASE
+    def to_pending_id(external_userid, **options)
+      raw_post 'external_userid_to_pending_id', external_userid: external_userid, base: BASE, **options
     end
   end
 end
