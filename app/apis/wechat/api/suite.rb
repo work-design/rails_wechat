@@ -7,7 +7,7 @@ module Wechat::Api
       r = with_raw_access_token(params) do |with_token_params|
         @client.post_json path, payload, headers: headers, params: with_token_params, debug: debug, base: base
       end
-      logger.debug "\e[35m  #{r}  \e[0m"
+      Rails.logger.debug "\e[35m  #{r}  \e[0m"
       r
     end
 
