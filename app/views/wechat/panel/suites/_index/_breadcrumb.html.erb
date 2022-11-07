@@ -1,6 +1,6 @@
 <div class="breadcrumb has-succeeds-separator">
   <ul>
-    <li><%= link_to t('wechat.panel.providers.index.title'), { controller: 'providers' } %></li>
+    <li><%= link_to t('wechat.panel.providers.index.title'), { controller: 'providers', anchor: "tr_#{params[:provider_id]}" } %></li>
     <li class="is-active"><%= t('.title') %></li>
   </ul>
 </div>
