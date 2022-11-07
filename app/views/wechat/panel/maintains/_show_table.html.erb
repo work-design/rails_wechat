@@ -1,28 +1,20 @@
 <tr>
-  <td class="has-text-right"><%= Wechat::External.human_attribute_name(:corp_id) %></td>
-  <td><%= @external.corp_id %></td>
+  <td class="has-text-right"><%= Crm::Maintain.human_attribute_name(:userid) %></td>
+  <td><%= @maintain.external_userid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::External.human_attribute_name(:userid) %></td>
-  <td><%= @external.userid %></td>
+  <td class="has-text-right"><%= Crm::Maintain.human_attribute_name(:name) %></td>
+  <td><%= @maintain.name %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::External.human_attribute_name(:state) %></td>
-  <td><%= @external.state %></td>
+  <td class="has-text-right"><%= Crm::Maintain.human_attribute_name(:remark) %></td>
+  <td><%= @maintain.remark %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::External.human_attribute_name(:name) %></td>
-  <td><%= @external.name %></td>
+  <td class="has-text-right"><%= Crm::Maintain.human_attribute_name(:gender) %></td>
+  <td><%= @maintain.client.gender_i18n %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::External.human_attribute_name(:remark) %></td>
-  <td><%= @external.remark %></td>
-</tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::External.human_attribute_name(:gender) %></td>
-  <td><%= @external.gender %></td>
-</tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::External.human_attribute_name(:add_way) %></td>
-  <td><%= @external.add_way %></td>
+  <td class="has-text-right"><%= Crm::Maintain.human_attribute_name(:add_way) %></td>
+  <td><%= @maintain.add_way_i18n %></td>
 </tr>
