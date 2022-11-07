@@ -15,7 +15,7 @@ module Wechat
       belongs_to :suite, foreign_key: :suiteid, primary_key: :suite_id, optional: true
       belongs_to :corp_user, ->(o) { where(suite_id: o.suiteid, corp_id: o.auth_corp_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
 
-      before_save :parsed_data
+      before_save :parsed_data, if: -> { ticket_data_changed? }
       after_save :sync_suite_ticket, if: -> { ['suite_ticket'].include?(info_type) && saved_change_to_info_type? }
       after_save_commit :sync_auth_code, if: -> { ['create_auth', 'reset_permanent_code'].include?(info_type) && saved_change_to_info_type? }
       after_create_commit :clean_last, if: -> { ['suite_ticket', 'reset_permanent_code'].include?(info_type) }
@@ -52,7 +52,7 @@ module Wechat
     def compute_corp_id!
       r = suite.provider.api.open_corpid(to)
       logger.debug "\e[35m  Corp id: #{r}  \e[0m"
-      self.auth_corp_id = r['open_corpid']
+      self.auth_corp_id ||= r['open_corpid']
       self.save
     end
 
