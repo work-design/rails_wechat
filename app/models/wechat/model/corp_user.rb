@@ -147,6 +147,7 @@ module Wechat
 
       follow_infos = r.fetch('follow_user', [])
       info = follow_infos.find(&->(i){ i['userid'] == user_id })
+      logger.debug "\e[35m  Corp id: #{info}  \e[0m"
       if info
         follow = init_follow(item['external_userid'], info)
         follow.client = external
@@ -176,7 +177,7 @@ module Wechat
     def init_follow(external_userid, info)
       follow = member.maintains.find_or_initialize_by(external_userid: external_userid)
       follow.assign_attributes info.slice('remark', 'state', 'oper_userid', 'add_way', 'remark_mobiles')
-      follow.note = info['description']
+      #follow.note = info['description']
       follow.member_id = member.id
       follow
     end
