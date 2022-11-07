@@ -2,8 +2,8 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
-      <%= link_to({ controller: 'suites', provider_id: model.corp_id }, aria: { label: t('wechat.panel.suites.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-folder"></i>
+      <%= link_to({ controller: 'suites', provider_id: model.id }, aria: { label: t('wechat.panel.suites.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-folder"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info"></i>
