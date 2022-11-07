@@ -107,7 +107,7 @@ Rails.application.routes.draw do
           resources :suites do
             resources :corps do
               resources :corp_users
-              resources :externals
+              resources :maintains
             end
             resources :suite_tickets
             resources :suite_receives

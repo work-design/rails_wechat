@@ -7,14 +7,5 @@ module Wechat
       @corps = @suite.corps.page(params[:page])
     end
 
-    private
-    def set_provider
-      @provider = Provider.find params[:provider_id]
-    end
-
-    def set_suite
-      @suite = @provider.suites.find params[:suite_id]
-    end
-
   end
 end

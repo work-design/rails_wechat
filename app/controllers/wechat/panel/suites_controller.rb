@@ -8,10 +8,6 @@ module Wechat
     end
 
     private
-    def set_provider
-      @provider = Provider.find params[:provider_id]
-    end
-
     def set_new_suite
       @suite = @provider.suites.build(suite_params)
     end

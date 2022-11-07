@@ -107,7 +107,7 @@ zh:
       corp_users:
         index:
           title: 已登录用户
-      externals:
+      maintains:
         index:
           title: 客户列表
       contacts:
