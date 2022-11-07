@@ -19,6 +19,7 @@ module Wechat
       after_save :sync_suite_ticket, if: -> { ['suite_ticket'].include?(info_type) && saved_change_to_info_type? }
       after_save_commit :sync_auth_code, if: -> { ['create_auth', 'reset_permanent_code'].include?(info_type) && saved_change_to_info_type? }
       after_create_commit :clean_last, if: -> { ['suite_ticket', 'reset_permanent_code'].include?(info_type) }
+      after_create_commit :compute_corp_id!, if: -> { ['change_external_contact'].include?(info_type) }
       after_create_commit :deal_contact, if: -> { ['change_external_contact'].include?(info_type) }
     end
 
@@ -26,7 +27,7 @@ module Wechat
       content = suite.decrypt(ticket_data)
       data = Hash.from_xml(content).fetch('xml', {})
 
-      self.info_type = data['InfoType']
+      self.info_type = data['InfoType'] || data['Event']
       self.message_hash = data
 
       # 同步 userid 和 corpid
@@ -46,6 +47,12 @@ module Wechat
     def sync_auth_code
       auth_code = message_hash.dig('AuthCode')
       suite.generate_corp(auth_code)
+    end
+
+    def compute_corp_id!
+      r = suite.provider.api.open_corpid(to)
+      self.auth_corp_id = r['open_corpid']
+      self.save
     end
 
     def clean_last
