@@ -13,7 +13,7 @@ module Wechat
     end
 
     def set_suite
-      @suite = Suite.find params[:suite_id]
+      @suite = @provider.suites.find params[:suite_id]
     end
 
   end

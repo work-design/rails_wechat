@@ -10,15 +10,15 @@ module Wechat
 
     private
     def set_provider
-      @provider = Provider.find_by corp_id: params[:provider_id]
+      @provider = Provider.find params[:provider_id]
     end
 
     def set_suite
-      @suite = Suite.find_by suite_id: params[:suite_id]
+      @suite = @provider.suites.find params[:suite_id]
     end
 
     def set_corp
-      @corp = Corp.find_by corp_id: params[:corp_id], suite_id: params[:suite_id]
+      @corp = @suite.corps.find params[:corp_id]
     end
 
   end
