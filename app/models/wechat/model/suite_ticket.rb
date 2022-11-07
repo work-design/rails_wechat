@@ -61,7 +61,7 @@ module Wechat
     end
 
     def deal_contact
-      if corp_user && ['change_external_contact'].include?(message_hash['Event'])
+      if corp_user
         corp_user.sync_external(message_hash['ExternalUserID'])
       end
     end
