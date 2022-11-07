@@ -4,9 +4,11 @@ module Wechat::Api
     include IdConvert
 
     def raw_post(path, params: {}, headers: {}, base: nil, debug: nil, **payload)
-      with_raw_access_token(params) do |with_token_params|
+      r = with_raw_access_token(params) do |with_token_params|
         @client.post_json path, payload, headers: headers, params: with_token_params, debug: debug, base: base
       end
+      logger.debug "\e[35m  #{r}  \e[0m"
+      r
     end
 
     protected
