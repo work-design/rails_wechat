@@ -47,7 +47,7 @@ module Wechat::Api
     end
 
     def external_userid(unionid:, openid:, **options)
-      post 'externalcontact/unionid_to_external_userid_3rd', unionid: unionid, openid: openid, base: BASE, **options
+      post 'externalcontact/unionid_to_external_userid_3rd', unionid: unionid, openid: openid, origin: BASE, **options
     end
 
   end
