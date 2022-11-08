@@ -18,24 +18,33 @@ module Wechat::Api
       )
     end
 
-    def get(path, params: {}, headers: {}, origin: nil, debug: nil, debug_level: 1)
+    def get(path, params: {}, headers: {}, origin: nil, debug: nil)
+      with_options = { origin: origin }
+      with_options.merge! debug: STDERR, debug_level: 2 if debug
+
       with_access_token(params) do |with_token_params|
-        response = @client.with_headers(headers).with(origin: origin, debug_level: debug_level).get(path, params: with_token_params)
+        response = @client.with_headers(headers).with(with_options).get(path, params: with_token_params)
         debug ? response : parse_response(response)
       end
     end
 
-    def post(path, params: {}, headers: {}, origin: nil, debug: nil, debug_level: 1, **payload)
+    def post(path, params: {}, headers: {}, origin: nil, debug: nil, **payload)
+      with_options = { origin: origin }
+      with_options.merge! debug: STDERR, debug_level: 2 if debug
+
       with_access_token(params) do |with_token_params|
-        response = @client.with_headers(headers).with(origin: origin, debug_level: debug_level).post(path, params: with_token_params, json: payload)
+        response = @client.with_headers(headers).with(with_options).post(path, params: with_token_params, json: payload)
         debug ? response : parse_response(response)
       end
     end
 
-    def post_file(path, file, params: {}, headers: {}, origin: nil, debug_level: 1, **options)
+    def post_file(path, file, params: {}, headers: {}, origin: nil, **options)
+      with_options = { origin: origin }
+      with_options.merge! debug: STDERR, debug_level: 2 if debug
+
       with_access_token(params) do |with_token_params|
         form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file, content_type: options[:content_type])
-        response = @client.plugin(:multipart).with_headers(headers).with(origin: origin, debug_level: debug_level).post(
+        response = @client.plugin(:multipart).with_headers(headers).with(with_options).post(
           path,
           params: with_token_params,
           form: { media: form_file }
