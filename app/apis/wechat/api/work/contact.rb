@@ -53,6 +53,10 @@ module Wechat::Api
       post 'get_new_external_userid', external_userid_list: external_userid, origin: BASE, **options
     end
 
+    def service_external_userid(external_userid, **options)
+      post 'to_service_external_userid', external_userid: external_userid, origin: BASE, **options
+    end
+
   end
 end
 
