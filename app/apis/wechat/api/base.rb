@@ -9,37 +9,55 @@ module Wechat::Api
     def initialize(app)
       @app = app
       @client = Wechat::HttpClient.new
-      @client = HTTPX.with(**RailsWechat.config.httpx)
+      @client = HTTPX.with(
+        ssl: {
+          verify_mode: OpenSSL::SSL::VERIFY_NONE
+        },
+        headers: {
+          'Accept' => 'application/json'
+        }
+      )
     end
 
     def get(path, params: {}, headers: {}, origin: nil, debug: nil)
       with_access_token(params) do |with_token_params|
-        @client.get path, headers: headers, params: with_token_params, base: base, debug: debug
+        response = @client.with_headers(headers).with(origin: origin).get(path, params: with_token_params)
+
+        if debug
+          response
+        else
+          parse_response(response)
+        end
       end
     end
 
-    def getx(path, headers: {}, params: {}, base: nil, **options)
-      headers.with_defaults! 'Accept' => 'application/json'
-      url = base + path
-
-      response = @http.with_headers(headers).get(url, params: params)
-
-      if options[:debug]
-        response
-      else
-        parse_response(response)
-      end
-    end
-
-    def post(path, params: {}, headers: {}, base: nil, debug: nil, **payload)
+    def post(path, params: {}, headers: {}, origin: nil, debug: nil, **payload)
       with_access_token(params) do |with_token_params|
-        @client.post_json path, payload, headers: headers, params: with_token_params, debug: debug, base: base
+        response = @http.with_headers(headers).with(origin: origin).post(path, params: with_token_params, json: payload)
+
+        if debug
+          response
+        else
+          parse_response(response)
+        end
       end
     end
 
     def post_file(path, file, params: {}, headers: {}, base: nil, **options)
       with_access_token(params) do |with_token_params|
         @client.post_file path, file, headers: headers, params: with_token_params, base: base, **options
+
+        form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file, content_type: options[:content_type])
+        response = @http.plugin(:multipart).with_headers(headers).post(
+          url,
+          params: params,
+          form: { media: form_file }
+        )
+        if debug
+          response
+        else
+          parse_response(response)
+        end
       end
     end
 
