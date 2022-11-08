@@ -29,6 +29,13 @@ module Wechat
       has_many :suite_receives, primary_key: :suite_id, foreign_key: :suite_id
       has_many :corp_users, primary_key: :suite_id, foreign_key: :suite_id
       has_many :corps, primary_key: :suite_id, foreign_key: :suite_id
+
+      before_validation :init_aes_key, if: -> { encoding_aes_key.blank? }
+    end
+
+    def init_aes_key
+      self.token ||= SecureRandom.alphanumeric(24)
+      self.encoding_aes_key ||= SecureRandom.alphanumeric(43)
     end
 
     # 密文解密得到msg的过程
