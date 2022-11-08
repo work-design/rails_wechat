@@ -8,7 +8,6 @@ module Wechat::Api
 
     def initialize(app)
       @app = app
-      @client = Wechat::HttpClient.new
       @client = HTTPX.with(
         ssl: {
           verify_mode: OpenSSL::SSL::VERIFY_NONE
@@ -43,16 +42,15 @@ module Wechat::Api
       end
     end
 
-    def post_file(path, file, params: {}, headers: {}, base: nil, **options)
+    def post_file(path, file, params: {}, headers: {}, origin: nil, **options)
       with_access_token(params) do |with_token_params|
-        @client.post_file path, file, headers: headers, params: with_token_params, base: base, **options
-
         form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file, content_type: options[:content_type])
-        response = @http.plugin(:multipart).with_headers(headers).post(
-          url,
-          params: params,
+        response = @http.plugin(:multipart).with_headers(headers).with(origin: origin).post(
+          path,
+          params: with_token_params,
           form: { media: form_file }
         )
+
         if debug
           response
         else
