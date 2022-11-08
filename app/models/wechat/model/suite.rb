@@ -30,12 +30,12 @@ module Wechat
       has_many :corp_users, primary_key: :suite_id, foreign_key: :suite_id
       has_many :corps, primary_key: :suite_id, foreign_key: :suite_id
 
-      before_validation :init_aes_key, if: -> { encoding_aes_key.blank? }
+      before_validation :init_aes_key, if: -> { encoding_aes_key.blank? || token.blank? }
     end
 
     def init_aes_key
-      self.token ||= SecureRandom.alphanumeric(24)
-      self.encoding_aes_key ||= SecureRandom.alphanumeric(43)
+      self.token = token.presence || SecureRandom.alphanumeric(24)
+      self.encoding_aes_key = encoding_aes_key.presence || SecureRandom.alphanumeric(43)
     end
 
     # 密文解密得到msg的过程
