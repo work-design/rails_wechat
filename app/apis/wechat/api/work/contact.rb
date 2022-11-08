@@ -49,6 +49,10 @@ module Wechat::Api
       post 'remark', userid: userid, external_userid: external_userid, origin: BASE, **options
     end
 
+    def new_external_userid(*external_userid, **options)
+      post 'get_new_external_userid', external_userid_list: external_userid, origin: BASE, **options
+    end
+
   end
 end
 
