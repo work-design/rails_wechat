@@ -41,13 +41,16 @@ module Wechat::Api
     end
 
     def component_token
-      body = {
-        component_appid: app.appid,
-        component_appsecret: app.secret,
-        component_verify_ticket: app.verify_ticket
-      }
+      r = client.with(origin: BASE).post(
+        'api_component_token',
+        body: {
+          component_appid: app.appid,
+          component_appsecret: app.secret,
+          component_verify_ticket: app.verify_ticket
+       }
+      )
 
-      client.post 'api_component_token', body.to_json, origin: BASE  # use client without access token
+      r.json
     end
 
   end

@@ -70,20 +70,18 @@ module Wechat::Api
 
     def parse_response(response)
       raise "Request get fail, response status #{response.status}" if response.status != 200
-
       content_type = response.content_type.mime_type
-      body = response.body.to_s
 
       if content_type =~ /image|audio|video/
         data = Tempfile.new('tmp')
         data.binmode
-        data.write(body)
+        data.write(response.body.to_s)
         data.rewind
         return data
       elsif content_type =~ /html|xml/
-        data = Hash.from_xml(body)
+        data = Hash.from_xml(response.body.to_s)
       else
-        data = JSON.parse body.gsub(/[\u0000-\u001f]+/, '')
+        data = response.json
       end
 
       case data['errcode']

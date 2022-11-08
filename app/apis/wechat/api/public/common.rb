@@ -9,7 +9,8 @@ module Wechat::Api
     end
 
     def token
-      client.get 'token', params: { grant_type: 'client_credential', appid: app.appid, secret: app.secret }, origin: BASE
+      r = client.with(origin: BASE).get 'token', params: { grant_type: 'client_credential', appid: app.appid, secret: app.secret }
+      r.json
     end
 
     def jsapi_ticket

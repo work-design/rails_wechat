@@ -3,7 +3,8 @@ module Wechat::Api
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/service/'
 
     def token
-      client.post 'get_suite_token', { suite_id: app.suite_id, suite_secret: app.secret, suite_ticket: app.suite_ticket }.to_json, origin: BASE
+      r = client.with(origin: BASE).post 'get_suite_token', body: { suite_id: app.suite_id, suite_secret: app.secret, suite_ticket: app.suite_ticket }
+      r.json
     end
 
     def pre_auth_code
