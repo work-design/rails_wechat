@@ -3,7 +3,7 @@ module Wechat::Api
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/service/'
 
     def token
-      r = client.with(origin: BASE).post 'get_suite_token', body: { suite_id: app.suite_id, suite_secret: app.secret, suite_ticket: app.suite_ticket }
+      r = client.with(origin: BASE).post 'get_suite_token', json: { suite_id: app.suite_id, suite_secret: app.secret, suite_ticket: app.suite_ticket }
       return r if r.status != 200
       r.json
     end
