@@ -27,7 +27,7 @@ module Wechat::Api
 
     def post(path, params: {}, headers: {}, origin: nil, debug: nil, debug_level: 1, **payload)
       with_access_token(params) do |with_token_params|
-        response = @http.with_headers(headers).with(origin: origin, debug_level: debug_level).post(path, params: with_token_params, json: payload)
+        response = @client.with_headers(headers).with(origin: origin, debug_level: debug_level).post(path, params: with_token_params, json: payload)
         debug ? response : parse_response(response)
       end
     end
@@ -35,7 +35,7 @@ module Wechat::Api
     def post_file(path, file, params: {}, headers: {}, origin: nil, debug_level: 1, **options)
       with_access_token(params) do |with_token_params|
         form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file, content_type: options[:content_type])
-        response = @http.plugin(:multipart).with_headers(headers).with(origin: origin, debug_level: debug_level).post(
+        response = @client.plugin(:multipart).with_headers(headers).with(origin: origin, debug_level: debug_level).post(
           path,
           params: with_token_params,
           form: { media: form_file }
