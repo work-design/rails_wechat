@@ -19,11 +19,16 @@ module Wechat
       attribute :identity, :string
       attribute :temp_identity, :string
       attribute :name, :string
-      attribute :gender, :string
       attribute :avatar_url, :string
       attribute :qr_code, :string
       attribute :department, :integer, array: []
       attribute :follows_count, :integer, default: 0
+
+      enum gender: {
+        male: '1',
+        female: '2',
+        unknown: '0'
+      }
 
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
       belongs_to :corp, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
