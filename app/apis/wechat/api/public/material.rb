@@ -3,51 +3,51 @@ module Wechat::Api
     BASE = 'https://api.weixin.qq.com/cgi-bin/'
 
     def media(media_id)
-      get 'media/get', params: { media_id: media_id }, as: :file, base: BASE
+      get 'media/get', params: { media_id: media_id }, as: :file, origin: BASE
     end
 
     def media_hq(media_id)
-      get 'media/get/jssdk', params: { media_id: media_id }, as: :file, base: BASE
+      get 'media/get/jssdk', params: { media_id: media_id }, as: :file, origin: BASE
     end
 
     def media_create(type, file)
-      post_file 'media/upload', file, params: { type: type }, base: BASE
+      post_file 'media/upload', file, params: { type: type }, origin: BASE
     end
 
     def material(media_id)
-      get 'material/get', params: { media_id: media_id }, as: :file, base: BASE
+      get 'material/get', params: { media_id: media_id }, as: :file, origin: BASE
     end
 
     def material_count
-      get 'material/get_materialcount', base: BASE
+      get 'material/get_materialcount', origin: BASE
     end
 
     def material_list(type = 'news', offset = 0, count = 20)
-      post 'material/batchget_material', type: type, offset: offset, count: count, base: BASE
+      post 'material/batchget_material', type: type, offset: offset, count: count, origin: BASE
     end
 
     def material_add(type, file)
-      post_file 'material/add_material', file, params: { type: type }, base: BASE
+      post_file 'material/add_material', file, params: { type: type }, origin: BASE
     end
 
     def material_add_news(*news)
-      post 'material/add_news', articles: news, base: BASE
+      post 'material/add_news', articles: news, origin: BASE
     end
 
     def material_delete(media_id)
-      post 'material/del_material', media_id: media_id, base: BASE
+      post 'material/del_material', media_id: media_id, origin: BASE
     end
 
     def message_custom_send(message)
-      post 'message/custom/send', **message, base: BASE
+      post 'message/custom/send', **message, origin: BASE
     end
 
     def message_custom_typing(openid, command = 'Typing')
-      post 'message/custom/typing', touser: openid, command: command, base: BASE
+      post 'message/custom/typing', touser: openid, command: command, origin: BASE
     end
 
     def customservice_getonlinekflist
-      get 'customservice/getonlinekflist', base: BASE
+      get 'customservice/getonlinekflist', origin: BASE
     end
 
   end

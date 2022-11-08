@@ -3,27 +3,27 @@ module Wechat::Api
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
     def getuserinfo(code)
-      get 'user/getuserinfo', params: { code: code }, base: BASE
+      get 'user/getuserinfo', params: { code: code }, origin: BASE
     end
 
     def auth_user(code)
-      get 'auth/getuserinfo', params: { code: code }, base: BASE
+      get 'auth/getuserinfo', params: { code: code }, origin: BASE
     end
 
     def convert_to_openid(userid)
-      post 'user/convert_to_openid', userid: userid, agentid: @agentid, base: BASE
+      post 'user/convert_to_openid', userid: userid, agentid: @agentid, origin: BASE
     end
 
     def user_detail(user_ticket)
-      post 'user/getuserdetail', user_ticket: user_ticket, base: BASE
+      post 'user/getuserdetail', user_ticket: user_ticket, origin: BASE
     end
 
     def invite_user(userid)
-      post 'invite/send', userid: userid, base: BASE
+      post 'invite/send', userid: userid, origin: BASE
     end
 
     def user_auth_success(userid)
-      get 'user/authsucc', params: { userid: userid }, base: BASE
+      get 'user/authsucc', params: { userid: userid }, origin: BASE
     end
 
     ## 成员管理
@@ -34,7 +34,7 @@ module Wechat::Api
 
     # 读取成员
     def user(userid)
-      get 'user/get', params: { userid: userid }, base: BASE
+      get 'user/get', params: { userid: userid }, origin: BASE
     end
 
     # 更新成员
@@ -44,36 +44,36 @@ module Wechat::Api
 
     # 删除成员
     def user_delete(userid)
-      get 'user/delete', params: { userid: userid }, base: BASE
+      get 'user/delete', params: { userid: userid }, origin: BASE
     end
 
     # 批量删除成员
     def user_batchdelete(useridlist)
-      post 'user/batchdelete', useridlist: useridlist, base: BASE
+      post 'user/batchdelete', useridlist: useridlist, origin: BASE
     end
 
     def batch_job_result(jobid)
-      get 'batch/getresult', params: { jobid: jobid }, base: BASE
+      get 'batch/getresult', params: { jobid: jobid }, origin: BASE
     end
 
     def batch_replaceparty(media_id)
-      post 'batch/replaceparty', media_id: media_id, base: BASE
+      post 'batch/replaceparty', media_id: media_id, origin: BASE
     end
 
     def batch_syncuser(media_id)
-      post 'batch/syncuser', media_id: media_id, base: BASE
+      post 'batch/syncuser', media_id: media_id, origin: BASE
     end
 
     def batch_replaceuser(media_id)
-      post 'batch/replaceuser', media_id: media_id, base: BASE
+      post 'batch/replaceuser', media_id: media_id, origin: BASE
     end
 
     def department_create(name, parentid)
-      post 'department/create', name: name, parentid: parentid, base: BASE
+      post 'department/create', name: name, parentid: parentid, origin: BASE
     end
 
     def department_delete(departmentid)
-      get 'department/delete', params: { id: departmentid }, base: BASE
+      get 'department/delete', params: { id: departmentid }, origin: BASE
     end
 
     def department_update(departmentid, name = nil, parentid = nil, order = nil)
@@ -82,46 +82,46 @@ module Wechat::Api
 
     def department(id = nil)
       if id.present?
-        get 'department/list', params: { id: id }, base: BASE
+        get 'department/list', params: { id: id }, origin: BASE
       else
-        get 'department/list', base: BASE
+        get 'department/list', origin: BASE
       end
     end
 
     def user_simplelist(department_id, fetch_child = 0, status = 0)
-      get 'user/simplelist', params: { department_id: department_id, fetch_child: fetch_child, status: status }, base: BASE
+      get 'user/simplelist', params: { department_id: department_id, fetch_child: fetch_child, status: status }, origin: BASE
     end
 
     def user_list(department_id, fetch_child = 0, status = 0)
-      get 'user/list', params: { department_id: department_id, fetch_child: fetch_child, status: status }, base: BASE
+      get 'user/list', params: { department_id: department_id, fetch_child: fetch_child, status: status }, origin: BASE
     end
 
     def tag_create(tagname, tagid = nil)
-      post 'tag/create', tagname: tagname, tagid: tagid, base: BASE
+      post 'tag/create', tagname: tagname, tagid: tagid, origin: BASE
     end
 
     def tag_update(tagid, tagname)
-      post 'tag/update', tagid: tagid, tagname: tagname, base: BASE
+      post 'tag/update', tagid: tagid, tagname: tagname, origin: BASE
     end
 
     def tag_delete(tagid)
-      get 'tag/delete', params: { tagid: tagid }, base: BASE
+      get 'tag/delete', params: { tagid: tagid }, origin: BASE
     end
 
     def tags
-      get 'tag/list', base: BASE
+      get 'tag/list', origin: BASE
     end
 
     def tag(tagid)
-      get 'tag/get', params: { tagid: tagid }, base: BASE
+      get 'tag/get', params: { tagid: tagid }, origin: BASE
     end
 
     def tag_add_user(tagid, userids = nil, departmentids = nil)
-      post 'tag/addtagusers', tagid: tagid, userlist: userids, partylist: departmentids, base: BASE
+      post 'tag/addtagusers', tagid: tagid, userlist: userids, partylist: departmentids, origin: BASE
     end
 
     def tag_del_user(tagid, userids = nil, departmentids = nil)
-      post 'tag/deltagusers', tagid: tagid, userlist: userids, partylist: departmentids, base: BASE
+      post 'tag/deltagusers', tagid: tagid, userlist: userids, partylist: departmentids, origin: BASE
     end
 
   end

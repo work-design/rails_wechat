@@ -7,7 +7,7 @@ module Wechat::Api
         component_appid: app.appid
       }
 
-      post 'api_create_preauthcode', **body, base: BASE
+      post 'api_create_preauthcode', **body, origin: BASE
     end
 
     def query_auth(auth_code)
@@ -16,7 +16,7 @@ module Wechat::Api
         authorization_code: auth_code
       }
 
-      r = post 'api_query_auth', **body, base: BASE
+      r = post 'api_query_auth', **body, origin: BASE
       r['authorization_info']
     end
 
@@ -27,7 +27,7 @@ module Wechat::Api
         authorizer_refresh_token: refresh_token
       }
 
-      post 'api_authorizer_token', **body, base: BASE
+      post 'api_authorizer_token', **body, origin: BASE
     end
 
     def get_authorizer_info(appid)
@@ -36,7 +36,7 @@ module Wechat::Api
         authorizer_appid: appid
       }
 
-      r = post 'api_get_authorizer_info', **body, base: BASE
+      r = post 'api_get_authorizer_info', **body, origin: BASE
       r['authorizer_info']
     end
 
@@ -47,7 +47,7 @@ module Wechat::Api
         component_verify_ticket: app.verify_ticket
       }
 
-      client.post 'api_component_token', body.to_json, base: BASE  # use client without access token
+      client.post 'api_component_token', body.to_json, origin: BASE  # use client without access token
     end
 
   end

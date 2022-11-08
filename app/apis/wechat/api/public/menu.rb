@@ -3,40 +3,40 @@ module Wechat::Api
     BASE = 'https://api.weixin.qq.com/cgi-bin/'
 
     def menu
-      get 'menu/get', base: BASE
+      get 'menu/get', origin: BASE
     end
 
     def menu_delete
-      get 'menu/delete', base: BASE
+      get 'menu/delete', origin: BASE
     end
 
     def menu_create(menu)
-      post 'menu/create', **menu, base: BASE
+      post 'menu/create', **menu, origin: BASE
     end
 
     def menu_addconditional(menu)
-      post 'menu/addconditional', **menu, base: BASE
+      post 'menu/addconditional', **menu, origin: BASE
     end
 
     def menu_trymatch(user_id)
-      post 'menu/trymatch', user_id: user_id, base: BASE
+      post 'menu/trymatch', user_id: user_id, origin: BASE
     end
 
     def menu_delconditional(menuid)
-      post 'menu/delconditional', menuid: menuid, base: BASE
+      post 'menu/delconditional', menuid: menuid, origin: BASE
     end
 
     def templates
-      r = get 'template/get_all_private_template', base: BASE
+      r = get 'template/get_all_private_template', origin: BASE
       r['template_list']
     end
 
     def add_template(template_id_short)
-      post 'template/api_add_template', template_id_short: template_id_short, base: BASE
+      post 'template/api_add_template', template_id_short: template_id_short, origin: BASE
     end
 
     def del_template(template_id)
-      post 'template/del_private_template', template_id: template_id, base: BASE
+      post 'template/del_private_template', template_id: template_id, origin: BASE
     end
 
   end

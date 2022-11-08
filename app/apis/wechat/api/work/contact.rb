@@ -8,45 +8,45 @@ module Wechat::Api
         type: type,
         scene: scene,
         **options,
-        base: BASE
+        origin: BASE
       )
     end
 
     def list_contact_way(**options)
-      post 'list_contact_way', base: BASE, **options
+      post 'list_contact_way', origin: BASE, **options
     end
 
     def get_contact_way(config_id, **options)
-      post 'get_contact_way', config_id: config_id, base: BASE, **options
+      post 'get_contact_way', config_id: config_id, origin: BASE, **options
     end
 
     def get_follow_user_list
-      get 'get_follow_user_list', base: BASE
+      get 'get_follow_user_list', origin: BASE
     end
 
     def del_contact_way(config_id, **options)
-      post 'del_contact_way', config_id: config_id, base: BASE, **options
+      post 'del_contact_way', config_id: config_id, origin: BASE, **options
     end
 
     def update_contact_way(config_id, **options)
-      post 'update_contact_way', config_id: config_id, base: BASE, **options
+      post 'update_contact_way', config_id: config_id, origin: BASE, **options
     end
 
     def list(userid)
-      r = get 'list', params: { userid: userid }, base: BASE
+      r = get 'list', params: { userid: userid }, origin: BASE
       r['external_userid']
     end
 
     def item(external_userid, **options)
-      get 'get', params: { external_userid: external_userid, **options }, base: BASE
+      get 'get', params: { external_userid: external_userid, **options }, origin: BASE
     end
 
     def batch(userid, **options)
-      post 'batch/get_by_user', userid_list: [userid], base: BASE, **options
+      post 'batch/get_by_user', userid_list: [userid], origin: BASE, **options
     end
 
     def remark(userid, external_userid, **options)
-      post 'remark', userid: userid, external_userid: external_userid, base: BASE, **options
+      post 'remark', userid: userid, external_userid: external_userid, origin: BASE, **options
     end
 
   end

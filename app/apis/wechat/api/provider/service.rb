@@ -3,15 +3,15 @@ module Wechat::Api
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/service/'
 
     def token
-      client.post 'get_provider_token', { corpid: app.corp_id, provider_secret: app.provider_secret }.to_json, base: BASE
+      client.post 'get_provider_token', { corpid: app.corp_id, provider_secret: app.provider_secret }.to_json, origin: BASE
     end
 
     def login_info(auth_code)
-      post 'get_login_info', auth_code: auth_code, base: BASE
+      post 'get_login_info', auth_code: auth_code, origin: BASE
     end
 
     def open_corpid(corpid)
-      provider_post 'corpid_to_opencorpid', corpid: corpid, base: BASE
+      provider_post 'corpid_to_opencorpid', corpid: corpid, origin: BASE
     end
 
   end
