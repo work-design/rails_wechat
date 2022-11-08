@@ -18,44 +18,30 @@ module Wechat::Api
       )
     end
 
-    def get(path, params: {}, headers: {}, origin: nil, debug: nil)
+    def get(path, params: {}, headers: {}, origin: nil, debug: nil, debug_level: 1)
       with_access_token(params) do |with_token_params|
-        response = @client.with_headers(headers).with(origin: origin).get(path, params: with_token_params)
-
-        if debug
-          response
-        else
-          parse_response(response)
-        end
+        response = @client.with_headers(headers).with(origin: origin, debug_level: debug_level).get(path, params: with_token_params)
+        debug ? response : parse_response(response)
       end
     end
 
-    def post(path, params: {}, headers: {}, origin: nil, debug: nil, **payload)
+    def post(path, params: {}, headers: {}, origin: nil, debug: nil, debug_level: 1, **payload)
       with_access_token(params) do |with_token_params|
-        response = @http.with_headers(headers).with(origin: origin).post(path, params: with_token_params, json: payload)
-
-        if debug
-          response
-        else
-          parse_response(response)
-        end
+        response = @http.with_headers(headers).with(origin: origin, debug_level: debug_level).post(path, params: with_token_params, json: payload)
+        debug ? response : parse_response(response)
       end
     end
 
-    def post_file(path, file, params: {}, headers: {}, origin: nil, **options)
+    def post_file(path, file, params: {}, headers: {}, origin: nil, debug_level: 1, **options)
       with_access_token(params) do |with_token_params|
         form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file, content_type: options[:content_type])
-        response = @http.plugin(:multipart).with_headers(headers).with(origin: origin).post(
+        response = @http.plugin(:multipart).with_headers(headers).with(origin: origin, debug_level: debug_level).post(
           path,
           params: with_token_params,
           form: { media: form_file }
         )
 
-        if debug
-          response
-        else
-          parse_response(response)
-        end
+        debug ? response : parse_response(response)
       end
     end
 
