@@ -43,7 +43,7 @@ module Wechat::Api
     def component_token
       r = client.with(origin: BASE).post(
         'api_component_token',
-        body: {
+        json: {
           component_appid: app.appid,
           component_appsecret: app.secret,
           component_verify_ticket: app.verify_ticket
