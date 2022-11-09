@@ -60,7 +60,12 @@ module Wechat
 
     def current_payee
       return @current_payee if defined?(@current_payee)
-      @current_payee = current_organ_domain.payee
+
+      if params[:appid]
+        @current_payee = current_organ_domain.payees.find_by(appid: params[:appid])
+      else
+        @current_payee = current_organ_domain.payees.take
+      end
 
       logger.debug "\e[35m  Current Payee: #{@current_payee&.id}  \e[0m"
       @current_payee
