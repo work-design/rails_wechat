@@ -2,9 +2,14 @@ module Wechat::Api
   class Provider < Base
     include Service
 
-    def provider_post(path, params: {}, headers: {}, base: nil, debug: nil, **payload)
+    def provider_post(path, params: {}, headers: {}, origin: nil, debug: nil, **payload)
+      with_options = { origin: origin }
+      with_options.merge! debug: STDERR, debug_level: 2 if debug
+
       with_provider_access_token(params) do |with_token_params|
-        @client.post_json path, payload, headers: headers, params: with_token_params, debug: debug, base: base
+        with_token_params.merge! debug: 1 if debug
+        response = @client.with_headers(headers).with(with_options).post(path, params: with_token_params, json: payload)
+        debug ? response : parse_response(response)
       end
     end
 

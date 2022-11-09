@@ -2,9 +2,14 @@ module Wechat::Api
   class Suite < Wechat::Api::Base
     include Service
 
-    def raw_post(path, params: {}, headers: {}, base: nil, debug: nil, **payload)
+    def raw_post(path, params: {}, headers: {}, origin: nil, debug: nil, **payload)
+      with_options = { origin: origin }
+      with_options.merge! debug: STDERR, debug_level: 2 if debug
+
       r = with_raw_access_token(params) do |with_token_params|
-        @client.post_json path, payload, headers: headers, params: with_token_params, debug: debug, base: base
+        with_token_params.merge! debug: 1 if debug
+        response = @client.with_headers(headers).with(with_options).post(path, params: with_token_params, json: payload)
+        debug ? response : parse_response(response)
       end
       Rails.logger.debug "\e[35m  #{r}  \e[0m"
       r
