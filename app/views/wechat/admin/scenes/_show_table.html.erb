@@ -4,5 +4,11 @@
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::Scene.human_attribute_name(:qrcode_file) %></td>
-  <td><%= image_tag @scene.qrcode_data_url %></td>
+  <td>
+    <% if @app.is_a?(Wechat::ProgramApp) %>
+      <%= image_tag model.qrcode_url, class: 'image' if model.qrcode_url.present? %>
+    <% else %>
+      <%= image_tag model.qrcode_data_url, class: 'image' if model.qrcode_data_url.present? %>
+    <% end %>
+  </td>
 </tr>
