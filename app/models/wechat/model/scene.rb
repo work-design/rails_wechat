@@ -172,5 +172,13 @@ module Wechat
       }
     end
 
+    class_methods do
+
+      def handle_types
+        distinct.pluck(:handle_type).compact
+      end
+
+    end
+
   end
 end

@@ -1,10 +1,10 @@
 <table class="table as-search">
   <tr>
-    <th><%= Wechat::Scene.human_attribute_name(:aim) %></th>
+    <th><%= Wechat::Scene.human_attribute_name(:handle_type) %></th>
     <td>
-      <%= link_to t('.all'), filter_params(except: [:aim]), class: active_params(aim: '', active: 'button is-info', item: 'button is-light') %>
-      <% Wechat::Scene.options_i18n(:aim).each do |text, value| %>
-        <%= link_to text, filter_params(aim: value), class: active_params(aim: value, active: 'button is-info', item: 'button is-light') %>
+      <%= link_to t('.all'), filter_params(except: [:handle_type]), class: active_params(handle_type: '', active: 'button is-info', item: 'button is-light') %>
+      <% Wechat::Scene.handle_types.each do |value| %>
+        <%= link_to value, filter_params(handle_type: value), class: active_params(handle_type: value, active: 'button is-info', item: 'button is-light') %>
       <% end %>
     </td>
   </tr>
