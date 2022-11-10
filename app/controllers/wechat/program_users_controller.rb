@@ -1,7 +1,6 @@
 module Wechat
   class ProgramUsersController < BaseController
     before_action :set_app, only: [:create]
-    before_action :require_authorized_token, only: [:info, :mobile]
     before_action :set_wechat_program_user, only: [:info, :mobile]
     skip_before_action :verify_authenticity_token if whether_filter(:verify_authenticity_token)
 
@@ -32,10 +31,10 @@ module Wechat
     end
 
     def mobile
-      session_key = current_authorized_token.session_key
-
+      session_key = current_authorized_token&.session_key
       phone_number = @program_user.get_phone_number(params[:encryptedData], params[:iv], session_key)
-      if phone_number
+
+      if session_key && phone_number
         @program_user.identity = phone_number
         @account = @program_user.account || @program_user.build_account(type: 'Auth::MobileAccount')
         @account.confirmed = true
@@ -49,7 +48,7 @@ module Wechat
 
         render json: { program_user: @program_user.as_json(only: [:id, :identity]), user: @program_user.user }
       else
-        current_authorized_token.destroy  # 触发重新授权逻辑
+        current_authorized_token&.destroy  # 触发重新授权逻辑
         render :mobile_err, locals: { model: @program_user }, status: :unprocessable_entity
       end
     end
