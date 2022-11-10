@@ -25,13 +25,13 @@ module Wechat
       end
     end
 
-    def js_login(state: "#{domain}#me/home#index", **url_options)
+    def js_login(**url_options)
       url_options.with_defaults! controller: 'wechat/apps', action: 'login', id: id, host: self.domain
       {
         appid: appid,
         agentid: agentid,
         redirect_uri: ERB::Util.url_encode(Rails.application.routes.url_for(**url_options)),
-        state: Base64.urlsafe_encode64(state)
+        state: StateUtil.urlsafe_encode64(host: host, controller: 'me/home')
       }
     end
 

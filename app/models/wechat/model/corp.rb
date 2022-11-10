@@ -148,13 +148,13 @@ module Wechat
       logger.debug e.message
     end
 
-    def js_login(state: "#{host}#me/home#index", **url_options)
-      url_options.with_defaults! controller: 'wechat/apps', action: 'login', id: id, host: host
+    def js_login(**url_options)
+      url_options.with_defaults! controller: 'wechat/corps', action: 'login', id: id, host: host
       {
         appid: appid,
         agentid: agentid,
         redirect_uri: ERB::Util.url_encode(Rails.application.routes.url_for(**url_options)),
-        state: Base64.urlsafe_encode64(state)
+        state: StateUtil.urlsafe_encode64(host: host, controller: 'me/home')
       }
     end
 
