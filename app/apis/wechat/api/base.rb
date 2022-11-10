@@ -76,8 +76,10 @@ module Wechat::Api
         return data
       elsif content_type =~ /html|xml/
         data = Hash.from_xml(response.body.to_s)
-      else
+      elsif content_type =~ /json/
         data = response.json
+      else
+        data = JSON.parse(response.body.to_s)
       end
 
       case data['errcode']
