@@ -1,6 +1,6 @@
 <td>
   <p><%= model.match_value %></p>
-  <p><span class="tag"><%= model.aim_i18n %></span></p>
+  <p><span class="tag"><%= model.handle_type_i18n %></span></p>
 </td>
 <td>
   <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
@@ -10,7 +10,10 @@
 <td>
   <%= link_to({ controller: 'wechat_users', 'user_tags.tag_name': model.match_value }, aria: { label: t('wechat.admin.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fa-solid fa-users"></i>
-  <% end if model.tag %>
+  <% end if model.tag && false %>
+  <%= link_to({ controller: 'wechat_users', user_inviter_id: model.handle_id }, aria: { label: t('wechat.admin.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
+    <i class="fa-solid fa-users"></i>
+  <% end if model.handle_type == 'Auth::User' %>
   <%= link_to({ controller: 'responses', action: 'show', id: model.response.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fa-solid fa-reply-all"></i>
   <% end if model.response %>

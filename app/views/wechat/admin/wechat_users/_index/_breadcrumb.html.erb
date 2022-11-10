@@ -1,12 +1,19 @@
 <div class="breadcrumb has-succeeds-separator">
   <ul>
     <li><%= link_to t('wechat.admin.apps.index.title'), { controller: 'apps', anchor: "tr_#{@app.id}" } %></li>
-    <li><span class="px-3"><%= @app.type_i18n %></span></li>
-    <li><span class="px-3"><%= @app.name %></span></li>
+    <li>
+      <span class="px-3">
+        <span><%= @app.name %></span>
+        <span class="tag is-success"><%= @app.type_i18n %></span>
+      </span>
+    </li>
     <% if params['user_tags.tag_name'] %>
     <li>
       <span class="px-3"><%= @tag.name %></span>
     </li>
+    <% end %>
+    <% if params[:user_inviter_id] %>
+    <li><%= link_to t('wechat.admin.scenes.index.title'), { controller: 'scenes', handle_type: 'Auth::User', handle_id: params[:user_inviter_id] } %>></li>
     <% end %>
     <li class="is-active"><%= t('.title') %></li>
   </ul>

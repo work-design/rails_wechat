@@ -6,7 +6,7 @@ module Wechat
 
     def index
       q_params = {}
-      q_params.merge! params.permit('user_tags.tag_name', :name, :uid)
+      q_params.merge! params.permit('user_tags.tag_name', :name, :uid, :user_inviter_id)
 
       @wechat_users = @app.wechat_users.includes(:account, :user, :user_tags).default_where(q_params).order(id: :desc).page(params[:page])
     end
