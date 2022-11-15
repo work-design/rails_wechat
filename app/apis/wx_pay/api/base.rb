@@ -6,30 +6,43 @@ module WxPay::Api
 
     def initialize(payee)
       @payee = payee
+      @client = HTTPX.with(
+        ssl: {
+          verify_mode: OpenSSL::SSL::VERIFY_NONE
+        },
+        headers: {
+          'Accept' => 'application/json'
+        }
+      )
     end
 
-    def execute(method, path, params = {})
-      method.upcase!
-      path = WxPay::Utils.replace(path, params)
-      path = WxPay::Utils.query(path, params) if method == 'GET'
-      url = BASE + path
+    def get(path, origin: nil, params: {}, headers: {}, debug: nil)
+      with_options = { origin: origin }
+      with_options.merge! debug: STDERR, debug_level: 2 if debug
+
+      @client.with_headers(headers).with(with_options).get(path, params: params)
+    end
+
+    def post(path, params = {})
       r = common_options
-      r.merge! signature: WxPay::Sign::Rsa.generate(method, path, params, key: @payee.apiclient_key, **r)
+      r.merge! signature: WxPay::Sign::Rsa.generate('POST', path, params, key: @payee.apiclient_key, **r)
       r = r.map(&->(k,v){ "#{k}=\"#{v}\"" }).join(',')
       opts = {
         headers: {
-          Accept: 'application/json',
           'Content-Type': 'application/json',
           'Wechatpay-Serial': @payee.platform_serial_no,
           Authorization: [AUTH, r].join(' ')
         }
       }
-      if method != 'GET'
-        opts.merge! body: params.to_json
-      end
 
-      r = HTTPX.with(debug: STDERR, debug_level: 2).request(method, url, **opts)
+      opts.merge! body: params.to_json
+
+      r = @client.with_headers(headers).with(with_options).post(path, params: params, json: payload)
       r.json
+    end
+
+    def with_signature
+
     end
 
     def generate_js_pay_req(params)
@@ -46,7 +59,7 @@ module WxPay::Api
       opts
     end
 
-    def common_options
+    def with_common_options
       {
         mchid: @payee.mch_id,
         serial_no: @payee.serial_no,
