@@ -39,6 +39,7 @@ module Wechat
       p = params.fetch(:payee, {}).permit(
         :name,
         :mch_id,
+        :partner_id,
         :key,
         :key_v3,
         :serial_no,
