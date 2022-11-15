@@ -2,8 +2,9 @@ module WxPay::Api
   class Base
     AUTH = 'WECHATPAY2-SHA256-RSA2048'
 
-    def initialize(payee)
-      @payee = payee
+    def initialize(app_payee)
+      @payee = app_payee.payee
+      @app = app_payee.app
       @client = HTTPX.with(
         ssl: {
           verify_mode: OpenSSL::SSL::VERIFY_NONE
