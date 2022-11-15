@@ -20,13 +20,13 @@ module WxPay::Api
       with_options = { origin: origin }
       with_options.merge! debug: STDERR, debug_level: 2 if debug
 
-      @client.with_headers(headers).with(with_options).get(path, params: params)
+      with_common_headers('get', path, params: params) do |with_token_params|
+        response = @client.with_headers(headers).with(with_options).get(path, params: with_token_params)
+        debug ? response : parse_response(response)
+      end
     end
 
-    def post(path, params = {})
-      r = common_options
-      r.merge! signature: WxPay::Sign::Rsa.generate('POST', path, params, key: @payee.apiclient_key, **r)
-      r = r.map(&->(k,v){ "#{k}=\"#{v}\"" }).join(',')
+    def post(path, origin: nil, params: {}, headers: {}, debug: nil)
       opts = {
         headers: {
           'Content-Type': 'application/json',
@@ -35,14 +35,9 @@ module WxPay::Api
         }
       }
 
-      opts.merge! body: params.to_json
 
       r = @client.with_headers(headers).with(with_options).post(path, params: params, json: payload)
       r.json
-    end
-
-    def with_signature
-
     end
 
     def generate_js_pay_req(params)
@@ -59,13 +54,18 @@ module WxPay::Api
       opts
     end
 
-    def with_common_options
-      {
+    def with_common_headers(method, path, params: {}, header: {})
+      r = {
         mchid: @payee.mch_id,
         serial_no: @payee.serial_no,
         nonce_str: SecureRandom.hex,
         timestamp: Time.current.to_i
       }
+
+      r.merge! signature: WxPay::Sign::Rsa.generate(method, path, params, key: @payee.apiclient_key, **r)
+      r = r.map(&->(k,v){ "#{k}=\"#{v}\"" }).join(',')
+
+      yield r
     end
 
   end
