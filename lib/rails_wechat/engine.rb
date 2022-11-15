@@ -10,7 +10,8 @@ module RailsWechat
       "#{config.root}/app/models/notice",
       "#{config.root}/app/models/reply",
       "#{config.root}/app/models/request",
-      "#{config.root}/app/models/service"
+      "#{config.root}/app/models/service",
+      "#{config.root}/app/models/payee"
     ]
     config.eager_load_paths += Dir[
       "#{config.root}/app/models/oauth_user",
@@ -20,7 +21,8 @@ module RailsWechat
       "#{config.root}/app/models/notice",
       "#{config.root}/app/models/reply",
       "#{config.root}/app/models/request",
-      "#{config.root}/app/models/service"
+      "#{config.root}/app/models/service",
+      "#{config.root}/app/models/payee"
     ]
 
     config.generators do |g|

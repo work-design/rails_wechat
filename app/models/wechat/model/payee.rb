@@ -3,6 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :type, :string
       attribute :name, :string
       attribute :mch_id, :string, comment: '支付专用、商户号'
       attribute :key, :string, comment: '支付专用'
