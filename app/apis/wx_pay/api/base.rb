@@ -19,23 +19,20 @@ module WxPay::Api
       with_options = { origin: origin }
       with_options.merge! debug: STDERR, debug_level: 2 if debug
 
-      with_common_headers('get', path, params: params) do |with_token_params|
-        response = @client.with_headers(headers).with(with_options).get(path, params: with_token_params)
-        debug ? response : parse_response(response)
+      with_common_headers('get', path, params: params, headers: headers) do |signed_headers|
+        response = @client.with_headers(signed_headers).with(with_options).get(path, params: params)
+        debug ? response : response.json
       end
     end
 
     def post(path, origin: nil, params: {}, headers: {}, debug: nil)
-      opts = {
-        headers: {
-          'Content-Type': 'application/json',
+      with_options = { origin: origin }
+      with_options.merge! debug: STDERR, debug_level: 2 if debug
 
-        }
-      }
-
-
-      r = @client.with_headers(headers).with(with_options).post(path, params: params, json: payload)
-      r.json
+      with_common_headers('get', path, params: params, headers: headers) do |signed_headers|
+        response = @client.with_headers(signed_headers).with(with_options).post(path, params: params, json: payload)
+        debug ? response : response.json
+      end
     end
 
     def generate_js_pay_req(params)
@@ -52,7 +49,7 @@ module WxPay::Api
       opts
     end
 
-    def with_common_headers(method, path, params: {}, header: {})
+    def with_common_headers(method, path, params: {}, headers: {})
       r = {
         mchid: @payee.mch_id,
         serial_no: @payee.serial_no,
