@@ -1,8 +1,8 @@
 module WxPay::Api
   class Base
     AUTH = 'WECHATPAY2-SHA256-RSA2048'
-    BASE = 'https://api.mch.weixin.qq.com'.freeze
-    include V3
+
+    include Mch
 
     def initialize(payee)
       @payee = payee

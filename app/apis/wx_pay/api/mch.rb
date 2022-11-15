@@ -1,5 +1,6 @@
 module WxPay::Api
   module Mch
+    BASE = 'https://api.mch.weixin.qq.com'
 
     def invoke_unifiedorder
       post '/v3/pay/transactions/jsapi',
