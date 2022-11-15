@@ -2,16 +2,45 @@ module WxPay::Api
   class Mch < Base
     BASE = 'https://api.mch.weixin.qq.com'
 
-    def invoke_unifiedorder(appid:, mchid:, description:, out_trade_no:, notify_url:, amount:, payer:, **options)
-      post '/v3/pay/transactions/jsapi'
+    def jsapi_order(description:, out_trade_no:, notify_url:, amount:, payer:, **options)
+      post(
+        '/v3/pay/transactions/jsapi',
+        description: description,
+        out_trade_no: out_trade_no,
+        notify_url: notify_url,
+        amount: amount,
+        payer: payer,
+        origin: BASE,
+        **common_payee_params,
+        **options
+      )
     end
 
-    def h5_order(appid:, mchid:, description:, out_trade_no:, notify_url:, amount:, scene_info:)
-      post '/v3/pay/transactions/h5'
+    def h5_order(description:, out_trade_no:, notify_url:, amount:, scene_info:)
+      post(
+        '/v3/pay/transactions/h5',
+        description: description,
+        out_trade_no: out_trade_no,
+        notify_url: notify_url,
+        amount: amount,
+        scene_info: scene_info,
+        origin: BASE,
+        **common_payee_params,
+        **options
+      )
     end
 
-    def native_order(appid:, mchid:, description:, out_trade_no:, notify_url:, amount:, **options)
-      post '/v3/pay/transactions/native', appid:, mchid:, description:, out_trade_no:, notify_url:, amount: amount, **options
+    def native_order(description:, out_trade_no:, notify_url:, amount:, **options)
+      post(
+        '/v3/pay/transactions/native',
+        description: description,
+        out_trade_no: out_trade_no,
+        notify_url: notify_url,
+        amount: amount,
+        origin: BASE,
+        **common_payee_params,
+        **options
+      )
     end
 
     def order_query(out_trade_no)
@@ -44,6 +73,13 @@ module WxPay::Api
 
     def profit_query(transaction_id)
       get "/v3/profitsharing/transactions/#{transaction_id}/amounts", origin: BASE
+    end
+
+    def common_payee_params
+      {
+        appid: app_payee.appid,
+        mchid: payee.mch_id
+      }
     end
 
   end
