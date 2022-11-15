@@ -11,14 +11,14 @@ module Wechat
 
       @wechat_users = @app.wechat_users.includes(:account, :user, :user_tags).default_where(q_params).order(id: :desc).page(params[:page])
 
-      @select_uids = @payee.receivers.where(account: @wechat_users.pluck(:uid)).pluck(:account)
+      @select_uids = @app_payee.receivers.where(account: @wechat_users.pluck(:uid)).pluck(:account)
     end
 
     def new_openid
     end
 
     def destroy_openid
-      @receiver = @payee.receivers.find_by account: params[:uid]
+      @receiver = @app_payee.receivers.find_by account: params[:uid]
       @receiver.destroy
     end
 
