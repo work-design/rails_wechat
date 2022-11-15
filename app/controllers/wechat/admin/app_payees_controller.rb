@@ -21,7 +21,7 @@ module Wechat
     end
 
     def set_payees
-      @payees = Payee.default_where(default_params)
+      @payees = Payee.all.limit(5)
     end
 
     def app_payee_params
