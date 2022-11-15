@@ -1,7 +1,6 @@
 module WxPay::Api
   class Base
     AUTH = 'WECHATPAY2-SHA256-RSA2048'
-
     include Mch
 
     def initialize(payee)
@@ -30,8 +29,7 @@ module WxPay::Api
       opts = {
         headers: {
           'Content-Type': 'application/json',
-          'Wechatpay-Serial': @payee.platform_serial_no,
-          Authorization: [AUTH, r].join(' ')
+
         }
       }
 
@@ -65,7 +63,12 @@ module WxPay::Api
       r.merge! signature: WxPay::Sign::Rsa.generate(method, path, params, key: @payee.apiclient_key, **r)
       r = r.map(&->(k,v){ "#{k}=\"#{v}\"" }).join(',')
 
-      yield r
+      headers.merge!(
+        'Wechatpay-Serial': @payee.platform_serial_no,
+        Authorization: [AUTH, r].join(' ')
+      )
+
+      yield headers
     end
 
   end
