@@ -3,16 +3,12 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      belongs_to :partner, optional: true
+      belongs_to :partner
     end
 
     def api
       return @api if defined? @api
-      if payee.partner
-        @api = WxPay::Api::Partner.new(self)
-      else
-        @api = WxPay::Api::Mch.new(self)
-      end
+      @api = WxPay::Api::Partner.new(payee: self)
     end
   end
 end

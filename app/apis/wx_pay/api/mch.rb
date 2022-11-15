@@ -63,10 +63,6 @@ module WxPay::Api
       post '/v3/profitsharing/receivers/delete', origin: BASE
     end
 
-    def certs
-      get '/v3/certificates', origin: BASE
-    end
-
     def profit_share(params = {})
       post '/v3/profitsharing/orders', params: params, origin: BASE
     end
@@ -77,7 +73,7 @@ module WxPay::Api
 
     def common_payee_params
       {
-        appid: @app_payee.appid,
+        appid: @appid,
         mchid: @payee.mch_id
       }
     end

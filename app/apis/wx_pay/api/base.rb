@@ -1,10 +1,11 @@
 module WxPay::Api
   class Base
     AUTH = 'WECHATPAY2-SHA256-RSA2048'
+    BASE = 'https://api.mch.weixin.qq.com'
 
-    def initialize(app_payee: nil, payee: nil)
-      @app_payee = app_payee
-      @payee = payee || app_payee&.payee
+    def initialize(payee:, appid: nil)
+      @appid = appid
+      @payee = payee
       @client = HTTPX.with(
         ssl: {
           verify_mode: OpenSSL::SSL::VERIFY_NONE
@@ -35,9 +36,13 @@ module WxPay::Api
       end
     end
 
+    def certs
+      get '/v3/certificates', origin: BASE
+    end
+
     def generate_js_pay_req(params)
       opts = {
-        appId: @app_payee.appid,
+        appId: @appid,
         package: "prepay_id=#{params.delete(:prepayid)}",
         signType: 'RSA'
       }

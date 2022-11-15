@@ -2,9 +2,9 @@ module WxPay::Api
   class Partner < Base
     BASE = 'https://api.mch.weixin.qq.com'
 
-    def initialize(app_payee)
+    def initialize(payee:, appid: nil)
       super
-      @partner = @payee.partner
+      @partner = payee.partner
     end
 
     def jsapi_order(description:, out_trade_no:, notify_url:, amount:, payer:, **options)
@@ -80,7 +80,7 @@ module WxPay::Api
       {
         sp_appid: @partner.appid,
         sp_mchid: @partner.mch_id,
-        sub_appid: @app_payee.appid,
+        sub_appid: @appid,
         sub_mchid: @payee.mch_id
       }
     end
