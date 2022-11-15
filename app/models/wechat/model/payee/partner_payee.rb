@@ -10,5 +10,10 @@ module Wechat
       return @api if defined? @api
       @api = WxPay::Api::Partner.new(payee: self)
     end
+
+    def key_v3
+      partner.key_v3
+    end
+
   end
 end
