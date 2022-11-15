@@ -3,7 +3,7 @@ module Wechat
     before_action :set_app
     before_action :set_app_payee, only: [:show, :edit, :update, :destroy, :actions]
     before_action :set_new_app_payee, only: [:new, :create]
-    before_action :set_payees, only: [:new, :create]
+    before_action :set_payees, only: [:new, :create, :edit, :update]
 
     def index
       q_params = {}
