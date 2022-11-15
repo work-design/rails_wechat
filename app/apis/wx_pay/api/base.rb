@@ -3,8 +3,8 @@ module WxPay::Api
     AUTH = 'WECHATPAY2-SHA256-RSA2048'
 
     def initialize(app_payee)
+      @app_payee = app_payee
       @payee = app_payee.payee
-      @app = app_payee.app
       @client = HTTPX.with(
         ssl: {
           verify_mode: OpenSSL::SSL::VERIFY_NONE
@@ -37,7 +37,7 @@ module WxPay::Api
 
     def generate_js_pay_req(params)
       opts = {
-        appId: @payee.appid,
+        appId: @app_payee.appid,
         package: "prepay_id=#{params.delete(:prepayid)}",
         signType: 'RSA'
       }
