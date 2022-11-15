@@ -14,7 +14,7 @@ module WxPay::Api
         out_trade_no: out_trade_no,
         notify_url: notify_url,
         amount: amount,
-        payer: payer,
+        payer: { sub_openid: payer[:openid] },
         origin: BASE,
         **common_payee_params,
         **options
