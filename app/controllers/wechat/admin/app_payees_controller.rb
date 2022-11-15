@@ -1,5 +1,6 @@
 module Wechat
   class Admin::PayeesController < Admin::BaseController
+    before_action :set_app
     before_action :set_payee, only: [:show, :edit, :update, :destroy, :actions, :edit_cert, :update_cert]
     before_action :set_new_payee, only: [:new, :create]
 
@@ -7,7 +8,7 @@ module Wechat
       q_params = {}
       q_params.merge! default_params
 
-      @payees = Payee.default_where(q_params)
+      @payees = @app.payees.default_where(q_params)
     end
 
     def edit_cert
@@ -28,11 +29,11 @@ module Wechat
 
     private
     def set_payee
-      @payee = Payee.find params[:id]
+      @payee = @app.payees.find params[:id]
     end
 
     def set_new_payee
-      @payee = Payee.new(payee_params)
+      @payee = @app.payees.build(payee_params)
     end
 
     def payee_params
@@ -42,7 +43,8 @@ module Wechat
         :key_v3,
         :serial_no,
         :apiclient_cert,
-        :apiclient_key
+        :apiclient_key,
+        :domain
       )
       p.merge! default_form_params
     end

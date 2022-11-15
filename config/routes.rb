@@ -148,15 +148,17 @@ Rails.application.routes.draw do
             get :edit_parent
           end
         end
+        resources :payees do
+          member do
+            get 'cert' => :edit_cert
+            patch 'cert' => :update_cert
+          end
+        end
         resources :apps do
           member do
             get :info
           end
-          resources :payees do
-            member do
-              get 'cert' => :edit_cert
-              patch 'cert' => :update_cert
-            end
+          resources :app_payees do
             resources :receivers do
               collection do
                 get :users

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 69e641c535ae6bb48033bae4e98529e779f27d7f
+  revision: 03285f31016e782fd71032f5a4752bcae493efce
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 23afb95a48d1861fceb896d80b8908f166edfa44
+  revision: 09c64e0bb54edff4bc7df1047019f530cc327740
   specs:
     rails_com (1.3.0)
       acme-client
@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 932ef184955322269ff1713e3763ca8edba42553
+  revision: ae0c59905b3d0f9624562c7fb954ba78fdc6873a
   specs:
     rails_design (0.0.1)
       rails
@@ -151,7 +151,7 @@ GEM
     faraday (2.6.0)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.1)
+    faraday-net_http (3.0.2)
     faraday-retry (1.0.3)
     globalid (1.0.0)
       activesupport (>= 5.0)
