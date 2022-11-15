@@ -81,8 +81,27 @@ module WxPay::Api
         sp_appid: @partner.appid,
         sp_mchid: @partner.mch_id,
         sub_appid: @app_payee.appid,
-        sub_mchid: @payee.mchid
+        sub_mchid: @payee.mch_id
       }
+    end
+
+    def with_common_headers(method, path, params: {}, headers: {})
+      r = {
+        mchid: @partner.mch_id,
+        serial_no: @partner.serial_no,
+        nonce_str: SecureRandom.hex,
+        timestamp: Time.current.to_i
+      }
+
+      r.merge! signature: WxPay::Sign::Rsa.generate(method, path, params, key: @partner.apiclient_key, **r)
+      r = r.map(&->(k,v){ "#{k}=\"#{v}\"" }).join(',')
+
+      headers.merge!(
+        'Wechatpay-Serial': @payee.platform_serial_no,
+        Authorization: [AUTH, r].join(' ')
+      )
+
+      yield headers
     end
 
   end

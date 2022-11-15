@@ -28,6 +28,15 @@ module Wechat
       Base64.encode64(result)
     end
 
+    def api
+      return @api if defined? @api
+      if payee.partner
+        @api = WxPay::Api::Partner.new(self)
+      else
+        @api = WxPay::Api::Mch.new(self)
+      end
+    end
+
     def sync_cert!
       certs = api.certs['data']
       result = certs.select(&->(i){ i['effective_time'].to_time < Time.current }).min_by do |cert|
