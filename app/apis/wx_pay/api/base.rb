@@ -25,7 +25,7 @@ module WxPay::Api
       end
     end
 
-    def post(path, origin: nil, params: {}, headers: {}, debug: nil)
+    def post(path, origin: nil, params: {}, headers: {}, debug: nil, **payload)
       with_options = { origin: origin }
       with_options.merge! debug: STDERR, debug_level: 2 if debug
 

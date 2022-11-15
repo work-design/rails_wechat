@@ -3,6 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :name, :string
       attribute :mch_id, :string, comment: '支付专用、商户号'
       attribute :key, :string, comment: '支付专用'
       attribute :key_v3, :string, comment: '支付通知解密'
@@ -17,11 +18,6 @@ module Wechat
       encrypts :key, :key_v3, :apiclient_cert, :apiclient_key
 
       belongs_to :organ, class_name: 'Org::Organ'
-    end
-
-    def api
-      return @api if defined? @api
-      @api = WxPay::Api::Base.new(self)
     end
 
     def rsa_encrypt(data)

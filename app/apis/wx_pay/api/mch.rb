@@ -1,55 +1,49 @@
 module WxPay::Api
-  module Mch
+  class Mch < Base
     BASE = 'https://api.mch.weixin.qq.com'
 
-    def invoke_unifiedorder
-      post '/v3/pay/transactions/jsapi',
-        required: [:appid, :mchid, :description, :out_trade_no, :notify_url, :amount, :payer],
-        optional: [:time_expire, :attach, :goods_tag, :detail, :scene_info]
+    def invoke_unifiedorder(appid:, mchid:, description:, out_trade_no:, notify_url:, amount:, payer:, **options)
+      post '/v3/pay/transactions/jsapi'
     end
 
-    def h5_order
-      post '/v3/pay/transactions/h5',
-        required: [:appid, :mchid, :description, :out_trade_no, :notify_url, :amount, :scene_info],
-        optional: [:time_expire, :attach, :goods_tag, :detail, :settle_info]
+    def h5_order(appid:, mchid:, description:, out_trade_no:, notify_url:, amount:, scene_info:)
+      post '/v3/pay/transactions/h5'
     end
 
-    def native_order
-      post '/v3/pay/transactions/native',
-        required: [:appid, :mchid, :description, :out_trade_no, :notify_url, :amount],
-        optional: [:time_expire, :attach, :goods_tag, :detail, :scene_info]
+    def native_order(appid:, mchid:, description:, out_trade_no:, notify_url:, amount:, **options)
+      post '/v3/pay/transactions/native', appid:, mchid:, description:, out_trade_no:, notify_url:, amount: amount, **options
     end
 
     def order_query(out_trade_no)
-      get "/v3/pay/transactions/out-trade-no/#{out_trade_no}"
+      get "/v3/pay/transactions/out-trade-no/#{out_trade_no}", origin: BASE
     end
 
     def invoke_refund(out_refund_no:, amount:)
-      post '/v3/refund/domestic/refunds'
+      post '/v3/refund/domestic/refunds', origin: BASE
     end
 
     def refund_query(out_refund_no)
-      get "/v3/refund/domestic/refunds/#{out_refund_no}"
+      get "/v3/refund/domestic/refunds/#{out_refund_no}", origin: BASE
     end
 
     def add_receiver(receiver)
-      post '/v3/profitsharing/receivers/add', receiver: receiver
+      post '/v3/profitsharing/receivers/add', receiver: receiver, origin: BASE
     end
 
     def delete_receiver
-      post '/v3/profitsharing/receivers/delete'
+      post '/v3/profitsharing/receivers/delete', origin: BASE
     end
 
     def certs
-      get '/v3/certificates'
+      get '/v3/certificates', origin: BASE
     end
 
     def profit_share(params = {})
-      post '/v3/profitsharing/orders', params
+      post '/v3/profitsharing/orders', params: params, origin: BASE
     end
 
     def profit_query(transaction_id)
-      get "/v3/profitsharing/transactions/#{transaction_id}/amounts"
+      get "/v3/profitsharing/transactions/#{transaction_id}/amounts", origin: BASE
     end
 
   end
