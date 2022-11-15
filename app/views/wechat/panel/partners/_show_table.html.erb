@@ -3,6 +3,10 @@
   <td><%= @partner.mch_id %></td>
 </tr>
 <tr>
+  <td class="has-text-right"><%= Wechat::Partner.human_attribute_name(:appid) %></td>
+  <td><%= @partner.appid %></td>
+</tr>
+<tr>
   <td class="has-text-right"><%= Wechat::Partner.human_attribute_name(:key) %></td>
   <td><%= @partner.key %></td>
 </tr>

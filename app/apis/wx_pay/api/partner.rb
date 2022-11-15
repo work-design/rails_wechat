@@ -2,6 +2,11 @@ module WxPay::Api
   class Partner < Base
     BASE = 'https://api.mch.weixin.qq.com'
 
+    def initialize(app_payee)
+      super
+      @partner = @payee.partner
+    end
+
     def jsapi_order(description:, out_trade_no:, notify_url:, amount:, payer:, **options)
       post(
         '/v3/pay/partner/transactions/jsapi',
@@ -18,7 +23,7 @@ module WxPay::Api
 
     def h5_order(description:, out_trade_no:, notify_url:, amount:, scene_info:)
       post(
-        '/v3/pay/transactions/h5',
+        '/v3/pay/partner/transactions/h5',
         description: description,
         out_trade_no: out_trade_no,
         notify_url: notify_url,
@@ -32,7 +37,7 @@ module WxPay::Api
 
     def native_order(description:, out_trade_no:, notify_url:, amount:, **options)
       post(
-        '/v3/pay/transactions/native',
+        '/v3/pay/partner/transactions/native',
         description: description,
         out_trade_no: out_trade_no,
         notify_url: notify_url,
@@ -63,10 +68,6 @@ module WxPay::Api
       post '/v3/profitsharing/receivers/delete', origin: BASE
     end
 
-    def certs
-      get '/v3/certificates', origin: BASE
-    end
-
     def profit_share(params = {})
       post '/v3/profitsharing/orders', params: params, origin: BASE
     end
@@ -77,10 +78,10 @@ module WxPay::Api
 
     def common_payee_params
       {
-        sp_appid: @app_payee.appid,
-        sp_mchid: @payee.mch_id,
-        sub_appid: sub_appid,
-        sub_mchid: sub_mchid
+        sp_appid: @partner.appid,
+        sp_mchid: @partner.mch_id,
+        sub_appid: @app_payee.appid,
+        sub_mchid: @payee.mchid
       }
     end
 

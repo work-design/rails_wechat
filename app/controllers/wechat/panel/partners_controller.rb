@@ -37,6 +37,7 @@ module Wechat
     def partner_params
       params.fetch(:partner, {}).permit(
         :name,
+        :appid,
         :mch_id,
         :key,
         :key_v3,

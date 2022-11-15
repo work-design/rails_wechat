@@ -14,7 +14,11 @@ module Wechat
 
     def api
       return @api if defined? @api
-      @api = WxPay::Api::Mch.new(self)
+      if payee.partner
+        @api = WxPay::Api::Partner.new(self)
+      else
+        @api = WxPay::Api::Mch.new(self)
+      end
     end
 
   end
