@@ -77,8 +77,8 @@ module WxPay::Api
 
     def common_payee_params
       {
-        appid: app_payee.appid,
-        mchid: payee.mch_id
+        appid: @app_payee.appid,
+        mchid: @payee.mch_id
       }
     end
 
