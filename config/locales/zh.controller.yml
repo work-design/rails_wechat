@@ -119,6 +119,9 @@ zh:
       developers:
         index:
           title: 代开发
+      partners:
+        index:
+          title: 微信支付服务商
     in:
       title: 平台微信
       apps:

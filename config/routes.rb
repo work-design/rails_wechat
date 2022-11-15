@@ -114,6 +114,12 @@ Rails.application.routes.draw do
           end
         end
         resources :developers
+        resources :partners do
+          member do
+            get 'cert' => :edit_cert
+            patch 'cert' => :update_cert
+          end
+        end
       end
 
       namespace :in, defaults: { namespace: 'in' } do
