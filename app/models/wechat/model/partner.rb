@@ -17,7 +17,7 @@ module Wechat
 
       encrypts :key, :key_v3, :apiclient_cert, :apiclient_key
 
-      has_many :payees
+      has_many :payees, class_name: 'PartnerPayee'
     end
 
     def api

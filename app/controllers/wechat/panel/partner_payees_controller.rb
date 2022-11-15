@@ -5,7 +5,7 @@ module Wechat
     before_action :set_new_partner_payee, only: [:new, :create]
 
     def index
-      @partner_payees = @partner.payees
+      @partner_payees = @partner.payees.page(params[:page])
     end
 
     private
