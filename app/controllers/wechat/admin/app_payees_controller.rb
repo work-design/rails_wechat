@@ -1,49 +1,27 @@
 module Wechat
-  class Admin::PayeesController < Admin::BaseController
+  class Admin::AppPayeesController < Admin::BaseController
     before_action :set_app
-    before_action :set_payee, only: [:show, :edit, :update, :destroy, :actions, :edit_cert, :update_cert]
-    before_action :set_new_payee, only: [:new, :create]
+    before_action :set_app_payee, only: [:show, :edit, :update, :destroy, :actions, :edit_cert, :update_cert]
+    before_action :set_new_app_payee, only: [:new, :create]
 
     def index
       q_params = {}
-      q_params.merge! default_params
 
-      @payees = @app.payees.default_where(q_params)
-    end
-
-    def edit_cert
-    end
-
-    def update_cert
-      if params[:p12].present?
-        pkcs12 = WxPay::Utils.set_apiclient_by_pkcs12(params[:p12].read, @payee.mch_id)
-        @payee.apiclient_cert = pkcs12.certificate
-        @payee.apiclient_key = pkcs12.key
-      else
-        @payee.apiclient_cert = params[:cert].read if params[:cert].respond_to?(:read)
-        @payee.apiclient_key = params[:key].read if params[:key].respond_to?(:read)
-      end
-
-      @payee.save
+      @app_payees = @app.app_payees.default_where(q_params)
     end
 
     private
-    def set_payee
-      @payee = @app.payees.find params[:id]
+    def set_app_payee
+      @app_payee = @app.app_payees.find params[:id]
     end
 
-    def set_new_payee
+    def set_new_app_payee
       @payee = @app.payees.build(payee_params)
     end
 
     def payee_params
-      p = params.fetch(:payee, {}).permit(
+      p = params.fetch(:app_payee, {}).permit(
         :mch_id,
-        :key,
-        :key_v3,
-        :serial_no,
-        :apiclient_cert,
-        :apiclient_key,
         :domain
       )
       p.merge! default_form_params

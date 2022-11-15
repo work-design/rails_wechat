@@ -1,7 +1,6 @@
 module WxPay::Api
   class Base
     AUTH = 'WECHATPAY2-SHA256-RSA2048'
-    include Mch
 
     def initialize(payee)
       @payee = payee

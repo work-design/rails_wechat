@@ -27,7 +27,7 @@ module Wechat
         custom: 'custom' #自定义
       }, _prefix: true
 
-      belongs_to :payee
+      belongs_to :app_payee
 
       after_save_commit :sync_to_wxpay, if: -> { (saved_changes.keys & ['account', 'name']).present? }
     end

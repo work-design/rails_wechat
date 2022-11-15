@@ -16,12 +16,12 @@ module Wechat
 
       encrypts :key, :key_v3, :apiclient_cert, :apiclient_key
 
-      belongs_to :organ, class_name: 'Org::Organ'
+      has_many :payees
     end
 
     def api
       return @api if defined? @api
-      @api = WxPay::Api::Base.new(self)
+      @api = WxPay::Api::Partner.new(self)
     end
 
     def rsa_encrypt(data)
