@@ -37,6 +37,7 @@ module Wechat
 
     def payee_params
       p = params.fetch(:payee, {}).permit(
+        :name,
         :mch_id,
         :key,
         :key_v3,

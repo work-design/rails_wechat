@@ -1,7 +1,7 @@
 module Wechat
   class Admin::ReceiversController < Admin::BaseController
     before_action :set_app
-    before_action :set_payee
+    before_action :set_app_payee
     before_action :set_receiver, only: [:show, :edit, :update, :destroy, :actions]
     before_action :set_new_receiver, only: [:new, :new_openid, :create]
 
@@ -23,20 +23,16 @@ module Wechat
     end
 
     private
-    def set_app
-      @app = App.find_by appid: params[:app_id]
-    end
-
-    def set_payee
-      @payee = @app.payees.find params[:payee_id]
+    def set_app_payee
+      @app_payee = @app.app_payees.find params[:app_payee_id]
     end
 
     def set_receiver
-      @receiver = @payee.receivers.find params[:id]
+      @receiver = @app_payee.receivers.find params[:id]
     end
 
     def set_new_receiver
-      @receiver = @payee.receivers.build(receiver_params)
+      @receiver = @app_payee.receivers.build(receiver_params)
     end
 
     def receiver_params

@@ -3,7 +3,7 @@
     <li><%= link_to t('wechat.admin.apps.index.title'), { controller: 'apps', anchor: "tr_#{@app.id}" } %></li>
     <li><span class="px-3"><%= @app.type_i18n %></span></li>
     <li><span class="px-3"><%= @app.name %></span></li>
-    <li><%= link_to t('wechat.admin.payees.index.title'), { controller: 'payees', anchor: "tr_#{@payee.id}" } %></li>
+    <li><%= link_to t('wechat.admin.app_payees.index.title'), { controller: 'app_payees', anchor: "tr_#{@app_payee.id}" } %></li>
     <li class="is-active"><%= t('.title') %></li>
   </ul>
 </div>

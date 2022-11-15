@@ -1,24 +1,12 @@
 <tr>
+  <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:name) %></td>
+  <td><%= @app_payee.payee.name %></td>
+</tr>
+<tr>
   <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:mch_id) %></td>
-  <td><%= @payee.mch_id %></td>
+  <td><%= @app_payee.payee.mch_id %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:key) %></td>
-  <td><%= @payee.key %></td>
-</tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:key_v3) %></td>
-  <td><%= @payee.key_v3 %></td>
-</tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:serial_no) %></td>
-  <td><%= @payee.serial_no %></td>
-</tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:apiclient_cert) %></td>
-  <td><%= @payee.apiclient_cert.to_s.truncate(20) %></td>
-</tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:apiclient_key) %></td>
-  <td><%= @payee.apiclient_key.to_s.truncate(20) %></td>
+  <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:domain) %></td>
+  <td><%= @app_payee.domain %></td>
 </tr>

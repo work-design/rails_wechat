@@ -1,8 +1,9 @@
 module Wechat
   class Admin::AppPayeesController < Admin::BaseController
     before_action :set_app
-    before_action :set_app_payee, only: [:show, :edit, :update, :destroy, :actions, :edit_cert, :update_cert]
+    before_action :set_app_payee, only: [:show, :edit, :update, :destroy, :actions]
     before_action :set_new_app_payee, only: [:new, :create]
+    before_action :set_payees, only: [:new, :create]
 
     def index
       q_params = {}
@@ -16,15 +17,18 @@ module Wechat
     end
 
     def set_new_app_payee
-      @payee = @app.payees.build(payee_params)
+      @app_payee = @app.app_payees.build(app_payee_params)
     end
 
-    def payee_params
-      p = params.fetch(:app_payee, {}).permit(
-        :mch_id,
+    def set_payees
+      @payees = Payee.default_where(default_params)
+    end
+
+    def app_payee_params
+      params.fetch(:app_payee, {}).permit(
+        :payee_id,
         :domain
       )
-      p.merge! default_form_params
     end
   end
 end
