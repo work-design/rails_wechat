@@ -19,7 +19,6 @@ module Wechat
       encrypts :key, :key_v3, :apiclient_cert, :apiclient_key
 
       belongs_to :organ, class_name: 'Org::Organ'
-      belongs_to :partner, optional: true
     end
 
     def rsa_encrypt(data)

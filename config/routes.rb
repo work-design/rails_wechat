@@ -119,6 +119,7 @@ Rails.application.routes.draw do
             get 'cert' => :edit_cert
             patch 'cert' => :update_cert
           end
+          resources :partner_payees
         end
       end
 

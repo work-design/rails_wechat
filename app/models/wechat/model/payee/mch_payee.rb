@@ -1,9 +1,8 @@
 module Wechat
-  module Model::Payee::PartnerPayee
+  module Model::Payee::MchPayee
     extend ActiveSupport::Concern
 
     included do
-      belongs_to :partner, optional: true
     end
   end
 end

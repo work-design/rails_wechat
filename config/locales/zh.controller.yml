@@ -122,6 +122,9 @@ zh:
       partners:
         index:
           title: 微信支付服务商
+      partner_payees:
+        index:
+          title: 签约商户
     in:
       title: 平台微信
       apps:
