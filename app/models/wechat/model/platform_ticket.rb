@@ -25,7 +25,7 @@ module Wechat
     end
 
     def clean_last
-      TicketCleanJob.perform_later(self)
+      PlatformTicketCleanJob.perform_later(self)
     end
 
   end
