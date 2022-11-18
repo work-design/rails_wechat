@@ -24,7 +24,7 @@ module Wechat
     # 第三方平台上线测试用例2
     # 测试公众号使用客服消息接口处理用户消息
     def deal_test_case(agency)
-      text_service = agency.wechat_services.build(type: 'TextService')
+      text_service = agency.services.build(type: 'TextService')
       text_service.open_id = request.open_id
       text_service.value = "#{auth_code}_from_api"
       text_service.save

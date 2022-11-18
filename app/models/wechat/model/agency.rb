@@ -26,6 +26,8 @@ module Wechat
       belongs_to :platform
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
+      has_many :services, primary_key: :appid, foreign_key: :appid
+
       after_create_commit :store_info_later
       before_save :init_app, if: -> { appid_changed? && appid }
     end
