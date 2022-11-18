@@ -3,19 +3,19 @@
   <td>
     <div data-show-target="item" style="visibility: hidden">
       <%= link_to model.auth_url, aria: { label: '测试授权' }, class: 'button is-small is-rounded is-light' do %>
-        <i class="fa-regular fa-vial"></i>
+        <i class="fa-solid fa-vial has-text-success"></i>
       <% end if model.auth_url %>
       <%= link_to({ controller: 'agencies', platform_id: model.id }, aria: { label: t('wechat.panel.agencies.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-door-open"></i>
+        <i class="fa-solid fa-door-open has-text-warning"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-circle-info"></i>
+        <i class="fa-solid fa-circle-info has-text-primary"></i>
       <% end %>
       <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-pencil"></i>
+        <i class="fa-solid fa-pencil has-text-link"></i>
       <% end %>
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.confirm') } }) do %>
-        <i class="fa-solid fa-trash"></i>
+        <i class="fa-solid fa-trash has-text-danger"></i>
       <% end %>
     </div>
   </td>
