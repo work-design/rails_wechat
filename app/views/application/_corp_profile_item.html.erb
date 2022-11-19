@@ -1,0 +1,15 @@
+<%= link_to({ controller: 'auth/my/home' }, text: true, class: 'weui-media-box weui-media-box_appmsg') do %>
+  <div class="weui-media-box__hd">
+    <div class="is-avatar">
+      <div class="text">一</div>
+    </div>
+  </div>
+  <div class="weui-media-box__bd">
+    <% if request.variant.any?(:work_wechat) %>
+      <ww-open-data type="userName" openid="<%= current_corp_user&.user_id %>"></ww-open-data>
+    <% else %>
+      <p><%= current_member.name %></p>
+    <% end %>
+    <p class="has-text-grey"><%= current_organ.name %></p>
+  </div>
+<% end %>
