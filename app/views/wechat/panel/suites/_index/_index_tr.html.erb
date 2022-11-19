@@ -3,22 +3,22 @@
   <td>
     <div data-show-target="item" style="visibility: hidden">
       <%= link_to({ controller: 'corps', suite_id: model.id }, aria: { label: t('wechat.panel.corps.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-building"></i>
+        <i class="fa-solid fa-building has-text-danger"></i>
       <% end %>
       <%= link_to({ controller: 'suite_tickets', suite_id: model.id }, aria: { label: t('wechat.panel.suite_tickets.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-envelope"></i>
+        <i class="fa-solid fa-envelope has-text-info"></i>
       <% end %>
       <%= link_to({ controller: 'suite_receives', suite_id: model.id }, aria: { label: t('wechat.panel.suite_receives.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-message"></i>
+        <i class="fa-solid fa-message has-text-success"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-circle-info"></i>
+        <i class="fa-solid fa-circle-info has-text-primary"></i>
       <% end %>
       <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-pencil"></i>
+        <i class="fa-solid fa-pencil has-text-link"></i>
       <% end %>
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.confirm') } }) do %>
-        <i class="fa-solid fa-trash"></i>
+        <i class="fa-solid fa-trash has-text-danger"></i>
       <% end %>
     </div>
   </td>
