@@ -30,7 +30,7 @@ module Wechat::Api
     end
 
     def auth_user(code)
-      get 'getuserinfo3rd', code: code, origin: BASE
+      get 'getuserinfo3rd', params: { code: code }, origin: BASE
     end
 
     def login_info(auth_code)
