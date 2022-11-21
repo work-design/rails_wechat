@@ -35,7 +35,6 @@ module Wechat
       has_one :organ, class_name: 'Org::Organ', through: :organ_domain
 
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
-      belongs_to :provider, optional: true
 
       has_many :corp_tickets, ->(o) { where(suiteid: o.suite_id) }
       has_many :corp_users, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
@@ -116,7 +115,7 @@ module Wechat
     end
 
     def auth_info
-      info = provider.api.auth_info(corp_id, permanent_code)
+      info = suite.provider.api.auth_info(corp_id, permanent_code)
       assign_info(info)
       save
     end
