@@ -139,6 +139,7 @@ module Wechat
       page_url = url.delete_suffix('#')
       js_hash = Wechat::Signature.signature(jsapi_ticket, page_url)
       js_hash.merge!(
+        beta: true,
         corpid: corp_id
       )
 
