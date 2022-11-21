@@ -35,7 +35,7 @@ module Wechat
 
       if js_app
         render json: {
-          debug: false,
+          debug: js_app.debug,
           apis: [
             'scanQRCode', 'chooseWXPay',
             'openUserProfile', 'shareToExternalMoments',

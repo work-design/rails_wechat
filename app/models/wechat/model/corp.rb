@@ -30,6 +30,7 @@ module Wechat
       attribute :host, :string
       attribute :token, :string
       attribute :encoding_aes_key, :string
+      attribute :debug, :boolean, default: false
 
       belongs_to :organ_domain, class_name: 'Org::OrganDomain', foreign_key: :host, primary_key: :identifier, optional: true
       has_one :organ, class_name: 'Org::Organ', through: :organ_domain
