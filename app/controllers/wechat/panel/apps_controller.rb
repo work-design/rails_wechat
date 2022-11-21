@@ -43,7 +43,8 @@ module Wechat
         :token,
         :encoding_aes_key,
         :domain,
-        :weapp_id
+        :weapp_id,
+        :debug
       )
     end
 
