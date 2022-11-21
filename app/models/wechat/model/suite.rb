@@ -125,18 +125,7 @@ module Wechat
     end
 
     def generate_corp_user(code)
-      refresh_access_token unless access_token_valid?
-
-      h = {
-        code: code,
-        suite_access_token: access_token
-      }
-      r = HTTPX.get "https://qyapi.weixin.qq.com/cgi-bin/service/getuserinfo3rd?#{h.to_query}"
-      result = JSON.parse(r.body.to_s)
-      if result['errcode'] == 40082
-        refresh_access_token && generate_corp_user(code)
-      end
-
+      result = api.auth_user(code)
       logger.debug "\e[35m  #{result}  \e[0m"
       corp_user = corp_users.find_or_initialize_by(open_userid: result['open_userid'])
       corp_user.corp_id = result['CorpId']
