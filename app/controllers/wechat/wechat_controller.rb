@@ -50,6 +50,27 @@ module Wechat
       end
     end
 
+    def agent_js
+      session[:enter_url] = params[:url] if params[:url].present?
+      if params[:appid].present?
+        js_app = App.find_by appid: params[:appid]
+      else
+        js_app = current_js_app
+      end
+
+      if js_app
+        render json: {
+          debug: js_app.debug,
+          apis: [
+            'selectExternalContact', 'openUserProfile'
+          ],
+          **js_app.agent_config(session[:enter_url])
+        }
+      else
+        render json: {}
+      end
+    end
+
     def friend
       render :friend, layout: 'my'
     end
