@@ -31,6 +31,10 @@
   <td><%= @app.token %></td>
 </tr>
 <tr>
+  <td class="has-text-right"><%= Wechat::App.human_attribute_name(:debug) %></td>
+  <td><%= @app.debug %></td>
+</tr>
+<tr>
   <td class="has-text-right"><%= Wechat::App.human_attribute_name(:created_at) %></td>
   <td><time data-controller="time"><%= @app.created_at.to_fs(:iso8601) %></time></td>
 </tr>
