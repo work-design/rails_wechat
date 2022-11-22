@@ -140,7 +140,7 @@ module Wechat
       js_hash = Wechat::Signature.signature(jsapi_ticket, page_url)
       js_hash.merge!(
         beta: true,
-        corpid: corp_id
+        appid: corp_id
       )
 
       logger.debug "\e[35m  Current page is: #{page_url}, Hash: #{js_hash.inspect}  \e[0m"
