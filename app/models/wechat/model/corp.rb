@@ -136,14 +136,13 @@ module Wechat
 
     def js_config(url = '/')
       refresh_jsapi_ticket unless jsapi_ticket_valid?
-      page_url = url.delete_suffix('#')
-      js_hash = Wechat::Signature.signature(jsapi_ticket, page_url)
+      js_hash = Wechat::Signature.signature(jsapi_ticket, url)
       js_hash.merge!(
         beta: true,
         appid: corp_id
       )
 
-      logger.debug "\e[35m  Current page is: #{page_url}, Hash: #{js_hash.inspect}  \e[0m"
+      logger.debug "\e[35m  Current page is: #{url}, Hash: #{js_hash.inspect}  \e[0m"
       js_hash
     rescue => e
       logger.debug e.message
@@ -165,14 +164,13 @@ module Wechat
 
     def agent_config(url = '/')
       refresh_agent_ticket unless agent_ticket_valid?
-      page_url = url.delete_suffix('#')
-      js_hash = Wechat::Signature.signature(jsapi_ticket, page_url)
+      js_hash = Wechat::Signature.signature(jsapi_ticket, url)
       js_hash.merge!(
         corpid: corp_id,
         agentid: agentid
       )
 
-      logger.debug "\e[35m  Current page is: #{page_url}, Hash: #{js_hash.inspect}  \e[0m"
+      logger.debug "\e[35m  Current page is: #{url}, Hash: #{js_hash.inspect}  \e[0m"
       js_hash
     rescue => e
       logger.debug e.message

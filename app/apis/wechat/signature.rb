@@ -18,11 +18,12 @@ module Wechat
     #    signature: signature
     #  }
     def signature(ticket, url)
+      deal_url = url.split('#')[0]
       params = {
         noncestr: SecureRandom.base64(16),
         timestamp: Time.current.to_i,
         jsapi_ticket: ticket,
-        url: url
+        url: deal_url
       }
       pairs = params.sort.map do |key, value|
         "#{key}=#{value}"
