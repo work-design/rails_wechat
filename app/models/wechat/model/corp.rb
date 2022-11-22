@@ -164,7 +164,7 @@ module Wechat
 
     def agent_config(url = '/')
       refresh_agent_ticket unless agent_ticket_valid?
-      js_hash = Wechat::Signature.signature(jsapi_ticket, url)
+      js_hash = Wechat::Signature.signature(agent_ticket, url)
       js_hash.merge!(
         corpid: corp_id,
         agentid: agentid
