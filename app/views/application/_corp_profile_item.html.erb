@@ -6,7 +6,12 @@
   </div>
   <div class="weui-media-box__bd">
     <% if request.variant.any?(:work_wechat) %>
-      <ww-open-data type="userName" openid="<%= current_corp_user&.user_id %>"></ww-open-data>
+      <ww-open-data
+        type="userName"
+        openid="<%= current_corp_user&.user_id %>"
+        data-controller="open-data"
+      >
+      </ww-open-data>
     <% else %>
       <p><%= current_member.name %></p>
     <% end %>
