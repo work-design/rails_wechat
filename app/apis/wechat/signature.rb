@@ -18,7 +18,7 @@ module Wechat
     #    signature: signature
     #  }
     def signature(ticket, url)
-      deal_url = ERB::Util.url_encode(url.split('#')[0])
+      deal_url = url.split('#')[0]
       params = {
         noncestr: SecureRandom.base64(16),
         timestamp: Time.current.to_i,
