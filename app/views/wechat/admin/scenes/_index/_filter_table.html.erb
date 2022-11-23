@@ -2,9 +2,9 @@
   <tr>
     <th><%= Wechat::Scene.human_attribute_name(:handle_type) %></th>
     <td>
-      <%= link_to t('.all'), filter_params(except: [:handle_type]), class: active_params(handle_type: '', active: 'button is-info', item: 'button is-light') %>
+      <%= link_to t('.all'), filter_params(except: [:handle_type]), class: active_helper(handle_type: '', active: 'button is-info', item: 'button is-light') %>
       <% Wechat::Scene.handle_types.each do |value| %>
-        <%= link_to value, filter_params(handle_type: value), class: active_params(handle_type: value, active: 'button is-info', item: 'button is-light') %>
+        <%= link_to value, filter_params(handle_type: value), class: active_helper(handle_type: value, active: 'button is-info', item: 'button is-light') %>
       <% end %>
     </td>
   </tr>
