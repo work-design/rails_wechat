@@ -4,7 +4,10 @@ module Wechat
     before_action :set_suite
 
     def index
-      @suite_tickets = @suite.suite_tickets.order(id: :desc).page(params[:page])
+      q_params = {}
+      q_params.merge! params.permit(:event)
+
+      @suite_tickets = @suite.suite_tickets.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     private
