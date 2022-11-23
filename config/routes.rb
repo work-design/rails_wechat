@@ -52,6 +52,7 @@ Rails.application.routes.draw do
       resources :corps, only: [:show] do
         member do
           get :login
+          post :notify
         end
       end
       resources :app_configs, only: [:index]

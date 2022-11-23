@@ -37,10 +37,10 @@ module Wechat
 
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
 
-      has_many :corp_tickets, ->(o) { where(suiteid: o.suite_id) }
-      has_many :corp_users, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
-      has_many :contacts, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
-      has_many :externals, foreign_key: :corp_id, primary_key: :corp_id
+      has_many :suite_tickets, ->(o) { where(suiteid: o.suite_id) }, primary_key: :corp_id, foreign_key: :corpid
+      has_many :corp_users, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corp_id, foreign_key: :corp_id
+      has_many :contacts, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corp_id, foreign_key: :corp_id
+      has_many :externals, primary_key: :corp_id, foreign_key: :corp_id
     end
 
     def decrypt(msg)
