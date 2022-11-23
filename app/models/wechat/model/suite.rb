@@ -38,7 +38,6 @@ module Wechat
       self.encoding_aes_key = encoding_aes_key.presence || SecureRandom.alphanumeric(43)
     end
 
-
     def decrypt(msg)
       Wechat::Cipher.qy_decrypt(msg, encoding_aes_key)
     end

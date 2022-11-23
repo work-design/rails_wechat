@@ -16,8 +16,6 @@ module Wechat
       has_many :suites, foreign_key: :corp_id, primary_key: :corp_id
     end
 
-    # 密文解密得到msg的过程
-    # https://open.work.weixin.qq.com/api/doc/90000/90139/90968#密文解密得到msg的过程
     def decrypt(msg)
       Wechat::Cipher.qy_decrypt(msg, encoding_aes_key)
     end
