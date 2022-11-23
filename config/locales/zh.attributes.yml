@@ -68,3 +68,5 @@ zh:
       wechat/external:
         state: 来源
         add_way: 添加方式
+      org/organ:
+        corpid: 企业微信ID

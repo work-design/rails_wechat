@@ -13,7 +13,7 @@ module Wechat
 
     def set_corp_users
       if RailsWechat.config.suite_id.present?
-        @corp_users = CorpUser.where(suite_id: RailsWechat.config.suite_id, corp_id: @organ.corp_id)
+        @corp_users = CorpUser.where(suite_id: RailsWechat.config.suite_id, corp_id: @organ.corpid)
       else
         @corp_users = CorpUser.none
       end
@@ -21,7 +21,7 @@ module Wechat
 
     def organ_params
       params.fetch(:organ, {}).permit(
-        :corp_id,
+        :corpid,
         :corp_user_id
       )
     end
