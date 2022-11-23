@@ -170,7 +170,7 @@ module Wechat
 
     def init_external(contact)
       external = Profiled::Profile.find_or_initialize_by(external_userid: contact['external_userid'])
-      external.organ_id = organ_id
+      external.organ_id = organ&.id
       external.external_type = contact['type']
       external.nick_name = contact['name']
       external.avatar_url = contact['avatar']
