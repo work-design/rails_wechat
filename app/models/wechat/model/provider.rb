@@ -14,6 +14,13 @@ module Wechat
       has_many :corp_users
       has_many :corps
       has_many :suites, foreign_key: :corp_id, primary_key: :corp_id
+
+      before_validation :init_aes_key, if: -> { encoding_aes_key.blank? || token.blank? }
+    end
+
+    def init_aes_key
+      self.token = token.presence || SecureRandom.alphanumeric(24)
+      self.encoding_aes_key = encoding_aes_key.presence || SecureRandom.alphanumeric(43)
     end
 
     def decrypt(msg)
