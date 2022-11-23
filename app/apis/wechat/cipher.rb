@@ -32,9 +32,11 @@ module Wechat::Cipher
     decode_padding(plain)
   end
 
-  # 密文解密得到msg的过程
-  # https://open.work.weixin.qq.com/api/doc/90000/90139/90968#密文解密得到msg的过程
-  def suite_decrypt(msg, encoding_aes_key)
+  # 见：附录 > 加解密方案说明
+  # 企业内部开发：https://developer.work.weixin.qq.com/document/path/90968
+  # 第三方应用开发：https://developer.work.weixin.qq.com/document/path/91144
+  # 服务商代开发：https://developer.work.weixin.qq.com/document/path/96211
+  def qy_decrypt(msg, encoding_aes_key)
     cipher = OpenSSL::Cipher.new('AES-256-CBC')
     cipher.decrypt
     cipher.padding = 0
@@ -46,7 +48,7 @@ module Wechat::Cipher
     cipher.iv = aes_key[0, 16]
     plain = cipher.update(Base64.decode64(msg)) + cipher.final
 
-    content, _ = Wechat::Cipher.unpack(plain)
+    content, _ = unpack(plain)
     content
   end
 
