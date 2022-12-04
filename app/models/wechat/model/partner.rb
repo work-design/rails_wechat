@@ -23,7 +23,7 @@ module Wechat
 
     def api
       return @api if defined? @api
-      @api = WxPay::Api::Partner.new(self)
+      @api = WxPay::Api::Partner.new(payee: self, appid: appid)
     end
 
     def rsa_encrypt(data)
