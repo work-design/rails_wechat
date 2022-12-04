@@ -3,16 +3,16 @@
   <td>
     <div data-show-target="item" style="visibility: hidden">
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-circle-info"></i>
+        <i class="fa-solid fa-circle-info has-text-primary"></i>
       <% end %>
       <%= link_to({ action: 'edit_cert', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.payees.edit_cert.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-certificate"></i>
+        <i class="fa-solid fa-certificate has-text-info"></i>
       <% end %>
       <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal', turbo_scroll: true }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-pencil"></i>
+        <i class="fa-solid fa-pencil has-text-link"></i>
       <% end %>
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.confirm'), turbo_scroll: true } }) do %>
-        <i class="fa-solid fa-trash"></i>
+        <i class="fa-solid fa-trash has-text-danger"></i>
       <% end %>
     </div>
   </td>
