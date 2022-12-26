@@ -3,6 +3,10 @@
   <td><%= @organ.name %></td>
 </tr>
 <tr>
+  <td class="has-text-right"><%= Org::Organ.human_attribute_name(:limit_wechat_menu) %></td>
+  <td><%= @organ.limit_wechat_menu %></td>
+</tr>
+<tr>
   <td class="has-text-right"><%= Org::Organ.human_attribute_name(:corpid) %></td>
   <td><%= @organ.corpid %></td>
 </tr>
