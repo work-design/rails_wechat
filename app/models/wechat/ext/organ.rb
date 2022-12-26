@@ -11,7 +11,7 @@ module Wechat
       has_many :corps, class_name: 'Wechat::Corp', primary_key: :corpid, foreign_key: :corp_id
       belongs_to :corp_user, class_name: 'Wechat::CorpUser', optional: true
 
-      validates :limit_wechat_menu, inclusion: { in: [1, 2, 3] }
+      validates :limit_wechat_menu, inclusion: { in: [0, 1, 2, 3] }
     end
 
     def contact
