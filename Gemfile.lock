@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 9b882fc524190f0db715d4fd546b81c6393c2a48
+  revision: bfd3a18f6377fb88631c624ba3bdef6bd029d980
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 69ada45dd11c0f480f75920488d0e384cd7ee383
+  revision: 35e4ecfe6d2278c622cce9e407f5c3d9d557974a
   specs:
     rails_com (1.3.0)
       acme-client
@@ -26,28 +26,28 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: aa40900c64ffee6ce3b7ed2ad2227d1497852771
+  revision: d9b8af61c1691548bce3c8e97bb8223d0300dae3
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: 58bb78046d012e81af45e66871b3740df91946a1
+  revision: 01e6eb57fdeff3df9ab79ad59186ef2d0d068e05
   specs:
     rails_extend (1.0.1)
       rails (>= 5.0)
 
 GIT
   remote: https://github.com/work-design/rails_notice.git
-  revision: cd3ea8208484bf310339f42e66b038e5ee91698a
+  revision: 801fef68cc446b221abec0190652a4e4d2338fc5
   specs:
     rails_notice (1.0.3)
       rails_extend
 
 GIT
   remote: https://github.com/work-design/rails_org.git
-  revision: 7093994d70fb199b3bd5c4102fef80c217ac61c6
+  revision: 3fa02c1ae0c118cdc2f3ed1ac689214a82b7037e
   specs:
     rails_org (0.0.1)
       rails_com (~> 1.2)
@@ -142,6 +142,7 @@ GEM
       with_advisory_lock (>= 4.0.0)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
+    date (3.3.3)
     debug (1.7.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
@@ -164,7 +165,7 @@ GEM
     io-console (0.5.11)
     irb (1.5.1)
       reline (>= 0.3.0)
-    jwt (2.5.0)
+    jwt (2.6.0)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -190,13 +191,14 @@ GEM
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
     minitest (5.16.3)
-    net-http (0.3.1)
+    net-http (0.3.2)
       uri
-    net-imap (0.3.1)
+    net-imap (0.3.4)
+      date
       net-protocol
     net-pop (0.1.2)
       net-protocol
-    net-protocol (0.2.0)
+    net-protocol (0.2.1)
       timeout
     net-smtp (0.3.3)
       net-protocol
