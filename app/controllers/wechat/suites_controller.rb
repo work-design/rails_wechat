@@ -70,12 +70,17 @@ module Wechat
       corp_user = current_account && current_account.corp_users.find_by(suite_id: @suite.id, corp_id: params[:corp_id])
 
       if corp_user
-        url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.organ.host, disposable_token: current_account.once_token, suite_id: @suite.id)
         current_authorized_token.update corp_user_id: corp_user.id
-        redirect_to url, allow_other_host: true
+        if corp.host.present?
+          url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.host, disposable_token: current_account.once_token, suite_id: @suite.id)
+        else
+          url = url_for(controller: 'org/board/organs')
+        end
       else
-        redirect_to @suite.oauth2_url(host: request.host, port: request.port, protocol: request.protocol, corp_id: params[:corp_id]), allow_other_host: true
+        url = @suite.oauth2_url(host: request.host, port: request.port, protocol: request.protocol, corp_id: params[:corp_id])
       end
+
+      redirect_to url, allow_other_host: true
     end
 
     private
