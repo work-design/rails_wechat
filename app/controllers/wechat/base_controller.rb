@@ -7,7 +7,7 @@ module Wechat
       state_hash = urlsafe_decode64(params[:state])
 
       if oauth_user.user
-        login_by_account(oauth_user.account)
+        login_by_oauth_user(oauth_user)
         Com::SessionChannel.broadcast_to(params[:state], auth_token: current_authorized_token.token)
 
         url = url_for(disposable_token: oauth_user.account.once_token, **state_hash)
