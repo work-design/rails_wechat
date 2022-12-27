@@ -83,18 +83,13 @@ module Wechat
     def auto_join_organ
       return if member
       return unless corp || organ
-      if organ
-        temp_member = organ.members.find_by(identity: temp_identity)
-        if temp_member
-          temp_member.identity = self.identity
-          temp_member.save
-        else
-          build_member(organ_id: organ.id)
-          member.name = user_id
-          member.save
-        end
+
+      temp_member = organ.members.find_by(identity: temp_identity)
+      if temp_member
+        temp_member.identity = self.identity
+        temp_member.save
       else
-        build_member(organ_id: corp.organ.id)
+        build_member(organ_id: organ.id)
         member.name = user_id
         member.save
       end
