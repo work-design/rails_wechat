@@ -4,7 +4,7 @@ module Wechat
     before_action :set_suite
 
     def index
-      @corps = @suite.corps.page(params[:page])
+      @corps = @suite.corps.order(id: :desc).page(params[:page])
     end
 
   end

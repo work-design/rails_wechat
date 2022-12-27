@@ -3,7 +3,7 @@
     <%= image_tag model.square_logo_url, class: 'image is-32x32' if model.square_logo_url.present? %>
     <span><%= model.name %></span>
   </div>
-  <p><%= model.full_name %></p>
+  <p class="has-text-grey"><%= model.full_name %></p>
 </td>
 <td>
   <p><%= model.corp_id %></p>
