@@ -82,7 +82,7 @@ module Wechat
 
     def auto_join_organ
       return if member
-      return unless corp || organ
+      return unless organ
 
       temp_member = organ.members.find_by(identity: temp_identity)
       if temp_member
