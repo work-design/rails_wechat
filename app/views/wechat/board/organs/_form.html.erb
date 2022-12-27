@@ -1,0 +1,4 @@
+<%= f.text_field :name, required: true %>
+<%= f.fields :who_roles do |ef| %>
+  <%= ef.hidden_field :role_id %>
+<% end %>

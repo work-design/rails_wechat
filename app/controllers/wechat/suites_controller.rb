@@ -60,7 +60,7 @@ module Wechat
         if corp.host.present?
           url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.host, disposable_token: current_account.once_token, suite_id: @suite.id)
         else
-          url = url_for(controller: 'org/board/organs')
+          url = url_for(controller: 'wechat/board/organs', corp_id: params[:corp_id])
         end
 
         redirect_to url, allow_other_host: true

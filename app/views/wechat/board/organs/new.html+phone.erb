@@ -1,0 +1,10 @@
+<%= form_with theme: 'weui', model: @organ, url: { action: 'create' } do |f| %>
+  <%= render 'error_messages', target: f.object %>
+  <div class="weui-form__control-area">
+    <div class="weui-cells__title"><%= t('.title') %></div>
+    <div class="weui-cells">
+      <%= render partial: 'form', locals: { f: f } %>
+    </div>
+  </div>
+  <%= f.submit %>
+<% end %>

@@ -146,6 +146,10 @@ Rails.application.routes.draw do
         end
       end
 
+      namespace :board, defaults: { namespace: 'board' } do
+        resources :organs
+      end
+
       namespace :admin, defaults: { namespace: 'admin' } do
         root 'home#index'
         resource :organ, only: [:show, :edit, :update]

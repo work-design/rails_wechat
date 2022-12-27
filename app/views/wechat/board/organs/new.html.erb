@@ -1,0 +1,7 @@
+<%= turbo_frame_tagged 'modal', data: { title: t('.title') } do %>
+  <%= form_with model: @organ, url: { action: 'create' } do |f| %>
+    <%= render 'error_messages', target: f.object %>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= f.submit %>
+  <% end %>
+<% end %>
