@@ -7,7 +7,7 @@
 <div class="weui-panel">
   <div class="weui-panel__bd">
   <% Roled::OrganRole.visible.each do |role| %>
-    <%= link_to({ controller: 'organs', action: 'new', role_id: role.id }, class: 'weui-cell weui-cell_access') do %>
+    <%= link_to({ controller: 'organs', action: 'new', role_id: role.id, **params.permit(:corp_id) }, class: 'weui-cell weui-cell_access') do %>
       <i class="fa-solid fa-plus"></i>
       <span class="pl-1"><%= role.name %></span>
     <% end %>
