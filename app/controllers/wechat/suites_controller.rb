@@ -72,7 +72,7 @@ module Wechat
     # 应用主页，自动跳转
     def redirect
       corp = @suite.corps.find_by corp_id: params[:corp_id]
-      corp_user = current_account && current_account.corp_users.find_by(suite_id: @suite.id, corp_id: params[:corp_id])
+      corp_user = current_account && current_account.corp_users.find_by(suite_id: @suite.suite_id, corp_id: params[:corp_id])
 
       if corp_user
         current_authorized_token.update corp_user_id: corp_user.id
