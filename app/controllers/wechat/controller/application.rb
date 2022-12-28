@@ -86,10 +86,9 @@ module Wechat
     end
 
     def current_corp_user
+      return unless current_account
       return @current_corp_user if defined? @current_corp_user
-      if current_authorized_token
-        @current_corp_user = current_authorized_token.corp_user
-      end
+      @current_corp_user = current_account.corp_users.take
 
       logger.debug "\e[35m  Login as Corp User: #{@current_corp_user&.id}  \e[0m"
       @current_corp_user
