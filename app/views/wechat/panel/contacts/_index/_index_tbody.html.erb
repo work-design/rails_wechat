@@ -4,7 +4,7 @@
 </td>
 <td>
   <p><%= model.config_id %></p>
-  <p><%= image_tag model.qr_code, class: 'image is-64x64' %></p>
+  <p><%= image_tag model.qr_code, class: 'image is-64x64' if model.qr_code.present? %></p>
 </td>
 <td><%= image_tag model.file, class: 'image is-64x64' if model.file.attached? %></td>
 <td>
