@@ -89,10 +89,12 @@ module Wechat
           corp_user.assign_attributes detail.slice('gender', 'qr_code')
           corp_user.identity = detail['mobile']
           corp_user.avatar_url = detail['avatar']
+          corp_user.open_userid = detail['open_userid']
         end
       end
 
       corp_user.save
+      logger.debug "\e[35m  err: #{corp_user.error_text}"
       corp_user
     end
 
