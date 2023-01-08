@@ -34,6 +34,7 @@ module Wechat
       belongs_to :member, ->(o) { where(organ_id: o.organ&.id) }, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity, optional: true
       belongs_to :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity, optional: true
       has_one :user, class_name: 'Auth::User', through: :account
+      has_many :authorized_tokens, ->(o) { where(suite_id: o.suite_id) }, class_name: 'Auth::AuthorizedToken', primary_key: :identity, foreign_key: :identity, dependent: :delete_all
 
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
       belongs_to :corp, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
@@ -42,7 +43,6 @@ module Wechat
       has_many :contacts, ->(o) { where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :user_id, primary_key: :user_id
       has_many :maintains, through: :member
       has_many :clients, through: :maintains
-      has_many :authorized_tokens, ->(o) { where(suite_id: o.suite_id) }, primary_key: :identity, foreign_key: :identity, dependent: :delete_all
 
       validates :identity, presence: true
 
