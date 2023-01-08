@@ -4,7 +4,7 @@
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:qrcode_url) %></td>
-  <td><%= image_tag @agency.file, class: 'image is-64x64' if @agency.file.attached? %></td>
+  <td><%= image_tag @agency.file, class: 'image is-128x128' if @agency.file.attached? %></td>
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:access_token) %></td>
