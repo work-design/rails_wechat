@@ -75,9 +75,9 @@ module Wechat
       corp_user = current_account && current_account.corp_users.find_by(suite_id: @suite.suite_id, corp_id: params[:corp_id])
 
       if corp_user
-        current_authorized_token.update corp_user_id: corp_user.id
+        current_authorized_token.update suite_id: corp_user.suite_id
         if corp.host.present? || corp.organ&.host
-          url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.host || corp.organ&.host, suite_id: @suite.id)
+          url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.host || corp.organ&.host)
         else
           url = url_for(controller: 'org/board/organs')
         end
