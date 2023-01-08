@@ -87,7 +87,7 @@ module Wechat
 
         if detail['errcode'] == 0
           corp_user.assign_attributes detail.slice('gender', 'qr_code')
-          corp_user.identity = detail['mobile']
+          corp_user.identity = detail['mobile'] if detail['mobile'].present?
           corp_user.avatar_url = detail['avatar']
           corp_user.open_userid = detail['open_userid']
         end
