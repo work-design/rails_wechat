@@ -60,7 +60,7 @@ module Wechat
 
     def init_account
       return if account
-      if identity.include?('-')
+      if identity.to_s.include?('-')
         build_account(type: 'Auth::ThirdpartyAccount')
       else
         temp_account = ::Auth::Account.find_by(identity: temp_identity)
