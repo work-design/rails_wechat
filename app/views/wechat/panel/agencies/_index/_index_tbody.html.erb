@@ -1,9 +1,4 @@
 <td><%= model.appid %></td>
-<td>
-  <code class="is-wrap"><%= model.access_token %></code>
-  <p><time data-controller="time"><%= model.access_token_expires_at.to_fs(:iso8601) %></time></p>
-  <code class="is-wrap"><%= model.refresh_token %></code>
-</td>
 <td><%= simple_format model.func_infos %></td>
 <td>
   <p>
