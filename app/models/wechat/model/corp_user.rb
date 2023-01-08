@@ -42,6 +42,7 @@ module Wechat
       has_many :contacts, ->(o) { where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :user_id, primary_key: :user_id
       has_many :maintains, through: :member
       has_many :clients, through: :maintains
+      has_many :authorized_tokens, ->(o) { where(suite_id: o.suite_id) }, primary_key: :identity, foreign_key: :identity, dependent: :delete_all
 
       validates :identity, presence: true
 
@@ -180,6 +181,10 @@ module Wechat
       #follow.note = info['description']
       follow.member_id = member.id
       follow
+    end
+
+    def authorized_token
+      authorized_tokens.find(&->(i){ i.expire_at.present? && i.expire_at > Time.current }) || authorized_tokens.create
     end
 
   end
