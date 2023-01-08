@@ -1,10 +1,15 @@
-<td><%= model.appid %></td>
+<td>
+  <p class="is-several">
+    <%= image_tag model.head_img, class: 'image is-24x24' if model.head_img %>
+    <span><%= model.nick_name %></span>
+    <% if model.default %>
+      <i class="fa-solid fa-shield has-text-success"></i>
+    <% end %>
+  </p>
+  <p class="has-text-grey"><%= model.appid %></p>
+</td>
 <td><%= simple_format model.func_infos %></td>
 <td>
-  <p>
-    <%= image_tag model.head_img, class: 'image is-24x24' if model.head_img %>
-    <%= model.nick_name %>
-  </p>
   <p><%= model.principal_name %></p>
   <p><%= model.user_name %></p>
   <p><%= model.alias_name %></p>
