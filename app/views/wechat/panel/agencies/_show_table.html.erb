@@ -3,6 +3,10 @@
   <td><%= @agency.appid %></td>
 </tr>
 <tr>
+  <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:qrcode_url) %></td>
+  <td><%= image_tag @agency.file, class: 'image is-64x64' if @agency.file.attached? %></td>
+</tr>
+<tr>
   <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:access_token) %></td>
   <td><%= @agency.access_token %></td>
 </tr>
