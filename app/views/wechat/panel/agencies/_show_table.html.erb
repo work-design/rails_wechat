@@ -7,18 +7,6 @@
   <td><%= image_tag @agency.file, class: 'image is-128x128' if @agency.file.attached? %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:access_token) %></td>
-  <td><%= @agency.access_token %></td>
-</tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:access_token_expires_at) %></td>
-  <td><%= @agency.access_token_expires_at %></td>
-</tr>
-<tr>
-  <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:refresh_token) %></td>
-  <td><%= @agency.refresh_token %></td>
-</tr>
-<tr>
   <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:func_infos) %></td>
   <td><%= @agency.func_infos %></td>
 </tr>
