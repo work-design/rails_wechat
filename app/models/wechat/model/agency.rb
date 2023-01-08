@@ -29,9 +29,12 @@ module Wechat
 
       has_many :services, primary_key: :appid, foreign_key: :appid
 
+      has_one_attached :file
+
       after_create_commit :store_info_later
       before_save :init_app, if: -> { appid_changed? && appid }
       after_update :set_default, if: -> { default? && saved_change_to_default? }
+      after_save_commit :sync_to_storage, if: -> { saved_change_to_qrcode_url? }
     end
 
     def api
@@ -77,6 +80,10 @@ module Wechat
 
     def set_default
       self.class.where.not(id: self.id).where(platform_id: self.platform_id).update_all(default: false)
+    end
+
+    def sync_to_storage
+      self.file.url_sync(qrcode_url)
     end
 
   end

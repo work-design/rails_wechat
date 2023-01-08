@@ -14,4 +14,4 @@
   <p><%= model.user_name %></p>
   <p><%= model.alias_name %></p>
 </td>
-<td><%= image_tag model.qrcode_url, class: 'image is-128x128' if model.qrcode_url %></td>
+<td><%= image_tag model.file, class: 'image is-128x128' if model.file.attached? %></td>
