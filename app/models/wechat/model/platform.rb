@@ -14,6 +14,8 @@ module Wechat
       attribute :pre_auth_code, :string
       attribute :pre_auth_code_expires_at, :datetime
 
+      has_one :agency, -> { where(default: true) }
+
       has_many :agencies
       has_many :auths
       has_many :platform_tickets, primary_key: :appid, foreign_key: :appid
