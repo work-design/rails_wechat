@@ -63,6 +63,8 @@ module Wechat
 
       if params[:appid]
         @current_payee = current_organ_domain.app_payees.find_by(appid: params[:appid])
+      elsif current_wechat_app
+        @current_payee = current_organ_domain.app_payees.find_by(appid: current_wechat_app.appid)
       else
         @current_payee = current_organ_domain.app_payees.take
       end
