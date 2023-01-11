@@ -26,7 +26,7 @@ module Wechat
       end
     end
 
-    def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
+    def oauth2_url(scope: 'snsapi_base', state: SecureRandom.hex(16), **url_options)
       url_options.with_defaults! controller: 'wechat/apps', action: 'login', id: id, host: self.domain
       h = {
         appid: appid,
@@ -39,7 +39,7 @@ module Wechat
       "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
     end
 
-    def oauth2_data_url(scope = 'snsapi_userinfo', **host_options)
+    def oauth2_data_url(scope = 'snsapi_base', **host_options)
       r = oauth2_url(scope: scope, **host_options)
       QrcodeHelper.data_url(r)
     end
