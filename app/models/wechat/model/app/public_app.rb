@@ -45,14 +45,8 @@ module Wechat
     end
 
     def generate_wechat_user(code)
-      h = {
-        appid: appid,
-        secret: secret,
-        code: code,
-        grant_type: 'authorization_code'
-      }
-      r = HTTPX.get "https://api.weixin.qq.com/sns/oauth2/access_token?#{h.to_query}"
-      result = JSON.parse(r.body.to_s)
+      result = api.oauth2_access_token(code)
+      logger.debug "\e[35m  Detail: #{result}  \e[0m"
 
       wechat_user = WechatUser.find_or_initialize_by(uid: result['openid'])
       wechat_user.appid = appid

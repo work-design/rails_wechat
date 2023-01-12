@@ -2,10 +2,10 @@ module Wechat::Api
   module Base::Sns
     BASE = 'https://api.weixin.qq.com/sns/'
 
-    def web_access_token(code)
+    def oauth2_access_token(code)
       params = {
-        appid: access_token.appid,
-        secret: access_token.secret,
+        appid: app.appid,
+        secret: app.secret,
         code: code,
         grant_type: 'authorization_code'
       }
