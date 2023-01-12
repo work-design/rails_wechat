@@ -168,7 +168,7 @@ module Wechat
       end
     end
 
-    def base64_state(host: self.domain, controller_path: 'home', action_name: 'index', method: 'get', **params)
+    def base64_state(host: self.domain, controller_path: '/home', action_name: 'index', method: 'get', **params)
       state = [
         host,
         controller_path,
