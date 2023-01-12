@@ -94,7 +94,7 @@ module Wechat
         reply_params(
           title: '点击链接查看个人账户详情',
           description: '点击链接查看个人账户详情',
-          url: Rails.application.routes.url_for(controller: 'my/home', host: app.domain, disposable_token: wechat_user.account.once_token)
+          url: Rails.application.routes.url_for(controller: 'my/home', host: app.domain, disposable_token: wechat_user.auth_token)
         )
       else
         reply_for_blank_user

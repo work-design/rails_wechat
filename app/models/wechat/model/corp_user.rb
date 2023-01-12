@@ -184,7 +184,7 @@ module Wechat
     end
 
     def authorized_token
-      authorized_tokens.find(&->(i){ i.expire_at.present? && i.expire_at > Time.current }) || authorized_tokens.create
+      authorized_tokens.find(&:effective?) || authorized_tokens.create
     end
 
   end

@@ -172,6 +172,7 @@ module Wechat
         params.to_query
       ]
 
+      logger.debug "\e[35m  state: #{state}  \e[0m"
       state.map! { |i| Base64.urlsafe_encode64(i, padding: false) }
       state.join('~')
     end
