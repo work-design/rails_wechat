@@ -43,7 +43,7 @@ module Wechat
     end
 
     def init_app
-      app || build_app
+      app || build_app(name: nick_name)
       app.save
     end
 
