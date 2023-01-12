@@ -12,7 +12,7 @@ module Wechat
       attribute :inviting, :boolean, default: false, comment: '可邀请加入'
       attribute :appid, :string
       attribute :secret, :string
-      attribute :token, :string, default: -> { SecureRandom.hex }
+      attribute :token, :string
       attribute :agentid, :string, comment: '企业微信所用'
       attribute :encrypt_mode, :boolean, default: true
       attribute :encoding_aes_key, :string
@@ -53,12 +53,17 @@ module Wechat
 
       validates :appid, presence: true, uniqueness: true
 
+      before_validation :init_token, if: -> { token.blank? }
       before_validation :init_aes_key, if: -> { encrypt_mode && encoding_aes_key.blank? }
       after_update :set_global, if: -> { global? && saved_change_to_global? }
     end
 
+    def init_token
+      self.token = SecureRandom.hex
+    end
+
     def init_aes_key
-      self.encoding_aes_key ||= SecureRandom.alphanumeric(43)
+      self.encoding_aes_key = SecureRandom.alphanumeric(43)
     end
 
     def url
