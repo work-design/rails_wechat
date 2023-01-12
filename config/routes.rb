@@ -25,6 +25,11 @@ Rails.application.routes.draw do
           patch :qrcode
         end
       end
+      resources :agencies, only: [:show] do
+        member do
+          get :login
+        end
+      end
       resources :platforms, only: [:show] do
         member do
           get :callback

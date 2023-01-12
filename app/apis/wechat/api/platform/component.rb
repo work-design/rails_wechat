@@ -53,5 +53,15 @@ module Wechat::Api
       r.json
     end
 
+    def oauth2_access_token(code, appid)
+      params = {
+        appid: appid,
+        code: code,
+        grant_type: 'authorization_code',
+        component_appid: app.appid,
+      }
+      get 'oauth2/component/access_token', params: params, origin: 'https://api.weixin.qq.com/sns/'
+    end
+
   end
 end
