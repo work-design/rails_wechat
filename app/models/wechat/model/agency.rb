@@ -57,19 +57,20 @@ module Wechat
       store_access_token(r)
     end
 
-    def base64_state(host: platform.domain, controller_path: 'auth/sign', action_name: 'bind', method: 'get', **params)
-      state = [
-        host,
-        controller_path,
-        action_name,
-        method.downcase,
-        params.to_query
-      ]
-
-      logger.debug "\e[35m  state: #{state}  \e[0m"
-      state.map! { |i| Base64.urlsafe_encode64(i, padding: false) }
-      state.join('~')
+    def oauth2_url(scope: 'snsapi_base', state: SecureRandom.hex(16), **url_options)
+      url_options.with_defaults! controller: 'wechat/apps', action: 'login', id: id, host: platform.domain
+      h = {
+        appid: appid,
+        redirect_uri: Rails.application.routes.url_for(**url_options),
+        response_type: 'code',
+        scope: scope,
+        state: state,
+        component_appid: platform.appid
+      }
+      logger.debug "\e[35m  Detail: #{h}  \e[0m"
+      "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
     end
+
 
     def store_info_later
       AgencyJob.perform_later(self)

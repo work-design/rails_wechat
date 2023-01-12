@@ -84,9 +84,9 @@ module Wechat
     def reply_for_blank_info
       return if wechat_user.attributes['name'].present? || !app.oauth_enable
       if agency
-        url = app.oauth2_url(host: agency.platform.domain, state: app.base64_state(uid: open_id))
+        url = agency.oauth2_url(scope: 'snsapi_userinfo', state: app.base64_state(uid: open_id))
       else
-        url = app.oauth2_url(state: app.base64_state(uid: open_id))
+        url = app.oauth2_url(scope: 'snsapi_userinfo', state: app.base64_state(uid: open_id))
       end
 
       reply_params(
