@@ -6,7 +6,7 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit(:id, :type, :appid)
 
-      @apps = App.includes(:organ).default_where(q_params).order(id: :asc).page(params[:page])
+      @apps = App.includes(:organ).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def create
