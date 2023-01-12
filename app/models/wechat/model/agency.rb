@@ -57,6 +57,20 @@ module Wechat
       store_access_token(r)
     end
 
+    def base64_state(host: platform.domain, controller_path: 'auth/sign', action_name: 'bind', method: 'get', **params)
+      state = [
+        host,
+        controller_path,
+        action_name,
+        method.downcase,
+        params.to_query
+      ]
+
+      logger.debug "\e[35m  state: #{state}  \e[0m"
+      state.map! { |i| Base64.urlsafe_encode64(i, padding: false) }
+      state.join('~')
+    end
+
     def store_info_later
       AgencyJob.perform_later(self)
     end

@@ -5,6 +5,7 @@ module Wechat
     def platform_params
       params.fetch(:platform, {}).permit(
         :name,
+        :domain,
         :appid,
         :secret,
         :verify_ticket,

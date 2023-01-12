@@ -13,6 +13,7 @@ module Wechat
       attribute :access_token_expires_at, :datetime
       attribute :pre_auth_code, :string
       attribute :pre_auth_code_expires_at, :datetime
+      attribute :domain, :string
 
       has_one :agency, -> { where(default: true) }
 

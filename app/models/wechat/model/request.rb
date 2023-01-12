@@ -21,6 +21,7 @@ module Wechat
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
       belongs_to :corp_user, ->(o) { where(corp_id: o.appid) }, foreign_key: :userid, primary_key: :user_id, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :agency, foreign_key: :appid, primary_key: :appid, optional: true
 
       has_one :platform, through: :receive
       has_one :tag, ->(o) { where(name: o.body) }, foreign_key: :appid, primary_key: :appid
@@ -82,10 +83,16 @@ module Wechat
 
     def reply_for_blank_info
       return if wechat_user.attributes['name'].present? || !app.oauth_enable
+      if agency
+        url = app.oauth2_url(state: agency.base64_state(uid: open_id))
+      else
+        url = app.oauth2_url(state: app.base64_state(uid: open_id))
+      end
+
       reply_params(
         title: '授权信息（微信昵称，头像）',
         description: '相关信息将用于您个人中心的用户展示',
-        url: app.oauth2_url(state: app.base64_state(uid: open_id))
+        url: url
       )
     end
 
