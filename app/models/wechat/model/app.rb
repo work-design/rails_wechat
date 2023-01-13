@@ -76,28 +76,17 @@ module Wechat
     end
 
     def menu
+      r = []
+      r1 = self.menus.where(parent_id: nil).order(position: :asc)
+      r2 = Menu.includes(:children).where(parent_id: nil, organ_id: organ_id).order(position: :asc)
+      r3 = Menu.includes(:children).where(parent_id: nil, organ_id: nil).order(position: :asc)
+
+      r << (r1 + r2)[0...organ.limit_wechat_menu]
+      r << r3[0...(3 - r.size)]
+
       {
-        button: default_menus + within_menus
+        button: r.as_json
       }
-    end
-
-    def default_menus
-      if organ && organ.respond_to?(:limit_wechat_menu)
-        global = 3 - organ.limit_wechat_menu
-      else
-        global = 3
-      end
-      r1 = Menu.includes(:children).where(parent_id: nil, organ_id: nil).order(position: :asc).limit(global)
-      r2 = Menu.includes(:children).where(parent_id: nil, organ_id: organ_id).order(position: :asc).limit(organ.limit_wechat_menu)
-      (r1 + r2).as_json
-    end
-
-    def within_menus
-      if organ && organ.respond_to?(:limit_wechat_menu)
-        self.menus.limit(organ.limit_wechat_menu).where(parent_id: nil).order(position: :asc).as_json
-      else
-        self.menus.where(parent_id: nil).order(position: :asc).as_json
-      end
     end
 
     def refresh_access_token
