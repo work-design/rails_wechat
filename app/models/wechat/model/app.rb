@@ -81,8 +81,8 @@ module Wechat
       r2 = Menu.includes(:children).where(parent_id: nil, organ_id: organ_id).order(position: :asc)
       r3 = Menu.includes(:children).where(parent_id: nil, organ_id: nil).order(position: :asc)
 
-      r << (r1 + r2)[0...organ.limit_wechat_menu]
-      r << r3[0...(3 - r.size)]
+      r += (r1 + r2)[0...organ.limit_wechat_menu]
+      r += r3[0...(3 - r.size)]
 
       {
         button: r.as_json
