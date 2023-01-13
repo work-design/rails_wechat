@@ -42,6 +42,12 @@ module Wechat
     end
 
     def reply_params(title:, description:, url:)
+      if agency
+        head_url = agency.head_img
+      else
+        head_url = ApplicationController.helpers.image_path('logo_avatar.png', protocol: 'https')
+      end
+
       r = {
         appid: appid,
         news_reply_items_attributes: [
@@ -49,7 +55,7 @@ module Wechat
             title: title,
             description: description,
             url: url,
-            raw_pic_url: ApplicationController.helpers.image_path('logo_avatar.png', protocol: 'https')
+            raw_pic_url: head_url
           }
         ]
       }
