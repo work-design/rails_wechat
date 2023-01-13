@@ -45,7 +45,7 @@ module Wechat
       q_params = {
         type: 'Wechat::ParentMenu'
       }
-      q_params.merge! default_params
+      q_params.merge! organ_id: [current_organ.id, nil]
 
       @parents = Menu.where(parent_id: nil).default_where(q_params)
     end
