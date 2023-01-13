@@ -23,7 +23,7 @@ module Wechat
 
       scope :roots, -> { where(parent_id: nil) }
 
-      acts_as_list scope: [:parent_id, :appid]
+      acts_as_list scope: [:parent_id, :organ_id]
 
       after_save_commit :sync_to_wechat, if: -> { (saved_changes.keys & ['name', 'value', 'mp_appid', 'mp_pagepath']).present? }
     end
