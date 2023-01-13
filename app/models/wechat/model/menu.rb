@@ -11,8 +11,6 @@ module Wechat
       attribute :mp_pagepath, :string
       attribute :position, :integer
 
-      belongs_to :organ, class_name: 'Org::Organ', optional: true
-
       belongs_to :parent, class_name: self.base_class.name, optional: true
       has_many :children, -> { order(position: :asc) }, class_name: self.base_class.name, foreign_key: :parent_id, dependent: :nullify
 
