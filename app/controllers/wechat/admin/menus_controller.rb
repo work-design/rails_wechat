@@ -4,6 +4,8 @@ module Wechat
     before_action :set_types, only: [:new, :create, :edit, :update]
     before_action :set_parents, only: [:new, :edit]
     before_action :set_menu_roots, only: [:index]
+    before_action :set_menu_root, only: [:new, :create]
+    before_action :set_new_menu, only: [:new, :create]
 
     def index
       q_params = {}
@@ -14,17 +16,6 @@ module Wechat
       #@menus = Menu.includes(:children).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
     end
 
-    def new
-      @menu = Menu.new(type: 'Wechat::ViewMenu')
-    end
-
-    def new_parent
-      @menu = Menu.new(type: 'Wechat::ParentMenu')
-    end
-
-    def edit_parent
-    end
-
     private
     def set_menu_roots
       q_params = {}
@@ -33,8 +24,16 @@ module Wechat
       @default_menus = MenuRoot.includes(:menus).where(organ_id: nil).order(position: :asc)
     end
 
+    def set_menu_root
+      @menu_root = MenuRoot.find params[:menu_root_id]
+    end
+
     def set_menu
       @menu = Menu.find(params[:id])
+    end
+
+    def set_new_menu
+      @menu = @menu_root.menus.build(menu_params)
     end
 
     def set_types

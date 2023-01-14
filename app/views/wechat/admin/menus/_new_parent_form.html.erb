@@ -1,7 +1,0 @@
-<%= form_with model: @menu, scope: :menu, url: { action: 'create' } do |f| %>
-  <%= f.hidden_field :appid, value: params[:appid] %>
-  <%= f.hidden_field :type, value: 'Wechat::ParentMenu' %>
-  <%= f.text_field :name, required: true %>
-  <%= f.number_field :position, step: 1 %>
-  <%= f.submit %>
-<% end %>
