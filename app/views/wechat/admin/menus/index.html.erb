@@ -1,0 +1,9 @@
+<%= render layout: 'index_table' do %>
+  <%= render partial: 'root_tbody', layout: 'root_tr', collection: @default_menus, as: :model %>
+  <%# render partial: 'index_tbody', layout: 'index_tr', collection: @menus, as: :model %>
+  <tr>
+    <td colspan="6">
+      <%= render 'button' %>
+    </td>
+  </tr>
+<% end %>

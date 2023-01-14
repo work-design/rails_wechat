@@ -161,6 +161,7 @@ Rails.application.routes.draw do
       namespace :admin, defaults: { namespace: 'admin' } do
         root 'home#index'
         resource :organ, only: [:show, :edit, :update]
+        resources :menu_roots
         resources :menus do
           member do
             get :edit_parent

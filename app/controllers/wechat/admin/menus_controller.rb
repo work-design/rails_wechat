@@ -1,16 +1,17 @@
 module Wechat
-  class Admin::MenuOrgansController < Admin::BaseController
+  class Admin::MenusController < Admin::BaseController
     before_action :set_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
     before_action :set_types, only: [:new, :create, :edit, :update]
     before_action :set_parents, only: [:new, :edit]
-    before_action :set_default_menus, only: [:index]
+    before_action :set_menu_roots, only: [:index]
 
     def index
       q_params = {}
       q_params.merge! default_params
       q_params.merge! params.permit(:name)
 
-      @menus = Menu.includes(:children).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
+      @menu_roots = MenuRoot.where(default_params)
+      #@menus = Menu.includes(:children).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
     end
 
     def new
@@ -25,11 +26,11 @@ module Wechat
     end
 
     private
-    def set_default_menus
+    def set_menu_roots
       q_params = {}
       q_params.merge! params.permit(:name)
 
-      @default_menus = Menu.includes(:children).where(organ_id: nil).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
+      @default_menus = MenuRoot.includes(:menus).where(organ_id: nil).order(position: :asc)
     end
 
     def set_menu
@@ -38,7 +39,6 @@ module Wechat
 
     def set_types
       @types = Menu.options_i18n(:type)
-      @types.reject! { |_, v| v == :'Wechat::ParentMenu' }
     end
 
     def set_parents
