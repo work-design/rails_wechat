@@ -159,9 +159,6 @@ Rails.application.routes.draw do
         root 'home#index'
         resource :organ, only: [:show, :edit, :update]
         resources :menus do
-          collection do
-            get :new_parent
-          end
           member do
             get :edit_parent
           end

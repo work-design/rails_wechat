@@ -1,5 +1,5 @@
 module Wechat
-  class Admin::AppMenusController < Admin::BaseController
+  class Admin::MenuAppsController < Admin::BaseController
     before_action :set_app
     before_action :set_app_menu, only: [:show, :edit, :update, :destroy]
     before_action :set_default_menus, only: [:index]

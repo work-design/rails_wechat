@@ -3,7 +3,6 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :name, :string
       attribute :appid, :string, index: true
 
       belongs_to :menu

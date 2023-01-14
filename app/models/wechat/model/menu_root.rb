@@ -1,0 +1,22 @@
+module Wechat
+  module Model::MenuRoot
+    extend ActiveSupport::Concern
+
+    included do
+      attribute :name, :string
+      attribute :position, :integer
+
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
+
+      has_many :menus, -> { order(position: :asc) }, dependent: :nullify
+    end
+
+    def as_json
+      {
+        name: name,
+        sub_button: children.as_json
+      }
+    end
+
+  end
+end
