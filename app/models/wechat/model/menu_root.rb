@@ -8,7 +8,7 @@ module Wechat
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
-      has_many :menus, -> { order(position: :asc) }, dependent: :nullify
+      has_many :menus, ->(o) { where(organ_id: o.organ_id).order(position: :asc) }, dependent: :nullify
     end
 
     def as_json

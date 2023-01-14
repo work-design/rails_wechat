@@ -7,7 +7,8 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit(:name)
 
-      @menus = Menu.includes(:children).where(organ_id: nil).roots.default_where(q_params).order(parent_id: :desc, position: :asc).page(params[:page])
+      @menu_roots = MenuRoot.includes(:menus).where(organ_id: nil)
+      #@menus = Menu.where(organ_id: nil).default_where(q_params).order(m_id: :desc, position: :asc).page(params[:page])
     end
 
     def new
@@ -15,23 +16,8 @@ module Wechat
       @parents = Menu.roots.where(appid: nil).where(type: 'Wechat::ParentMenu')
     end
 
-    def new_parent
-      @menu = Menu.new
-    end
-
-    def create
-      @menu = Menu.new(menu_params)
-
-      unless @menu.save
-        render :new, locals: { model: @menu }, status: :unprocessable_entity
-      end
-    end
-
     def edit
       @parents = Menu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @menu.appid)
-    end
-
-    def edit_parent
     end
 
     private

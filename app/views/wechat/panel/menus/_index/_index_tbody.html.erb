@@ -1,10 +1,5 @@
 <td>
-  <span style="width: <%= model.parent_id ? 1.43 : 0 %>em; display: inline-block"></span>
-  <% if model.children.size > 0 %>
-    <i class="fa-solid fa-fw fa-caret-down" style="cursor: pointer" data-action="click->tree#collapse"></i>
-  <% else %>
-    <i class="fa-solid fa-fw fa-minus"></i>
-  <% end %>
+  <i class="fa-solid fa-fw fa-minus has-text-grey"></i>
   <%= model.type_i18n %>
 </td>
 <td><%= model.name %></td>
