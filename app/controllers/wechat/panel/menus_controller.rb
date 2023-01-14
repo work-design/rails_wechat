@@ -1,7 +1,9 @@
 module Wechat
   class Panel::MenusController < Panel::BaseController
     before_action :set_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
-    before_action :prepare_form, only: [:new, :create, :edit, :update]
+    before_action :set_menu_root, only: [:new, :create]
+    before_action :set_new_menu, only: [:new, :create]
+    before_action :set_types, only: [:new, :create, :edit, :update]
 
     def index
       q_params = {}
@@ -11,24 +13,25 @@ module Wechat
       #@menus = Menu.where(organ_id: nil).default_where(q_params).order(m_id: :desc, position: :asc).page(params[:page])
     end
 
-    def new
-      @menu = Menu.new(type: 'Wechat::ViewMenu')
-      @parents = Menu.roots.where(appid: nil).where(type: 'Wechat::ParentMenu')
-    end
-
     private
     def set_menu
       @menu = Menu.find(params[:id])
     end
 
-    def prepare_form
+    def set_menu_root
+      @menu_root = MenuRoot.find params[:menu_root_id]
+    end
+
+    def set_new_menu
+      @menu = @menu_root.menus.build(menu_params)
+    end
+
+    def set_types
       @types = Menu.options_i18n(:type)
-      @types.reject! { |_, v| v == :ParentMenu }
     end
 
     def menu_params
       params.fetch(:menu, {}).permit(
-        :parent_id,
         :type,
         :name,
         :value,

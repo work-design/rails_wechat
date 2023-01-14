@@ -13,10 +13,10 @@ module Wechat
       belongs_to :menu_root, optional: true
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
-      has_many :app_menus, dependent: :destroy_async
-      accepts_nested_attributes_for :app_menus, allow_destroy: true
-      has_many :apps, through: :app_menus
-      has_many :scenes, through: :app_menus
+      has_many :menu_apps, dependent: :destroy_async
+      accepts_nested_attributes_for :menu_apps, allow_destroy: true
+      has_many :apps, through: :menu_apps
+      has_many :scenes, through: :menu_apps
 
       acts_as_list scope: [:menu_root_id, :organ_id]
 

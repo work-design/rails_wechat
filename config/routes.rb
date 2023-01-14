@@ -97,8 +97,10 @@ Rails.application.routes.draw do
             get :key
           end
         end
-        resources :menu_roots, only: [:new, :create, :edit, :update, :destroy]
-        resources :menus do
+        resources :menu_roots, only: [:new, :create, :edit, :update, :destroy] do
+          resources :menus, only: [:new, :create]
+        end
+        resources :menus, except: [:new, :create] do
           collection do
             get :new_parent
           end

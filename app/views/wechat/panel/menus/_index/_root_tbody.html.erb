@@ -1,14 +1,13 @@
 <td>
-  <span style="width: 1.43em; display: inline-block"></span>
   <% if model.menus.size > 0 %>
     <i class="fa-solid fa-fw fa-caret-down" style="cursor: pointer" data-action="click->tree#collapse"></i>
   <% else %>
     <i class="fa-solid fa-fw fa-minus"></i>
   <% end %>
+  <span><%= model.name %></span>
 </td>
-<td><%= model.name %></td>
 <td colspan="2">
-  <%= link_to({ action: 'new' }, data: { turbo_frame: 'modal' }, class: 'button is-small is-link') do %>
+  <%= link_to({ action: 'new', menu_root_id: model.id }, data: { turbo_frame: 'modal' }, class: 'button is-small is-link') do %>
     <i class="fa-solid fa-plus"></i>
     <span><% t('.new') %></span>
   <% end %>
