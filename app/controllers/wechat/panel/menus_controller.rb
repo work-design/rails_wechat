@@ -16,10 +16,6 @@ module Wechat
       @parents = Menu.roots.where(appid: nil).where(type: 'Wechat::ParentMenu')
     end
 
-    def edit
-      @parents = Menu.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @menu.appid)
-    end
-
     private
     def set_menu
       @menu = Menu.find(params[:id])
