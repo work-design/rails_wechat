@@ -1,6 +1,6 @@
 module Wechat
   class Admin::MenusController < Admin::BaseController
-    before_action :set_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
+    before_action :set_menu, only: [:show, :edit, :update, :destroy]
     before_action :set_types, only: [:new, :create, :edit, :update]
     before_action :set_menu_root, only: [:new, :create]
     before_action :set_new_menu, only: [:new, :create]

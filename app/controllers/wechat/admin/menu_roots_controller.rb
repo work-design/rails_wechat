@@ -1,18 +1,17 @@
 module Wechat
   class Admin::MenuRootsController < Admin::BaseController
-
+    before_action :set_menu_root, only: [:new, :create]
 
     private
     def set_menu_root
-      @menu_root = MenuRoot.where(position: params[:position]).find_or_create_by(organ_id: current_organ.id)
+      @menu_root = MenuRoot.where(position: params[:position]).find_or_initialize_by(organ_id: current_organ.id)
+      @menu_root.assign_attributes(menu_root_params)
     end
 
     def menu_root_params
-      r = params.fetch(:menu_root, {}).permit(
-        :name,
-        :position
+      params.fetch(:menu_root, {}).permit(
+        :name
       )
-      r.merge! default_form_params
     end
 
   end

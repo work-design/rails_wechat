@@ -9,8 +9,9 @@ module Wechat
       attribute :mp_appid, :string
       attribute :mp_pagepath, :string
       attribute :position, :integer
+      attribute :root_position, :integer
 
-      belongs_to :menu_root, optional: true
+      belongs_to :menu_root, foreign_key: :root_position, primary_key: :position, optional: true
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
       has_many :menu_apps, dependent: :destroy_async
@@ -20,7 +21,12 @@ module Wechat
 
       acts_as_list scope: [:menu_root_id, :organ_id]
 
+      before_validation :sync_root_position, if: -> { menu_root_id_changed? }
       after_save_commit :sync_to_wechat, if: -> { (saved_changes.keys & ['name', 'value', 'mp_appid', 'mp_pagepath']).present? }
+    end
+
+    def sync_root_position
+      self.root_position = menu_root&.position
     end
 
     def sync_to_wechat
