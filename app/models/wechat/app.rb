@@ -1,6 +1,6 @@
 module Wechat
   class App < ApplicationRecord
     include Model::App
-    include Model::AppSync
+    include Inner::App
   end
 end

@@ -232,7 +232,7 @@ Rails.application.routes.draw do
             end
             resources :notices
           end
-          resources :app_menus do
+          resources :menu_apps do
             collection do
               post :sync
             end

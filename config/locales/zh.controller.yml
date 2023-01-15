@@ -33,9 +33,9 @@ zh:
       menus:
         index:
           title: 菜单
-      app_menus:
+      menu_apps:
         index:
-          title: 菜单
+          title: 自定菜单
       responses:
         index:
           title: 回复设置

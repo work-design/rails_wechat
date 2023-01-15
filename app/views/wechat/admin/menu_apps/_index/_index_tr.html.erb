@@ -4,6 +4,3 @@
     <div data-show-target="item" style="visibility: hidden"></div>
   </td>
 </tr>
-<% model.children.each do |child| %>
-  <%= render partial: 'index_tbody', layout: 'index_tr', locals: { model: child } %>
-<% end %>

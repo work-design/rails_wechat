@@ -1,17 +1,13 @@
 <td>
-  <span style="width: 1.43em; display: inline-block"></span>
-  <i class="fa-solid fa-fw fa-minus"></i>
+  <span style="display: inline-block"></span>
+  <% if model.menus.size > 0 %>
+    <i class="fa-solid fa-fw fa-caret-down" style="cursor: pointer" data-action="click->tree#collapse"></i>
+  <% else %>
+    <i class="fa-solid fa-fw fa-minus"></i>
+  <% end %>
   <span><%= model.name %></span>
-  <span class="tag"><%= model.type_i18n %></span>
 </td>
-<td><%= model.value %></td>
-<td>
-  <p><%= model.mp_appid %></p>
-  <p><%= model.mp_pagepath %></p>
-</td>
-<td>
-  <span class="has-text-grey"><%= model.position %></span>
-</td>
+<td colspan="2"></td>
 <td>
 <% app_menu = @app.menu_apps.find(&->(i){ i.menu_id == model.id }) %>
 <% if app_menu %>

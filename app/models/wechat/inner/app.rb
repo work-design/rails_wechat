@@ -1,12 +1,12 @@
 module Wechat
-  module Model::AppSync
+  module Inner::App
     extend ActiveSupport::Concern
 
     included do
-      has_many :app_menus, -> { where(scene_id: nil) }, primary_key: :appid, foreign_key: :appid
-      has_many :menus, through: :app_menus
-      has_many :all_app_menus, class_name: 'AppMenu', primary_key: :appid, foreign_key: :appid
-      has_many :all_menus, through: :all_app_menus
+      has_many :menu_apps, -> { where(scene_id: nil) }, primary_key: :appid, foreign_key: :appid
+      has_many :menus, through: :menu_apps
+      has_many :all_menu_apps, class_name: 'MenuApp', primary_key: :appid, foreign_key: :appid
+      has_many :all_menus, through: :all_menu_apps
       has_many :receives, primary_key: :appid, foreign_key: :appid
       has_many :replies, primary_key: :appid, foreign_key: :appid
       has_many :requests, primary_key: :appid, foreign_key: :appid
