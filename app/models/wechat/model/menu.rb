@@ -10,8 +10,10 @@ module Wechat
       attribute :mp_pagepath, :string
       attribute :position, :integer
       attribute :root_position, :integer
+      attribute :appid, :string
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       belongs_to :menu_root, ->(o){ where(organ_id: o.organ_id) }, foreign_key: :root_position, primary_key: :position, optional: true
 
