@@ -13,14 +13,14 @@
   <span class="has-text-grey"><%= model.position %></span>
 </td>
 <td>
-<% app_menu = @app.menu_apps.find(&->(i){ i.menu_id == model.id }) %>
-<% if app_menu %>
-  <%= form_with theme: nil, url: { action: 'destroy', id: app_menu.id }, method: :delete, data: { controller: 'input' } do |f| %>
+<% menu_app = @app.menu_apps.find(&->(i){ i.menu_id == model.id }) %>
+<% if menu_app %>
+  <%= form_with theme: nil, url: { action: 'destroy', id: menu_app.id }, method: :delete, data: { controller: 'input' } do |f| %>
     <%= f.check_box :disabled, checked: true, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
     <label data-action="click->input#check"></label>
   <% end %>
 <% else %>
-  <%= form_with theme: nil, scope: :app_menu, url: { action: 'create' }, data: { controller: 'input' } do |f| %>
+  <%= form_with theme: nil, scope: :menu_app, url: { action: 'create' }, data: { controller: 'input' } do |f| %>
     <%= f.hidden_field :menu_id, value: model.id %>
     <%= f.check_box :disabled, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
     <label data-action="click->input#check"></label>

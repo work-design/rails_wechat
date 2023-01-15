@@ -1,7 +1,8 @@
 module Wechat
   class Admin::MenuAppsController < Admin::BaseController
     before_action :set_app
-    before_action :set_app_menu, only: [:show, :edit, :update, :destroy]
+    before_action :set_menu_app, only: [:show, :edit, :update, :destroy]
+    before_action :set_new_menu_app, only: [:new, :create]
 
     def index
       q_params = {}
@@ -13,23 +14,6 @@ module Wechat
       end.values
     end
 
-    def new
-      @menu = @app.menus.build(type: 'Wechat::ViewMenu')
-      @parents = @app.menus.where(type: 'Wechat::ParentMenu', parent_id: nil)
-    end
-
-    def new_parent
-      @menu = @app.menus.build
-    end
-
-    def create
-      @app_menu = @app.app_menus.build(menu_params)
-
-      unless @app_menu.save
-        render :new, locals: { model: @menu }, status: :unprocessable_entity
-      end
-    end
-
     def sync
       r = @app.sync_menu
       render 'sync', locals: { notice: r.to_s }
@@ -39,12 +23,13 @@ module Wechat
       @parents = @app.menus.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @menu.appid)
     end
 
-    def edit_parent
+    private
+    def set_menu_app
+      @menu_app = @app.menu_apps.find(params[:id])
     end
 
-    private
-    def set_app_menu
-      @app_menu = @app.app_menus.find(params[:id])
+    def set_new_menu_app
+      @menu_app = @app.menu_apps.build(menu_params)
     end
 
     def set_types
@@ -52,7 +37,7 @@ module Wechat
     end
 
     def menu_params
-      params.fetch(:app_menu, {}).permit(
+      params.fetch(:menu_app, {}).permit(
         :menu_id
       )
     end
