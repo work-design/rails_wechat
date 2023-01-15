@@ -2,8 +2,6 @@ module Wechat
   class Admin::MenusController < Admin::BaseController
     before_action :set_menu, only: [:show, :edit, :edit_parent, :update, :destroy]
     before_action :set_types, only: [:new, :create, :edit, :update]
-    before_action :set_parents, only: [:new, :edit]
-    before_action :set_menu_roots, only: [:index]
     before_action :set_menu_root, only: [:new, :create]
     before_action :set_new_menu, only: [:new, :create]
 
@@ -12,24 +10,20 @@ module Wechat
       q_params.merge! default_params
       q_params.merge! params.permit(:name)
 
-      @menu_roots = MenuRoot.where(default_params)
+      @menu_roots = MenuRoot.includes(:menus).where(organ_id: [nil, current_organ.id]).order(position: :asc)
+      @menus = @menu_roots.group_by(&:position).transform_values! do |x|
+        x.find(&->(i){ i.organ_id == current_organ.id }) || x.find(&->(i){ i.organ_id.nil? })
+      end.values
       #@menus = Menu.includes(:children).roots.default_where(q_params).order(parent_id: :desc, position: :asc)
     end
 
     private
-    def set_menu_roots
-      q_params = {}
-      q_params.merge! params.permit(:name)
-
-      @default_menus = MenuRoot.includes(:menus).where(organ_id: nil).order(position: :asc)
+    def set_menu
+      @menu = Menu.find(params[:id])
     end
 
     def set_menu_root
       @menu_root = MenuRoot.find params[:menu_root_id]
-    end
-
-    def set_menu
-      @menu = Menu.find(params[:id])
     end
 
     def set_new_menu
@@ -40,18 +34,9 @@ module Wechat
       @types = Menu.options_i18n(:type)
     end
 
-    def set_parents
-      q_params = {
-        type: 'Wechat::ParentMenu'
-      }
-      q_params.merge! organ_id: [current_organ.id, nil]
-
-      @parents = Menu.where(parent_id: nil).default_where(q_params)
-    end
-
     def menu_params
       p = params.fetch(:menu, {}).permit(
-        :parent_id,
+        :root_position,
         :type,
         :name,
         :value,
