@@ -11,8 +11,9 @@ module Wechat
       attribute :position, :integer
       attribute :root_position, :integer
 
-      belongs_to :menu_root, foreign_key: :root_position, primary_key: :position, optional: true
       belongs_to :organ, class_name: 'Org::Organ', optional: true
+
+      belongs_to :menu_root, ->(o){ where(organ_id: o.organ_id) }, foreign_key: :root_position, primary_key: :position, optional: true
 
       has_many :menu_apps, dependent: :destroy_async
       accepts_nested_attributes_for :menu_apps, allow_destroy: true
