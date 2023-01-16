@@ -10,7 +10,7 @@ module Wechat
       q_params.merge! default_params
       q_params.merge! params.permit(:name)
 
-      @menu_roots = MenuRoot.includes(:menus).where(organ_id: [nil, current_organ.id]).order(position: :asc)
+      @menu_roots = MenuRoot.includes(:organ_menus).where(organ_id: [nil, current_organ.id]).order(position: :asc)
       @menus = @menu_roots.group_by(&:position).transform_values! do |x|
         x.find(&->(i){ i.organ_id == current_organ.id }) || x.find(&->(i){ i.organ_id.nil? })
       end.values
