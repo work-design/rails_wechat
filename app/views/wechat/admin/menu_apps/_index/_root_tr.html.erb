@@ -9,6 +9,6 @@
     </div>
   </td>
 </tr>
-<% model.menus.or(Wechat::Menu.where(organ_id: current_organ.id)).each do |child| %>
+<% model.menus.where(organ_id: [current_organ.id, nil]).each do |child| %>
   <%= render partial: 'index_tbody', layout: 'index_tr', locals: { model: child } %>
 <% end %>

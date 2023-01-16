@@ -10,8 +10,8 @@ module Wechat
       belongs_to :organ, class_name: 'Org::Organ', optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
-      has_many :menus, ->(o) { where(organ_id: [o.organ_id, nil]).order(appid: :asc, position: :asc) }, primary_key: :position, foreign_key: :root_position
-      has_many :organ_menus, ->(o) { where(organ_id: [o.organ_id, nil], appid: nil).order(position: :asc) }, class_name: 'Menu', primary_key: :position, foreign_key: :root_position
+      has_many :menus, -> { order(appid: :asc, position: :asc) }, primary_key: :position, foreign_key: :root_position
+      has_many :organ_menus, -> { where(appid: nil).order(position: :asc) }, class_name: 'Menu', primary_key: :position, foreign_key: :root_position
 
       acts_as_list scope: [:organ_id, :appid]
     end

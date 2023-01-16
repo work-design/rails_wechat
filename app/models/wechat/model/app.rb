@@ -86,7 +86,7 @@ module Wechat
       r = menu_roots.map do |menu_root|
         {
           name: menu_root.name,
-          sub_button: menu_root.menus.where(appid: [appid, nil]).limit(5).as_json
+          sub_button: menu_root.menus.where(organ_id: [organ_id, nil], appid: [appid, nil]).limit(5).as_json
         }
       end
 
