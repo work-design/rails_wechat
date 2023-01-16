@@ -27,7 +27,8 @@ module Wechat
     end
 
     def set_new_menu
-      @menu = @menu_root.menus.build(menu_params)
+      @menu = @menu_root.menus.build(appid: params[:appid])
+      @menu.assign_attributes menu_params
     end
 
     def set_types
@@ -42,7 +43,8 @@ module Wechat
         :value,
         :mp_appid,
         :mp_pagepath,
-        :position
+        :position,
+        :appid
       )
       p.merge! default_form_params
     end
