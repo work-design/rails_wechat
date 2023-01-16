@@ -75,10 +75,16 @@ module Wechat
       api.menu_create menu
     end
 
+    def menu_roots
+      r = MenuRoot.includes(:menus).where(organ_id: [nil, organ_id], appid: [nil, appid]).order(position: :asc)
+      r.group_by(&:position).transform_values! do |x|
+        x.find(&->(i){ i.appid == appid }) || x.find(&->(i){ i.organ_id == organ_id }) || x.find(&->(i){ i.organ_id.nil? })
+      end.values
+    end
+
     def menu
       r = []
       r1 = self.menus.where(parent_id: nil).order(position: :asc)
-      r2 = Menu.includes(:children).where(parent_id: nil, organ_id: organ_id).order(position: :asc)
       r3 = Menu.includes(:children).where(parent_id: nil, organ_id: nil).order(position: :asc)
 
       r += (r1 + r2)[0...organ.limit_wechat_menu]

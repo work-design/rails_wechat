@@ -22,7 +22,7 @@ module Wechat
       has_many :apps, through: :menu_apps
       has_many :scenes, through: :menu_apps
 
-      acts_as_list scope: [:root_position, :organ_id]
+      acts_as_list scope: [:root_position, :organ_id, :appid]
 
       after_save_commit :sync_to_wechat, if: -> { (saved_changes.keys & ['name', 'value', 'mp_appid', 'mp_pagepath']).present? }
     end

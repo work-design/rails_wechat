@@ -4,9 +4,8 @@ module Wechat
 
     included do
       has_many :menu_apps, -> { where(scene_id: nil) }, primary_key: :appid, foreign_key: :appid
-      has_many :menus, through: :menu_apps
+      has_many :menus, primary_key: :appid, foreign_key: :appid
       has_many :all_menu_apps, class_name: 'MenuApp', primary_key: :appid, foreign_key: :appid
-      has_many :all_menus, through: :all_menu_apps
       has_many :receives, primary_key: :appid, foreign_key: :appid
       has_many :replies, primary_key: :appid, foreign_key: :appid
       has_many :requests, primary_key: :appid, foreign_key: :appid
