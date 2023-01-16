@@ -76,23 +76,21 @@ module Wechat
     end
 
     def menu_roots
-      r = MenuRoot.includes(:menus).where(organ_id: [nil, organ_id], appid: [nil, appid]).order(position: :asc)
+      r = MenuRoot.where(organ_id: [nil, organ_id], appid: [nil, appid]).order(position: :asc)
       r.group_by(&:position).transform_values! do |x|
         x.find(&->(i){ i.appid == appid }) || x.find(&->(i){ i.organ_id == organ_id }) || x.find(&->(i){ i.organ_id.nil? })
       end.values
     end
 
     def menu
-      r = []
-      r1 = self.menus.where(parent_id: nil).order(position: :asc)
-      r3 = Menu.includes(:children).where(parent_id: nil, organ_id: nil).order(position: :asc)
+      r = menu_roots.map do |menu_root|
+        {
+          name: menu_root.name,
+          sub_button: menu_root.menus.where(appid: [appid, nil]).limit(5).as_json
+        }
+      end
 
-      r += (r1 + r2)[0...organ.limit_wechat_menu]
-      r += r3[0...(3 - r.size)]
-
-      {
-        button: r.as_json
-      }
+      { button: r }
     end
 
     def refresh_access_token
