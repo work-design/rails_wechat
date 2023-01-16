@@ -11,6 +11,6 @@
     </div>
   </td>
 </tr>
-<% model.menus.each do |child| %>
+<% model.menus.where(organ_id: nil).each do |child| %>
   <%= render partial: 'index_tbody', layout: 'index_tr', locals: { model: child } %>
 <% end %>
