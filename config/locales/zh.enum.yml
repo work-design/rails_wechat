@@ -24,6 +24,7 @@ zh:
       wechat/request:
         type:
           Wechat::TextRequest: 文字
+          Wechat::ClickRequest: 点击
           Wechat::SubscribeRequest: 关注
           Wechat::UnsubscribeRequest: 取消关注
           Wechat::ScanRequest: 扫码
