@@ -1,3 +1,3 @@
 <%= f.text_field :match_value %>
 <%= f.check_box :contain %>
-<%= f.collection_check_boxes(:request_types, Wechat::Request.options_i18n(:type), :last, :first)  %>
+<%= f.collection_check_boxes(:request_types, Wechat::Request.options_i18n(:type), ->(i){ i.last.to_s }, :first)  %>
