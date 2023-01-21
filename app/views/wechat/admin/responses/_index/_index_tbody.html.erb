@@ -16,12 +16,12 @@
 </td>
 <td>
 <% if model.reply %>
-  <p>
-    <span><%= model.reply.type_i18n %></span>
-    <%= link_to({ action: 'edit_reply', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-pencil"></i>
-    <% end %>
-  </p>
+  <p><%= model.reply.type_i18n %></p>
   <p><%= model.reply.value %></p>
 <% end %>
+</td>
+<td>
+  <%= link_to({ action: 'edit_reply', id: model.id }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+    <i class="fa-solid fa-pencil has-text-success"></i>
+  <% end %>
 </td>

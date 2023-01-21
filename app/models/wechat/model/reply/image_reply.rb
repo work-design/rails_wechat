@@ -6,6 +6,10 @@ module Wechat
       after_create_commit :upload_file_later
     end
 
+    def msg_type
+      'image'
+    end
+
     def content
       {
         MsgType: 'image',

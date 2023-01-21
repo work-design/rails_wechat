@@ -1,3 +1,7 @@
-<turbo-frame id="reply">
-  <%= render partial: 'reply_form' %>
-</turbo-frame>
+<%= render 'button' %>
+
+<%= render layout: 'index_table' do %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @replies, as: :model %>
+<% end %>
+
+<%= paginate @replies %>

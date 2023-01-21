@@ -3,7 +3,7 @@ module Wechat
     before_action :set_app
     before_action :set_response, only: [:show, :edit, :edit_reply, :update, :destroy]
     before_action :set_new_response, only: [:new, :create]
-    before_action :prepare_form, only: [:new, :create, :edit, :update]
+    before_action :set_extractors, only: [:new, :create, :edit, :update]
 
     def index
       q_params = {
@@ -20,7 +20,7 @@ module Wechat
       }
       q_params.merge! type: @response.reply.type if @response.reply
 
-      @replies = Reply.where(q_params)
+      @replies = Reply.where(q_params).page(params[:page])
     end
 
     def filter_reply
@@ -35,7 +35,7 @@ module Wechat
       @response = @app.responses.build(response_params)
     end
 
-    def prepare_form
+    def set_extractors
       q = { organ_id: nil }
       if defined?(current_organ) && current_organ
         q.merge! organ_id: [current_organ.id, nil]

@@ -7,6 +7,10 @@ module Wechat
       accepts_nested_attributes_for :news_reply_items
     end
 
+    def msg_type
+      'news'
+    end
+
     def content
       items = news_reply_items.map do |item|
         item.to_wechat

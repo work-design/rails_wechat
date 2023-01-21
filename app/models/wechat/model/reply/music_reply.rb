@@ -1,6 +1,10 @@
 module Wechat
   module Model::Reply::MusicReply
 
+    def msg_type
+      'music'
+    end
+
     def content
       {
         MsgType: 'music',

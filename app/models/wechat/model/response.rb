@@ -19,10 +19,6 @@ module Wechat
       accepts_nested_attributes_for :request_responses
 
       validates :match_value, presence: true
-
-      before_validation do
-        self.match_value ||= "#{effective_type}_#{effective_id}"
-      end
     end
 
     def scan_regexp(body)

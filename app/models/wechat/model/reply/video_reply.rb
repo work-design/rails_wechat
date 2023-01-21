@@ -1,6 +1,10 @@
 module Wechat
   module Model::Reply::VideoReply
 
+    def msg_type
+      'video'
+    end
+
     def content
       {
         MsgType: 'video',

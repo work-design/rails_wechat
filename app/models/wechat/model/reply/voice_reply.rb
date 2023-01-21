@@ -1,6 +1,10 @@
 module Wechat
   module Model::Reply::VoiceReply
 
+    def msg_type
+      'voice'
+    end
+
     def content
       {
         MsgType: 'voice',
