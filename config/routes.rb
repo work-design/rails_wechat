@@ -196,8 +196,8 @@ Rails.application.routes.draw do
           resources :responses do
             member do
               post :sync
-              get 'reply' => :edit_reply
               get :filter_reply
+              get 'reply' => :edit_reply
               patch 'reply' => :update_reply
             end
           end

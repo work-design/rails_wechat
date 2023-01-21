@@ -1,7 +1,7 @@
 module Wechat
   class Admin::ResponsesController < Admin::BaseController
     before_action :set_app
-    before_action :set_response, only: [:show, :edit, :edit_reply, :update, :destroy]
+    before_action :set_response, only: [:show, :edit, :update, :destroy, :actions, :edit_reply, :update_reply]
     before_action :set_new_response, only: [:new, :create]
     before_action :set_extractors, only: [:new, :create, :edit, :update]
 
@@ -21,6 +21,10 @@ module Wechat
       q_params.merge! type: @response.reply.type if @response.reply
 
       @replies = Reply.where(q_params).page(params[:page])
+    end
+
+    def update_reply
+      @response.update reply_id: params[:reply_id]
     end
 
     def filter_reply

@@ -11,7 +11,7 @@
         <div class="media-right">
           <%= image_tag item.pic_url, class: 'image is-64x64' if item.pic_url.present? %>
           <%= button_to({ controller: 'news_reply_items', action: 'destroy', reply_id: model.id, id: item.id }, method: :delete) do %>
-            <i class="fa-regular fa-times"></i>
+            <i class="fa-solid fa-times"></i>
           <% end %>
         </div>
       </article>
@@ -26,4 +26,13 @@
   <% else %>
     <%= model.value %>
   <% end %>
+</td>
+<td>
+<% if @response.reply_id == model.id %>
+  <i class="fa-solid fa-check has-text-success"></i>
+<% else %>
+  <%= button_to({ action: 'update_reply', id: @response.id }, method: :patch, params: { reply_id: model.id }) do %>
+    <i class="fa-solid fa-check-double has-text-success"></i>
+  <% end %>
+<% end %>
 </td>
