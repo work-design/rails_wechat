@@ -4,6 +4,7 @@ module Wechat
 
     included do
       before_save :sync_to_tag, unless: -> { body.to_s.start_with?('session_') }
+      after_create_commit :login_user, if: -> { body.to_s.start_with?('session_') }
     end
 
     def set_body

@@ -198,6 +198,13 @@ module Wechat
       do_encrypt
     end
 
+    def login_user
+      session_str, url = body.split('@')
+      session = session_str.delete_prefix!('session_')
+
+      Com::SessionChannel.broadcast_to session, auth_token: wechat_user.auth_token
+    end
+
     def do_encrypt
       if platform
         token = platform.token

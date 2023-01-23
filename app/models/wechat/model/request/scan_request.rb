@@ -20,25 +20,5 @@ module Wechat
       Wechat::TextReply.new(value: '登录成功！') if body.to_s.start_with?('session_')
     end
 
-    def login_user
-      session_str, url = body.split('@')
-      session = session_str.delete_prefix!('session_')
-      url_options = URI(url)
-      url = Rails.application.routes.url_for(
-        controller: 'auth/sign',
-        action: 'bind',
-        uid: wechat_user.uid,
-        host: url_options.host,
-        protocol: url_options.scheme,
-        port: url_options.port
-      )
-
-      if wechat_user.user
-        Com::SessionChannel.broadcast_to session, auth_token: wechat_user.auth_token
-      else
-        Com::SessionChannel.broadcast_to session, url: url
-      end
-    end
-
   end
 end
