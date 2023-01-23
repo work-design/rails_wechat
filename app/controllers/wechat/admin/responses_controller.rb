@@ -54,7 +54,6 @@ module Wechat
         :expire_at,
         :effective_type,
         :effective_id,
-        request_types: [],
         request_responses_attributes: {}
       )
     end

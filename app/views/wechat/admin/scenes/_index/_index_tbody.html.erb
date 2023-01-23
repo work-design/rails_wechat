@@ -1,6 +1,9 @@
 <td>
-  <p><%= model.match_value %></p>
-  <p><span class="tag"><%= model.handle_type_i18n %></span></p>
+  <p>
+    <span><%= model.match_value %></span>
+    <span class="tag"><%= model.handle_type_i18n %></span>
+  </p>
+  <p><%= model.qrcode_url %></p>
 </td>
 <td>
   <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
