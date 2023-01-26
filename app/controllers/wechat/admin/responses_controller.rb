@@ -14,6 +14,12 @@ module Wechat
       @responses = @app.responses.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
+    def edit
+      Wechat::Request.enum_base_i18n(:type).except(*@response.request_types.map(&:to_sym)).each do |type, _|
+        @response.request_responses.build(request_type: type)
+      end
+    end
+
     def edit_reply
       q_params = {
         appid: @app.appid

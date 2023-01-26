@@ -3,7 +3,6 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :request_types, :string, array: true
       attribute :match_value, :string
       attribute :contain, :boolean, default: true
       attribute :enabled, :boolean, default: true
@@ -16,9 +15,13 @@ module Wechat
       has_many :hooks, dependent: :delete_all
       has_many :request_responses, ->(o){ where(appid: o.appid) }, dependent: :destroy_async
 
-      accepts_nested_attributes_for :request_responses
+      accepts_nested_attributes_for :request_responses, allow_destroy: true
 
       validates :match_value, presence: true
+    end
+
+    def request_types
+      request_responses.pluck(:request_type)
     end
 
     def scan_regexp(body)
