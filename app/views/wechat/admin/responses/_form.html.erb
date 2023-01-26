@@ -1,6 +1,6 @@
 <%= f.text_field :match_value %>
 <%= f.check_box :contain %>
 <%= f.fields :request_responses do |ef| %>
-  <%= ef.check_box :_destroy, { label: ef.object.type_text }, 0, 1 %>
+  <%= ef.check_box :_destroy, { label: ef.object.type_text, checked: ef.object.persisted? }, 0, 1 %>
   <%= ef.hidden_field :request_type %>
 <% end %>
