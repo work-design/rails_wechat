@@ -202,6 +202,7 @@ module Wechat
       session_str, url = body.split('@')
       session = session_str.delete_prefix!('session_')
 
+      wechat_user.generate_account! unless wechat_user.user
       Com::SessionChannel.broadcast_to session, auth_token: wechat_user.auth_token
     end
 
