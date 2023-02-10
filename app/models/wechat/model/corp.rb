@@ -42,6 +42,7 @@ module Wechat
       has_many :externals, primary_key: :corp_id, foreign_key: :corp_id
 
       before_validation :init_aes_key, if: -> { encoding_aes_key.blank? || token.blank? }
+      after_save :init_organ, if: -> { corp_id.present? && saved_change_to_corp_id? }
     end
 
     def init_aes_key
