@@ -7,10 +7,18 @@
   <td><%= @corp_user.corp_id %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::CorpUser.human_attribute_name(:device_id) %></td>
-  <td><%= @corp_user.device_id %></td>
+  <td class="has-text-right"><%= Wechat::CorpUser.human_attribute_name(:identity) %></td>
+  <td><%= @corp_user.identity %></td>
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::CorpUser.human_attribute_name(:open_userid) %></td>
   <td><%= @corp_user.open_userid %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::CorpUser.human_attribute_name(:device_id) %></td>
+  <td><%= @corp_user.device_id %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::CorpUser.human_attribute_name(:created_at) %></td>
+  <td><time data-controller="time"><%= @corp_user.created_at.to_fs(:iso8601) %></time></td>
 </tr>
