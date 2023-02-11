@@ -57,8 +57,14 @@ module Wechat
       if @corp_user.save
         login_by_account(@corp_user.account)
         current_authorized_token.update suite_id: @corp_user.suite_id
-        if corp.host.present?
-          url = url_for(controller: @suite.redirect_controller, action: @suite.redirect_action, host: corp.host, disposable_token: current_account.once_token, suite_id: @suite.id)
+        if corp.host.present? || corp.organ&.host
+          url = url_for(
+            controller: @suite.redirect_controller,
+            action: @suite.redirect_action,
+            host: corp.host.presence || corp.organ.host ,
+            auth_token: current_authorized_token.id,
+            suite_id: @suite.id
+          )
         else
           url = url_for(controller: 'wechat/board/organs', corp_id: corp.id)
         end
