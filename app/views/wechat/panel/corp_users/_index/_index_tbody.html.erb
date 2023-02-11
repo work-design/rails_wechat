@@ -1,6 +1,6 @@
 <td>
-  <p><%= model.identity %></p>
-  <p class="has-text-grey"><%= model.user_id %></p>
+  <p><%= model.user_id %></p>
+  <p class="has-text-grey"><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
 </td>
 <td>
   <p><%= model.device_id %></p>
