@@ -14,7 +14,7 @@ module Wechat
       attribute :user_id, :string
 
       belongs_to :suite, foreign_key: :suiteid, primary_key: :suite_id, optional: true
-      belongs_to :corp, foreign_key: :corpid, primary_key: :corp_id, optional: true
+      belongs_to :corp, ->(o) { where(suite_id: o.suiteid) }, foreign_key: :auth_corp_id, primary_key: :corp_id, optional: true
       belongs_to :corp_user, ->(o) { where(suite_id: o.suiteid, corp_id: o.auth_corp_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
 
       before_save :parsed_data, if: -> { ticket_data_changed? }
