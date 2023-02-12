@@ -59,12 +59,14 @@ module Wechat
       end
 
       if js_app
+        r = js_app.agent_config(session[:enter_url])
+        logger.debug "\e[35m  agent config: #{r}  \e[0m"
         render json: {
           debug: js_app.debug,
           apis: [
             'selectExternalContact', 'openUserProfile'
           ],
-          **js_app.agent_config(session[:enter_url])
+          **r
         }
       else
         render json: {}
@@ -80,7 +82,7 @@ module Wechat
       headers['Authorization'] = oauth_user.account.auth_token
       oauth_user.user.update(last_login_at: Time.current)
 
-      logger.debug "Login by oauth user as user: #{oauth_user.user_id}"
+      logger.debug "\e[35m  Login by oauth user as user: #{oauth_user.user_id}  \e[0m"
       @current_oauth_user = oauth_user
       @current_user = oauth_user.user
     end
