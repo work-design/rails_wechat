@@ -141,7 +141,10 @@ module Wechat
 
     def sync_external(external_userid, **options)
       r = (corp || app).api.item(external_userid, **options)
-      return unless r['errcode'] == 0
+      unless r['errcode'] == 0
+        logger.debug "\e[35m  Sync External Err info: #{r}  \e[0m"
+        return
+      end
 
       item = r.fetch('external_contact', {})
       external = init_external(item)
