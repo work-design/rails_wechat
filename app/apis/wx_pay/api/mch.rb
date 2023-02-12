@@ -16,7 +16,7 @@ module WxPay::Api
       )
     end
 
-    def h5_order(description:, out_trade_no:, notify_url:, amount:, scene_info:)
+    def h5_order(description:, out_trade_no:, notify_url:, amount:, scene_info:, **options)
       post(
         '/v3/pay/transactions/h5',
         description: description,
