@@ -187,7 +187,7 @@ module Wechat
     end
 
     def active_info
-      r = suite.provider.active_info(corp_id, user_id)
+      r = suite.provider.api.active_info(corp_id, user_id)
     end
 
     def authorized_token
