@@ -1,6 +1,17 @@
 module Wechat::Api
   class Provider < Base
     include Service
+    include License
+
+    def provider_get(path, params: {}, headers: {}, origin: nil, debug: nil)
+      with_options = { origin: origin }
+      with_options.merge! debug: STDERR, debug_level: 2 if debug
+
+      with_provider_access_token(params) do |with_token_params|
+        response = @client.with_headers(headers).with(with_options).get(path, params: with_token_params)
+        debug ? response : parse_response(response)
+      end
+    end
 
     def provider_post(path, params: {}, headers: {}, origin: nil, debug: nil, **payload)
       with_options = { origin: origin }

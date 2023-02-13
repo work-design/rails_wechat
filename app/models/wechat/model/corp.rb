@@ -129,6 +129,10 @@ module Wechat
       end
     end
 
+    def list_actived_account
+      suite.provider.api.list_actived_account(corp_id)
+    end
+
     def js_config(url = '/')
       refresh_jsapi_ticket unless jsapi_ticket_valid?
       js_hash = Wechat::Signature.signature(jsapi_ticket, url)
