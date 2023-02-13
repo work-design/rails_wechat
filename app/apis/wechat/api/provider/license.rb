@@ -14,5 +14,13 @@ module Wechat::Api
       provider_post 'get_active_info_by_user', corpid: corpid, userid: userid, origin: BASE, **options
     end
 
+    def list_order(corpid)
+      provider_post 'list_order', corpid: corpid, origin: BASE, **options
+    end
+
+    def list_order_account(order_id)
+      provider_post 'list_order_account', order_id: order_id, origin: BASE, **options
+    end
+
   end
 end
