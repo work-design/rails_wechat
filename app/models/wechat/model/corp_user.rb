@@ -187,7 +187,15 @@ module Wechat
     end
 
     def active_info
-      r = suite.provider.api.active_info(corp_id, user_id)
+      suite.provider.api.active_info(corp_id, user_id)
+    end
+
+    # 激活码详情：https://developer.work.weixin.qq.com/document/path/95552
+    def active_account(type = 2)
+      rest_code = corp.list_codes.find(&->(i){ i['type'] == type && [1, 4].include?(i['status']) })
+      return unless rest_code
+
+      suite.provider.api.active_account(corp_id, user_id, rest_code['active_code'])
     end
 
     def authorized_token
