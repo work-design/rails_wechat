@@ -144,7 +144,7 @@ module Wechat
       end
 
       orders.each do |h|
-        code = suite.provider.api.get_active_info_by_code(corp_id, h['active_code'])
+        code = suite.provider.api.active_info_by_code(corp_id, h['active_code'])
         codes << code['active_info']
       end
 
