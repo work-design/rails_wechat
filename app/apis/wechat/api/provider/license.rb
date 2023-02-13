@@ -6,8 +6,8 @@ module Wechat::Api
       provider_get 'get_active_info_by_code', params: { corpid: corpid, active_code: active_code }, origin: BASE
     end
 
-    def list_actived_account(corpid)
-      provider_get 'list_actived_account', params: { corpid: corpid }, origin: BASE
+    def list_actived_account(corpid, **options)
+      provider_get 'list_actived_account', params: { corpid: corpid }, origin: BASE, **options
     end
 
   end

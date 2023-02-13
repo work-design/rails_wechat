@@ -129,8 +129,8 @@ module Wechat
       end
     end
 
-    def list_actived_account
-      suite.provider.api.list_actived_account(corp_id)
+    def list_actived_account(debug: false)
+      suite.provider.api.list_actived_account(corp_id, debug: debug)
     end
 
     def js_config(url = '/')
