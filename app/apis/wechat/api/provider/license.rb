@@ -10,5 +10,9 @@ module Wechat::Api
       provider_post 'list_actived_account', corpid: corpid, origin: BASE, **options
     end
 
+    def active_info(corpid, userid, **options)
+      provider_post 'get_active_info_by_user', corpid: corpid, userid: userid, origin: BASE, **options
+    end
+
   end
 end

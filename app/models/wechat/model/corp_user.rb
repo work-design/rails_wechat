@@ -186,6 +186,10 @@ module Wechat
       follow
     end
 
+    def active_info
+      r = suite.provider.active_info(corp_id, user_id)
+    end
+
     def authorized_token
       authorized_tokens.find(&:effective?) || authorized_tokens.create
     end
