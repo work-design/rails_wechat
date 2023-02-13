@@ -133,15 +133,22 @@ module Wechat
       suite.provider.api.list_actived_account(corp_id, debug: debug)
     end
 
-    def list_accounts
+    def list_codes
       orders = []
+      codes = []
+
       r = suite.provider.api.list_order(corp_id)
       r['order_list'].each do |h|
         account = suite.provider.api.list_order_account(h['order_id'])
-        orders << account['account_list']
+        orders += account['account_list']
       end
 
-      orders
+      orders.each do |h|
+        code = suite.provider.api.get_active_info_by_code(corp_id, h['active_code'])
+        codes << code['active_info']
+      end
+
+      codes
     end
 
     def js_config(url = '/')
