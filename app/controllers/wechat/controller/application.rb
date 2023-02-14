@@ -83,7 +83,7 @@ module Wechat
         @current_wechat_user = current_account.wechat_users.find_by(type: 'Wechat::ProgramUser')
       end
 
-      logger.debug "\e[35m  Wechat User: #{@current_wechat_user&.id}  \e[0m"
+      logger.debug "\e[35m  Current Wechat User: #{@current_wechat_user&.id}  \e[0m"
       @current_wechat_user
     end
 
