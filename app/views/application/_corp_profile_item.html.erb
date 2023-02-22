@@ -6,9 +6,9 @@
   </div>
   <div class="weui-media-box__bd">
     <% if request.variant.include?(:work_wechat) %>
-      <div data-controller="open-data" type="userName" openid="<%= current_corp_user&.user_id %>"></div>
+      <div data-controller="open-data" data-open-data-url-value="<%= session[:enter_url] %>" type="userName" openid="<%= current_corp_user&.user_id %>"></div>
     <% else %>
-      <p type="a"><%= current_member.name %></p>
+      <p><%= current_member.name %></p>
     <% end %>
     <p class="has-text-grey"><%= current_organ.name %></p>
   </div>
