@@ -43,7 +43,7 @@ module Wechat
       if request.variant.include?(:work_wechat) && current_account
         @current_js_app = current_corp_user&.corp
       else
-        @current_js_app = current_wechat_app
+        @current_js_app = PublicApp.default_where(default_params).take || PublicApp.global.take
       end
 
       logger.debug "\e[35m  Current Js App: #{@current_js_app&.id}  \e[0m"
