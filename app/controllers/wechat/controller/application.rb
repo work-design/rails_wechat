@@ -78,7 +78,7 @@ module Wechat
       return @current_wechat_user if defined?(@current_wechat_user)
 
       if request.variant.include?(:wechat) && request.variant.exclude?(:mini_program)
-        @current_wechat_user = current_account.wechat_users.find_by(type: 'Wechat::WechatUser')
+        @current_wechat_user = current_authorized_token.oauth_user || current_account.wechat_users.unscope(where: :type).find_by(type: 'Wechat::WechatUser')
       else
         @current_wechat_user = current_account.wechat_users.find_by(type: 'Wechat::ProgramUser')
       end
