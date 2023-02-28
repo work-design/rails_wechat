@@ -22,7 +22,7 @@ module Wechat
 
       if redirect_url
         logger.debug "\e[35m  Redirect to: #{redirect_url}  \e[0m"
-        render 'require_user', locals: { url: redirect_url }
+        render 'require_user', layout: 'raw', locals: { url: redirect_url }
       end
     end
 
