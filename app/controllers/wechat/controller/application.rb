@@ -8,7 +8,11 @@ module Wechat
     end
 
     def require_user(return_to: nil)
-      return if current_user && (current_wechat_user || current_corp_user)
+      if request.variant.include?(:work_wechat)
+        return if current_user && current_corp_user
+      else
+        return if current_user && current_wechat_user
+      end
       return super if request.variant.include?(:mini_program) || request.variant.exclude?(:wechat)
 
       if current_wechat_user && current_wechat_user.user.nil?
