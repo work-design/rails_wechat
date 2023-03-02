@@ -10,7 +10,7 @@ module Wechat
       login_by_oauth_user(oauth_user)
 
       Com::SessionChannel.broadcast_to(params[:state], auth_token: current_authorized_token.id)
-      url = url_for(auth_token: oauth_user.auth_token, **state_hash)
+      url = url_for(auth_token: oauth_user.auth_token, **state_hash.except(:auth_token))
       redirect_to url, allow_other_host: true
     end
 
