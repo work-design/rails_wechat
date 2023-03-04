@@ -27,17 +27,6 @@ module WxPay
       end
     end
 
-    def generate_sign(params, key: )
-      str = [
-        params[:appId],
-        params[:timeStamp],
-        params[:nonceStr],
-        params[:package]
-      ].join("\n") + "\n"
-
-      Rsa.sign(str, key)
-    end
-
     def verify?(params, options = {})
       return true if WxPay.sandbox_mode?
 

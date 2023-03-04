@@ -40,20 +40,6 @@ module WxPay::Api
       get '/v3/certificates', origin: BASE
     end
 
-    def generate_js_pay_req(params)
-      opts = {
-        appId: @appid,
-        package: "prepay_id=#{params.delete(:prepayid)}",
-        signType: 'RSA'
-      }
-      opts.merge! params
-      opts[:timeStamp] ||= Time.current.to_i.to_s
-      opts[:nonceStr] ||= SecureRandom.hex
-
-      opts[:paySign] = WxPay::Sign.generate_sign(opts, key: @payee.apiclient_key)
-      opts
-    end
-
     def with_common_headers(method, path, params: {}, headers: {})
       r = {
         mchid: @payee.mch_id,
