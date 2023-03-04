@@ -93,7 +93,7 @@ module WxPay::Api
 
       r = @client.with_options(origin: BASE, debug: Rails.logger.instance_values['logdev'].dev, debug_level: 2)
           .post('pay/micropay', body: opts.to_xml(root: 'xml', skip_types: true, skip_instruct: true, dasherize: false))
-      Hash.from_xml r.to_s
+      Hash.from_xml(r.to_s)['xml']
     end
 
     def common_payee_params
