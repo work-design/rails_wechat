@@ -62,7 +62,7 @@ module WxPay::Api
         timestamp: Time.current.to_i
       }
 
-      r.merge! signature: WxPay::Sign::Rsa.generate(method, path, params, key: @payee.apiclient_key, **r)
+      r.merge! signature: Sign::Rsa.generate(method, path, params, key: @payee.apiclient_key, **r)
       r = r.map(&->(k,v){ "#{k}=\"#{v}\"" }).join(',')
 
       headers.merge!(

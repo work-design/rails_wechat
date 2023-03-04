@@ -81,6 +81,7 @@ module WxPay::Api
     def pay_micropay(out_trade_no:, auth_code:, body:, total_fee:, spbill_create_ip:)
       opts = {
         nonce_str: SecureRandom.hex,
+        sign_type: 'HMAC-SHA256',
         body: body,
         out_trade_no: out_trade_no,
         total_fee: total_fee,
@@ -88,13 +89,9 @@ module WxPay::Api
         auth_code: auth_code,
         **v2_common_payee_params
       }
+      opts.merge! sign: Sign::Hmac.generate(opts)
 
-      post(
-        'pay/micropay',
-
-        sign: xx,
-        **v2_common_payee_params
-      )
+      @client.with_options(origin: BASE, debug_level: 2).post('pay/micropay', body: opts.to_xml(root: 'xml', skip_types: true, skip_instruct: true))
     end
 
     def common_payee_params
