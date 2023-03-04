@@ -78,20 +78,6 @@ module WxPay::Api
       get "/v3/profitsharing/transactions/#{transaction_id}/amounts", origin: BASE
     end
 
-    def generate_js_pay_req(prepay_id:, time_stamp: Time.current.to_i.to_s, nonce_str: SecureRandom.hex)
-      opts = {
-        appId: @appid,
-        timeStamp: time_stamp,
-        nonceStr: nonce_str,
-        package: "prepay_id=#{prepay_id}",
-        signType: 'RSA'
-      }
-      str = [opts[:appId], opts[:timeStamp], opts[:nonceStr], opts[:package]].join("\n") + "\n"
-
-      opts[:paySign] = WxPay::Sign::Rsa.sign(str, @payee.apiclient_key)
-      opts
-    end
-
     def pay_micropay(out_trade_no:, auth_code:, body:, total_fee:, spbill_create_ip:)
       post(
         'pay/micropay',
