@@ -50,7 +50,7 @@ module WxPay::Api
       }
       str = [opts[:appId], opts[:timeStamp], opts[:nonceStr], opts[:package]].join("\n") + "\n"
 
-      opts[:paySign] = Sign::Rsa.sign(str, @payee.apiclient_key)
+      opts[:paySign] = WxPay::Sign::Rsa.sign(str, @payee.apiclient_key)
       opts
     end
 
@@ -62,7 +62,7 @@ module WxPay::Api
         timestamp: Time.current.to_i
       }
 
-      r.merge! signature: Sign::Rsa.generate(method, path, params, key: @payee.apiclient_key, **r)
+      r.merge! signature: WxPay::Sign::Rsa.generate(method, path, params, key: @payee.apiclient_key, **r)
       r = r.map(&->(k,v){ "#{k}=\"#{v}\"" }).join(',')
 
       headers.merge!(
