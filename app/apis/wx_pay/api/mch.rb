@@ -79,13 +79,19 @@ module WxPay::Api
     end
 
     def pay_micropay(out_trade_no:, auth_code:, body:, total_fee:, spbill_create_ip:)
-      post(
-        'pay/micropay',
+      opts = {
+        nonce_str: SecureRandom.hex,
         body: body,
         out_trade_no: out_trade_no,
         total_fee: total_fee,
         spbill_create_ip: spbill_create_ip,
         auth_code: auth_code,
+        **v2_common_payee_params
+      }
+
+      post(
+        'pay/micropay',
+
         sign: xx,
         **v2_common_payee_params
       )
@@ -107,7 +113,6 @@ module WxPay::Api
 
     def v2_sign_params
       {
-        nonce_str: SecureRandom.hex,
         sign_type: 'HMAC-SHA256'
       }
     end
