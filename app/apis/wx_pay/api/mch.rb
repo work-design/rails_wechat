@@ -91,7 +91,8 @@ module WxPay::Api
       }
       opts.merge! sign: WxPay::Sign::Hmac.generate(opts, key: @payee.apiclient_key)
 
-      @client.with_options(origin: BASE, debug_level: 2).post('pay/micropay', body: opts.to_xml(root: 'xml', skip_types: true, skip_instruct: true))
+      r = @client.with_options(origin: BASE, debug_level: 2).post('pay/micropay', body: opts.to_xml(root: 'xml', skip_types: true, skip_instruct: true))
+      Hash.from_xml r.to_s
     end
 
     def common_payee_params
