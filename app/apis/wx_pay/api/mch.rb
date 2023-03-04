@@ -89,7 +89,7 @@ module WxPay::Api
         auth_code: auth_code,
         **v2_common_payee_params
       }
-      opts.merge! sign: WxPay::Sign::Hmac.generate(opts, key: @payee.apiclient_key)
+      opts.merge! sign: WxPay::Sign::Hmac.generate(opts, key: @payee.key)
 
       r = @client.with_options(origin: BASE, debug_level: 2).post('pay/micropay', body: opts.to_xml(root: 'xml', skip_types: true, skip_instruct: true))
       Hash.from_xml r.to_s
