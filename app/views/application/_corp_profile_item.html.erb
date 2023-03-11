@@ -1,4 +1,4 @@
-<%= link_to({ controller: 'auth/my/home' }, text: true, class: 'weui-media-box weui-media-box_appmsg') do %>
+<%= link_to({ controller: 'auth/my/home' }, text: true, state: 'enter', class: 'weui-media-box weui-media-box_appmsg') do %>
   <div class="weui-media-box__hd">
     <div class="is-avatar">
       <div class="text"><%= current_member.name.to_s[0] %></div>
