@@ -85,7 +85,6 @@ Rails.application.routes.draw do
 
       namespace :panel, defaults: { namespace: 'panel' } do
         root 'home#index'
-        resources :organs
         resources :template_configs do
           member do
             get :apps

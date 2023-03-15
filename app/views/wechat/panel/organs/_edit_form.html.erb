@@ -1,5 +1,0 @@
-<%= form_with model: @organ, url: { action: 'update' } do |f| %>
-  <%= render 'error_messages', target: @organ %>
-  <%= f.text_field :corpid, required: true %>
-  <%= f.submit %>
-<% end %>

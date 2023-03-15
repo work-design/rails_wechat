@@ -128,9 +128,6 @@ zh:
       partner_payees:
         index:
           title: 签约商户
-      organs:
-        index:
-          title: 入驻企业
     in:
       title: 平台微信
       apps:
