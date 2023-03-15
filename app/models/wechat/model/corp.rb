@@ -250,6 +250,11 @@ module Wechat
       jsapi_ticket_expires_at.acts_like?(:time) && jsapi_ticket_expires_at > Time.current
     end
 
+    def compute_open_corpid
+      r = suite.provider.api.open_corpid(corp_id)
+      logger.debug "\e[35m  Corp Open id: #{r}  \e[0m"
+    end
+
     def api
       return @api if defined? @api
       @api = Wechat::Api::Work.new(self)
