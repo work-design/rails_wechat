@@ -129,7 +129,10 @@ module Wechat
       return if r['errcode']
 
       corp_id = r.dig('auth_corp_info', 'corpid')
-      corp = corps.find_or_initialize_by(corp_id: corp_id)
+      open = provider.api.open_corpid(corp_id)
+      logger.debug "\e[35m  Suite Corp Open id: #{open}  \e[0m"
+
+      corp = corps.find_or_initialize_by(corp_id: open['open_corpid'])
       corp.assign_info(r)
       corp.save
       corp
