@@ -132,7 +132,8 @@ module Wechat
       open = provider.api.open_corpid(corp_id)
       logger.debug "\e[35m  Suite Corp Open id: #{open}  \e[0m"
 
-      corp = corps.find_or_initialize_by(corp_id: open['open_corpid'])
+      corp = corps.find_or_initialize_by(corp_id: corp_id)
+      corp.open_corpid = open['open_corpid']
       corp.assign_info(r)
       corp.save
       corp
