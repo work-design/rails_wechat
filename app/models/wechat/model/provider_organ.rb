@@ -16,7 +16,7 @@ module Wechat
     def compute_open_corpid
       r = provider.api.open_corpid(corpid)
       logger.debug "\e[35m  Corp id: #{r}  \e[0m"
-      self.open_corpid = r['open_corpid']
+      self.open_corpid = r['open_corpid'] if r.is_a?(Hash)
       self.save
     end
 

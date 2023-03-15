@@ -1,6 +1,5 @@
 <%= form_with model: @organ, url: { action: 'update' } do |f| %>
   <%= render 'error_messages', target: @organ %>
-  <%= render partial: 'com/nodes/children_select', locals: { f: f, node: Org::Organ.root } %>
-  <%= render partial: 'form', locals: { f: f } %>
+  <%= f.text_field :corpid, required: true %>
   <%= f.submit %>
 <% end %>
