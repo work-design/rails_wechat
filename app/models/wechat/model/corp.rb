@@ -32,6 +32,7 @@ module Wechat
       attribute :encoding_aes_key, :string
       attribute :debug, :boolean, default: false
 
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
 
       has_many :suite_tickets, ->(o) { where(suiteid: o.suite_id) }, primary_key: :corp_id, foreign_key: :corpid
@@ -39,11 +40,8 @@ module Wechat
       has_many :contacts, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corp_id, foreign_key: :corp_id
       has_many :externals, primary_key: :corp_id, foreign_key: :corp_id
 
-      has_one :provider_organ, primary_key: :open_corpid, foreign_key: :open_corpid
-      has_one :organ, class_name: 'Org::Organ', through: :provider_organ
-
       before_validation :init_aes_key, if: -> { encoding_aes_key.blank? || token.blank? }
-      after_save :init_organ, if: -> { corp_id.present? && saved_change_to_corp_id? }
+      before_create :init_organ
     end
 
     def init_aes_key
@@ -68,9 +66,7 @@ module Wechat
     end
 
     def init_organ
-      organ = organs.take || organs.build(corpid: corp_id)
-      provider_organs.each(&->(i){ i.provider_id = i.suite.provider.id })
-      organ.save
+      organ || create_organ(name: name)
     end
 
     # todo 这个方法跟 work app 下的方法是类似的，后期合并
