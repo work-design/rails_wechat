@@ -32,8 +32,6 @@ module Wechat
       attribute :encoding_aes_key, :string
       attribute :debug, :boolean, default: false
 
-      belongs_to :organ, class_name: 'Org::Organ', foreign_key: :corp_id, primary_key: :corpid, optional: true
-
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
 
       has_many :suite_tickets, ->(o) { where(suiteid: o.suite_id) }, primary_key: :corp_id, foreign_key: :corpid
@@ -41,6 +39,7 @@ module Wechat
       has_many :contacts, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corp_id, foreign_key: :corp_id
       has_many :externals, primary_key: :corp_id, foreign_key: :corp_id
       has_many :provider_organs, primary_key: :corp_id, foreign_key: :corpid
+      has_many :organs, class_name: 'Org::Organ', through: :provider_organs
 
       before_validation :init_aes_key, if: -> { encoding_aes_key.blank? || token.blank? }
       after_save :init_organ, if: -> { corp_id.present? && saved_change_to_corp_id? }
