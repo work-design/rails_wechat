@@ -14,6 +14,7 @@ module Wechat
       belongs_to :corp_user, class_name: 'Wechat::CorpUser', optional: true
 
       validates :limit_wechat_menu, inclusion: { in: [0, 1, 2, 3] }
+      validates :corpid, uniqueness: true
 
       after_save_commit :compute_open_corpid, if: -> { corpid.present? && saved_change_to_corpid? }
     end
