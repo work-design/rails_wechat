@@ -5,6 +5,9 @@
       <%= link_to({ controller: 'maintains', corp_id: model.id }, aria: { label: t('wechat.panel.maintains.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-users-line has-text-success"></i>
       <% end %>
+      <%= link_to({ controller: '/admin/home', host: model.organ.host, auth_token: current_authorized_token.id }, aria: { label: t('.mock') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-hand-point-right has-text-success"></i>
+      <% end if model.organ %>
       <%= link_to({ controller: 'corp_users', corp_id: model.id }, aria: { label: t('wechat.panel.corp_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-users has-text-info"></i>
       <% end %>
