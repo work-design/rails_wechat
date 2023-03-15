@@ -6,7 +6,7 @@ module Wechat
       attribute :corpid, :string
       attribute :open_corpid, :string
 
-      belongs_to :organ, class_name: 'Org::Organ', foreign_key: :corpid, primary_key: :corpid
+      belongs_to :organ, class_name: 'Org::Organ', foreign_key: :corpid, primary_key: :corpid, inverse_of: :provider_organs
       belongs_to :provider
 
       after_save_commit :compute_open_corpid, if: -> { saved_change_to_corpid? }
