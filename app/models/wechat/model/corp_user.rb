@@ -65,12 +65,9 @@ module Wechat
     def mig
       mobile_account = ::Auth::MobileAccount.find_by(identity: mobile)
       if mobile_account
-        temp_account.type = 'Auth::MobileAccount'
-        temp_account.identity = self.identity
         temp_account.confirmed = true
         temp_account.save
-        self.account = temp_account # account 只有当 identity 发生变化时才会 reload
-      else
+      end
     end
 
     def init_corp
@@ -85,15 +82,9 @@ module Wechat
       return if member
       return unless organ
 
-      temp_member = organ.members.find_by(corp_userid: user_id)
-      if temp_member
-        temp_member.identity = self.identity
-        temp_member.save
-      else
-        build_member(organ_id: organ.id)
-        member.name = user_id
-        member.save
-      end
+      temp_member = organ.members.find_or_initialize_by(corp_userid: user_id)
+      temp_member.identity = mobile
+      temp_member.save
     end
 
     def get_detail_by_suite
