@@ -82,11 +82,11 @@ module Wechat
 
       if corp_user
         current_authorized_token.update suite_id: corp_user.suite_id
-        if corp.host.present? || corp.organ&.host
+        if corp.organs.present? || corp.organs.take
           url = url_for(
             controller: @suite.redirect_controller,
             action: @suite.redirect_action,
-            host: corp.host.presence || corp.organ&.host,
+            host: corp.organs.take.host,
             auth_token: current_authorized_token.id
           )
         else
