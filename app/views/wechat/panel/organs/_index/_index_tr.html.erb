@@ -1,0 +1,19 @@
+<tr id="tr_<%= model.id %>" data-controller="show" data-action="mouseenter->show#show mouseleave->show#hide">
+  <%= yield %>
+  <td>
+    <div data-show-target="item" style="visibility: hidden">
+      <%= link_to({ controller: 'organ_domains', organ_id: model.id }, aria: { label: t('org.panel.organ_domains.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-mobile has-text-info"></i>
+      <% end %>
+      <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-pencil has-text-link"></i>
+      <% end %>
+      <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.confirm') } }) do %>
+        <i class="fa-solid fa-trash has-text-danger"></i>
+      <% end %>
+      <%= link_to({ controller: '/admin/home', host: model.host, auth_token: current_authorized_token.id }, aria: { label: t('.mock') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-hand-point-right has-text-success"></i>
+      <% end %>
+    </div>
+  </td>
+</tr>

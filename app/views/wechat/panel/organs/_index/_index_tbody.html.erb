@@ -1,0 +1,33 @@
+<td>
+  <div class="is-several">
+    <%= image_tag model.logo.variant(resize_to_limit: [30, 30]) if model.logo.attached? %>
+    <span><%= model.name %></span>
+    <% if model.name_short.present? %>
+      <span class="has-text-grey">(<%= model.name_short %>)</span>
+    <% end %>
+  </div>
+</td>
+<td>
+  <p><%= simple_format model.domains %></p>
+  <p class="has-text-grey"><%= model.corpid %></p>
+</td>
+<td>
+  <p><%= model.area&.full_name %></p>
+  <p><%= model.address %></p>
+</td>
+<td>
+  <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :official, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
+</td>
+<td>
+  <div>
+    <% model.roles.pluck(:name).each do |role| %>
+      <span><%= role %></span>
+    <% end %>
+    <%= link_to({ controller: 'roled/panel/whos', action: 'edit', who_type: 'Org::Organ', who_id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('roled.panel.whos.edit.title') }) do %>
+      <i class="fa-solid fa-user-shield"></i>
+    <% end %>
+  </div>
+</td>
