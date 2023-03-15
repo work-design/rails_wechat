@@ -4,7 +4,10 @@ module Wechat
     before_action :set_suite
 
     def index
-      @corps = @suite.corps.order(id: :desc).page(params[:page])
+      q_params = {}
+      q_params.merge! params.permit('name-like', :corp_id)
+
+      @corps = @suite.corps.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
   end
