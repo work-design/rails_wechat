@@ -38,8 +38,9 @@ module Wechat
       has_many :corp_users, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corp_id, foreign_key: :corp_id
       has_many :contacts, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corp_id, foreign_key: :corp_id
       has_many :externals, primary_key: :corp_id, foreign_key: :corp_id
-      has_many :provider_organs, primary_key: :open_corpid, foreign_key: :open_corpid
-      has_many :organs, class_name: 'Org::Organ', through: :provider_organs
+
+      has_one :provider_organ, primary_key: :open_corpid, foreign_key: :open_corpid
+      has_one :organ, class_name: 'Org::Organ', through: :provider_organ
 
       before_validation :init_aes_key, if: -> { encoding_aes_key.blank? || token.blank? }
       after_save :init_organ, if: -> { corp_id.present? && saved_change_to_corp_id? }
