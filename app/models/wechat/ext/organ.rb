@@ -15,7 +15,7 @@ module Wechat
 
       validates :limit_wechat_menu, inclusion: { in: [0, 1, 2, 3] }
 
-      after_save_commit :compute_open_corpid, if: -> { saved_change_to_corpid? }
+      after_save_commit :compute_open_corpid, if: -> { corpid.present? && saved_change_to_corpid? }
     end
 
     def contact
