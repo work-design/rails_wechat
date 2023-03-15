@@ -17,7 +17,7 @@ module Wechat
       attribute :open_userid, :string
       attribute :open_id, :string
       attribute :identity, :string
-      attribute :temp_identity, :string
+      attribute :mobile, :string
       attribute :name, :string
       attribute :avatar_url, :string
       attribute :qr_code, :string
@@ -30,7 +30,6 @@ module Wechat
         unknown: '0'
       }
 
-      belongs_to :organ, class_name: 'Org::Organ', foreign_key: :corp_id, primary_key: :corpid, optional: true
       belongs_to :member, ->(o) { where(organ_id: o.organ&.id) }, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity, optional: true
       belongs_to :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity, optional: true
       has_one :user, class_name: 'Auth::User', through: :account
@@ -55,37 +54,38 @@ module Wechat
     end
 
     def sync_identity
-      self.temp_identity = [corp_id, user_id].join('-')
-      self.identity = identity.presence || temp_identity
+      self.identity = [corp_id, user_id].join('-')
     end
 
     def init_account
       return if account
-      if identity.to_s.include?('-')
-        build_account(type: 'Auth::ThirdpartyAccount')
+      build_account(type: 'Auth::ThirdpartyAccount', confirmed: true)
+    end
+
+    def mig
+      mobile_account = ::Auth::MobileAccount.find_by(identity: mobile)
+      if mobile_account
+        temp_account.type = 'Auth::MobileAccount'
+        temp_account.identity = self.identity
+        temp_account.confirmed = true
+        temp_account.save
+        self.account = temp_account # account 只有当 identity 发生变化时才会 reload
       else
-        temp_account = ::Auth::Account.find_by(identity: temp_identity)
-        if temp_account
-          temp_account.type = 'Auth::MobileAccount'
-          temp_account.identity = self.identity
-          temp_account.confirmed = true
-          temp_account.save
-          self.account = temp_account # account 只有当 identity 发生变化时才会 reload
-        else
-          build_account(type: 'Auth::MobileAccount', confirmed: true)
-        end
-      end
     end
 
     def init_corp
       corp || build_corp(suite_id: suite_id)
     end
 
+    def organ
+      corp.organ
+    end
+
     def auto_join_organ
       return if member
       return unless organ
 
-      temp_member = organ.members.find_by(identity: temp_identity)
+      temp_member = organ.members.find_by(corp_userid: user_id)
       if temp_member
         temp_member.identity = self.identity
         temp_member.save
@@ -96,16 +96,12 @@ module Wechat
       end
     end
 
-    def temp?
-      temp_identity == identity
-    end
-
     def get_detail_by_suite
       return unless suite
       r = suite.api.user_detail(user_ticket)
+      logger.debug "\e[35m  user_detail: #{detail}  \e[0m"
       if r['errcode'] == 0
-        self.assign_attributes r.slice('name', 'gender', 'qr_code')
-        self.identity = r['mobile'] if r['mobile']
+        self.assign_attributes r.slice('name', 'gender', 'qr_code', 'mobile', 'open_userid')
         self.avatar_url = r['avatar']
         self.save
       end

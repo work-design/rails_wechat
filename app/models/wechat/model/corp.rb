@@ -80,18 +80,9 @@ module Wechat
       corp_user = corp_users.find_or_initialize_by(user_id: result['userid'])
       corp_user.organ = organ
 
-      if result['user_ticket'] && corp_user.temp?
+      if result['user_ticket']
         corp_user.user_ticket = result['user_ticket']
         corp_user.ticket_expires_at = Time.current + result['expires_in'].to_i
-        detail = api.user_detail(result['user_ticket'])
-        logger.debug "\e[35m  user_detail: #{detail}  \e[0m"
-
-        if detail['errcode'] == 0
-          corp_user.assign_attributes detail.slice('gender', 'qr_code')
-          corp_user.identity = detail['mobile'] if detail['mobile'].present?
-          corp_user.avatar_url = detail['avatar']
-          corp_user.open_userid = detail['open_userid']
-        end
       end
 
       corp_user.save

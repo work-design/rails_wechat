@@ -4,6 +4,8 @@ module Wechat
     include Ext::Handle
 
     included do
+      attribute :corp_userid, :string
+
       has_many :corp_users, ->(o) { where(organ_id: o.organ_id) }, class_name: 'Wechat::CorpUser', primary_key: :identity, foreign_key: :identity
       has_many :wechat_users, class_name: 'Wechat::WechatUser', through: :account, source: :oauth_users
       has_many :program_users, class_name: 'Wechat::ProgramUser', through: :account, source: :oauth_users
