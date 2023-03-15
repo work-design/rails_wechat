@@ -27,7 +27,6 @@ module Wechat
       attribute :agent_ticket_expires_at, :datetime
       attribute :permanent_code, :string
       attribute :suite_id, :string
-      attribute :host, :string
       attribute :token, :string
       attribute :encoding_aes_key, :string
       attribute :debug, :boolean, default: false
