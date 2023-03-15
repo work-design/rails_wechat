@@ -8,8 +8,8 @@ module Wechat
       attribute :corpid, :string
 
       has_many :apps, class_name: 'Wechat::App', dependent: :destroy_async
-      has_many :corps, class_name: 'Wechat::Corp', primary_key: :corpid, foreign_key: :corp_id
       has_many :provider_organs, class_name: 'Wechat::ProviderOrgan', primary_key: :corpid, foreign_key: :corpid
+      has_many :corps, class_name: 'Wechat::Corp', through: :provider_organs
 
       belongs_to :corp_user, class_name: 'Wechat::CorpUser', optional: true
 
