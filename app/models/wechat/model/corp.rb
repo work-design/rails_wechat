@@ -67,9 +67,8 @@ module Wechat
     end
 
     def init_organ
-      organ || build_organ
-      organ.name_short = name
-      organ.name = full_name
+      organ = organs.take || organs.build(corpid: corp_id)
+      provider_organs.each(&->(i){ i.provider_id = i.suite.provider.id })
       organ.save
     end
 
