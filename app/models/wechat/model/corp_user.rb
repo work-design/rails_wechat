@@ -84,9 +84,9 @@ module Wechat
       return if member
       return unless organ
 
-      temp_member = organ.members.find_or_initialize_by(corp_userid: user_id)
-      temp_member.identity = mobile
-      temp_member.save
+      member || create_member
+      member.identity = mobile || identity
+      member.save
     end
 
     def get_detail_by_suite
