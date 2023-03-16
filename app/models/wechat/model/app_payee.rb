@@ -5,11 +5,20 @@ module Wechat
     included do
       attribute :appid, :string, index: true
       attribute :domain, :string
+      attribute :enabled, :boolean, default: true
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, counter_cache: true
       belongs_to :payee
 
       has_many :receivers
+
+      scope :enabled, -> { where(enabled: true) }
+
+      after_update :set_enabled, if: -> { enabled? && saved_change_to_enabled? }
+    end
+
+    def set_enabled
+      self.class.where.not(id: self.id).where(appid: self.appid).update_all(enabled: false)
     end
 
     def api

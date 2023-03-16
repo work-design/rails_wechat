@@ -1,3 +1,9 @@
 <td><%= model.payee.mch_id %></td>
 <td><%= model.payee.serial_no %></td>
 <td><%= model.domain %></td>
+<td>
+  <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :enabled, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check"></label>
+  <% end %>
+</td>
