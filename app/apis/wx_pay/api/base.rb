@@ -3,9 +3,8 @@ module WxPay::Api
     AUTH = 'WECHATPAY2-SHA256-RSA2048'
     BASE = 'https://api.mch.weixin.qq.com'
 
-    def initialize(payee:, appid: nil)
+    def initialize(appid: nil)
       @appid = appid
-      @payee = payee
       @client = HTTPX.with(
         ssl: {
           verify_mode: OpenSSL::SSL::VERIFY_NONE

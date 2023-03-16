@@ -2,10 +2,10 @@ module WxPay::Api
   class Partner < Base
     BASE = 'https://api.mch.weixin.qq.com'
 
-    def initialize(payee:, appid: nil)
-      super
-      @partner = payee.partner
-      @mch = @partner
+    def initialize(partner:, payee: nil, appid: nil)
+      super(appid: appid)
+      @payee = payee
+      @mch = partner
     end
 
     def jsapi_order(description:, out_trade_no:, notify_url:, amount:, payer:, **options)
@@ -79,8 +79,8 @@ module WxPay::Api
 
     def common_payee_params
       {
-        sp_appid: @partner.appid,
-        sp_mchid: @partner.mch_id,
+        sp_appid: @mch.appid,
+        sp_mchid: @mch.mch_id,
         sub_appid: @appid,
         sub_mchid: @payee.mch_id
       }

@@ -3,7 +3,7 @@ module WxPay::Api
     BASE = 'https://api.mch.weixin.qq.com'
 
     def initialize(payee:, appid: nil)
-      super
+      super(appid: appid)
       @mch = payee
     end
 
@@ -94,7 +94,7 @@ module WxPay::Api
         auth_code: auth_code,
         **v2_common_payee_params
       }
-      opts.merge! sign: WxPay::Sign::Hmac.generate(opts, key: @payee.key)
+      opts.merge! sign: WxPay::Sign::Hmac.generate(opts, key: @mch.key)
 
       r = @client.with_options(origin: BASE, debug: Rails.logger.instance_values['logdev'].dev, debug_level: 2)
           .post('pay/micropay', body: opts.to_xml(root: 'xml', skip_types: true, skip_instruct: true, dasherize: false))
@@ -104,14 +104,14 @@ module WxPay::Api
     def common_payee_params
       {
         appid: @appid,
-        mchid: @payee.mch_id
+        mchid: @mch.mch_id
       }
     end
 
     def v2_common_payee_params
       {
         appid: @appid,
-        mch_id: @payee.mch_id
+        mch_id: @mch.mch_id
       }
     end
 
