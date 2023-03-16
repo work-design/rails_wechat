@@ -51,7 +51,7 @@ module Wechat
       before_validation :sync_organ, if: -> { corp_id_changed? }
       before_validation :init_account, if: -> { identity_changed? }
       before_validation :init_corp, if: -> { suite_id.present? && suite_id_changed? }
-      after_save :auto_join_organ, if: -> { saved_change_to_identity? }
+      after_save :auto_join_organ, if: -> { organ_id.present? && saved_change_to_organ_id? }
       after_create_commit :sync_externals_later
     end
 
