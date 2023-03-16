@@ -30,7 +30,8 @@ module Wechat
         unknown: '0'
       }
 
-      belongs_to :member, ->(o) { where(organ_id: o.organ&.id) }, class_name: 'Org::Member', foreign_key: :identity, primary_key: :identity, optional: true
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
+      belongs_to :member, ->(o) { where(organ_id: o.organ_id) }, class_name: 'Org::Member', foreign_key: :user_id, primary_key: :corp_userid, optional: true
       belongs_to :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity, optional: true
       has_one :user, class_name: 'Auth::User', through: :account
       has_many :authorized_tokens, ->(o) { where(suite_id: o.suite_id) }, class_name: 'Auth::AuthorizedToken', primary_key: :identity, foreign_key: :identity, dependent: :delete_all
@@ -47,6 +48,7 @@ module Wechat
 
       after_initialize :sync_identity, if: -> { new_record? && user_id.present? }
       before_validation :sync_identity, if: -> { user_id_changed? }
+      before_validation :sync_organ, if: -> { corp_id_changed? }
       before_validation :init_account, if: -> { identity_changed? }
       before_validation :init_corp, if: -> { suite_id.present? && suite_id_changed? }
       after_save :auto_join_organ, if: -> { saved_change_to_identity? }
@@ -55,6 +57,10 @@ module Wechat
 
     def sync_identity
       self.identity = [corp_id, user_id].join('-')
+    end
+
+    def sync_organ
+      self.organ_id = corp.organ_id
     end
 
     def init_account
@@ -72,10 +78,6 @@ module Wechat
 
     def init_corp
       corp || build_corp(suite_id: suite_id)
-    end
-
-    def organ
-      corp.organ
     end
 
     def auto_join_organ
