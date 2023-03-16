@@ -50,23 +50,23 @@ module WxPay::Api
       }
       str = [opts[:appId], opts[:timeStamp], opts[:nonceStr], opts[:package]].join("\n") + "\n"
 
-      opts[:paySign] = WxPay::Sign::Rsa.sign(str, @payee.apiclient_key)
+      opts[:paySign] = WxPay::Sign::Rsa.sign(str, @mch.apiclient_key)
       opts
     end
 
     def with_common_headers(method, path, params: {}, headers: {})
       r = {
-        mchid: @payee.mch_id,
-        serial_no: @payee.serial_no,
+        mchid: @mch.mch_id,
+        serial_no: @mch.serial_no,
         nonce_str: SecureRandom.hex,
         timestamp: Time.current.to_i
       }
 
-      r.merge! signature: WxPay::Sign::Rsa.generate(method, path, params, key: @payee.apiclient_key, **r)
+      r.merge! signature: WxPay::Sign::Rsa.generate(method, path, params, key: @mch.apiclient_key, **r)
       r = r.map(&->(k,v){ "#{k}=\"#{v}\"" }).join(',')
 
       headers.merge!(
-        'Wechatpay-Serial': @payee.platform_serial_no,
+        'Wechatpay-Serial': @mch.platform_serial_no,
         Authorization: [AUTH, r].join(' ')
       )
 

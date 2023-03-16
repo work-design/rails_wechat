@@ -2,6 +2,11 @@ module WxPay::Api
   class Mch < Base
     BASE = 'https://api.mch.weixin.qq.com'
 
+    def initialize(payee:, appid: nil)
+      super
+      @mch = payee
+    end
+
     def jsapi_order(description:, out_trade_no:, notify_url:, amount:, payer:, **options)
       post(
         '/v3/pay/transactions/jsapi',
