@@ -45,7 +45,7 @@ module Wechat
         :mp_pagepath,
         :position,
         :appid
-      )
+      ).compact_blank
       p.merge! default_form_params
     end
 
