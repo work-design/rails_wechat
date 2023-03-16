@@ -1,0 +1,5 @@
+<%= form_with model: @menu_root, method: :post, url: { action: 'create' } do |f| %>
+  <%= render 'error_messages', target: f.object %>
+  <%= render partial: 'form', locals: { f: f } %>
+  <%= f.submit %>
+<% end %>
