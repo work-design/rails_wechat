@@ -1,7 +1,7 @@
 <%= link_to({ controller: 'auth/my/home' }, text: true, state: 'enter', class: 'weui-media-box weui-media-box_appmsg') do %>
   <div class="weui-media-box__hd">
     <div class="is-avatar">
-      <div class="text"><%= current_member.name.to_s[0] %></div>
+      <div class="text"><%= current_member ? current_member.name.to_s[0] : current_user.name.to_s[0] %></div>
     </div>
   </div>
   <div class="weui-media-box__bd">
@@ -10,7 +10,7 @@
         <div data-open-data-target="tag" type="userName" openid="<%= current_corp_user&.user_id %>"></div>
       </div>
     <% else %>
-      <p><%= current_member.name %></p>
+      <p><%= current_member ? current_member.name : current_user.name %></p>
     <% end %>
     <p class="has-text-grey"><%= current_organ.name %></p>
   </div>
