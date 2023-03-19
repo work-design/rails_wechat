@@ -3,6 +3,7 @@ module Wechat
     before_action :set_app
     before_action :set_wechat_user, only: [:show, :edit, :update, :destroy, :actions]
     before_action :set_tag, only: [:index]
+    before_action :set_tags, only: [:index]
 
     def index
       q_params = {}
@@ -24,6 +25,10 @@ module Wechat
       if params['user_tags.tag_name']
         @tag = @app.tags.find_by name: params['user_tags.tag_name']
       end
+    end
+
+    def set_tags
+      @tags = @app.tags.where(kind: 'normal')
     end
 
     def wechat_user_params
