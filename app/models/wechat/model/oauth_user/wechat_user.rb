@@ -18,6 +18,7 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :user_inviter, class_name: 'Auth::User', optional: true
       belongs_to :member_inviter, class_name: 'Org::Member', optional: true
+      has_many :org_members, class_name: 'Org::Member', primary_key: :uid, foreign_key: :wechat_openid
 
       has_one :request, -> { where(init_wechat_user: true) }, primary_key: :uid, foreign_key: :open_id
       has_many :requests, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
@@ -45,7 +46,7 @@ module Wechat
     end
 
     def auto_join_organ
-      members.find_by(organ_id: member_inviter.organ_id) || members.create(organ_id: member_inviter.organ_id, state: 'pending_trial')
+      org_members.find_by(organ_id: member_inviter.organ_id) || org_members.create(organ_id: member_inviter.organ_id, state: 'pending_trial')
     end
 
     def sync_remark_later
