@@ -25,7 +25,7 @@ module Wechat
     end
 
     def auto_join_organ
-      wechat_user.members.find_by(organ_id: member_inviter.organ_id) || members.create(organ_id: member_inviter.organ_id, state: 'pending_trial')
+      wechat_user.members.find_by(organ_id: member_inviter.organ_id) || wechat_user.members.create(organ_id: member_inviter.organ_id, state: 'pending_trial')
     end
 
     def sync_create_later
