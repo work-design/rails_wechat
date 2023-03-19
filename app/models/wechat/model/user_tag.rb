@@ -14,13 +14,13 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :user_tagged, optional: true
 
-      before_save :sync_inviter, if: -> { tag_name.start_with?('invite_member_') && tag_name_changed? }
+      before_save :sync_inviter, if: -> { tag_name.start_with?('org_member_') && tag_name_changed? }
       after_create_commit :sync_create_later
       after_destroy_commit :remove_from_wechat
     end
 
     def sync_inviter
-      self.member_inviter_id = tag_name.delete_prefix('invite_member_')
+      self.member_inviter_id = tag_name.delete_prefix('org_member_')
     end
 
     def sync_create_later
