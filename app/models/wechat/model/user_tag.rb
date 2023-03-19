@@ -9,8 +9,8 @@ module Wechat
       attribute :synced, :boolean, default: false
 
       belongs_to :member_inviter, class_name: 'Org::Member', optional: true
-      belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid
-      belongs_to :tag, ->(o) { where(appid: o.appid) }, foreign_key: :tag_name, primary_key: :name, counter_cache: true
+      belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
+      belongs_to :tag, ->(o) { where(appid: o.appid) }, foreign_key: :tag_name, primary_key: :name, counter_cache: true, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :user_tagged, optional: true
 
