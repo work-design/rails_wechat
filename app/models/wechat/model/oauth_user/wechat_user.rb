@@ -28,6 +28,7 @@ module Wechat
       has_many :externals, primary_key: :unionid, foreign_key: :unionid
 
       before_save :auto_link, if: -> { unionid.present? && unionid_changed? }
+      after_save :sync_to_org_members, if: -> { saved_change_to_identity? }
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :auto_join_organ, if: -> { member_inviter && saved_change_to_member_inviter_id? }
       after_save_commit :prune_user_tags, if: -> { unsubscribe_at.present? && saved_change_to_unsubscribe_at? }
@@ -35,6 +36,13 @@ module Wechat
 
     def try_match
       app.api.menu_trymatch(uid)
+    end
+
+    def sync_to_org_members
+      org_members.each do |org_member|
+        org_member.identity = identity
+        org_member.name = name
+      end
     end
 
     def auto_link
