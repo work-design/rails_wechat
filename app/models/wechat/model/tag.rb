@@ -10,6 +10,11 @@ module Wechat
       attribute :user_tags_count, :integer, default: 0
       attribute :tag_id, :integer
 
+      enum kind: {
+        normal: 'normal',
+        inviting: 'inviting'
+      }, _default: 'normal'
+
       belongs_to :tagging, polymorphic: true, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :user_tag, optional: true
@@ -20,7 +25,8 @@ module Wechat
 
       validates :name, uniqueness: { scope: :appid }
 
-      before_create :sync_name
+      before_validation :sync_name
+      before_validation :compute_kind, if: -> { name_changed? }
       after_create_commit :sync_to_wechat, if: -> { tag_id.blank? }
       after_update_commit :sync_to_wechat, if: -> { saved_change_to_name? }
       after_destroy_commit :remove_from_wechat, if: -> { tag_id.present? }
@@ -29,6 +35,12 @@ module Wechat
 
     def sync_name
       self.name = tagging.name if tagging
+    end
+
+    def compute_kind
+      if name.to_s.start_with?('auth_user_', 'org_member_')
+        self.kind = 'inviting'
+      end
     end
 
     def sync_to_wechat_later
