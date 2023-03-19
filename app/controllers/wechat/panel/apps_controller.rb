@@ -40,6 +40,7 @@ module Wechat
         :encrypt_mode,
         :serial_no,
         :global,
+        :inviting,
         :token,
         :encoding_aes_key,
         :domain,
