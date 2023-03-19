@@ -34,9 +34,8 @@ module Wechat
 
     def auto_join_organ
       user_tags.each do |user_tag|
-        next unless user_tag.tag_name.start_with?('invite_member_')
+        next unless user_tag.tag_name.start_with?('org_member_')
         member = members.find_by(organ_id: user_tag.member_inviter.organ_id) || members.build(organ_id: user_tag.member_inviter.organ_id, state: 'pending_trial')
-        member.set_current_cart(user_tag.app.organ_id)
         member.save
       end
     end
