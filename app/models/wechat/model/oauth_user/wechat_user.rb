@@ -42,6 +42,7 @@ module Wechat
       org_members.each do |org_member|
         org_member.identity = identity
         org_member.name = name
+        org_member.save
       end
     end
 
