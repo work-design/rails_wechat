@@ -16,11 +16,16 @@ module Wechat
 
       before_save :sync_inviter, if: -> { tag_name.start_with?('org_member_') && tag_name_changed? }
       after_create_commit :sync_create_later
+      after_create_commit :auto_join_organ, if: -> { tag_name.start_with?('org_member_') && saved_change_to_tag_name? }
       after_destroy_commit :remove_from_wechat
     end
 
     def sync_inviter
       self.member_inviter_id = tag_name.delete_prefix('org_member_')
+    end
+
+    def auto_join_organ
+      wechat_user.members.find_by(organ_id: member_inviter.organ_id) || members.create(organ_id: member_inviter.organ_id, state: 'pending_trial')
     end
 
     def sync_create_later
