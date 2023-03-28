@@ -165,17 +165,14 @@ module Wechat
     end
 
     def base64_state(host: self.domain, controller_path: '/home', action_name: 'index', method: 'get', **params)
-      state = [
-        host,
-        controller_path,
-        action_name,
-        method.downcase,
-        params.to_query
-      ]
-
-      logger.debug "\e[35m  state: #{state}  \e[0m"
-      state.map! { |i| Base64.urlsafe_encode64(i, padding: false) }
-      state.join('~')
+      state = Com::State.create(
+        host: host,
+        controller_path: controller_path,
+        action_name: action_name,
+        request_method: method.downcase,
+        params: params
+      )
+      state.id
     end
 
     def sync_templates
