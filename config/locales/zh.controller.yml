@@ -1,6 +1,9 @@
 zh:
   wechat:
     title: 微信平台
+    agencies:
+      login:
+        title: 微信授权登录中
     admin:
       title: 微信公众平台
       apps:
