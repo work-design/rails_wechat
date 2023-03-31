@@ -19,7 +19,7 @@ module Wechat
         store_location(return_to)
         redirect_url = url_for(controller: '/auth/sign', action: 'sign', uid: current_wechat_user.uid)
       elsif current_oauth_app.oauth_enable && current_oauth_app.respond_to?(:oauth2_url)
-        redirect_url = current_oauth_app.oauth2_url(state: urlsafe_encode64, port: request.port, protocol: request.protocol)
+        redirect_url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
       else
         redirect_url = url_for(controller: '/auth/sign', action: 'sign')
       end

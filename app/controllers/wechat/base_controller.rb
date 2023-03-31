@@ -7,7 +7,9 @@ module Wechat
       state = Com::State.find_by(id: params[:state])
 
       oauth_user.generate_account! unless oauth_user.user
-      state.update user_id: oauth_user.user&.id if state
+      if state
+        state.update user_id: oauth_user.user&.id, destroyable: true
+      end
       login_by_oauth_user(oauth_user)
 
       Com::SessionChannel.broadcast_to(params[:state], auth_token: current_authorized_token.id)
