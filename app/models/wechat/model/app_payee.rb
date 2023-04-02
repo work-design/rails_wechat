@@ -3,12 +3,13 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :mch_id, :string, index: true
       attribute :appid, :string, index: true
       attribute :domain, :string
       attribute :enabled, :boolean, default: true
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, counter_cache: true
-      belongs_to :payee
+      belongs_to :payee, foreign_key: :mch_id, primary_key: :mch_id
 
       has_many :receivers
 

@@ -26,7 +26,7 @@ module Wechat
 
     def app_payee_params
       params.fetch(:app_payee, {}).permit(
-        :payee_id,
+        :mch_id,
         :enabled,
         :domain
       )
