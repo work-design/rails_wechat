@@ -53,8 +53,16 @@ module WxPay::Api
       get "/v3/pay/partner/transactions/out-trade-no/#{out_trade_no}", params: { sp_mchid: , sub_mchid:  }, origin: BASE
     end
 
-    def invoke_refund(out_refund_no:, amount:)
-      post '/v3/refund/domestic/refunds', origin: BASE
+    def invoke_refund(out_refund_no:, transaction_id:, amount:, **options)
+      post(
+        '/v3/refund/domestic/refunds',
+        transaction_id: transaction_id,
+        out_refund_no: out_refund_no,
+        amount: amount,
+        origin: BASE,
+        sub_mchid: @payee.mch_id,
+        **options
+      )
     end
 
     def refund_query(out_refund_no)
