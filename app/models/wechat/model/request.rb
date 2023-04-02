@@ -107,7 +107,7 @@ module Wechat
         reply_params(
           title: '点击链接查看个人账户详情',
           description: '点击链接查看个人账户详情',
-          url: Rails.application.routes.url_for(controller: 'my/home', host: app.domain, disposable_token: wechat_user.auth_token)
+          url: Rails.application.routes.url_for(controller: 'my/home', host: app.domain, auth_token: wechat_user.auth_token)
         )
       else
         reply_for_blank_user
@@ -116,10 +116,12 @@ module Wechat
 
     def reply_for_blank_user
       return if wechat_user.user
+      wechat_user.generate_account!
+
       reply_params(
         title: wechat_user.attributes['name'].present? ? "您好，#{wechat_user.attributes['name']}" : '您好',
-        description: '请绑定已有账号或注册新账号',
-        url: Rails.application.routes.url_for(controller: 'auth/sign', action: 'bind', uid: open_id, host: app.domain)
+        description: '请查看个人页面',
+        url: Rails.application.routes.url_for(controller: 'my/home', host: app.domain, auth_token: wechat_user.auth_token)
       )
     end
 
