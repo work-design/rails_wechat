@@ -50,7 +50,7 @@ module WxPay::Api
     end
 
     def order_query(out_trade_no)
-      get "/v3/pay/partner/transactions/out-trade-no/#{out_trade_no}", params: { sp_mchid: , sub_mchid:  }, origin: BASE
+      get "/v3/pay/partner/transactions/out-trade-no/#{out_trade_no}", params: { sp_mchid: @mch.mch_id, sub_mchid: @payee.mch_id }, origin: BASE
     end
 
     def invoke_refund(out_refund_no:, transaction_id:, amount:, **options)
@@ -66,7 +66,7 @@ module WxPay::Api
     end
 
     def refund_query(out_refund_no)
-      get "/v3/refund/domestic/refunds/#{out_refund_no}", origin: BASE
+      get "/v3/refund/domestic/refunds/#{out_refund_no}", params: { sub_mchid: @payee.mch_id }, origin: BASE
     end
 
     def add_receiver(receiver)
