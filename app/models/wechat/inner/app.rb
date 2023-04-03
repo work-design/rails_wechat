@@ -30,12 +30,13 @@ module Wechat
           present_menu['sub_button'].each_with_index do |sub, sub_index|
             m = parent.menus.find_or_initialize_by(appid: appid, position: sub_index + 1)
             m.name = sub['name']
-            #m.type = sub['type']
+            m.type = Menu::TYPE[sub['type']]
             m.value = sub['url'] || sub['key']
           end
           parent.save
         else
           m = menus.find_or_initialize_by(root_position: index + 1)
+          m.type = Menu::TYPE[sub['type']]
           m.name = present_menu['name']
           m.value = present_menu['url'] || present_menu['key']
           m.save

@@ -1,6 +1,13 @@
 module Wechat
   module Model::Menu
     extend ActiveSupport::Concern
+    TYPE = {
+      'view' => 'Wechat::ViewMenu',
+      'click' => 'Wechat::ClickMenu',
+      'miniprogram' => 'Wechat::MiniProgramMenu',
+      'scancode_push' => 'Wechat::ScanPushMenu',
+      'scancode_waitmsg' => 'Wechat::ScanWaitMenu'
+    }.freeze
 
     included do
       attribute :type, :string
