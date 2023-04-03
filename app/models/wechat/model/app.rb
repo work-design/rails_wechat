@@ -76,7 +76,7 @@ module Wechat
     end
 
     def menu_roots
-      r = MenuRoot.where(organ_id: [nil, organ_id], appid: [nil, appid]).order(position: :asc)
+      r = MenuRoot.includes(:menus).where(organ_id: [nil, organ_id], appid: [nil, appid]).order(position: :asc)
       r.group_by(&:position).transform_values! do |x|
         x.find(&->(i){ i.appid == appid }) || x.find(&->(i){ i.organ_id == organ_id }) || x.find(&->(i){ i.organ_id.nil? })
       end.values
