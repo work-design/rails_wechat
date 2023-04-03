@@ -35,7 +35,10 @@ module Wechat
           end
           parent.save
         else
-
+          m = menus.find_or_initialize_by(root_position: index + 1)
+          m.name = present_menu['name']
+          m.value = present_menu['url'] || present_menu['key']
+          m.save
         end
       end
     end
