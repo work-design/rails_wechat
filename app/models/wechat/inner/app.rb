@@ -27,8 +27,8 @@ module Wechat
         if present_menu['sub_button'].present?
           parent = self.pure_menu_roots.find_or_initialize_by(position: index + 1)
           parent.name = present_menu['name']
-          present_menu['sub_button'].each do |sub|
-            m = parent.menus.find_or_initialize_by(appid: appid)
+          present_menu['sub_button'].each_with_index do |sub, sub_index|
+            m = parent.menus.find_or_initialize_by(appid: appid, position: sub_index + 1)
             m.name = sub['name']
             #m.type = sub['type']
             m.value = sub['url'] || sub['key']
