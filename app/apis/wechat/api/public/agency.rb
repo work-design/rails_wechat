@@ -12,5 +12,13 @@ module Wechat::Api
       post 'open/get', origin: BASE
     end
 
+    def open_bind(open_appid)
+      post 'open/bind', open_appid: open_appid, origin: BASE
+    end
+
+    def open_unbind(open_appid)
+      post 'open/unbind', open_appid: open_appid, origin: BASE
+    end
+
   end
 end
