@@ -1,24 +1,13 @@
 module Wechat
   class Admin::ExtractorsController < Admin::BaseController
     before_action :set_response
-    before_action :set_extractor, only: [:show, :edit, :update, :destroy]
+    before_action :set_extractor, only: [:show, :edit, :update, :destroy, :actions]
+    before_action :set_new_extractor, only: [:new, :create]
 
     def index
       q_params = {}
 
-      @extractors = @response.extractors.default_where(q_params).page(params[:page])
-    end
-
-    def new
-      @extractor = @response.extractors.build
-    end
-
-    def create
-      @extractor = @response.extractors.build(extractor_params)
-
-      unless @extractor.save
-        render :new, locals: { model: @extractor }, status: :unprocessable_entity
-      end
+      @extractors = @response.extractors.default_where(q_params).order(id: :asc).page(params[:page])
     end
 
     private
@@ -28,6 +17,10 @@ module Wechat
 
     def set_extractor
       @extractor = @response.extractors.find(params[:id])
+    end
+
+    def set_new_extractor
+      @extractor = @response.extractors.build(extractor_params)
     end
 
     def extractor_params
