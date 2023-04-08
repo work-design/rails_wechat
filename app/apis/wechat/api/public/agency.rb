@@ -8,5 +8,9 @@ module Wechat::Api
       post 'open/create', origin: BASE
     end
 
+    def open_get
+      post 'open/get', origin: BASE
+    end
+
   end
 end
