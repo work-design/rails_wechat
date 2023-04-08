@@ -7,6 +7,7 @@ module Wechat::Api
     include Menu
     include Mp
     include User
+    include Agency
     include Base::Sns
 
   end
