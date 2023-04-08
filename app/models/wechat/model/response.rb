@@ -36,7 +36,7 @@ module Wechat
       r = extractors.map(&->(extractor){ extractor.invoke_effect(request) }).compact
 
       if reply
-        reply.invoke_effect(request, value: r.join(','))
+        reply.invoke_effect(request, value: r.join("\n"))
       end
     end
 
