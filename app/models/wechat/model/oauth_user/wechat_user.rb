@@ -14,6 +14,7 @@ module Wechat
       attribute :expires_at, :datetime
       attribute :refresh_token, :string
       attribute :unsubscribe_at, :datetime
+      attribute :scope, :string
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :user_inviter, class_name: 'Auth::User', optional: true
@@ -32,6 +33,7 @@ module Wechat
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :auto_join_organ, if: -> { member_inviter && saved_change_to_member_inviter_id? }
       after_save_commit :prune_user_tags, if: -> { unsubscribe_at.present? && saved_change_to_unsubscribe_at? }
+      after_save_commit :sync_user_info_later, if: -> { scope == 'snsapi_userinfo' && saved_change_to_scope? }
     end
 
     def try_match
@@ -76,7 +78,7 @@ module Wechat
       }
       user_response = HTTPX.get('https://api.weixin.qq.com/sns/userinfo', params: params)
       res = JSON.parse(user_response.to_s)
-      logger.debug "\e[35m  Result: #{res}  \e[0m"
+      logger.debug "\e[35m  Sync User Info: #{res}  \e[0m"
 
       if res['errcode'].present?
         self.errors.add :base, "#{res['errcode']}, #{res['errmsg']}"
@@ -85,6 +87,10 @@ module Wechat
       self.name = res['nickname']
       self.avatar_url = res['headimgurl']
       self
+    end
+
+    def sync_user_info_later
+      UserInfoJob.perform_later(wechat_user)
     end
 
     def refresh_access_token

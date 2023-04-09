@@ -47,13 +47,12 @@ module Wechat
 
     def generate_wechat_user(code)
       result = api.oauth2_access_token(code)
-      logger.debug "\e[35m  Detail: #{result}  \e[0m"
+      logger.debug "\e[35m  App Generate User: #{result}  \e[0m"
 
       wechat_user = WechatUser.find_or_initialize_by(uid: result['openid'])
       wechat_user.appid = appid
-      wechat_user.assign_attributes result.slice('access_token', 'refresh_token', 'unionid')
+      wechat_user.assign_attributes result.slice('access_token', 'refresh_token', 'scope', 'unionid')
       wechat_user.expires_at = Time.current + result['expires_in'].to_i
-      wechat_user.sync_user_info if wechat_user.access_token.present? && (wechat_user.attributes['name'].blank? && wechat_user.attributes['avatar_url'].blank?)
       wechat_user
     end
 
