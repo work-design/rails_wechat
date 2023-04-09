@@ -57,7 +57,7 @@ module Wechat
       store_access_token(r)
     end
 
-    def oauth2_url(scope: 'snsapi_base', state: SecureRandom.hex(16), **url_options)
+    def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
       url_options.with_defaults! controller: 'wechat/agencies', action: 'login', id: id, host: platform.domain
       h = {
         appid: appid,
