@@ -6,7 +6,6 @@ module Wechat
     def auth
       @wechat_user = WechatUser.find_or_initialize_by(uid: params[:openid])
       @wechat_user.assign_attributes params.permit(:access_token, :refresh_token, :app_id)
-      @wechat_user.sync_user_info
       @wechat_user.account = current_account if current_account
       @wechat_user.save
 

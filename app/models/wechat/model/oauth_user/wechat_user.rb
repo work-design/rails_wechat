@@ -86,6 +86,7 @@ module Wechat
 
       self.name = res['nickname']
       self.avatar_url = res['headimgurl']
+      self.save
       self
     end
 
