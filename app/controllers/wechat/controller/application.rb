@@ -85,9 +85,8 @@ module Wechat
         r = current_authorized_token.oauth_user
         if r.is_a?(Wechat::ProgramUser) || r.nil?
           @current_wechat_user = current_account.wechat_users.unscope(where: :type).find_by(type: 'Wechat::WechatUser')
-        else
-          @current_wechat_user = r
         end
+        @current_wechat_user = r if @current_wechat_user.nil?
       else
         @current_wechat_user = current_account.wechat_users.find_by(type: 'Wechat::ProgramUser')
       end
