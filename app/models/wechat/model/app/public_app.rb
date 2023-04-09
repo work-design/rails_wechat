@@ -26,7 +26,7 @@ module Wechat
       end
     end
 
-    def oauth2_url(scope: 'snsapi_base', state: SecureRandom.hex(16), **url_options)
+    def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
       return agency.oauth2_url(scope: scope, state: state, **url_options) if agency
       url_options.with_defaults! controller: 'wechat/apps', action: 'login', id: id, host: self.domain
       h = {
@@ -36,7 +36,7 @@ module Wechat
         scope: scope,
         state: state
       }
-      logger.debug "\e[35m  Detail: #{h}  \e[0m"
+      logger.debug "\e[35m  App Oauth2: #{h}  \e[0m"
       "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
     end
 
