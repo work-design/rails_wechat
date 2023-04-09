@@ -67,7 +67,7 @@ module Wechat
         state: state,
         component_appid: platform.appid
       }
-      logger.debug "\e[35m  Detail: #{h}  \e[0m"
+      logger.debug "\e[35m  Agency Oauth2: #{h}  \e[0m"
       "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
     end
 
