@@ -90,7 +90,7 @@ module Wechat
     end
 
     def sync_user_info_later
-      UserInfoJob.perform_later(wechat_user)
+      UserInfoJob.perform_later(self)
     end
 
     def refresh_access_token
