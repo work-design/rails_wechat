@@ -4,6 +4,7 @@ module Wechat::Api
   class Program < Base
     include Base::Sns
     include Public::Common
+    include Public::Agency
     include Wxaapi
     include Wxa
     include CgiBin
