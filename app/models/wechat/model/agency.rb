@@ -92,6 +92,12 @@ module Wechat
       self.alias_name = r['alias']
       self.service_type = r.dig('service_type_info', 'id')
       self.verify_type = r.dig('verify_type_info', 'id')
+      self.extra = r
+      if r['MiniProgramInfo'].present?
+        self.type = 'Wechat::ProgramAgency'
+      else
+        self.type = 'Wechat::PublicAgency'
+      end
       self.save
     end
 
