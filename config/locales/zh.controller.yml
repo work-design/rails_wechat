@@ -90,6 +90,8 @@ zh:
       platforms:
         index:
           title: 微信第三方平台
+        agency:
+          title: 示例
       providers:
         index:
           title: 企业微信服务商

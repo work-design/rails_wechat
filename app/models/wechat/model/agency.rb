@@ -8,6 +8,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :type, :string
       attribute :appid, :string
       attribute :access_token, :string
       attribute :access_token_expires_at, :datetime
@@ -22,7 +23,7 @@ module Wechat
       attribute :business_info, :json
       attribute :service_type, :string
       attribute :verify_type, :string
-      attribute :default, :boolean, default: false
+      attribute :extra, :json
 
       belongs_to :platform
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
@@ -33,7 +34,6 @@ module Wechat
 
       after_create_commit :store_info_later
       before_save :init_app, if: -> { appid_changed? && appid }
-      after_update :set_default, if: -> { default? && saved_change_to_default? }
       after_save_commit :sync_to_storage, if: -> { saved_change_to_qrcode_url? }
     end
 
@@ -101,10 +101,6 @@ module Wechat
       self.refresh_token = r['authorizer_refresh_token']
       self.func_infos = r['func_info'].map { |i| i.dig('funcscope_category', 'id') } if r['func_info'].is_a?(Array)
       self.save
-    end
-
-    def set_default
-      self.class.where.not(id: self.id).where(platform_id: self.platform_id).update_all(default: false)
     end
 
     def sync_to_storage

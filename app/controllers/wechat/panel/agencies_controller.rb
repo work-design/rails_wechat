@@ -7,6 +7,10 @@ module Wechat
       @agencies = @platform.agencies.order(id: :desc).page(params[:page])
     end
 
+    def search
+      @agencies = @platform.agencies.default_where('nick_name-like': params['name-like'])
+    end
+
     private
     def set_platform
       @platform = Platform.find params[:platform_id]

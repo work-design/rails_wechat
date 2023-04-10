@@ -15,7 +15,8 @@ module Wechat
       attribute :pre_auth_code_expires_at, :datetime
       attribute :domain, :string
 
-      has_one :agency, -> { where(default: true) }
+      belongs_to :public_agency, optional: true
+      belongs_to :program_agency, optional: true
 
       has_many :agencies
       has_many :auths

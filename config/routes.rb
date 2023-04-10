@@ -109,7 +109,14 @@ Rails.application.routes.draw do
           end
         end
         resources :platforms do
-          resources :agencies
+          member do
+            get :agency
+          end
+          resources :agencies do
+            collection do
+              post :search
+            end
+          end
           resources :platform_tickets
         end
         resources :contacts

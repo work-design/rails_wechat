@@ -1,0 +1,36 @@
+<%= turbo_frame_tagged 'modal', data: { title: t('.title') } do %>
+  <%= form_with model: @platform, url: { action: 'update' } do |f| %>
+    <%= render 'error_messages', target: f.object %>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">公众号示例</label>
+      </div>
+      <div class="field-body">
+        <div class="panel" data-controller="typer" data-typer-url-value="<%= url_for(controller: 'agencies', action: 'search', platform_id: @platform.id, dom_id: 'public_agencies_content') %>" data-typer-method-value="post">
+          <%= f.hidden_field :public_agency_id, data: { typer_target: 'value' } %>
+          <div class="control has-icons-left">
+            <%= search_field_tag 'name-like', nil, class: 'input', placeholder: '搜索', data: { typer_target: 'input' } %>
+            <span class="icon is-left"><i class="fa-solid fa-search"></i></span>
+          </div>
+          <div class="panel" id="public_agencies_content"></div>
+        </div>
+      </div>
+    </div>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">小程序示例</label>
+      </div>
+      <div class="field-body">
+        <div class="panel" data-controller="typer" data-typer-url-value="<%= url_for(controller: 'agencies', action: 'search', platform_id: @platform.id, dom_id: 'program_agencies_content') %>" data-typer-method-value="post">
+          <%= f.hidden_field :program_agency_id, data: { typer_target: 'value' } %>
+          <div class="control has-icons-left">
+            <%= search_field_tag 'name-like', nil, class: 'input', placeholder: '搜索', data: { typer_target: 'input' } %>
+            <span class="icon is-left"><i class="fa-solid fa-search"></i></span>
+          </div>
+          <div class="panel" id="program_agencies_content"></div>
+        </div>
+      </div>
+    </div>
+    <%= f.submit %>
+  <% end %>
+<% end %>

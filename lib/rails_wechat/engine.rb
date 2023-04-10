@@ -5,6 +5,7 @@ module RailsWechat
     config.autoload_paths += Dir[
       "#{config.root}/app/models/oauth_user",
       "#{config.root}/app/models/template_config",
+      "#{config.root}/app/models/agency",
       "#{config.root}/app/models/app",
       "#{config.root}/app/models/menu",
       "#{config.root}/app/models/notice",
@@ -16,6 +17,7 @@ module RailsWechat
     config.eager_load_paths += Dir[
       "#{config.root}/app/models/oauth_user",
       "#{config.root}/app/models/template_config",
+      "#{config.root}/app/models/agency",
       "#{config.root}/app/models/app",
       "#{config.root}/app/models/menu",
       "#{config.root}/app/models/notice",
