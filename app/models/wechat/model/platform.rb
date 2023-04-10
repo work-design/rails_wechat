@@ -87,6 +87,7 @@ module Wechat
       url.query = {
         action: 'bindcomponent',
         no_scan: 1,
+        auth_type: 3,
         component_appid: appid,
         pre_auth_code: pre_auth_code,
         redirect_uri: Rails.application.routes.url_for(controller: 'wechat/platforms', action: 'callback', id: self.id)

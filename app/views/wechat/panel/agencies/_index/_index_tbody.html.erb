@@ -6,7 +6,10 @@
       <i class="fa-solid fa-shield has-text-success"></i>
     <% end %>
   </p>
-  <p class="has-text-grey"><%= model.appid %></p>
+  <p class="has-text-grey">
+    <span class="tag is-success"><%= model.type_i18n %></span>
+    <span><%= model.appid %></span>
+  </p>
 </td>
 <td><%= simple_format model.disabled_func_infos %></td>
 <td>
