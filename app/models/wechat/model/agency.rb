@@ -48,8 +48,6 @@ module Wechat
     end
 
     def disabled_func_infos
-      return unless platform.agency
-      platform.agency.func_infos - func_infos
     end
 
     def refresh_access_token

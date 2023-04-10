@@ -2,7 +2,11 @@
 
 module Wechat
   module Model::Agency::PublicAgency
-    extend ActiveSupport::Concern
+
+    def disabled_func_infos
+      return unless platform.public_agency
+      platform.public_agency.func_infos - func_infos
+    end
 
   end
 end
