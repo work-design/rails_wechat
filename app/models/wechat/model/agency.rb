@@ -84,8 +84,10 @@ module Wechat
       AgencyJob.perform_later(self)
     end
 
-    def store_info
+    def store_info!
       r = platform.api.get_authorizer_info(appid)
+      logger.debug "\e[35m  Agency Store Info: #{r}  \e[0m"
+      return if r.blank?
       self.assign_attributes r.slice('nick_name', 'head_img', 'user_name', 'principal_name', 'qrcode_url', 'business_info')
       self.alias_name = r['alias']
       self.service_type = r.dig('service_type_info', 'id')
