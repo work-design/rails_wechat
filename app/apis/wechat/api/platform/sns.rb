@@ -7,7 +7,7 @@ module Wechat::Api
       params = {
         appid: appid,
         grant_type: 'authorization_code',
-        component_appid: app.component_appid,
+        component_appid: app.appid,
         js_code: code
       }
 
