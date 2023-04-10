@@ -1,6 +1,7 @@
 module Wechat::Api
   class Platform < Wechat::Api::Base
     include Component
+    include Sns
 
     protected
     def with_access_token(params = {}, tries = 2)
