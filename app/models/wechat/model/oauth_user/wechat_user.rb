@@ -10,6 +10,8 @@ module Wechat
       attribute :appid, :string
       attribute :uid, :string, index: true
       attribute :unionid, :string, index: true
+      attribute :external_userid, :string
+      attribute :pending_id, :string
       attribute :access_token, :string
       attribute :expires_at, :datetime
       attribute :refresh_token, :string
