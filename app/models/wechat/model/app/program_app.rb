@@ -24,6 +24,18 @@ module Wechat
       api.webview_domain(action: action, webviewdomain: [URI::HTTPS.build(host: domain).to_s])
     end
 
+    def set_domain(action: 'set')
+      api.modify_domain(
+        action: action,
+        requestdomain: [URI::HTTPS.build(host: domain).to_s],
+        wsrequestdomain: [URI::WSS.build(host: domain).to_s],
+        uploaddomain: [URI::HTTPS.build(host: domain).to_s],
+        downloaddomain: [URI::HTTPS.build(host: domain).to_s],
+        udpdomain: [URI::Generic.build(host: domain, scheme: 'udp').to_s],
+        tcpdomain: [URI::Generic.build(host: domain, scheme: 'tcp').to_s]
+      )
+    end
+
     # 小程序
     def sync_templates
       api.templates.each do |template|
