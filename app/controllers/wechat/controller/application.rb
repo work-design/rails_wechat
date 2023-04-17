@@ -33,9 +33,9 @@ module Wechat
     def current_oauth_app
       return @current_oauth_app if defined? @current_oauth_app
       if request.variant.include?(:work_wechat)
-        @current_oauth_app = current_organ_domain.corp || WorkApp.default_where(default_params).take || WorkApp.global.take
+        @current_oauth_app = current_organ_domain.corp || WorkApp.default_where(default_ancestors_params).take || WorkApp.global.take
       else
-        @current_oauth_app = current_organ_domain.app || PublicApp.default_where(default_params).take || PublicApp.global.take
+        @current_oauth_app = current_organ_domain.app || PublicApp.default_where(default_ancestors_params).take || PublicApp.global.take
       end
 
       logger.debug "\e[35m  Current Oauth App: #{@current_oauth_app&.class_name}/#{@current_oauth_app&.id}  \e[0m"
