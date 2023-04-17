@@ -46,5 +46,9 @@ module Wechat::Api
       post 'generatescheme', **p, origin: BASE
     end
 
+    def webview_domain(action: 'get', **options)
+      post 'setwebviewdomain', action: action, **options, origin: BASE
+    end
+
   end
 end
