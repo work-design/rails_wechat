@@ -8,6 +8,7 @@ module Wechat::Api
     include Wxaapi
     include Wxa
     include CgiBin
+    include Wxopen
 
     def jscode2session(code)
       if app.is_a?(Wechat::Agency)

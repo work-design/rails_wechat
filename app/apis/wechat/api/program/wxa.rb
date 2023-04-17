@@ -58,9 +58,5 @@ module Wechat::Api
       post 'submit_audit', **options, origin: BASE
     end
 
-    def category
-      get 'wxopen/getcategory', origin: BASE
-    end
-
   end
 end
