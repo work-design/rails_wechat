@@ -194,7 +194,7 @@ module Wechat
 
     def get_external_userid(unionid, openid)
       corp = organ.corps[0]
-      retrun unless corp
+      return {} unless corp
       corp.api.external_userid(unionid: unionid, openid: openid)
     end
 
