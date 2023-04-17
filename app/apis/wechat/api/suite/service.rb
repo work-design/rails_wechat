@@ -47,7 +47,7 @@ module Wechat::Api
 
     # https://developer.work.weixin.qq.com/document/path/91122
     def user_detail(user_ticket)
-      post 'getuserdetail3rd', user_ticket: user_ticket, origin: BASE
+      post 'auth/getuserdetail3rd', user_ticket: user_ticket, origin: BASE
     end
 
     def external_userid(unionid:, openid:, **options)
