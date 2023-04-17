@@ -41,12 +41,12 @@ module Wechat
       cate = categories[0]
 
       api.submit_audit(
-        item_list: {
+        item_list: [{
           first_id: cate['first'],
           first_class: cate['first_name'],
           second_id: cate['second'],
           second_class: cate['second_name']
-        }
+        }]
       )
     end
 
