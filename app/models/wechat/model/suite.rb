@@ -118,6 +118,7 @@ module Wechat
       corp_user.user_id = result['userid']
       corp_user.user_ticket = result['user_ticket']
       corp_user.ticket_expires_at = Time.current + result['expires_in'].to_i
+      corp_user.open_id = result['openid']
       corp_user
     end
 
