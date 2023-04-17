@@ -7,10 +7,10 @@ module Wechat
 
     def index
       q_params = {}
-      q_params.merge! organ_id: @corp.organ&.id
+      q_params.merge! organ_id: @corp.organ_id
       q_params.merge! params.permit(:state, :userid)
 
-      @maintains = Crm::Maintain.default_where(q_params).page(params[:page])
+      @maintains = Crm::Maintain.where(q_params).page(params[:page])
     end
 
     private
