@@ -55,8 +55,7 @@ module Wechat
       corp = @suite.corps.find_by corp_id: params[:corp_id]
 
       if @corp_user.save
-        login_by_account(@corp_user.account)
-        current_authorized_token.update suite_id: @corp_user.suite_id
+        login_by_corp_user(@corp_user)
         if corp.organ
           url = url_for(
             controller: @suite.redirect_controller,
