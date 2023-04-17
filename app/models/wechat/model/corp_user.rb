@@ -92,7 +92,7 @@ module Wechat
     def get_detail_by_suite
       return unless suite
       r = suite.api.user_detail(user_ticket)
-      logger.debug "\e[35m  user_detail: #{detail}  \e[0m"
+      logger.debug "\e[35m  user_detail: #{r}  \e[0m"
       if r['errcode'] == 0
         self.assign_attributes r.slice('name', 'gender', 'qr_code', 'mobile', 'open_userid')
         self.avatar_url = r['avatar']
