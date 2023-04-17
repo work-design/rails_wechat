@@ -17,7 +17,8 @@ module Wechat::Api
       }
 
       r = post 'api_query_auth', **body, origin: BASE
-      r['authorization_info']
+      logger.debug "\e[35m  query path #{r}  \e[0m"
+      r['authorization_info'] if r.present?
     end
 
     def authorizer_token(appid, refresh_token)
