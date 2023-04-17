@@ -112,14 +112,12 @@ module Wechat
 
     def generate_corp_user(code)
       result = api.auth_user(code)
-      logger.debug "\e[35m  #{result}  \e[0m"
+      logger.debug "\e[35m  Suite CorpUser#{result}  \e[0m"
       corp_user = corp_users.find_or_initialize_by(open_userid: result['open_userid'])
-      corp_user.corp_id = result['CorpId']
-      corp_user.user_id = result['UserId']
-      corp_user.device_id = result['DeviceId']
+      corp_user.corp_id = result['corpid']
+      corp_user.user_id = result['userid']
       corp_user.user_ticket = result['user_ticket']
       corp_user.ticket_expires_at = Time.current + result['expires_in'].to_i
-      corp_user.open_id = result['OpenId']
       corp_user
     end
 
