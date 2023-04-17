@@ -17,7 +17,7 @@ module Wechat::Api
       }
 
       r = post 'api_query_auth', **body, origin: BASE
-      logger.debug "\e[35m  query path #{r}  \e[0m"
+      Rails.logger.debug "\e[35m  query path #{r}  \e[0m"
       r['authorization_info'] if r.present?
     end
 
