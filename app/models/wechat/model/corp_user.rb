@@ -140,7 +140,7 @@ module Wechat
 
       follow_infos = r.fetch('follow_user', [])
       info = follow_infos.find(&->(i){ i['userid'] == user_id })
-      logger.debug "\e[35m  Corp id: #{info}  \e[0m"
+      logger.debug "\e[35m  External Info: #{info}  \e[0m"
       if info
         follow = init_follow(item['external_userid'], info)
         follow.client = external
