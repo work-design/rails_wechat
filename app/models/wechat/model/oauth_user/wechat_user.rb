@@ -130,5 +130,10 @@ module Wechat
       user_tags.update_all(synced: false)
     end
 
+    def get_external_userid
+      return if unionid.blank?
+      app.get_external_userid(unionid, uid)
+    end
+
   end
 end
