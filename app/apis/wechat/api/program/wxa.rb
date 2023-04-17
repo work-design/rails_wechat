@@ -54,5 +54,13 @@ module Wechat::Api
       post 'modify_domain', **options, origin: BASE
     end
 
+    def submit_audit(**options)
+      post 'submit_audit', **options, origin: BASE
+    end
+
+    def category
+      get 'wxopen/getcategory', origin: BASE
+    end
+
   end
 end

@@ -36,6 +36,14 @@ module Wechat
       )
     end
 
+    def submit_audit
+      api.submit_audit(
+        item_list: {
+
+        }
+      )
+    end
+
     # 小程序
     def sync_templates
       api.templates.each do |template|
