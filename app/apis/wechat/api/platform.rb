@@ -2,6 +2,7 @@ module Wechat::Api
   class Platform < Base
     include Component
     include Sns
+    include Wxa
 
     def component_get(path, params: {}, headers: {}, origin: nil, debug: nil)
       with_options = { origin: origin }

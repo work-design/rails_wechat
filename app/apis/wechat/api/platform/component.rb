@@ -64,9 +64,5 @@ module Wechat::Api
       component_get 'oauth2/component/access_token', params: params, origin: 'https://api.weixin.qq.com/sns/'
     end
 
-    def templates
-      get 'gettemplatelist', origin: BASE
-    end
-
   end
 end
