@@ -21,7 +21,7 @@
   <% if model.pending_id.present? %>
   <p><%= model.pending_id %></p>
   <% else %>
-  <p><%= model.external_userid %></p>
+  <p class="has-text-danger"><%= model.external_userid %></p>
   <% end %>
 </td>
 <td>
