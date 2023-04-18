@@ -98,7 +98,7 @@ module Wechat
     end
 
     def auth_info
-      info = suite.provider.api.auth_info(corp_id, permanent_code)
+      info = suite.api.auth_info(corp_id, permanent_code)
       assign_info(info)
       save
     end
