@@ -42,6 +42,7 @@ module Wechat
         user_version: user_version,
         user_desc: user_desc,
         ext_json: {
+          requiredPrivateInfos: ['chooseAddress'],
           extAppid: appid,
           ext: { host: domain }
         }.to_json
