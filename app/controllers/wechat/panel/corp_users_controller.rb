@@ -5,7 +5,7 @@ module Wechat
     before_action :set_corp
 
     def index
-      @corp_users = @corp.corp_users.order(id: :desc).page(params[:page])
+      @corp_users = @corp.corp_users.includes(:member).order(id: :desc).page(params[:page])
     end
 
   end
