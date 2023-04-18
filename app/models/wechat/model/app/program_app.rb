@@ -44,7 +44,7 @@ module Wechat
         user_desc: user_desc,
         ext_json: {
           extAppid: appid,
-          ext: { host: domain }
+          ext: { host: URI::HTTPS.build(host: domain).to_s }
         }.to_json
       )
     end
