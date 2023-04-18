@@ -54,8 +54,8 @@ module Wechat::Api
       post 'modify_domain', **options, origin: BASE
     end
 
-    def commit
-      post 'commit'
+    def commit(**options)
+      post 'commit', **options, origin: BASE
     end
 
     def submit_audit(**options)

@@ -36,6 +36,17 @@ module Wechat
       )
     end
 
+    def commit(template_id: 1, user_version: '1.0.1', user_desc: '常规更新')
+      api.commit(
+        template_id: template_id,
+        user_version: user_version,
+        user_desc: user_desc,
+        ext_json: {
+          host: domain
+        }.to_json
+      )
+    end
+
     def submit_audit
       categories = api.category['categories']
       cate = categories[0]
