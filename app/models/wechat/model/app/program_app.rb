@@ -36,13 +36,14 @@ module Wechat
       )
     end
 
-    def commit(template_id: 1, user_version: '1.0.1', user_desc: '常规更新')
+    def commit(template_id: 1, user_version: 'v1.0.1', user_desc: '常规更新')
       api.commit(
         template_id: template_id,
         user_version: user_version,
         user_desc: user_desc,
         ext_json: {
-          host: domain
+          extAppid: appid,
+          ext: { host: domain }
         }.to_json
       )
     end
