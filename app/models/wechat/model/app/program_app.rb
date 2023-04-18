@@ -68,6 +68,33 @@ module Wechat
       api.audit_status(auditid)
     end
 
+    def set_privacy
+      api.set_privacy(
+        owner_setting: {
+          contact_email: 'contact@one.work',
+          notice_method: '通过微信公众号消息'
+        },
+        setting_list: [
+          {
+            privacy_key: 'UserInfo',
+            privacy_text: '用于个人中心身份确认'
+          },
+          {
+            privacy_key: 'Address',
+            privacy_text: '用于电商配送'
+          },
+          {
+            privacy_key: 'PhoneNumber',
+            privacy_text: '用于打通多平台用户身份'
+          },
+          {
+            privacy_key: 'BlueTooth',
+            privacy_text: '用于支持蓝牙打印机'
+          }
+        ]
+      )
+    end
+
     # 小程序
     def sync_templates
       api.templates.each do |template|

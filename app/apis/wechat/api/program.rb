@@ -6,6 +6,7 @@ module Wechat::Api
     include Public::Common
     include Public::Agency
     include Wxaapi
+    include Component
     include Wxa
     include CgiBin
     include Wxopen
