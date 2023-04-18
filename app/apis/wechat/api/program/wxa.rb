@@ -70,6 +70,10 @@ module Wechat::Api
       get 'undocodeaudit', origin: BASE
     end
 
+    def release
+      post 'release', origin: BASE
+    end
+
     def get_qrcode
       get 'get_qrcode', origin: BASE
     end
