@@ -54,6 +54,10 @@ module Wechat::Api
       post 'modify_domain', **options, origin: BASE
     end
 
+    def templates
+      get 'gettemplatelist', origin: BASE
+    end
+
     def commit
       post 'commit'
     end
