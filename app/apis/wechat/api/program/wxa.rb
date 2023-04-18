@@ -62,6 +62,10 @@ module Wechat::Api
       post 'submit_audit', **options, origin: BASE
     end
 
+    def audit_status(auditid)
+      post 'get_auditstatus', auditid: auditid, origin: BASE
+    end
+
     def privacy_interfaces
       get 'security/get_privacy_interface', origin: BASE
     end
