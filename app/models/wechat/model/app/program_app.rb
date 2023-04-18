@@ -3,6 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :auditid, :integer
     end
 
     def api
@@ -48,11 +49,11 @@ module Wechat
       )
     end
 
-    def submit_audit
+    def submit_audit!
       categories = api.category['categories']
       cate = categories[0]
 
-      api.submit_audit(
+      r = api.submit_audit(
         item_list: [{
           first_id: cate['first'],
           first_class: cate['first_name'],
@@ -60,6 +61,7 @@ module Wechat
           second_class: cate['second_name']
         }]
       )
+      self.update auditid: r['auditid']
     end
 
     # 小程序
