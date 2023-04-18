@@ -1,4 +1,8 @@
-<td><%= model.name %></td>
+<td>
+  <p><%= model.name %></p>
+  <p class="has-text-grey"><%= model.remark %></p>
+  <p><%= model.user&.id %></p>
+</td>
 <td>
   <p><%= model.uid %></p>
   <p class="has-text-grey"><%= model.unionid %></p>
@@ -12,16 +16,13 @@
     </span>
   <% end %>
 </td>
-<td><%= model.remark %></td>
 <td>
-  <p>
-  <% if model.account %>
-    <%= link_to model.identity, { controller: 'auth/panel/accounts', action: 'show', id: model.account.id }, data: { turbo_frame: 'modal' } %>
+  <p><%= model.identity %></p>
+  <% if model.pending_id.present? %>
+  <p><%= model.pending_id %></p>
   <% else %>
-    <%= model.identity %>
+  <p><%= model.external_userid %></p>
   <% end %>
-  </p>
-  <p><%= model.user&.id %></p>
 </td>
 <td>
   <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
