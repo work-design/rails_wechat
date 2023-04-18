@@ -7,7 +7,7 @@ module Wechat::Api
         component_appid: app.appid
       }
 
-      post 'api_create_preauthcode', **body, origin: BASE
+      component_post 'api_create_preauthcode', **body, origin: BASE
     end
 
     def query_auth(auth_code)
@@ -16,7 +16,7 @@ module Wechat::Api
         authorization_code: auth_code
       }
 
-      r = post 'api_query_auth', **body, origin: BASE
+      r = component_post 'api_query_auth', **body, origin: BASE
       Rails.logger.debug "\e[35m  query path #{r}  \e[0m"
       r['authorization_info'] if r.present?
     end
@@ -28,7 +28,7 @@ module Wechat::Api
         authorizer_refresh_token: refresh_token
       }
 
-      post 'api_authorizer_token', **body, origin: BASE
+      component_post 'api_authorizer_token', **body, origin: BASE
     end
 
     def get_authorizer_info(appid)
@@ -37,7 +37,7 @@ module Wechat::Api
         authorizer_appid: appid
       }
 
-      r = post 'api_get_authorizer_info', **body, origin: BASE
+      r = component_post 'api_get_authorizer_info', **body, origin: BASE
       r['authorizer_info']
     end
 
@@ -61,7 +61,11 @@ module Wechat::Api
         grant_type: 'authorization_code',
         component_appid: app.appid,
       }
-      get 'oauth2/component/access_token', params: params, origin: 'https://api.weixin.qq.com/sns/'
+      component_get 'oauth2/component/access_token', params: params, origin: 'https://api.weixin.qq.com/sns/'
+    end
+
+    def templates
+      get 'gettemplatelist', origin: BASE
     end
 
   end

@@ -11,7 +11,7 @@ module Wechat::Api
         js_code: code
       }
 
-      get 'jscode2session', params: params, origin: BASE
+      component_get 'jscode2session', params: params, origin: BASE
     end
 
   end
