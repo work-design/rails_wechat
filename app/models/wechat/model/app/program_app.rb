@@ -64,6 +64,10 @@ module Wechat
       self.update auditid: r['auditid']
     end
 
+    def audit_status
+      api.audit_status(auditid)
+    end
+
     # 小程序
     def sync_templates
       api.templates.each do |template|
