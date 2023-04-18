@@ -194,8 +194,7 @@ module Wechat
       agentid.present? && self
     end
 
-    def get_external_userid(unionid, openid)
-      corp = organ.corps[0]
+    def get_external_userid(unionid, openid, corp: nil)
       return {} unless corp
       corp.api.external_userid(unionid: unionid, openid: openid)
     end
