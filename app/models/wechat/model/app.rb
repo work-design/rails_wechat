@@ -46,6 +46,8 @@ module Wechat
       has_many :app_payees, primary_key: :appid, foreign_key: :appid
       has_many :payees, through: :app_payees
 
+      has_one_attached :qrcode
+
       scope :enabled, -> { where(enabled: true) }
       scope :shared, -> { where(shared: true) }
       scope :inviting, -> { where(inviting: true) }
