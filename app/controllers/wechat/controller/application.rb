@@ -106,7 +106,7 @@ module Wechat
 
     # 需要微信授权获取openid, 但并不需要注册为用户
     def require_wechat_user(return_to: nil)
-      return if current_oauth_user
+      return if current_wechat_user
       store_location(return_to)
 
       redirect_url = '/auth/wechat?skip_register=true'
