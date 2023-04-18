@@ -84,11 +84,11 @@ module Wechat
       if request.variant.include?(:wechat) && request.variant.exclude?(:mini_program)
         r = current_authorized_token.oauth_user
         if r.is_a?(Wechat::ProgramUser) || r.nil?
-          @current_wechat_user = current_account.wechat_users.unscope(where: :type).find_by(type: 'Wechat::WechatUser')
+          @current_wechat_user = current_user.wechat_users.unscope(where: :type).find_by(type: 'Wechat::WechatUser')
         end
         @current_wechat_user = r if @current_wechat_user.nil?
       else
-        @current_wechat_user = current_account.wechat_users.find_by(type: 'Wechat::ProgramUser')
+        @current_wechat_user = current_user.wechat_users.find_by(type: 'Wechat::ProgramUser')
       end
 
       logger.debug "\e[35m  Current Wechat User: #{@current_wechat_user&.id}  \e[0m"
