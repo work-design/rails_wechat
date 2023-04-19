@@ -3,7 +3,7 @@ module Wechat
 
     def index
       q_params = {}
-      q_params.merge! params.permit(:identity, :uid, :unionid, :appid, :name)
+      q_params.merge! params.permit(:identity, :uid, :unionid, :external_userid, :pending_id, :appid, :name)
 
       @wechat_users = WechatUser.default_where(q_params).order(id: :desc).page(params[:page])
     end
