@@ -181,12 +181,7 @@ Rails.application.routes.draw do
             get 'cert' => :edit_cert
             patch 'cert' => :update_cert
           end
-        end
-        resources :apps do
-          member do
-            get :info
-          end
-          resources :app_payees do
+          resources :payee_apps do
             resources :receivers do
               collection do
                 get :users
@@ -194,6 +189,11 @@ Rails.application.routes.draw do
                 delete 'openid/:uid' => :destroy_openid
               end
             end
+          end
+        end
+        resources :apps do
+          member do
+            get :info
           end
           resources :scenes do
             member do

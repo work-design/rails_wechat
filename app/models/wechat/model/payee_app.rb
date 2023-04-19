@@ -1,5 +1,5 @@
 module Wechat
-  module Model::AppPayee
+  module Model::PayeeApp
     extend ActiveSupport::Concern
 
     included do
