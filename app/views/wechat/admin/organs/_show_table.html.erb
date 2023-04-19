@@ -7,10 +7,6 @@
   <td><%= @organ.limit_wechat_menu %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Org::Organ.human_attribute_name(:corpid) %></td>
-  <td><%= @organ.corpid %></td>
-</tr>
-<tr>
   <td class="has-text-right"><%= Org::Organ.human_attribute_name(:corp_user_id) %></td>
   <td><%= @organ.corp_user&.user_id %></td>
 </tr>
