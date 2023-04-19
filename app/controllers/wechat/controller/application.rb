@@ -54,6 +54,10 @@ module Wechat
       @current_js_app
     end
 
+    def current_wechat_apps
+      PublicApp.global + PublicApp.default_where(default_params)
+    end
+
     def current_wechat_app
       return @current_wechat_app if defined?(@current_wechat_app)
       @current_wechat_app = current_wechat_user&.app || PublicApp.global.take
@@ -82,13 +86,10 @@ module Wechat
       return @current_wechat_user if defined?(@current_wechat_user)
 
       if request.variant.include?(:wechat) && request.variant.exclude?(:mini_program)
-        r = current_authorized_token.oauth_user
-        if r.is_a?(Wechat::ProgramUser) || r.nil?
-          @current_wechat_user = current_user.wechat_users.unscope(where: :type).find_by(type: 'Wechat::WechatUser')
-        end
-        @current_wechat_user = r if @current_wechat_user.nil?
-      else
-        @current_wechat_user = current_user.wechat_users.find_by(type: 'Wechat::ProgramUser')
+        @current_wechat_user = current_user.wechat_users.where(appid: current_wechat_apps.pluck(:appid)).take
+      elsif request.variant.include?(:mini_program)
+        appid = request.user_agent.scan RegexpUtil.between('miniProgram/', '$')
+        @current_wechat_user = current_user.wechat_users.where(appid: appid).take
       end
 
       logger.debug "\e[35m  Current Wechat User: #{@current_wechat_user&.id}  \e[0m"
