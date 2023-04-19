@@ -8,7 +8,7 @@ module Wechat
     def index
       q_params = {}
 
-      @payee_domains = @app.payee_domains.default_where(q_params)
+      @payee_domains = @payee.payee_domains.default_where(q_params)
     end
 
     private
