@@ -32,7 +32,7 @@ module Wechat
     end
 
     def set_new_payee
-      @payee = Payee.new(payee_params)
+      @payee = MchPayee.new(payee_params)
     end
 
     def payee_params
