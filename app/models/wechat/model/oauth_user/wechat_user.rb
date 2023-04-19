@@ -10,8 +10,6 @@ module Wechat
       attribute :appid, :string
       attribute :uid, :string, index: true
       attribute :unionid, :string, index: true
-      attribute :external_userid, :string
-      attribute :pending_id, :string
       attribute :access_token, :string
       attribute :expires_at, :datetime
       attribute :refresh_token, :string
@@ -132,15 +130,6 @@ module Wechat
 
     def get_corp
       Corp.where(organ_id: app.organ.self_and_ancestor_ids).take
-    end
-
-    def get_external_userid!(corp: get_corp, subject_type: 0)
-      return if unionid.blank?
-      r = app.get_external_userid(unionid, uid, corp: corp, subject_type: subject_type)
-      logger.debug "\e[35m  External Userid: #{r}  \e[0m"
-      self.external_userid = r['external_userid']
-      self.pending_id = r['pending_id']
-      self.save
     end
 
   end
