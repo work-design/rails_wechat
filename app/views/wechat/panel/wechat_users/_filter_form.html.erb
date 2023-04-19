@@ -1,0 +1,21 @@
+<%= form_with theme: 'search', model: Auth::OauthUser.new(params.permit(:name, :uid, :appid)), class: 'mb-3' do |f| %>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <%= f.text_field :name %>
+      <%= f.text_field :uid, style: 'width: 28ch' %>
+      <%= f.text_field :unionid, style: 'width: 28ch' %>
+      <%= f.text_field :appid %>
+      <%= f.text_field :identity %>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <%= f.text_field :external_userid, style: 'width: 28ch' %>
+      <%= f.text_field :pending_id, style: 'width: 28ch' %>
+      <div class="field is-narrow">
+        <%= f.submit %>
+        <%= link_to t('.clear'), filter_params(except: [:name, :uid, :unionid, :appid, :identity]), class: 'button is-light' %>
+      </div>
+    </div>
+  </div>
+<% end %>

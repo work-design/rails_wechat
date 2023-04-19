@@ -1,0 +1,4 @@
+<%= form_with model: @oauth_user, scope: :oauth_user, url: { action: 'update' } do |f| %>
+  <%= f.text_area :remark %>
+  <%= f.submit %>
+<% end %>

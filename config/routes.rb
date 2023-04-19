@@ -97,6 +97,7 @@ Rails.application.routes.draw do
             get :key
           end
         end
+        resources :wechat_users, only: [:index, :show, :edit, :update]
         resources :menu_roots, only: [:new, :create, :edit, :update, :destroy] do
           resources :menus, only: [:new, :create]
         end

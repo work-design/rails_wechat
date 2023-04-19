@@ -1,0 +1,24 @@
+<tr>
+  <td class="has-text-right"><%= Auth::OauthUser.human_attribute_name(:type) %></td>
+  <td><%= @oauth_user.type_i18n %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Auth::OauthUser.human_attribute_name(:name) %></td>
+  <td><%= @oauth_user.name %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Auth::OauthUser.human_attribute_name(:avatar_url) %></td>
+  <td><%= image_tag @oauth_user.avatar_url if @oauth_user.avatar_url.present? %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Auth::OauthUser.human_attribute_name(:uid) %></td>
+  <td><%= @oauth_user.uid %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Auth::OauthUser.human_attribute_name(:unionid) %></td>
+  <td><%= @oauth_user.unionid %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Auth::OauthUser.human_attribute_name(:remark) %></td>
+  <td><%= @oauth_user.remark %></td>
+</tr>
