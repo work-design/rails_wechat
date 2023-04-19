@@ -181,6 +181,7 @@ Rails.application.routes.draw do
             get 'cert' => :edit_cert
             patch 'cert' => :update_cert
           end
+          resources :payee_domains
           resources :payee_apps do
             resources :receivers do
               collection do

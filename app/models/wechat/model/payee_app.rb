@@ -5,7 +5,6 @@ module Wechat
     included do
       attribute :mch_id, :string, index: true
       attribute :appid, :string, index: true
-      attribute :domain, :string
       attribute :enabled, :boolean, default: true
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
