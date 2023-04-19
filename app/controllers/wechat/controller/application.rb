@@ -81,7 +81,7 @@ module Wechat
 
       if request.variant.include?(:mini_program)
         appid = request.user_agent.scan(RegexpUtil.between('miniProgram/', '$')).presence || request.referer.scan(RegexpUtil.between('servicewechat.com/', '/')).presence
-        @current_wechat_user = current_user.wechat_users.where(appid: appid).take
+        @current_wechat_user = current_account.wechat_users.where(appid: appid).take
       elsif request.variant.include?(:wechat)
         @current_wechat_user = current_user.wechat_users.where(appid: current_wechat_apps.pluck(:appid)).take
       end
