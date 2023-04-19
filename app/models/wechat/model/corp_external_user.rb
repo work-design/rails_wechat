@@ -11,6 +11,7 @@ module Wechat
       attribute :corp_id, :string, index: true
 
       has_one :corp, primary_key: :corp_id, foreign_key: :corp_id
+      belongs_to :wechat_user, foreign_key: :uid, primary_key: :uid
 
       after_create_commit :get_external_userid_later
     end

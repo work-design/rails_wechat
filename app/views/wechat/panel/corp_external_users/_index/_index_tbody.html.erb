@@ -2,6 +2,10 @@
   <p><%= model.corp_id %></p>
 </td>
 <td>
+  <div class="is-several">
+    <%= image_tag model.wechat_user.avatar_url, class: 'image is-24x24' if model.wechat_user.avatar_url.present? %>
+    <span><%= model.wechat_user.name %></span>
+  </div>
   <p class="has-text-success"><%= model.uid %></p>
   <p class="has-text-grey"><%= model.unionid %></p>
 </td>
