@@ -129,11 +129,11 @@ module Wechat
       user_tags.update_all(synced: false)
     end
 
-    def corp
+    def get_corp
       Corp.where(organ_id: app.organ.self_and_ancestor_ids).take
     end
 
-    def init_corp_external_user
+    def init_corp_external_user(corp: get_corp)
       return unless corp
       corp_external_users.present? || corp_external_users.create(corp_id: corp.corp_id)
     end
