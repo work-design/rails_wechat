@@ -11,13 +11,24 @@ module Wechat
       attribute :corp_id, :string, index: true
 
       has_one :corp, primary_key: :corp_id, foreign_key: :corp_id
+
+      after_create_commit :get_external_userid_later
     end
 
-    def get_external_userid!(corp: get_corp, subject_type: 0)
-      r = corp.get_external_userid(unionid, uid, corp: corp, subject_type: subject_type)
+    def get_external_userid_later
+      CorpExternalUserJob.perform_later(self)
+    end
+
+    def get_external_userid!
+      r = corp.get_external_userid(unionid, uid, subject_type: 0)
       logger.debug "\e[35m  External Userid: #{r}  \e[0m"
       self.external_userid = r['external_userid']
       self.pending_id = r['pending_id']
+
+      r1 = corp.get_external_userid(unionid, uid, subject_type: 1)
+      logger.debug "\e[35m  Provider External Userid: #{r1}  \e[0m"
+      self.provider_external_userid = r1['external_userid']
+
       self.save
     end
 

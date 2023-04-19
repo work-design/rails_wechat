@@ -26,7 +26,7 @@ module Wechat
       has_many :user_tags, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
       has_many :tags, through: :user_tags
       has_many :notices, ->(o) { where(appid: o.appid) }, primary_key: :uid, foreign_key: :open_id
-      has_many :externals, primary_key: :unionid, foreign_key: :unionid
+      has_many :corp_external_users, ->(o) { where(uid: o.uid) }, primary_key: :unionid, foreign_key: :unionid
 
       before_save :auto_link, if: -> { unionid.present? && unionid_changed? }
       after_save :sync_to_org_members, if: -> { saved_change_to_identity? }
@@ -34,6 +34,7 @@ module Wechat
       after_save_commit :auto_join_organ, if: -> { member_inviter && saved_change_to_member_inviter_id? }
       after_save_commit :prune_user_tags, if: -> { unsubscribe_at.present? && saved_change_to_unsubscribe_at? }
       after_save_commit :sync_user_info_later, if: -> { scope == 'snsapi_userinfo' && saved_change_to_scope? }
+      after_create_commit :init_corp_external_user, if: -> { unionid.present? && saved_change_to_unionid? }
     end
 
     def try_match
@@ -128,8 +129,13 @@ module Wechat
       user_tags.update_all(synced: false)
     end
 
-    def get_corp
+    def corp
       Corp.where(organ_id: app.organ.self_and_ancestor_ids).take
+    end
+
+    def init_corp_external_user
+      return unless corp
+      corp_external_users.present? || corp_external_users.create(corp_id: corp.corp_id)
     end
 
   end
