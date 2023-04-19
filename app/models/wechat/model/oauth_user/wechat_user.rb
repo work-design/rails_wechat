@@ -130,9 +130,9 @@ module Wechat
       user_tags.update_all(synced: false)
     end
 
-    def get_external_userid!(corp: app.organ.corps[0])
+    def get_external_userid!(corp: app.organ.corps[0], subject_type: 1)
       return if unionid.blank?
-      r = app.get_external_userid(unionid, uid, corp: corp)
+      r = app.get_external_userid(unionid, uid, corp: corp, subject_type: subject_type)
       logger.debug "\e[35m  External Userid: #{r}  \e[0m"
       self.external_userid = r['external_userid']
       self.pending_id = r['pending_id']
