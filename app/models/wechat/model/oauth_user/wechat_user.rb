@@ -130,7 +130,11 @@ module Wechat
       user_tags.update_all(synced: false)
     end
 
-    def get_external_userid!(corp: app.organ.corps[0], subject_type: 0)
+    def get_corp
+      Corp.where(organ_id: app.organ.self_and_ancestor_ids).take
+    end
+
+    def get_external_userid!(corp: get_corp, subject_type: 0)
       return if unionid.blank?
       r = app.get_external_userid(unionid, uid, corp: corp, subject_type: subject_type)
       logger.debug "\e[35m  External Userid: #{r}  \e[0m"
