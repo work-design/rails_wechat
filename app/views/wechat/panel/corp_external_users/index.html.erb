@@ -1,0 +1,7 @@
+<%= render 'filter_form' %>
+
+<%= render layout: 'index_table' do %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @corp_external_users, as: :model %>
+<% end %>
+
+<%= paginate @corp_external_users %>

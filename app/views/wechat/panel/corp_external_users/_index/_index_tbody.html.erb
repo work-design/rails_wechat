@@ -1,0 +1,12 @@
+<td>
+  <p><%= model.corp_id %></p>
+</td>
+<td>
+  <p class="has-text-success"><%= model.uid %></p>
+  <p class="has-text-grey"><%= model.unionid %></p>
+</td>
+<td>
+  <p class="has-text-success"><%= model.external_userid %></p>
+  <p class="has-text-info"><%= model.pending_id %></p>
+</td>
+<td><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></td>
