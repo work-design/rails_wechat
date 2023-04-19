@@ -79,11 +79,11 @@ module Wechat
       return unless current_account
       return @current_wechat_user if defined?(@current_wechat_user)
 
-      if request.variant.include?(:wechat) && request.variant.exclude?(:mini_program)
-        @current_wechat_user = current_user.wechat_users.where(appid: current_wechat_apps.pluck(:appid)).take
-      elsif request.variant.include?(:mini_program)
-        appid = request.user_agent.scan(RegexpUtil.between('miniProgram/', '$')) || request.referer.scan(RegexpUtil.between('servicewechat.com/', '/'))
+      if request.variant.include?(:mini_program)
+        appid = request.user_agent.scan(RegexpUtil.between('miniProgram/', '$')) || request.referer.scan(RegexpUtil.between('servicewechat\.com/', '/'))
         @current_wechat_user = current_user.wechat_users.where(appid: appid).take
+      elsif request.variant.include?(:wechat)
+        @current_wechat_user = current_user.wechat_users.where(appid: current_wechat_apps.pluck(:appid)).take
       end
 
       logger.debug "\e[35m  Current Wechat User: #{@current_wechat_user&.id}  \e[0m"
