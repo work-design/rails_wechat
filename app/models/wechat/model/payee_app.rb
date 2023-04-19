@@ -8,7 +8,7 @@ module Wechat
       attribute :domain, :string
       attribute :enabled, :boolean, default: true
 
-      belongs_to :app, foreign_key: :appid, primary_key: :appid, counter_cache: true
+      belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :payee, foreign_key: :mch_id, primary_key: :mch_id
 
       has_many :receivers

@@ -16,7 +16,7 @@ zh:
           title: 支付设置
         edit_cert:
           title: 支付证书
-      app_payees:
+      payee_apps:
         index:
           title: 支付设置
       receivers:

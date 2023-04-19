@@ -24,7 +24,6 @@ module Wechat
       attribute :user_name, :string
       attribute :domain, :string
       attribute :url_link, :string
-      attribute :app_payees_count, :integer, default: 0
       attribute :debug, :boolean, default: false
 
       encrypts :secret
@@ -43,8 +42,8 @@ module Wechat
       has_many :tags, primary_key: :appid, foreign_key: :appid
       has_many :templates, primary_key: :appid, foreign_key: :appid
       has_many :app_configs, primary_key: :appid, foreign_key: :appid
-      has_many :app_payees, primary_key: :appid, foreign_key: :appid
-      has_many :payees, through: :app_payees
+      has_many :payee_apps, primary_key: :appid, foreign_key: :appid
+      has_many :payees, through: :payee_apps
 
       has_one_attached :qrcode
 
