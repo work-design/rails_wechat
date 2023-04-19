@@ -14,6 +14,8 @@ module Wechat
 
       scope :enabled, -> { where(enabled: true) }
 
+      validates :appid, uniqueness: { scope: :mch_id }
+
       after_update :set_enabled, if: -> { enabled? && saved_change_to_enabled? }
     end
 
