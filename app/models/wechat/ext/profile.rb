@@ -14,7 +14,7 @@ module Wechat
 
       has_one :wechat_user, class_name: 'Wechat::WechatUser', primary_key: :external_userid, foreign_key: :external_userid
       has_many :corp_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :external_userid, foreign_key: :external_userid
-      has_many :wechat_users, through: :corp_external_users
+      has_many :wechat_users, class_name: 'Wechat::WechatUser', through: :corp_external_users
       has_many :users, class_name: 'Auth::User', through: :wechat_users
       has_many :members, through: :wechat_users
 
