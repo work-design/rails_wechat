@@ -41,6 +41,14 @@ module Wechat
       self.save
     end
 
+    def get_pending_id!
+      r = corp.api.pending_id(external_userid)
+      logger.debug "\e[35m  Pending ID: #{r}  \e[0m"
+      p = r['result'].find(&->(i){ i['external_userid'] == external_userid })
+      self.pending_id = p['pending_id']
+      self.save
+    end
+
   end
 end
 
