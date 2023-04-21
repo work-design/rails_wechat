@@ -135,6 +135,7 @@ module Wechat
 
     def init_corp_external_user(corp: get_corp)
       return unless corp
+      return if unionid.blank?
       corp_external_users.present? || corp_external_users.create(corp_id: corp.corp_id)
     end
 
