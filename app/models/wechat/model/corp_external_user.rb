@@ -17,7 +17,7 @@ module Wechat
       has_one :corp, primary_key: :corp_id, foreign_key: :corp_id
       belongs_to :wechat_user, foreign_key: :uid, primary_key: :uid
 
-      before_validation :init_subject_type, if: -> { uid.present? }
+      before_validation :init_subject_type, if: -> { uid.present? && uid_changed? }
       after_create_commit :get_external_userid_later
     end
 
@@ -27,9 +27,9 @@ module Wechat
 
     def init_subject_type
       if wechat_user.app.global
-        self.subject_type = 1
+        self.subject_type = :provider
       else
-        self.subject_type = 0
+        self.subject_type = :oneself
       end
     end
 
