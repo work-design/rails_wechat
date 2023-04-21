@@ -34,7 +34,7 @@ module Wechat
     end
 
     def get_external_userid!
-      r = corp.get_external_userid(unionid, uid, subject_type: subject_type)
+      r = corp.get_external_userid(unionid, uid, subject_type: subject_type_before_type_cast)
       logger.debug "\e[35m  External Userid: #{r}  \e[0m"
       self.external_userid = r['external_userid']
       self.pending_id = r['pending_id']
