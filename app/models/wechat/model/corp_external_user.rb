@@ -10,8 +10,8 @@ module Wechat
       attribute :corp_id, :string, index: true
 
       enum subject_type: {
-        oneself: 0,
-        provider: 1
+        oneself: '0',
+        provider: '1'
       }
 
       has_one :corp, primary_key: :corp_id, foreign_key: :corp_id
