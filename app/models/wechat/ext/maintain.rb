@@ -13,6 +13,7 @@ module Wechat
       attribute :remark_mobiles, :json, default: []
 
       belongs_to :crm_tag, class_name: 'Crm::Tag', foreign_key: :state, primary_key: :name, optional: true
+      has_many :corp_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :external_userid, foreign_key: :external_userid
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
     end
@@ -30,6 +31,15 @@ module Wechat
         logger.debug "\e[35m  sync Remark: #{r}  \e[0m"
         break
       end
+    end
+
+    def get_corp
+      Corp.where(organ_id: organ.self_and_ancestor_ids).take
+    end
+
+    def init_corp_external_user(corp: get_corp)
+      return unless corp
+      corp_external_users.present? || corp_external_users.create(corp_id: corp.corp_id)
     end
 
   end
