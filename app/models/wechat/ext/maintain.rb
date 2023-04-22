@@ -14,7 +14,10 @@ module Wechat
       attribute :remark_mobiles, :json, default: []
 
       belongs_to :crm_tag, class_name: 'Crm::Tag', foreign_key: :state, primary_key: :name, optional: true
-      has_many :corp_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :external_userid, foreign_key: :external_userid
+
+      has_many :corp_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :pending_id, foreign_key: :pending_id
+      has_many :wechat_users, class_name: 'Wechat::WechatUser', through: :corp_external_users
+      has_many :users, class_name: 'Auth::User', through: :wechat_users
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
     end
