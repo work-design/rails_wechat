@@ -1,0 +1,10 @@
+<%= form_with theme: 'search', model: Crm::Maintain.new, url: { action: params[:action] } do |f| %>
+  <div class="field-body">
+    <%= f.text_field :name %>
+    <%= f.text_field :pending_id %>
+    <div class="field is-narrow">
+      <%= f.submit %>
+      <%= link_to t('.clear'), filter_params(except: [:name]), class: 'button is-light' %>
+    </div>
+  </div>
+<% end %>
