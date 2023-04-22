@@ -10,7 +10,7 @@ module Wechat
       attribute :oper_userid, :string
       attribute :add_way, :string
       attribute :external_userid, :string
-      attribute :pending_id, :string
+      attribute :pending_id, :string, index: true
       attribute :remark_mobiles, :json, default: []
 
       belongs_to :crm_tag, class_name: 'Crm::Tag', foreign_key: :state, primary_key: :name, optional: true
