@@ -10,6 +10,7 @@ module Wechat
       attribute :oper_userid, :string
       attribute :add_way, :string
       attribute :external_userid, :string
+      attribute :pending_id, :string
       attribute :remark_mobiles, :json, default: []
 
       belongs_to :crm_tag, class_name: 'Crm::Tag', foreign_key: :state, primary_key: :name, optional: true
@@ -37,9 +38,14 @@ module Wechat
       Corp.where(organ_id: organ.self_and_ancestor_ids).take
     end
 
-    def init_corp_external_user(corp: get_corp)
+    def get_pending_id!(corp: get_corp)
       return unless corp
-      corp_external_users.present? || corp_external_users.create(corp_id: corp.corp_id)
+      r = corp.api.pending_id(external_userid)
+      logger.debug "\e[35m  Pending ID: #{r}  \e[0m"
+      p = r['result'].find(&->(i){ i['external_userid'] == external_userid })
+      return if p.blank?
+      self.pending_id = p['pending_id']
+      self.save
     end
 
   end
