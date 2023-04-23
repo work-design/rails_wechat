@@ -33,7 +33,7 @@ module Wechat
       belongs_to :organ, class_name: 'Org::Organ', optional: true
       belongs_to :member, ->(o) { where(organ_id: o.organ_id) }, class_name: 'Org::Member', foreign_key: :user_id, primary_key: :corp_userid, optional: true
       belongs_to :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity, optional: true
-      has_one :user, class_name: 'Auth::User', through: :account
+      belongs_to :user, class_name: 'Auth::User', optional: true
       has_many :authorized_tokens, ->(o) { where(suite_id: o.suite_id, identity: o.identity) }, class_name: 'Auth::AuthorizedToken', primary_key: :open_userid, foreign_key: :corp_userid, dependent: :nullify
 
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
@@ -46,34 +46,14 @@ module Wechat
 
       validates :identity, presence: true
 
-      after_initialize :sync_identity, if: -> { new_record? && user_id.present? }
-      before_validation :sync_identity, if: -> { user_id_changed? }
       before_validation :sync_organ, if: -> { corp_id_changed? }
-      before_validation :init_account, if: -> { identity_changed? }
       before_validation :init_corp, if: -> { suite_id.present? && suite_id_changed? }
       after_save :auto_join_organ, if: -> { organ_id.present? && saved_change_to_organ_id? }
       after_create_commit :sync_externals_later
     end
 
-    def sync_identity
-      self.identity = [corp_id, user_id].join('-')
-    end
-
     def sync_organ
       self.organ_id = corp.organ_id
-    end
-
-    def init_account
-      return if account
-      build_account(type: 'Auth::ThirdpartyAccount', confirmed: true)
-    end
-
-    def mig
-      mobile_account = ::Auth::MobileAccount.find_by(identity: mobile)
-      if mobile_account
-        temp_account.confirmed = true
-        temp_account.save
-      end
     end
 
     def init_corp
