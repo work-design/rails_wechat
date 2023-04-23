@@ -76,7 +76,6 @@ module Wechat
     end
 
     def current_wechat_user
-      return unless current_account
       return @current_wechat_user if defined?(@current_wechat_user)
 
       if request.variant.include?(:mini_program)
