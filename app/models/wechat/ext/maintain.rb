@@ -15,7 +15,8 @@ module Wechat
 
       belongs_to :crm_tag, class_name: 'Crm::Tag', foreign_key: :state, primary_key: :name, optional: true
 
-      has_many :corp_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :pending_id, foreign_key: :pending_id
+      has_many :corp_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :external_userid, foreign_key: :external_userid
+      has_many :pending_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :pending_id, foreign_key: :pending_id
       has_many :wechat_users, class_name: 'Wechat::WechatUser', through: :corp_external_users
       has_many :users, class_name: 'Auth::User', through: :wechat_users
 
