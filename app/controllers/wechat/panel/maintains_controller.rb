@@ -10,7 +10,7 @@ module Wechat
       q_params.merge! organ_id: @corp.organ_id
       q_params.merge! params.permit(:state, :userid, :pending_id, :external_userid)
 
-      @maintains = Crm::Maintain.where(q_params).page(params[:page])
+      @maintains = Crm::Maintain.where(q_params).order(id: :desc).page(params[:page])
     end
 
     private
