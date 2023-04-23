@@ -125,11 +125,7 @@ module Wechat
       if info
         follow = init_follow(item['external_userid'], info)
         follow.client = external
-
-        self.class.transaction do
-          follow.save
-          self.save
-        end
+        follow.save
       elsif r['next_cursor']
         sync_external(external_userid, cursor: r['next_cursor'])
       end
