@@ -5,8 +5,6 @@ module Wechat
     private
     def xxx(oauth_user)
       state = Com::State.find_by(id: params[:state])
-
-      oauth_user.generate_account! unless oauth_user.user
       if state
         state.update user_id: oauth_user.user_id, destroyable: true
       end
