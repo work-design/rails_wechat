@@ -15,7 +15,7 @@ module Wechat
       }
 
       has_one :corp, primary_key: :corp_id, foreign_key: :corp_id
-      has_one :wechat_user, primary_key: :uid, foreign_key: :uid
+      belongs_to :wechat_user, foreign_key: :uid, primary_key: :uid, optional: true
 
       before_validation :init_subject_type, if: -> { uid.present? && uid_changed? }
       after_create_commit :get_external_userid_later
