@@ -55,7 +55,7 @@ module Wechat
     end
 
     def current_wechat_apps
-      PublicApp.global + PublicApp.default_where(default_params)
+      PublicApp.global + PublicApp.default_where(default_ancestors_params)
     end
 
     def current_wechat_app
