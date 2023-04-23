@@ -11,6 +11,7 @@ module Wechat
       attribute :corp_id, :string
       attribute :suite_id, :string, index: true
       attribute :user_id, :string
+      attribute :userid, :string, index: true
       attribute :device_id, :string
       attribute :user_ticket, :string
       attribute :ticket_expires_at, :datetime
@@ -31,7 +32,7 @@ module Wechat
       }
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
-      belongs_to :member, ->(o) { where(organ_id: o.organ_id) }, class_name: 'Org::Member', foreign_key: :user_id, primary_key: :corp_userid, optional: true
+      belongs_to :member, ->(o) { where(organ_id: o.organ_id) }, class_name: 'Org::Member', foreign_key: :userid, primary_key: :corp_userid, optional: true
       belongs_to :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity, optional: true
       belongs_to :user, class_name: 'Auth::User', optional: true
       has_many :authorized_tokens, ->(o) { where(suite_id: o.suite_id, identity: o.identity) }, class_name: 'Auth::AuthorizedToken', primary_key: :open_userid, foreign_key: :corp_userid, dependent: :nullify
@@ -40,7 +41,7 @@ module Wechat
       belongs_to :corp, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
       belongs_to :app, foreign_key: :corp_id, primary_key: :appid, optional: true
 
-      has_many :contacts, ->(o) { where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :user_id, primary_key: :user_id
+      has_many :contacts, ->(o) { where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :userid, primary_key: :user_id
       has_many :maintains, through: :member
       has_many :clients, through: :maintains
 
@@ -85,7 +86,7 @@ module Wechat
     end
 
     def sync_externals(**options)
-      r = (corp || app).api.batch(user_id, **options)
+      r = (corp || app).api.batch(userid, **options)
       return unless r['errcode'] == 0
 
       list = r.fetch('external_contact_list', [])
@@ -119,7 +120,7 @@ module Wechat
       external = init_external(item)
 
       follow_infos = r.fetch('follow_user', [])
-      info = follow_infos.find(&->(i){ i['userid'] == user_id })
+      info = follow_infos.find(&->(i){ i['userid'] == userid })
       logger.debug "\e[35m  External Info: #{info}  \e[0m"
       if info
         follow = init_follow(item['external_userid'], info)
@@ -156,7 +157,7 @@ module Wechat
     end
 
     def active_info
-      suite.provider.api.active_info(corp_id, user_id)
+      suite.provider.api.active_info(corp_id, userid)
     end
 
     # 激活码详情：https://developer.work.weixin.qq.com/document/path/95552
@@ -164,7 +165,7 @@ module Wechat
       rest_code = corp.list_codes.find(&->(i){ i['type'] == type && [1, 4].include?(i['status']) })
       return unless rest_code
 
-      suite.provider.api.active_account(corp_id, user_id, rest_code['active_code'])
+      suite.provider.api.active_account(corp_id, userid, rest_code['active_code'])
     end
 
     def authorized_token
