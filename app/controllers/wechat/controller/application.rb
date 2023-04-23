@@ -44,7 +44,7 @@ module Wechat
 
     def current_js_app
       return @current_js_app if defined?(@current_js_app)
-      if request.variant.include?(:work_wechat) && current_account
+      if request.variant.include?(:work_wechat)
         @current_js_app = current_corp_user&.corp
       else
         @current_js_app = PublicApp.default_where(default_params).take || PublicApp.global.take
