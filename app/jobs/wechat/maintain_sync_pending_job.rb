@@ -1,5 +1,5 @@
 module Wechat
-  class MaintainSyncRemarkJob < ApplicationJob
+  class MaintainSyncPendingJob < ApplicationJob
 
     def perform(maintain)
       maintain.get_pending_id!

@@ -16,9 +16,9 @@ module Wechat
       belongs_to :crm_tag, class_name: 'Crm::Tag', foreign_key: :state, primary_key: :name, optional: true
 
       has_many :corp_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :external_userid, foreign_key: :external_userid
-      has_many :pending_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :pending_id, foreign_key: :pending_id
       has_many :wechat_users, class_name: 'Wechat::WechatUser', through: :corp_external_users
       has_many :users, class_name: 'Auth::User', through: :wechat_users
+      has_many :pending_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :pending_id, foreign_key: :pending_id
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :get_pending_id_later, if: -> { external_userid.present? && saved_change_to_external_userid? }
