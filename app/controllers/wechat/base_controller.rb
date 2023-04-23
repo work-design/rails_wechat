@@ -8,7 +8,7 @@ module Wechat
 
       oauth_user.generate_account! unless oauth_user.user
       if state
-        state.update user_id: oauth_user.user&.id, destroyable: true
+        state.update user_id: oauth_user.user_id, destroyable: true
       end
       login_by_oauth_user(oauth_user)
 
