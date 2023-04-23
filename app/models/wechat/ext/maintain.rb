@@ -21,6 +21,7 @@ module Wechat
       has_many :users, class_name: 'Auth::User', through: :wechat_users
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
+      after_save_commit :get_pending_id_later, if: -> { external_userid.present? && saved_change_to_external_userid? }
     end
 
     def sync_remark_later
@@ -36,6 +37,10 @@ module Wechat
         logger.debug "\e[35m  sync Remark: #{r}  \e[0m"
         break
       end
+    end
+
+    def get_pending_id_later
+      MaintainSyncPendingJob.perform_later(self)
     end
 
     def get_corp
