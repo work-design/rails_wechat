@@ -19,6 +19,8 @@ module Wechat
       has_many :wechat_users, class_name: 'Wechat::WechatUser', through: :corp_external_users
       has_many :users, class_name: 'Auth::User', through: :wechat_users
       has_many :pending_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :pending_id, foreign_key: :pending_id
+      has_many :pending_wechat_users, class_name: 'Wechat::WechatUser', through: :pending_external_users
+      has_many :pending_users, class_name: 'Auth::User', through: :pending_wechat_users
 
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :get_pending_id_later, if: -> { external_userid.present? && saved_change_to_external_userid? }
