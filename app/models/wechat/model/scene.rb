@@ -67,7 +67,11 @@ module Wechat
 
     def qrcode_data_url
       return unless self.qrcode_url
-      QrcodeHelper.data_url(self.qrcode_url)
+      if ['Wechat::PublicApp', 'Wechat::ReadApp'].include?(app.type)
+        QrcodeHelper.data_url(self.qrcode_url)
+      else
+        qrcode_url
+      end
     end
 
     def commit_to_wechat
