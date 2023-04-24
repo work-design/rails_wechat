@@ -105,6 +105,8 @@ module Wechat
         org_id: "#{organ_id}",
         path: "#{match_value.delete_prefix('/')}"
       }
+
+      {}
     end
 
     def get_program_qrcode
