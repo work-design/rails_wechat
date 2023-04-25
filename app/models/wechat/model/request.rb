@@ -116,7 +116,7 @@ module Wechat
 
     def reply_for_blank_user
       return if wechat_user.user
-      wechat_user.generate_account!
+      wechat_user.create_user
 
       reply_params(
         title: wechat_user.attributes['name'].present? ? "您好，#{wechat_user.attributes['name']}" : '您好',
@@ -204,7 +204,7 @@ module Wechat
       session_str, url = body.split('@')
       session = session_str.delete_prefix!('session_')
 
-      wechat_user.generate_account! unless wechat_user.user
+      wechat_user.user || wechat_user.create_user
       Com::SessionChannel.broadcast_to session, auth_token: wechat_user.auth_token
     end
 
