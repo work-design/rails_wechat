@@ -9,7 +9,7 @@ module Wechat
       @program_user.user || @program_user.build_user
       @program_user.save
 
-      headers['Authorization'] = auth_token.id
+      headers['Authorization'] = @program_user.auth_token
       render json: { auth_token: auth_token.id, user: @program_user.user }
     end
 
@@ -30,7 +30,8 @@ module Wechat
 
     def mobile
       if @program_user && @program_user.get_phone_number!(params)
-        render json: { program_user: @program_user.as_json(only: [:id, :identity]), user: @program_user.user }
+        headers['Authorization'] = @program_user.auth_token
+        render json: { user: @program_user.user }
       else
         current_authorized_token&.destroy  # 触发重新授权逻辑
         render :mobile_err, locals: { model: @program_user }, status: :unprocessable_entity
