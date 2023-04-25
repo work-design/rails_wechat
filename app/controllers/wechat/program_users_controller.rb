@@ -10,7 +10,7 @@ module Wechat
       @program_user.save
 
       headers['Authorization'] = @program_user.auth_token
-      render json: { auth_token: auth_token.id, user: @program_user.user }
+      render json: { auth_token: @program_user.auth_token, user: @program_user.user }
     end
 
     def info
