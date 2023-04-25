@@ -36,9 +36,6 @@ module Wechat
 
     def login
       @oauth_user = @app.generate_wechat_user(params[:code])
-      if @oauth_user.account.nil? && current_account
-        @oauth_user.account = current_account
-      end
       @oauth_user.save
 
       xxx(@oauth_user)

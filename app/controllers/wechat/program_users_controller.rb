@@ -6,7 +6,6 @@ module Wechat
 
     def create
       @program_user = @app.generate_wechat_user(params[:code])
-      @program_user.user || @program_user.build_user
       @program_user.save
 
       headers['Authorization'] = @program_user.auth_token
