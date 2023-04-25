@@ -21,7 +21,7 @@ module Wechat
       info = api.jscode2session(code)
       logger.debug "\e[35m  Program App Generate User: #{info}  \e[0m"
 
-      program_user = ProgramUser.create_or_find_by!(uid: info['openid'])
+      program_user = ProgramUser.find_or_initialize_by(uid: info['openid'])
       program_user.appid = appid
       program_user.assign_attributes info.slice('unionid', 'session_key')
       if program_user.same_oauth_user
