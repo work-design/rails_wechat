@@ -29,14 +29,7 @@ module Wechat
     end
 
     def mobile
-      session_key = current_authorized_token&.session_key
-      r = Wechat::Cipher.program_decrypt(params[:encryptedData], params[:iv], session_key)
-      phone_number = r['phoneNumber']
-
-      if session_key && phone_number
-        @program_user.identity = phone_number
-        @program_user.save!
-
+      if @program_user && @program_user.get_phone_number!(params)
         render json: { program_user: @program_user.as_json(only: [:id, :identity]), user: @program_user.user }
       else
         current_authorized_token&.destroy  # 触发重新授权逻辑

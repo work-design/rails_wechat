@@ -7,25 +7,15 @@ module Wechat
       attribute :session_key, :string
     end
 
-    def get_phone_number(encrypted_data, iv, session_key)
-      r = Wechat::Cipher.program_decrypt(encrypted_data, iv, session_key)
+    def get_phone_number(params)
+      r = Wechat::Cipher.program_decrypt(params[:encryptedData], params[:iv], session_key)
       if r['phoneNumber']
-        r['phoneNumber']
+        self.identity = r['phoneNumber']
+        self.save
       else
         self.errors.add :base, "手机号获取失败，session_key 为：#{session_key}"
         nil
       end
-    end
-
-    def auth_token(session_key = nil)
-      at = authorized_tokens.find(&->(i){ i.expire_at.present? && i.expire_at > Time.current }) || authorized_tokens.build
-      at.identity = identity if identity.present?
-      at.session_key = session_key if session_key.present?
-      self.class.transaction do
-        self.save!
-        at.save!
-      end
-      at
     end
 
   end
