@@ -95,7 +95,7 @@ module Wechat
     end
 
     def get_wxa_qrcode
-      r = app.api.get_wxacode(query: program_query)
+      r = app.api.get_wxacode_unlimit(program_query)
       self.qrcode_url = r
       r
     end

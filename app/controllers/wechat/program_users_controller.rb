@@ -5,14 +5,12 @@ module Wechat
     skip_before_action :verify_authenticity_token if whether_filter(:verify_authenticity_token)
 
     def create
-      info = @app.api.jscode2session(session_params[:code])
-      @program_user = ProgramUser.create_or_find_by!(uid: info['openid'])
-      @program_user.appid = params[:appid]
-      @program_user.unionid = info['unionid']
-      auth_token = @program_user.auth_token(info['session_key'])
+      @program_user = @app.generate_wechat_user(params[:code])
+      @program_user.user || @program_user.build_user
+      @program_user.save
 
       headers['Authorization'] = auth_token.id
-      render json: { auth_token: auth_token.id, account: @program_user.account, user: @program_user.user }
+      render json: { auth_token: auth_token.id, user: @program_user.user }
     end
 
     def info
@@ -32,7 +30,8 @@ module Wechat
 
     def mobile
       session_key = current_authorized_token&.session_key
-      phone_number = @program_user.get_phone_number(params[:encryptedData], params[:iv], session_key)
+      r = Wechat::Cipher.program_decrypt(params[:encryptedData], params[:iv], session_key)
+      phone_number = r['phoneNumber']
 
       if session_key && phone_number
         @program_user.identity = phone_number

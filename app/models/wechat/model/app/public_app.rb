@@ -47,7 +47,7 @@ module Wechat
 
     def generate_wechat_user(code)
       result = api.oauth2_access_token(code)
-      logger.debug "\e[35m  App Generate User: #{result}  \e[0m"
+      logger.debug "\e[35m  Public App Generate User: #{result}  \e[0m"
 
       wechat_user = WechatUser.find_or_initialize_by(uid: result['openid'])
       wechat_user.appid = appid
