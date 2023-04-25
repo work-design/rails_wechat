@@ -35,15 +35,7 @@ module Wechat
 
       if session_key && phone_number
         @program_user.identity = phone_number
-        @account = @program_user.account || @program_user.build_account(type: 'Auth::MobileAccount')
-        @account.confirmed = true
-        @account.user || @account.build_user
-        @account.user.assign_attributes name: @program_user.name, invited_code: params[:invited_code]
-
-        @program_user.class.transaction do
-          @program_user.save!
-          @account.save!
-        end
+        @program_user.save!
 
         render json: { program_user: @program_user.as_json(only: [:id, :identity]), user: @program_user.user }
       else
