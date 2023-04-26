@@ -9,7 +9,17 @@ module Wechat
       @program_user.save
 
       headers['Authorization'] = @program_user.auth_token
-      render json: { auth_token: @program_user.auth_token, user: @program_user.user }
+      render json: { auth_token: @program_user.auth_token, program_user: @program_user, user: @program_user.user }
+    end
+
+    def mobile
+      if @program_user && @program_user.get_phone_number!(params)
+        headers['Authorization'] = @program_user.auth_token
+        render json: { user: @program_user.user }
+      else
+        current_authorized_token&.destroy  # 触发重新授权逻辑
+        render :mobile_err, locals: { model: @program_user }, status: :unprocessable_entity
+      end
     end
 
     def info
@@ -25,16 +35,6 @@ module Wechat
       @program_user.save
 
       render json: { program_user: @program_user.as_json(only: [:id, :identity, :name, :avatar_url]) }
-    end
-
-    def mobile
-      if @program_user && @program_user.get_phone_number!(params)
-        headers['Authorization'] = @program_user.auth_token
-        render json: { user: @program_user.user }
-      else
-        current_authorized_token&.destroy  # 触发重新授权逻辑
-        render :mobile_err, locals: { model: @program_user }, status: :unprocessable_entity
-      end
     end
 
     private
