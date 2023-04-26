@@ -15,7 +15,7 @@ module Wechat
     def mobile
       if @program_user && @program_user.get_phone_number!(params)
         headers['Authorization'] = @program_user.auth_token
-        render json: { user: @program_user.user }
+        render json: { program_user: @program_user, user: @program_user.user }
       else
         current_authorized_token&.destroy  # 触发重新授权逻辑
         render :mobile_err, locals: { model: @program_user }, status: :unprocessable_entity
@@ -25,13 +25,7 @@ module Wechat
     def info
       @program_user.name = userinfo_params[:nickName]
       @program_user.avatar_url = userinfo_params[:avatarUrl]
-      @program_user.extra = {
-        gender: userinfo_params[:gender],
-        language: userinfo_params[:language],
-        city: userinfo_params[:city],
-        province: userinfo_params[:province],
-        country: userinfo_params[:country]
-      }
+      @program_user.extra = userinfo_params.slice(:gender, :language, :city, :province, :country)
       @program_user.save
 
       render json: { program_user: @program_user.as_json(only: [:id, :identity, :name, :avatar_url]) }
