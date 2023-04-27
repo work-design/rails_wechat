@@ -14,7 +14,6 @@ module Wechat
     def filter_hash
       {
         uid: self.uid,
-        session_key: self.session_key,
         session_id: self.session_id,
         appid: self.appid,
         suite_id: self.suite_id
