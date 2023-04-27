@@ -8,8 +8,8 @@ module Wechat
       has_many :scenes, as: :handle, class_name: 'Wechat::Scene'
     end
 
-    def invite_scene!(app)
-      scene = scenes.find_or_initialize_by(appid: app.appid)
+    def invite_scene!(app, organ_id: nil)
+      scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: organ_id)
       scene.refresh if scene.expired?
       scene.save
       scene

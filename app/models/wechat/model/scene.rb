@@ -32,13 +32,13 @@ module Wechat
 
       after_initialize :init_match_value, if: -> { new_record? && handle }
       before_validation :init_expire_at, if: -> { expire_seconds.present? && expire_seconds_changed? }
-      before_validation :sync_from_app, if: -> { appid.present? && appid_changed? }
+      before_validation :sync_from_app, if: -> { organ_id.blank? && appid.present? && appid_changed? }
       after_save_commit :to_qrcode!, if: -> { saved_change_to_match_value? }
       after_save_commit :refresh_when_expired, if: -> { saved_change_to_expire_at? }
     end
 
     def init_match_value
-      self.match_value = "#{handle_type.downcase.gsub('::', '_')}_#{handle_id}"
+      self.match_value = "#{handle_type.downcase.gsub('::', '_')}_#{handle_id}_#{organ_id}"
     end
 
     def init_expire_at
@@ -46,7 +46,7 @@ module Wechat
     end
 
     def sync_from_app
-      self.organ_id ||= app.organ_id
+      self.organ_id = app.organ_id
     end
 
     def init_response
@@ -67,10 +67,10 @@ module Wechat
 
     def qrcode_data_url
       return unless self.qrcode_url
-      if ['Wechat::PublicApp', 'Wechat::ReadApp'].include?(app.type)
-        QrcodeHelper.data_url(self.qrcode_url)
-      else
+      if ['Wechat::ProgramApp'].include?(app.type)
         qrcode_url
+      else
+        QrcodeHelper.data_url(self.qrcode_url)
       end
     end
 

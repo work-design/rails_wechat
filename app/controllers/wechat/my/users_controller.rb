@@ -12,7 +12,7 @@ module Wechat
 
     private
     def set_scene
-      @scene = current_user.invite_scene!(current_wechat_app)
+      @scene = current_user.invite_scene!(current_wechat_app, organ_id: current_organ.id)
     end
 
   end
