@@ -3,7 +3,7 @@
     <li><%= link_to t('wechat.admin.apps.index.title'), { controller: 'apps' } %></li>
     <li><%= link_to @app.name, { controller: 'apps', id: @app.id } %></li>
     <li><%= link_to t('wechat.in.scenes.index.title'), { controller: 'scenes' } %></li>
-    <li><%= link_to @scene.match_value, { controller: 'scenes', id: @scene.id } %></li>
+    <li><%= link_to @scene.match_value, { controller: 'scenes', anchor: "tr_#{@scene.id}" } %></li>
     <li class="is-active"><%= t('.title') %></li>
   </ul>
 </div>

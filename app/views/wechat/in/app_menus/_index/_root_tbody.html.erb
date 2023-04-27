@@ -1,0 +1,12 @@
+<td>
+  <span style="display: inline-block"></span>
+  <% if model.menus.size > 0 %>
+    <i class="fa-solid fa-fw fa-caret-down" style="cursor: pointer" data-action="click->tree#collapse"></i>
+  <% else %>
+    <i class="fa-solid fa-fw fa-minus"></i>
+  <% end %>
+  <span><%= model.name %></span>
+</td>
+<td colspan="2"></td>
+<td><strong class="has-text-success"><%= model.position %></strong></td>
+<td></td>

@@ -1,11 +1,5 @@
 <td>
-  <span style="width: <%= model.parent_id ? 1.43 : 0 %>em; display: inline-block"></span>
-  <% if model.children.size > 0 %>
-    <i class="fa-solid fa-fw fa-caret-down" style="cursor: pointer" data-action="click->tree#collapse"></i>
-  <% else %>
-    <i class="fa-solid fa-fw fa-minus"></i>
-  <% end %>
-  <span><%= model.type_i18n %></span>
+  <span style="width: 2em; display: inline-block"></span>
 </td>
 <td><%= model.name %></td>
 <td><%= model.value %></td>
@@ -14,7 +8,7 @@
   <p><%= model.mp_pagepath %></p>
 </td>
 <td>
-<% app_menu = @scene.app_menus.find(&->(i){ i.menu_id == model.id }) %>
+<% app_menu = @scene.menu_apps.find(&->(i){ i.menu_id == model.id }) %>
 <% if app_menu %>
   <%= form_with theme: nil, url: { action: 'destroy', id: app_menu.id }, method: :delete, data: { controller: 'input' } do |f| %>
     <%= f.check_box :disabled, checked: true, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>

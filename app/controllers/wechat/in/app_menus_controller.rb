@@ -10,9 +10,9 @@ module Wechat
       q_params.merge! default_params
       q_params.merge! params.permit(:name)
 
-      @menus = Menu.roots.where(q_params).order(parent_id: :desc, position: :asc)
+      @menus = MenuRoot.where(q_params).order(position: :asc)
 
-      @scene_menu_ids = @scene.app_menus.pluck(:menu_id)
+      @scene_menu_ids = @scene.menu_apps.pluck(:menu_id)
     end
 
     def new
@@ -55,7 +55,7 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit(:name)
 
-      @default_menus = Menu.roots.where(organ_id: nil).where(q_params).order(parent_id: :desc, position: :asc)
+      @default_menus = MenuRoot.where(organ_id: nil).where(q_params).order(position: :asc)
     end
 
     def set_app_menu
