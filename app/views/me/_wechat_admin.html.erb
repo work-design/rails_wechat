@@ -1,0 +1,18 @@
+<div class="media" data-controller="empty">
+  <figure class="media-left">
+    <%# image_tag meta[0].logo, class: 'image is-64x64' if meta[0].logo.present? %>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <strong><%= t('wechat.admin.title') %></strong>
+    </div>
+    <div data-empty-target="content">
+      <%= link_to({ controller: 'wechat/admin/apps' }, class: 'tag') do %>
+        <span><%= t('wechat.admin.apps.index.title') %></span>
+      <% end %>
+      <%= link_to({ controller: 'wechat/in/apps' }, class: 'tag') do %>
+        <span><%= t('wechat.in.apps.index.title') %></span>
+      <% end %>
+    </div>
+  </div>
+</div>
