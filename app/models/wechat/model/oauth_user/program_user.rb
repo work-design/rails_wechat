@@ -9,6 +9,7 @@ module Wechat
 
     def get_phone_number!(params)
       r = Wechat::Cipher.program_decrypt(params[:encryptedData], params[:iv], session_key)
+      logger.debug "\e[35m  Get Phone Number: #{r}  \e[0m"
       if r['phoneNumber']
         self.identity = r['phoneNumber']
         self.save
