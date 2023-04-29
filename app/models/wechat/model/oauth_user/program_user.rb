@@ -18,5 +18,13 @@ module Wechat
       end
     end
 
+    def skip_auth
+      identity.present?
+    end
+
+    def only_auth
+      false
+    end
+
   end
 end

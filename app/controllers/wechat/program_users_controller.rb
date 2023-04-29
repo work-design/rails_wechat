@@ -9,7 +9,7 @@ module Wechat
       @program_user.save
 
       headers['Authorization'] = @program_user.auth_token
-      render json: { auth_token: @program_user.auth_token, program_user: @program_user, user: @program_user.user }
+      render json: { auth_token: @program_user.auth_token, program_user: @program_user.as_json(methods: [:skip_auth, :only_auth]), user: @program_user.user }
     end
 
     def mobile
