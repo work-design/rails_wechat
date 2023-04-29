@@ -7,7 +7,7 @@ module Wechat
       attribute :session_key, :string
     end
 
-    def get_phone_number(params)
+    def get_phone_number!(params)
       r = Wechat::Cipher.program_decrypt(params[:encryptedData], params[:iv], session_key)
       if r['phoneNumber']
         self.identity = r['phoneNumber']
