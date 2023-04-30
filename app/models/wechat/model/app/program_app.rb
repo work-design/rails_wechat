@@ -76,6 +76,7 @@ module Wechat
           second_class: cate['second_name']
         }]
       )
+      logger.debug "\e[35m  Submit Audit: #{r}  \e[0m"
       self.update auditid: r['auditid']
     end
 
