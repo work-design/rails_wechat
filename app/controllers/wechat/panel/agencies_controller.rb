@@ -4,7 +4,10 @@ module Wechat
     before_action :set_agency, only: [:show, :edit, :update]
 
     def index
-      @agencies = @platform.agencies.order(id: :desc).page(params[:page])
+      q_params = {}
+      q_params.merge! params.permit(:type)
+
+      @agencies = @platform.agencies.includes(:app).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def search
