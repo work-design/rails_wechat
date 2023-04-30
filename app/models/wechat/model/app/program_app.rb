@@ -4,6 +4,7 @@ module Wechat
 
     included do
       attribute :auditid, :integer
+      attribute :version_info, :json
     end
 
     def api
@@ -118,6 +119,14 @@ module Wechat
     def get_qrcode
       file = api.get_qrcode
       self.qrcode.attach io: file, filename: "qrcode_#{id}"
+    end
+
+    def version_info!
+      r = api.version_info
+      self.version_info.merge! exp_info: r['exp_info'], release_info: r['release_info']
+      self.version_info['exp_info']['exp_time'] = Time.at(version_info['exp_info']['exp_time']) if version_info['exp_info']
+      self.version_info['release_info']['release_time'] = Time.at(version_info['release_info']['release_time']) if version_info['release_info']
+      self.save
     end
 
     # 小程序
