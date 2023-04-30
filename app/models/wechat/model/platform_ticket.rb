@@ -9,23 +9,33 @@ module Wechat
       attribute :msg_signature, :string
       attribute :appid, :string
       attribute :ticket_data, :string
+      attribute :message_hash, :json
 
       belongs_to :platform, foreign_key: :appid, primary_key: :appid, optional: true
 
-      after_create_commit :parsed_data, if: -> { platform.present? }
-      after_create_commit :clean_last
+      before_save :parsed_data, if: -> { ticket_data_changed? }
+      after_create_commit :update_platform_ticket, if: -> { platform.present? }
+      after_create_commit :clean_last_later
     end
 
     def parsed_data
       content = platform.decrypt(ticket_data)
       data = Hash.from_xml(content).fetch('xml', {})
+      self.message_hash = data
+    end
 
-      platform.update(verify_ticket: data['ComponentVerifyTicket'])
-      data
+    def update_platform_ticket
+      r = message_hash['ComponentVerifyTicket']
+      return unless r.present?
+      platform.update verify_ticket: r
+    end
+
+    def clean_last_later
+      PlatformTicketCleanJob.perform_later(self)
     end
 
     def clean_last
-      PlatformTicketCleanJob.perform_later(self)
+      #self.class.where(appid: appid).where.not(id: id).delete_all
     end
 
   end
