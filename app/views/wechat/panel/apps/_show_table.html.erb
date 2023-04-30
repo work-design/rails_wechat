@@ -3,6 +3,10 @@
   <td><%= @app.type_i18n %></td>
 </tr>
 <tr>
+  <td class="has-text-right"><%= Wechat::App.human_attribute_name(:qrcode) %></td>
+  <td><%= image_tag @app.qrcode.url, class: 'image' if @app.qrcode.attached? %></td>
+</tr>
+<tr>
   <td class="has-text-right"><%= Wechat::App.human_attribute_name(:enabled) %></td>
   <td><%= @app.enabled %></td>
 </tr>
