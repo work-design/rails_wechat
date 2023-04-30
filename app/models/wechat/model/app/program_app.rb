@@ -111,6 +111,10 @@ module Wechat
       )
     end
 
+    def set_choose_address
+      api.apply_privacy_interface('wx.chooseAddress', '用于电商配送')
+    end
+
     def get_qrcode
       file = api.get_qrcode
       self.qrcode.attach io: file, filename: "qrcode_#{id}"
