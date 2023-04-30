@@ -11,6 +11,7 @@
     <dt data-show-target="item" class="has-text-grey" style="visibility: hidden"><%= Wechat::App.human_attribute_name(:agentid) %></dt>
     <dd><%= model.agentid %></dd>
   <% end if model.agentid.present? %>
+  <p><%= model.domain %></p>
 </td>
 <td>
   <%= form_with theme: nil, model: model, scope: :app, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
