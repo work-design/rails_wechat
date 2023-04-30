@@ -74,6 +74,10 @@ module Wechat::Api
       post 'release', origin: BASE
     end
 
+    def version_info
+      post 'getversioninfo', origin: BASE
+    end
+
     def get_qrcode
       get 'get_qrcode', origin: BASE
     end
