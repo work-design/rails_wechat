@@ -13,7 +13,7 @@ module Wechat
     end
 
     def mobile
-      if @program_user && @program_user.get_phone_number!(params)
+      if @program_user && @program_user.get_phone_number!(session_params)
         headers['Authorization'] = @program_user.auth_token
         render json: { auth_token: @program_user.auth_token, program_user: @program_user, user: @program_user.user }
       else
@@ -41,9 +41,9 @@ module Wechat
     end
 
     def session_params
-      params.permit(
+      params.fetch(:detail, {}).permit(
         :code,
-        :encrypted_data,
+        :encryptedData,
         :iv
       )
     end
