@@ -131,10 +131,10 @@ module Wechat
 
     def api
       return @api if defined? @api
-      if secret.present?
-        @api = Wechat::Api::Public.new(self)
-      elsif agency
+      if agency
         @api = Wechat::Api::Public.new(agency)
+      elsif secret.present?
+        @api = Wechat::Api::Public.new(self)
       else
         raise 'Must has secret or under agency'
       end
