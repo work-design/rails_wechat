@@ -38,11 +38,14 @@ module Wechat
     end
 
     def set_webview_domain(action: 'set')
-      api.webview_domain(action: action, webviewdomain: [URI::HTTPS.build(host: domain).to_s])
+      api.webview_domain_directly(
+        action: action,
+        webviewdomain: [URI::HTTPS.build(host: domain).to_s]
+      )
     end
 
     def set_domain(action: 'set')
-      api.modify_domain(
+      api.modify_domain_directly(
         action: action,
         requestdomain: [URI::HTTPS.build(host: domain).to_s],
         wsrequestdomain: [URI::WSS.build(host: domain).to_s],
