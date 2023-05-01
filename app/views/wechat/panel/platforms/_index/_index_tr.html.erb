@@ -8,6 +8,9 @@
       <%= link_to({ controller: 'agencies', platform_id: model.id }, aria: { label: t('wechat.panel.agencies.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-door-open has-text-warning"></i>
       <% end %>
+      <%= link_to({ controller: 'platform_receives', platform_id: model.id }, aria: { label: t('wechat.panel.platform_receives.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-messages"></i>
+      <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info has-text-primary"></i>
       <% end %>

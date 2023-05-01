@@ -1,0 +1,10 @@
+<td>
+  <p><%= model.appid %></p>
+  <p><%= model.open_id %></p>
+</td>
+<td>
+  <p><%= model.msg_type %></p>
+</td>
+<td><%= model.content %></td>
+<td><%= simple_format model.message_hash %></td>
+<td><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></td>
