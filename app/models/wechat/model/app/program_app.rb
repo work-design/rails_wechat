@@ -133,6 +133,13 @@ module Wechat
       self.version_info
     end
 
+    def get_webview_file!
+      r = api.webview_domain_file
+      self.confirm_name = r['file_name']
+      self.confirm_content = r['file_content']
+      self.save
+    end
+
     # 小程序
     def sync_templates
       api.templates.each do |template|

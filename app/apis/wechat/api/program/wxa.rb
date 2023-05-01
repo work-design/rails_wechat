@@ -54,6 +54,10 @@ module Wechat::Api
       post 'setwebviewdomain_directly', **options, origin: BASE
     end
 
+    def webview_domain_file
+      post 'get_webviewdomain_confirmfile', origin: BASE
+    end
+
     def modify_domain(**options)
       post 'modify_domain', **options, origin: BASE
     end
