@@ -59,7 +59,7 @@ module Wechat
     end
 
     def confirm
-      @app = App.find_by(confirm_name: [params[:path], request.format].join('.'))
+      @app = App.find_by(confirm_name: params[:path])
 
       if @app
         render text: @app.confirm_content
