@@ -260,4 +260,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get '*path' => 'wechat/apps#confirm', constraints: { format: 'txt' }
 end

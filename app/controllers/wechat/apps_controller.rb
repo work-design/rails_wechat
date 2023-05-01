@@ -58,6 +58,16 @@ module Wechat
       send_data r.read
     end
 
+    def confirm
+      @app = App.find_by(confirm_name: params[:path])
+
+      if @app
+        render text: @app.confirm_content
+      else
+        head :no_content
+      end
+    end
+
     private
     def set_app
       @app = App.enabled.find params[:id]
