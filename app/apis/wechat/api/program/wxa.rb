@@ -54,6 +54,14 @@ module Wechat::Api
       post 'modify_domain', **options, origin: BASE
     end
 
+    def effective_domain
+      post 'get_effective_domain', origin: BASE
+    end
+
+    def effective_webview_domain
+      post 'get_effective_webviewdomain', origin: BASE
+    end
+
     def commit(**options)
       post 'commit', **options, origin: BASE
     end
