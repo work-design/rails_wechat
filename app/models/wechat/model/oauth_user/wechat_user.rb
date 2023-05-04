@@ -28,7 +28,6 @@ module Wechat
       has_many :notices, ->(o) { where(appid: o.appid) }, primary_key: :uid, foreign_key: :open_id
       has_many :corp_external_users, ->(o) { where(uid: o.uid) }, primary_key: :unionid, foreign_key: :unionid
 
-      before_save :auto_link, if: -> { unionid.present? && unionid_changed? }
       after_save :sync_to_org_members, if: -> { saved_change_to_identity? }
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :auto_join_organ, if: -> { member_inviter && saved_change_to_member_inviter_id? }
@@ -47,15 +46,6 @@ module Wechat
         org_member.name = name
         org_member.save
       end
-    end
-
-    def auto_link
-      return unless same_oauth_user
-
-      self.identity ||= same_oauth_user.identity
-      self.user_id ||= same_oauth_user.user_id
-      self.name ||= same_oauth_user.name
-      self.avatar_url ||= same_oauth_user.avatar_url
     end
 
     def auto_join_organ

@@ -25,11 +25,7 @@ module Wechat
       program_user = ProgramUser.find_or_initialize_by(uid: info['openid'])
       program_user.appid = appid
       program_user.assign_attributes info.slice('unionid', 'session_key')
-      if program_user.same_oauth_user
-        program_user.auto_link
-      else
-        program_user.user || program_user.build_user
-      end
+      program_user.init_user
       program_user
     end
 

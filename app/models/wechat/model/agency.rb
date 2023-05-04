@@ -77,11 +77,7 @@ module Wechat
       wechat_user.appid = appid
       wechat_user.assign_attributes result.slice('access_token', 'refresh_token', 'scope', 'unionid')
       wechat_user.expires_at = Time.current + result['expires_in'].to_i
-      if wechat_user.same_oauth_user
-        wechat_user.auto_link
-      else
-        wechat_user.user || wechat_user.build_user
-      end
+      wechat_user.init_user
       wechat_user
     end
 

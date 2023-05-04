@@ -7,17 +7,18 @@ module Wechat
       helper_method :current_wechat_app, :current_js_app, :current_corp_user
     end
 
-    def require_user(return_to: nil)
+    def require_user
       if request.variant.include?(:work_wechat)
         return if current_user && current_corp_user
-      else
+      elsif request.variant.include?(:wechat)
         return if current_user && current_wechat_user
+      else
+        return if current_user
       end
-      return super if request.variant.include?(:mini_program) || request.variant.exclude?(:wechat)
 
       if current_wechat_user && current_wechat_user.user.nil?
-        store_location(return_to)
-        redirect_url = url_for(controller: '/auth/sign', action: 'sign', uid: current_wechat_user.uid)
+        current_wechat_user.init_user
+        current_wechat_user.save
       elsif current_oauth_app.oauth_enable && current_oauth_app.respond_to?(:oauth2_url)
         redirect_url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
       else
