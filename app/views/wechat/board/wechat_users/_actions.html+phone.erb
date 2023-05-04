@@ -1,0 +1,15 @@
+<%= button_to({ action: 'destroy' }, method: :delete, class: 'has-text-danger', form: { data: { turbo_confirm: t('.confirm') }, class: 'weui-actionsheet__cell weui-actionsheet__cell_warn' }) do %>
+  <i class="fa-solid fa-trash"></i>
+  <span><%= t('.unbind') %></span>
+<% end %>
+<%= link_to({ action: 'edit' }, class: 'weui-actionsheet__cell') do %>
+  <i class="fa-solid fa-pencil"></i>
+  <span><%= t('.edit') %></span>
+<% end %>
+<%= link_to({ action: 'show' }, class: 'weui-actionsheet__cell') do %>
+  <i class="fa-solid fa-circle-info"></i>
+  <span><%= t('.show') %></span>
+<% end %>
+<%= button_to "/auth/#{@oauth_user.provider}", form: { class: 'weui-actionsheet__cell' } do %>
+  <span><%= t('.update_token') %></span>
+<% end %>

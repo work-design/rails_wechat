@@ -1,0 +1,5 @@
+<%= render 'top_bar' %>
+
+<%= render layout: 'index_table' do %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @oauth_users, as: :model %>
+<% end %>

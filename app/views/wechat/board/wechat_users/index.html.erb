@@ -1,0 +1,6 @@
+<table class="table is-fullwidth">
+  <tbody>
+    <%= render partial: 'index_tbody', layout: 'index_tr', collection: @oauth_users, as: :model %>
+    <%# render partial: 'provider_tbody', collection: current_user.valid_providers, as: :model %>
+  </tbody>
+</table>

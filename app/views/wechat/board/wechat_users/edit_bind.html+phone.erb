@@ -1,0 +1,7 @@
+<%= form_with model: @oauth_user, url: bind_board_oauth_users_path, local: true, builder: WechatFormBuilder do |f| %>
+  <%= f.hidden_field :type %>
+  <%= f.hidden_field :uid %>
+  <%= f.text_field :email %>
+  <%= f.submit %>
+<% end %>
+

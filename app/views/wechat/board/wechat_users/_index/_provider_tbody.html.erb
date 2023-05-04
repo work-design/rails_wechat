@@ -1,0 +1,7 @@
+<td><%= model %></td>
+<td colspan="2"></td>
+<td>
+  <%= button_to "/auth/#{model}", data: { turbo: false }, class: 'button is-info' do %>
+    <span>绑定</span>
+  <% end %>
+</td>
