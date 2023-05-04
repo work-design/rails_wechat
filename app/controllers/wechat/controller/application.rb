@@ -10,25 +10,25 @@ module Wechat
     def require_user
       if request.variant.include?(:work_wechat)
         return if current_user && current_corp_user
+      elsif request.variant.include?(:mini_program)
+        render 'require_program_login', locals: { url: url_for(store_location) }
       elsif request.variant.include?(:wechat)
         return if current_user && current_wechat_user
+
+        if current_oauth_app.oauth_enable && current_oauth_app.respond_to?(:oauth2_url)
+          url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
+          logger.debug "\e[35m  Redirect to: #{redirect_url}  \e[0m"
+          redirect_to url
+        end
       else
         return if current_user
+
+        if current_wechat_app
+          redirect_to url_for(controller: '/wechat/wechat', action: 'login', identity: params[:identity])
+        end
       end
 
-      if current_wechat_user && current_wechat_user.user.nil?
-        current_wechat_user.init_user
-        current_wechat_user.save
-      elsif current_oauth_app.oauth_enable && current_oauth_app.respond_to?(:oauth2_url)
-        redirect_url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
-      else
-        redirect_url = url_for(controller: '/auth/sign', action: 'sign')
-      end
-
-      if redirect_url
-        logger.debug "\e[35m  Redirect to: #{redirect_url}  \e[0m"
-        render 'require_user', layout: 'raw', locals: { url: redirect_url }
-      end
+      super
     end
 
     def current_oauth_app
