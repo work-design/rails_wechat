@@ -46,14 +46,15 @@ module Wechat
       Rails.application.routes.url_for(controller: 'wechat/suites', action: 'notify', id: self.id)
     end
 
-    def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), host:, **url_options)
+    def oauth2_url(scope: 'snsapi_userinfo', host:, **url_options)
+      state_model = Com::State.create(host: host)
       url_options.with_defaults! controller: 'wechat/suites', action: 'login', id: id, host: host
       h = {
         appid: suite_id,
         redirect_uri: Rails.application.routes.url_for(**url_options),
         response_type: 'code',
         scope: scope,
-        state: state
+        state: state_model.id
       }
 
       logger.debug "\e[35m  Detail: #{h}  \e[0m"

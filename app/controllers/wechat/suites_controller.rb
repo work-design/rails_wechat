@@ -52,36 +52,14 @@ module Wechat
 
     def login
       @corp_user = @suite.generate_corp_user(params[:code])
-      corp = @suite.corps.find_by corp_id: params[:corp_id]
-
-      if @corp_user.save
-        login_by_corp_user(@corp_user)
-        if corp.organ
-          url = url_for(
-            controller: @suite.redirect_controller,
-            action: @suite.redirect_action,
-            host: corp.organ.host ,
-            auth_token: current_authorized_token.id,
-            suite_id: @suite.id
-          )
-        else
-          url = url_for(controller: 'wechat/board/organs', corp_id: corp.id)
-        end
-
-        redirect_to url, allow_other_host: true
-      else
-        render :login, locals: { url: root_url }, layout: 'raw'
-      end
+      @corp_user.save
+      login_by_corp_user(@corp_user, url: url_for(controller: 'wechat/board/organs', corp_id: corp.id))
     end
 
     # 应用主页，自动跳转
     def redirect
-      corp = @suite.corps.find_by corp_id: params[:corp_id]
-      corp_user = current_account && current_account.corp_users.find_by(suite_id: @suite.suite_id, corp_id: params[:corp_id])
-
-      if corp_user
-        current_authorized_token.update suite_id: corp_user.suite_id
-        if corp.organ
+      if current_corp_user
+        if current_corp_user.organ
           url = url_for(
             controller: @suite.redirect_controller,
             action: @suite.redirect_action,

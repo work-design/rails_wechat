@@ -99,7 +99,7 @@ module Wechat
       @current_corp_user
     end
 
-    def login_by_oauth_user(oauth_user)
+    def login_by_oauth_user(oauth_user, url: url_for(controller: '/home'))
       state = Com::State.find_by(id: params[:state])
       if state
         state.update user_id: oauth_user.user_id, destroyable: true
@@ -113,11 +113,11 @@ module Wechat
       if state
         render 'state_visit', layout: 'raw', locals: { state: state, auth_token: current_authorized_token.id }
       else
-        render 'visit', layout: 'raw', locals: { url: url_for(controller: '/home') }
+        render 'visit', layout: 'raw', locals: { url: url }
       end
     end
 
-    def login_by_corp_user(corp_user)
+    def login_by_corp_user(corp_user, url: url_for(controller: '/home'))
       state = Com::State.find_by(id: params[:state])
       @current_account = corp_user.account
       @current_authorized_token = corp_user.authorized_token
@@ -127,7 +127,7 @@ module Wechat
       if state
         render 'state_visit', layout: 'raw', locals: { state: state, auth_token: current_authorized_token.id }
       else
-        render 'visit', layout: 'raw', locals: { url: url_for(controller: '/home') }
+        render 'visit', layout: 'raw', locals: { url: url }
       end
     end
 
