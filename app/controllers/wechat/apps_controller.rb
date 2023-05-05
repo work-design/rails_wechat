@@ -41,18 +41,6 @@ module Wechat
       login_by_oauth_user(@oauth_user)
     end
 
-    # 企业微信账号和微信账号绑定
-    def bind
-      @oauth_user = @app.generate_wechat_user(params[:code])
-      @oauth_user.identity = params[:state]
-      @oauth_user.save
-
-      login_by_account(@oauth_user.account)
-      url = url_for(controller: 'me/home', host: @oauth_user.account.organs[0]&.host)
-
-      render :bind, locals: { url: url }
-    end
-
     def qrcode
       r = @app.api.get_wxacode(params[:path])
       send_data r.read

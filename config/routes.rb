@@ -20,7 +20,6 @@ Rails.application.routes.draw do
       resources :apps, only: [:show] do
         member do
           get :login
-          get :bind
           post '' => :create
           patch :qrcode
         end
