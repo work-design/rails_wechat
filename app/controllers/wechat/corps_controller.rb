@@ -5,7 +5,6 @@ module Wechat
 
     def login
       @corp_user = @corp.generate_corp_user(params[:code])
-      @corp_user.user || @corp_user.build_user
       @corp_user.save
 
       xxx(@corp_user)
