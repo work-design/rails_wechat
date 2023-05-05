@@ -51,6 +51,7 @@ module Wechat
       before_validation :init_corp, if: -> { suite_id.present? && suite_id_changed? }
       after_save :auto_join_organ, if: -> { organ_id.present? && saved_change_to_organ_id? }
       after_create_commit :sync_externals_later
+      after_create_commit :get_detail_later
     end
 
     def sync_organ
@@ -70,9 +71,13 @@ module Wechat
       member.save
     end
 
-    def get_detail_by_suite
+    def get_detail_later
+      CorpUserDetailJob.perform_later(self)
+    end
+
+    def get_detail
       return unless suite
-      r = suite.api.user_detail(user_ticket)
+      r = (suite || app).api.user_detail(user_ticket)
       logger.debug "\e[35m  user_detail: #{r}  \e[0m"
       if r['errcode'] == 0
         self.assign_attributes r.slice('name', 'gender', 'qr_code', 'mobile', 'open_userid')

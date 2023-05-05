@@ -59,21 +59,8 @@ module Wechat
       logger.debug "\e[35m  getuserinfo: #{result}  \e[0m"
       corp_user = corp_users.find_or_initialize_by(userid: result['UserId'])
       corp_user.device_id = result['DeviceId'] if result['DeviceId'].present?
-
-      if result['user_ticket'] && corp_user.temp?
-        corp_user.user_ticket = result['user_ticket']
-        corp_user.ticket_expires_at = Time.current + result['expires_in'].to_i
-        detail = api.user_detail(result['user_ticket'])
-        logger.debug "\e[35m  user_detail: #{detail}  \e[0m"
-
-        if detail['errcode'] == 0
-          corp_user.assign_attributes detail.slice('gender', 'qr_code')
-          corp_user.identity = detail['mobile']
-          corp_user.avatar_url = detail['avatar']
-        end
-      end
-
-      corp_user.save
+      corp_user.user_ticket = result['user_ticket']
+      corp_user.ticket_expires_at = Time.current + result['expires_in'].to_i
       corp_user
     end
 
