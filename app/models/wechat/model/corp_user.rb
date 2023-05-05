@@ -41,7 +41,8 @@ module Wechat
       belongs_to :corp, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
       belongs_to :app, foreign_key: :corp_id, primary_key: :appid, optional: true
 
-      has_many :contacts, ->(o) { where(corp_id: o.corp_id, suite_id: o.suite_id) }, foreign_key: :userid, primary_key: :user_id
+      has_one :same_corp_user, ->(o) { where(corp_id: o.corp_id) }, class_name: self.name, primary_key: :userid, foreign_key: :userid
+      has_many :contacts, ->(o) { where(corp_id: o.corp_id, suite_id: o.suite_id) }, primary_key: :user_id, foreign_key: :userid
       has_many :maintains, through: :member
       has_many :clients, through: :maintains
 
