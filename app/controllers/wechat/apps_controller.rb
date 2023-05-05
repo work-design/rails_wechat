@@ -36,9 +36,12 @@ module Wechat
 
     def login
       @oauth_user = @app.generate_wechat_user(params[:code])
-      @oauth_user.save
 
-      login_by_oauth_user(@oauth_user)
+      if @oauth_user.save
+        login_by_oauth_user(@oauth_user)
+      else
+        logger.debug @oauth_user.error_text
+      end
     end
 
     def qrcode
