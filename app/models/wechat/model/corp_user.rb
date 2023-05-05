@@ -55,7 +55,11 @@ module Wechat
     end
 
     def sync_organ
-      self.organ_id = corp.organ_id
+      if corp
+        self.organ_id = corp.organ_id
+      elsif app
+        self.organ_id = app.organ_id
+      end
     end
 
     def init_corp
