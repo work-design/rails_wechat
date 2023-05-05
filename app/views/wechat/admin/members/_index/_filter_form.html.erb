@@ -1,0 +1,10 @@
+<%= form_with theme: 'search', model: Org::Member.new do |f| %>
+  <div class="field-body">
+    <%= f.text_field 'name-like' %>
+    <%= f.text_field :identity %>
+    <div class="field is-narrow">
+      <%= f.submit %>
+      <%= link_to t('.clear'), filter_params(except: ['name-like', :enabled, :identity]), class: 'button is-light' %>
+    </div>
+  </div>
+<% end %>

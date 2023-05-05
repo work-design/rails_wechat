@@ -170,6 +170,7 @@ Rails.application.routes.draw do
       namespace :admin, defaults: { namespace: 'admin' } do
         root 'home#index'
         resource :organ, only: [:show, :edit, :update]
+        resources :members, only: [:index, :show, :edit, :update]
         resources :menu_roots do
           resources :menus, only: [:new, :create]
         end
