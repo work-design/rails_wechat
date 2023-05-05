@@ -10,6 +10,12 @@ module Wechat
     def require_user
       if request.variant.include?(:work_wechat)
         return if current_user && current_corp_user
+
+        if current_oauth_app.oauth_enable && current_oauth_app.respond_to?(:oauth2_url)
+          url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
+          logger.debug "\e[35m  Redirect to: #{url}  \e[0m"
+          redirect_to url
+        end
       elsif request.variant.include?(:mini_program)
         render 'require_program_login', locals: { url: url_for(state: urlsafe_encode64(destroyable: false)) }
       elsif request.variant.include?(:wechat)
@@ -17,7 +23,7 @@ module Wechat
 
         if current_oauth_app.oauth_enable && current_oauth_app.respond_to?(:oauth2_url)
           url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
-          logger.debug "\e[35m  Redirect to: #{redirect_url}  \e[0m"
+          logger.debug "\e[35m  Redirect to: #{url}  \e[0m"
           redirect_to url
         end
       else
