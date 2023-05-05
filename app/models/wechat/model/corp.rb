@@ -73,7 +73,7 @@ module Wechat
     def generate_corp_user(code)
       result = api.auth_user(code)
       logger.debug "\e[35m  auth_user: #{result}  \e[0m"
-      corp_user = corp_users.find_or_initialize_by(user_id: result['userid'])
+      corp_user = corp_users.find_or_initialize_by(userid: result['userid'])
       corp_user.organ = organ
 
       if result['user_ticket']
@@ -109,7 +109,7 @@ module Wechat
         r = api.get_contact_way(item['config_id'])
         info = r['contact_way']
         info['user'].each do |user|
-          contact = self.contacts.find_or_initialize_by(user_id: user, config_id: item['config_id'])
+          contact = self.contacts.find_or_initialize_by(userid: user, config_id: item['config_id'])
           contact.assign_attributes info.slice('qr_code', 'remark', 'skip_verify', 'state')
           contact.save
         end

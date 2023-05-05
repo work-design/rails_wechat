@@ -10,7 +10,6 @@ module Wechat
     included do
       attribute :corp_id, :string
       attribute :suite_id, :string, index: true
-      attribute :user_id, :string
       attribute :userid, :string, index: true
       attribute :device_id, :string
       attribute :user_ticket, :string
@@ -34,7 +33,6 @@ module Wechat
       belongs_to :organ, class_name: 'Org::Organ', optional: true
       belongs_to :member, ->(o) { where(organ_id: o.organ_id) }, class_name: 'Org::Member', foreign_key: :userid, primary_key: :corp_userid, optional: true
       belongs_to :account, class_name: 'Auth::Account', foreign_key: :identity, primary_key: :identity, optional: true
-      belongs_to :user, class_name: 'Auth::User', optional: true
       has_many :authorized_tokens, ->(o) { where(suite_id: o.suite_id, identity: o.identity) }, class_name: 'Auth::AuthorizedToken', primary_key: :open_userid, foreign_key: :corp_userid, dependent: :nullify
 
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
@@ -43,7 +41,7 @@ module Wechat
 
       has_one :same_corp_user, ->(o) { where(corp_id: o.corp_id) }, class_name: self.name, primary_key: :userid, foreign_key: :userid
       has_many :same_corp_users, ->(o) { where(corp_id: o.corp_id) }, class_name: self.name, primary_key: :userid, foreign_key: :userid
-      has_many :contacts, ->(o) { where(corp_id: o.corp_id, suite_id: o.suite_id) }, primary_key: :user_id, foreign_key: :userid
+      has_many :contacts, ->(o) { where(corp_id: o.corp_id, suite_id: o.suite_id) }, primary_key: :userid, foreign_key: :userid
       has_many :maintains, through: :member
       has_many :clients, through: :maintains
 
