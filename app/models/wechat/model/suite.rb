@@ -47,7 +47,11 @@ module Wechat
     end
 
     def oauth2_url(scope: 'snsapi_userinfo', host:, **url_options)
-      state_model = Com::State.create(host: host)
+      state_model = Com::State.create(
+        host: host,
+        controller_path: redirect_controller,
+        action_name: redirect_action
+      )
       url_options.with_defaults! controller: 'wechat/suites', action: 'login', id: id, host: host
       h = {
         appid: suite_id,
