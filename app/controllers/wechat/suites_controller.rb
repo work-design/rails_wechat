@@ -53,7 +53,7 @@ module Wechat
     def login
       @corp_user = @suite.generate_corp_user(params[:code])
       @corp_user.save
-      login_by_corp_user(@corp_user, url: url_for(controller: 'wechat/board/organs', corp_id: corp.id))
+      login_by_corp_user(@corp_user, url: url_for(controller: 'wechat/board/organs'))
     end
 
     # 应用主页，自动跳转
