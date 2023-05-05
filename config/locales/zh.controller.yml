@@ -69,6 +69,9 @@ zh:
       organs:
         show:
           title: 企业微信
+      members:
+        index:
+          title: 职工
       corp_users:
         index:
           title: 企业员工
