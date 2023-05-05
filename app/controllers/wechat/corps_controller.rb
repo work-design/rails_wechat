@@ -7,7 +7,7 @@ module Wechat
       @corp_user = @corp.generate_corp_user(params[:code])
       @corp_user.save
 
-      xxx(@corp_user)
+      login_by_corp_user(@corp_user)
     end
 
     # 指令回调URL: /wechat/corps/:id/notify

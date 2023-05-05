@@ -38,7 +38,7 @@ module Wechat
       @oauth_user = @app.generate_wechat_user(params[:code])
       @oauth_user.save
 
-      xxx(@oauth_user)
+      login_by_oauth_user(@oauth_user)
     end
 
     # 企业微信账号和微信账号绑定

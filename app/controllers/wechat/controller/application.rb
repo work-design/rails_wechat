@@ -99,6 +99,39 @@ module Wechat
       @current_corp_user
     end
 
+    def login_by_oauth_user(oauth_user)
+      state = Com::State.find_by(id: params[:state])
+      if state
+        state.update user_id: oauth_user.user_id, destroyable: true
+      end
+
+      @current_account = oauth_user.account
+      @current_user = oauth_user.user
+      @current_authorized_token = oauth_user.authorized_token
+      logger.debug "\e[35m  Login by OauthUser #{oauth_user.id} as user: #{oauth_user.user&.id}  \e[0m"
+
+      if state
+        render 'state_visit', layout: 'raw', locals: { state: state, auth_token: current_authorized_token.id }
+      else
+        render 'visit', layout: 'raw', locals: { url: url_for(controller: '/home') }
+      end
+    end
+
+    def login_by_corp_user(corp_user)
+      state = Com::State.find_by(id: params[:state])
+      @current_account = corp_user.account
+      @current_user = corp_user.user
+      @current_authorized_token = corp_user.authorized_token
+
+      logger.debug "\e[35m  Login by CorpUser #{corp_user.id} as user: #{@current_user&.id}  \e[0m"
+
+      if state
+        render 'state_visit', layout: 'raw', locals: { state: state, auth_token: current_authorized_token.id }
+      else
+        render 'visit', layout: 'raw', locals: { url: url_for(controller: '/home') }
+      end
+    end
+
     def bind_to_wechat(request)
       key = request[:EventKey].delete_prefix?('qrscene_')
       wechat_user = WechatUser.find_by(open_id: request[:FromUserName])

@@ -6,7 +6,7 @@ module Wechat
       @oauth_user = @agency.generate_wechat_user(params[:code])
       @oauth_user.save
 
-      xxx(@oauth_user)
+      login_by_oauth_user(@oauth_user)
     end
 
     private
