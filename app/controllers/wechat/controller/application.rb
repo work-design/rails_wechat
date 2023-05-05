@@ -14,7 +14,7 @@ module Wechat
         if current_oauth_app.oauth_enable && current_oauth_app.respond_to?(:oauth2_url)
           url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
           logger.debug "\e[35m  Redirect to: #{url}  \e[0m"
-          redirect_to url, allow_other_host: true
+          redirect_to url, allow_other_host: true and return
         end
       elsif request.variant.include?(:mini_program)
         render 'require_program_login', locals: { url: url_for(state: urlsafe_encode64(destroyable: false)) }
@@ -24,7 +24,7 @@ module Wechat
         if current_oauth_app.oauth_enable && current_oauth_app.respond_to?(:oauth2_url)
           url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
           logger.debug "\e[35m  Redirect to: #{url}  \e[0m"
-          redirect_to url, allow_other_host: true
+          redirect_to url, allow_other_host: true and return
         end
       else
         return if current_user
