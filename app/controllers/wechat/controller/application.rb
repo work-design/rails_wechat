@@ -114,7 +114,7 @@ module Wechat
       @current_account = oauth_user.account
       #@current_user = oauth_user.user
       @current_authorized_token = oauth_user.authorized_token
-      logger.debug "\e[35m  Login by OauthUser #{oauth_user.id} as user: #{oauth_user.user&.id}  \e[0m"
+      logger.debug "\e[35m  Login by OauthUser #{oauth_user.id} as user: #{current_user&.id}  \e[0m"
 
       if state
         render 'state_visit', layout: 'raw', locals: { state: state, auth_token: current_authorized_token.id }
