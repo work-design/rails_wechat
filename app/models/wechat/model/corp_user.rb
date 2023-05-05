@@ -45,8 +45,6 @@ module Wechat
       has_many :maintains, through: :member
       has_many :clients, through: :maintains
 
-      validates :identity, presence: true
-
       before_validation :sync_organ, if: -> { corp_id_changed? }
       before_validation :init_corp, if: -> { suite_id.present? && suite_id_changed? }
       after_save :auto_join_organ, if: -> { organ_id.present? && saved_change_to_organ_id? }
