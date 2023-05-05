@@ -57,7 +57,7 @@ module Wechat
     def generate_wechat_user(code)
       result = api.getuserinfo(code)
       logger.debug "\e[35m  getuserinfo: #{result}  \e[0m"
-      corp_user = corp_users.find_or_initialize_by(user_id: result['UserId'])
+      corp_user = corp_users.find_or_initialize_by(userid: result['UserId'])
       corp_user.device_id = result['DeviceId'] if result['DeviceId'].present?
 
       if result['user_ticket'] && corp_user.temp?
