@@ -76,7 +76,6 @@ module Wechat
     end
 
     def get_detail
-      return unless suite
       r = (suite || app).api.user_detail(user_ticket)
       logger.debug "\e[35m  user_detail: #{r}  \e[0m"
       if r['errcode'] == 0
