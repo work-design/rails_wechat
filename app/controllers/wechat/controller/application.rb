@@ -99,15 +99,6 @@ module Wechat
       @current_corp_user
     end
 
-    # 需要微信授权获取openid, 但并不需要注册为用户
-    def require_wechat_user
-      return if current_wechat_user
-
-      redirect_url = '/auth/wechat?skip_register=true'
-
-      render 'wechat_require_login', locals: { redirect_url: redirect_url, message: '请允许获取您的微信信息' }, status: 401
-    end
-
     def bind_to_wechat(request)
       key = request[:EventKey].delete_prefix?('qrscene_')
       wechat_user = WechatUser.find_by(open_id: request[:FromUserName])
