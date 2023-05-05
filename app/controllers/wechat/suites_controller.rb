@@ -63,7 +63,7 @@ module Wechat
           url = url_for(
             controller: @suite.redirect_controller,
             action: @suite.redirect_action,
-            host: corp.organ.host,
+            host: current_corp_user.organ.host,
             auth_token: current_authorized_token.id
           )
         else
