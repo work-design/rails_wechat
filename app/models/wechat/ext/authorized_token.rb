@@ -7,7 +7,7 @@ module Wechat
       attribute :corp_userid, :string
       attribute :appid, :string
 
-      belongs_to :corp_user, -> (o){ where(suite_id: o.suite_id) }, class_name: 'Wechat::CorpUser', foreign_key: :corp_userid, primary_key: :open_userid, optional: true
+      belongs_to :corp_user, -> (o){ where(suite_id: o.suite_id, corp_id: o.appid) }, class_name: 'Wechat::CorpUser', foreign_key: :corp_userid, primary_key: :userid, optional: true
       belongs_to :app, class_name: 'Wechat::App', foreign_key: :appid, primary_key: :appid, optional: true
     end
 
