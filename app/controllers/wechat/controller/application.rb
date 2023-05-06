@@ -17,6 +17,7 @@ module Wechat
           redirect_to url, allow_other_host: true and return
         end
       elsif request.variant.include?(:mini_program)
+        return if current_user && current_wechat_user
         render 'require_program_login', locals: { url: url_for(state: urlsafe_encode64(destroyable: false)) }
       elsif request.variant.include?(:wechat)
         return if current_user && current_wechat_user
