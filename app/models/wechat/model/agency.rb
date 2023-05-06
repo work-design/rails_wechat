@@ -6,6 +6,7 @@ module Wechat
       '2' => 'WechatPublic'
     }.freeze
     extend ActiveSupport::Concern
+    include Inner::App
 
     included do
       attribute :type, :string
