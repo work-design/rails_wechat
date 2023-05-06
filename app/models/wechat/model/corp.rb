@@ -1,6 +1,8 @@
 module Wechat
   module Model::Corp
     extend ActiveSupport::Concern
+    include Inner::Token
+    include Inner::JsToken
 
     included do
       attribute :name, :string
@@ -20,10 +22,6 @@ module Wechat
       attribute :auth_user_info, :json
       attribute :register_code_info, :json
       attribute :agent, :json
-      attribute :access_token, :string
-      attribute :access_token_expires_at, :datetime
-      attribute :jsapi_ticket, :string
-      attribute :jsapi_ticket_expires_at, :datetime
       attribute :agent_ticket, :string
       attribute :agent_ticket_expires_at, :datetime
       attribute :permanent_code, :string
@@ -207,11 +205,6 @@ module Wechat
       info
     end
 
-    def access_token_valid?
-      return false unless access_token_expires_at.acts_like?(:time)
-      access_token_expires_at > Time.current
-    end
-
     def refresh_agent_ticket
       info = api.agent_ticket
       self.agent_ticket = info['ticket']
@@ -222,18 +215,6 @@ module Wechat
 
     def agent_ticket_valid?
       agent_ticket_expires_at.acts_like?(:time) && agent_ticket_expires_at > Time.current
-    end
-
-    def refresh_jsapi_ticket
-      info = api.jsapi_ticket
-      self.jsapi_ticket = info['ticket']
-      self.jsapi_ticket_expires_at = Time.current + info['expires_in'].to_i if info['ticket'] && self.jsapi_ticket_changed?
-      self.save
-      info
-    end
-
-    def jsapi_ticket_valid?
-      jsapi_ticket_expires_at.acts_like?(:time) && jsapi_ticket_expires_at > Time.current
     end
 
     def sync_open_corpid!

@@ -2,6 +2,7 @@ module Wechat
   module Model::App
     extend ActiveSupport::Concern
     include Inner::Token
+    include Inner::JsToken
     include Inner::App
 
     included do
@@ -17,8 +18,6 @@ module Wechat
       attribute :token, :string
       attribute :encrypt_mode, :boolean, default: true
       attribute :encoding_aes_key, :string
-      attribute :jsapi_ticket, :string
-      attribute :jsapi_ticket_expires_at, :datetime
       attribute :user_name, :string
       attribute :domain, :string
       attribute :url_link, :string
@@ -99,19 +98,6 @@ module Wechat
       end
 
       { button: r }
-    end
-
-    def jsapi_ticket_valid?
-      return false unless jsapi_ticket_expires_at.acts_like?(:time)
-      jsapi_ticket_expires_at > Time.current
-    end
-
-    def refresh_jsapi_ticket
-      r = api.jsapi_ticket
-      self.jsapi_ticket = r['ticket']
-      self.jsapi_ticket_expires_at = Time.current + r['expires_in'].to_i
-      self.save
-      r
     end
 
     def api

@@ -7,6 +7,10 @@ module Wechat
       attribute :access_token_expires_at, :datetime
     end
 
+    def access_token_valid?
+      access_token_expires_at.acts_like?(:time) && access_token_expires_at > Time.current
+    end
+
     def refresh_access_token
       r = api.token
       if r['access_token']

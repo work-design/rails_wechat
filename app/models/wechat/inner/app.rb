@@ -15,11 +15,6 @@ module Wechat
       has_many :wechat_users, primary_key: :appid, foreign_key: :appid
     end
 
-    def access_token_valid?
-      return false unless access_token_expires_at.acts_like?(:time)
-      access_token_expires_at > Time.current
-    end
-
     def sync_from_menu
       r = api.menu
       present_menus = r.dig('menu', 'button')
