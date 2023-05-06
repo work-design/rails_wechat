@@ -200,6 +200,18 @@ Rails.application.routes.draw do
             end
           end
         end
+        resources :agents do
+          member do
+            get :info
+          end
+          resources :corp_users do
+            resources :follows do
+              collection do
+                post :sync
+              end
+            end
+          end
+        end
         resources :apps do
           member do
             get :info
@@ -230,13 +242,6 @@ Rails.application.routes.draw do
           resources :tags do
             collection do
               post :sync
-            end
-          end
-          resources :corp_users do
-            resources :follows do
-              collection do
-                post :sync
-              end
             end
           end
           resources :wechat_users
