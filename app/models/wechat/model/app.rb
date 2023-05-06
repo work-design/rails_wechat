@@ -101,7 +101,6 @@ module Wechat
       { button: r }
     end
 
-
     def jsapi_ticket_valid?
       return false unless jsapi_ticket_expires_at.acts_like?(:time)
       jsapi_ticket_expires_at > Time.current
@@ -109,14 +108,10 @@ module Wechat
 
     def refresh_jsapi_ticket
       r = api.jsapi_ticket
-      store_jsapi_ticket(r)
-      jsapi_ticket
-    end
-
-    def store_jsapi_ticket(ticket_hash)
-      self.jsapi_ticket = ticket_hash['ticket']
-      self.jsapi_ticket_expires_at = Time.current + ticket_hash['expires_in'].to_i
+      self.jsapi_ticket = r['ticket']
+      self.jsapi_ticket_expires_at = Time.current + r['expires_in'].to_i
       self.save
+      r
     end
 
     def api

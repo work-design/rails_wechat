@@ -1,6 +1,7 @@
 module Wechat
   module Model::App::WorkApp
     extend ActiveSupport::Concern
+    include Inner::Token
 
     included do
       attribute :name, :string
@@ -101,8 +102,10 @@ module Wechat
 
     def refresh_jsapi_ticket
       r = api.jsapi_ticket
-      store_jsapi_ticket(r)
-      jsapi_ticket
+      self.jsapi_ticket = r['ticket']
+      self.jsapi_ticket_expires_at = Time.current + r['expires_in'].to_i
+      self.save
+      r
     end
 
   end
