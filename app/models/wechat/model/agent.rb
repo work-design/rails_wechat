@@ -1,7 +1,8 @@
 module Wechat
-  module Model::App::WorkApp
+  module Model::Agent
     extend ActiveSupport::Concern
     include Inner::Token
+    include Inner::JsToken
 
     included do
       attribute :name, :string
@@ -11,8 +12,6 @@ module Wechat
       attribute :token, :string
       attribute :agentid, :string, comment: '企业微信所用'
       attribute :encoding_aes_key, :string
-      attribute :jsapi_ticket, :string
-      attribute :jsapi_ticket_expires_at, :datetime
       attribute :user_name, :string
       attribute :domain, :string
       attribute :url_link, :string
@@ -26,6 +25,11 @@ module Wechat
 
       before_validation :init_token, if: -> { token.blank? }
       before_validation :init_aes_key, if: -> { encoding_aes_key.blank? }
+    end
+
+    def api
+      return @api if defined? @api
+      @api = Wechat::Api::Work.new(self)
     end
 
     def decrypt(encrypt_data)
@@ -62,11 +66,6 @@ module Wechat
         redirect_uri: ERB::Util.url_encode(Rails.application.routes.url_for(**url_options)),
         state: Com::State.create(host: host, controller: '/me/home')
       }
-    end
-
-    def api
-      return @api if defined? @api
-      @api = Wechat::Api::Work.new(self)
     end
 
     def oauth2_url(scope: 'snsapi_privateinfo', state: SecureRandom.hex(16), **url_options)
