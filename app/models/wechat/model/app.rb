@@ -13,13 +13,11 @@ module Wechat
       attribute :appid, :string
       attribute :secret, :string
       attribute :token, :string
-      attribute :agentid, :string, comment: '企业微信所用'
       attribute :encrypt_mode, :boolean, default: true
       attribute :encoding_aes_key, :string
       attribute :access_token, :string
       attribute :access_token_expires_at, :datetime
       attribute :jsapi_ticket, :string
-      attribute :oauth2_state, :string
       attribute :jsapi_ticket_expires_at, :datetime
       attribute :user_name, :string
       attribute :domain, :string

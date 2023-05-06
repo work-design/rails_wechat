@@ -3,12 +3,42 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :name, :string
+      attribute :inviting, :boolean, default: false, comment: '可邀请加入'
+      attribute :corpid, :string
+      attribute :corpsecret, :string
+      attribute :token, :string
+      attribute :agentid, :string, comment: '企业微信所用'
+      attribute :encoding_aes_key, :string
+      attribute :access_token, :string
+      attribute :access_token_expires_at, :datetime
+      attribute :jsapi_ticket, :string
+      attribute :jsapi_ticket_expires_at, :datetime
+      attribute :user_name, :string
+      attribute :domain, :string
+      attribute :url_link, :string
+      attribute :debug, :boolean, default: false
+      attribute :confirm_name, :string
+      attribute :confirm_content, :string
+
       validates :agentid, presence: true
 
-      alias_attribute :corpid, :appid
-      alias_attribute :corpsecret, :secret
-
       has_many :corp_users, ->(o){ where(suite_id: nil, organ_id: o.organ_id) }, primary_key: :appid, foreign_key: :corp_id
+
+      before_validation :init_token, if: -> { token.blank? }
+      before_validation :init_aes_key, if: -> { encoding_aes_key.blank? }
+    end
+
+    def decrypt(encrypt_data)
+      Wechat::Cipher.decrypt(encrypt_data, encoding_aes_key)
+    end
+
+    def init_token
+      self.token = SecureRandom.hex
+    end
+
+    def init_aes_key
+      self.encoding_aes_key = SecureRandom.alphanumeric(43)
     end
 
     def init_corp
