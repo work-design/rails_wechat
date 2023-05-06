@@ -63,9 +63,7 @@ module Wechat
     end
 
     def decrypt_data
-      aes_key = platform ? platform.encoding_aes_key : app.encoding_aes_key
-      r = Wechat::Cipher.decrypt(Base64.decode64(encrypt_data), aes_key)
-      content, _ = Wechat::Cipher.unpack(r)
+      content = (platform || app).decrypt(encrypt_data)
 
       if self.xml?
         self.message_hash = Hash.from_xml(content).fetch('xml', {})

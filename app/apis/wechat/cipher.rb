@@ -28,8 +28,10 @@ module Wechat::Cipher
     cipher.key = aes_key
     cipher.iv = [aes_key].pack('H*')
 
-    plain = cipher.update(msg) + cipher.final
-    decode_padding(plain)
+    plain = cipher.update(Base64.decode64(msg)) + cipher.final
+    r = decode_padding(plain)
+    content, _ = unpack(r)
+    content
   end
 
   # 见：附录 > 加解密方案说明

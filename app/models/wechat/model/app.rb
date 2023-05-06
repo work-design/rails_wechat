@@ -61,6 +61,10 @@ module Wechat
       after_update :set_global, if: -> { global? && saved_change_to_global? }
     end
 
+    def decrypt(encrypt_data)
+      Wechat::Cipher.decrypt(encrypt_data, encoding_aes_key)
+    end
+
     def init_token
       self.token = SecureRandom.hex
     end
