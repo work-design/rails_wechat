@@ -1,6 +1,8 @@
 module Wechat
   module Model::App
     extend ActiveSupport::Concern
+    include Inner::Token
+    include Inner::App
 
     included do
       attribute :type, :string, default: 'Wechat::PublicApp'
@@ -15,8 +17,6 @@ module Wechat
       attribute :token, :string
       attribute :encrypt_mode, :boolean, default: true
       attribute :encoding_aes_key, :string
-      attribute :access_token, :string
-      attribute :access_token_expires_at, :datetime
       attribute :jsapi_ticket, :string
       attribute :jsapi_ticket_expires_at, :datetime
       attribute :user_name, :string
@@ -101,20 +101,6 @@ module Wechat
       { button: r }
     end
 
-    def refresh_access_token
-      r = api.token
-      if r['access_token']
-        store_access_token(r)
-      else
-        logger.debug "\e[35m  #{r['errmsg']}  \e[0m"
-      end
-    end
-
-    def store_access_token(token_hash)
-      self.access_token = token_hash['access_token']
-      self.access_token_expires_at = Time.current + token_hash['expires_in'].to_i
-      self.save
-    end
 
     def jsapi_ticket_valid?
       return false unless jsapi_ticket_expires_at.acts_like?(:time)
@@ -181,7 +167,11 @@ module Wechat
     end
 
     def sync_templates
-      puts 'should implement in sub models'
+      api.templates.each do |temp|
+        template = templates.find_or_initialize_by(template_id: temp['template_id'])
+        template.assign_attributes temp.slice('title', 'content', 'example')
+        template.save
+      end
     end
 
     def template_ids(notifiable_type, *code)

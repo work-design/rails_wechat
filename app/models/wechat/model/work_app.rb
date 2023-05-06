@@ -94,5 +94,16 @@ module Wechat
       corp_user
     end
 
+    def jsapi_ticket_valid?
+      return false unless jsapi_ticket_expires_at.acts_like?(:time)
+      jsapi_ticket_expires_at > Time.current
+    end
+
+    def refresh_jsapi_ticket
+      r = api.jsapi_ticket
+      store_jsapi_ticket(r)
+      jsapi_ticket
+    end
+
   end
 end
