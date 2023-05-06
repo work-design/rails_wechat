@@ -4,6 +4,12 @@ zh:
     agencies:
       login:
         title: 微信授权登录中
+    apps:
+      login:
+        title: 微信授权登录中
+    work_apps:
+      login:
+        title: 企业微信授权登录中
     admin:
       title: 微信公众平台
       apps:
