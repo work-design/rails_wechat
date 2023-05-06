@@ -24,9 +24,10 @@ Rails.application.routes.draw do
           patch :qrcode
         end
       end
-      resources :work_apps, only: [] do
+      resources :agents, only: [] do
         member do
           get :login
+          post '' => :create
         end
       end
       resources :agencies, only: [:show] do

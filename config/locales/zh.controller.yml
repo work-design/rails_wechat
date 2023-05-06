@@ -7,7 +7,7 @@ zh:
     apps:
       login:
         title: 微信授权登录中
-    work_apps:
+    agents:
       login:
         title: 企业微信授权登录中
     admin:
