@@ -34,6 +34,10 @@ module Wechat
       @app = App.default_where(default_params).find(params[:id])
     end
 
+    def set_new_app
+      @app = App.new(app_params)
+    end
+
     def app_params
       p = params.fetch(:app, {}).permit(
         :type,
@@ -42,9 +46,7 @@ module Wechat
         :inviting,
         :appid,
         :secret,
-        :agentid,
         :encrypt_mode,
-        :serial_no,
         :domain,
         :weapp_id
       )

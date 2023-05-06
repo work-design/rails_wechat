@@ -1,0 +1,14 @@
+<div class="weui-search-bar" data-controller="search">
+  <%= form_with theme: nil, class: 'weui-search-bar__form', method: :get do |f| %>
+    <div class="weui-search-bar__box">
+      <i class="weui-icon-search"></i>
+      <%= f.search_field 'name-like', value: params['name-like'], class: 'weui-search-bar__input', placeholder: '搜索', data: { search_target: 'input' } %>
+      <a class="weui-icon-clear" data-action="search#clear"></a>
+    </div>
+    <label class="weui-search-bar__label" data-search-target="label" data-action="click->search#focus">
+      <i class="weui-icon-search"></i>
+      <span>搜索</span>
+    </label>
+  <% end %>
+  <a class="weui-search-bar__cancel-btn" data-action="search#cancel">取消</a>
+</div>

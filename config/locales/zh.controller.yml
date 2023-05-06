@@ -16,7 +16,12 @@ zh:
         index:
           title: 我的公众号
         info:
-          title: 如何设置
+          title: 配置参数
+      agents:
+        index:
+          title: 我的企业微信
+        info:
+          title: 配置参数
       payees:
         index:
           title: 支付设置

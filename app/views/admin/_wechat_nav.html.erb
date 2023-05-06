@@ -7,6 +7,7 @@
   <div class="menu-list" data-empty-target="content">
     <%= link_to t('wechat.admin.menus.index.title'), { controller: 'wechat/admin/menus' }, class: active_helper(controllers: 'wechat/admin/menus', active: 'is-active') %>
     <%= link_to t('wechat.admin.apps.index.title'), { controller: 'wechat/admin/apps' }, class: active_helper(controllers: 'wechat/admin/apps', active: 'is-active') %>
+    <%= link_to t('wechat.admin.agents.index.title'), { controller: 'wechat/admin/agents' }, class: active_helper(controllers: 'wechat/admin/agents', active: 'is-active') %>
     <%= link_to t('wechat.admin.payees.index.title'), { controller: 'wechat/admin/payees' }, class: active_helper(controllers: 'wechat/admin/payees', active: 'is-active') %>
     <%= link_to t('wechat.admin.organs.show.title'), { controller: 'wechat/admin/organs', action: 'show' }, class: active_helper(controllers: ['organs'], active: 'is-active') %>
     <%= link_to t('wechat.admin.members.index.title'), { controller: 'wechat/admin/members' }, class: active_helper(controllers: ['members'], active: 'is-active') %>
