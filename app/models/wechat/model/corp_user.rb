@@ -17,7 +17,6 @@ module Wechat
       attribute :open_userid, :string
       attribute :open_id, :string
       attribute :identity, :string
-      attribute :mobile, :string
       attribute :name, :string
       attribute :avatar_url, :string
       attribute :qr_code, :string
@@ -69,7 +68,7 @@ module Wechat
       return unless organ
 
       member || create_member
-      member.identity = mobile || identity
+      member.identity = identity
       member.save
     end
 
@@ -81,8 +80,9 @@ module Wechat
       r = (suite || app).api.user_detail(user_ticket)
       logger.debug "\e[35m  user_detail: #{r}  \e[0m"
       if r['errcode'] == 0
-        self.assign_attributes r.slice('name', 'gender', 'qr_code', 'mobile', 'open_userid')
+        self.assign_attributes r.slice('name', 'gender', 'qr_code', 'open_userid')
         self.avatar_url = r['avatar']
+        self.identity = r['mobile'].presence || r['email'].presence
         self.save
       end
     end
