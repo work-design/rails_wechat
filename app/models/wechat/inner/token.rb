@@ -14,7 +14,7 @@ module Wechat
         self.access_token_expires_at = Time.current + r['expires_in'].to_i
         self.save
       else
-        logger.debug "\e[35m  #{r['errmsg']}  \e[0m"
+        logger.debug "\e[35m  #{r}  \e[0m"
       end
     end
 

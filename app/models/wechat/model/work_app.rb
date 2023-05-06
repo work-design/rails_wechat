@@ -11,8 +11,6 @@ module Wechat
       attribute :token, :string
       attribute :agentid, :string, comment: '企业微信所用'
       attribute :encoding_aes_key, :string
-      attribute :access_token, :string
-      attribute :access_token_expires_at, :datetime
       attribute :jsapi_ticket, :string
       attribute :jsapi_ticket_expires_at, :datetime
       attribute :user_name, :string
@@ -103,7 +101,6 @@ module Wechat
     def refresh_jsapi_ticket
       r = api.jsapi_ticket
       self.jsapi_ticket = r['ticket']
-      self.jsapi_ticket_expires_at = Time.current + r['expires_in'].to_i
       self.save
       r
     end
