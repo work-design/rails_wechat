@@ -18,7 +18,7 @@ module Wechat
         end
       elsif request.variant.include?(:mini_program)
         return if current_user && current_wechat_user
-        render 'require_program_login', locals: { url: url_for(state: urlsafe_encode64(destroyable: false)) }
+        render 'require_program_login', locals: { url: url_for(state: urlsafe_encode64(destroyable: false)) } and return
       elsif request.variant.include?(:wechat)
         return if current_user && current_wechat_user
 
@@ -31,7 +31,7 @@ module Wechat
         return if current_user
 
         if current_wechat_app
-          redirect_to url_for(controller: '/wechat/wechat', action: 'login', identity: params[:identity])
+          redirect_to url_for(controller: '/wechat/wechat', action: 'login', identity: params[:identity]) and return
         end
       end
 
