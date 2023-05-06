@@ -29,8 +29,7 @@ module Wechat::Cipher
     cipher.iv = [aes_key].pack('H*')
 
     plain = cipher.update(Base64.decode64(msg)) + cipher.final
-    r = decode_padding(plain)
-    content, _ = unpack(r)
+    content, _ = unpack(plain)
     content
   end
 
@@ -76,7 +75,10 @@ module Wechat::Cipher
   end
 
   def unpack(msg)
-    msg = decode_padding(msg)
+    pad = msg.bytes[-1]
+    # no padding
+    pad = 0 if pad < 1 || pad > 32
+    msg[0...(msg.length - pad)]
     msg_len = msg[16, 4].reverse.unpack('V')[0]
     content = msg[20, msg_len]
     app_id = msg[(20 + msg_len)..-1]
@@ -91,13 +93,6 @@ module Wechat::Cipher
     amount_to_pad = 32 if amount_to_pad == 0
     padding = ([amount_to_pad].pack('c') * amount_to_pad)
     data + padding
-  end
-
-  def decode_padding(plain)
-    pad = plain.bytes[-1]
-    # no padding
-    pad = 0 if pad < 1 || pad > 32
-    plain[0...(plain.length - pad)]
   end
 
 end
