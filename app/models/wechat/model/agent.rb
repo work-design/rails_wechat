@@ -10,7 +10,7 @@ module Wechat
       attribute :corpid, :string
       attribute :secret, :string
       attribute :token, :string
-      attribute :agentid, :string, comment: '企业微信所用'
+      attribute :agentid, :string
       attribute :encoding_aes_key, :string
       attribute :user_name, :string
       attribute :domain, :string
