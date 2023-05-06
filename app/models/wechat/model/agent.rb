@@ -8,7 +8,7 @@ module Wechat
       attribute :name, :string
       attribute :inviting, :boolean, default: false, comment: '可邀请加入'
       attribute :corpid, :string
-      attribute :corpsecret, :string
+      attribute :secret, :string
       attribute :token, :string
       attribute :agentid, :string, comment: '企业微信所用'
       attribute :encoding_aes_key, :string
