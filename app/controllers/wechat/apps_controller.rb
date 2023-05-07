@@ -6,12 +6,7 @@ module Wechat
     before_action :verify_signature, only: [:show, :create]
 
     def show
-      if @app.is_a?(WorkApp)
-        echostr, _corp_id = Cipher.unpack(Cipher.decrypt(Base64.decode64(params[:echostr]), @app.encoding_aes_key))
-        render plain: echostr
-      else
-        render plain: params[:echostr]
-      end
+      render plain: params[:echostr]
     end
 
     def create
@@ -66,18 +61,8 @@ module Wechat
 
     def verify_signature
       if @app
-        if @app.is_a?(WorkApp) && params[:echostr].present?
-          msg_encrypt = params[:echostr]
-        elsif @app.is_a?(WorkApp) && ['POST'].include?(request.request_method)
-          r = Hash.from_xml(request.raw_post).fetch('xml', {})
-          msg_encrypt = r['Encrypt']
-        else
-          msg_encrypt = nil
-        end
-        # msg_signature 为企业微信的参数名
-        signature = params[:signature] || params[:msg_signature]
-
-        forbidden = (signature != Wechat::Signature.hexdigest(@app.token, params[:timestamp], params[:nonce], msg_encrypt))
+        msg_encrypt = nil
+        forbidden = (params[:signature] != Wechat::Signature.hexdigest(@app.token, params[:timestamp], params[:nonce], msg_encrypt))
       else
         forbidden = true
       end

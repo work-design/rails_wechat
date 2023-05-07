@@ -50,6 +50,10 @@ module Wechat
       self.organ.update corp_id: self.corpid
     end
 
+    def url
+      Rails.application.routes.url_for(controller: 'wechat/agents', action: 'show', id: self.id, host: domain) if domain.present?
+    end
+
     def sync_departments
       r = api.department
       return unless r['errcode'] == 0
