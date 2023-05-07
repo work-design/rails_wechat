@@ -21,6 +21,8 @@ module Wechat
 
       validates :agentid, presence: true
 
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
+
       has_many :corp_users, ->(o){ where(suite_id: nil, organ_id: o.organ_id) }, primary_key: :appid, foreign_key: :corp_id
 
       before_validation :init_token, if: -> { token.blank? }
