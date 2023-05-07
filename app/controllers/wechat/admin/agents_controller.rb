@@ -40,11 +40,8 @@ module Wechat
 
     def agent_params
       p = params.fetch(:agent, {}).permit(
-        :type,
         :name,
-        :enabled,
-        :inviting,
-        :agentid,
+        :corpid,
         :secret,
         :agentid,
         :domain
