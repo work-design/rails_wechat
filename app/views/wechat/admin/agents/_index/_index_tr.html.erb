@@ -2,37 +2,13 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
-      <%= link_to({ controller: 'menu_apps', app_id: model.id }, aria: { label: t('wechat.admin.menu_apps.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-bars"></i>
-      <% end %>
-      <%= link_to({ controller: 'responses', app_id: model.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-reply-all"></i>
-      <% end %>
-      <%= link_to({ controller: 'requests', app_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-comments"></i>
-      <% end %>
-      <%= link_to({ controller: 'tags', app_id: model.id }, aria: { label: t('wechat.admin.tags.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-user-tag"></i>
-      <% end %>
-      <%= link_to({ controller: 'wechat_users', app_id: model.id }, aria: { label: t('wechat.admin.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-users"></i>
-      <% end %>
-      <%= link_to({ controller: 'templates', app_id: model.id }, aria: { label: t('wechat.admin.templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-inbox"></i>
-      <% end %>
-      <%= link_to({ controller: 'scenes', app_id: model.id }, aria: { label: t('wechat.admin.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-qrcode"></i>
-      <% end %>
       <%= link_to({ controller: 'corp_users', app_id: model.id }, aria: { label: t('wechat.admin.corp_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-building-user"></i>
-      <% end if ['Wechat::WorkApp'].include?(model.type) %>
+      <% end %>
     </div>
     <div data-show-target="item" class="mt-1" style="visibility: hidden">
       <%= link_to({ action: 'info', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-cog"></i>
-      <% end %>
-      <%= link_to({ controller: 'app_configs', app_id: model.id }, aria: { label: t('wechat.admin.app_configs.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-cogs"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info has-text-primary"></i>
