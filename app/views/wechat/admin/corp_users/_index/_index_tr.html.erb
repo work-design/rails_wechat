@@ -3,7 +3,7 @@
   <td>
     <div data-show-target="item" style="visibility: hidden">
       <%= link_to({ controller: 'follows', corp_user_id: model.id }, aria: { label: t('wechat.admin.follows.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-users-line"></i>
+        <i class="fa-solid fa-users-line"></i>
         <span class="pl-1"><%= model.follows_count %></span>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
