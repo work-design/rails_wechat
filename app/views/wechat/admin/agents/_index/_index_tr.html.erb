@@ -2,7 +2,7 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
-      <%= link_to({ controller: 'corp_users', app_id: model.id }, aria: { label: t('wechat.admin.corp_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'corp_users', agent_id: model.id }, aria: { label: t('wechat.admin.corp_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-building-user"></i>
       <% end %>
     </div>
