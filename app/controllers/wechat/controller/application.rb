@@ -17,10 +17,10 @@ module Wechat
           redirect_to url, allow_other_host: true and return
         end
       elsif request.variant.include?(:mini_program)
-        return if current_user && current_wechat_user
+        return if current_wechat_user && current_user
         render 'require_program_login', locals: { url: url_for(state: urlsafe_encode64(destroyable: false)) } and return
       elsif request.variant.include?(:wechat)
-        return if current_user && current_wechat_user
+        return if current_wechat_user && current_user
 
         if current_oauth_app.oauth_enable && current_oauth_app.respond_to?(:oauth2_url)
           url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
