@@ -7,12 +7,11 @@ module Wechat
     }.freeze
     extend ActiveSupport::Concern
     include Inner::App
+    include Inner::Token
 
     included do
       attribute :type, :string
       attribute :appid, :string
-      attribute :access_token, :string
-      attribute :access_token_expires_at, :datetime
       attribute :refresh_token, :string
       attribute :func_infos, :string, array: true
       attribute :nick_name, :string
