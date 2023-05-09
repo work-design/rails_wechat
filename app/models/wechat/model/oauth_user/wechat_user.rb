@@ -43,6 +43,7 @@ module Wechat
     def sync_to_org_members
       org_members.each do |org_member|
         org_member.identity = identity
+        org_member.user_id = user_id
         org_member.name = name
         org_member.save
       end
