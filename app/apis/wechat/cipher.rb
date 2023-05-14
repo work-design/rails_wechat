@@ -48,7 +48,6 @@ module Wechat::Cipher
     # IV 初始向量大小为 16 字节，取 AESKey 前 16 字节，详见：http://tools.ietf.org/html/rfc2315
     cipher.iv = aes_key[0, 16]
     plain = cipher.update(Base64.decode64(msg)) + cipher.final
-
     content, _ = unpack(plain)
     content
   end
