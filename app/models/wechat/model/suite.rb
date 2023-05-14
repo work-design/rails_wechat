@@ -39,10 +39,6 @@ module Wechat
     end
 
     def decrypt(msg)
-      Wechat::Cipher.qy_decrypt(msg, encoding_aes_key)
-    end
-
-    def n_decrypt(msg)
       Wechat::Cipher.decrypt(msg, encoding_aes_key)
     end
 

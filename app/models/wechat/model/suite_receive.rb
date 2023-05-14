@@ -28,7 +28,7 @@ module Wechat
     end
 
     def decrypt_data
-      content = suite.n_decrypt(encrypt_data)
+      content = suite.decrypt(encrypt_data)
 
       if self.xml?
         self.message_hash = Hash.from_xml(content).fetch('xml', {})

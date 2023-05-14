@@ -18,26 +18,12 @@ module Wechat::Cipher
     cipher.update(plain) + cipher.final
   end
 
-  # 第三方平台：https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Before_Develop/Technical_Plan.html#加密解密技术方案
-  def decrypt(msg, encoding_aes_key)
-    cipher = OpenSSL::Cipher.new('AES-256-CBC')
-    cipher.decrypt
-    cipher.padding = 0
-
-    aes_key = Base64.decode64(encoding_aes_key + '=')
-    cipher.key = aes_key
-    cipher.iv = [aes_key].pack('H*')
-
-    plain = cipher.update(Base64.decode64(msg)) + cipher.final
-    content, _ = unpack(plain)
-    content
-  end
-
   # 见：附录 > 加解密方案说明
+  # 第三方平台：https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/Before_Develop/Technical_Plan.html#加密解密技术方案
   # 企业内部开发：https://developer.work.weixin.qq.com/document/path/90968
   # 第三方应用开发：https://developer.work.weixin.qq.com/document/path/91144
   # 服务商代开发：https://developer.work.weixin.qq.com/document/path/96211
-  def qy_decrypt(msg, encoding_aes_key)
+  def decrypt(msg, encoding_aes_key)
     cipher = OpenSSL::Cipher.new('AES-256-CBC')
     cipher.decrypt
     cipher.padding = 0
