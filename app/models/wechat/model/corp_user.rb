@@ -36,7 +36,7 @@ module Wechat
 
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
       belongs_to :corp, ->(o) { where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
-      belongs_to :app, foreign_key: :corp_id, primary_key: :appid, optional: true
+      belongs_to :agent, foreign_key: :corp_id, primary_key: :corpid, optional: true
 
       has_one :same_corp_user, ->(o) { where(corp_id: o.corp_id) }, class_name: self.name, primary_key: :userid, foreign_key: :userid
       has_many :same_corp_users, ->(o) { where(corp_id: o.corp_id) }, class_name: self.name, primary_key: :userid, foreign_key: :userid
@@ -54,8 +54,8 @@ module Wechat
     def sync_organ
       if corp
         self.organ_id = corp.organ_id
-      elsif app
-        self.organ_id = app.organ_id
+      elsif agent
+        self.organ_id = agent.organ_id
       end
     end
 
@@ -77,7 +77,7 @@ module Wechat
     end
 
     def get_detail
-      r = (suite || app).api.user_detail(user_ticket)
+      r = (suite || agent).api.user_detail(user_ticket)
       logger.debug "\e[35m  user_detail: #{r}  \e[0m"
       if r['errcode'] == 0
         self.assign_attributes r.slice('name', 'gender', 'qr_code', 'open_userid')
@@ -92,7 +92,7 @@ module Wechat
     end
 
     def sync_externals(**options)
-      r = (corp || app).api.batch(userid, **options)
+      r = api.batch(userid, **options)
       return unless r['errcode'] == 0
 
       list = r.fetch('external_contact_list', [])
@@ -115,8 +115,12 @@ module Wechat
       r
     end
 
+    def api
+      (corp || agent).api
+    end
+
     def sync_external(external_userid, **options)
-      r = (corp || app).api.item(external_userid, **options)
+      r = api.item(external_userid, **options)
       unless r['errcode'] == 0
         logger.debug "\e[35m  Sync External Err info: #{r}  \e[0m"
         return
