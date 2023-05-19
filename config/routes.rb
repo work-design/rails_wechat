@@ -24,7 +24,7 @@ Rails.application.routes.draw do
           patch :qrcode
         end
       end
-      resources :agents, only: [] do
+      resources :agents, only: [:show] do
         member do
           get :login
           post '' => :create
