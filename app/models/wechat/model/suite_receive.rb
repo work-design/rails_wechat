@@ -41,7 +41,7 @@ module Wechat
       if suiteid
         { suite_id: suiteid, corp_id: auth_corp_id }
       else
-        { corp_id: corpid }
+        { corp_id: corpid, suite_id: suiteid }
       end
     end
 
