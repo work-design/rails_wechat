@@ -93,7 +93,7 @@ module Wechat
 
     def compute_corp_id!
       return unless suite
-      r = suite.provider.api.open_corpid(to)
+      r = suite.provider.api.open_corpid(corpid)
       logger.debug "\e[35m  Corp id: #{r}  \e[0m"
       self.auth_corp_id ||= r['open_corpid']
       self.save
