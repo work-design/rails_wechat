@@ -6,13 +6,13 @@ module Wechat
 
     # 指令回调URL: /wechat/suites/:id/notify
     def notify
-      @suite_ticket = @suite.suite_receives.build
       r = Hash.from_xml(request.raw_post)['xml']
       logger.debug "\e[35m  body is: #{r}  \e[0m"
 
+      @suite_ticket = @suite.suite_receives.build
       @suite_ticket.suiteid = r['ToUserName']
-      @suite_ticket.encrypt_data = r['Encrypt']
       @suite_ticket.agent_id = r['AgentID']
+      @suite_ticket.encrypt_data = r['Encrypt']
 
       if @suite_ticket.save
         render plain: 'success'
@@ -24,8 +24,10 @@ module Wechat
     # 消息与事件接收URL: /wechat/suites/:id/callback
     def callback
       r = Hash.from_xml(request.raw_post)['xml']
+      logger.debug "\e[35m  body is: #{r}  \e[0m"
+
       @suite_receive = @suite.suite_receives.build
-      @suite_receive.corp_id = r['ToUserName']
+      @suite_receive.corpid = r['ToUserName']
       @suite_receive.user_id = r['FromUserName']
       @suite_receive.agent_id = r['AgentID']
       @suite_receive.msg_type = r['MsgType']

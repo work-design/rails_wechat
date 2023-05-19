@@ -10,7 +10,7 @@ module Wechat
     end
 
     def create
-      @receive = @agent.receives.build
+      @receive = @agent.suite_receives.build
 
       if params['ToUserName']
         r = params.permit('Encrypt')
@@ -19,14 +19,10 @@ module Wechat
         r = Hash.from_xml(request.raw_post).fetch('xml', {})
       end
 
-      if r['Encrypt']
-        @receive.encrypt_data = r['Encrypt']
-      else
-        @receive.message_hash = r
-      end
+      @receive.encrypt_data = r['Encrypt']
       @receive.save
 
-      render plain: @receive.request.to_wechat
+      render plain: 'success'
     end
 
     def login
