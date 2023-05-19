@@ -3,7 +3,7 @@ module Wechat::Api
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
     def token
-      r = client.with(origin: BASE).get 'gettoken', params: { corpid: app.appid, corpsecret: app.secret }
+      r = client.with(origin: BASE).get 'gettoken', params: { corpid: app.corpid, corpsecret: app.secret }
       r.json
     end
 
