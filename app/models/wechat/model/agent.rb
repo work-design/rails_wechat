@@ -51,7 +51,7 @@ module Wechat
     end
 
     def url
-      Rails.application.routes.url_for(controller: 'wechat/agents', action: 'show', id: self.id, host: domain) if domain.present?
+      Rails.application.routes.url_for(controller: 'wechat/agents', action: 'create', id: self.id, host: domain) if domain.present?
     end
 
     def sync_departments
