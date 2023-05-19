@@ -5,9 +5,6 @@
       <%= link_to({ controller: 'corps', suite_id: model.id }, aria: { label: t('wechat.panel.corps.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-building has-text-danger"></i>
       <% end %>
-      <%= link_to({ controller: 'suite_tickets', suite_id: model.id }, aria: { label: t('wechat.panel.suite_tickets.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-envelope has-text-info"></i>
-      <% end %>
       <%= link_to({ controller: 'suite_receives', suite_id: model.id }, aria: { label: t('wechat.panel.suite_receives.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-message has-text-success"></i>
       <% end %>
