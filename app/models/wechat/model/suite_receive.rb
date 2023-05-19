@@ -21,7 +21,7 @@ module Wechat
       belongs_to :suite, foreign_key: :suiteid, primary_key: :suite_id, optional: true
       belongs_to :agent, ->(o){ where(corpid: o.corpid) }, foreign_key: :agent_id, primary_key: :agentid, optional: true
       belongs_to :corp, ->(o) { where(suite_id: o.suiteid) }, foreign_key: :auth_corp_id, primary_key: :corp_id, optional: true
-      belongs_to :corp_user, ->(o) { where(suite_id: o.suiteid, corp_id: o.auth_corp_id) }, foreign_key: :user_id, primary_key: :userid, optional: true
+      belongs_to :corp_user, ->(o) { where(o.filter_hash) }, foreign_key: :user_id, primary_key: :userid, optional: true
 
       enum msg_format: {
         json: 'json',
@@ -35,6 +35,14 @@ module Wechat
       after_create_commit :clean_last, if: -> { ['suite_ticket', 'reset_permanent_code'].include?(info_type) }
       after_create_commit :compute_corp_id!, if: -> { ['change_external_contact'].include?(info_type) }
       after_save_commit :deal_contact, if: -> { ['change_external_contact'].include?(info_type) && saved_change_to_auth_corp_id? }
+    end
+
+    def filter_hash
+      if suiteid
+        { suite_id: suiteid, corp_id: auth_corp_id }
+      else
+        { corp_id: corpid }
+      end
     end
 
     def decrypt_data
