@@ -58,7 +58,7 @@ module Wechat
       self.user_id = message_hash['FromUserName']
       self.msg_type = message_hash['MsgType']
       self.msg_id = message_hash['MsgId']
-      self.agent_id = message_hash['AgentID']
+      self.agent_id ||= message_hash['AgentID']
       self.event = message_hash['Event']
       self.event_key = message_hash['EventKey']
     end
