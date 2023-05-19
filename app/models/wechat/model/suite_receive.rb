@@ -84,6 +84,7 @@ module Wechat
     end
 
     def compute_corp_id!
+      return unless suite
       r = suite.provider.api.open_corpid(to)
       logger.debug "\e[35m  Corp id: #{r}  \e[0m"
       self.auth_corp_id ||= r['open_corpid']
@@ -95,9 +96,8 @@ module Wechat
     end
 
     def deal_contact
-      if corp_user
-        corp_user.sync_external(message_hash['ExternalUserID'])
-      end
+      return unless corp_user
+      corp_user.sync_external(message_hash['ExternalUserID'])
     end
 
 
