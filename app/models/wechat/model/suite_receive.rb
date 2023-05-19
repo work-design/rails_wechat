@@ -19,7 +19,7 @@ module Wechat
 
       belongs_to :provider, optional: true
       belongs_to :suite, foreign_key: :suiteid, primary_key: :suite_id, optional: true
-      belongs_to :agent, ->(o){ where(corpid: o.corpid) }, foreign_key: :agent_id, primary_key: :agent_id, optional: true
+      belongs_to :agent, ->(o){ where(corpid: o.corpid) }, foreign_key: :agent_id, primary_key: :agentid, optional: true
       belongs_to :corp, ->(o) { where(suite_id: o.suiteid) }, foreign_key: :auth_corp_id, primary_key: :corp_id, optional: true
       belongs_to :corp_user, ->(o) { where(suite_id: o.suiteid, corp_id: o.auth_corp_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
 
