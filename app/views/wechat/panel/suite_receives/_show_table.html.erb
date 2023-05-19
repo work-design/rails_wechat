@@ -1,6 +1,6 @@
 <tr>
-  <td class="has-text-right"><%= Wechat::SuiteReceive.human_attribute_name(:corp_id) %></td>
-  <td><%= @suite_receive.corp_id %></td>
+  <td class="has-text-right"><%= Wechat::SuiteReceive.human_attribute_name(:corpid) %></td>
+  <td><%= @suite_receive.corpid %></td>
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::SuiteReceive.human_attribute_name(:user_id) %></td>
@@ -23,6 +23,10 @@
   <td><%= @suite_receive.content %></td>
 </tr>
 <tr>
+  <td class="has-text-right"><%= Wechat::SuiteReceive.human_attribute_name(:info_type) %></td>
+  <td><%= @suite_receive.info_type %></td>
+</tr>
+<tr>
   <td class="has-text-right"><%= Wechat::SuiteReceive.human_attribute_name(:message_hash) %></td>
-  <td><%= @suite_receive.message_hash %></td>
+  <td><%= simple_format @suite_receive.message_hash %></td>
 </tr>
