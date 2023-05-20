@@ -12,7 +12,6 @@ module Wechat
       attribute :msg_type, :string
       attribute :event, :string
       attribute :event_key, :string
-      attribute :content, :string
       attribute :encrypt_data, :string
       attribute :message_hash, :json
       attribute :info_type, :string
@@ -107,7 +106,6 @@ module Wechat
       return unless corp_user
       corp_user.sync_external(message_hash['ExternalUserID'])
     end
-
 
   end
 end
