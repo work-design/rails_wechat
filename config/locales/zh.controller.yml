@@ -91,6 +91,9 @@ zh:
           title: 客户
         sync:
           title: 同步客户
+      suite_receives:
+        index:
+          title: 消息
     panel:
       title: 公众号通用
       template_configs:
@@ -115,9 +118,6 @@ zh:
       providers:
         index:
           title: 企业微信服务商
-      suite_tickets:
-        index:
-          title: 回调消息
       suite_receives:
         index:
           title: 消息

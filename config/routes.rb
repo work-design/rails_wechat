@@ -133,7 +133,6 @@ Rails.application.routes.draw do
               resources :corp_users
               resources :maintains
             end
-            resources :suite_tickets
             resources :suite_receives
           end
         end
@@ -204,6 +203,7 @@ Rails.application.routes.draw do
           member do
             get :info
           end
+          resources :suite_receives
           resources :corp_users do
             resources :follows do
               collection do
