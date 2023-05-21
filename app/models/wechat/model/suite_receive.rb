@@ -61,7 +61,13 @@ module Wechat
     end
 
     def parse_message_hash
-      self.corpid = message_hash['ToUserName']
+      case info_type
+      when 'change_external_contact'
+        self.corpid = message_hash['AuthCorpId']
+      else
+        self.corpid = message_hash['ToUserName']
+      end
+
       self.user_id ||= message_hash['FromUserName']
       self.agent_id ||= message_hash['AgentID']
       self.msg_type = message_hash['MsgType']
