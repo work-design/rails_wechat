@@ -53,7 +53,7 @@ module Wechat
         self.message_hash = JSON.parse(content)
       end
 
-      self.info_type = message_hash['InfoType'] || message_hash['Event']
+      self.info_type = message_hash['InfoType']
       # 同步 userid 和 corpid
       self.user_id = message_hash['UserID']
       self.auth_corp_id = message_hash['AuthCorpId']
@@ -68,14 +68,6 @@ module Wechat
       self.msg_id = message_hash['MsgId']
       self.event = message_hash['Event']
       self.event_key = message_hash['EventKey']
-    end
-
-    def compute_type
-      if msg_type == 'event'
-        EVENT[message_hash['Event']]
-      else
-        MSG_TYPE[msg_type]
-      end
     end
 
     def sync_suite_ticket
