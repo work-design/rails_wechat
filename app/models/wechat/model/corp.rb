@@ -51,8 +51,12 @@ module Wechat
       Wechat::Cipher.qy_decrypt(msg, encoding_aes_key)
     end
 
-    def oauth_enable
-      true
+    def receive_filter
+      if corp_id != open_corpid
+        { corpid: corp_id }
+      else
+        { auth_corp_id: open_corpid }
+      end
     end
 
     def secret
