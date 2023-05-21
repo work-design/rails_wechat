@@ -1,11 +1,12 @@
 <td>
   <p><%= model.corpid %></p>
+  <p><%= model.auth_corp_id %></p>
   <p><%= model.user_id %></p>
   <p><%= model.agent_id %></p>
   <p><time data-controller="time" data-format="human"><%= model.created_at.to_fs(:iso8601) %></time></p>
 </td>
 <td>
-  <p><%= model.info_type %></p>
+  <p><span class="tag"><%= model.info_type %></span></p>
   <p><%= model.event %></p>
   <p><%= model.event_key %></p>
 </td>

@@ -5,7 +5,7 @@ module Wechat
 
     def index
       q_params = {}
-      q_params.merge! params.permit(:info_type, :corpid)
+      q_params.merge! params.permit(:info_type, :corpid, :auth_corp_id)
 
       @suite_receives = @suite.suite_receives.default_where(q_params).order(id: :desc).page(params[:page])
     end
