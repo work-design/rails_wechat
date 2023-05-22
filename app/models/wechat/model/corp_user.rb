@@ -87,6 +87,13 @@ module Wechat
       end
     end
 
+    def get_open_id!
+      r = agent.api.convert_to_openid(userid)
+      logger.debug "\e[35m  openid: #{r}  \e[0m"
+      self.open_id = r['openid']
+      self.save
+    end
+
     def sync_externals_later
       CorpSyncExternalsJob.perform_later(self)
     end
