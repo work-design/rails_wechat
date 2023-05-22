@@ -20,6 +20,7 @@ module Wechat
 
     def sync_from_wechat_user
       self.user_id ||= wechat_user.user_id
+      self.identity = identity.presence || wechat_user.identity
     end
 
   end
