@@ -14,6 +14,12 @@ module Wechat
       has_many :program_users, class_name: 'Wechat::ProgramUser', through: :account, source: :oauth_users
       has_many :medias, class_name: 'Wechat::Media'
       has_many :subscribes, -> { where(sending_at: nil).order(id: :asc) }, class_name: 'Wechat::Subscribe', through: :program_users
+
+      before_save :sync_from_wechat_user, if: -> { wechat_openid.present? && wechat_openid_changed? }
+    end
+
+    def sync_from_wechat_user
+      self.user_id ||= wechat_user.user_id
     end
 
   end
