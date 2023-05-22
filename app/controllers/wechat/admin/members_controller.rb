@@ -18,10 +18,8 @@ module Wechat
 
     def member_params
       params.fetch(:member, {}).permit(
-        :name,
-        :identity,
-        :type,
-        :inviter
+        :wechat_openid,
+        :identity
       )
     end
 
