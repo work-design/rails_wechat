@@ -36,7 +36,7 @@ module Wechat
         if request.get?
           redirect_to url, allow_other_host: true and return
         else
-          render 'visit', locals: { url: url }
+          render 'visit', locals: { url: url } and return
         end
       end
 
