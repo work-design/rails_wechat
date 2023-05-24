@@ -13,8 +13,6 @@ module Wechat
 
         if current_oauth_app.respond_to?(:oauth2_url)
           url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
-          logger.debug "\e[35m  Redirect to: #{url}  \e[0m"
-          redirect_to url, allow_other_host: true and return
         end
       elsif request.variant.include?(:mini_program)
         return if current_wechat_user && current_user
@@ -24,17 +22,21 @@ module Wechat
 
         if current_oauth_app.respond_to?(:oauth2_url)
           url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
-          logger.debug "\e[35m  Redirect to: #{url}  \e[0m"
-          response.headers['Access-Control-Allow-Origin'] = '*'
-          response.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, PATCH, DELETE, OPTIONS'
-          response.headers['Access-Control-Allow-Credentials'] = true
-          redirect_to url, allow_other_host: true and return
         end
       else
         return if current_user
 
         if current_wechat_app
-          redirect_to url_for(controller: '/wechat/wechat', action: 'login', identity: params[:identity]) and return
+          url = url_for(controller: '/wechat/wechat', action: 'login', identity: params[:identity])
+        end
+      end
+
+      if defined?(url) && url
+        logger.debug "\e[35m  Redirect to: #{url}  \e[0m"
+        if request.get?
+          redirect_to url, allow_other_host: true and return
+        else
+          render 'visit', locals: { url: url }
         end
       end
 
