@@ -26,6 +26,7 @@ module Wechat
           url = current_oauth_app.oauth2_url(state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol)
           logger.debug "\e[35m  Redirect to: #{url}  \e[0m"
           response.headers['Access-Control-Allow-Origin'] = '*'
+          response.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, PATCH, DELETE, OPTIONS'
           redirect_to url, allow_other_host: true and return
         end
       else
