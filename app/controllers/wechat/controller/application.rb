@@ -27,6 +27,7 @@ module Wechat
           logger.debug "\e[35m  Redirect to: #{url}  \e[0m"
           response.headers['Access-Control-Allow-Origin'] = '*'
           response.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, PATCH, DELETE, OPTIONS'
+          response.headers['Access-Control-Allow-Credentials'] = true
           redirect_to url, allow_other_host: true and return
         end
       else
