@@ -31,7 +31,7 @@ module WxPay::Api
 
       with_common_headers('POST', path, params: payload, headers: headers) do |signed_headers|
         response = @client.with_headers(signed_headers).with(with_options).post(path, params: params, json: payload)
-        response.json
+        debug ? response : response.json
       end
     end
 
