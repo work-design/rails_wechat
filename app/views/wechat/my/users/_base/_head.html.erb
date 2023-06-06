@@ -1,4 +1,4 @@
-<div class="box is-radiusless">
+<div class="weui-panel is-box">
   <div class="has-text-centered">
     <div class="is-several">
       <%= image_tag current_user.avatar, class: 'image is-24x24' if current_user.avatar.attached? %>
@@ -33,6 +33,6 @@
 <% end %>
 
 <div class="weui-navbar mt-4">
-  <%= link_to '邀请记录', { action: 'invite_qrcode' }, class: active_helper(action: 'invite_qrcode', item: 'weui-navbar__item', active: 'weui-navbar__item weui-bar__item_on') %>
-  <%= link_to '邀请有礼', { action: 'gift' }, class: active_helper(action: 'gift', item: 'weui-navbar__item', active: 'weui-navbar__item weui-bar__item_on') %>
+  <%= link_to '邀请记录', { action: 'invite_qrcode' }, class: active_helper(action: 'invite_qrcode', item: 'weui-navbar__item is-size-7', active: 'weui-navbar__item weui-bar__item_on is-size-7') %>
+  <%= link_to '邀请有礼', { action: 'gift' }, class: active_helper(action: 'gift', item: 'weui-navbar__item is-size-7', active: 'weui-navbar__item weui-bar__item_on is-size-7') %>
 </div>
