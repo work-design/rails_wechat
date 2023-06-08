@@ -26,7 +26,7 @@ module Wechat
       else
         return if current_user
 
-        if current_wechat_app
+        if request.variant.exclude?(:phone) && current_wechat_app
           url = url_for(controller: '/wechat/wechat', action: 'login', identity: params[:identity])
         end
       end
