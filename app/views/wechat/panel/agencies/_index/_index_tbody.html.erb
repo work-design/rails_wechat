@@ -19,7 +19,5 @@
 </td>
 <td>
   <%= image_tag model.file, class: 'image is-64x64' if model.file.attached? %>
-  <% if model.app && model.app.version_info.present? %>
-    <p><time data-controller="time"><%= model.app.version_info.dig('release_info', 'release_time') %></time></p>
-  <% end %>
+  <p><time data-controller="time"><%= model.version_info.dig('release_info', 'release_time') %></time></p>
 </td>
