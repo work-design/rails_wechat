@@ -33,13 +33,7 @@ module Wechat
       has_one_attached :file
 
       after_create_commit :store_info_later
-      before_save :init_app, if: -> { appid_changed? && appid }
       after_save_commit :sync_to_storage, if: -> { saved_change_to_qrcode_url? }
-    end
-
-    def init_app
-      app || build_app(name: nick_name)
-      app.save
     end
 
     def disabled_func_infos
