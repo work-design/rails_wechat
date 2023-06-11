@@ -37,11 +37,6 @@ module Wechat
       after_save_commit :sync_to_storage, if: -> { saved_change_to_qrcode_url? }
     end
 
-    def api
-      return @api if defined? @api
-      @api = Wechat::Api::Public.new(self)
-    end
-
     def init_app
       app || build_app(name: nick_name)
       app.save
