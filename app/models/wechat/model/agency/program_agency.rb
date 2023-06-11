@@ -9,6 +9,14 @@ module Wechat
       attribute :auditid, :integer
       attribute :version_info, :json
 
+      enum audit_status: {
+        init: 0,
+        rejected: 1,
+        verifying: 2,
+        regretted: 3,
+        verify_later: 4
+      }
+
       belongs_to :platform_template, optional: true
     end
 
@@ -75,8 +83,11 @@ module Wechat
       self.update auditid: r['auditid']
     end
 
-    def audit_status
-      api.audit_status(auditid)
+    def get_audit_status!
+      r = api.audit_status(auditid)
+      r.audit_status = r['status']
+      r.save
+      r
     end
 
     def set_privacy
