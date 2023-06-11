@@ -85,8 +85,8 @@ module Wechat
 
     def get_audit_status!
       r = api.audit_status(auditid)
-      r.audit_status = r['status']
-      r.save
+      self.audit_status = r['status']
+      self.save
       r
     end
 
