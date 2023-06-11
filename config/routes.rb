@@ -273,5 +273,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*path' => 'wechat/apps#confirm', format: false, constraints: ->(req) { req.path.to_s.end_with?('.txt') }
+  get '*path' => 'wechat/apps#confirm', format: false, constraints: ->(req) { req.path.to_s.end_with?('.txt') } if RailsWechat.config.confirm
 end

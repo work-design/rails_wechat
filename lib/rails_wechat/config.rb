@@ -3,6 +3,7 @@ module RailsWechat
 
   configure do |config|
     config.email_domain = 'mail.work.design'
+    confirm.confirm = false
     config.suite_id = ''
     config.rules = ActiveSupport::OrderedOptions.new
     config.rules.a = {
