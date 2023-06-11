@@ -1,6 +1,5 @@
 module Wechat
   module Model::App::ProgramApp
-    include Inner::ProgramApp
 
     def api
       return @api if defined? @api
