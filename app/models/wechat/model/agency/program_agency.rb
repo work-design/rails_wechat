@@ -54,7 +54,7 @@ module Wechat
     end
 
     def commit(platform_template)
-      api.commit(
+      r = api.commit(
         template_id: platform_template.template_id,
         user_version: platform_template.user_version,
         user_desc: platform_template.user_desc,
@@ -63,6 +63,10 @@ module Wechat
           ext: { host: URI::HTTPS.build(host: domain).to_s }
         }.to_json
       )
+      if r['errcode'] == 0
+        self.platform_template = platform_template
+        self.save
+      end
     end
 
     def submit_audit!
