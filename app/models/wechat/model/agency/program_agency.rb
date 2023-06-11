@@ -22,6 +22,10 @@ module Wechat
       platform.program_agency.func_infos - func_infos
     end
 
+    def domain
+      super.presence || app.domain
+    end
+
     def set_webview_domain(action: 'set')
       api.webview_domain_directly(
         action: action,
