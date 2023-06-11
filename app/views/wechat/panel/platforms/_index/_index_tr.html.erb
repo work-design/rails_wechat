@@ -11,11 +11,16 @@
       <%= link_to({ controller: 'platform_receives', platform_id: model.id }, aria: { label: t('wechat.panel.platform_receives.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-message"></i>
       <% end %>
-      <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-circle-info has-text-primary"></i>
+      <%= link_to({ controller: 'platform_templates', platform_id: model.id }, aria: { label: t('wechat.panel.platform_templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-paperclip"></i>
       <% end %>
       <%= link_to({ action: 'agency', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-pencil has-text-info"></i>
+      <% end %>
+    </div>
+    <div data-show-target="item" style="visibility: hidden">
+      <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-circle-info has-text-primary"></i>
       <% end %>
       <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-pencil has-text-link"></i>

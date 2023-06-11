@@ -7,6 +7,8 @@ module Wechat
     included do
       attribute :auditid, :integer
       attribute :version_info, :json
+
+      belongs_to :platform_template, optional: true
     end
 
     def api
@@ -101,6 +103,15 @@ module Wechat
 
     def set_choose_address
       api.apply_privacy_interface('wx.chooseAddress', '用于电商配送')
+    end
+
+    def get_version_info!
+      r = api.version_info
+      self.version_info = { exp_info: r['exp_info'], release_info: r['release_info'] }
+      self.version_info['exp_info']['exp_time'] = Time.at(version_info['exp_info']['exp_time']) if version_info['exp_info']
+      self.version_info['release_info']['release_time'] = Time.at(version_info['release_info']['release_time']) if version_info['release_info']
+      self.save
+      self.version_info
     end
 
   end

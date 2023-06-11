@@ -22,6 +22,7 @@ module Wechat
       has_many :auths
       has_many :platform_tickets, primary_key: :appid, foreign_key: :appid
       has_many :receives, dependent: :nullify
+      has_many :platform_templates
     end
 
     def api
@@ -42,6 +43,16 @@ module Wechat
       else
         raise Wechat::InvalidCredentialError, Hash(token_hash)['errmsg']
       end
+    end
+
+    def sync_templates
+      r = api.templates
+      r['template_list'].each do |item|
+        t = platform_templates.find_or_initialize_by(template_id: item['template_id'])
+        t.assign_attributes item.slice('user_version')
+        t.created_at = Time.at(item['create_time'])
+      end
+      self.save
     end
 
     def access_token_valid?

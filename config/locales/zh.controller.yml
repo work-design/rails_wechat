@@ -115,6 +115,9 @@ zh:
       platform_receives:
         index:
           title: 消息通知
+      platform_templates:
+        index:
+          title: 小程序模版
       providers:
         index:
           title: 企业微信服务商

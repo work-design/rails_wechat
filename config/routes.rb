@@ -123,6 +123,7 @@ Rails.application.routes.draw do
               post :search
             end
           end
+          resources :platform_templates
           resources :platform_tickets
           resources :platform_receives
         end

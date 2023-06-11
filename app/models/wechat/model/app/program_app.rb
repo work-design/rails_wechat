@@ -32,15 +32,6 @@ module Wechat
       self.qrcode.attach io: file, filename: "qrcode_#{id}"
     end
 
-    def get_version_info!
-      r = api.version_info
-      self.version_info = { exp_info: r['exp_info'], release_info: r['release_info'] }
-      self.version_info['exp_info']['exp_time'] = Time.at(version_info['exp_info']['exp_time']) if version_info['exp_info']
-      self.version_info['release_info']['release_time'] = Time.at(version_info['release_info']['release_time']) if version_info['release_info']
-      self.save
-      self.version_info
-    end
-
     def get_webview_file!
       r = api.webview_domain_file
       self.confirm_name = r['file_name']
