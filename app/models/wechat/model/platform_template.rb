@@ -8,15 +8,14 @@ module Wechat
       attribute :user_version, :string
       attribute :template_id, :integer
 
-      enum audit_status: {
-        init: '0',
-        verifying: '1',
-        rejected: '2',
-        approved: '3',
-        commit: '4',
-        commit_fail: '5'
-      }
-
+      enum audit_status: [
+        :init,
+        :verifying,
+        :rejected,
+        :approved,
+        :commit,
+        :commit_fail
+      ]
 
       belongs_to :platform
     end
