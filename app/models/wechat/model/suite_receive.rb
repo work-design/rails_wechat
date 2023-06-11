@@ -28,7 +28,6 @@ module Wechat
       }, _default: 'xml'
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
-      before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
       after_save :sync_suite_ticket, if: -> { ['suite_ticket'].include?(info_type) && saved_change_to_info_type? }
       after_create_commit :clean_last, if: -> { ['suite_ticket', 'reset_permanent_code'].include?(info_type) }
       after_create_commit :compute_corp_id!, if: -> { ['change_external_contact'].include?(info_type) }
@@ -55,25 +54,20 @@ module Wechat
 
       self.info_type = message_hash['InfoType']
       # 同步 userid 和 corpid
-      self.user_id = message_hash['UserID']
-      self.auth_corp_id = message_hash['AuthCorpId']
-      self.message_hash
-    end
-
-    def parse_message_hash
-      case info_type
+      self.user_id = message_hash['UserID'] || message_hash['FromUserName']
+      case self.info_type
       when 'change_external_contact'
         self.corpid = message_hash['AuthCorpId']
       else
         self.corpid = message_hash['ToUserName']
       end
-
-      self.user_id ||= message_hash['FromUserName']
+      self.auth_corp_id = message_hash['AuthCorpId']
       self.agent_id ||= message_hash['AgentID']
       self.msg_type = message_hash['MsgType']
       self.msg_id = message_hash['MsgId']
       self.event = message_hash['Event']
       self.event_key = message_hash['EventKey']
+      self.message_hash
     end
 
     def sync_suite_ticket
