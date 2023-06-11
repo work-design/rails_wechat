@@ -49,7 +49,7 @@ module Wechat
       r = api.templates
       r['template_list'].each do |item|
         t = platform_templates.find_or_initialize_by(template_id: item['template_id'])
-        t.assign_attributes item.slice('user_version', 'audit_status')
+        t.assign_attributes item.slice('user_version', 'user_desc', 'audit_status')
         t.created_at = Time.at(item['create_time'])
       end
       self.save

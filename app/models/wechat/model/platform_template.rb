@@ -6,6 +6,7 @@ module Wechat
 
     included do
       attribute :user_version, :string
+      attribute :user_desc, :string
       attribute :template_id, :integer
 
       enum audit_status: [
