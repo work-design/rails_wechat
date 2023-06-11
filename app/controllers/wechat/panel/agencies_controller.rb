@@ -25,7 +25,8 @@ module Wechat
 
     def agency_params
       params.fetch(:agency, {}).permit(
-        :default
+        :default,
+        :domain
       )
     end
 

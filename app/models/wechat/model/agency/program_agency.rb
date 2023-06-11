@@ -5,6 +5,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :domain, :string
       attribute :auditid, :integer
       attribute :version_info, :json
 
