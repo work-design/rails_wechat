@@ -10,7 +10,7 @@ module Wechat
       attribute :version_info, :json
 
       enum audit_status: {
-        init: 0,
+        success: 0,
         rejected: 1,
         verifying: 2,
         regretted: 3,
