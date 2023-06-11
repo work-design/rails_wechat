@@ -1,11 +1,5 @@
 module Wechat
   module Model::App::ProgramApp
-    extend ActiveSupport::Concern
-
-    included do
-      attribute :auditid, :integer
-      attribute :version_info, :json
-    end
 
     def api
       return @api if defined? @api

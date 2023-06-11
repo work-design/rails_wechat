@@ -2,6 +2,12 @@
 
 module Wechat
   module Model::Agency::ProgramAgency
+    extend ActiveSupport::Concern
+
+    included do
+      attribute :auditid, :integer
+      attribute :version_info, :json
+    end
 
     def api
       return @api if defined? @api
@@ -38,9 +44,9 @@ module Wechat
         user_version: user_version,
         user_desc: user_desc,
         ext_json: {
-                    extAppid: appid,
-                    ext: { host: URI::HTTPS.build(host: domain).to_s }
-                  }.to_json
+          extAppid: appid,
+          ext: { host: URI::HTTPS.build(host: domain).to_s }
+        }.to_json
       )
     end
 
@@ -49,12 +55,14 @@ module Wechat
       cate = categories[0]
 
       r = api.submit_audit(
-        item_list: [{
-                      first_id: cate['first'],
-                      first_class: cate['first_name'],
-                      second_id: cate['second'],
-                      second_class: cate['second_name']
-                    }]
+        item_list: [
+          {
+            first_id: cate['first'],
+            first_class: cate['first_name'],
+            second_id: cate['second'],
+            second_class: cate['second_name']
+          }
+        ]
       )
       logger.debug "\e[35m  Submit Audit: #{r}  \e[0m"
       self.update auditid: r['auditid']
@@ -94,7 +102,6 @@ module Wechat
     def set_choose_address
       api.apply_privacy_interface('wx.chooseAddress', '用于电商配送')
     end
-
 
   end
 end
