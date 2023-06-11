@@ -9,12 +9,12 @@ module Wechat
       attribute :template_id, :integer
 
       enum audit_status: {
-        init: 0,
-        verifying: 1,
-        rejected: 2,
-        approved: 3,
-        commit: 4,
-        commit_fail: 5
+        init: '0',
+        verifying: '1',
+        rejected: '2',
+        approved: '3',
+        commit: '4',
+        commit_fail: '5'
       }
 
 
