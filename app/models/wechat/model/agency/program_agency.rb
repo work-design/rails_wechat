@@ -2,6 +2,7 @@
 
 module Wechat
   module Model::Agency::ProgramAgency
+    include Inner::ProgramApp
     extend ActiveSupport::Concern
 
     included do

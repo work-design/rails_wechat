@@ -45,7 +45,7 @@ module Wechat
     end
 
     def confirm
-      @app = App.find_by(confirm_name: params[:path])
+      @app = App.find_by(confirm_name: params[:path]) || Agency.find_by(confirm_name: params[:path])
 
       if @app
         render plain: @app.confirm_content

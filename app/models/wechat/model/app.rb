@@ -22,8 +22,6 @@ module Wechat
       attribute :domain, :string
       attribute :url_link, :string
       attribute :debug, :boolean, default: false
-      attribute :confirm_name, :string
-      attribute :confirm_content, :string
 
       encrypts :secret
 

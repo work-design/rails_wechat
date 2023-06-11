@@ -1,5 +1,6 @@
 module Wechat
   module Model::App::ProgramApp
+    include Inner::ProgramApp
 
     def api
       return @api if defined? @api
@@ -30,13 +31,6 @@ module Wechat
     def get_qrcode
       file = api.get_qrcode
       self.qrcode.attach io: file, filename: "qrcode_#{id}"
-    end
-
-    def get_webview_file!
-      r = api.webview_domain_file
-      self.confirm_name = r['file_name']
-      self.confirm_content = r['file_content']
-      self.save
     end
 
     # 小程序
