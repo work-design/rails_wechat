@@ -44,9 +44,11 @@ module Wechat
       attribute :content, :string
       attribute :encrypt_data, :string
       attribute :message_hash, :json
+      attribute :info_type, :string
 
       belongs_to :platform, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :agency, ->(o){ where(platform_id: o.platform_id) }, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 
       enum msg_format: {
@@ -60,6 +62,7 @@ module Wechat
       before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
       after_create :parse_content
       after_create_commit :check_app
+      after_save_commit :weapp_audited, if: -> { ['weapp_audit_success'].include?(info_type) && saved_change_to_info_type? }
     end
 
     def decrypt_data
@@ -70,6 +73,8 @@ module Wechat
       else
         self.message_hash = JSON.parse(content)
       end
+      self.info_type = message_hash['Event']
+      self.message_hash
     end
 
     def parse_message_hash
@@ -98,6 +103,12 @@ module Wechat
 
     def check_app
       app.update user_name: message_hash['ToUserName'] if app
+    end
+
+    def weapp_audited
+      if agency
+        agency.update audit_status: 'success'
+      end
     end
 
   end

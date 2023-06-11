@@ -30,9 +30,9 @@ module Wechat
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       before_save :parse_message_hash, if: -> { message_hash_changed? && message_hash.present? }
       after_save :sync_suite_ticket, if: -> { ['suite_ticket'].include?(info_type) && saved_change_to_info_type? }
-      after_save_commit :sync_auth_code, if: -> { ['create_auth', 'reset_permanent_code'].include?(info_type) && saved_change_to_info_type? }
       after_create_commit :clean_last, if: -> { ['suite_ticket', 'reset_permanent_code'].include?(info_type) }
       after_create_commit :compute_corp_id!, if: -> { ['change_external_contact'].include?(info_type) }
+      after_save_commit :sync_auth_code, if: -> { ['create_auth', 'reset_permanent_code'].include?(info_type) && saved_change_to_info_type? }
       after_save_commit :deal_contact, if: -> { ['change_external_contact'].include?(info_type) && saved_change_to_auth_corp_id? }
     end
 
