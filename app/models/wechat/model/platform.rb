@@ -47,12 +47,14 @@ module Wechat
 
     def sync_templates
       r = api.templates
-      r['template_list'].each do |item|
+      rs = r['template_list'].map do |item|
         t = platform_templates.find_or_initialize_by(template_id: item['template_id'])
         t.assign_attributes item.slice('user_version', 'user_desc', 'audit_status')
         t.created_at = Time.at(item['create_time'])
+        t
       end
       self.save
+      rs
     end
 
     def access_token_valid?
