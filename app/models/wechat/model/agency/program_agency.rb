@@ -7,7 +7,7 @@ module Wechat
     included do
       attribute :domain, :string
       attribute :auditid, :integer
-      attribute :version_info, :json
+      attribute :version_info, :json, default: {}
 
       enum audit_status: {
         success: 0,
