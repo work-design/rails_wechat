@@ -31,7 +31,7 @@ module Wechat
       if matched.blank?
         return
       else
-        logger.debug "  \e[35m=====> Matched: #{matched.inspect}, Extractor: #{name}(#{id})\e[0m"
+        logger.debug "\e[35m  Matched: #{matched.inspect}, Extractor: #{name}(#{id})  \e[0m"
       end
 
       # 这里不用 find_or_initialize_by，因为可以建立 ex.extractor, 减少 belongs_to validation present 的数据库查询
