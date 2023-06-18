@@ -88,11 +88,13 @@ module Wechat
     end
 
     def reply_for_blank_info
-      return if wechat_user.attributes['name'].present? || !app.oauth_enable
+      return if wechat_user.attributes['name'].present?
       if agency
         url = agency.oauth2_url(scope: 'snsapi_userinfo', state: app.base64_state(uid: open_id))
-      else
+      elsif app&.oauth_enable
         url = app.oauth2_url(scope: 'snsapi_userinfo', state: app.base64_state(uid: open_id))
+      else
+        return
       end
 
       reply_params(
