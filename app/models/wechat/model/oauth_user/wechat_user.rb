@@ -17,6 +17,7 @@ module Wechat
       attribute :scope, :string
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :agency, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :user_inviter, class_name: 'Auth::User', optional: true
       belongs_to :member_inviter, class_name: 'Org::Member', optional: true
       has_many :org_members, class_name: 'Org::Member', primary_key: :uid, foreign_key: :wechat_openid
@@ -122,7 +123,7 @@ module Wechat
     end
 
     def get_corp
-      Corp.where(organ_id: app.organ.self_and_ancestor_ids).take
+      Corp.where(organ_id: app.organ.self_and_ancestor_ids).take if app
     end
 
     def init_corp_external_user(corp: get_corp)
