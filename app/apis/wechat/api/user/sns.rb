@@ -8,7 +8,7 @@ module Wechat::Api
 
     def refresh_token(refresh_token)
       params = {
-        appid: appid,
+        appid: app.appid,
         grant_type: 'refresh_token',
         refresh_token: refresh_token
       }
