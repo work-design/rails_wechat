@@ -101,6 +101,11 @@ module Wechat
       res
     end
 
+    def access_token_valid?
+      return false unless expires_at.acts_like?(:time)
+      expires_at > Time.current
+    end
+
     def assign_info(oauth_params)
       info_params = oauth_params.fetch('info', {})
       self.name = info_params['nickname']
