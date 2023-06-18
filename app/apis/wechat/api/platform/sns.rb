@@ -24,5 +24,16 @@ module Wechat::Api
       component_get 'oauth2/component/access_token', params: params, origin: BASE
     end
 
+    def oauth2_refresh_token(refresh_token, appid)
+      params = {
+        appid: appid,
+        grant_type: 'refresh_token',
+        refresh_token: refresh_token,
+        component_appid: app.appid
+      }
+
+      component_get 'oauth2/component/refresh_token', params: params, origin: BASE
+    end
+
   end
 end

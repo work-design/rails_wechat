@@ -13,6 +13,7 @@ module Wechat
       attribute :access_token, :string
       attribute :expires_at, :datetime
       attribute :refresh_token, :string
+      attribute :agency_oauth, :boolean, default: false
       attribute :unsubscribe_at, :datetime
       attribute :scope, :string
 
@@ -35,6 +36,11 @@ module Wechat
       after_save_commit :prune_user_tags, if: -> { unsubscribe_at.present? && saved_change_to_unsubscribe_at? }
       after_save_commit :sync_user_info_later, if: -> { scope == 'snsapi_userinfo' && saved_change_to_scope? }
       after_save_commit :init_corp_external_user, if: -> { unionid.present? && saved_change_to_unionid? }
+    end
+
+    def api
+      return @api if defined? @api
+      @api = Wechat::Api::User.new(self)
     end
 
     def try_match
@@ -66,12 +72,7 @@ module Wechat
     end
 
     def sync_user_info
-      params = {
-        access_token: access_token,
-        openid: uid
-      }
-      user_response = HTTPX.get('https://api.weixin.qq.com/sns/userinfo', params: params)
-      res = JSON.parse(user_response.to_s)
+      res = api.userinfo(uid)
       logger.debug "\e[35m  Sync User Info: #{res}  \e[0m"
 
       if res['errcode'].present?
@@ -89,14 +90,11 @@ module Wechat
     end
 
     def refresh_access_token
-      params = {
-        appid: appid,
-        grant_type: 'refresh_token',
-        refresh_token: refresh_token
-      }
-
-      response = HTTPX.get 'https://api.weixin.qq.com/sns/oauth2/refresh_token', params: params
-      res = JSON.parse(response.to_s)
+      if agency_oauth
+        res = agency.platform.api.oauth2_refresh_token(refresh_token, appid)
+      else
+        res = api.refresh_token(refresh_token)
+      end
       self.assign_attributes res.slice('access_token', 'refresh_token')
       self.expires_at = Time.current + res['expires_in'].to_i
       self.save

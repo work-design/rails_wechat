@@ -6,5 +6,15 @@ module Wechat::Api
       get 'userinfo', params: { openid: openid }, origin: BASE
     end
 
+    def refresh_token(refresh_token)
+      params = {
+        appid: appid,
+        grant_type: 'refresh_token',
+        refresh_token: refresh_token
+      }
+
+      client.with(origin: BASE).get 'oauth2/refresh_token', params: params
+    end
+
   end
 end
