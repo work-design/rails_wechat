@@ -190,7 +190,7 @@ module Wechat
     end
 
     def get_reply
-      reply = reply_from_rule || reply_from_response || reply_for_blank_info || reply_for_blank_user
+      reply = reply_from_rule || reply_from_response
 
       if reply.is_a?(Reply)
         self.reply_body = reply.to_wechat
