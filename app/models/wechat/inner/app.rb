@@ -15,6 +15,17 @@ module Wechat
       has_many :wechat_users, primary_key: :appid, foreign_key: :appid
     end
 
+    def base64_state(host: self.domain, controller_path: '/home', action_name: 'index', method: 'get', **params)
+      state = Com::State.create(
+        host: host,
+        controller_path: controller_path,
+        action_name: action_name,
+        request_method: method.downcase,
+        params: params
+      )
+      state.id
+    end
+
     def sync_from_menu
       r = api.menu
       present_menus = r.dig('menu', 'button')

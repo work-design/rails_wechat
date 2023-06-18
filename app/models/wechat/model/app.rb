@@ -134,17 +134,6 @@ module Wechat
       end
     end
 
-    def base64_state(host: self.domain, controller_path: '/home', action_name: 'index', method: 'get', **params)
-      state = Com::State.create(
-        host: host,
-        controller_path: controller_path,
-        action_name: action_name,
-        request_method: method.downcase,
-        params: params
-      )
-      state.id
-    end
-
     def sync_templates
       api.templates.each do |temp|
         template = templates.find_or_initialize_by(template_id: temp['template_id'])
