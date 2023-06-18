@@ -13,7 +13,8 @@ module Wechat::Api
         refresh_token: refresh_token
       }
 
-      client.with(origin: BASE).get 'oauth2/refresh_token', params: params
+      r = client.with(origin: BASE).get 'oauth2/refresh_token', params: params
+      r.json
     end
 
   end
