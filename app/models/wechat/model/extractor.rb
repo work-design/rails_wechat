@@ -39,7 +39,7 @@ module Wechat
       ex.name = name
       ex.matched = matched.join(', ')
       if serial && effective?(request.created_at)
-        ex.serial_number ||= serial_number
+        ex.serial_number = serial_number
         r = ex.respond_text
       else
         r = invalid_response.presence
