@@ -9,6 +9,6 @@
     </div>
   </td>
 </tr>
-<% model.menus.each do |child| %>
+<% model.menus.where(default_platform_params).each do |child| %>
   <%= render partial: 'index_tbody', layout: 'index_tr', locals: { model: child } %>
 <% end %>
