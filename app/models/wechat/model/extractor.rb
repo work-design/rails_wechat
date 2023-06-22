@@ -49,7 +49,9 @@ module Wechat
     end
 
     def effective?(time = Time.current)
-      time > start_at.change(time.to_date.parts) && time < finish_at.change(time.to_date.parts)
+      r = time > start_at.change(time.to_date.parts) && time < finish_at.change(time.to_date.parts)
+      logger.debug "\e[35m  time: #{time}, result: #{r}  \e[0m"
+      r
     end
 
     def serial_number(now = Time.current, pad: -1.day, init_start: serial_start)
