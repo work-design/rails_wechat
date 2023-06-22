@@ -44,7 +44,7 @@ module Wechat
       else
         r = invalid_response.presence
       end
-      logger.debug "\e[35m  serial number: #{serial_number}, extraction: #{ex.serial_number}  \e[0m"
+      logger.debug "\e[35m  serial: #{serial}, serial number: #{serial_number}, extraction: #{ex.serial_number}  \e[0m"
       r
     end
 
