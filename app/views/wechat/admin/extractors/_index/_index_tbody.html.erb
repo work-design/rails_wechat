@@ -1,6 +1,8 @@
 <td><%= model.name %></td>
-<td><%= model.prefix.inspect if model.prefix %></td>
-<td><%= model.suffix.inspect if model.suffix %></td>
+<td>
+  <p class="has-text-success"><%= model.prefix.inspect if model.prefix %></p>
+  <p class="has-text-danger"><%= model.suffix.inspect if model.suffix %></p>
+</td>
 <td>
   <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
     <%= f.check_box :more, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
