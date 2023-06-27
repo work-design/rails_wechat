@@ -30,6 +30,8 @@ module Wechat
       has_many :menu_apps, ->(o) { where(appid: o.appid) }, dependent: :destroy_async
       has_many :menus, -> { roots }, through: :menu_apps
 
+      has_one_atached :qrcode
+
       after_initialize :init_match_value, if: -> { new_record? && handle }
       before_validation :init_expire_at, if: -> { expire_seconds.present? && expire_seconds_changed? }
       before_validation :sync_from_app, if: -> { organ_id.blank? && appid.present? && appid_changed? }
@@ -96,7 +98,7 @@ module Wechat
 
     def get_wxa_qrcode
       r = app.api.get_wxacode_unlimit(program_query.to_query)
-      self.qrcode_url = r
+      self.qrcode.attach io: r
       r
     end
 
