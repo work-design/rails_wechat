@@ -32,18 +32,18 @@ module Wechat
 
       has_one_attached :qrcode
 
-      after_initialize :init_match_value, if: -> { new_record? && handle }
       before_validation :sync_from_app, if: -> { organ_id.blank? && appid.present? && appid_changed? }
+      before_validation :init_match_value, if: -> { new_record? && handle }
       after_save_commit :to_qrcode!, if: -> { saved_change_to_match_value? }
       after_save_commit :refresh_when_expired, if: -> { saved_change_to_expire_at? }
     end
 
-    def init_match_value
-      self.match_value = "#{handle_type.downcase.gsub('::', '_')}_#{handle_id}_#{organ_id}"
-    end
-
     def sync_from_app
       self.organ_id = app.organ_id
+    end
+
+    def init_match_value
+      self.match_value = "#{handle_type.downcase.gsub('::', '_')}_#{handle_id}_#{organ_id}"
     end
 
     def init_response

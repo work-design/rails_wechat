@@ -17,6 +17,8 @@ module Wechat
       attribute :init_wechat_user, :boolean, default: false
       attribute :init_user_tag, :boolean, default: false
 
+      belongs_to :scene_organ, class_name: 'Org::Organ', optional: true
+
       belongs_to :receive
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
       belongs_to :corp_user, ->(o) { where(corp_id: o.appid) }, foreign_key: :userid, primary_key: :user_id, optional: true
@@ -149,8 +151,10 @@ module Wechat
       if ['SCAN', 'subscribe'].include?(event)
         if body.to_s.start_with?('auth_user_')
           wechat_user.user_inviter_id ||= body.delete_prefix('auth_user_')
+          self.scene_organ_id = body.split('_')[-1]
         elsif body.to_s.start_with? 'org_member_'
           wechat_user.member_inviter_id ||= body.delete_prefix('org_member_')
+          self.scene_organ_id = body.split('_')[-1]
         end
       end
       if ['subscribe'].include?(event)
