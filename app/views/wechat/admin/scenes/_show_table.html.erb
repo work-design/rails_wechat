@@ -3,12 +3,8 @@
   <td><%= @scene.match_value %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Scene.human_attribute_name(:qrcode_file) %></td>
+  <td class="has-text-right"><%= Wechat::Scene.human_attribute_name(:qrcode_url) %></td>
   <td>
-    <% if @app.is_a?(Wechat::ProgramApp) %>
-      <%= image_tag @scene.qrcode_url, class: 'image' if @scene.qrcode_url.present? %>
-    <% else %>
-      <%= image_tag @scene.qrcode_data_url, class: 'image' if @scene.qrcode_data_url.present? %>
-    <% end %>
+    <%= image_tag @scene.qrcode_data_url, class: 'image' %>
   </td>
 </tr>
