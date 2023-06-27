@@ -30,7 +30,7 @@ module Wechat
       has_many :menu_apps, ->(o) { where(appid: o.appid) }, dependent: :destroy_async
       has_many :menus, -> { roots }, through: :menu_apps
 
-      has_one_atached :qrcode
+      has_one_attached :qrcode
 
       after_initialize :init_match_value, if: -> { new_record? && handle }
       before_validation :init_expire_at, if: -> { expire_seconds.present? && expire_seconds_changed? }
