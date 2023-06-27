@@ -103,7 +103,7 @@ module Wechat
     def program_query
       {
         org_id: "#{organ_id}",
-        path: "#{match_value.delete_prefix('/')}"
+        path: "#{organ.redirect_path.delete_prefix('/')}"
       }
     end
 
