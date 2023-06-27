@@ -116,7 +116,7 @@ module Wechat
           host: scene_organ.domain,
           auth_token: wechat_user.auth_token
         )
-        desc = "点击链接访问：#{scene_organ.name}"
+        desc = "#{scene_organ.name}欢迎您\n点击链接访问精心为您准备的内容"
       else
         url = Rails.application.routes.url_for(
           controller: 'my/home',
