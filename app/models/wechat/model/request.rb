@@ -46,6 +46,8 @@ module Wechat
     def reply_params(title:, description:, url:)
       if agency
         head_url = agency.head_img
+      elsif scene_organ && scene_organ.logo.attached?
+        head_url = scene_organ.logo.url
       else
         head_url = ApplicationController.helpers.image_path('logo_avatar.png', protocol: 'https')
       end
