@@ -72,7 +72,6 @@ module Wechat
     end
 
     def qrcode_data_url
-      return unless self.qrcode_url
       if ['Wechat::ProgramApp'].include?(app.type)
         if qrcode.attached?
           qrcode.url
@@ -80,7 +79,7 @@ module Wechat
           qrcode_url
         end
       else
-        QrcodeHelper.data_url(self.qrcode_url)
+        QrcodeHelper.data_url(self.qrcode_url) if qrcode_url
       end
     end
 
