@@ -126,11 +126,7 @@ module Wechat
     end
 
     def refresh_when_expired
-      if ['login'].include?(aim)
-        SceneCleanJob.set(wait_until: expire_at).perform_later(self)
-      else
-
-      end
+      SceneCleanJob.set(wait_until: expire_at).perform_later(self)
     end
 
     def refresh!(now = false)
