@@ -14,11 +14,13 @@
         <span class="tag is-success">邀请成功</span>
       <% end %>
     </h4>
-    <ul class="weui-media-box__info">
-      <li class="weui-media-box__info__meta">
-        <span><%= request.init_wechat_user_i18n %></span>
-        <time data-controller="time" data-format="human"><%= request.wechat_user.created_at.to_fs(:iso8601) %></time>
-      </li>
-    </ul>
+    <p class="weui-media-box__info">
+      <span><%= request.init_wechat_user_i18n %></span>
+      <time data-controller="time" data-format="human"><%= request.wechat_user.created_at.to_fs(:iso8601) %></time>
+    </p>
+    <p class="weui-media-box__info">
+      <span><%= Wechat::Request.human_attribute_name(:created_at) %></span>
+      <time data-controller="time" data-format="human"><%= request.created_at.to_fs(:iso8601) %></time>
+    </p>
   </div>
 </div>
