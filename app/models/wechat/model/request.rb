@@ -124,6 +124,7 @@ module Wechat
           auth_token: wechat_user.auth_token
         )
         desc = '点击链接查看详情'
+        return
       end
 
       reply_params(
