@@ -39,6 +39,10 @@ module Wechat
       after_save_commit :refresh_when_expired, if: -> { saved_change_to_expire_at? }
     end
 
+    def qrcode_url
+
+    end
+
     def init_match_value
       self.match_value = "#{handle_type.downcase.gsub('::', '_')}_#{handle_id}_#{organ_id}"
     end
@@ -70,7 +74,11 @@ module Wechat
     def qrcode_data_url
       return unless self.qrcode_url
       if ['Wechat::ProgramApp'].include?(app.type)
-        qrcode_url
+        if qrcode.attached?
+          qrcode.url
+        else
+          qrcode_url
+        end
       else
         QrcodeHelper.data_url(self.qrcode_url)
       end
