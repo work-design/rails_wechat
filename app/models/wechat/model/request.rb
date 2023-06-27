@@ -107,25 +107,25 @@ module Wechat
     end
 
     def reply_for_user
-      if wechat_user.account
-        reply_params(
-          title: '点击链接查看个人账户详情',
-          description: '点击链接查看个人账户详情',
-          url: Rails.application.routes.url_for(controller: 'my/home', host: app.domain, auth_token: wechat_user.auth_token)
+      if scene_organ
+        url = Rails.application.routes.url_for(
+          controller: scene_organ.redirect_controller,
+          action: scene_organ.redirect_action,
+          host: scene_organ.domain,
+          auth_token: wechat_user.auth_token
         )
       else
-        reply_for_blank_user
+        url = Rails.application.routes.url_for(
+          controller: 'my/home',
+          host: app.domain,
+          auth_token: wechat_user.auth_token
+        )
       end
-    end
-
-    def reply_for_blank_user
-      return if wechat_user.user
-      wechat_user.create_user
 
       reply_params(
         title: wechat_user.attributes['name'].present? ? "您好，#{wechat_user.attributes['name']}" : '您好',
-        description: '请查看个人页面',
-        url: Rails.application.routes.url_for(controller: 'my/home', host: app.domain, auth_token: wechat_user.auth_token)
+        description: '点击链接查看详情',
+        url: url
       )
     end
 
@@ -194,7 +194,7 @@ module Wechat
     end
 
     def get_reply
-      reply = reply_from_rule || reply_from_response
+      reply = reply_from_rule || reply_from_response || reply_for_user
 
       if reply.is_a?(Reply)
         self.reply_body = reply.to_wechat
