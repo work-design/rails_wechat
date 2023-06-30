@@ -4,7 +4,7 @@ module Wechat
 
     included do
       attribute :corp_id, :string
-      attribute :user_id, :string
+      attribute :userid, :string
       attribute :part_id, :string
       attribute :config_id, :string
       attribute :qr_code, :string
@@ -17,7 +17,7 @@ module Wechat
 
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id
       belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
-      belongs_to :corp_user, ->(o){ where(suite_id: o.suite_id, corp_id: o.corp_id) }, foreign_key: :user_id, primary_key: :user_id, optional: true
+      belongs_to :corp_user, ->(o){ where(suite_id: o.suite_id, corp_id: o.corp_id) }, foreign_key: :userid, primary_key: :userid, optional: true
 
       has_one :source_contact, ->(o){ where(source_id: o.source.id) }, class_name: 'Crm::SourceContact'
       has_many :source_contacts, ->(o){ where(source_id: o.source.id) }, class_name: 'Crm::SourceContact'
@@ -42,7 +42,7 @@ module Wechat
     def add_to_wx
       return unless corp
       r = corp.api.add_contact_way(
-        user: user_id,
+        user: userid,
         remark: remark,
         state: state,
         skip_verify: skip_verify
