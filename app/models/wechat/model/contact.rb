@@ -15,7 +15,7 @@ module Wechat
 
       belongs_to :source, class_name: 'Crm::Source', foreign_key: :state, primary_key: :name, optional: true
 
-      belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id
+      belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
       belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id, optional: true
       belongs_to :corp_user, ->(o){ where(suite_id: o.suite_id, corp_id: o.corp_id) }, foreign_key: :userid, primary_key: :userid, optional: true
 
@@ -32,16 +32,20 @@ module Wechat
     end
 
     def prune
-      corp && corp.api.del_contact_way(config_id)
+      api.del_contact_way(config_id)
     end
 
     def info
-      corp.api.get_contact_way(config_id)
+      api.get_contact_way(config_id)
+    end
+
+    def api
+      return @api if defined? @api
+      @api = (corp || corp_user.agent).api
     end
 
     def add_to_wx
-      return unless corp
-      r = corp.api.add_contact_way(
+      r = api.add_contact_way(
         user: userid,
         remark: remark,
         state: state,
@@ -56,8 +60,7 @@ module Wechat
     end
 
     def sync_to_wx
-      return unless corp
-      corp.api.update_contact_way(
+      api.update_contact_way(
         config_id,
         remark: remark,
         state: state,
