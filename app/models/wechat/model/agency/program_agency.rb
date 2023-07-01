@@ -31,7 +31,7 @@ module Wechat
     end
 
     def domain
-      super.presence || app.domain
+      super.presence || app&.domain
     end
 
     def set_webview_domain(action: 'set')
