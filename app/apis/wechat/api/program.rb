@@ -5,10 +5,11 @@ module Wechat::Api
     include Base::Sns
     include Public::Common
     include Public::Agency
-    include Wxaapi
     include Component
+    include Sec
     include Wxa
-    include CgiBin
+    include Wxaapi
+    include Wxaapp
     include Wxopen
 
     def jscode2session(code)
