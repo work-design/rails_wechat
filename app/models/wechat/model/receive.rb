@@ -59,7 +59,7 @@ module Wechat
       has_one :request
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
-      after_create :parse_content
+      after_create :parse_content, if: -> { platform.blank? }
       after_create_commit :check_app
       after_save_commit :weapp_audited, if: -> { ['weapp_audit_success'].include?(info_type) && saved_change_to_info_type? }
     end
