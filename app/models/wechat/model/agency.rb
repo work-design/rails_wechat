@@ -36,6 +36,10 @@ module Wechat
       after_save_commit :sync_to_storage, if: -> { saved_change_to_qrcode_url? }
     end
 
+    def name
+      user_name
+    end
+
     def disabled_func_infos
     end
 

@@ -64,6 +64,10 @@ module Wechat
       after_save_commit :weapp_audited, if: -> { ['weapp_audit_success'].include?(info_type) && saved_change_to_info_type? }
     end
 
+    def app_name
+      (agency || app).name
+    end
+
     def decrypt_data
       content = (platform || app).decrypt(encrypt_data)
 
