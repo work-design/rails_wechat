@@ -33,7 +33,7 @@ module Wechat
 
     private
     def set_app
-      @app = App.find_by(appid: params[:appid])
+      @app = App.find_by(appid: params[:appid]) || Agency.find_by(appid: params[:appid])
     end
 
     def set_wechat_program_user
