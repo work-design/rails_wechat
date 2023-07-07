@@ -7,6 +7,12 @@ module Wechat
     included do
       attribute :confirm_name, :string
       attribute :confirm_content, :string
+
+      after_create_commit :get_webview_file_later
+    end
+
+    def get_webview_file_later
+      AgencyWebviewFileJob.perform_later(self)
     end
 
     def get_webview_file!
