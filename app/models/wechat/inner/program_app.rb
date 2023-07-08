@@ -11,6 +11,17 @@ module Wechat
       after_create_commit :get_webview_file_later
     end
 
+    def generate_wechat_user(code)
+      info = api.jscode2session(code)
+      logger.debug "\e[35m  Program Generate User: #{info}  \e[0m"
+
+      program_user = ProgramUser.find_or_initialize_by(uid: info['openid'])
+      program_user.appid = appid
+      program_user.assign_attributes info.slice('unionid', 'session_key')
+      program_user.init_user
+      program_user
+    end
+
     def get_webview_file_later
       AgencyWebviewFileJob.perform_later(self)
     end
