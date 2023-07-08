@@ -109,7 +109,7 @@ module Wechat
     end
 
     def reply_for_user
-      if scene_organ
+      if scene_organ && wechat_user.persisted?
         url = Rails.application.routes.url_for(
           controller: scene_organ.redirect_controller,
           action: scene_organ.redirect_action,
@@ -117,13 +117,15 @@ module Wechat
           auth_token: wechat_user.auth_token
         )
         desc = "#{scene_organ.name}欢迎您\n点击链接访问精心为您准备的内容"
-      else
+      elsif wechat_user.persisted?
         url = Rails.application.routes.url_for(
           controller: 'my/home',
           host: app.domain,
           auth_token: wechat_user.auth_token
         )
         desc = '点击链接查看详情'
+        return
+      else
         return
       end
 
