@@ -38,7 +38,7 @@ module Wechat::Api
       }
 
       r = component_post 'api_get_authorizer_info', **body, origin: BASE
-      logger.debug "\e[35m  Agency Store Info: #{r}  \e[0m"
+      Rails.logger.debug "\e[35m  Agency Store Info: #{r}  \e[0m"
       r['authorizer_info']
     end
 
