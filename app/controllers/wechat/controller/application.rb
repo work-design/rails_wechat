@@ -92,7 +92,12 @@ module Wechat
         @current_wechat_user = current_authorized_token.oauth_user.same_oauth_users.where(appid: appid).take
       elsif request.variant.include?(:wechat) && current_user
         wechat_appids = (PublicApp.global + PublicApp.default_where(default_ancestors_params)).pluck(:appid).uniq
-        @current_wechat_user = current_authorized_token.oauth_user.same_oauth_users.where(appid: wechat_appids).take
+
+        if wechat_appids.include?(current_authorized_token.oauth_user.appid)
+          @current_wechat_user = current_authorized_token.oauth_user
+        else
+          @current_wechat_user = current_authorized_token.oauth_user.same_oauth_users.where(appid: wechat_appids).take
+        end
       end
 
       logger.debug "\e[35m  Current Wechat User: #{@current_wechat_user&.id}  \e[0m"
