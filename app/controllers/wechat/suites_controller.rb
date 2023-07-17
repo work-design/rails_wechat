@@ -27,12 +27,12 @@ module Wechat
       logger.debug "\e[35m  body is: #{r}  \e[0m"
 
       @suite_receive = @suite.suite_receives.build
+      @suite_receive.message_hash = r
       @suite_receive.corpid = r['ToUserName']
       @suite_receive.user_id = r['FromUserName']
       @suite_receive.agent_id = r['AgentID']
       @suite_receive.msg_type = r['MsgType']
       @suite_receive.msg_id = r['MsgId']
-      @suite_receive.content = r['Content']
       @suite_receive.event = r['Event']
       @suite_receive.event_key = r['EventKey']
       @suite_receive.encrypt_data = r['Encrypt']
