@@ -52,12 +52,12 @@ module Wechat
         self.message_hash = JSON.parse(content)
       end
 
-      self.info_type = message_hash['InfoType']
+      self.info_type = message_hash['InfoType'] || message_hash['Event']
       # 同步 userid 和 corpid
       self.user_id = message_hash['UserID'] || message_hash['FromUserName']
       case self.info_type
       when 'change_external_contact'
-        self.corpid = message_hash['AuthCorpId']
+        self.corpid = message_hash['AuthCorpId'] || message_hash['ToUserName']
       else
         self.corpid = message_hash['ToUserName']
       end
