@@ -1,6 +1,9 @@
 module Wechat
   class Admin::AgentsController < Admin::BaseController
-    before_action :set_agent, only: [:show, :info, :edit, :update, :destroy, :actions]
+    before_action :set_agent, only: [
+      :show, :edit, :update, :destroy, :actions,
+      :info, :edit_confirm, :update_confirm
+    ]
 
     def index
       q_params = {}
@@ -27,6 +30,15 @@ module Wechat
     end
 
     def info
+    end
+
+    def edit_confirm
+    end
+
+    def update_confirm
+      @agent.confirm_name = params[:confirm_file].original_filename
+      @agent.confirm_content = params[:confirm_file].read if params[:confirm_file].respond_to?(:read)
+      @agent.save
     end
 
     private

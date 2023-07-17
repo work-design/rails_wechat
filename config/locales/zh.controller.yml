@@ -20,6 +20,8 @@ zh:
       agents:
         index:
           title: 我的企业微信
+        edit_confirm:
+          title: 验证文件
         info:
           title: 配置参数
       payees:

@@ -207,6 +207,8 @@ Rails.application.routes.draw do
         resources :agents do
           member do
             get :info
+            get 'confirm' => :edit_confirm
+            patch 'confirm' => :update_confirm
           end
           resources :suite_receives
           resources :corp_users do

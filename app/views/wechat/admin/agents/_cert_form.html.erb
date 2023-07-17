@@ -1,0 +1,4 @@
+<%= form_with model: @agent, scope: '', url: { action: 'update_confirm' } do |f| %>
+  <%= f.file_field :confirm_file %>
+  <%= f.submit %>
+<% end %>
