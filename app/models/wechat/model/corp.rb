@@ -186,7 +186,7 @@ module Wechat
     end
 
     def oauth2_url(scope: 'snsapi_privateinfo', state: SecureRandom.hex(16), **url_options)
-      url_options.with_defaults! controller: 'wechat/corps', action: 'login', id: id, host: host
+      url_options.with_defaults! controller: 'wechat/corps', action: 'login', id: id, host: organ.host
       h = {
         appid: corp_id,
         redirect_uri: ERB::Util.url_encode(Rails.application.routes.url_for(**url_options)),
