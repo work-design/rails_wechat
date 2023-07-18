@@ -17,7 +17,7 @@ module Wechat
 
     private
     def set_corp
-      @corp = Corp.find params[:corp_id] if params[:corp_id]
+      @corp = Corp.find params[:corpid] if params[:corp_id]
     end
 
     def set_organ
@@ -26,7 +26,7 @@ module Wechat
 
     def set_new_organ
       @member = current_account.members.build(owned: true)
-      @organ = @member.build_organ(corpid: @corp&.corp_id, **organ_params)
+      @organ = @member.build_organ(corpid: @corp&.corpid, **organ_params)
     end
 
     def organ_params

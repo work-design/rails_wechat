@@ -6,7 +6,7 @@ module Wechat
 
     included do
       attribute :name, :string
-      attribute :corp_id, :string, index: true
+      attribute :corpid, :string, index: true
       attribute :open_corpid, :string, index: true
       attribute :corp_type, :string
       attribute :subject_type, :string
@@ -32,12 +32,13 @@ module Wechat
       attribute :enabled, :boolean, default: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
+      has_many :profiles, class_name: 'Profiled::Profile', primary_key: :corpid, foreign_key: :corpid
+
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id, optional: true
 
       has_many :suite_receives, ->(o) { where(suiteid: o.suite_id) }, primary_key: :open_corpid, foreign_key: :auth_corp_id
-      has_many :corp_users, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corp_id, foreign_key: :corp_id
-      has_many :contacts, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corp_id, foreign_key: :corp_id
-      has_many :externals, primary_key: :corp_id, foreign_key: :corp_id
+      has_many :corp_users, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corpid, foreign_key: :corpid
+      has_many :contacts, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corpid, foreign_key: :corpid
 
       scope :enabled, -> { where(enabled: true) }
 
@@ -55,8 +56,8 @@ module Wechat
     end
 
     def receive_filter
-      if corp_id != open_corpid
-        { corpid: corp_id }
+      if corpid != open_corpid
+        { corpid: corpid }
       else
         { auth_corp_id: open_corpid }
       end
@@ -67,7 +68,7 @@ module Wechat
     end
 
     def appid
-      corp_id
+      corpid
     end
 
     def init_organ
@@ -103,7 +104,7 @@ module Wechat
     end
 
     def auth_info
-      info = suite.api.auth_info(corp_id, permanent_code)
+      info = suite.api.auth_info(corpid, permanent_code)
       assign_info(info)
       save
     end
@@ -122,21 +123,21 @@ module Wechat
     end
 
     def list_actived_account(debug: false)
-      suite.provider.api.list_actived_account(corp_id, debug: debug)
+      suite.provider.api.list_actived_account(corpid, debug: debug)
     end
 
     def list_codes
       orders = []
       codes = []
 
-      r = suite.provider.api.list_order(corp_id)
+      r = suite.provider.api.list_order(corpid)
       r['order_list'].each do |h|
         account = suite.provider.api.list_order_account(h['order_id'])
         orders += account['account_list']
       end
 
       orders.each do |h|
-        code = suite.provider.api.active_info_by_code(corp_id, h['active_code'])
+        code = suite.provider.api.active_info_by_code(corpid, h['active_code'])
         codes << code['active_info']
       end
 
@@ -148,7 +149,7 @@ module Wechat
       js_hash = Wechat::Signature.signature(jsapi_ticket, url)
       js_hash.merge!(
         beta: true,
-        appid: corp_id
+        appid: corpid
       )
 
       logger.debug "\e[35m  Current page is: #{url}, Hash: #{js_hash.inspect}  \e[0m"
@@ -175,7 +176,7 @@ module Wechat
       refresh_agent_ticket unless agent_ticket_valid?
       js_hash = Wechat::Signature.signature(agent_ticket, url)
       js_hash.merge!(
-        corpid: corp_id,
+        corpid: corpid,
         agentid: agentid
       )
 
@@ -188,7 +189,7 @@ module Wechat
     def oauth2_url(scope: 'snsapi_privateinfo', state: SecureRandom.hex(16), **url_options)
       url_options.with_defaults! controller: 'wechat/corps', action: 'login', id: id, host: organ.host
       h = {
-        appid: corp_id,
+        appid: corpid,
         redirect_uri: ERB::Util.url_encode(Rails.application.routes.url_for(**url_options)),
         response_type: 'code',
         scope: scope,
@@ -204,7 +205,7 @@ module Wechat
       if suite.kind_develop?
         info = api.token
       else
-        info = suite.api.corp_token(corp_id, permanent_code)
+        info = suite.api.corp_token(corpid, permanent_code)
       end
       self.access_token = info['access_token']
       self.access_token_expires_at = Time.current + info['expires_in'].to_i if info['access_token'] && self.access_token_changed?
@@ -225,7 +226,7 @@ module Wechat
     end
 
     def sync_open_corpid!
-      open = suite.provider.api.open_corpid(corp_id)
+      open = suite.provider.api.open_corpid(corpid)
       logger.debug "\e[35m  Suite Corp Open id: #{open}  \e[0m"
       self.open_corpid = open['open_corpid']
       self.save

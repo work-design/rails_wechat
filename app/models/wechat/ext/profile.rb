@@ -3,7 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :corp_id, :string
+      attribute :corpid, :string
       attribute :external_userid, :string
       attribute :position, :string
       attribute :avatar_url, :string

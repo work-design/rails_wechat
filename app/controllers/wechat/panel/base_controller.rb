@@ -11,7 +11,7 @@ module Wechat
     end
 
     def set_corp
-      @corp = @suite.corps.find params[:corp_id]
+      @corp = @suite.corps.find params[:corpid]
     end
   end
 end

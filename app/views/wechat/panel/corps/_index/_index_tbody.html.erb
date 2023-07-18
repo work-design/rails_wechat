@@ -3,7 +3,7 @@
     <%= image_tag model.square_logo_url, class: 'image is-32x32' if model.square_logo_url.present? %>
     <span><%= model.name %></span>
   </div>
-  <p class="has-text-grey"><%= model.corp_id %></p>
+  <p class="has-text-grey"><%= model.corpid %></p>
 </td>
 <td>
   <%= link_to({ controller: '/admin/home', host: model.organ.host, auth_token: current_authorized_token.id }, aria: { label: t('admin.home.index.title') }, class: 'button is-small is-rounded is-light') do %>

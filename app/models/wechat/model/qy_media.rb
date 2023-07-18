@@ -3,7 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :corp_id, :string, index: true
+      attribute :corpid, :string, index: true
       attribute :suite_id, :string, index: true
       attribute :media_id, :string
       attribute :url, :string
@@ -11,7 +11,7 @@ module Wechat
 
       belongs_to :medium, polymorphic: true, optional: true
 
-      belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corp_id, primary_key: :corp_id
+      belongs_to :corp, ->(o){ where(suite_id: o.suite_id) }, foreign_key: :corpid, primary_key: :corpid
       belongs_to :suite, foreign_key: :suite_id, primary_key: :suite_id
     end
 
