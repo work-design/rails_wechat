@@ -19,7 +19,7 @@ module Wechat
       belongs_to :provider, optional: true
       belongs_to :suite, foreign_key: :suiteid, primary_key: :suite_id, optional: true
       belongs_to :agent, ->(o){ where(corpid: o.corpid) }, foreign_key: :agent_id, primary_key: :agentid, optional: true
-      belongs_to :corp, ->(o) { where(suite_id: o.suiteid) }, foreign_key: :auth_corp_id, primary_key: :corp_id, optional: true
+      belongs_to :corp, ->(o) { where(suite_id: o.suiteid) }, foreign_key: :auth_corp_id, primary_key: :corpid, optional: true
       belongs_to :corp_user, ->(o) { where(o.filter_hash) }, foreign_key: :user_id, primary_key: :userid, optional: true
 
       enum msg_format: {
@@ -37,9 +37,9 @@ module Wechat
 
     def filter_hash
       if suiteid
-        { suite_id: suiteid, corp_id: auth_corp_id }
+        { suite_id: suiteid, corpid: auth_corp_id }
       else
-        { corp_id: corpid, suite_id: suiteid }
+        { corpid: corpid, suite_id: suiteid }
       end
     end
 
