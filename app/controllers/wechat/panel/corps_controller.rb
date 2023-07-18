@@ -7,7 +7,7 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit('name-like', :corpid)
 
-      @corps = @suite.corps.default_where(q_params).order(id: :desc).page(params[:page])
+      @corps = @suite.corps.includes(:organ).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
   end
