@@ -120,7 +120,7 @@ module Wechat
       elsif wechat_user.persisted?
         url = Rails.application.routes.url_for(
           controller: 'my/home',
-          host: app.domain,
+          host: app&.domain,
           auth_token: wechat_user.auth_token
         )
         desc = '点击链接查看详情'
