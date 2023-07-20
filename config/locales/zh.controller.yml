@@ -10,6 +10,9 @@ zh:
     agents:
       login:
         title: 企业微信授权登录中
+    corps:
+      login:
+        title: 企业微信授权登录中
     admin:
       title: 微信公众平台
       apps:
