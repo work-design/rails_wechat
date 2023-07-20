@@ -95,7 +95,7 @@ module Wechat
     end
 
     def deal_contact
-      return unless corp_user
+      return unless corp_user.reload
       corp_user.sync_external(message_hash['ExternalUserID'])
     end
 
