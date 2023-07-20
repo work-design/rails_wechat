@@ -32,11 +32,12 @@ module Wechat
       after_create_commit :clean_last, if: -> { ['suite_ticket', 'reset_permanent_code'].include?(info_type) }
       after_create_commit :compute_corp_id!, if: -> { ['change_external_contact'].include?(info_type) }
       after_save_commit :sync_auth_code, if: -> { ['create_auth', 'reset_permanent_code'].include?(info_type) && saved_change_to_info_type? }
-      after_save_commit :deal_contact, if: -> { ['change_external_contact'].include?(info_type) && (['auth_corp_id', 'corpid'] & saved_changes.keys).present? }
     end
 
     def filter_hash
-      if suiteid
+      if suiteid && corpid.start_with?('wp-')
+        { suite_id: suiteid, corpid: corpid }
+      elsif suiteid
         { suite_id: suiteid, corpid: auth_corp_id }
       else
         { corpid: corpid, suite_id: suiteid }
@@ -88,6 +89,8 @@ module Wechat
       logger.debug "\e[35m  Corp id: #{r}  \e[0m"
       self.auth_corp_id ||= r['open_corpid']
       self.save
+
+      deal_contact
     end
 
     def clean_last
@@ -95,7 +98,7 @@ module Wechat
     end
 
     def deal_contact
-      return unless corp_user.reload
+      return unless corp_user
       corp_user.sync_external(message_hash['ExternalUserID'])
     end
 
