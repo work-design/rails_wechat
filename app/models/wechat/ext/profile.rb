@@ -26,8 +26,8 @@ module Wechat
     end
 
     def sync_related_task
-      return if wechat_users.blank?
-      self.identity = wechat_users.pluck(:identity).compact[0]
+      return if union_wechat_users.blank?
+      self.user_id = union_wechat_users.pluck(:user_id).compact[0]
       client_maintains.each do |maintain|
         maintain.sync_user_from_client
       end
