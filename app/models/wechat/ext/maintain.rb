@@ -36,7 +36,7 @@ module Wechat
       member.corp_users.each do |corp_user|
         app = corp_user.corp || corp_user.app.agent
         next if app.blank?
-        r = app.api.remark(corp_user.user_id, external_userid, remark: remark)
+        r = app.api.remark(corp_user.userid, external_userid, remark: remark)
         logger.debug "\e[35m  sync Remark: #{r}  \e[0m"
         break
       end
