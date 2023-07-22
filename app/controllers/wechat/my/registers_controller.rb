@@ -1,6 +1,7 @@
 module Wechat
   class My::RegistersController < My::BaseController
     before_action :set_register, only: [:show, :edit, :edit_code, :update, :destroy]
+    before_action :set_new_register, only: [:new, :create]
 
     def index
       @registers = current_user.registers
@@ -13,25 +14,11 @@ module Wechat
       end
     end
 
-    def new
-      new_register
-    end
-
-    def create
-      new_register
-
-      if @register.save
-        render 'create', locals: { return_to: my_registers_url }
-      else
-        render :new, locals: { model: @register }, status: :unprocessable_entity
-      end
-    end
-
     def edit_code
     end
 
     private
-    def new_register
+    def set_new_register
       @register = current_user.registers.build(register_params)
       @register.mobile ||= current_account.identity if current_account.is_a?(::Auth::MobileAccount)
     end
