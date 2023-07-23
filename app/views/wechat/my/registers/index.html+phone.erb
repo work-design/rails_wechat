@@ -1,13 +1,13 @@
 <% @registers.each do |register| %>
   <% if register.done? %>
-    <%= render partial: 'register_done', locals: { register: register } %>
+    <%= render partial: 'register_done', locals: { model: register } %>
   <% else %>
-    <%= render partial: 'register', locals: { register: register } %>
+    <%= render partial: 'register', locals: { model: register } %>
   <% end %>
 <% end %>
 
 <% if @registers.blank? %>
-<div class="weui-panel">
+<div class="weui-panel is-box">
   <%= link_to({ action: 'new' }, class: 'weui-btn_cell weui-btn_cell-primary') do %>
     <span class="weui-btn_cell__icon"><i class="fa-solid fa-plus"></i></span>
     <span><%= t('.new') %></span>

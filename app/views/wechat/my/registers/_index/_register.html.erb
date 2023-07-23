@@ -1,0 +1,32 @@
+<div class="weui-form-preview is-box">
+  <div class="weui-form-preview__hd">
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label"><%= model.id_name %></label>
+    </div>
+  </div>
+  <div class="weui-form-preview__bd">
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label"><%= Wechat::Register.human_attribute_name(:id_number) %></label>
+      <div class="weui-form-preview__value"><%= model.id_number %></div>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label"><%= Wechat::Register.human_attribute_name(:mobile) %></label>
+      <div class="weui-form-preview__value"><%= model.mobile %></div>
+    </div>
+    <div class="weui-form-preview__item">
+      <label class="weui-form-preview__label"><%= Wechat::Register.human_attribute_name(:state) %></label>
+      <span class="weui-form-preview__value"><%= model.state_i18n %></span>
+    </div>
+  </div>
+  <div class="weui-form-preview__ft">
+    <%= link_to({ action: 'edit', id: model.id }, aria: { label: t('.edit') }, class: 'weui-form-preview__btn weui-form-preview__btn_default') do %>
+      <i class="fa-solid fa-pencil"></i>
+    <% end %>
+    <%= link_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, data: { turbo_confirm: t('.confirm') }, class: 'weui-form-preview__btn weui-form-preview__btn_default') do %>
+      <i class="fa-solid fa-trash"></i>
+    <% end %>
+    <%= link_to({ action: 'edit_code', id: model.id }, aria: { label: t('.edit') }, class: 'weui-form-preview__btn weui-form-preview__btn_default') do %>
+      <i class="fa-solid fa-mobile-alt"></i>
+    <% end unless model.mobile_code %>
+  </div>
+</div>

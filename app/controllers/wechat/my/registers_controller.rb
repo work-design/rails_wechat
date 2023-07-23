@@ -7,7 +7,7 @@ module Wechat
       @registers = current_user.registers
 
       if @registers.blank?
-        new_register
+        set_new_register
         render :new
       else
         render 'index'

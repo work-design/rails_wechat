@@ -1,8 +1,11 @@
-<%= form_with theme: 'weui', model: [:my, @register] do |f| %>
+<%= render 'top_bar' %>
+
+<div class="weui-form-wrap">
+<%= form_with theme: 'weui', model: @register, url: { action: 'update' } do |f| %>
   <%= render 'error_messages', target: f.object %>
   <div class="weui-form__control-area">
     <div class="weui-cells__group weui-cells__group_form">
-      <div class="weui-cells__title">开通公众号 / 从医专用邮箱</div>
+      <div class="weui-cells__title">开通公众号 / 专用邮箱</div>
       <div class="weui-cells weui-cells_form">
         <%= f.text_field :mobile_code %>
       </div>
@@ -10,3 +13,4 @@
   </div>
   <%= f.submit nil, wrap: { all: nil } %>
 <% end %>
+</div>

@@ -1,4 +1,4 @@
-<div class="weui-form-preview">
+<div class="weui-form-preview is-box">
   <div class="weui-form-preview__hd">
     <div class="weui-form-preview__item">
       <label class="weui-form-preview__label"><%= register.id_name %></label>
@@ -6,17 +6,17 @@
   </div>
   <div class="weui-form-preview__bd">
     <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label"><%= Register.human_attribute_name(:qrcode) %></label>
+      <label class="weui-form-preview__label"><%= Wechat::Register.human_attribute_name(:qrcode) %></label>
       <div class="weui-form-preview__value">
         <%= image_tag register.qrcode if register.qrcode.attached? %>
       </div>
     </div>
     <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label"><%= Register.human_attribute_name(:appid) %></label>
+      <label class="weui-form-preview__label"><%= Wechat::Register.human_attribute_name(:appid) %></label>
       <span class="weui-form-preview__value"><%= register.appid %></span>
     </div>
     <div class="weui-form-preview__item">
-      <label class="weui-form-preview__label"><%= Register.human_attribute_name(:email) %></label>
+      <label class="weui-form-preview__label"><%= Wechat::Register.human_attribute_name(:email) %></label>
       <span class="weui-form-preview__value"><%= register.email %></span>
     </div>
   </div>
