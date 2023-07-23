@@ -105,7 +105,7 @@ Rails.application.routes.draw do
             get 'bind' => :edit_bind
             patch 'bind' => :updaet_bind
             get :qrcode
-            get 'code' => :edit_code
+            get :code
           end
         end
         resources :apps do
