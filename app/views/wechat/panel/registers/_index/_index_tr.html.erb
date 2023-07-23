@@ -2,14 +2,14 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
-      <%= link_to assign_admin_register_path(model), aria: { label: '分配' }, class: 'button is-small is-rounded is-light' do %>
-        <i class="fa-regular fa-hand-point-right"></i>
+      <%= link_to({ action: 'edit_assign', id: model.id }, aria: { label: '分配' }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-hand-point-right"></i>
       <% end %>
-      <%= link_to app_admin_register_path(model), aria: { label: t('.app') }, class: 'button is-small is-rounded is-light' do %>
+      <%= link_to({ action: 'edit_app', id: model.id }, aria: { label: t('.app') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-brands fa-weixin"></i>
       <% end %>
       <%= link_to({ controller: 'bench/me/tasks', tasking_type: 'Register', tasking_id: model.id }, aria: { label: t('.tasks') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-regular fa-tasks"></i>
+        <i class="fa-solid fa-tasks"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info"></i>

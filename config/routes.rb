@@ -97,6 +97,17 @@ Rails.application.routes.draw do
           end
           resources :template_key_words
         end
+        resources :registers do
+          member do
+            get 'app' => :edit_app
+            get 'assign' => :edit_assign
+            patch 'assign' => :update_assign
+            get 'bind' => :edit_bind
+            patch 'bind' => :updaet_bind
+            get :qrcode
+            get 'code' => :edit_code
+          end
+        end
         resources :apps do
           member do
             get :key

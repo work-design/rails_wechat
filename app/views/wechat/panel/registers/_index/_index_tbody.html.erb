@@ -1,5 +1,5 @@
 <td>
-  <p><%= link_to model.id_name, admin_register_path(model) %></p>
+  <p><%= link_to model.id_name, { action: 'show', id: model.id } %></p>
   <p><%= model.id_number %></p>
 </td>
 <td>
@@ -10,8 +10,8 @@
 <td>
   <p>
     <%= model.mobile %>
-    <%= link_to code_admin_register_path(model), method: :put, aria: { label: '验证码' }, data: { turbo_confirm: t('.confirm') }, class: 'button is-small is-rounded is-light' do %>
-      <i class="fa-regular fa-paper-plane"></i>
+    <%= link_to({ action: 'edit_code', id: model.id }, method: :put, aria: { label: '验证码' }, data: { turbo_confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-paper-plane"></i>
     <% end %>
   </p>
   <p><%= model.mobile_code %></p>
@@ -19,13 +19,13 @@
 <td>
   <p>
     <%= image_tag model.bind_qrcode, class: 'image is-24x24' if model.bind_qrcode.attached? %>
-    <%= link_to bind_admin_register_path(model), aria: { label: t('.bind') }, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to({ action: 'edit_bind', id: model.id }, aria: { label: t('.bind') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fa-solid fa-qrcode"></i>
     <% end %>
   </p>
   <p>
     <%= image_tag model.qrcode, class: 'image is-24x24' if model.qrcode.attached? %>
-    <%= link_to qrcode_admin_register_path(model), aria: { label: t('.qrcode') }, class: 'button is-small is-rounded is-light' do %>
+    <%= link_to({ action: 'qrcode', id: model.id }, aria: { label: t('.qrcode') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fa-solid fa-qrcode"></i>
     <% end %>
   </p>

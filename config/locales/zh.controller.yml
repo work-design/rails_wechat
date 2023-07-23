@@ -76,12 +76,6 @@ zh:
       templates:
         index:
           title: 消息模板
-      registers:
-        index:
-          title: 公众号申请
-          bind: 绑定二维码
-          qrcode: 关注二维码
-          app: APPID
       organs:
         show:
           title: 企业微信
@@ -164,6 +158,12 @@ zh:
       partner_payees:
         index:
           title: 签约商户
+      registers:
+        index:
+          title: 公众号申请
+          bind: 绑定二维码
+          qrcode: 关注二维码
+          app: APPID
     in:
       title: 平台微信
       apps:
