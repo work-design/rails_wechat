@@ -23,6 +23,17 @@ module Wechat
       has_many :platform_tickets, primary_key: :appid, foreign_key: :appid
       has_many :receives, dependent: :nullify
       has_many :platform_templates
+
+      before_validation :init_token, if: -> { token.blank? }
+      before_validation :init_aes_key, if: -> { encoding_aes_key.blank? }
+    end
+
+    def init_token
+      self.token = SecureRandom.hex
+    end
+
+    def init_aes_key
+      self.encoding_aes_key = SecureRandom.alphanumeric(43)
     end
 
     def api

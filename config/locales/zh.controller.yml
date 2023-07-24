@@ -111,6 +111,8 @@ zh:
           title: 微信第三方平台
         agency:
           title: 示例
+        info:
+          title: 配置信息
       platform_receives:
         index:
           title: 消息通知

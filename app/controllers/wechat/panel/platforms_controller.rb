@@ -1,6 +1,6 @@
 module Wechat
   class Panel::PlatformsController < Panel::BaseController
-    before_action :set_platform, only: [:show, :edit, :update, :destroy, :agency]
+    before_action :set_platform, only: [:show, :edit, :update, :destroy, :agency, :info]
 
     private
     def set_platform

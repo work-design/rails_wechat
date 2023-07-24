@@ -1,0 +1,16 @@
+<table class="table is-fullwidth">
+  <tbody>
+    <tr>
+      <td class="has-text-right"><%= Wechat::Platform.human_attribute_name(:url) %></td>
+      <td><%= @platform.domain %></td>
+    </tr>
+    <tr>
+      <td class="has-text-right"><%= Wechat::Platform.human_attribute_name(:token) %></td>
+      <td><%= @platform.token %></td>
+    </tr>
+    <tr>
+      <td class="has-text-right"><%= Wechat::Platform.human_attribute_name(:encoding_aes_key) %></td>
+      <td><%= @platform.encoding_aes_key %></td>
+    </tr>
+  </tbody>
+</table>

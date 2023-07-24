@@ -128,6 +128,7 @@ Rails.application.routes.draw do
         resources :platforms do
           member do
             get :agency
+            get :info
           end
           resources :agencies do
             collection do
