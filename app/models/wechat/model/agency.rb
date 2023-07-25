@@ -24,6 +24,7 @@ module Wechat
       attribute :service_type, :string
       attribute :verify_type, :string
       attribute :extra, :json
+      attribute :version_info, :json, default: {}
 
       belongs_to :platform
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
