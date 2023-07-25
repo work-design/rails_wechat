@@ -2,7 +2,7 @@ module Wechat
   class AgencyWebviewFileJob < ApplicationJob
 
     def perform(agency)
-      agency.store_info!
+      agency.get_webview_file!
     end
 
   end
