@@ -39,7 +39,7 @@ module Wechat
     end
 
     def sync_from_app
-      self.organ_id = app.organ_id
+      self.organ_id ||= app.organ_id
     end
 
     def init_match_value
