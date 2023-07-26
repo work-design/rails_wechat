@@ -4,7 +4,7 @@
     <div data-show-target="item" style="visibility: hidden">
       <%= link_to model.fast_url, aria: { label: '快速注册' }, class: 'button is-small is-rounded is-light' do %>
         <i class="fa-solid fa-vial has-text-success"></i>
-      <% end if model.fast_url %>
+      <% end if model.respond_to?(:fast_url) %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info has-text-primary"></i>
       <% end %>
