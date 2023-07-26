@@ -20,7 +20,6 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :agency, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :user_inviter, class_name: 'Auth::User', optional: true
-      belongs_to :member_inviter, class_name: 'Org::Member', optional: true
 
       has_many :org_members, class_name: 'Org::Member', primary_key: :uid, foreign_key: :wechat_openid
       has_many :profiles, class_name: 'Profiled::Profile', primary_key: :unionid, foreign_key: :unionid
@@ -34,7 +33,6 @@ module Wechat
 
       after_save :sync_to_org_members, if: -> { saved_change_to_identity? }
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
-      after_save_commit :auto_join_organ, if: -> { member_inviter && saved_change_to_member_inviter_id? }
       after_save_commit :prune_user_tags, if: -> { unsubscribe_at.present? && saved_change_to_unsubscribe_at? }
       after_save_commit :sync_user_info_later, if: -> { scope == 'snsapi_userinfo' && saved_change_to_scope? }
       after_save_commit :init_corp_external_user, if: -> { unionid.present? && saved_change_to_unionid? }
@@ -56,10 +54,6 @@ module Wechat
         org_member.name = name
         org_member.save
       end
-    end
-
-    def auto_join_organ
-      org_members.find_by(organ_id: member_inviter.organ_id) || org_members.create(organ_id: member_inviter.organ_id, state: 'pending_trial')
     end
 
     def sync_remark_later

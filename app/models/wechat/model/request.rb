@@ -162,7 +162,7 @@ module Wechat
           self.scene_organ_id = _organ_id
         elsif body.to_s.start_with? 'org_member_'
           _member_id, _organ_id = body.delete_prefix('org_member_').split('_')
-          wechat_user.member_inviter_id ||= _member_id
+          wechat_user.org_members.find_by(organ_id: _organ_id) || wechat_user.org_members.create(organ_id: _organ_id, member_inviter_id: _member_id, state: 'pending_trial')
           self.scene_organ_id = _organ_id
         end
       end

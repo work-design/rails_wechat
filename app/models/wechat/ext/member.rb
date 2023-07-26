@@ -7,6 +7,7 @@ module Wechat
       attribute :corp_userid, :string
       attribute :wechat_openid, :string
 
+      belongs_to :member_inviter, class_name: 'Org::Member', optional: true
       belongs_to :wechat_user, class_name: 'Wechat::WechatUser', foreign_key: :wechat_openid, primary_key: :uid, optional: true
 
       has_many :corp_users, ->(o) { where(organ_id: o.organ_id) }, class_name: 'Wechat::CorpUser', primary_key: :corp_userid, foreign_key: :userid
