@@ -9,7 +9,8 @@ module Wechat
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :agency, foreign_key: :appid, primary_key: :appid, optional: true
-      belongs_to :payee, foreign_key: :mch_id, primary_key: :mch_id
+      belongs_to :partner_payee, foreign_key: :mch_id, primary_key: :mch_id, optional: true
+      belongs_to :mch_payee, foreign_key: :mch_id, primary_key: :mch_id, optional: true
 
       has_many :receivers
 
@@ -26,10 +27,10 @@ module Wechat
 
     def api
       return @api if defined? @api
-      if payee.is_a?(PartnerPayee) && payee.partner
-        @api = WxPay::Api::Partner.new(payee: payee, partner: payee.partner, appid: appid)
-      else
-        @api = WxPay::Api::Mch.new(payee: payee, appid: appid)
+      if partner_payee
+        @api = WxPay::Api::Partner.new(payee: partner_payee, partner: partner_payee.partner, appid: appid)
+      elsif mch_payee
+        @api = WxPay::Api::Mch.new(payee: mch_payee, appid: appid)
       end
     end
 
