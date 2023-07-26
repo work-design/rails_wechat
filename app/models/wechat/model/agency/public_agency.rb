@@ -13,5 +13,16 @@ module Wechat
       platform.public_agency.func_infos - func_infos
     end
 
+    def fast_url
+      url = URI('https://mp.weixin.qq.com/cgi-bin/fastregisterauth')
+      url.query = {
+        component_appid: platform.appid,
+        appid: appid,
+        copy_wx_verify: 1,
+        redirect_uri: Rails.application.routes.url_for(controller: 'wechat/platforms', action: 'callback', id: platform.id, host: platform.domain)
+      }.to_query
+      url.to_s
+    end
+
   end
 end
