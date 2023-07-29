@@ -26,12 +26,10 @@ module Wechat
       encrypts :secret
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
+      has_many :organ_domains, class_name: 'Org::OrganDomain', primary_key: :domain, foreign_key: :identifier
 
       #has_many :post_syncs, as: :synced, dependent: :delete_all
       #has_many :posts, through: :post_syncs
-
-      has_one :organ_domain, -> { where(default: true) }, class_name: 'Org::OrganDomain', primary_key: :domain, foreign_key: :identifier
-      has_many :organ_domains, class_name: 'Org::OrganDomain', primary_key: :domain, foreign_key: :identifier
 
       has_one :agency, primary_key: :appid, foreign_key: :appid
       has_many :agencies, primary_key: :appid, foreign_key: :appid
