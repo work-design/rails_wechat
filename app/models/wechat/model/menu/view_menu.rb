@@ -4,7 +4,7 @@ module Wechat
 
     def as_json(options = {})
       if options[:app]
-        host = app.domain.presence || app.organ.domain.presence || Rails.application.routes.default_url_options[:host]
+        host = options[:app].domain.presence || options[:app].organ.domain.presence || Rails.application.routes.default_url_options[:host]
       else
         host = app&.domain.presence || organ&.domain.prescen || Rails.application.routes.default_url_options[:host]
       end
