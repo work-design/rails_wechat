@@ -84,14 +84,14 @@ module Wechat
 
     def menu
       r = menu_roots.map do |menu_root|
-        subs = menu_root.menus.where(organ_id: [organ_id, nil], appid: [appid, nil]).limit(5).as_json
+        subs = menu_root.menus.where(organ_id: [organ_id, nil], appid: [appid, nil]).limit(5).as_json(app: self)
 
         if subs.size <= 1
           subs[0]
         else
           { name: menu_root.name, sub_button: subs }
         end
-      end
+      end.compact
 
       { button: r }
     end

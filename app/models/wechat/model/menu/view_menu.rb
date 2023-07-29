@@ -2,33 +2,22 @@ module Wechat
   module Model::Menu::ViewMenu
     extend ActiveSupport::Concern
 
-    included do
-      after_initialize if: :new_record? do
-        self.value ||= host
+    def as_json(options = {})
+      if options[:app]
+        host = app.domain.presence || app.organ.domain.presence || Rails.application.routes.default_url_options[:host]
+      else
+        host = app&.domain.presence || organ&.domain.prescen || Rails.application.routes.default_url_options[:host]
       end
-    end
+      r = URI(value)
+      r.host = host
+      r.scheme = Rails.application.routes.default_url_options[:protocol].presence || 'https'
+      r.to_s
 
-    def as_json
       {
         type: 'view',
         name: name,
-        url: url
+        url: r.to_s
       }
-    end
-
-    def url
-      ActionDispatch::Http::URL.url_for(
-        host: value,
-        protocol: Rails.application.routes.default_url_options[:protocol]
-      )
-    end
-
-    def host
-      if organ
-        organ.host
-      else
-        ''
-      end
     end
 
   end

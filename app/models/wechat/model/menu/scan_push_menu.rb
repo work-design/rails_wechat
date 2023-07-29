@@ -1,7 +1,7 @@
 module Wechat
   module Model::Menu::ScanPushMenu
 
-    def as_json
+    def as_json(options = nil)
       {
         type: 'scancode_push',
         name: name,
