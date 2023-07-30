@@ -186,6 +186,7 @@ Rails.application.routes.draw do
 
       namespace :board, defaults: { namespace: 'board' } do
         resources :organs
+        resources :wechat_users
       end
 
       namespace :admin, defaults: { namespace: 'admin' } do
