@@ -98,7 +98,7 @@ module Wechat
         else
           @current_wechat_user = current_authorized_token.oauth_user.same_oauth_users.where(appid: wechat_appids).take
         end
-      else
+      elsif current_authorized_token
         @current_wechat_user = current_authorized_token.oauth_user
       end
 
