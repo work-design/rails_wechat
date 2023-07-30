@@ -98,6 +98,8 @@ module Wechat
         else
           @current_wechat_user = current_authorized_token.oauth_user.same_oauth_users.where(appid: wechat_appids).take
         end
+      else
+        @current_wechat_user = current_authorized_token.oauth_user
       end
 
       logger.debug "\e[35m  Current Wechat User: #{@current_wechat_user&.id}  \e[0m"
