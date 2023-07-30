@@ -4,8 +4,8 @@ module Wechat
 
     included do
       attribute :name, :string
-      attribute :position, :integer
       attribute :appid, :string
+      attribute :position, :integer
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
