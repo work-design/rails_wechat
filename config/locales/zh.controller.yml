@@ -189,6 +189,10 @@ zh:
       users:
         invite_qrcode:
           title: 邀请二维码
+    board:
+      wechat_users:
+        index:
+          title: 微信登录
     me:
       externals:
         index:

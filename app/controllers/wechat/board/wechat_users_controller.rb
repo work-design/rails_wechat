@@ -1,6 +1,6 @@
 module Wechat
   class Board::WechatUsersController < Board::BaseController
-    before_action :set_oauth_user, only: [:show, :edit, :update, :destroy, :actions]
+    before_action :set_wechat_user, only: [:show, :edit, :update, :destroy, :actions]
 
     def index
       @wechat_users = current_user.wechat_users.includes(:app).order(appid: :asc)
@@ -27,8 +27,8 @@ module Wechat
     end
 
     private
-    def set_oauth_user
-      @oauth_user = OauthUser.find(params[:id])
+    def set_wechat_user
+      @wechat_user = WechatUser.find(params[:id])
     end
 
     def oauth_user_params
