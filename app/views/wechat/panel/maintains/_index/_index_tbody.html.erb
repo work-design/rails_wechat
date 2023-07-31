@@ -11,4 +11,5 @@
 </td>
 <td>
   <p><%= model.member.name %></p>
+  <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
 </td>
