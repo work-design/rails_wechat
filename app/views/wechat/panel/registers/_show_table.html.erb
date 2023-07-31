@@ -1,32 +1,32 @@
-<table class="table is-fullwidth">
-  <thead>
-    <tr>
-      <th>
-        <%= link_to t('.edit'), edit_admin_register_path(@register), class: 'ui mini blue right floated button' %>
-      </th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="has-text-right"><%= Register.human_attribute_name(:email) %></td>
-      <td><%= @register.email %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Register.human_attribute_name(:email_code) %></td>
-      <td><%= @register.email_code %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Register.human_attribute_name(:id_name) %></td>
-      <td><%= @register.id_name %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Register.human_attribute_name(:id_number) %></td>
-      <td><%= @register.id_number %></td>
-    </tr>
-    <tr>
-      <td class="has-text-right"><%= Register.human_attribute_name(:qrcode) %></td>
-      <td><%= image_tag @register.qrcode if @register.qrcode.attached? %></td>
-    </tr>
-  </tbody>
-</table>
+<tr>
+  <td><%= Wechat::Register.human_attribute_name(:email) %></td>
+  <td><%= @register.email %></td>
+</tr>
+<tr>
+  <td><%= Wechat::Register.human_attribute_name(:email_code) %></td>
+  <td><%= @register.email_code %></td>
+</tr>
+<tr>
+  <td><%= Wechat::Register.human_attribute_name(:id_name) %></td>
+  <td><%= @register.id_name %></td>
+</tr>
+<tr>
+  <td><%= Wechat::Register.human_attribute_name(:id_number) %></td>
+  <td><%= @register.id_number %></td>
+</tr>
+<tr>
+  <td><%= Wechat::Register.human_attribute_name(:qrcode) %></td>
+  <td><%= image_tag @register.qrcode if @register.qrcode.attached? %></td>
+</tr>
+<tr>
+  <td><%= Wechat::Register.human_attribute_name(:organ_name) %></td>
+  <td><%= @register.organ_name %></td>
+</tr>
+<tr>
+  <td><%= Wechat::Register.human_attribute_name(:organ_code) %></td>
+  <td><%= @register.organ_code %></td>
+</tr>
+<tr>
+  <td><%= Wechat::Register.human_attribute_name(:personal_wechat) %></td>
+  <td><%= @register.personal_wechat %></td>
+</tr>

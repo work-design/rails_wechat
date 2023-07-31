@@ -11,6 +11,9 @@ module Wechat
       attribute :password, :string
       attribute :mobile, :string
       attribute :mobile_code, :string
+      attribute :personal_wechat, :string
+      attribute :organ_name, :string
+      attribute :organ_code, :string
 
       belongs_to :user, optional: true
       belongs_to :organ, class_name: 'Wechat::Organ', optional: true
