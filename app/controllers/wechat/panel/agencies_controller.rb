@@ -1,7 +1,7 @@
 module Wechat
   class Panel::AgenciesController < Panel::BaseController
     before_action :set_platform
-    before_action :set_agency, only: [:show, :edit, :update]
+    before_action :set_agency, only: [:show, :edit, :update, :qrcode]
 
     def index
       q_params = {}

@@ -106,6 +106,8 @@ zh:
       agencies:
         index:
           title: 授权公众号
+        qrcode:
+          title: 体验二维码
       platforms:
         index:
           title: 微信第三方平台

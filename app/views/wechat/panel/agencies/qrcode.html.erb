@@ -1,0 +1,4 @@
+<tr>
+  <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:qrcode) %></td>
+  <td><%= image_tag @agency.qrcode, class: 'image is-128x128' if @agency.qrcode.attached? %></td>
+</tr>

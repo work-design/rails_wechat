@@ -134,6 +134,9 @@ Rails.application.routes.draw do
             collection do
               post :search
             end
+            member do
+              get :qrcode
+            end
           end
           resources :platform_templates do
             collection do
