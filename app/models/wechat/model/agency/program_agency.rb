@@ -67,6 +67,7 @@ module Wechat
         self.platform_template = platform_template
         self.save
       end
+      r
     end
 
     def submit_audit!
