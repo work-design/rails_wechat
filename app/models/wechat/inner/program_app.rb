@@ -8,6 +8,8 @@ module Wechat
       attribute :confirm_name, :string
       attribute :confirm_content, :string
 
+      has_one_attached :qrcode
+
       after_create_commit :get_webview_file_later
     end
 
@@ -20,6 +22,11 @@ module Wechat
       program_user.assign_attributes info.slice('unionid', 'session_key')
       program_user.init_user
       program_user
+    end
+
+    def get_qrcode
+      file = api.get_qrcode
+      self.qrcode.attach io: file, filename: "qrcode_#{id}"
     end
 
     def get_webview_file_later

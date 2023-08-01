@@ -16,11 +16,6 @@ module Wechat
       Wechat::Message::Template::Program.new(self, template)
     end
 
-    def get_qrcode
-      file = api.get_qrcode
-      self.qrcode.attach io: file, filename: "qrcode_#{id}"
-    end
-
     # 小程序
     def sync_templates
       api.templates.each do |template|
