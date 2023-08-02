@@ -21,7 +21,7 @@ module Wechat
       belongs_to :agency, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :user_inviter, class_name: 'Auth::User', optional: true
 
-      has_many :org_members, class_name: 'Org::Member', primary_key: :uid, foreign_key: :wechat_openid
+      has_many :members, class_name: 'Org::Member', primary_key: :uid, foreign_key: :wechat_openid
       has_many :profiles, class_name: 'Profiled::Profile', primary_key: :unionid, foreign_key: :unionid
 
       has_one :request, -> { where(init_wechat_user: true) }, primary_key: :uid, foreign_key: :open_id
@@ -48,11 +48,10 @@ module Wechat
     end
 
     def sync_to_org_members
-      org_members.each do |org_member|
-        org_member.identity = identity
-        org_member.user_id = user_id
-        org_member.name = name
-        org_member.save
+      members.each do |member|
+        member.identity = identity
+        member.name = name
+        member.save
       end
     end
 
