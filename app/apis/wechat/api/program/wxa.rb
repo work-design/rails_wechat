@@ -110,6 +110,10 @@ module Wechat::Api
       post 'security/apply_privacy_interface', api_name: api_name, content: content, origin: BASE
     end
 
+    def latest_audit_status
+      get 'get_latest_auditstatus', origin: BASE
+    end
+
     def bind_tester(wechatid)
       post 'bind_tester', wechatid: wechatid, origin: BASE
     end
