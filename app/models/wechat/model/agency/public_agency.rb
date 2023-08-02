@@ -3,6 +3,10 @@
 module Wechat
   module Model::Agency::PublicAgency
 
+    def domain
+      organ&.host
+    end
+
     def api
       return @api if defined? @api
       @api = Wechat::Api::Public.new(self)
