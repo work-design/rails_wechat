@@ -133,9 +133,11 @@ Rails.application.routes.draw do
           resources :agencies do
             collection do
               post :search
+              post :search_organs
             end
             member do
               get :qrcode
+              get :organ
             end
           end
           resources :platform_templates do

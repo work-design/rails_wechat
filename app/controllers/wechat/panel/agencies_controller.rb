@@ -1,7 +1,7 @@
 module Wechat
   class Panel::AgenciesController < Panel::BaseController
     before_action :set_platform
-    before_action :set_agency, only: [:show, :edit, :update, :qrcode]
+    before_action :set_agency, only: [:show, :edit, :update, :qrcode, :organ]
 
     def index
       q_params = {}
@@ -12,6 +12,10 @@ module Wechat
 
     def search
       @agencies = @platform.agencies.default_where('nick_name-like': params['name-like'])
+    end
+
+    def search_organs
+      @organs = Org::Organ.default_where('name-like': params['name-like'])
     end
 
     private
