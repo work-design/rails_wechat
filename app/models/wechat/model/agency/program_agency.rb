@@ -41,7 +41,7 @@ module Wechat
     end
 
     def set_domain(action: 'set')
-      api.modify_domain_directly(
+      h = {
         action: action,
         requestdomain: [URI::HTTPS.build(host: domain).to_s],
         wsrequestdomain: [URI::WSS.build(host: domain).to_s],
@@ -49,7 +49,9 @@ module Wechat
         downloaddomain: [URI::HTTPS.build(host: domain).to_s],
         udpdomain: [URI::Generic.build(host: domain, scheme: 'udp').to_s],
         tcpdomain: [URI::Generic.build(host: domain, scheme: 'tcp').to_s]
-      )
+      }
+      api.modify_domain_directly(**h)
+      api.modify_domain(**h)
     end
 
     def commit(platform_template)
