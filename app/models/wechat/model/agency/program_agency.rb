@@ -5,7 +5,6 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      attribute :domain, :string
       attribute :auditid, :integer
       attribute :version_info, :json, default: {}
 
@@ -31,7 +30,7 @@ module Wechat
     end
 
     def domain
-      super.presence || app&.domain
+      organ&.mp_host
     end
 
     def set_webview_domain(action: 'set')

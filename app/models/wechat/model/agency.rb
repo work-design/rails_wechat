@@ -26,6 +26,8 @@ module Wechat
       attribute :extra, :json
       attribute :version_info, :json, default: {}
 
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
+
       belongs_to :platform
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
