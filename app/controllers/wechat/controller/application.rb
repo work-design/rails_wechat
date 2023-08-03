@@ -77,31 +77,23 @@ module Wechat
 
     def current_payee
       return @current_payee if defined?(@current_payee)
-
       @current_payee = current_organ_domain.payees.take
-
       logger.debug "\e[35m  Current Payee: #{@current_payee&.id}  \e[0m"
       @current_payee
     end
 
     def current_wechat_user
       return @current_wechat_user if defined?(@current_wechat_user)
-
-      if request.variant.include?(:mini_program) && current_user
-        appid = request.user_agent&.scan(RegexpUtil.between('miniProgram/', '$')).presence || request.referer&.scan(RegexpUtil.between('servicewechat.com/', '/')).presence || current_authorized_token.appid
-        @current_wechat_user = current_authorized_token.oauth_user.same_oauth_users.where(appid: appid).take
-      elsif request.variant.include?(:wechat) && current_user
-        wechat_appids = (PublicApp.global + PublicApp.default_where(default_ancestors_params)).pluck(:appid).uniq
-
-        if wechat_appids.include?(current_authorized_token.oauth_user.appid)
-          @current_wechat_user = current_authorized_token.oauth_user
-        else
+      @current_wechat_user = current_authorized_token&.oauth_user
+      unless @current_wechat_user
+        if request.variant.include?(:mini_program) && current_user
+          appid = request.user_agent&.scan(RegexpUtil.between('miniProgram/', '$')).presence || request.referer&.scan(RegexpUtil.between('servicewechat.com/', '/')).presence || current_authorized_token.appid
+          @current_wechat_user = current_authorized_token.oauth_user.same_oauth_users.where(appid: appid).take
+        elsif request.variant.include?(:wechat) && current_user
+          wechat_appids = (PublicApp.global + PublicApp.default_where(default_ancestors_params)).pluck(:appid).uniq
           @current_wechat_user = current_authorized_token.oauth_user.same_oauth_users.where(appid: wechat_appids).take
         end
-      elsif current_authorized_token
-        @current_wechat_user = current_authorized_token.oauth_user
       end
-
       logger.debug "\e[35m  Current Wechat User: #{@current_wechat_user&.id}  \e[0m"
       @current_wechat_user
     end
