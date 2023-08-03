@@ -42,6 +42,7 @@ module Wechat
             'chooseImage', 'previewImage', 'uploadImage',
             'updateTimelineShareData', 'updateAppMessageShareData'
           ],
+          open_tags: ['wx-open-subscribe'],
           **js_app.js_config(session[:enter_url])
         }
       else
