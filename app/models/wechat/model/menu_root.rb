@@ -17,10 +17,10 @@ module Wechat
     end
 
     def filter_hash
-      {
-        organ_id: [organ_id, nil],
-        appid: [appid, nil]
-      }
+      h = {}
+      h.merge! organ_id: [organ_id, nil] if organ_id
+      h.merge! appid: [appid, nil] if appid
+      h
     end
 
     def as_json
