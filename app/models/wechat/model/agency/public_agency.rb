@@ -21,6 +21,11 @@ module Wechat
 
     def deal_ticket
       r = api.fast_register(ticket)
+      if r['errcode'] == 0
+        agency = platform.agencies.find_or_initialize_by(appid: r['appid'])
+      else
+        r
+      end
     end
 
     def disabled_func_infos
