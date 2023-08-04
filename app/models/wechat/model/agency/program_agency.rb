@@ -34,10 +34,7 @@ module Wechat
     end
 
     def set_nickname
-      api.set_nickname(
-        nick_name: organ.name_short,
-        license: organ.license
-      )
+      api.set_nickname(organ.name_short, license: organ.license)
     end
 
     def set_webview_domain(action: 'set')
