@@ -27,13 +27,13 @@ Rails.application.routes.draw do
       resources :agents, only: [:show] do
         member do
           get :login
-          get :callback
           post '' => :create
         end
       end
       resources :agencies, only: [:show] do
         member do
           get :login
+          get :callback
         end
       end
       resources :platforms, only: [:show] do
