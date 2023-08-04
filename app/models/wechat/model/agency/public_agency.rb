@@ -22,7 +22,9 @@ module Wechat
     def deal_ticket
       r = api.fast_register(ticket)
       if r['errcode'] == 0
-        agency = platform.agencies.find_or_initialize_by(appid: r['appid'])
+        agency_info = platform.api.query_auth(r['authorization_code'])
+        agency = platform.agencies.find_or_initialize_by(appid: agency_info['authorizer_appid'])
+        agency.store_access_token(agency_info)
       else
         r
       end
