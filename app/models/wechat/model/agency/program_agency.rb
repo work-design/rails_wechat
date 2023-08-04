@@ -37,6 +37,14 @@ module Wechat
       api.set_nickname(organ.name_short, license: organ.license)
     end
 
+    def set_category(first, second)
+      {
+        first: first,
+        second: second
+      }
+      api.add_category([r])
+    end
+
     def set_webview_domain(action: 'set')
       h = {
         action: action,
