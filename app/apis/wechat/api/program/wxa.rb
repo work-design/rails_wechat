@@ -118,5 +118,9 @@ module Wechat::Api
       post 'bind_tester', wechatid: wechatid, origin: BASE
     end
 
+    def set_nickname(nick_name, **options)
+      post 'setnickname', nick_name: nick_name, origin: BASE, **options
+    end
+
   end
 end
