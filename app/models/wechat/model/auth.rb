@@ -12,6 +12,7 @@ module Wechat
       belongs_to :request, optional: true  # for testcase 2
 
       after_create_commit :deal_auth_code, if: -> { auth_code.present? }
+      after_create_commit :deal_ticket, if: -> { ticket.present? }
       after_create_commit :expire_platform_pre_auth_code
     end
 
@@ -21,6 +22,10 @@ module Wechat
       agency = platform.agencies.find_or_initialize_by(appid: r['authorizer_appid'])
       agency.store_access_token(r)
       deal_test_case(agency) if testcase
+    end
+
+    def deal_ticket
+      r = platform.api.fast_register(ticket)
     end
 
     def expire_platform_pre_auth_code
