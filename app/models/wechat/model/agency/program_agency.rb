@@ -38,7 +38,7 @@ module Wechat
     end
 
     def set_category(first, second)
-      {
+      r = {
         first: first,
         second: second
       }
