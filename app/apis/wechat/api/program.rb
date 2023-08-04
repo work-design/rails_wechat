@@ -5,6 +5,7 @@ module Wechat::Api
     include Base::Sns
     include Public::Common
     include Public::Agency
+    include Public::Material
     include Component
     include Sec
     include Wxa
