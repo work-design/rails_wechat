@@ -36,5 +36,9 @@ module Wechat::Api
       )
     end
 
+    def modify_desc(signature)
+      post 'account/modifysignature', signature: signature, origin: BASE
+    end
+
   end
 end
