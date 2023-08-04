@@ -2,6 +2,13 @@
 
 module Wechat
   module Model::Agency::PublicAgency
+    extend ActiveSupport::Concern
+
+    included do
+      attribute :ticket, :string
+
+      after_create_commit :deal_ticket, if: -> { ticket.present? }
+    end
 
     def domain
       organ&.host
@@ -10,6 +17,10 @@ module Wechat
     def api
       return @api if defined? @api
       @api = Wechat::Api::Public.new(self)
+    end
+
+    def deal_ticket
+      r = api.fast_register(ticket)
     end
 
     def disabled_func_infos
@@ -23,7 +34,7 @@ module Wechat
         component_appid: platform.appid,
         appid: appid,
         copy_wx_verify: 1,
-        redirect_uri: Rails.application.routes.url_for(controller: 'wechat/platforms', action: 'callback', id: platform.id, host: platform.domain)
+        redirect_uri: Rails.application.routes.url_for(controller: 'wechat/agencies', action: 'callback', id: id, host: platform.domain)
       }.to_query
       url.to_s
     end

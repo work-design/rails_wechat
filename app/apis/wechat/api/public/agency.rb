@@ -20,5 +20,9 @@ module Wechat::Api
       post 'open/unbind', open_appid: open_appid, origin: BASE
     end
 
+    def fast_register(ticket)
+      post 'account/fastregister', ticket: ticket, origin: BASE
+    end
+
   end
 end

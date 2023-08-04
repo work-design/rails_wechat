@@ -42,10 +42,6 @@ module Wechat::Api
       r['authorizer_info']
     end
 
-    def fast_register(ticket)
-      post 'account/fastregister', ticket: ticket, origin: BASE
-    end
-
     def component_token
       r = client.with(origin: BASE).post(
         'component/api_component_token',
