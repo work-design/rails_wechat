@@ -38,10 +38,12 @@ module Wechat
     end
 
     def set_webview_domain(action: 'set')
-      api.webview_domain_directly(
+      h = {
         action: action,
         webviewdomain: [URI::HTTPS.build(host: domain).to_s]
-      )
+      }
+      api.webview_domain_directly(**h)
+      api.webview_domain(**h)
     end
 
     def set_domain(action: 'set')
