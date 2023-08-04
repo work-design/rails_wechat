@@ -25,6 +25,7 @@ module Wechat
       attribute :verify_type, :string
       attribute :extra, :json
       attribute :version_info, :json, default: {}
+      attribute :logo_media_id, :string
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
@@ -34,6 +35,7 @@ module Wechat
       has_many :services, primary_key: :appid, foreign_key: :appid
 
       has_one_attached :file
+      has_one_attached :logo
 
       after_create_commit :store_info_later
       after_save_commit :sync_to_storage, if: -> { saved_change_to_qrcode_url? }

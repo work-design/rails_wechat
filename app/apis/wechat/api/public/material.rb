@@ -10,7 +10,7 @@ module Wechat::Api
       get 'media/get/jssdk', params: { media_id: media_id }, as: :file, origin: BASE
     end
 
-    def media_create(type, file)
+    def media_create(file, type = 'image')
       post_file 'media/upload', file, params: { type: type }, origin: BASE
     end
 

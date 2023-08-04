@@ -14,3 +14,7 @@
   <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:func_infos) %></td>
   <td><%= @agency.func_infos %></td>
 </tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:logo) %></td>
+  <td><%= image_tag @agency.logo if @agency.logo.attached? %></td>
+</tr>

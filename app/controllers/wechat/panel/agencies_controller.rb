@@ -30,6 +30,7 @@ module Wechat
     def agency_params
       params.fetch(:agency, {}).permit(
         :default,
+        :logo,
         :organ_id
       )
     end
