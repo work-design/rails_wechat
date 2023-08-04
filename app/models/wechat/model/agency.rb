@@ -113,5 +113,12 @@ module Wechat
       self.file.url_sync(qrcode_url)
     end
 
+    def upload_logo
+      r = logo.blob.open do |file|
+        api.media_create file
+      end
+      self.update logo_media_id: r['media_id']
+    end
+
   end
 end
