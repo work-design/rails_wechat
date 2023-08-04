@@ -135,6 +135,9 @@ zh:
       corp_external_users:
         index:
           title: 微信用户关联
+      categories:
+        index:
+          title: 分类
       menus:
         index:
           title: 通用菜单

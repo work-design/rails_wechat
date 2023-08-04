@@ -98,6 +98,7 @@ Rails.application.routes.draw do
           end
           resources :template_key_words
         end
+        resources :categories
         resources :registers do
           member do
             get 'app' => :edit_app

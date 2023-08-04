@@ -150,5 +150,17 @@ module Wechat
       self.version_info
     end
 
+    def sync_categories
+      r = api.categories
+      r.each do |cate|
+        category = Category.find_or_initialize_by(id: cate['id'])
+        category.assign_attributes cate.slice('name', 'level', 'scope')
+        category.kind = cate['type']
+        category.parent_id = cate['father']
+        category.extra = cate
+        category.save
+      end
+    end
+
   end
 end
