@@ -9,7 +9,7 @@ module Wechat
         host = app&.domain.presence || organ&.host.prescen || Rails.application.routes.default_url_options[:host]
       end
       r = URI(value)
-      r.host = host
+      r.host ||= host
       r.scheme = Rails.application.routes.default_url_options[:protocol].presence || 'https'
       r.to_s
 
