@@ -24,5 +24,17 @@ module Wechat::Api
       post 'account/fastregister', ticket: ticket, origin: BASE
     end
 
+    def modify_logo(media_id)
+      post(
+        'account/modifyheadimage',
+        head_img_media_id: media_id,
+        x1: '0',
+        y1: '0',
+        x2: '1',
+        y2: '1',
+        origin: BASE
+      )
+    end
+
   end
 end
