@@ -22,6 +22,7 @@ module Wechat
       belongs_to :user_inviter, class_name: 'Auth::User', optional: true
 
       has_many :members, class_name: 'Org::Member', primary_key: :uid, foreign_key: :wechat_openid
+      has_many :organs, -> { order(id: :asc) }, class_name: 'Org::Organ', through: :members
       has_many :profiles, class_name: 'Profiled::Profile', primary_key: :unionid, foreign_key: :unionid
 
       has_one :request, -> { where(init_wechat_user: true) }, primary_key: :uid, foreign_key: :open_id
