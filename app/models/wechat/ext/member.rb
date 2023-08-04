@@ -15,8 +15,16 @@ module Wechat
       has_many :program_users, class_name: 'Wechat::ProgramUser', through: :account, source: :oauth_users
       has_many :medias, class_name: 'Wechat::Media'
       has_many :subscribes, -> { where(sending_at: nil).order(id: :asc) }, class_name: 'Wechat::Subscribe', through: :program_users
+      has_many :scenes, as: :handle, class_name: 'Wechat::Scene'
 
       before_save :sync_from_wechat_user, if: -> { wechat_openid.present? && wechat_openid_changed? }
+    end
+
+    def invite_scene!(app)
+      scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: organ_id)
+      scene.refresh if scene.expired?
+      scene.save
+      scene
     end
 
     def sync_from_wechat_user
