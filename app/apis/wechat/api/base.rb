@@ -39,7 +39,7 @@ module Wechat::Api
       end
     end
 
-    def post_file(path, file, params: {}, headers: {}, origin: nil, **options)
+    def post_file(path, file, params: {}, headers: {}, origin: nil, debug: nil, **options)
       with_options = { origin: origin }
       with_options.merge! debug: STDERR, debug_level: 2 if debug
 
