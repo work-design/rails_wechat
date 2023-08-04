@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       resources :agents, only: [:show] do
         member do
           get :login
+          get :callback
           post '' => :create
         end
       end

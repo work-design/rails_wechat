@@ -23,7 +23,6 @@ module Wechat
     def callback
       @auth = @platform.auths.build
       @auth.auth_code = params[:auth_code]
-      @auth.ticket = params[:ticket]
       @auth.auth_code_expires_at = Time.current + params[:expires_in].to_i
       @auth.save
     end
