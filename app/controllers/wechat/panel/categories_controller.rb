@@ -5,7 +5,7 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit('name-like')
 
-      @categories = Category.default_where(q_params).page(params[:page])
+      @categories = Category.roots.default_where(q_params).page(params[:page])
     end
 
   end
