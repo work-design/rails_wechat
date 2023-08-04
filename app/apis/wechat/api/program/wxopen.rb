@@ -3,7 +3,12 @@ module Wechat::Api
     BASE = 'https://api.weixin.qq.com/cgi-bin/wxopen/'
 
     def categories
-      get 'getallcategories', origin: BASE
+      r = get 'getallcategories', origin: BASE
+      if r['errcode'] == 0
+        r.dig('categories_list', 'categories')
+      else
+        r
+      end
     end
 
     def category
