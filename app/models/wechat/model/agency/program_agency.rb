@@ -33,6 +33,13 @@ module Wechat
       organ&.mp_host
     end
 
+    def set_nickname
+      api.set_nickname(
+        nick_name: organ.name_short,
+        license: organ.license
+      )
+    end
+
     def set_webview_domain(action: 'set')
       api.webview_domain_directly(
         action: action,
