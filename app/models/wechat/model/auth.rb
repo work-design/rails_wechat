@@ -5,12 +5,13 @@ module Wechat
     included do
       attribute :auth_code, :string
       attribute :auth_code_expires_at, :datetime
+      attribute :ticket, :string
       attribute :testcase, :boolean, default: false
 
       belongs_to :platform
       belongs_to :request, optional: true  # for testcase 2
 
-      after_create_commit :deal_auth_code
+      after_create_commit :deal_auth_code, if: -> { auth_code.present? }
       after_create_commit :expire_platform_pre_auth_code
     end
 
