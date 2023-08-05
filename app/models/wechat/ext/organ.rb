@@ -12,6 +12,7 @@ module Wechat
       belongs_to :corp_user, class_name: 'Wechat::CorpUser', optional: true
 
       has_many :apps, class_name: 'Wechat::App', dependent: :destroy_async
+      has_many :agencies, class_name: 'Wechat::App'
       has_many :corps, class_name: 'Wechat::Corp', dependent: :nullify
 
       validates :limit_wechat_menu, inclusion: { in: [0, 1, 2, 3] }
