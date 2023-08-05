@@ -2,11 +2,17 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
-      <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-circle-info has-text-info"></i>
+      <%= link_to({ controller: 'payee_apps', payee_id: model.id }, aria: { label: t('wechat.admin.payee_apps.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-brands fa-amazon-pay"></i>
+      <% end %>
+      <%= link_to({ controller: 'payee_domains', payee_id: model.id }, aria: { label: t('wechat.admin.payee_domains.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-globe"></i>
       <% end %>
       <%= link_to({ action: 'organ', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-building has-text-link"></i>
+      <% end %>
+      <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-circle-info has-text-info"></i>
       <% end %>
       <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-pencil has-text-link"></i>
