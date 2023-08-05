@@ -7,6 +7,7 @@ module Wechat::Api
     include Menu
     include Mp
     include User
+    include Wxopen
     include Agency
     include Base::Sns
 
