@@ -166,7 +166,14 @@ Rails.application.routes.draw do
             get 'cert' => :edit_cert
             patch 'cert' => :update_cert
           end
-          resources :partner_payees
+          resources :partner_payees do
+            collection do
+              post :search_organs
+            end
+            member do
+              get :organ
+            end
+          end
         end
       end
 
