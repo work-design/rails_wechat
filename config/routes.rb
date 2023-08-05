@@ -173,6 +173,8 @@ Rails.application.routes.draw do
             member do
               get :organ
             end
+            resources :payee_domains
+            resources :payee_apps
           end
         end
       end
