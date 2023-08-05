@@ -8,6 +8,7 @@ module Wechat
       attribute :appid, :string
 
       belongs_to :app, class_name: 'Wechat::App', foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :agency, class_name: 'Wechat::Agency', foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :corp_user, class_name: 'Wechat::CorpUser', optional: true
 
       has_many :apps, class_name: 'Wechat::App', dependent: :destroy_async
