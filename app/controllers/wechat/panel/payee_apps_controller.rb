@@ -25,7 +25,7 @@ module Wechat
     end
 
     def set_apps
-      @apps = App.default_where(default_params)
+      @apps = @payee.organ.agencies
     end
 
     def payee_app_params
