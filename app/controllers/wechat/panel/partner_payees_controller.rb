@@ -5,7 +5,7 @@ module Wechat
     before_action :set_new_partner_payee, only: [:new, :create]
 
     def index
-      @partner_payees = @partner.payees.page(params[:page])
+      @partner_payees = @partner.payees.includes(:organ).page(params[:page])
     end
 
     def search_organs
