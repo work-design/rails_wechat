@@ -201,7 +201,7 @@ module Wechat
     end
 
     def name
-      user_name
+      nick_name.presence || user_name
     end
 
     def disabled_func_infos
