@@ -48,7 +48,7 @@ module Wechat
       if request.variant.include?(:work_wechat)
         @current_oauth_app = Agent.default_where(default_ancestors_params).take || current_organ.corps.enabled.take
       else
-        @current_oauth_app = current_organ.app
+        @current_oauth_app = current_organ.app || current_organ.provider.app
       end
 
       logger.debug "\e[35m  Current Oauth App: #{@current_oauth_app&.class_name}/#{@current_oauth_app&.id}  \e[0m"
