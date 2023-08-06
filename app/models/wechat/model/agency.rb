@@ -6,7 +6,6 @@ module Wechat
       '2' => 'WechatPublic'
     }.freeze
     extend ActiveSupport::Concern
-    include Inner::App
     include Inner::Token
     include Inner::JsToken
 
@@ -44,11 +43,6 @@ module Wechat
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
       belongs_to :platform
-      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
-
-
-      belongs_to :organ, class_name: 'Org::Organ', optional: true
-      has_many :organ_domains, class_name: 'Org::OrganDomain', primary_key: :domain, foreign_key: :identifier
 
       #has_many :post_syncs, as: :synced, dependent: :delete_all
       #has_many :posts, through: :post_syncs
@@ -58,6 +52,15 @@ module Wechat
       has_many :tags, primary_key: :appid, foreign_key: :appid
       has_many :templates, primary_key: :appid, foreign_key: :appid
       has_many :app_configs, primary_key: :appid, foreign_key: :appid
+      has_many :menu_apps, -> { where(scene_id: nil) }, primary_key: :appid, foreign_key: :appid
+      has_many :menus, primary_key: :appid, foreign_key: :appid
+      has_many :all_menu_apps, class_name: 'MenuApp', primary_key: :appid, foreign_key: :appid
+      has_many :pure_menu_roots, class_name: 'MenuRoot', primary_key: :appid, foreign_key: :appid
+      has_many :receives, primary_key: :appid, foreign_key: :appid
+      has_many :replies, primary_key: :appid, foreign_key: :appid
+      has_many :requests, primary_key: :appid, foreign_key: :appid
+      has_many :responses, primary_key: :appid, foreign_key: :appid
+      has_many :wechat_users, primary_key: :appid, foreign_key: :appid
       has_many :payee_apps, primary_key: :appid, foreign_key: :appid
       has_many :payees, through: :payee_apps
 
@@ -144,6 +147,41 @@ module Wechat
       end
       tags.where(tag_id: nil).each do |tag|
         tag.sync_to_wechat_later
+      end
+    end
+
+    def base64_state(host: self.domain, controller_path: '/home', action_name: 'index', method: 'get', **params)
+      state = Com::State.create(
+        host: host,
+        controller_path: controller_path,
+        action_name: action_name,
+        request_method: method.downcase,
+        params: params
+      )
+      state.id
+    end
+
+    def sync_from_menu
+      r = api.menu
+      present_menus = r.dig('menu', 'button')
+      present_menus.each_with_index do |present_menu, index|
+        if present_menu['sub_button'].present?
+          parent = self.pure_menu_roots.find_or_initialize_by(position: index + 1)
+          parent.name = present_menu['name']
+          present_menu['sub_button'].each_with_index do |sub, sub_index|
+            m = parent.menus.find_or_initialize_by(appid: appid, position: sub_index + 1)
+            m.name = sub['name']
+            m.type = Menu::TYPE[sub['type']]
+            m.value = sub['url'] || sub['key']
+          end
+          parent.save
+        else
+          m = menus.find_or_initialize_by(root_position: index + 1)
+          m.type = Menu::TYPE[sub['type']]
+          m.name = present_menu['name']
+          m.value = present_menu['url'] || present_menu['key']
+          m.save
+        end
       end
     end
 

@@ -8,6 +8,11 @@ module Wechat
       belongs_to :weapp, class_name: 'ProgramApp', foreign_key: :weapp_id, primary_key: :appid, optional: true
     end
 
+
+    def domain
+      organ&.host
+    end
+
     def api
       return @api if defined? @api
       @api = Wechat::Api::Public.new(self)
