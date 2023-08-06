@@ -25,19 +25,19 @@
       <% end %>
     </div>
     <div data-show-target="item" class="mt-1" style="visibility: hidden">
-      <%= link_to({ action: 'info', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ action: 'info', appid: model.appid }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-cog"></i>
       <% end %>
       <%= link_to({ controller: 'app_configs', appid: model.appid }, aria: { label: t('wechat.admin.app_configs.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-cogs"></i>
       <% end %>
-      <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ action: 'show', appid: model.appid }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info has-text-info"></i>
       <% end %>
-      <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ action: 'edit', appid: model.appid }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-pencil has-text-link"></i>
       <% end %>
-      <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, data: { turbo_confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
+      <%= button_to({ action: 'destroy', appid: model.appid }, method: :delete, aria: { label: t('.destroy') }, data: { turbo_confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-trash has-text-danger"></i>
       <% end %>
     </div>
