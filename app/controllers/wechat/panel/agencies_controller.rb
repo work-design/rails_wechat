@@ -7,7 +7,7 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit(:type)
 
-      @agencies = @platform.agencies.includes(:app).default_where(q_params).order(id: :desc).page(params[:page])
+      @agencies = @platform.agencies.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def search
