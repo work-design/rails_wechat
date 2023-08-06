@@ -4,7 +4,7 @@ module Wechat
 
     def index
       q_params = {
-        organ_id: current_organ.provider_id + current_organ.self_and_ancestor_ids
+        organ_id: current_organ.self_and_ancestor_ids.append(current_organ.provider_id)
       }
       q_params.merge! params.permit(:id)
 
