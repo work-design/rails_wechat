@@ -25,6 +25,7 @@ module Wechat
 
       has_many :corp_users, ->(o){ where(suite_id: nil, organ_id: o.organ_id) }, primary_key: :corpid, foreign_key: :corpid
       has_many :suite_receives, ->(o){ where(agent_id: o.agentid) }, primary_key: :corpid, foreign_key: :corpid
+      has_many :supporters
 
       before_validation :init_token, if: -> { token.blank? }
       before_validation :init_aes_key, if: -> { encoding_aes_key.blank? }
@@ -97,6 +98,15 @@ module Wechat
       corp_user.user_ticket = result['user_ticket']
       corp_user.ticket_expires_at = Time.current + result['expires_in'].to_i
       corp_user
+    end
+
+    def sync_supporters
+      r = api.accounts
+      r['account_list'].each do |item|
+        supporter = supporters.find_or_initialize_by(open_kfid: item['open_kfid'])
+        supporter.assign_attributes item.slice('name', 'avatar', 'manage_privilege')
+        supporter.save
+      end
     end
 
   end
