@@ -7,7 +7,7 @@ module Wechat
       q_params.merge! default_params
       q_params.merge! params.permit(:id, :type, :appid)
 
-      @apps = App.default_where(q_params).order(id: :asc).page(params[:page])
+      @apps = Agency.default_where(q_params).order(id: :asc).page(params[:page])
     end
 
     def new
@@ -31,7 +31,7 @@ module Wechat
 
     private
     def set_app
-      @app = App.default_where(default_params).find(params[:id])
+      @app = Agency.default_where(default_params).find(params[:id])
     end
 
     def set_new_app

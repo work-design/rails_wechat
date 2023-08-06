@@ -147,9 +147,5 @@ module Wechat
       self.class.where.not(id: self.id).global.update_all(global: false)
     end
 
-    def agent
-      agentid.present? && self
-    end
-
   end
 end

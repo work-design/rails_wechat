@@ -248,7 +248,7 @@ Rails.application.routes.draw do
             end
           end
         end
-        resources :apps do
+        resources :apps, param: :appid do
           member do
             get :info
           end

@@ -3,7 +3,7 @@ module Wechat
 
     private
     def set_app
-      @app = App.find(params[:app_id])
+      @app = Agency.find_by(appid: params[:appid])
     end
 
   end
