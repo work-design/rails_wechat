@@ -8,6 +8,11 @@ module Wechat
       belongs_to :weapp, class_name: 'ProgramApp', foreign_key: :weapp_id, primary_key: :appid, optional: true
     end
 
+    def api
+      return @api if defined? @api
+      @api = Wechat::Api::Public.new(self)
+    end
+
     def js_config(url = '/')
       refresh_jsapi_ticket unless jsapi_ticket_valid?
       js_hash = Wechat::Signature.signature(jsapi_ticket, url)

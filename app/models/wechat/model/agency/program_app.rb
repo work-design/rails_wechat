@@ -1,15 +1,9 @@
 module Wechat
-  module Model::App::ProgramApp
+  module Model::Agency::ProgramApp
 
     def api
       return @api if defined? @api
-      if agency
-        @api = Wechat::Api::Program.new(agency)
-      elsif secret.present?
-        @api = Wechat::Api::Program.new(self)
-      else
-        raise 'Must has secret or under agency'
-      end
+      @api = Wechat::Api::Program.new(self)
     end
 
     def template_messenger(template)
