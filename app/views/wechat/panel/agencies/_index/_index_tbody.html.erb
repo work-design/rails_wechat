@@ -12,13 +12,14 @@
   </p>
   <p class="has-text-grey"><%= model.domain %></p>
 </td>
-<td><%= simple_format model.disabled_func_infos %></td>
+<td>
+  <p><%= model.disabled_func_infos.join(',') %></p>
+  <p><time data-controller="time"><%= model.version_info.dig('release_info', 'release_time') %></time></p>
+</td>
 <td>
   <p><%= model.principal_name %></p>
   <p><%= model.user_name %></p>
   <p><%= model.alias_name %></p>
 </td>
 <td>
-  <%= image_tag model.file, class: 'image is-64x64' if model.file.attached? %>
-  <p><time data-controller="time"><%= model.version_info.dig('release_info', 'release_time') %></time></p>
 </td>
