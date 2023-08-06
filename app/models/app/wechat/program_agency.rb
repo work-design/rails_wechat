@@ -1,6 +1,6 @@
 module Wechat
   class ProgramAgency < Agency
-    include Model::Agency::ProgramAgency
+    include Model::App::ProgramAgency
     include Inner::ProgramApp
   end
 end

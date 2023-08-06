@@ -1,5 +1,5 @@
 module Wechat
-  module Model::Agency::ProgramApp
+  module Model::App::ProgramApp
 
     def api
       return @api if defined? @api

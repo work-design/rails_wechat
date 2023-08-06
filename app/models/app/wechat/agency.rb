@@ -1,5 +1,5 @@
 module Wechat
-  class Agency < ApplicationRecord
+  class Agency < App
     include Model::Agency
   end
 end

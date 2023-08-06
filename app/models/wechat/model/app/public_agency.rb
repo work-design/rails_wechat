@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Wechat
-  module Model::Agency::PublicAgency
+  module Model::App::PublicAgency
     extend ActiveSupport::Concern
 
     included do
