@@ -1,5 +1,5 @@
 module Wechat
-  module Model::App::ReadApp
+  module Model::Agency::ReadApp
     extend ActiveSupport::Concern
 
     included do
