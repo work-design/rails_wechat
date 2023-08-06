@@ -10,6 +10,10 @@ module Wechat::Api
       post 'add_contact_way', open_kfid: open_kfid, origin: BASE, **options
     end
 
+    def account_add()
+      post 'account/add'
+    end
+
   end
 end
 
