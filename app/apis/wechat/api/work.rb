@@ -7,6 +7,7 @@ module Wechat::Api
     include Contact
     include Media
     include IdConvert
+    include Kf
 
     def initialize(app)
       super
