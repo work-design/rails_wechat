@@ -71,7 +71,7 @@ module Wechat
         appid: corpid,
         agentid: agentid,
         redirect_uri: ERB::Util.url_encode(Rails.application.routes.url_for(**url_options)),
-        state: Com::State.create(host: domain, controller: '/me/home')
+        state: Com::State.create(host: domain, controller_path: '/me/home').id
       }
     end
 
