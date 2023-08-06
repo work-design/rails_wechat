@@ -22,8 +22,7 @@ module Wechat
       belongs_to :receive
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
       belongs_to :corp_user, ->(o) { where(corp_id: o.appid) }, foreign_key: :userid, primary_key: :user_id, optional: true
-      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
-      belongs_to :agency, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :app, class_name: 'Agency', foreign_key: :appid, primary_key: :appid, optional: true
 
       has_one :platform, through: :receive
       has_one :tag, ->(o) { where(name: o.body) }, foreign_key: :appid, primary_key: :appid
@@ -46,8 +45,8 @@ module Wechat
     def reply_params(title:, description:, url:)
       if scene_organ && scene_organ.logo.attached?
         head_url = scene_organ.logo.url
-      elsif agency
-        head_url = agency.head_img
+      elsif app
+        head_url = app.head_img
       else
         head_url = ApplicationController.helpers.image_path('logo_avatar.png', protocol: 'https')
       end
@@ -93,9 +92,7 @@ module Wechat
 
     def reply_for_blank_info
       return if wechat_user.attributes['name'].present?
-      if agency
-        url = agency.oauth2_url(scope: 'snsapi_userinfo', state: agency.base64_state(uid: open_id))
-      elsif app&.oauth_enable
+      if app
         url = app.oauth2_url(scope: 'snsapi_userinfo', state: app.base64_state(uid: open_id))
       else
         return
@@ -120,7 +117,7 @@ module Wechat
       elsif wechat_user.persisted?
         url = Rails.application.routes.url_for(
           controller: 'my/home',
-          host: app&.domain || agency&.domain,
+          host: app&.domain,
           auth_token: wechat_user.auth_token
         )
         desc = '点击链接查看详情'
@@ -208,7 +205,7 @@ module Wechat
       if reply.is_a?(Reply)
         self.reply_body = reply.to_wechat
         self.reply_body.merge!(ToUserName: open_id)
-        self.reply_body.merge!(FromUserName: app&.user_name.presence || agency&.user_name)
+        self.reply_body.merge!(FromUserName: app&.user_name.presence)
       else
         self.reply_body = {}
       end

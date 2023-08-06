@@ -47,8 +47,7 @@ module Wechat
       attribute :info_type, :string
 
       belongs_to :platform, optional: true
-      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
-      belongs_to :agency, ->(o){ where(platform_id: o.platform_id) }, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :app, ->(o){ where(platform_id: o.platform_id) }, class_name: 'Agency', foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
 
       enum msg_format: {
@@ -65,7 +64,7 @@ module Wechat
     end
 
     def app_name
-      (agency || app).name
+      app.name
     end
 
     def decrypt_data
@@ -106,9 +105,7 @@ module Wechat
     end
 
     def weapp_audited
-      if agency
-        agency.update audit_status: 'success'
-      end
+      app.update audit_status: 'success' if app
     end
 
   end
