@@ -2,6 +2,11 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
+      <%= link_to({ controller: 'requests', app_appid: model.appid }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-comments"></i>
+      <% end %>
+    </div>
+    <div data-show-target="item" style="visibility: hidden">
       <%= link_to model.fast_url, aria: { label: '快速注册' }, target: '_blank', class: 'button is-small is-rounded is-light' do %>
         <i class="fa-solid fa-vial has-text-success"></i>
       <% end if model.respond_to?(:fast_url) %>

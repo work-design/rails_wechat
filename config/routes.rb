@@ -141,6 +141,7 @@ Rails.application.routes.draw do
               get :qrcode
               get :organ
             end
+            resources :requests
           end
           resources :platform_templates do
             collection do
