@@ -2,7 +2,7 @@ module Wechat
   class QyWechatController < BaseController
 
     def login
-      @app = WorkApp.default_where(default_params).take || WorkApp.global.take || current_organ.corps[0]
+      @app = Agent.default_where(default_params).take || current_organ.corps[0]
     end
 
   end
