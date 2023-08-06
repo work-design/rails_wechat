@@ -2,6 +2,10 @@ module Wechat
   class Panel::BaseController < PanelController
 
     private
+    def set_app
+      @app = App.find_by(appid: params[:app_appid])
+    end
+
     def set_provider
       @provider = Provider.find params[:provider_id]
     end

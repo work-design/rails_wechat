@@ -1,23 +1,6 @@
 module Wechat
-  class Admin::RequestsController < Admin::BaseController
-    before_action :set_app
-    before_action :set_request, only: [:show, :update, :destroy]
-
-    def index
-      q_params = {
-        type: 'Wechat::TextRequest'
-      }
-      q_params.merge! params.permit('created_at-gte', 'created_at-lte', :type)
-      if q_params['created_at-lte']
-        q_params['created_at-lte'] = q_params['created_at-lte'].to_time.end_of_day
-      end
-      @requests = @app.requests.includes(wechat_user: :user, extractions: :extractor).default_where(q_params).order(id: :desc).page(params[:page])
-    end
-
-    private
-    def set_request
-      @request = @app.requests.find(params[:id])
-    end
+  class Admin::RequestsController < Panel::RequestsController
+    include Controller::Admin
 
   end
 end
