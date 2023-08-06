@@ -2,25 +2,25 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
-      <%= link_to({ controller: 'menu_apps', appid: model.appid }, aria: { label: t('wechat.admin.menu_apps.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'menu_apps', app_appid: model.appid }, aria: { label: t('wechat.admin.menu_apps.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-bars"></i>
       <% end %>
-      <%= link_to({ controller: 'responses', appid: model.appid }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'responses', app_appid: model.appid }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-reply-all"></i>
       <% end %>
-      <%= link_to({ controller: 'requests', appid: model.appid }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'requests', app_appid: model.appid }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-comments"></i>
       <% end %>
-      <%= link_to({ controller: 'tags', appid: model.appid }, aria: { label: t('wechat.admin.tags.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'tags', app_appid: model.appid }, aria: { label: t('wechat.admin.tags.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-user-tag"></i>
       <% end %>
-      <%= link_to({ controller: 'wechat_users', appid: model.appid }, aria: { label: t('wechat.admin.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'wechat_users', app_appid: model.appid }, aria: { label: t('wechat.admin.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-users"></i>
       <% end %>
-      <%= link_to({ controller: 'templates', appid: model.appid }, aria: { label: t('wechat.admin.templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'templates', app_appid: model.appid }, aria: { label: t('wechat.admin.templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-inbox"></i>
       <% end %>
-      <%= link_to({ controller: 'scenes', appid: model.appid }, aria: { label: t('wechat.admin.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'scenes', app_appid: model.appid }, aria: { label: t('wechat.admin.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-qrcode"></i>
       <% end %>
     </div>
@@ -28,7 +28,7 @@
       <%= link_to({ action: 'info', appid: model.appid }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-cog"></i>
       <% end %>
-      <%= link_to({ controller: 'app_configs', appid: model.appid }, aria: { label: t('wechat.admin.app_configs.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'app_configs', app_appid: model.appid }, aria: { label: t('wechat.admin.app_configs.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-cogs"></i>
       <% end %>
       <%= link_to({ action: 'show', appid: model.appid }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
