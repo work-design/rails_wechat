@@ -75,9 +75,9 @@ module Wechat
     end
 
     def commit_to_wechat
-      if ['Wechat::PublicApp', 'Wechat::ReadApp'].include? app.type
+      if ['Wechat::PublicApp', 'Wechat::PublicAgency', 'Wechat::ReadApp'].include? app.type
         get_public_qrcode
-      elsif ['Wechat::ProgramApp'].include? app.type
+      elsif ['Wechat::ProgramApp', 'Wechat::ProgramAgency'].include? app.type
         get_wxa_qrcode
       end
       self
