@@ -13,6 +13,15 @@ module Wechat
       after_create_commit :get_webview_file_later
     end
 
+    def api
+      return @api if defined? @api
+      @api = Wechat::Api::Program.new(self)
+    end
+
+    def domain
+      organ&.mp_host
+    end
+
     def generate_wechat_user(code)
       info = api.jscode2session(code)
       logger.debug "\e[35m  Program Generate User: #{info}  \e[0m"

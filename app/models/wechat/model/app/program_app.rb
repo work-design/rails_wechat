@@ -1,15 +1,6 @@
 module Wechat
   module Model::App::ProgramApp
 
-    def api
-      return @api if defined? @api
-      @api = Wechat::Api::Program.new(self)
-    end
-
-    def domain
-      organ&.mp_host
-    end
-
     def template_messenger(template)
       Wechat::Message::Template::Program.new(self, template)
     end

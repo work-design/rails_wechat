@@ -19,18 +19,9 @@ module Wechat
       belongs_to :platform_template, optional: true
     end
 
-    def api
-      return @api if defined? @api
-      @api = Wechat::Api::Program.new(self)
-    end
-
     def disabled_func_infos
       return unless platform.program_agency
       platform.program_agency.func_infos - func_infos
-    end
-
-    def domain
-      organ&.mp_host
     end
 
     def set_nickname

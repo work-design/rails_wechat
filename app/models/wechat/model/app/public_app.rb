@@ -8,26 +8,6 @@ module Wechat
       belongs_to :weapp, class_name: 'ProgramApp', foreign_key: :weapp_id, primary_key: :appid, optional: true
     end
 
-
-    def domain
-      organ&.host
-    end
-
-    def api
-      return @api if defined? @api
-      @api = Wechat::Api::Public.new(self)
-    end
-
-    def js_config(url = '/')
-      refresh_jsapi_ticket unless jsapi_ticket_valid?
-      js_hash = Wechat::Signature.signature(jsapi_ticket, url)
-      js_hash.merge! appid: appid
-      logger.debug "\e[35m  Current page is: #{url}, Hash: #{js_hash.inspect}  \e[0m"
-      js_hash
-    rescue => e
-      logger.debug e.message
-    end
-
     def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
       return agency.oauth2_url(scope: scope, state: state, **url_options) if agency
       url_options.with_defaults! controller: 'wechat/apps', action: 'login', id: id, host: self.domain
