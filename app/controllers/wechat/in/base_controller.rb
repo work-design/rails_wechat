@@ -3,7 +3,7 @@ module Wechat
 
     private
     def set_app
-      @app = App.shared.find params[:app_id]
+      @app = App.find params[:app_id]
     end
 
   end

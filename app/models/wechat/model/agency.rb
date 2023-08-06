@@ -27,7 +27,6 @@ module Wechat
       attribute :version_info, :json, default: {}
       attribute :logo_media_id, :string
       attribute :enabled, :boolean, default: true
-      attribute :shared, :boolean, default: false, comment: '可与其他或下级机构公用'
       attribute :global, :boolean, default: false
       attribute :oauth_enable, :boolean, default: true
       attribute :inviting, :boolean, default: false, comment: '可邀请加入'
@@ -68,7 +67,6 @@ module Wechat
       has_one_attached :logo
 
       scope :enabled, -> { where(enabled: true) }
-      scope :shared, -> { where(shared: true) }
       scope :inviting, -> { where(inviting: true) }
       scope :global,  -> { where(global: true) }
 
