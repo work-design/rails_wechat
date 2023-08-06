@@ -44,12 +44,11 @@ zh:
           Wechat::TextReply: 文字
           Wechat::ImageReply: 图片
           Wechat::SuccessReply: 成功
-      wechat/agency:
-        type:
-          Wechat::PublicAgency: 公众号
-          Wechat::ProgramAgency: 小程序
       wechat/app:
         type:
+          Wechat::Agency: 代运营
+          Wechat::PublicAgency: 代运营公众号
+          Wechat::ProgramAgency: 代运营小程序
           Wechat::PublicApp: 服务号
           Wechat::ReadApp: 订阅号
           Wechat::ProgramApp: 小程序
