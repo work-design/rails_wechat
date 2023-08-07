@@ -18,7 +18,7 @@ module Wechat
 
       belongs_to :platform_template, optional: true
 
-      after_save_commit :get_version_info_later, if: -> { saved_change_to_platform_templdate_id? }
+      after_save_commit :get_version_info_later, if: -> { saved_change_to_platform_template_id? }
     end
 
     def disabled_func_infos
