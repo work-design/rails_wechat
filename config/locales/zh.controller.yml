@@ -113,6 +113,8 @@ zh:
           title: 体验二维码
         templates:
           title: 模板
+        commit:
+          title: 发版
       platforms:
         index:
           title: 微信第三方平台

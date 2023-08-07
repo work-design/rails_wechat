@@ -1,4 +1,5 @@
-<td><%= model.template_id %></td>
-<td><%= model.user_version %></td>
+<td>
+  <p><%= model.template_id %></p>
+  <p><%= model.user_version %></p>
+</td>
 <td><%= model.audit_status_i18n %></td>
-<td><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></td>
