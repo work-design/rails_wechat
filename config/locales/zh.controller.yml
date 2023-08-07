@@ -111,6 +111,8 @@ zh:
           title: 授权小程序
         qrcode:
           title: 体验二维码
+        templates:
+          title: 模板
       platforms:
         index:
           title: 微信第三方平台
