@@ -10,13 +10,14 @@
   <p class="has-text-grey"><%= model.domain %></p>
 </td>
 <td>
-  <p><%= model.disabled_func_infos.join(',') %></p>
-  <p><time data-controller="time"><%= model.version_info.dig('release_info', 'release_time') %></time></p>
+<% if model.version_info.is_a?(Hash) %>
+  <p><%= model.version_info.dig('release_info', 'release_version') %></p>
+  <p class="has-text-grey"><time data-controller="time"><%= model.version_info.dig('release_info', 'release_time') %></time></p>
+<% end %>
 </td>
 <td>
   <p><%= model.principal_name %></p>
   <p><%= model.user_name %></p>
   <p><%= model.alias_name %></p>
 </td>
-<td>
-</td>
+<td><p><%= model.disabled_func_infos.join(',') %></p></td>
