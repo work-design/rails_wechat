@@ -41,7 +41,7 @@ module Wechat
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
-      belongs_to :platform
+      belongs_to :platform, optional: true
 
       #has_many :post_syncs, as: :synced, dependent: :delete_all
       #has_many :posts, through: :post_syncs

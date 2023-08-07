@@ -1,7 +1,5 @@
 <%= f.select :type, options_for_select(Wechat::App.options_i18n(:type), f.object.type) %>
-<%= f.text_field :name %>
+<%= f.text_field :nick_name %>
 <%= f.text_field :appid %>
 <%= f.text_field :secret %>
 <%= f.check_box :encrypt_mode %>
-<%= f.text_field :domain %>
-<%= f.text_field :weapp_id %>
