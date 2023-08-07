@@ -1,0 +1,34 @@
+module Wechat
+  module Model::MenuRootApp
+    extend ActiveSupport::Concern
+
+    included do
+      attribute :name, :string
+      attribute :appid, :string
+      attribute :position, :integer
+
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
+      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
+
+      has_many :menus, ->(o) { where(o.filter_hash).order(appid: :asc, position: :asc) }, primary_key: :position, foreign_key: :root_position
+      has_many :organ_menus, -> { where(appid: nil).order(position: :asc) }, class_name: 'Menu', primary_key: :position, foreign_key: :root_position
+
+      acts_as_list scope: [:organ_id, :appid]
+    end
+
+    def filter_hash
+      h = {}
+      h.merge! organ_id: [organ_id, nil] if organ_id
+      h.merge! appid: [appid, nil] if appid
+      h
+    end
+
+    def as_json
+      {
+        name: name,
+        sub_button: children.as_json
+      }
+    end
+
+  end
+end

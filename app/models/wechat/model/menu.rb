@@ -16,11 +16,10 @@ module Wechat
       attribute :mp_appid, :string
       attribute :mp_pagepath, :string
       attribute :root_position, :integer
+      attribute :global, :boolean
 
-      belongs_to :menu_root, ->(o){ where(organ_id: o.organ_id) }, foreign_key: :root_position, primary_key: :position, optional: true
 
       has_many :menu_apps, dependent: :destroy_async
-      accepts_nested_attributes_for :menu_apps, allow_destroy: true
       has_many :apps, through: :menu_apps
       has_many :scenes, through: :menu_apps
 
