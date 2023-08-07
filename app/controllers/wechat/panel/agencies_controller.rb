@@ -4,10 +4,12 @@ module Wechat
     before_action :set_agency, only: [:show, :edit, :update, :qrcode, :organ]
 
     def index
-      q_params = {}
-      q_params.merge! params.permit(:type)
+      q_params = {
+        type: 'Wechat::PublicAgency'
+      }
+      q_params.merge! params.permit()
 
-      @agencies = @platform.agencies.default_where(q_params).order(id: :desc).page(params[:page])
+      @agencies = @platform.agencies.includes(organ: :organ_domains).default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     def search
