@@ -2,6 +2,10 @@ module Wechat
   class Panel::BaseController < PanelController
 
     private
+    def set_platform
+      @platform = Platform.find params[:platform_id]
+    end
+
     def set_app
       @app = Agency.find(params[:agency_id])
     end

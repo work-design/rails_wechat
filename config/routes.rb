@@ -132,6 +132,7 @@ Rails.application.routes.draw do
             get :agency
             get :info
           end
+          resources :program_agencies
           resources :agencies do
             collection do
               post :search
