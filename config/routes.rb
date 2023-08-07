@@ -132,7 +132,11 @@ Rails.application.routes.draw do
             get :agency
             get :info
           end
-          resources :program_agencies
+          resources :program_agencies do
+            member do
+              get :qrcode
+            end
+          end
           resources :agencies do
             collection do
               post :search
