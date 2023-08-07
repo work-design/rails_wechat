@@ -17,6 +17,8 @@ module Wechat
       }
 
       belongs_to :platform_template, optional: true
+
+      after_save_commit :get_version_info_later, if: -> { saved_change_to_platform_templdate_id? }
     end
 
     def disabled_func_infos
@@ -139,6 +141,10 @@ module Wechat
       self.version_info['release_info']['release_time'] = Time.at(version_info['release_info']['release_time']) if version_info['release_info']
       self.save
       self.version_info
+    end
+
+    def get_version_info_later
+      AgencyVersionJob.perform_later(self)
     end
 
     def sync_categories
