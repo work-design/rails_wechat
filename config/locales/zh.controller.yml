@@ -115,6 +115,8 @@ zh:
           title: 模板
         commit:
           title: 发版
+        submit:
+          title: 提交审核
       platforms:
         index:
           title: 微信第三方平台

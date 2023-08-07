@@ -18,6 +18,9 @@
   <p>
     <span><%= model.version_info.dig('exp_info', 'exp_version') %></span>
     <time data-controller="time" class="has-text-grey"><%= model.version_info.dig('exp_info', 'exp_time') %></time>
+    <%= button_to({ action: 'submit', id: model.id }, aria: { label: t('wechat.panel.program_agencies.submit.title') }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-upload has-text-danger"></i>
+    <% end %>
   </p>
 <% end %>
 </td>
