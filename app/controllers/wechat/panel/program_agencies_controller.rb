@@ -1,7 +1,7 @@
 module Wechat
   class Panel::ProgramAgenciesController < Panel::BaseController
     before_action :set_platform
-    before_action :set_program_agency, only: [:show, :edit, :update, :qrcode, :organ]
+    before_action :set_program_agency, only: [:show, :edit, :update, :qrcode, :templates, :commit]
 
     def index
       q_params = {
@@ -18,6 +18,11 @@ module Wechat
 
     def templates
       @platform_templates = @platform.platform_templates.order(id: :desc)
+    end
+
+    def commit
+      platform_template = @platform.platform_templates.find params[:platform_template_id]
+      @program_agency.commit(platform_template)
     end
 
     private
