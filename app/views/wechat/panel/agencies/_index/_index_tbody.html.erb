@@ -2,24 +2,18 @@
   <p class="is-several">
     <%= image_tag model.head_img, class: 'image is-24x24' if model.head_img %>
     <span><%= model.nick_name %></span>
-    <% if [model.platform.public_agency_id, model.platform.program_agency_id].include?(model.id) %>
+    <% if [model.platform.public_agency_id].include?(model.id) %>
       <i class="fa-solid fa-shield has-text-success"></i>
     <% end %>
   </p>
-  <p class="has-text-grey">
-    <span class="tag is-success"><%= model.type_i18n %></span>
-    <span><%= model.appid %></span>
-  </p>
+  <p class="has-text-grey"><%= model.appid %></p>
   <p class="has-text-grey"><%= model.domain %></p>
 </td>
 <td>
   <p><%= model.disabled_func_infos.join(',') %></p>
-  <p><time data-controller="time"><%= model.version_info.dig('release_info', 'release_time') %></time></p>
 </td>
 <td>
   <p><%= model.principal_name %></p>
   <p><%= model.user_name %></p>
   <p><%= model.alias_name %></p>
-</td>
-<td>
 </td>
