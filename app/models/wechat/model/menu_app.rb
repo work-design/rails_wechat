@@ -13,8 +13,6 @@ module Wechat
 
       belongs_to :scene, optional: true
       belongs_to :tag, optional: true
-
-
     end
 
   end

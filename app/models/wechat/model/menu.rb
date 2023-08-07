@@ -15,17 +15,17 @@ module Wechat
       attribute :value, :string
       attribute :mp_appid, :string
       attribute :mp_pagepath, :string
-      attribute :root_position, :integer
-      attribute :global, :boolean
       attribute :position, :integer
+
+      belongs_to :menu_root
 
       has_many :menu_apps, dependent: :destroy_async
       has_many :apps, through: :menu_apps
       has_many :scenes, through: :menu_apps
 
-      acts_as_list scope: [:root_position]
+      acts_as_list scope: [:menu_root_id]
 
-      after_save_commit :sync_to_wechat, if: -> { (saved_changes.keys & ['name', 'value', 'mp_appid', 'mp_pagepath']).present? }
+      #after_save_commit :sync_to_wechat, if: -> { (saved_changes.keys & ['name', 'value', 'mp_appid', 'mp_pagepath']).present? }
     end
 
     def sync_to_wechat

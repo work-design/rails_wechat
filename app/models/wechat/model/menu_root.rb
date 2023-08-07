@@ -6,7 +6,7 @@ module Wechat
       attribute :name, :string
       attribute :position, :integer
 
-      has_many :menus, -> { where(global: true).order(position: :asc) }, primary_key: :position, foreign_key: :root_position
+      has_many :menus, -> { order(position: :asc) }
     end
 
   end
