@@ -2,7 +2,7 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
-      <%= link_to model.auth_url, aria: { label: '测试授权' }, class: 'button is-small is-rounded is-light' do %>
+      <%= link_to model.auth_url, aria: { label: '测试授权' }, target: '_blank', class: 'button is-small is-rounded is-light' do %>
         <i class="fa-solid fa-vial has-text-success"></i>
       <% end if model.auth_url %>
       <%= link_to({ controller: 'agencies', platform_id: model.id }, aria: { label: t('wechat.panel.agencies.index.title') }, class: 'button is-small is-rounded is-light') do %>
