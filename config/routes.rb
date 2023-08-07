@@ -135,6 +135,8 @@ Rails.application.routes.draw do
           resources :program_agencies do
             member do
               get :qrcode
+              get :templates
+              post 'templates/:platform_template_id' => :commit
             end
           end
           resources :agencies do

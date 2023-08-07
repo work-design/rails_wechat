@@ -16,8 +16,8 @@ module Wechat
       @agencies = @platform.agencies.default_where('nick_name-like': params['name-like'])
     end
 
-    def search_organs
-      @organs = Org::Organ.default_where('name-like': params['name-like'])
+    def templates
+      @platform_templates = @platform.platform_templates.order(id: :desc)
     end
 
     private
