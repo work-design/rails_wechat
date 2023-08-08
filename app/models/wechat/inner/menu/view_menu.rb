@@ -3,13 +3,12 @@ module Wechat
     extend ActiveSupport::Concern
 
     def as_json(options = {})
-      if options[:app]
-        host = options[:app].domain.presence || options[:app].organ.host.presence || Rails.application.routes.default_url_options[:host]
+      if value.to_s.start_with?('/')
+        r = URI(value)
       else
-        host = app&.domain.presence || organ&.host.prescen || Rails.application.routes.default_url_options[:host]
+        r = URI("/#{value}")
       end
-      r = URI(value)
-      r.host ||= host
+      r.host ||= options[:host]
       r.scheme = Rails.application.routes.default_url_options[:protocol].presence || 'https'
       r.to_s
 

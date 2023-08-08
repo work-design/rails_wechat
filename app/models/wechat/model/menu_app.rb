@@ -24,5 +24,13 @@ module Wechat
       self.menu_root_id = menu&.menu_root_id
     end
 
+    def xx
+      if options[:app]
+        host = options[:app].domain.presence || options[:app].organ.host.presence || Rails.application.routes.default_url_options[:host]
+      else
+        host = app&.domain.presence || organ&.host.prescen || Rails.application.routes.default_url_options[:host]
+      end
+    end
+
   end
 end
