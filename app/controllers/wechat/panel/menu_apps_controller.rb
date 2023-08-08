@@ -9,7 +9,7 @@ module Wechat
       q_params.merge! params.permit(:name)
 
       @menu_root_apps = @app.menu_root_apps
-      @menu_roots = MenuRoot.all
+      @menu_roots = MenuRoot.order(id: :asc)
     end
 
     def sync
