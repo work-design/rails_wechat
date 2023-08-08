@@ -22,6 +22,12 @@ module Wechat
       h
     end
 
+    def xx
+      @menus = @menu_roots.group_by(&:position).transform_values! do |x|
+        x.find(&->(i){ i.organ_id == current_organ.id }) || x.find(&->(i){ i.organ_id.nil? })
+      end.values
+    end
+
     def as_json
       {
         name: name,

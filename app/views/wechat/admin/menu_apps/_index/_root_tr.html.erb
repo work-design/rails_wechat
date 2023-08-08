@@ -11,4 +11,4 @@
 </tr>
 <% model.menus.where(default_platform_params).each do |child| %>
   <%= render partial: 'index_tbody', layout: 'index_tr', locals: { model: child } %>
-<% end %>
+<% end if false %>

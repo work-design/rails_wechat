@@ -8,10 +8,8 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit(:name)
 
-      @menu_roots = @app.menu_roots
-      @menus = @menu_roots.group_by(&:position).transform_values! do |x|
-        x.find(&->(i){ i.organ_id == current_organ.id }) || x.find(&->(i){ i.organ_id.nil? })
-      end.values
+      @menu_root_apps = @app.menu_root_apps
+      @menu_roots = MenuRoot.all
     end
 
     def sync
