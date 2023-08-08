@@ -8,6 +8,13 @@ zh:
           Wechat::MiniProgramMenu: 小程序
           Wechat::ScanPushMenu: 扫码推事件
           Wechat::ScanWaitMenu: 扫码带提示
+      wechat/menu_app:
+        type:
+          Wechat::ClickMenuApp: 点击事件
+          Wechat::ViewMenuApp: 链接
+          Wechat::MiniProgramMenuApp: 小程序
+          Wechat::ScanPushMenuApp: 扫码推事件
+          Wechat::ScanWaitMenuApp: 扫码带提示
       wechat/register:
         state:
           init: 处理中

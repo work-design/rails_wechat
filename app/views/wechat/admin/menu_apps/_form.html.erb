@@ -1,4 +1,5 @@
-<%= f.select :type, options_for_select(@types, @menu.type) %>
+<%= f.hidden_field :menu_id %>
+<%= f.select :type, options_for_select(Wechat::MenuApp.options_i18n(:type), @menu_app.type) %>
 <%= f.text_field :name, required: true %>
 <%= f.text_field :value, required: true %>
 <%= f.text_field :mp_appid %>

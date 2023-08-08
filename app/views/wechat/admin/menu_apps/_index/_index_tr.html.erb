@@ -8,6 +8,10 @@
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.confirm') } }) do %>
         <i class="fa-solid fa-trash has-text-danger"></i>
       <% end %>
+      <%= link_to({ controller: 'menu_apps', action: 'new', menu_id: model.id }, data: { turbo_frame: 'modal' }, class: 'button is-small is-link') do %>
+        <i class="fa-solid fa-plus"></i>
+        <span><% t('.new') %></span>
+      <% end %>
     </div>
   </td>
 </tr>

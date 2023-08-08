@@ -28,6 +28,7 @@ module Wechat
 
     def set_new_menu_app
       @menu_app = @app.menu_apps.build(menu_params)
+      @menu_app.menu_id = params[:menu_id] if params[:menu_id]
     end
 
     def set_types
@@ -36,7 +37,12 @@ module Wechat
 
     def menu_params
       params.fetch(:menu_app, {}).permit(
-        :menu_id
+        :menu_id,
+        :type,
+        :name,
+        :value,
+        :mp_appid,
+        :mp_pagepath
       )
     end
 
