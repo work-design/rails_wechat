@@ -5,8 +5,8 @@
       <%= link_to({ controller: 'requests', agency_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-comments"></i>
       <% end %>
-      <%= link_to({ controller: 'menus', agency_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-comments"></i>
+      <%= link_to({ controller: 'menu_apps', agency_id: model.id }, aria: { label: t('wechat.panel.menu_apps.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-bars"></i>
       <% end %>
     </div>
     <div data-show-target="item" style="visibility: hidden">
