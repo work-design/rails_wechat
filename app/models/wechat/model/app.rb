@@ -52,7 +52,6 @@ module Wechat
       has_many :templates, primary_key: :appid, foreign_key: :appid
       has_many :app_configs, primary_key: :appid, foreign_key: :appid
       has_many :menu_apps, -> { where(scene_id: nil) }, primary_key: :appid, foreign_key: :appid
-      has_many :menus, primary_key: :appid, foreign_key: :appid
       has_many :all_menu_apps, class_name: 'MenuApp', primary_key: :appid, foreign_key: :appid
       has_many :menu_root_apps, primary_key: :appid, foreign_key: :appid
       has_many :receives, primary_key: :appid, foreign_key: :appid
