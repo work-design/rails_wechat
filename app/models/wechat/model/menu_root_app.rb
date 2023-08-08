@@ -16,18 +16,5 @@ module Wechat
       acts_as_list scope: [:menu_root_id, :appid]
     end
 
-    def xx
-      @menus = @menu_roots.group_by(&:position).transform_values! do |x|
-        x.find(&->(i){ i.organ_id == current_organ.id }) || x.find(&->(i){ i.organ_id.nil? })
-      end.values
-    end
-
-    def as_json
-      {
-        name: name,
-        sub_button: children.as_json
-      }
-    end
-
   end
 end
