@@ -7,19 +7,18 @@ module Wechat
       attribute :appid, :string
       attribute :position, :integer
 
-      belongs_to :organ, class_name: 'Org::Organ', optional: true
+      belongs_to :menu_root
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       has_many :menus, ->(o) { where(o.filter_hash).order(appid: :asc, position: :asc) }, primary_key: :position, foreign_key: :root_position
-      has_many :organ_menus, -> { where(appid: nil).order(position: :asc) }, class_name: 'Menu', primary_key: :position, foreign_key: :root_position
 
-      acts_as_list scope: [:organ_id, :appid]
+      acts_as_list scope: [:menu_root_id, :appid]
     end
 
     def filter_hash
       h = {}
-      h.merge! organ_id: [organ_id, nil] if organ_id
-      h.merge! appid: [appid, nil] if appid
+      h.merge! menu_root_id: menu_root_id
+      h.merge! appid: appid
       h
     end
 
