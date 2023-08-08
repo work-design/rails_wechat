@@ -1,5 +1,5 @@
 module Wechat
-  module Model::Menu::ScanWaitMenu
+  module Inner::Menu::ScanWaitMenu
 
     def as_json(options = nil)
       {

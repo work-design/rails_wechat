@@ -1,5 +1,5 @@
 module Wechat
-  module Model::Menu::ViewMenu
+  module Inner::Menu::ViewMenu
     extend ActiveSupport::Concern
 
     def as_json(options = {})

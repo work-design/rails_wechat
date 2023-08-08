@@ -1,7 +1,8 @@
 module Wechat
   module Model::Menu
     extend ActiveSupport::Concern
-    inner Inner::Menu
+    include Inner::Menu
+
     TYPE = {
       'view' => 'Wechat::ViewMenu',
       'click' => 'Wechat::ClickMenu',

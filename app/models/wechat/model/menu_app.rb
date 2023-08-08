@@ -1,7 +1,7 @@
 module Wechat
   module Model::MenuApp
-    include Inner::Menu
     extend ActiveSupport::Concern
+    include Inner::Menu
 
     included do
       attribute :appid, :string, index: true

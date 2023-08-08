@@ -1,5 +1,5 @@
 module Wechat
-  module Model::Menu::ClickMenu
+  module Inner::Menu::ClickMenu
 
     def as_json(options = nil)
       {
