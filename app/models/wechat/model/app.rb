@@ -29,7 +29,6 @@ module Wechat
       attribute :enabled, :boolean, default: true
       attribute :global, :boolean, default: false
       attribute :oauth_enable, :boolean, default: true
-      attribute :inviting, :boolean, default: false, comment: '可邀请加入'
       attribute :secret, :string
       attribute :token, :string
       attribute :encrypt_mode, :boolean, default: true
