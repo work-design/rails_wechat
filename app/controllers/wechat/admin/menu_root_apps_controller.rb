@@ -1,25 +1,22 @@
 module Wechat
   class Admin::MenuRootAppsController < Admin::BaseController
     before_action :set_app
-    before_action :set_menu_root, only: [:new, :create]
+    before_action :set_new_menu_root_app, only: [:new, :create]
 
     def index
 
     end
 
     private
-    def set_menu_root
-      @menu_root = MenuRoot.find(params[:menu_root_id])
-    end
-
     def set_new_menu_root_app
       @menu_root_app = @app.menu_root_apps.build(menu_root_app_params)
-      @menu_root_app.menu_root_id = params[:menu_root_id]
+      @menu_root_app.menu_root_id = params[:menu_root_id] if params[:menu_root_id]
     end
 
     def menu_root_app_params
       params.fetch(:menu_root_app, {}).permit(
-        :name
+        :name,
+        :menu_root_id
       )
     end
 
