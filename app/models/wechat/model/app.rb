@@ -101,10 +101,15 @@ module Wechat
     end
 
     def menu_roots
-      r = MenuRoot.includes(:menus).where(organ_id: [nil, organ_id], appid: [nil, appid]).order(position: :asc)
-      r.group_by(&:position).transform_values! do |x|
-        x.find(&->(i){ i.appid == appid }) || x.find(&->(i){ i.organ_id == organ_id }) || x.find(&->(i){ i.organ_id.nil? })
-      end.values
+      r = MenuRoot.includes(:menus).order(position: :asc).to_a
+      menu_root_apps.includes(:menu_root).order(position: :desc).each do |menu_root_app|
+        if menu_root_app.menu_root
+          r.insert r.index(menu_root_app.menu_root) + 1, menu_root_app
+        else
+          r.insert -(r.size + 1), menu_root_app
+        end
+      end
+      r
     end
 
     def menu
