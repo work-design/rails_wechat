@@ -16,5 +16,17 @@ module Wechat
       acts_as_list scope: [:menu_root_id, :appid]
     end
 
+    def app_menus(_)
+      r = []
+      menu_apps.each do |menu_app|
+        if menu_app.menu
+          r.insert r.index(menu_app.menu) + 1, menu_app
+        else
+          r.insert -(r.size + 1), menu_app
+        end
+      end
+      r
+    end
+
   end
 end

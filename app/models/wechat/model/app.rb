@@ -111,13 +111,13 @@ module Wechat
       r
     end
 
-    def menus
-
-    end
-
     def menu
       r = menu_roots.map do |menu_root|
-        subs = menu_root.menus.limit(5).as_json(app: self)
+        if menu_root.is_a?(MenuRoot)
+          subs = menu_root.app_menus(appid)[0..5].as_json(host: domain.split(':')[0])
+        else
+          subs = menu_apps[0..5].as_json(host: domain.split(':')[0])
+        end
 
         if subs.size <= 1
           subs[0]
