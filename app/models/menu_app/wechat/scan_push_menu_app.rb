@@ -1,5 +1,5 @@
 module Wechat
-  class ScanPushMenu < Menu
+  class ScanPushMenuApp < MenuApp
     include Inner::Menu::ScanPushMenu
   end
 end

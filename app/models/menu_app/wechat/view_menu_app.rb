@@ -1,5 +1,5 @@
 module Wechat
-  class ViewMenu < Menu
+  class ViewMenuApp < MenuApp
     include Inner::Menu::ViewMenu
   end
 end

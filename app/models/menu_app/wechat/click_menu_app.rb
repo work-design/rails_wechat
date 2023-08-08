@@ -1,5 +1,5 @@
 module Wechat
-  class ClickMenu < Menu
+  class ClickMenuApp < MenuApp
     include Inner::Menu::ClickMenu
   end
 end
