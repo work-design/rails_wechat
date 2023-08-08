@@ -9,6 +9,9 @@
     </div>
   </td>
 </tr>
-<% model.menu_root_apps.where(appid: params[:app_appid]).each do |child| %>
-  <%= render partial: 'root_tbody', layout: 'root_app_tr', locals: { model: child } %>
+<% model.menus.each do |menu| %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', locals: { model: menu } %>
+<% end %>
+<% model.menu_root_apps.where(appid: params[:app_appid]).each do |menu_root_app| %>
+  <%= render partial: 'root_tbody', layout: 'root_app_tr', locals: { model: menu_root_app } %>
 <% end %>

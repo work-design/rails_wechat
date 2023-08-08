@@ -1,0 +1,15 @@
+<tr id="tr_<%= model.id %>" data-depth="0" data-controller="tree show" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide">
+  <%= yield %>
+  <td>
+    <div data-show-target="item" style="visibility: hidden">
+    <% if model.appid.present? %>
+      <%= link_to({ controller: 'menus', action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-pencil has-text-link"></i>
+      <% end %>
+      <%= button_to({ controller: 'menus', action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.confirm') } }) do %>
+        <i class="fa-solid fa-trash has-text-danger"></i>
+      <% end %>
+    <% end %>
+    </div>
+  </td>
+</tr>
