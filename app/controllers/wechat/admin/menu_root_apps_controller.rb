@@ -4,7 +4,7 @@ module Wechat
     before_action :set_menu_root, only: [:new, :create]
 
     def index
-      @menu_roots = MenuRoot.where(organ_id: nil)
+
     end
 
     private
@@ -14,6 +14,7 @@ module Wechat
 
     def set_new_menu_root_app
       @menu_root_app = @app.menu_root_apps.build(menu_root_app_params)
+      @menu_root_app.menu_root_id = params[:menu_root_id]
     end
 
     def menu_root_app_params
