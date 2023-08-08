@@ -8,6 +8,8 @@ module Wechat
       attribute :scope, :string
       attribute :kind, :string
       attribute :extra, :json
+
+      scope :roots, -> { where(parent_id: 0) }
     end
 
   end

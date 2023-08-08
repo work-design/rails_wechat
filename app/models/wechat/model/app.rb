@@ -270,6 +270,7 @@ module Wechat
         api.media_create file
       end
       self.update logo_media_id: r['media_id']
+      api.modify_logo(logo_media_id)
     end
 
   end
