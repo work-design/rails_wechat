@@ -114,7 +114,7 @@ module Wechat
     def menu
       r = menu_roots.map do |menu_root|
         if menu_root.is_a?(MenuRoot)
-          subs = menu_root.app_menus(appid)[0..5].as_json(host: domain.split(':')[0])
+          subs = menu_root.app_menus(appid)[0..4].as_json(host: domain.split(':')[0])
         else
           subs = menu_apps[0..5].as_json(host: domain.split(':')[0])
         end
@@ -126,7 +126,7 @@ module Wechat
         end
       end.compact
 
-      { button: r }
+      { button: r[0..2] }
     end
 
 
