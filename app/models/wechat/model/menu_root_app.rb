@@ -7,8 +7,8 @@ module Wechat
       attribute :appid, :string
       attribute :position, :integer
 
-      belongs_to :menu_root
-      belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :menu_root, optional: true
+      belongs_to :app, foreign_key: :appid, primary_key: :appid
 
       has_many :menus, ->(o) { where(o.filter_hash).order(appid: :asc, position: :asc) }, primary_key: :position, foreign_key: :root_position
 

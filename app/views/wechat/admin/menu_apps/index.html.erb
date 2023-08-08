@@ -1,5 +1,6 @@
 <%= render 'button' %>
 
 <%= render layout: 'index_table' do %>
+  <%= render 'root_raw_tr' %>
   <%= render partial: 'root_tbody', layout: 'root_tr', collection: @menu_roots, as: :model %>
 <% end %>
