@@ -7,6 +7,7 @@ module Wechat
       attribute :position, :integer
 
       has_many :menus, -> { order(position: :asc) }
+      has_many :menu_root_apps, -> { order(position: :asc) }
     end
 
   end

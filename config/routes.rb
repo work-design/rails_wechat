@@ -303,6 +303,7 @@ Rails.application.routes.draw do
               post :sync
             end
           end
+          resources :menu_root_apps
           resources :app_configs
         end
         resources :responses, only: [] do
