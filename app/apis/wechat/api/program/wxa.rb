@@ -1,6 +1,13 @@
 module Wechat::Api
   module Program::Wxa
     BASE = 'https://api.weixin.qq.com/wxa/'
+    PRIVACY_STATUS = {
+      1 => '待申请开通',
+      2 => '无权限',
+      3 => '申请中',
+      4 => '申请失败',
+      5 => '已开通'
+    }
 
     # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/sec-check/security.msgSecCheck.html
     def msg_sec_check(content)
@@ -103,7 +110,11 @@ module Wechat::Api
     end
 
     def privacy_interfaces
-      get 'security/get_privacy_interface', origin: BASE
+      r = get 'security/get_privacy_interface', origin: BASE
+      r['interface_list'].map do |item|
+        item['status'] = PRIVACY_STATUS[item['status']]
+        item
+      end
     end
 
     def apply_privacy_interface(api_name, content)
