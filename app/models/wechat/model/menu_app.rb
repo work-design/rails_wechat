@@ -13,6 +13,8 @@ module Wechat
 
       belongs_to :scene, optional: true
       belongs_to :tag, optional: true
+
+      acts_as_list scope: [:menu_id, :appid]
     end
 
   end

@@ -7,7 +7,7 @@ module Wechat
     included do
       attribute :ticket, :string
 
-      after_create_commit :deal_ticket, if: -> { ticket.present? }
+      after_save_commit :deal_ticket, if: -> { ticket.present? && saved_change_to_ticket? }
     end
 
     def domain

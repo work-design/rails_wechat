@@ -17,10 +17,6 @@ module Wechat
       render 'sync', locals: { notice: r.to_s }
     end
 
-    def edit
-      @parents = @app.menus.where(type: 'Wechat::ParentMenu', parent_id: nil, appid: @menu.appid)
-    end
-
     private
     def set_menu_app
       @menu_app = @app.menu_apps.find(params[:id])
