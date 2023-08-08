@@ -3,7 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     def as_json(options = {})
-      if value.to_s.start_with?('/')
+      if value.to_s.start_with?('/', 'http')
         r = URI(value)
       else
         r = URI("/#{value}")
