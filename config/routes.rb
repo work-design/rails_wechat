@@ -1,5 +1,52 @@
 Rails.application.routes.draw do
   scope RailsCom.default_routes_scope do
+    concern :appable do
+      resources :scenes do
+        member do
+          patch :sync
+        end
+      end
+      resources :responses do
+        member do
+          post :sync
+          get :filter_reply
+          get 'reply' => :edit_reply
+          patch 'reply' => :update_reply
+        end
+      end
+      resources :requests, except: [:new, :create]
+      resources :replies do
+        collection do
+          post :build
+        end
+        member do
+          get :add
+        end
+        resources :news_reply_items, only: [:destroy]
+      end
+      resources :tags do
+        collection do
+          post :sync
+        end
+      end
+      resources :wechat_users
+      resources :user_tags
+      resources :templates do
+        collection do
+          get :default
+          post :sync
+        end
+        resources :notices
+      end
+      resources :menu_apps do
+        collection do
+          post :sync
+        end
+      end
+      resources :menu_root_apps
+      resources :app_configs
+    end
+
     namespace :wechat, defaults: { business: 'wechat' } do
       controller :wechat do
         post :auth
@@ -149,7 +196,7 @@ Rails.application.routes.draw do
               get :qrcode
               get :organ
             end
-            resources :requests
+            concerns :appable
           end
           resources :platform_templates do
             collection do
@@ -217,6 +264,12 @@ Rails.application.routes.draw do
       namespace :admin, defaults: { namespace: 'admin' } do
         root 'home#index'
         resource :organ, only: [:show, :edit, :update]
+        resources :apps, param: :appid do
+          member do
+            get :info
+          end
+          concerns :appable
+        end
         resources :members, only: [:index, :show, :edit, :update]
         resources :menu_roots do
           resources :menus, only: [:new, :create]
@@ -256,55 +309,6 @@ Rails.application.routes.draw do
               end
             end
           end
-        end
-        resources :apps, param: :appid do
-          member do
-            get :info
-          end
-          resources :scenes do
-            member do
-              patch :sync
-            end
-          end
-          resources :responses do
-            member do
-              post :sync
-              get :filter_reply
-              get 'reply' => :edit_reply
-              patch 'reply' => :update_reply
-            end
-          end
-          resources :requests, except: [:new, :create]
-          resources :replies do
-            collection do
-              post :build
-            end
-            member do
-              get :add
-            end
-            resources :news_reply_items, only: [:destroy]
-          end
-          resources :tags do
-            collection do
-              post :sync
-            end
-          end
-          resources :wechat_users
-          resources :user_tags
-          resources :templates do
-            collection do
-              get :default
-              post :sync
-            end
-            resources :notices
-          end
-          resources :menu_apps do
-            collection do
-              post :sync
-            end
-          end
-          resources :menu_root_apps
-          resources :app_configs
         end
         resources :responses, only: [] do
           resources :extractors
