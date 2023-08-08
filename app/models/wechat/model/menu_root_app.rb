@@ -10,16 +10,10 @@ module Wechat
       belongs_to :menu_root, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid
 
-      has_many :menus, ->(o) { where(o.filter_hash).order(appid: :asc, position: :asc) }, primary_key: :position, foreign_key: :root_position
+      has_many :menus, -> { order(position: :asc) }, primary_key: :menu_root_id, foreign_key: :menu_root_id
+      has_many :menu_apps, -> { order(position: :asc) }
 
       acts_as_list scope: [:menu_root_id, :appid]
-    end
-
-    def filter_hash
-      h = {}
-      h.merge! menu_root_id: menu_root_id
-      h.merge! appid: appid
-      h
     end
 
     def xx
