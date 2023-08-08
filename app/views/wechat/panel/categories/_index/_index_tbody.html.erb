@@ -1,5 +1,5 @@
 <td><%= model.id %></td>
-<td><%= model.name %></td>
+<td><%= link_to model.name, { parent_id: model.id } %></td>
 <td>
   <p><%= model.level %></p>
 </td>
