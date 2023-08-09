@@ -15,6 +15,9 @@ zh:
         title: 企业微信授权登录中
     admin:
       title: 微信公众平台
+      home:
+        index:
+          title: 公众号管理
       apps:
         index:
           title: 我的公众号

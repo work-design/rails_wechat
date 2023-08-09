@@ -1,0 +1,12 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <%= render 'index_thead' %>
+      <%= render 'index_thead_actions' %>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+    <%= yield %>
+  </tbody>
+  <%= render 'index_tfoot' %>
+</table>
