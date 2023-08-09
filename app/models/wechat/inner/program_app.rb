@@ -49,5 +49,12 @@ module Wechat
       self.save
     end
 
+    def update_open_appid!
+      r = api.open_get
+      if r['errcode'] == 0
+        self.update open_appid: r['open_appid']
+      end
+    end
+
   end
 end
