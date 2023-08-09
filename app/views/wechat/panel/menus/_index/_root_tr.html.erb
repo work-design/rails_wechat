@@ -1,4 +1,4 @@
-<tr id="tr_<%= model.id %>" data-depth="10" data-controller="show tree" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide">
+<tr id="tr_<%= model.id %>" data-depth="10" data-controller="show tree" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="has-background-light">
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
@@ -14,3 +14,11 @@
 <% model.menus.each do |child| %>
   <%= render partial: 'index_tbody', layout: 'index_tr', locals: { model: child } %>
 <% end %>
+<tr>
+  <td colspan="5">
+    <%= link_to({ action: 'new', menu_root_id: model.id }, data: { turbo_frame: 'modal' }, class: 'pl-4') do %>
+      <i class="fa-solid fa-plus"></i>
+      <span><% t('.new') %></span>
+    <% end %>
+  </td>
+</tr>
