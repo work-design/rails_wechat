@@ -13,6 +13,41 @@ module Wechat
       @api = Wechat::Api::Public.new(self)
     end
 
+    def sync_menu
+      api.menu_delete
+      api.menu_create menu
+    end
+
+    def menu_roots
+      r = MenuRoot.includes(:menus).order(position: :asc).to_a
+      menu_root_apps.includes(:menu_root).order(position: :desc).each do |menu_root_app|
+        if menu_root_app.menu_root
+          r.insert r.index(menu_root_app.menu_root) + 1, menu_root_app
+        else
+          r.insert -(r.size + 1), menu_root_app
+        end
+      end
+      r
+    end
+
+    def menu
+      r = menu_roots.map do |menu_root|
+        if menu_root.is_a?(MenuRoot)
+          subs = menu_root.app_menus(appid)[0..4].as_json(host: domain.split(':')[0])
+        else
+          subs = menu_apps[0..5].as_json(host: domain.split(':')[0])
+        end
+
+        if subs.size <= 1
+          subs[0]
+        else
+          { name: menu_root.name, sub_button: subs }
+        end
+      end.compact
+
+      { button: r[0..2] }
+    end
+
     def js_config(url = '/')
       refresh_jsapi_ticket unless jsapi_ticket_valid?
       js_hash = Wechat::Signature.signature(jsapi_ticket, url)
