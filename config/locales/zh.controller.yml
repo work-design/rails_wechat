@@ -95,6 +95,9 @@ zh:
           title: 消息
     panel:
       title: 公众号通用
+      home:
+        index:
+          title: 公众号管理
       template_configs:
         index:
           title: 模板设置
