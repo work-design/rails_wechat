@@ -2,7 +2,7 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
-      <%= link_to({ action: 'qrcode', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.panel.agencies.qrcode.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ action: 'qrcode', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.panel.program_agencies.qrcode.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-qrcode has-text-primary"></i>
       <% end if model.is_a?(Wechat::ProgramAgency) %>
       <%= link_to({ action: 'templates', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('wechat.panel.program_agencies.templates.title') }, class: 'button is-small is-rounded is-light') do %>
