@@ -62,6 +62,12 @@ zh:
         encrypt_mode:
           true: 安全模式（推荐）
           false: 明文模式
+        audit_status:
+          success: 审核成功
+          rejected: 审核被拒绝
+          verifying: 审核中
+          regretted: 已撤回
+          verify_later: 审核延后
       wechat/tag_default:
         default_type:
           WechatUser: 微信已绑定用户
