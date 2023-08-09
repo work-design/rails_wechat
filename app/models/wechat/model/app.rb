@@ -273,5 +273,9 @@ module Wechat
       api.modify_logo(logo_media_id)
     end
 
+    def upload_desc
+      api.modify_desc("#{organ.name}官方小程序")
+    end
+
   end
 end
