@@ -4,6 +4,10 @@ module Wechat
   module Inner::PublicApp
     extend ActiveSupport::Concern
 
+    def oauth_enable
+      true
+    end
+
     def domain
       organ&.host
     end
@@ -57,6 +61,16 @@ module Wechat
       js_hash
     rescue => e
       logger.debug e.message
+    end
+
+    def update_open_appid!
+      r = api.open_get
+      if r['errcode'] == 0
+        self.update open_appid: r['open_appid']
+      else
+        r = api.open_create
+        self.update open_appid: r['open_appid']
+      end
     end
 
   end

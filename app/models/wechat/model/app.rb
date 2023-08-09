@@ -28,13 +28,13 @@ module Wechat
       attribute :logo_media_id, :string
       attribute :enabled, :boolean, default: true
       attribute :global, :boolean, default: false
-      attribute :oauth_enable, :boolean, default: true
       attribute :secret, :string
       attribute :token, :string
       attribute :encrypt_mode, :boolean, default: true
       attribute :encoding_aes_key, :string
       attribute :url_link, :string
       attribute :debug, :boolean, default: false
+      attribute :open_appid, :string
 
       encrypts :secret
 
@@ -169,6 +169,10 @@ module Wechat
 
     def set_global
       self.class.where.not(id: self.id).global.update_all(global: false)
+    end
+
+    def oauth_enable
+      false
     end
 
     def name
