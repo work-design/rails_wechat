@@ -9,6 +9,6 @@
     </div>
   </td>
 </tr>
-<% Wechat::MenuRootApp.where(appid: params[:app_appid], menu_root_id: nil).each do |child| %>
+<% Wechat::MenuRootApp.where(appid: @app.appid, menu_root_id: nil).each do |child| %>
   <%= render partial: 'root_tbody', layout: 'root_app_tr', locals: { model: child } %>
 <% end %>
