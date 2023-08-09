@@ -53,6 +53,7 @@ module Wechat
       has_many :menu_apps, -> { where(scene_id: nil) }, primary_key: :appid, foreign_key: :appid
       has_many :all_menu_apps, class_name: 'MenuApp', primary_key: :appid, foreign_key: :appid
       has_many :menu_root_apps, primary_key: :appid, foreign_key: :appid
+      has_many :menu_disables, primary_key: :appid, foreign_key: :appid
       has_many :receives, primary_key: :appid, foreign_key: :appid
       has_many :replies, primary_key: :appid, foreign_key: :appid
       has_many :requests, primary_key: :appid, foreign_key: :appid
@@ -69,7 +70,6 @@ module Wechat
       scope :global,  -> { where(global: true) }
 
       validates :appid, presence: true, uniqueness: true
-
 
       before_validation :init_token, if: -> { token.blank? }
       before_validation :init_aes_key, if: -> { encrypt_mode && encoding_aes_key.blank? }
