@@ -33,11 +33,12 @@ module Wechat
     def menu
       r = menu_roots.map do |menu_root|
         if menu_root.is_a?(MenuRoot)
-          subs = menu_root.app_menus(appid)[0..4].as_json(host: domain.split(':')[0])
+          _subs = menu_root.app_menus(appid).delete_if { |i| i.is_a?(Menu) && menu_disables.include?(i.id) }
         else
-          subs = menu_apps[0..5].as_json(host: domain.split(':')[0])
+          _subs = menu_root.menu_apps
         end
 
+        subs = _subs[0..4].as_json(host: domain.split(':')[0])
         if subs.size <= 1
           subs[0]
         else
