@@ -1,15 +1,20 @@
+<% menu_disable = @app.menu_disables.find(&->(i){ i.menu_id == model.id }) %>
 <tr id="tr_<%= model.id %>" data-depth="0" data-controller="tree show" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="<%= 'has-background-white-ter' %>">
   <%= yield %>
   <td>
-    <div data-show-target="item" style="visibility: hidden">
-      <%= button_to({ controller: 'menu_disables', action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.confirm') } }) do %>
-        <i class="fa-solid fa-trash has-text-danger"></i>
+    <% if menu_disable %>
+      <%= button_to({ controller: 'menu_disables', action: 'destroy', menu_id: model.id, id: menu_disable.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-check has-text-success"></i>
       <% end %>
-      <%= link_to({ controller: 'menu_apps', action: 'new', menu_id: model.id }, data: { turbo_frame: 'modal' }, class: 'button is-small is-link') do %>
-        <i class="fa-solid fa-plus"></i>
-        <span><%= t('.new') %></span>
+    <% else %>
+      <%= button_to({ controller: 'menu_disables', action: 'create', menu_id: model.id }, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-xmark has-text-danger"></i>
       <% end %>
-    </div>
+    <% end %>
+    <%= link_to({ controller: 'menu_apps', action: 'new', menu_id: model.id }, data: { turbo_frame: 'modal' }, class: 'button is-small is-link') do %>
+      <i class="fa-solid fa-plus"></i>
+      <span><%= t('.new') %></span>
+    <% end %>
   </td>
 </tr>
 <% model.menu_apps.where(appid: @app.appid).each do |menu_app| %>
