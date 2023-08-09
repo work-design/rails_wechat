@@ -33,7 +33,7 @@ module Wechat
     def menu
       r = menu_roots.map do |menu_root|
         if menu_root.is_a?(MenuRoot)
-          _subs = menu_root.app_menus(appid).delete_if { |i| i.is_a?(Menu) && menu_disables.include?(i.id) }
+          _subs = menu_root.app_menus(appid).delete_if { |i| i.is_a?(Menu) && menu_disables.pluck(:menu_id).include?(i.id) }
         else
           _subs = menu_root.menu_apps
         end
