@@ -15,6 +15,6 @@
     </div>
   </td>
 </tr>
-<% model.menu_apps.where(appid: params[:app_appid]).each do |menu_app| %>
+<% model.menu_apps.where(appid: @app.appid).each do |menu_app| %>
   <%= render partial: 'index_app_tbody', layout: 'index_app_tr', locals: { model: menu_app } %>
 <% end %>
