@@ -8,6 +8,13 @@ module Wechat::Api
       4 => '申请失败',
       5 => '已开通'
     }
+    AUDIT_STATUS = {
+      0 => '审核成功',
+      1 => '审核被拒绝',
+      2 => '审核中',
+      3 => '已撤回',
+      4 => '审核延后'
+    }
 
     # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/sec-check/security.msgSecCheck.html
     def msg_sec_check(content)
@@ -90,7 +97,8 @@ module Wechat::Api
     end
 
     def audit_status(auditid)
-      post 'get_auditstatus', auditid: auditid, origin: BASE
+      r = post 'get_auditstatus', auditid: auditid, origin: BASE
+      r.merge! desc: AUDIT_STATUS[r['status']]
     end
 
     def audit_undo
