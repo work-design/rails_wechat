@@ -150,6 +150,9 @@ zh:
       menus:
         index:
           title: 通用菜单
+      menu_apps:
+        index:
+          title: 公众号菜单
       corps:
         index:
           title: 授权企业
