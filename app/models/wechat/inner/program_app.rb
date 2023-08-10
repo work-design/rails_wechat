@@ -49,6 +49,11 @@ module Wechat
       self.save
     end
 
+    def release
+      r = api.release
+      get_version_info! if r['errcode'] == 0
+    end
+
     def update_open_appid!
       r = api.open_get
       if r['errcode'] == 0
