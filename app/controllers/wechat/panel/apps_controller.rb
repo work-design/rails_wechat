@@ -29,20 +29,11 @@ module Wechat
     def app_params
       params.fetch(:app, {}).permit(
         :type,
-        :name,
-        :shared,
+        :nick_name,
         :appid,
         :secret,
-        :agentid,
-        :mch_id,
-        :key,
-        :key_v3,
         :encrypt_mode,
-        :serial_no,
-        :global,
         :inviting,
-        :token,
-        :encoding_aes_key,
         :domain,
         :weapp_id,
         :debug
