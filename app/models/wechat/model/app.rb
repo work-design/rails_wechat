@@ -182,11 +182,6 @@ module Wechat
     def disabled_func_infos
     end
 
-    def refresh_access_token
-      r = platform.api.authorizer_token(appid, refresh_token)
-      store_access_token(r)
-    end
-
     def generate_wechat_user(code)
       result = platform.api.oauth2_access_token(code, appid)
       logger.debug "\e[35m  Agency generate User: #{result}  \e[0m"
