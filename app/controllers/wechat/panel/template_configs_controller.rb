@@ -8,7 +8,7 @@ module Wechat
     end
 
     def apps
-      @apps = PublicApp.page(params[:page])
+      @apps = App.page(params[:page])
       @appids = @template_config.templates.pluck(:appid)
     end
 
