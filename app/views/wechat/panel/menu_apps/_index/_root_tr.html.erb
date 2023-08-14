@@ -16,7 +16,7 @@
 <% model.menus.each do |menu| %>
   <%= render partial: 'menu_tbody', layout: 'menu_tr', locals: { model: menu } %>
 <% end %>
-<% model.menu_apps.where(appid: @app.appid).each do |menu_app| %>
+<% model.menu_apps.where(appid: @app.appid, menu_id: nil).each do |menu_app| %>
   <%= render partial: 'menu_app_tbody', layout: 'menu_app_tr', locals: { model: menu_app } %>
 <% end %>
 <% model.menu_root_apps.where(appid: @app.appid).each do |menu_root_app| %>
