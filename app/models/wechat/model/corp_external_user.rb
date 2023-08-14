@@ -14,7 +14,7 @@ module Wechat
         provider: '1'
       }
 
-      has_one :corp, primary_key: :corp_id, foreign_key: :corp_id
+      has_one :corp, primary_key: :corp_id, foreign_key: :corpid
       belongs_to :wechat_user, foreign_key: :uid, primary_key: :uid, optional: true
 
       before_validation :init_subject_type, if: -> { uid.present? && uid_changed? }
