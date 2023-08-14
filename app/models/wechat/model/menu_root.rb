@@ -8,7 +8,7 @@ module Wechat
 
       has_many :menus, -> { order(position: :asc) }
       has_many :menu_root_apps, -> { order(position: :asc) }
-      has_many :menu_apps
+      has_many :menu_apps, -> { order(position: :asc) }
     end
 
     def app_menus(appid)
