@@ -73,7 +73,6 @@ module Wechat
 
       before_validation :init_token, if: -> { token.blank? }
       before_validation :init_aes_key, if: -> { encrypt_mode && encoding_aes_key.blank? }
-      after_update :set_global, if: -> { global? && saved_change_to_global? }
       after_create_commit :store_info_later
       after_save_commit :sync_to_storage, if: -> { saved_change_to_qrcode_url? }
     end
@@ -165,10 +164,6 @@ module Wechat
     def template_ids(notifiable_type, *code)
       ids = TemplateConfig.where(notifiable_type: notifiable_type, code: code).pluck(:id)
       templates.where(template_config_id: ids).pluck(:template_id)
-    end
-
-    def set_global
-      self.class.where.not(id: self.id).global.update_all(global: false)
     end
 
     def oauth_enable

@@ -42,7 +42,7 @@ module Wechat
           _subs = menu_root.menu_apps
         end
 
-        subs = _subs[0..4].as_json(host: domain.split(':')[0])
+        subs = _subs[0..4].reverse!.as_json(host: domain.split(':')[0])
         if subs.size <= 1
           subs[0]
         else
