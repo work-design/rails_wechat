@@ -2,13 +2,15 @@
   <span class="pl-4"><%= model.name %></span>
   <span class="tag"><%= model.type_i18n %></span>
 </td>
-<td><%= model.value %></td>
 <td>
+  <p><%= model.value %></p>
   <p><%= model.mp_appid %></p>
   <p><%= model.mp_pagepath %></p>
 </td>
 <td>
   <span class="has-text-grey"><%= model.position %></span>
+</td>
+<td>
   <% menu_app = @app.menu_apps.find(&->(i){ i.menu_id == model.id }) %>
   <% if menu_app %>
     <%= form_with theme: nil, url: { action: 'destroy', id: menu_app.id }, method: :delete, data: { controller: 'input' } do |f| %>
