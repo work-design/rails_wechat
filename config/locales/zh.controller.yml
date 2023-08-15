@@ -186,6 +186,8 @@ zh:
       partner_payees:
         index:
           title: 签约商户
+        organ:
+          title: 关联企业
       registers:
         index:
           title: 公众号申请
