@@ -68,6 +68,10 @@ zh:
           verifying: 审核中
           regretted: 已撤回
           verify_later: 审核延后
+      wechat/payee:
+        type:
+          Wechat::MchPayee: 商户
+          Wechat::PartnerPayee: 服务商
       wechat/tag_default:
         default_type:
           WechatUser: 微信已绑定用户
