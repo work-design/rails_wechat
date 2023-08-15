@@ -6,10 +6,12 @@
   <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:key) %></td>
   <td><%= @payee.key %></td>
 </tr>
+<% if @payee.is_a?(Wechat::MchPayee) %>
 <tr>
   <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:key_v3) %></td>
   <td><%= @payee.key_v3 %></td>
 </tr>
+<% end %>
 <tr>
   <td class="has-text-right"><%= Wechat::Payee.human_attribute_name(:serial_no) %></td>
   <td><%= @payee.serial_no %></td>
