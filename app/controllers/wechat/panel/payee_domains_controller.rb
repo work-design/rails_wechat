@@ -25,7 +25,7 @@ module Wechat
     end
 
     def set_domains
-      @organ_domains = @payee.organ.organ_domains
+      @organ_domains = Org::OrganDomain.default_where(organ_id: @payee.organ.self_and_descendant_ids, kind: ['frontend', 'mp'])
     end
 
     def payee_domain_params
