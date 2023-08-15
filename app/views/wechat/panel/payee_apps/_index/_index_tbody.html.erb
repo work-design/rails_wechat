@@ -1,7 +1,7 @@
 <td><%= model.appid %></td>
 <td>
-  <span><%= model.agency.name %></span>
-  <span class="tag"><%= model.agency.type_i18n %></span>
+  <span><%= model.app.name %></span>
+  <span class="tag"><%= model.app.type_i18n %></span>
 </td>
 <td>
   <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
