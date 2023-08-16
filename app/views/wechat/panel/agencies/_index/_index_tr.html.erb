@@ -8,6 +8,9 @@
       <%= link_to({ controller: 'menu_apps', agency_id: model.id }, aria: { label: t('wechat.panel.menu_apps.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-bars"></i>
       <% end %>
+      <%= link_to({ controller: 'scenes', agency_id: model.id }, aria: { label: t('wechat.panel.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-qrcode"></i>
+      <% end %>
     </div>
     <div data-show-target="item" style="visibility: hidden">
       <%= link_to model.fast_url, aria: { label: '快速注册' }, target: '_blank', class: 'button is-small is-rounded is-light' do %>
