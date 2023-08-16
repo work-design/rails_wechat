@@ -9,11 +9,17 @@ module Wechat
       @program_user.save
 
       headers['Authorization'] = @program_user.auth_token
-      render json: {
+      r = {
         auth_token: @program_user.auth_token,
         program_user: @program_user.as_json(methods: [:skip_auth]),
         user: @program_user.user
       }
+      if params[:state].present?
+        state = Com::State.find(params[:state])
+        r.merge! url: state.url if state
+      end
+
+      render json: r
     end
 
     def mobile
