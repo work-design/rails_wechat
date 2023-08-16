@@ -1,12 +1,8 @@
 <div class="breadcrumb has-succeeds-separator">
   <ul>
     <li><%= link_to t('wechat.admin.apps.index.title'), { controller: 'apps', anchor: "tr_#{@app.id}" } %></li>
-    <li>
-      <span class="px-3">
-        <span><%= @app.name %></span>
-        <span class="tag is-success"><%= @app.type_i18n %></span>
-      </span>
-    </li>
+    <li><span class="px-3"><%= @app.type_i18n %></span></li>
+    <li><span class="px-3"><%= @app.name %></span></li>
     <li class="is-active"><%= t('.title') %></li>
   </ul>
 </div>
