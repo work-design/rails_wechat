@@ -18,7 +18,7 @@ module Wechat
         state = Com::State.find(params[:state])
         state.destroyable = true
         state.save
-        r.merge! url: state.url if state
+        r.merge! url: state.url(auth_toke: @program_user.auth_token) if state
       end
 
       render json: r
