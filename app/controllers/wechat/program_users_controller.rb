@@ -16,6 +16,8 @@ module Wechat
       }
       if params[:state].present?
         state = Com::State.find(params[:state])
+        state.destroyable = true
+        state.save
         r.merge! url: state.url if state
       end
 
