@@ -138,6 +138,10 @@ module Wechat
       version_info.dig('release_info', 'release_version') != version_info.dig('exp_info', 'exp_version')
     end
 
+    def experienceable?
+      audit_status.nil? && submittable?
+    end
+
     def releasable?
       audit_status_success? && submittable?
     end

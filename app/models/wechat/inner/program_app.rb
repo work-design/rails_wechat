@@ -51,7 +51,11 @@ module Wechat
 
     def release
       r = api.release
-      get_version_info! if r['errcode'] == 0
+      if r['errcode'] == 0
+        self.auditid = nil
+        self.audit_status = nil
+        get_version_info!
+      end
     end
 
     def update_open_appid!
