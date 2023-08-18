@@ -162,6 +162,9 @@ zh:
       menu_root_apps:
         new:
           title: 自定义主菜单
+      requests:
+        index:
+          title: 消息
       scenes:
         index:
           title: 场景码
