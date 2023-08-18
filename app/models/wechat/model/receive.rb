@@ -60,7 +60,6 @@ module Wechat
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       before_create :parse_content
       after_create_commit :check_app
-      after_save_commit :weapp_audited, if: -> { ['weapp_audit_success'].include?(info_type) && saved_change_to_info_type? }
     end
 
     def app_name
@@ -99,11 +98,10 @@ module Wechat
     end
 
     def check_app
-      app.update user_name: message_hash['ToUserName'] if app
-    end
-
-    def weapp_audited
-      app.update audit_status: 'success' if app
+      return unless app
+      app.user_name = message_hash['ToUserName']
+      app.audit_status = 'success' if ['weapp_audit_success'].include?(info_type)
+      app.save
     end
 
   end
