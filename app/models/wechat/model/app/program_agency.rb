@@ -134,8 +134,12 @@ module Wechat
       api.apply_privacy_interface('wx.chooseAddress', '用于电商配送')
     end
 
+    def submittable?
+      version_info.dig('release_info', 'release_version') != version_info.dig('exp_info', 'exp_version')
+    end
+
     def releasable?
-      audit_status_success? && version_info.dig('release_info', 'release_version') != version_info.dig('exp_info', 'exp_version')
+      audit_status_success? && submittable?
     end
 
     def get_version_info!
