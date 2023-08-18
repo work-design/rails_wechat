@@ -58,7 +58,7 @@ module Wechat
       has_one :request
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
-      after_create :parse_content
+      before_create :parse_content
       after_create_commit :check_app
       after_save_commit :weapp_audited, if: -> { ['weapp_audit_success'].include?(info_type) && saved_change_to_info_type? }
     end
@@ -96,8 +96,6 @@ module Wechat
       request.open_id = open_id
       request.msg_type = msg_type
       request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
-
-      self.save  # will auto save wechat request
     end
 
     def check_app
