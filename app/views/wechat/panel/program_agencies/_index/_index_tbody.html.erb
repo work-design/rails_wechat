@@ -10,6 +10,12 @@
   <p class="has-text-grey"><%= model.domain %></p>
 </td>
 <td>
+  <p><%= model.principal_name %></p>
+  <p><%= model.user_name %></p>
+  <p><%= model.alias_name %></p>
+  <p class="has-text-grey"><%= model.disabled_func_infos.join(',') %></p>
+</td>
+<td>
 <% if model.version_info.is_a?(Hash) %>
   <div>
     <span><%= model.version_info.dig('release_info', 'release_version') %></span>
@@ -23,11 +29,5 @@
     <% end %>
   </div>
 <% end %>
-</td>
-<td>
-  <p><%= model.principal_name %></p>
-  <p><%= model.user_name %></p>
-  <p><%= model.alias_name %></p>
-  <p class="has-text-grey"><%= model.disabled_func_infos.join(',') %></p>
 </td>
 <td><%= model.audit_status_i18n %></td>
