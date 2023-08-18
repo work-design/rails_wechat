@@ -30,4 +30,9 @@
   </div>
 <% end %>
 </td>
-<td><%= model.audit_status_i18n %></td>
+<td>
+  <span><%= model.audit_status_i18n %></span>
+  <%= button_to({ action: 'release', id: model.id }, aria: { label: t('wechat.panel.program_agencies.release.title') }, class: 'button is-small is-rounded is-light') do %>
+    <i class="fa-solid fa-cloud-arrow-up has-text-success"></i>
+  <% end %>
+</td>

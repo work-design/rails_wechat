@@ -188,6 +188,7 @@ Rails.application.routes.draw do
               get :templates
               post 'templates/:platform_template_id' => :commit
               post :submit
+              post :release
             end
           end
           resources :agencies do
