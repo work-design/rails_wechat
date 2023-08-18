@@ -14,7 +14,7 @@ module Wechat
         verifying: 2,
         regretted: 3,
         verify_later: 4
-      }
+      }, _prefix: true
 
       belongs_to :platform_template, optional: true
 
@@ -132,6 +132,10 @@ module Wechat
 
     def set_choose_address
       api.apply_privacy_interface('wx.chooseAddress', '用于电商配送')
+    end
+
+    def releasable?
+      audit_status_success? && version_info.dig('release_info', 'release_version') != version_info.dig('exp_info', 'exp_version')
     end
 
     def get_version_info!
