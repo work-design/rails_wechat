@@ -20,7 +20,7 @@ module Wechat
     end
 
     def templates
-      @platform_templates = @platform.platform_templates.order(id: :desc)
+      @platform_templates = @platform.platform_templates.order(id: :desc).limit(5)
     end
 
     def commit
