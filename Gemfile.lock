@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: faf43381b7a04e0d37293bf52ed30f62e7a0561f
+  revision: 71b0e1c1021e0d85c29cfe97541222bbf8ea61fb
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -213,7 +213,7 @@ GEM
       railties (>= 7.0.0)
     psych (5.1.0)
       stringio
-    puma (6.3.0)
+    puma (6.3.1)
       nio4r (~> 2.0)
     racc (1.7.1)
     rack (2.2.8)
