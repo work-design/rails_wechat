@@ -94,6 +94,12 @@ module Wechat
       )
       logger.debug "\e[35m  Submit Audit: #{r}  \e[0m"
       self.update auditid: r['auditid']
+      get_audit_status_later
+      r
+    end
+
+    def get_audit_status_later
+      AgencyAuditStatusJob.perform_later(self)
     end
 
     def get_audit_status!
