@@ -17,8 +17,6 @@ module Wechat
       }, _prefix: true
 
       belongs_to :platform_template, optional: true
-
-      after_save_commit :get_version_info_later, if: -> { saved_change_to_platform_template_id? }
     end
 
     def disabled_func_infos
@@ -73,6 +71,7 @@ module Wechat
       )
       if r['errcode'] == 0
         self.platform_template = platform_template
+        get_version_info
         self.save
       end
       r
@@ -102,10 +101,6 @@ module Wechat
       end
 
       r
-    end
-
-    def get_audit_status_later
-      AgencyAuditStatusJob.perform_later(self)
     end
 
     def get_audit_status!
@@ -158,17 +153,17 @@ module Wechat
       audit_status_success? && submittable?
     end
 
-    def get_version_info!
+    def get_version_info
       r = api.version_info
       self.version_info = { exp_info: r['exp_info'], release_info: r['release_info'] }
       self.version_info['exp_info']['exp_time'] = Time.at(version_info['exp_info']['exp_time']) if version_info['exp_info']
       self.version_info['release_info']['release_time'] = Time.at(version_info['release_info']['release_time']) if version_info['release_info']
-      self.save
       self.version_info
     end
 
-    def get_version_info_later
-      AgencyVersionJob.perform_later(self)
+    def get_version_info!
+      get_version_info
+      self.save
     end
 
     def sync_categories
