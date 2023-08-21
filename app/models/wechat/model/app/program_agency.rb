@@ -93,8 +93,14 @@ module Wechat
         ]
       )
       logger.debug "\e[35m  Submit Audit: #{r}  \e[0m"
-      self.update auditid: r['auditid']
-      get_audit_status_later
+
+      if r['auditid']
+        au = api.audit_status(r['auditid'])
+        self.auditid = r['auditid']
+        self.audit_status = au['status']
+        self.save
+      end
+
       r
     end
 
