@@ -4,6 +4,7 @@ module Wechat
 
     included do
       attribute :match_value, :string
+      attribute :tag_name, :string
       attribute :expire_seconds, :integer, default: 2592000  # 默认: 2592000 ，即 30 天
       attribute :expire_at, :datetime
       attribute :qrcode_ticket, :string
@@ -25,7 +26,7 @@ module Wechat
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
       belongs_to :response, ->(o) { where(appid: o.appid) }, foreign_key: :match_value, primary_key: :match_value, optional: true
-      belongs_to :tag, ->(o) { where(appid: o.appid) }, foreign_key: :match_value, primary_key: :name, optional: true
+      belongs_to :tag, ->(o) { where(appid: o.appid) }, foreign_key: :tag_name, primary_key: :name, optional: true
 
       has_many :menu_apps, ->(o) { where(appid: o.appid) }, dependent: :destroy_async
       has_many :menus, -> { roots }, through: :menu_apps
