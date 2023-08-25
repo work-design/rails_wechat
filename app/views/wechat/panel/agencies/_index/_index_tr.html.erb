@@ -8,6 +8,9 @@
       <%= link_to({ controller: 'menu_apps', agency_id: model.id }, aria: { label: t('wechat.panel.menu_apps.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-bars"></i>
       <% end %>
+      <%= link_to({ controller: 'wechat_users', agency_id: model.id }, aria: { label: t('wechat.panel.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-users"></i>
+      <% end %>
       <%= link_to({ controller: 'scenes', agency_id: model.id }, aria: { label: t('wechat.panel.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-qrcode"></i>
       <% end %>
