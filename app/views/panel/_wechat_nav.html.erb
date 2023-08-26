@@ -5,6 +5,7 @@
     <i class="fa-solid dropdown"></i>
   </a>
   <div class="menu-list" data-empty-target="content">
+    <%= link_to t('wechat.panel.organs.index.title'), { controller: 'wechat/panel/organs' }, class: active_helper(controllers: 'organs', active: 'is-active') %>
     <%= link_to t('wechat.panel.registers.index.title'), { controller: 'wechat/panel/registers' }, class: active_helper(controllers: 'registers', active: 'is-active') %>
     <%= link_to t('wechat.panel.template_configs.index.title'), { controller: 'wechat/panel/template_configs' }, class: active_helper(controllers: 'template_configs', active: 'is-active') %>
     <%= link_to t('wechat.panel.categories.index.title'), { controller: 'wechat/panel/categories' }, class: active_helper(controllers: 'categories', active: 'is-active') %>

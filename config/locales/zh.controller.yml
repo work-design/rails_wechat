@@ -101,6 +101,9 @@ zh:
       home:
         index:
           title: 公众号管理
+      organs:
+        index:
+          title: 组织列表
       template_configs:
         index:
           title: 模板设置
