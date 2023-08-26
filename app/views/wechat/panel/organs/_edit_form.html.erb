@@ -1,0 +1,5 @@
+<%= form_with model: @organ, url: { action: 'update' } do |f| %>
+  <%= render 'error_messages', target: @organ %>
+  <%= f.collection_select :appid, @apps, :appid, :name %>
+  <%= f.submit %>
+<% end %>

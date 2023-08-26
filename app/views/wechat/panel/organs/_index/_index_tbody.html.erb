@@ -1,0 +1,11 @@
+<td>
+  <div class="is-several">
+    <%= image_tag model.logo.variant(resize_to_limit: [30, 30]) if model.logo.attached? %>
+    <span><%= model.name %></span>
+  </div>
+</td>
+<td><%= model.name_short %></td>
+<td><%= model.appid %></td>
+<td>
+  <time data-controller="time" data-format="human"><%= model.created_at.to_fs(:iso8601) %></time>
+</td>
