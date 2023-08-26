@@ -113,8 +113,6 @@ module Wechat
         state.update user_id: oauth_user.user_id, destroyable: true
       end
 
-      @current_account = oauth_user.account
-      #@current_user = oauth_user.user
       @current_authorized_token = oauth_user.authorized_token
       logger.debug "\e[35m  Login by OauthUser #{oauth_user.id} as user: #{current_user&.id}  \e[0m"
 
@@ -127,7 +125,6 @@ module Wechat
 
     def login_by_corp_user(corp_user, url: url_for(controller: '/home'))
       state = Com::State.find_by(id: params[:state])
-      @current_account = corp_user.account
       @current_authorized_token = corp_user.authorized_token
 
       logger.debug "\e[35m  Login by CorpUser #{corp_user.id}  \e[0m"
