@@ -32,7 +32,6 @@ module Wechat
       attribute :token, :string
       attribute :encoding_aes_key, :string
       attribute :debug, :boolean, default: false
-      attribute :enabled, :boolean, default: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
       has_many :profiles, class_name: 'Profiled::Profile', primary_key: :corpid, foreign_key: :corpid
@@ -43,8 +42,6 @@ module Wechat
       has_many :corp_users, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corpid, foreign_key: :corpid
       has_many :contacts, ->(o) { where(suite_id: o.suite_id) }, primary_key: :corpid, foreign_key: :corpid
       has_many :supporters, primary_key: :corpid, foreign_key: :corpid
-
-      scope :enabled, -> { where(enabled: true) }
 
       before_validation :init_aes_key, if: -> { encoding_aes_key.blank? || token.blank? }
       before_validation :sync_agentid, if: -> { agent_changed? && agent.present? }
