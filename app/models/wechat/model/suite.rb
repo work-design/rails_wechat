@@ -118,9 +118,7 @@ module Wechat
       result = api.auth_user(code)
       logger.debug "\e[35m  Suite CorpUser#{result}  \e[0m"
       corp_user = corp_users.find_or_initialize_by(open_userid: result['open_userid'])
-      corp_user.corp_id = result['corpid']
-      corp_user.userid = result['userid']
-      corp_user.user_ticket = result['user_ticket']
+      corp_user.assign_attributes result.slice('corpid', 'userid', 'user_ticket')
       corp_user.ticket_expires_at = Time.current + result['expires_in'].to_i
       corp_user.open_id = result['openid']
       corp_user
