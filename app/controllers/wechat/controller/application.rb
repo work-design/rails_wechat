@@ -46,7 +46,7 @@ module Wechat
     def current_oauth_app
       return @current_oauth_app if defined? @current_oauth_app
       if request.variant.include?(:work_wechat)
-        @current_oauth_app = Agent.default_where(default_ancestors_params).take || current_organ.corps.enabled.take
+        @current_oauth_app = current_organ.corps.enabled.take
       else
         @current_oauth_app = current_organ.app || current_organ.provider.app
       end
