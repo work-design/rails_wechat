@@ -215,6 +215,12 @@ Rails.application.routes.draw do
         resources :providers do
           resources :suites do
             resources :corps do
+              collection do
+                post :search_organs
+              end
+              member do
+                get :organ
+              end
               resources :corp_users
               resources :maintains
             end
