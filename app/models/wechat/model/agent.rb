@@ -90,16 +90,6 @@ module Wechat
       "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
     end
 
-    def generate_corp_user(code)
-      result = api.getuserinfo(code)
-      logger.debug "\e[35m  gene corp User: #{result}  \e[0m"
-      corp_user = corp_users.find_or_initialize_by(userid: result['UserId'])
-      corp_user.device_id = result['DeviceId'] if result['DeviceId'].present?
-      corp_user.user_ticket = result['user_ticket']
-      corp_user.ticket_expires_at = Time.current + result['expires_in'].to_i
-      corp_user
-    end
-
     def sync_supporters
       r = api.accounts
       r['account_list'].each do |item|

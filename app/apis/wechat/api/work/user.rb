@@ -2,10 +2,6 @@ module Wechat::Api
   module Work::User
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
-    def getuserinfo(code)
-      get 'user/getuserinfo', params: { code: code }, origin: BASE
-    end
-
     def auth_user(code)
       get 'auth/getuserinfo', params: { code: code }, origin: BASE
     end
