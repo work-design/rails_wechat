@@ -7,8 +7,9 @@ module Wechat
       attribute :name, :string
       attribute :open_kfid, :string
       attribute :manage_privilege, :boolean
+      attribute :corpid, :string, index: true
 
-      belongs_to :agent
+      belongs_to :corp
     end
 
     def xx
