@@ -53,7 +53,7 @@ module Wechat
     def agent_js
       session[:enter_url] = params[:url] if params[:url].present?
       if params[:appid].present?
-        js_app = App.find_by appid: params[:appid]
+        js_app = Corp.find_by appid: params[:appid]
       else
         js_app = current_js_app
       end
