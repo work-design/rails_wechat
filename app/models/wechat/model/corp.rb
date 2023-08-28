@@ -79,7 +79,7 @@ module Wechat
 
     def generate_corp_user(code)
       result = api.auth_user(code)
-      logger.debug "\e[35m  auth_user: #{result}  \e[0m"
+      logger.debug "\e[35m  corp generate user: #{result}  \e[0m"
       corp_user = corp_users.find_or_initialize_by(userid: result['userid'])
       corp_user.organ = organ
 

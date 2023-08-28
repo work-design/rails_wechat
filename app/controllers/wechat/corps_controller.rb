@@ -4,7 +4,7 @@ module Wechat
     before_action :set_corp, only: [:login, :notify]
 
     def login
-      @corp_user = @corp.generate_corp_user(params[:code])
+      @corp_user = (@corp.suite || @corp).generate_corp_user(params[:code])
       @corp_user.save
 
       login_by_corp_user(@corp_user)
