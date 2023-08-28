@@ -18,22 +18,9 @@ module Wechat
       has_many :suite_receives, ->(o){ where(agent_id: o.agentid) }, primary_key: :corpid, foreign_key: :corpid
       has_many :supporters
 
-      before_validation :init_token, if: -> { token.blank? }
-      before_validation :init_aes_key, if: -> { encoding_aes_key.blank? }
+
     end
 
-    def api
-      return @api if defined? @api
-      @api = Wechat::Api::Work.new(self)
-    end
-
-    def init_token
-      self.token = SecureRandom.hex
-    end
-
-    def init_aes_key
-      self.encoding_aes_key = SecureRandom.alphanumeric(43)
-    end
 
     def init_corp
       self.organ.update corp_id: self.corpid
@@ -75,15 +62,6 @@ module Wechat
       }
       logger.debug "\e[35m  Oauth2 Options: #{h}  \e[0m"
       "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"
-    end
-
-    def sync_supporters
-      r = api.accounts
-      r['account_list'].each do |item|
-        supporter = supporters.find_or_initialize_by(open_kfid: item['open_kfid'])
-        supporter.assign_attributes item.slice('name', 'avatar', 'manage_privilege')
-        supporter.save
-      end
     end
 
   end

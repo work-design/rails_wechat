@@ -71,10 +71,6 @@ module Wechat
       end
     end
 
-    def secret
-      permanent_code
-    end
-
     def appid
       corpid
     end
@@ -102,6 +98,7 @@ module Wechat
 
     def assign_info(info)
       self.assign_attributes info.slice('access_token', 'permanent_code', 'auth_corp_info', 'auth_user_info')
+      self.secret = info['permanent_code']
       self.access_token_expires_at = Time.current + info['expires_in'].to_i if info['access_token']
       self.agent = info.fetch('auth_info', {}).fetch('agent', [])[0]
 
@@ -112,7 +109,7 @@ module Wechat
     end
 
     def auth_info
-      info = suite.api.auth_info(corpid, permanent_code)
+      info = suite.api.auth_info(corpid, secret)
       assign_info(info)
       save
     end
@@ -169,7 +166,7 @@ module Wechat
     def js_login(**url_options)
       url_options.with_defaults! controller: 'wechat/corps', action: 'login', id: id, host: host
       {
-        appid: appid,
+        appid: corpid,
         agentid: agentid,
         redirect_uri: ERB::Util.url_encode(Rails.application.routes.url_for(**url_options)),
         state: Com::State.create(host: host, controller: '/me/home')
@@ -209,7 +206,7 @@ module Wechat
       if suite.kind_develop?
         info = api.token
       else
-        info = suite.api.corp_token(corpid, permanent_code)
+        info = suite.api.corp_token(corpid, secret)
       end
       self.access_token = info['access_token']
       self.access_token_expires_at = Time.current + info['expires_in'].to_i if info['access_token'] && self.access_token_changed?
@@ -234,6 +231,15 @@ module Wechat
       logger.debug "\e[35m  Suite Corp Open id: #{open}  \e[0m"
       self.open_corpid = open['open_corpid']
       self.save
+    end
+
+    def sync_supporters
+      r = api.accounts
+      r['account_list'].each do |item|
+        supporter = supporters.find_or_initialize_by(open_kfid: item['open_kfid'])
+        supporter.assign_attributes item.slice('name', 'avatar', 'manage_privilege')
+        supporter.save
+      end
     end
 
     def get_external_userid(unionid, openid, subject_type: 1)
