@@ -5,17 +5,10 @@ module Wechat
     include Inner::JsToken
 
     included do
-      attribute :name, :string
       attribute :inviting, :boolean, default: false, comment: '可邀请加入'
-      attribute :corpid, :string
-      attribute :secret, :string
-      attribute :token, :string
-      attribute :agentid, :string
-      attribute :encoding_aes_key, :string
       attribute :user_name, :string
       attribute :domain, :string
       attribute :url_link, :string
-      attribute :debug, :boolean, default: false
       attribute :confirm_name, :string
       attribute :confirm_content, :string
 
@@ -34,10 +27,6 @@ module Wechat
     def api
       return @api if defined? @api
       @api = Wechat::Api::Work.new(self)
-    end
-
-    def decrypt(encrypt_data)
-      Wechat::Cipher.decrypt(encrypt_data, encoding_aes_key)
     end
 
     def init_token

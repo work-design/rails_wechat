@@ -5,9 +5,11 @@ module Wechat
     include Inner::JsToken
 
     included do
+      attribute :type, :string
       attribute :name, :string
       attribute :corpid, :string, index: true
       attribute :open_corpid, :string, index: true
+      attribute :agentid, :string
       attribute :corp_type, :string
       attribute :subject_type, :string
       attribute :verified_end_at, :datetime
@@ -26,6 +28,7 @@ module Wechat
       attribute :agent_ticket_expires_at, :datetime
       attribute :permanent_code, :string
       attribute :suite_id, :string
+      attribute :secret, :string
       attribute :token, :string
       attribute :encoding_aes_key, :string
       attribute :debug, :boolean, default: false
@@ -51,8 +54,8 @@ module Wechat
       self.encoding_aes_key = encoding_aes_key.presence || SecureRandom.alphanumeric(43)
     end
 
-    def decrypt(msg)
-      Wechat::Cipher.qy_decrypt(msg, encoding_aes_key)
+    def decrypt(encrypt_data)
+      Wechat::Cipher.decrypt(encrypt_data, encoding_aes_key)
     end
 
     def receive_filter
