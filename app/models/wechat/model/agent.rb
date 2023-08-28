@@ -12,8 +12,6 @@ module Wechat
       attribute :confirm_name, :string
       attribute :confirm_content, :string
 
-      validates :agentid, presence: true
-
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
       has_many :corp_users, ->(o){ where(suite_id: nil, organ_id: o.organ_id) }, primary_key: :corpid, foreign_key: :corpid

@@ -46,12 +46,17 @@ module Wechat
       scope :enabled, -> { where(enabled: true) }
 
       before_validation :init_aes_key, if: -> { encoding_aes_key.blank? || token.blank? }
+      before_validation :sync_agentid, if: -> { agent_changed? && agent.present? }
       before_create :init_organ
     end
 
     def init_aes_key
       self.token = token.presence || SecureRandom.alphanumeric(24)
       self.encoding_aes_key = encoding_aes_key.presence || SecureRandom.alphanumeric(43)
+    end
+
+    def sync_agentid
+      self.agentid = agent['agentid']
     end
 
     def decrypt(encrypt_data)
@@ -169,10 +174,6 @@ module Wechat
         redirect_uri: ERB::Util.url_encode(Rails.application.routes.url_for(**url_options)),
         state: Com::State.create(host: host, controller: '/me/home')
       }
-    end
-
-    def agentid
-      agent['agentid']
     end
 
     def agent_config(url = '/')
