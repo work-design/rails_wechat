@@ -77,7 +77,6 @@ module Wechat
       organ || create_organ(name: name)
     end
 
-    # todo 这个方法跟 work app 下的方法是类似的，后期合并
     def generate_corp_user(code)
       result = api.auth_user(code)
       logger.debug "\e[35m  auth_user: #{result}  \e[0m"
