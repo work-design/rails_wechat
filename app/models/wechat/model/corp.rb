@@ -242,6 +242,16 @@ module Wechat
       end
     end
 
+    def sync_departments
+      r = api.department
+      return unless r['errcode'] == 0
+      r['department'].each do |dep|
+        depart = organ.departments.find_or_initialize_by(wechat_id: dep['id'])
+        depart.name = dep['name']
+        depart.save
+      end
+    end
+
     def get_external_userid(unionid, openid, subject_type: 1)
       api.external_userid(unionid: unionid, openid: openid, subject_type: subject_type)
     end

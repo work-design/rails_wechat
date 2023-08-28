@@ -17,28 +17,13 @@ module Wechat
       has_many :corp_users, ->(o){ where(suite_id: nil, organ_id: o.organ_id) }, primary_key: :corpid, foreign_key: :corpid
       has_many :suite_receives, ->(o){ where(agent_id: o.agentid) }, primary_key: :corpid, foreign_key: :corpid
       has_many :supporters
-
-
     end
 
-
-    def init_corp
-      self.organ.update corp_id: self.corpid
-    end
 
     def url
       Rails.application.routes.url_for(controller: 'wechat/agents', action: 'create', id: self.id, host: domain) if domain.present?
     end
 
-    def sync_departments
-      r = api.department
-      return unless r['errcode'] == 0
-      r['department'].each do |dep|
-        depart = organ.departments.find_or_initialize_by(wechat_id: dep['id'])
-        depart.name = dep['name']
-        depart.save
-      end
-    end
 
     def js_login(**url_options)
       url_options.with_defaults! controller: 'wechat/agents', action: 'login', id: id, host: self.domain
