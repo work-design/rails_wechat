@@ -4,7 +4,7 @@ module Wechat
     before_action :set_apps, only: [:edit, :update]
 
     def index
-      @organs = Org::Organ.where.associated(:apps).page(params[:page])
+      @organs = Org::Organ.where.associated(:apps).distinct.page(params[:page])
     end
 
     private
