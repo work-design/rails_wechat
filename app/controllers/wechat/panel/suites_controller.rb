@@ -4,7 +4,7 @@ module Wechat
     before_action :set_new_suite, only: [:new, :create]
 
     def index
-      @suites = @provider.suites.page(params[:page])
+      @suites = @provider.suites.order(id: :asc).page(params[:page])
     end
 
     private
