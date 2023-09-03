@@ -205,6 +205,12 @@ zh:
           bind: 绑定二维码
           qrcode: 关注二维码
           app: APPID
+      wechat_users:
+        index:
+          title: 用户
+      templates:
+        index:
+          title: 通知模板
     in:
       title: 平台微信
       apps:
