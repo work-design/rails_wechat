@@ -1,3 +1,4 @@
 <td><%= model.notification.title %></td>
 <td><%= model.type_i18n %></td>
 <td><%= model.status %></td>
+<td><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></td>

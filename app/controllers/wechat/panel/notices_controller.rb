@@ -4,7 +4,7 @@ module Wechat
     before_action :set_notice, only: [:show, :edit, :update, :destroy]
 
     def index
-      @notices = @template.notices.page(params[:page])
+      @notices = @template.notices.order(id: :desc).page(params[:page])
     end
 
     private
