@@ -211,6 +211,9 @@ zh:
       templates:
         index:
           title: 通知模板
+      notices:
+        index:
+          title: 通知
     in:
       title: 平台微信
       apps:

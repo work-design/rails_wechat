@@ -1,22 +1,10 @@
 module Wechat
-  class Admin::NoticesController < Admin::BaseController
+  class Panel::NoticesController < Panel::BaseController
     before_action :set_template
     before_action :set_notice, only: [:show, :edit, :update, :destroy]
 
     def index
       @notices = @template.notices.page(params[:page])
-    end
-
-    def new
-      @notice = @template.notices.build
-    end
-
-    def create
-      @notice = @template.notices.build(notice_params)
-
-      unless @notice.save
-        render :new, locals: { model: @notice }, status: :unprocessable_entity
-      end
     end
 
     private
