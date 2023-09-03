@@ -2,6 +2,7 @@ module Wechat
   class Panel::TemplatesController < Panel::BaseController
     before_action :set_app
     before_action :set_template, only: [:show, :edit, :update, :destroy]
+    before_action :set_new_template, only: [:new, :create]
 
     def index
       q_params = {}
@@ -11,30 +12,21 @@ module Wechat
       @template_configs = TemplateConfig.where.not(id: template_config_ids)
     end
 
-    def create
-      @template = @app.templates.build(template_params)
-
-      unless @template.save
-        render :new, locals: { model: @template }, status: :unprocessable_entity
-      end
-    end
-
     def sync
       r = @app.sync_templates
     end
 
     private
-    def set_app
-      @app = App.default_where(default_params).find_by id: params[:app_id]
-    end
-
     def set_template
       @template = Template.find(params[:id])
     end
 
+    def set_new_template
+      @template = @app.templates.build(template_params)
+    end
+
     def template_params
       params.fetch(:template, {}).permit(
-        :app_id,
         :template_id,
         :title,
         :content,
