@@ -5,7 +5,7 @@
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info has-text-info"></i>
       <% end %>
-      <%= link_to({ controller: 'notice', template_id: model.id }, aria: { label: t('wechat.panel.notices.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'notices', template_id: model.id }, aria: { label: t('wechat.panel.notices.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-inbox has-text-info"></i>
       <% end %>
       <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal', turbo_scroll: true }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
