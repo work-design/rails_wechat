@@ -8,8 +8,8 @@ module Wechat
       q_params = {}
 
       @templates = @app.templates.default_where(q_params).page(params[:page])
-      template_config_ids = @templates.pluck(:template_config_id)
-      @template_configs = TemplateConfig.where.not(id: template_config_ids)
+      #template_config_ids = @templates.pluck(:template_config_id)
+      #@template_configs = TemplateConfig.where.not(id: template_config_ids)
     end
 
     def sync
