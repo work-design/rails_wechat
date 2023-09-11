@@ -9,7 +9,7 @@ module Wechat
     end
 
     def domain
-      organ&.host
+      organ&.host || (defined?(SETTING) && SETTING.host)
     end
 
     def api
