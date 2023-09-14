@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: d2c79bc3bb3e8b6c7d1282f9621232233ce3fe9a
+  revision: 7ba1cd3b25b70caaddb147d7e675b3c67988f5ed
   specs:
     rails_extend (1.0.1)
       rails (>= 5.0)
