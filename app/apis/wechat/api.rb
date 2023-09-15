@@ -1,6 +1,0 @@
-require_relative 'api/base'
-require_relative 'api/platform'
-require_relative 'api/public'
-require_relative 'api/suite'
-require_relative 'api/program'
-require_relative 'api/work'
