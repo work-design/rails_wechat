@@ -66,7 +66,10 @@ module Wechat
         user_desc: platform_template.user_desc,
         ext_json: {
           extAppid: appid,
-          ext: { host: URI::HTTPS.build(host: domain).to_s }
+          ext: {
+            host: URI::HTTPS.build(host: domain).to_s,
+            path: organ.redirect_path || 'board'
+          }
         }.to_json
       )
       if r['errcode'] == 0
