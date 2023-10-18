@@ -59,18 +59,22 @@ module Wechat
       api.modify_domain(**h)
     end
 
+    def ext_json
+      {
+        extAppid: appid,
+        ext: {
+          host: URI::HTTPS.build(host: domain).to_s,
+          path: organ.redirect_path
+        }
+      }
+    end
+
     def commit(platform_template)
       r = api.commit(
         template_id: platform_template.template_id,
         user_version: platform_template.user_version,
         user_desc: platform_template.user_desc,
-        ext_json: {
-          extAppid: appid,
-          ext: {
-            host: URI::HTTPS.build(host: domain).to_s,
-            path: organ.redirect_path || 'board'
-          }
-        }.to_json
+        ext_json: ext_json.to_json
       )
       if r['errcode'] == 0
         self.platform_template = platform_template
