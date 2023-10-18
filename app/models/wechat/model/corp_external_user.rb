@@ -7,14 +7,14 @@ module Wechat
       attribute :unionid, :string, index: true
       attribute :external_userid, :string, index: true
       attribute :pending_id, :string
-      attribute :corp_id, :string, index: true
+      attribute :corpid, :string, index: true
 
       enum subject_type: {
         oneself: '0',
         provider: '1'
       }
 
-      has_one :corp, primary_key: :corp_id, foreign_key: :corpid
+      has_one :corp, primary_key: :corpid, foreign_key: :corpid
       belongs_to :wechat_user, foreign_key: :uid, primary_key: :uid, optional: true
 
       before_validation :init_subject_type, if: -> { uid.present? && uid_changed? }

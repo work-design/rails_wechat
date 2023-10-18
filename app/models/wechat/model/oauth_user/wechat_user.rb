@@ -134,7 +134,7 @@ module Wechat
       elsif app
         corp = Corp.where(organ_id: app.organ.self_and_ancestor_ids).take
         return unless corp
-        corp_external_users.present? || corp_external_users.create(corp_id: corp.corp_id)
+        corp_external_users.present? || corp_external_users.create(corpid: corp.corpid)
       end
     end
 
