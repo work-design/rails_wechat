@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 4f946a9d39c79a1d00554a83333ffba3dd34e4ed
+  revision: 365444ec2702b3a0f1d3fffccf0854eccbb1c244
   specs:
     rails_design (0.0.1)
       rails
@@ -207,7 +207,7 @@ GEM
     mutex_m (0.1.2)
     net-http (0.3.2)
       uri
-    net-imap (0.4.1)
+    net-imap (0.4.2)
       date
       net-protocol
     net-pop (0.1.2)
@@ -281,7 +281,7 @@ GEM
     sdoc (2.6.1)
       rdoc (>= 5.0)
     stringio (3.0.9)
-    thor (1.2.2)
+    thor (1.3.0)
     timeout (0.4.0)
     turbo-rails (1.5.0)
       actionpack (>= 6.0.0)
