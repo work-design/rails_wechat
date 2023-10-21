@@ -1,5 +1,5 @@
 module Wechat
-  class Board::OrgansController < Org::Board::OrgansController
+  class Board::OrgansController < defined?(RailsOrg) ? Org::Board::OrgansController : Board::BaseController
     before_action :set_organ, only: [:show, :edit, :update, :destroy]
     before_action :set_corp, only: [:new, :index]
     before_action :set_new_organ, only: [:new, :create]
