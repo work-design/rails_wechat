@@ -2,10 +2,10 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
-      <%= link_to({ controller: 'menu_roots', action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'menu_roots', action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-pencil has-text-info"></i>
       <% end %>
-      <%= button_to({ controller: 'menu_roots', action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.confirm') } }) do %>
+      <%= button_to({ controller: 'menu_roots', action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.confirm') } }) do %>
         <i class="fa-solid fa-trash has-text-danger"></i>
       <% end %>
     </div>
@@ -18,7 +18,7 @@
   <td colspan="5">
     <%= link_to({ action: 'new', menu_root_id: model.id }, data: { turbo_frame: 'modal' }, class: 'pl-4') do %>
       <i class="fa-solid fa-plus"></i>
-      <span><% t('.new') %></span>
+      <span><% t('.new.title') %></span>
     <% end %>
   </td>
 </tr>

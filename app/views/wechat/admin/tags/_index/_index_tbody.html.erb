@@ -2,7 +2,7 @@
 <td><%= model.tag_id %></td>
 <td><%= model.count %></td>
 <td>
-  <%= link_to({ controller: 'wechat_users', 'user_tags.tag_name': model.name }, aria: { label: t('.show') }, class: 'button is-small is-rounded is-light') do %>
+  <%= link_to({ controller: 'wechat_users', 'user_tags.tag_name': model.name }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fa-solid fa-users"></i>
     <span class="pl-1"><%= model.user_tags_count %></span>
   <% end %>

@@ -4,12 +4,12 @@
   <% if @select_uids.include?(model.uid) %>
     <%= button_to({ action: 'destroy_openid', uid: model.uid }, method: :delete, data: { turbo_confirm: t('.confirm') }, class: 'button is-small is-danger') do %>
       <i class="fa-solid fa-times"></i>
-      <span class="pl-1"><%= t('.destroy') %></span>
+      <span class="pl-1"><%= t('.destroy.title') %></span>
     <% end %>
   <% else %>
     <%= link_to({ action: 'new_openid', 'receiver[account]': model.uid }, data: { turbo_frame: 'modal' }, class: 'button is-small is-success') do %>
       <i class="fa-solid fa-plus"></i>
-      <span class="pl-1"><%= t('.new') %></span>
+      <span class="pl-1"><%= t('.new.title') %></span>
     <% end %>
   <% end %>
   </td>

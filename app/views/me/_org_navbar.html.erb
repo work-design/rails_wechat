@@ -1,0 +1,40 @@
+<div class="navbar-item has-dropdown is-hoverable is-hidden-touch">
+  <div class="navbar-link">
+    <%= image_tag current_organ.logo if current_organ && current_organ.logo.attached? %>
+    <span><%= current_organ.present? ? current_organ.name : t('.title') %></span>
+  </div>
+  <div class="navbar-dropdown is-right">
+  <% current_user.accounts.each do |account| %>
+    <div class="navbar-item">
+      <span class="is-size-7 has-text-grey"><%= account.identity %></span>
+    </div>
+    <div class="navbar-divider"></div>
+    <% account.members.includes(organ: :organ_domains).each do |member| %>
+      <% if current_organ.self_and_ancestor_ids.include?(member.organ_id) %>
+        <%= link_to({ controller: '/me/home', auth_token: current_authorized_token.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item is-active') do %>
+          <span><%= member.organ.name %></span>
+        <% end %>
+      <% else %>
+        <%= link_to({ controller: '/me/home', auth_token: current_authorized_token.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item') do %>
+          <span><%= member.organ.name %></span>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% current_user.wechat_users.where.associated(:members).each do |oauth_user| %>
+    <div class="navbar-item"><%= oauth_user.name.presence || oauth_user.uid %></div>
+    <div class="navbar-divider"></div>
+    <% oauth_user.members.includes(organ: :organ_domains).each do |member| %>
+      <% if current_organ.self_and_ancestor_ids.include?(member.organ_id) %>
+        <%= link_to({ controller: '/me/home', auth_token: current_authorized_token.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item is-active') do %>
+          <span><%= member.organ.name %></span>
+        <% end %>
+      <% else %>
+        <%= link_to({ controller: '/me/home', auth_token: current_authorized_token.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item') do %>
+          <span><%= member.organ.name %></span>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  </div>
+</div>

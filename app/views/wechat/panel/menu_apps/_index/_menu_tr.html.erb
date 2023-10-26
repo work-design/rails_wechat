@@ -7,13 +7,13 @@
         <i class="fa-solid fa-xmark has-text-danger"></i>
       <% end %>
     <% else %>
-      <%= button_to({ controller: 'menu_disables', action: 'create', menu_id: model.id }, aria: { label: t('.destroy') }, class: 'button is-small is-rounded is-light') do %>
+      <%= button_to({ controller: 'menu_disables', action: 'create', menu_id: model.id }, aria: { label: t('.destroy.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-check has-text-success"></i>
       <% end %>
     <% end %>
     <%= link_to({ controller: 'menu_apps', action: 'new', menu_id: model.id }, data: { turbo_frame: 'modal' }, class: 'button is-small is-link') do %>
       <i class="fa-solid fa-plus"></i>
-      <span><%= t('.new') %></span>
+      <span><%= t('.new.title') %></span>
     <% end %>
   </td>
 </tr>
