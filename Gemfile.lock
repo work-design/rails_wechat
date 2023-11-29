@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: ee194e2cc5876d6e4531f2edbec6cb4a2530861b
+  revision: 05ff5ef2c7dfa4d7b77677a01c387978e7850807
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 1e2ea30467daf19e0690e3068c1d825f019cc7e5
+  revision: c6b1daa593c1a2b54bc875aed9b1dfb1f633f0b6
   specs:
     rails_com (1.3.0)
       acme-client
@@ -27,28 +27,28 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 05aac51ebab3df772e64860724abd0c28d6b5801
+  revision: 69a35081f56872f91e84dcad71946c9eb66cc21e
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: ced020805eda08fd8ab8c93c408fe2ce5439bd1f
+  revision: a56dd272f8b02196d1c019be18621135508f415c
   specs:
     rails_extend (1.0.1)
       rails (>= 5.0)
 
 GIT
   remote: https://github.com/work-design/rails_notice.git
-  revision: e0e1a0964524c4ad4ea2750aa3e5efa0c70c2308
+  revision: bd9dd402542b2b679098c5c3712fb47fc3f67d85
   specs:
     rails_notice (1.0.3)
       rails_extend
 
 GIT
   remote: https://github.com/work-design/rails_org.git
-  revision: 597816d70d8730149ba7261a6bb186a7a1989484
+  revision: 471b172ef65ba37491f38a53039e2bce909e1da8
   specs:
     rails_org (0.0.1)
       rails_com (~> 1.2)
@@ -219,9 +219,9 @@ GEM
     mini_portile2 (2.8.4)
     minitest (5.20.0)
     mutex_m (0.1.2)
-    net-http (0.3.2)
+    net-http (0.4.0)
       uri
-    net-imap (0.4.2)
+    net-imap (0.4.3)
       date
       net-protocol
     net-pop (0.1.2)
@@ -305,13 +305,13 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uri (0.12.2)
+    uri (0.13.0)
     webrick (1.8.1)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    with_advisory_lock (4.6.0)
-      activerecord (>= 4.2)
+    with_advisory_lock (5.0.0)
+      activerecord (>= 6.1)
     zeitwerk (2.6.12)
 
 PLATFORMS

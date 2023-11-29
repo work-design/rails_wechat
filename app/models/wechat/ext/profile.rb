@@ -16,7 +16,7 @@ module Wechat
       has_many :corp_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :external_userid, foreign_key: :external_userid
       has_many :wechat_users, class_name: 'Wechat::WechatUser', through: :corp_external_users
       has_many :users, class_name: 'Auth::User', through: :wechat_users
-      has_many :members, through: :wechat_users
+      has_many :wechat_members, class_name: 'Org::Member', through: :wechat_users
 
       after_save_commit :sync_related_task_later, if: -> { unionid.present? && saved_change_to_unionid? }
     end
