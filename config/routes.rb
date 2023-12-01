@@ -133,7 +133,7 @@ Rails.application.routes.draw do
         resources :subscribeds
         resources :registers do
           member do
-            get 'code' => :edit_code
+            match :edit_code, via: [:get, :post]
           end
         end
         resources :medias
@@ -159,6 +159,7 @@ Rails.application.routes.draw do
             patch 'bind' => :updaet_bind
             get :qrcode
             get :code
+            match :edit_code, via: [:get, :post]
           end
         end
         resources :apps do

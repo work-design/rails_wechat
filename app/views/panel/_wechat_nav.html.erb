@@ -2,7 +2,7 @@
   <a class="menu-label" data-action="menu#toggle">
     <i class="fa-brands fa-fw fa-weixin"></i>
     <span><%= t('wechat.panel.title') %></span>
-    <i class="fa-solid dropdown"></i>
+    <i class="fa-solid fa-fw dropdown"></i>
   </a>
   <div class="menu-list" data-empty-target="content">
     <%= link_to t('wechat.panel.organs.index.title'), { controller: 'wechat/panel/organs' }, class: active_helper(controllers: 'organs', active: 'is-active') %>

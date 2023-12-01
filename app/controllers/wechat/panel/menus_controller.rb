@@ -9,7 +9,7 @@ module Wechat
       q_params = {}
       q_params.merge! params.permit(:name)
 
-      @menu_roots = MenuRoot.includes(:menus).order(position: :asc)
+      @menu_roots = MenuRoot.includes(:menus).order(position: :asc).page(params[:page])
     end
 
     private

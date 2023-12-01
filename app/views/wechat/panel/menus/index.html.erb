@@ -1,6 +1,5 @@
-<%= render 'filter_form' %>
-<%= render 'filter_table' %>
-<%= render 'button' %>
+<%= render 'index_bar' %>
+<%= render 'index_actions' %>
 
 <%= render layout: 'index_table' do %>
   <%= render partial: 'root_tbody', layout: 'root_tr', collection: @menu_roots, as: :model %>
