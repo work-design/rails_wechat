@@ -1,18 +1,14 @@
-<div class="breadcrumb has-succeeds-separator">
-  <ul>
-    <li>
-    <% if @app.is_a?(Wechat::ProgramAgency) %>
-      <%= link_to t('wechat.panel.program_agencies.index.title'), { controller: 'program_agencies', anchor: "tr_#{@app.id}" } %>
-    <% else %>
-      <%= link_to t('wechat.panel.agencies.index.title'), { controller: 'agencies', anchor: "tr_#{@app.id}" } %>
-    <% end %>
-    </li>
-    <li>
-      <span class="px-3">
-        <span><%= @app.name %></span>
-        <span class="tag is-success"><%= @app.type_i18n %></span>
-      </span>
-    </li>
-    <li class="is-active"><%= t('.title') %></li>
-  </ul>
-</div>
+<li>
+<% if @app.is_a?(Wechat::ProgramAgency) %>
+  <%= link_to t('wechat.panel.program_agencies.index.title'), { controller: 'program_agencies', anchor: "tr_#{@app.id}" } %>
+<% else %>
+  <%= link_to t('wechat.panel.agencies.index.title'), { controller: 'agencies', anchor: "tr_#{@app.id}" } %>
+<% end %>
+</li>
+<li>
+  <span class="px-3">
+    <span><%= @app.name %></span>
+    <span class="tag is-success"><%= @app.type_i18n %></span>
+  </span>
+</li>
+<li class="is-active"><%= t('.title') %></li>
