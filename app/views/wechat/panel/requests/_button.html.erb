@@ -1,3 +1,4 @@
-<%= link_to({ controller: 'datum/panel/table_lists', action: 'find', data_list_id: 'RequestDailyExport', **params.permit('created_at-gte', 'created_at-lte') }, data: { turbo_frame: 'modal' }, class: 'button is-link is-small mb-1') do %>
-  <i class="fa-regular fa-file-excel"></i><span><%= t('.export') %></span>
+<%= button_to({ controller: 'datum/admin/table_lists', action: 'find', data_list_id: 'RequestDailyExport', **params.permit('created_at-gte', 'created_at-lte') }, class: 'button is-small is-link') do %>
+  <i class="fa-solid fa-file-excel"></i>
+  <span class="pl-1"><%= t('.export') %></span>
 <% end %>
