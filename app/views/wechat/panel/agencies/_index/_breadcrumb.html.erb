@@ -1,7 +1,3 @@
-<div class="breadcrumb has-succeeds-separator">
-  <ul>
-    <li><%= link_to t('wechat.panel.platforms.index.title'), { controller: 'platforms' } %></li>
-    <li><span class="px-3"><%= @platform.name %></span></li>
-    <li class="is-active"><%= t('.title') %></li>
-  </ul>
-</div>
+<li><%= link_to t('.platforms.index.title'), { controller: 'platforms' } %></li>
+<li><span class="px-3"><%= @platform.name %></span></li>
+<li class="is-active"><%= t('.title') %></li>
