@@ -9,7 +9,6 @@ module Wechat
     end
 
     def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
-      return agency.oauth2_url(scope: scope, state: state, **url_options) if agency
       url_options.with_defaults! controller: 'wechat/apps', action: 'login', id: id, host: self.domain
       h = {
         appid: appid,
