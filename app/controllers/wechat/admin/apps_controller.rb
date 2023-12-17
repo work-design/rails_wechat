@@ -41,7 +41,7 @@ module Wechat
     def app_params
       p = params.fetch(:app, {}).permit(
         :type,
-        :name,
+        :nick_name,
         :enabled,
         :inviting,
         :appid,

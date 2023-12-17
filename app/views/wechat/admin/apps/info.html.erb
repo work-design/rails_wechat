@@ -1,3 +1,1 @@
-<turbo-frame id="modal">
-  <%= render partial: 'info' %>
-</turbo-frame>
+<%= turbo_stream.append 'body', partial: 'info' %>
