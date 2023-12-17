@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 316c6951b3c52d4ce5e444d7460ccdacae8be020
+  revision: 0c3995384e4b253e314a647bdea69024ce383893
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 36d52d18383bec13c388dbf890ae42e1b1e80dcc
+  revision: da0cab3804503367f766b1bbd4eb47190072f7a8
   specs:
     rails_com (1.3.0)
       acme-client
@@ -20,6 +20,7 @@ GIT
       http-form_data (~> 2.3)
       httpx
       kaminari
+      money-rails (~> 1.15)
       net-http
       rails (~> 7.0)
       rails_extend
@@ -27,28 +28,28 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: e1a2ab2314a882985e48502648af4d5aed2244eb
+  revision: d84f4ce8d15925ca9b08fcf0819afb41e9c6de2c
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: 6bda2b2c9d70339eb4e0ffa2246b57d2a9adb14f
+  revision: 1b219ff1db4f48a8d2f69d92be30f64b0ba99542
   specs:
     rails_extend (1.0.1)
       rails (>= 5.0)
 
 GIT
   remote: https://github.com/work-design/rails_notice.git
-  revision: 34e5bf95863c93ce54512a5809fa48ebcbd03033
+  revision: f5ebbf2131753644a730d41796eab8d5e0ccfc80
   specs:
     rails_notice (1.0.3)
       rails_extend
 
 GIT
   remote: https://github.com/work-design/rails_org.git
-  revision: 2be52fd644c02afa60ab680c744e28f72ac42377
+  revision: 9c4763fb47b9000eb8cd6f6beba0d33912b47700
   specs:
     rails_org (0.0.1)
       rails_com (~> 1.2)
@@ -178,7 +179,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    good_job (3.21.2)
+    good_job (3.21.5)
       activejob (>= 6.0.0)
       activerecord (>= 6.0.0)
       concurrent-ruby (>= 1.0.2)
@@ -219,10 +220,19 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
     minitest (5.20.0)
+    monetize (1.12.0)
+      money (~> 6.12)
+    money (6.16.0)
+      i18n (>= 0.6.4, <= 2)
+    money-rails (1.15.0)
+      activesupport (>= 3.0)
+      monetize (~> 1.9)
+      money (~> 6.13)
+      railties (>= 3.0)
     mutex_m (0.2.0)
     net-http (0.4.0)
       uri
-    net-imap (0.4.6)
+    net-imap (0.4.8)
       date
       net-protocol
     net-pop (0.1.2)
@@ -366,7 +376,7 @@ CHECKSUMS
   faraday-retry (2.2.0) sha256=80824a5454dd0ce7d8074013454d163569b909001a64bdb3499c9968df4f41c5
   fugit (1.9.0) sha256=e92ae18828a094afdd753e42ded0b83ad3449d79adddc5d1ab88e28dbfedd221
   globalid (1.2.1) sha256=70bf76711871f843dbba72beb8613229a49429d1866828476f9c9d6ccc327ce9
-  good_job (3.21.2) sha256=3c5d7039421f027b06b69918a4a12adf9ee0e29f2b5da25a2734c78a49ea7385
+  good_job (3.21.5)
   http-2-next (0.5.1) sha256=34582dc0e737267a55b9df5c042e7ed236b358fd94394c3a1bbbdc91ed70b456
   http-form_data (2.3.0) sha256=cc4eeb1361d9876821e31d7b1cf0b68f1cf874b201d27903480479d86448a5f3
   httpx (0.24.7) sha256=f66ba15ed67f7a7b8b811dbdb053ab6bd3a94c9779946bd6e2e3c166bd1dbe26
@@ -383,9 +393,12 @@ CHECKSUMS
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   mini_portile2 (2.8.5) sha256=7a37db8ae758086c3c3ac3a59c036704d331e965d5e106635e4a42d6e66089ce
   minitest (5.20.0) sha256=a3faf26a757ced073aaae0bd10481340f53e221a4f50d8a6033591555374752e
+  monetize (1.12.0)
+  money (6.16.0)
+  money-rails (1.15.0)
   mutex_m (0.2.0) sha256=b6ef0c6c842ede846f2ec0ade9e266b1a9dac0bc151682b04835e8ebd54840d5
   net-http (0.4.0) sha256=d87a6163ce3c64008bc8764e210d5f4ec9b87ca558a9052eb390b2c2c277f157
-  net-imap (0.4.6) sha256=31975db12d9f7979338ad29934ded585a1fdc881b096dc72b35596a563281a3e
+  net-imap (0.4.8)
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
   net-protocol (0.2.2) sha256=aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
   net-smtp (0.4.0) sha256=2d7eb8de289ba8dce3f0d436ee40b9366bea28354c5ba183c8ab2ec05139a3e7
