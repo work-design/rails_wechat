@@ -1,5 +1,5 @@
 module Wechat
-  module Ext::Profile
+  module Ext::Contact
     extend ActiveSupport::Concern
 
     included do
