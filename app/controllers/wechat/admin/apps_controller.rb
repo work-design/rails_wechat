@@ -1,5 +1,5 @@
 module Wechat
-  class Admin::AppsController < Admin::BaseController
+  class Admin::AppsController < Panel::AppsController
     before_action :set_app, only: [:show, :info, :edit, :update, :destroy, :actions]
 
     def index
