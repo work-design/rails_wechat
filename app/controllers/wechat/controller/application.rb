@@ -51,7 +51,7 @@ module Wechat
         @current_oauth_app = current_organ.app || current_organ.provider.app
       end
 
-      logger.debug "\e[35m  Current Oauth App: #{@current_oauth_app&.class_name}/#{@current_oauth_app&.id}  \e[0m"
+      logger.debug "\e[35m  Current Oauth App: #{@current_oauth_app&.base_class_name}/#{@current_oauth_app&.id}  \e[0m"
       @current_oauth_app
     end
 
