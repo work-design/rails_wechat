@@ -2,11 +2,11 @@
   <%= yield %>
   <td>
     <div data-show-target="item" style="visibility: hidden">
-      <%= link_to({ controller: 'menu_root_apps', action: 'new', menu_root_id: model.id }, data: { turbo_frame: 'modal' }, class: 'button is-small is-link') do %>
+      <%= button_to({ controller: 'menu_root_apps', action: 'new', menu_root_id: model.id }, class: 'button is-small is-link') do %>
         <i class="fa-solid fa-plus"></i>
         <span><% t('.new.title') %></span>
       <% end %>
-      <%= link_to({ action: 'new', menu_root_id: model.id }, data: { turbo_frame: 'modal' }, class: 'button is-small is-success') do %>
+      <%= button_to({ action: 'new', menu_root_id: model.id }, class: 'button is-small is-success') do %>
         <i class="fa-solid fa-plus"></i>
         <span><% t('.new.title') %></span>
       <% end %>

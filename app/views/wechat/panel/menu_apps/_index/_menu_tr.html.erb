@@ -11,7 +11,7 @@
         <i class="fa-solid fa-check has-text-success"></i>
       <% end %>
     <% end %>
-    <%= link_to({ controller: 'menu_apps', action: 'new', menu_id: model.id }, data: { turbo_frame: 'modal' }, class: 'button is-small is-link') do %>
+    <%= button_to({ controller: 'menu_apps', action: 'new', menu_id: model.id }, class: 'button is-small is-link') do %>
       <i class="fa-solid fa-plus"></i>
       <span><%= t('.new.title') %></span>
     <% end %>
