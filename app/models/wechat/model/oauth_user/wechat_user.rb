@@ -23,7 +23,7 @@ module Wechat
 
       has_many :members, class_name: 'Org::Member', primary_key: :uid, foreign_key: :wechat_openid
       has_many :organs, -> { order(id: :asc) }, class_name: 'Org::Organ', through: :members
-      has_many :profiles, class_name: 'Profiled::Profile', primary_key: :unionid, foreign_key: :unionid
+      has_many :contacts, class_name: 'Crm::Contact', primary_key: :unionid, foreign_key: :unionid
 
       has_one :request, -> { where(init_wechat_user: true) }, primary_key: :uid, foreign_key: :open_id
       has_many :requests, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
@@ -122,14 +122,11 @@ module Wechat
     end
 
     def init_corp_external_user
-      if profiles.present?
-        profiles.each do |profile|
-          profile.user_id ||= user_id
-          profile.client_maintains.each do |maintain|
-            maintain.client_user_id ||= user_id
-            maintain.client_member ||= members[0]
-            maintain.save
-          end
+      if contacts.present?
+        contacts.each do |contact|
+          contact.client_user_id ||= user_id
+          contact.client_member ||= members[0]
+          contact.save
         end
       elsif app
         corp = Corp.where(organ_id: app.organ.self_and_ancestor_ids).take
