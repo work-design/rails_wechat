@@ -15,7 +15,7 @@ module Wechat
         return if current_user && current_corp_user
 
         if current_oauth_app.respond_to?(:oauth2_url)
-          url = current_oauth_app.oauth2_url(wechat_oauth_options)
+          url = current_oauth_app.oauth2_url(**wechat_oauth_options)
         end
       elsif request.variant.include?(:mini_program)
         return if current_wechat_user && current_user
@@ -24,7 +24,7 @@ module Wechat
         return if current_wechat_user && current_user
 
         if current_oauth_app.respond_to?(:oauth2_url)
-          url = current_oauth_app.oauth2_url(wechat_oauth_options)
+          url = current_oauth_app.oauth2_url(**wechat_oauth_options)
         end
       else
         return if current_user
