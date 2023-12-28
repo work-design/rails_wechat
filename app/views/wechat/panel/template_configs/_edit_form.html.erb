@@ -1,10 +1,18 @@
-<%= form_with model: @template_config, scope: :template_config, url: { action: 'update' } do |f| %>
-  <%= render 'error_messages', target: @template_config %>
-  <%= f.fields :template_key_words, all: { normal: nil } do |ef| %>
-    <%= render partial: 'item_form', locals: { ef: ef } %>
-  <% end %>
-  <%= f.text_field :notifiable_type %>
-  <%= f.text_field :code %>
-  <%= f.text_field :description %>
-  <%= f.submit %>
+<%= form_with model: @template_config, scope: :template_config, url: { action: 'update' }, class: 'modal-card' do |f| %>
+  <header class="modal-card-head">
+    <p class="modal-card-title"><%= t('.title') %></p>
+    <button type="button" data-action="modal#close" class="delete"></button>
+  </header>
+  <section class="modal-card-body">
+    <%= render 'error_messages', target: @template_config %>
+    <%= f.fields :template_key_words, all: { normal: nil } do |ef| %>
+      <%= render partial: 'item_form', locals: { ef: ef } %>
+    <% end %>
+    <%= f.text_field :notifiable_type %>
+    <%= f.text_field :code %>
+    <%= f.text_field :description %>
+  </section>
+  <footer class="modal-card-foot">
+    <%= f.submit %>
+  </footer>
 <% end %>

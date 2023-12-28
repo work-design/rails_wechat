@@ -1,7 +1,15 @@
-<%= form_with model: @template_config, url: { action: 'create' } do |f| %>
-  <%= render 'error_messages', target: @template_config %>
-  <%= f.select :type, options_for_select(Wechat::TemplateConfig.options_i18n(:type)) %>
-  <%= f.text_field :tid %>
-  <%= f.text_field :description %>
-  <%= f.submit %>
+<%= form_with model: @template_config, url: { action: 'create' }, class: 'modal-card' do |f| %>
+  <header class="modal-card-head">
+    <p class="modal-card-title"><%= t('.title') %></p>
+    <button type="button" data-action="modal#close" class="delete"></button>
+  </header>
+  <section class="modal-card-body">
+    <%= render 'error_messages', target: @template_config %>
+    <%= f.select :type, options_for_select(Wechat::TemplateConfig.options_i18n(:type)) %>
+    <%= f.text_field :tid %>
+    <%= f.text_field :description %>
+  </section>
+  <footer class="modal-card-foot">
+    <%= f.submit %>
+  </footer>
 <% end %>
