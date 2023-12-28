@@ -1,8 +1,8 @@
 <td>
-  <div class="is-several">
-    <%= image_tag model.logo.variant(resize_to_limit: [30, 30]) if model.logo.attached? %>
+  <%= link_to({ controller: 'org/panel/organs', action: 'show', id: model.id }, class: 'is-several') do %>
+    <%= image_tag model.logo, class: 'image is-64x64' if model.logo.attached? %>
     <span><%= model.name %></span>
-  </div>
+  <% end %>
 </td>
 <td><%= model.name_short %></td>
 <td><%= model.appid %></td>
