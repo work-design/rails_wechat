@@ -1,0 +1,13 @@
+<td>
+  <div class="is-several">
+    <%= image_tag model.avatar.variant(resize_to_limit: [35, 35]), class: 'image is-24x24' if model.avatar.attached? %>
+    <%= link_to model.name, { action: 'show', id: model } %>
+  </div>
+  <p class="has-text-grey"><%= model.identity %></p>
+</td>
+<td><%= model.join_on %></td>
+<td>
+  <p><%= model.wechat_openid %></p>
+  <p><%= model.wechat_user.name %></p>
+  <p><%= model.wechat_user.appid %></p>
+</td>
