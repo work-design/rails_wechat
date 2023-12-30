@@ -17,6 +17,9 @@ module Wechat
       has_many :subscribes, -> { where(sending_at: nil).order(id: :asc) }, class_name: 'Wechat::Subscribe', through: :program_users
       has_many :scenes, as: :handle, class_name: 'Wechat::Scene'
 
+      scope :wechat, -> { where.not(wechat_openid: [nil, '']) }
+      scope :corp, -> { where.not(corp_userid: [nil, '']) }
+
       before_save :sync_from_wechat_user, if: -> { wechat_openid.present? && wechat_openid_changed? }
     end
 
