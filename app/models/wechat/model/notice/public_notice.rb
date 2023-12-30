@@ -5,8 +5,10 @@ module Wechat
     def do_send
       r = app.api.post 'message/template/send', **message_hash, origin: BASE
       if r['errcode'] == 0
-        self.update msg_id: r['msgid']
+        self.msg_id = r['msgid']
       end
+      self.result = r
+      self.save
       r
     end
 

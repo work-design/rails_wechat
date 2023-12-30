@@ -9,6 +9,7 @@ module Wechat
       attribute :type, :string
       attribute :appid, :string
       attribute :open_id, :string
+      attribute :result, :json
 
       belongs_to :notification, class_name: 'Notice::Notification'
 
