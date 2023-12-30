@@ -282,7 +282,12 @@ Rails.application.routes.draw do
           end
           concerns :appable
         end
-        resources :members, only: [:index, :show, :edit, :update]
+        resources :members, only: [:index, :show, :edit, :update] do
+          collection do
+            get :wechat
+            get :corp
+          end
+        end
         resources :menu_roots do
           resources :menus, only: [:new, :create]
         end
