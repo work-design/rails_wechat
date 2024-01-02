@@ -7,15 +7,15 @@ module Wechat
       helper_method :current_wechat_app, :current_js_app, :current_corp_user
     end
 
-    def require_user
+    def require_user(app = current_oauth_app)
       wechat_oauth_options = { state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol }
       wechat_oauth_options.merge! scope: params[:scope] if params[:scope] == 'snsapi_base'
 
       if request.variant.include?(:work_wechat)
         return if current_user && current_corp_user
 
-        if current_oauth_app.respond_to?(:oauth2_url)
-          url = current_oauth_app.oauth2_url(**wechat_oauth_options)
+        if app.respond_to?(:oauth2_url)
+          url = app.oauth2_url(**wechat_oauth_options)
         end
       elsif request.variant.include?(:mini_program)
         return if current_wechat_user && current_user
@@ -23,8 +23,8 @@ module Wechat
       elsif request.variant.include?(:wechat)
         return if current_wechat_user && current_user
 
-        if current_oauth_app.respond_to?(:oauth2_url)
-          url = current_oauth_app.oauth2_url(**wechat_oauth_options)
+        if app.respond_to?(:oauth2_url)
+          url = app.oauth2_url(**wechat_oauth_options)
         end
       else
         return if current_user
@@ -51,11 +51,19 @@ module Wechat
       if request.variant.include?(:work_wechat)
         @current_oauth_app = current_organ.corps.where.not(agentid: nil).take
       else
-        @current_oauth_app = current_organ.app || current_organ.provider.app
+        @current_oauth_app = current_organ.app
       end
 
       logger.debug "\e[35m  Current Oauth App: #{@current_oauth_app&.base_class_name}/#{@current_oauth_app&.id}  \e[0m"
       @current_oauth_app
+    end
+
+    def current_provider_app
+      return @current_provider_app if defined? @current_provider_app
+      @current_provider_app = current_organ.provider.app
+
+      logger.debug "\e[35m  Current Admin Oauth App: #{@current_provider_app&.base_class_name}/#{@current_provider_app&.id}  \e[0m"
+      @current_provider_app
     end
 
     def current_js_app
@@ -63,7 +71,7 @@ module Wechat
       if request.variant.include?(:work_wechat)
         @current_js_app = current_corp_user&.corp
       else
-        @current_js_app = current_organ.app || current_organ.provider&.app
+        @current_js_app = current_organ.app
       end
 
       logger.debug "\e[35m  Current Js App: #{@current_js_app&.id}  \e[0m"
