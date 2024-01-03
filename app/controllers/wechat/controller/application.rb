@@ -20,16 +20,16 @@ module Wechat
       elsif request.variant.include?(:mini_program)
         return if current_wechat_user && current_user
         render 'require_program_login', layout: 'raw', locals: { path: 'state_return', state: urlsafe_encode64(destroyable: false) } and return
-      elsif request.variant.include?(:wechat)
+      elsif request.variant.include?(:wechat) && app
         return if current_wechat_user && current_user
 
         if app.respond_to?(:oauth2_url)
           url = app.oauth2_url(**wechat_oauth_options)
         end
-      else
+      elsif app
         return if current_user
 
-        if request.variant.exclude?(:phone) && current_wechat_app
+        if request.variant.exclude?(:phone)
           url = url_for(controller: '/wechat/wechat', action: 'login', identity: params[:identity])
         end
       end
@@ -60,7 +60,7 @@ module Wechat
 
     def current_provider_app
       return @current_provider_app if defined? @current_provider_app
-      @current_provider_app = current_organ.provider.app
+      @current_provider_app = current_organ.provider&.app
 
       logger.debug "\e[35m  Current Admin Oauth App: #{@current_provider_app&.base_class_name}/#{@current_provider_app&.id}  \e[0m"
       @current_provider_app
