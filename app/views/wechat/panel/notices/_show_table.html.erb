@@ -1,8 +1,16 @@
 <tr>
-  <td class="has-text-right"><%= Wechat::Notice.human_attribute_name(:notifiable_type) %></td>
-  <td><%= @notice.notifiable_type %></td>
+  <td class="has-text-right"><%= Wechat::Notice.human_attribute_name(:template_id) %></td>
+  <td><%= @notice.template_id %></td>
 </tr>
 <tr>
   <td class="has-text-right"><%= Wechat::Notice.human_attribute_name(:code) %></td>
   <td><%= @notice.code %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::Notice.human_attribute_name(:data) %></td>
+  <td><%= simple_format @notice.data %></td>
+</tr>
+<tr>
+  <td class="has-text-right"><%= Wechat::Notice.human_attribute_name(:result) %></td>
+  <td><%= simple_format @notice.result %></td>
 </tr>
