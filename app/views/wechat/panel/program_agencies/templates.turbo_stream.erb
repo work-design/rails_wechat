@@ -1,6 +1,1 @@
-<%= turbo_stream.append 'body', layout: 'modal' do %>
-  <%= render layout: 'index_table' do %>
-    <%= render partial: 'index_tbody', layout: 'index_tr', collection: @platform_templates, as: :model %>
-  <% end %>
-  <%= paginate @platform_templates %>
-<% end %>
+<%= turbo_stream.append 'body', partial: 'templates', layout: 'modal' %>
