@@ -200,7 +200,7 @@ Rails.application.routes.draw do
             end
             member do
               get :qrcode
-              get :organ
+              match :organ, via: [:get, :post]
             end
             concerns :appable
           end
