@@ -19,6 +19,10 @@ module Wechat
       belongs_to :platform_template, optional: true
     end
 
+    def computed_webview_domain
+      webview_domain.presence || domain
+    end
+
     def disabled_func_infos
       return unless platform.program_agency
       platform.program_agency.func_infos - func_infos
@@ -39,7 +43,7 @@ module Wechat
     def set_webview_domain(action: 'set')
       h = {
         action: action,
-        webviewdomain: [URI::HTTPS.build(host: domain).to_s]
+        webviewdomain: [URI::HTTPS.build(host: computed_webview_domain).to_s]
       }
       api.webview_domain_directly(**h)
       api.webview_domain(**h)

@@ -35,6 +35,7 @@ module Wechat
       attribute :url_link, :string
       attribute :debug, :boolean, default: false
       attribute :open_appid, :string
+      attribute :webview_domain, :string
 
       encrypts :secret
 

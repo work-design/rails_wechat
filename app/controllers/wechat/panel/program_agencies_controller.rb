@@ -44,7 +44,8 @@ module Wechat
     def agency_params
       params.fetch(:agency, {}).permit(
         :logo,
-        :organ_id
+        :organ_id,
+        :webview_domain
       )
     end
 
