@@ -21,7 +21,7 @@ module Wechat
           state.save
           r.merge! url: state.url(auth_token: @program_user.auth_token)
         else
-          r.merge! url: @app.webview_url(auth_token: @program_user.auth_token)
+          r.merge! url: @app.webview_url(auth_jwt_token: @program_user.auth_jwt_token)
         end
       else
         r.merge! url: @app.webview_url(auth_token: @program_user.auth_token)
