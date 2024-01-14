@@ -20,6 +20,8 @@ module Wechat
           state.destroyable = true
           state.save
           r.merge! url: state.url(auth_token: @program_user.auth_token)
+        else
+          r.merge! url: @app.webview_url(auth_token: @program_user.auth_token)
         end
       else
         r.merge! url: @app.webview_url(auth_token: @program_user.auth_token)
