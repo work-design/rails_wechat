@@ -15,10 +15,12 @@ module Wechat
         user: @program_user.user.as_json(only: [:name], methods: [:avatar_url])
       }
       if params[:state].present?
-        state = Com::State.find(params[:state])
-        state.destroyable = true
-        state.save
-        r.merge! url: state.url(auth_token: @program_user.auth_token) if state
+        state = Com::State.find_by(id: params[:state])
+        if state
+          state.destroyable = true
+          state.save
+          r.merge! url: state.url(auth_token: @program_user.auth_token)
+        end
       end
 
       render json: r
