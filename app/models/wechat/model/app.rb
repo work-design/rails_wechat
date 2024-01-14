@@ -91,7 +91,12 @@ module Wechat
     end
 
     def url
-      Rails.application.routes.url_for(controller: 'wechat/apps', action: 'show', id: self.id, host: domain) if domain.present?
+      Rails.application.routes.url_for(
+        controller: 'wechat/apps',
+        action: 'show',
+        id: self.id,
+        host: domain
+      ) if domain.present?
     end
 
     def oauth2_qrcode_url(**host_options)

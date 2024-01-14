@@ -23,6 +23,14 @@ module Wechat
       webview_domain.presence || domain
     end
 
+    def webview_url(**options)
+      Rails.application.routes.url_for(
+        controller: 'home',
+        host: computed_webview_domain,
+        **options
+      )
+    end
+
     def disabled_func_infos
       return unless platform.program_agency
       platform.program_agency.func_infos - func_infos
