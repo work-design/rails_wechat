@@ -19,9 +19,7 @@ module Wechat
         end
       elsif request.variant.include?(:mini_program)
         return if current_wechat_user && current_user
-        if params[:auth_jwt_token]
-          Auth::AuthorizedToken.create(jwt_token: params[:auth_jwt_token])
-        end
+        check_jwt_token if params[:auth_jwt_token]
         render 'require_program_login', layout: 'raw', locals: { path: 'state_return', state: urlsafe_encode64(destroyable: false) } and return
       elsif request.variant.include?(:wechat) && app
         return if current_wechat_user && current_user
