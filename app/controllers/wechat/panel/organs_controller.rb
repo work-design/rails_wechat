@@ -7,6 +7,10 @@ module Wechat
       @organs = Org::Organ.where.associated(:apps).distinct.page(params[:page])
     end
 
+    def all
+      @organs = Org::Organ.page(params[:page])
+    end
+
     private
     def set_organ
       @organ = Org::Organ.find params[:id]

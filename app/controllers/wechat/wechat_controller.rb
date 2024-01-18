@@ -21,14 +21,14 @@ module Wechat
       @scene = current_oauth_app.scenes.find_or_initialize_by(match_value: "session_#{session.id}@#{request.base_url}")
       @scene.expire_seconds = 600 # 默认 600 秒有效
       @scene.aim = 'login'
-      @scene.refresh!(true)
+      @scene.check_refresh!(true)
     end
 
     def admin_login
       @scene = current_provider_app.scenes.find_or_initialize_by(match_value: "session_#{session.id}@#{request.base_url}")
       @scene.expire_seconds = 600 # 默认 600 秒有效
       @scene.aim = 'login'
-      @scene.refresh!(true)
+      @scene.check_refresh!(true)
 
       render :login
     end

@@ -1,10 +1,9 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 76de45bde72c16aba4c01caa64620b861cb819fa
+  revision: fd82e7d40d9ff37323904b2cc705800007c9ad8d
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
-      jwt
       rails_com (~> 1.2)
       rotp
 
@@ -28,7 +27,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 17d3ef6c1bb413cba18bc8f0c92c42847798639d
+  revision: dfd42123010de4e9cc8d5631c168ddfdadd9f1d3
   specs:
     rails_design (0.0.1)
       rails
@@ -183,7 +182,6 @@ GEM
     irb (1.11.0)
       rdoc
       reline (>= 0.3.8)
-    jwt (2.7.1)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -367,7 +365,6 @@ CHECKSUMS
   i18n (1.14.1) sha256=9d03698903547c060928e70a9bc8b6b87fda674453cda918fc7ab80235ae4a61
   io-console (0.7.1) sha256=a5ffa9fa6be28c4cc7337f7924d2e094ac6c34776f480e3b418a427f155bbcba
   irb (1.11.0) sha256=79acb778cf9ca31ded8df237f7ad4989562f10bba3d1df089c15f3d56bfd195e
-  jwt (2.7.1)
   kaminari (1.2.2) sha256=c4076ff9adccc6109408333f87b5c4abbda5e39dc464bd4c66d06d9f73442a3e
   kaminari-actionview (1.2.2) sha256=1330f6fc8b59a4a4ef6a549ff8a224797289ebf7a3a503e8c1652535287cc909
   kaminari-activerecord (1.2.2) sha256=0dd3a67bab356a356f36b3b7236bcb81cef313095365befe8e98057dd2472430

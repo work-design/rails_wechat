@@ -131,7 +131,7 @@ module Wechat
       SceneCleanJob.set(wait_until: expire_at).perform_later(self)
     end
 
-    def refresh!(now = false)
+    def check_refresh!(now = false)
       if expired? || now
         to_qrcode!
       end
