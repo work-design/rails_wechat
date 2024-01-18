@@ -72,7 +72,11 @@ module Wechat
           qrcode_url
         end
       else
-        QrcodeHelper.data_url(self.qrcode_url) if qrcode_url
+        if qrcode_url
+          QrcodeHelper.data_url(self.qrcode_url)
+        else
+          Rails.logger.debug "Scene:#{id} qrcode nil"
+        end
       end
     end
 
