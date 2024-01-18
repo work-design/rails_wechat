@@ -1,12 +1,12 @@
 module Wechat
-  class Panel::PlatformReceivesController < Panel::BaseController
+  class Panel::ReceivesController < Panel::BaseController
     before_action :set_platform
 
     def index
       q_params = {}
       q_params.merge! params.permit(:appid, :open_id)
 
-      @platform_receives = @platform.receives.default_where(q_params).order(id: :desc).page(params[:page])
+      @receives = @platform.receives.default_where(q_params).order(id: :desc).page(params[:page])
     end
 
     private

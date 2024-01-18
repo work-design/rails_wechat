@@ -210,7 +210,7 @@ Rails.application.routes.draw do
             end
           end
           resources :platform_tickets
-          resources :platform_receives
+          resources :receives
         end
         resources :contacts
         resources :providers do

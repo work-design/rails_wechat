@@ -135,7 +135,7 @@ zh:
           title: 示例
         info:
           title: 配置信息
-      platform_receives:
+      receives:
         index:
           title: 消息通知
       platform_templates:
