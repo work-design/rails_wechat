@@ -3,11 +3,7 @@ module Wechat
     before_action :set_scene
 
     def invite_qrcode
-      if @scene.tag
-        @requests = @scene.tag.requests.includes(:wechat_user).page(params[:page])
-      else
-        @requests = Request.none.page(params[:page])
-      end
+      @requests = @scene.requests.includes(:wechat_user).order(id: :desc).page(params[:page])
     end
 
     private
