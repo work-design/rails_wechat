@@ -98,6 +98,7 @@ module Wechat
       self.qrcode_ticket = r['ticket']
       self.qrcode_url = r['url']
       self.expire_at = Time.current + r['expire_seconds']
+      Rails.logger.debug "Scene:#{r} qrcode nil"
       r
     end
 
