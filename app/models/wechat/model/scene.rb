@@ -97,7 +97,6 @@ module Wechat
       end
       self.qrcode_ticket = r['ticket']
       self.qrcode_url = r['url']
-      Rails.logger.debug "Scene:#{r}"
       r
     end
 
