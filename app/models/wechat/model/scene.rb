@@ -61,7 +61,7 @@ module Wechat
 
     def to_qrcode!
       commit_to_wechat
-      self.save
+      self.save!
     end
 
     def qrcode_data_url
