@@ -35,7 +35,7 @@ module Wechat
 
       before_validation :sync_from_app, if: -> { organ_id.blank? && appid.present? && appid_changed? }
       before_validation :init_match_value, if: -> { new_record? && handle }
-      after_save_commit :to_qrcode!, if: -> { saved_change_to_match_value? }
+      after_save_commit :to_qrcode!, if: -> { (saved_changes.keys & ['match_value', 'expire_at']).present? }
       after_save_commit :refresh_when_expired, if: -> { saved_change_to_expire_at? }
     end
 
@@ -97,8 +97,7 @@ module Wechat
       end
       self.qrcode_ticket = r['ticket']
       self.qrcode_url = r['url']
-      self.expire_at = Time.current + r['expire_seconds']
-      Rails.logger.debug "Scene:#{r} qrcode nil"
+      Rails.logger.debug "Scene:#{r}"
       r
     end
 
@@ -136,11 +135,10 @@ module Wechat
       SceneCleanJob.set(wait_until: expire_at).perform_later(self)
     end
 
-    def check_refresh!(now = false)
+    def check_refresh(now = false)
       if expired? || now
-        to_qrcode!
+        self.expire_at = Time.current + expire_seconds
       end
-      self
     end
 
     def sync_menu

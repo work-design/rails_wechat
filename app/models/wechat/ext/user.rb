@@ -16,7 +16,7 @@ module Wechat
 
     def invite_scene!(app, organ_id:)
       scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: organ_id)
-      scene.check_refresh!
+      scene.check_refresh
       scene
     end
 
