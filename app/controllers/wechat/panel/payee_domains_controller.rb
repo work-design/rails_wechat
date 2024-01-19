@@ -13,7 +13,7 @@ module Wechat
 
     private
     def set_payee
-      @payee = PartnerPayee.find params[:partner_payee_id]
+      @payee = Payee.find params[:payee_id]
     end
 
     def set_payee_domain

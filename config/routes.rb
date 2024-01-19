@@ -167,6 +167,7 @@ Rails.application.routes.draw do
             get :key
           end
         end
+        resources :payees
         resources :corp_external_users, only: [:index, :show, :edit, :update, :destroy]
         resources :menu_roots, only: [:new, :create, :edit, :update, :destroy] do
           resources :menus, only: [:new, :create]
