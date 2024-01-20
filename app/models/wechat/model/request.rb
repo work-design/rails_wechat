@@ -5,6 +5,7 @@ module Wechat
     included do
       attribute :type, :string
       attribute :body, :string
+      attribute :tag_name, :string
       attribute :raw_body, :json
       attribute :msg_type, :string
       attribute :event, :string
@@ -14,8 +15,6 @@ module Wechat
       attribute :userid, :string, index: true
       attribute :reply_body, :json, default: {}
       attribute :reply_encrypt, :json, default: {}
-      attribute :init_wechat_user, :boolean, default: false
-      attribute :init_user_tag, :boolean, default: false
 
       belongs_to :scene_organ, class_name: 'Org::Organ', optional: true
 
@@ -25,8 +24,9 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       has_one :platform, through: :receive
-      has_one :tag, ->(o) { where(name: o.body) }, foreign_key: :appid, primary_key: :appid
-      has_one :user_tag, ->(o) { where(tag_name: o.body, open_id: o.open_id) }, foreign_key: :appid, primary_key: :appid
+      has_one :tag, ->(o) { where(name: o.tag_name) }, foreign_key: :appid, primary_key: :appid
+      has_one :user_tag, ->(o) { where(tag_name: o.tag_name, open_id: o.open_id) }, foreign_key: :appid, primary_key: :appid
+
       has_many :services, dependent: :nullify
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all, inverse_of: :request  # 解析 request body 内容，主要针对文字
       has_many :request_responses, ->(o) { where(appid: o.appid) }, foreign_key: :request_type, primary_key: :type
@@ -34,6 +34,7 @@ module Wechat
 
       before_validation :set_body, if: -> { receive.present? }
       before_create :check_wechat_user
+      before_save :sync_to_tag, if: -> { tag_name.present? && tag_name_changed? }
       after_create :get_reply!
     end
 
@@ -144,39 +145,28 @@ module Wechat
       app.api.message_custom_typing(wechat_user.uid, command)
     end
 
-    def check_wechat_user
+    def check_wechat_user_and_tag
       wechat_user || build_wechat_user
       wechat_user.appid = appid
       if ['SCAN', 'subscribe'].include?(event)
         if body.to_s.start_with?('auth_user_')
           _user_id, _organ_id = body.delete_prefix('auth_user_').split('_')
-          wechat_user.user_inviter_id ||= _user_id
-          self.scene_organ_id = _organ_id
         elsif body.to_s.start_with? 'org_member_'
           _member_id, _organ_id = body.delete_prefix('org_member_').split('_')
-          wechat_user.members.find_by(organ_id: _organ_id) || wechat_user.members.build(organ_id: _organ_id, member_inviter_id: _member_id, state: 'pending_trial')
-          self.scene_organ_id = _organ_id
         end
+
+        self.scene_organ_id = _organ_id
       end
       if ['subscribe'].include?(event)
         wechat_user.unsubscribe_at = nil
       end
 
-      if wechat_user.new_record?
-        self.init_wechat_user = true
-      else
-        wechat_user.save
-      end
+      wechat_user.save
     end
 
     def sync_to_tag
-      return if body.blank?
       tag || build_tag
       user_tag || build_user_tag
-
-      if user_tag.new_record?
-        self.init_user_tag = true
-      end
     end
 
     def reply_from_rule

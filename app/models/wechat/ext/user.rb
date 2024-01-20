@@ -6,7 +6,6 @@ module Wechat
     included do
       has_many :wechat_users, class_name: 'Wechat::WechatUser'
       has_many :program_users, class_name: 'Wechat::ProgramUser'
-      has_many :user_inviters, through: :wechat_users
       has_many :corp_users, class_name: 'Wechat::CorpUser'
       has_many :registers, class_name: 'Wechat::Register'
       has_many :medias, class_name: 'Wechat::Media'

@@ -32,7 +32,6 @@ module Wechat
       has_many :menus, -> { roots }, through: :menu_apps
       has_many :requests, ->(o) { where(type: ['Wechat::ScanRequest', 'Wechat::SubscribeRequest'], body: o.match_value) }, primary_key: :appid, foreign_key: :appid
 
-
       has_one_attached :qrcode
 
       before_validation :sync_from_app, if: -> { organ_id.blank? && appid.present? && appid_changed? }
@@ -46,8 +45,7 @@ module Wechat
     end
 
     def init_match_value
-      self.match_value = "#{handle_type.downcase.gsub('::', '_')}_#{handle_id}_#{organ_id}"
-      self.tag_name = "org_#{organ_id}"
+      self.match_value = "#{handle_type.downcase.gsub('::', '_')}_#{handle_id}_#{organ_id}_#{tag_name}"
     end
 
     def init_response

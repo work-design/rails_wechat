@@ -19,13 +19,12 @@ module Wechat
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :agency, foreign_key: :appid, primary_key: :appid, optional: true
-      belongs_to :user_inviter, class_name: 'Auth::User', optional: true
+      belongs_to :x_request, class_name: 'Request', optional: true
 
       has_many :members, class_name: 'Org::Member', primary_key: :uid, foreign_key: :wechat_openid
       has_many :organs, -> { order(id: :asc) }, class_name: 'Org::Organ', through: :members
       has_many :contacts, class_name: 'Crm::Contact', primary_key: :unionid, foreign_key: :unionid
 
-      has_one :request, -> { where(init_wechat_user: true) }, primary_key: :uid, foreign_key: :open_id
       has_many :requests, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
       has_many :user_tags, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
       has_many :tags, through: :user_tags
@@ -119,6 +118,10 @@ module Wechat
 
     def prune_user_tags
       user_tags.update_all(synced: false)
+    end
+
+    def init_member(organ_id, member_id)
+      members.find_by(organ_id: organ_id) || members.build(organ_id: organ_id, member_inviter_id: member_id, state: 'pending_trial')
     end
 
     def init_corp_external_user
