@@ -22,6 +22,7 @@ module Wechat
       @scene.expire_seconds = 600 # 默认 600 秒有效
       @scene.check_refresh(true)
       @scene.aim = 'login'
+      @scene.save
     end
 
     def admin_login
@@ -29,6 +30,7 @@ module Wechat
       @scene.expire_seconds = 600 # 默认 600 秒有效
       @scene.check_refresh(true)
       @scene.aim = 'login'
+      @scene.save
 
       render :login
     end
