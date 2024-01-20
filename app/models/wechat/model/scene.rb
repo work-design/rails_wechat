@@ -16,6 +16,7 @@ module Wechat
         login: 'login',
         invite_user: 'invite_user',
         invite_member: 'invite_member',
+        invite_contact: 'invite_contact',
         prepayment: 'prepayment',  # 钱包充值场景
         unknown: 'unknown'
       }, _default: 'unknown', _prefix: true

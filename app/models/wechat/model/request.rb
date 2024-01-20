@@ -5,6 +5,7 @@ module Wechat
     included do
       attribute :type, :string
       attribute :body, :string
+      attribute :body_prefix, :string
       attribute :tag_name, :string
       attribute :raw_body, :json
       attribute :msg_type, :string
@@ -150,9 +151,12 @@ module Wechat
       wechat_user.appid = appid
       if ['SCAN', 'subscribe'].include?(event)
         if body.to_s.start_with?('auth_user_')
+          self.body_prefix = 'auth_user'
           _user_id, _organ_id = body.delete_prefix('auth_user_').split('_')
         elsif body.to_s.start_with? 'org_member_'
+          self.body_prefix = 'org_member'
           _member_id, _organ_id = body.delete_prefix('org_member_').split('_')
+          wechat_user.init_member(_organ_id, _member_id)
         end
 
         self.scene_organ_id = _organ_id
@@ -167,6 +171,19 @@ module Wechat
     def sync_to_tag
       tag || build_tag
       user_tag || build_user_tag
+    end
+
+    def bind_contact
+
+    end
+
+    def login_user
+      session_str, url = body.split('@')
+      session = session_str.delete_prefix!('session_')
+
+      wechat_user.init_user
+      wechat_user.save
+      Com::SessionChannel.broadcast_to session, auth_token: wechat_user.auth_token, url: url
     end
 
     def reply_from_rule
@@ -195,15 +212,6 @@ module Wechat
         self.reply_body = {}
       end
       do_encrypt
-    end
-
-    def login_user
-      session_str, url = body.split('@')
-      session = session_str.delete_prefix!('session_')
-
-      wechat_user.init_user
-      wechat_user.save
-      Com::SessionChannel.broadcast_to session, auth_token: wechat_user.auth_token, url: url
     end
 
     def do_encrypt
