@@ -150,13 +150,16 @@ module Wechat
       wechat_user || build_wechat_user
       wechat_user.appid = appid
       if ['SCAN', 'subscribe'].include?(event)
-        if body.to_s.start_with?('auth_user_')
-          self.body_prefix = 'auth_user'
+        if body.to_s.start_with?('invite_user_')
+          self.body_prefix = 'invite_user'
           _user_id, _organ_id = body.delete_prefix('auth_user_').split('_')
-        elsif body.to_s.start_with? 'org_member_'
-          self.body_prefix = 'org_member'
+        elsif body.to_s.start_with? 'invite_member_'
+          self.body_prefix = 'invite_member'
           _member_id, _organ_id = body.delete_prefix('org_member_').split('_')
-          wechat_user.init_member(_organ_id, _member_id)
+          wechat_user.init_member(_organ_id)
+        elsif body.to_s.start_with 'invite_contact_'
+          self.body_prefix = 'invite_contact'
+          wechat_user.init_contact(_organ_id)
         end
 
         self.scene_organ_id = _organ_id
@@ -171,10 +174,6 @@ module Wechat
     def sync_to_tag
       tag || build_tag
       user_tag || build_user_tag
-    end
-
-    def bind_contact
-
     end
 
     def login_user

@@ -46,7 +46,7 @@ module Wechat
     end
 
     def init_match_value
-      self.match_value = "#{handle_type.downcase.gsub('::', '_')}_#{handle_id}_#{organ_id}_#{tag_name}"
+      self.match_value = "#{aim}_#{handle_id}_#{organ_id}_#{tag_name}"
     end
 
     def init_response

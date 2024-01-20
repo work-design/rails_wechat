@@ -120,6 +120,11 @@ module Wechat
       user_tags.update_all(synced: false)
     end
 
+    def init_contact(organ_id)
+      init_user
+      contacts.find_by(organ_id: organ_id) || contacts.build(organ_id: organ_id)
+    end
+
     def init_member(organ_id)
       members.find_by(organ_id: organ_id) || members.build(organ_id: organ_id, state: 'pending_trial')
     end
