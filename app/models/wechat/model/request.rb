@@ -201,7 +201,7 @@ module Wechat
       session_str, url = body.split('@')
       session = session_str.delete_prefix!('session_')
 
-      wechat_user.user || wechat_user.create_user
+      wechat_user.init_user
       wechat_user.save
       Com::SessionChannel.broadcast_to session, auth_token: wechat_user.auth_token, url: url
     end
