@@ -5,7 +5,6 @@ module Wechat
     included do
       attribute :type, :string
       attribute :body, :string
-      attribute :body_prefix, :string
       attribute :tag_name, :string
       attribute :raw_body, :json
       attribute :msg_type, :string
@@ -16,6 +15,15 @@ module Wechat
       attribute :userid, :string, index: true
       attribute :reply_body, :json, default: {}
       attribute :reply_encrypt, :json, default: {}
+
+      enum aim: {
+        login: 'login',
+        invite_user: 'invite_user',
+        invite_member: 'invite_member',
+        invite_contact: 'invite_contact',
+        prepayment: 'prepayment',  # 钱包充值场景
+        unknown: 'unknown'
+      }, _default: 'unknown', _prefix: true
 
       belongs_to :scene_organ, class_name: 'Org::Organ', optional: true
 
@@ -149,20 +157,21 @@ module Wechat
     def check_wechat_user_and_tag
       wechat_user || build_wechat_user
       wechat_user.appid = appid
-      if ['SCAN', 'subscribe'].include?(event)
-        if body.to_s.start_with?('invite_user_')
-          self.body_prefix = 'invite_user'
-          _user_id, _organ_id = body.delete_prefix('invite_user_').split('_')
+      if ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('invite_')
+        if body.to_s.start_with?('invite_user')
+          self.aim = 'invite_user'
         elsif body.to_s.start_with? 'invite_member_'
-          self.body_prefix = 'invite_member'
-          _member_id, _organ_id = body.delete_prefix('invite_member_').split('_')
+          self.aim = 'invite_member'
           wechat_user.init_member(_organ_id)
         elsif body.to_s.start_with? 'invite_contact_'
-          self.body_prefix = 'invite_contact'
+          self.aim = 'invite_contact'
           wechat_user.init_contact(_organ_id)
         end
+        _handle_id, _organ_id, _tag_name = body.sub(/invite_(user|member|contact)_/, '').split('_')
 
+        self.handle_id = _handle_id
         self.scene_organ_id = _organ_id
+        self.tag_name = _tag_name
       end
       if ['subscribe'].include?(event)
         wechat_user.unsubscribe_at = nil

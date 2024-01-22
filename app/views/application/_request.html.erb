@@ -10,12 +10,12 @@
     <h4 class="weui-media-box__title">
       <span><%= request.wechat_user.name %></span>
       <span class="weui-badge"><%= request.type_i18n %></span>
-      <% if request.wechat_user.user_inviter_id == current_user.id && request.init_wechat_user %>
+      <% if request.handle_id == current_user.id && request.aim == 'invite_user' %>
         <span class="tag is-success">邀请成功</span>
       <% end %>
     </h4>
     <p class="is-size-7 pt-1 has-text-grey">
-      <span><%= request.init_wechat_user_i18n %></span>
+      <span><%= request.aim_i18n %></span>
       <time data-controller="time" data-format="human"><%= request.wechat_user.created_at.to_fs(:iso8601) %></time>
     </p>
     <p class="is-size-7 pt-1 has-text-grey">
