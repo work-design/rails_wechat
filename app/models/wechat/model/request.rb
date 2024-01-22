@@ -15,6 +15,7 @@ module Wechat
       attribute :userid, :string, index: true
       attribute :reply_body, :json, default: {}
       attribute :reply_encrypt, :json, default: {}
+      attribute :handle_id, :integer
 
       enum aim: {
         login: 'login',
