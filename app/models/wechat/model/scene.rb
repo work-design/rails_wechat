@@ -31,7 +31,7 @@ module Wechat
 
       has_many :menu_apps, ->(o) { where(appid: o.appid) }, dependent: :destroy_async
       has_many :menus, -> { roots }, through: :menu_apps
-      has_many :requests, ->(o) { where(type: ['Wechat::ScanRequest', 'Wechat::SubscribeRequest'], aim: aim, handle_id: o.handle_id, scene_organ_id: organ_id) }, primary_key: :appid, foreign_key: :appid
+      has_many :requests, ->(o) { where(type: ['Wechat::ScanRequest', 'Wechat::SubscribeRequest'], aim: o.aim, handle_id: o.handle_id, scene_organ_id: o.organ_id) }, primary_key: :appid, foreign_key: :appid
 
       has_one_attached :qrcode
 
