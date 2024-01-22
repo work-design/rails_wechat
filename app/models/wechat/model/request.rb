@@ -34,7 +34,7 @@ module Wechat
       has_many :responses, through: :request_responses
 
       before_validation :set_body, if: -> { receive.present? }
-      before_create :check_wechat_user
+      before_create :check_wechat_user_and_tag
       before_save :sync_to_tag, if: -> { tag_name.present? && tag_name_changed? }
       after_create :get_reply!
     end
