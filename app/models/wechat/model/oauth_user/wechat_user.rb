@@ -19,7 +19,6 @@ module Wechat
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :agency, foreign_key: :appid, primary_key: :appid, optional: true
-      belongs_to :x_request, class_name: 'Request', optional: true
 
       has_many :members, class_name: 'Org::Member', primary_key: :uid, foreign_key: :wechat_openid
       has_many :organs, -> { order(id: :asc) }, class_name: 'Org::Organ', through: :members

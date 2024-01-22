@@ -152,12 +152,12 @@ module Wechat
       if ['SCAN', 'subscribe'].include?(event)
         if body.to_s.start_with?('invite_user_')
           self.body_prefix = 'invite_user'
-          _user_id, _organ_id = body.delete_prefix('auth_user_').split('_')
+          _user_id, _organ_id = body.delete_prefix('invite_user_').split('_')
         elsif body.to_s.start_with? 'invite_member_'
           self.body_prefix = 'invite_member'
-          _member_id, _organ_id = body.delete_prefix('org_member_').split('_')
+          _member_id, _organ_id = body.delete_prefix('invite_member_').split('_')
           wechat_user.init_member(_organ_id)
-        elsif body.to_s.start_with 'invite_contact_'
+        elsif body.to_s.start_with? 'invite_contact_'
           self.body_prefix = 'invite_contact'
           wechat_user.init_contact(_organ_id)
         end
