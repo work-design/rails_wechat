@@ -13,8 +13,8 @@ module Wechat
       has_many :scenes, as: :handle, class_name: 'Wechat::Scene'
     end
 
-    def invite_scene!(app, organ_id:)
-      scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: organ_id)
+    def invite_user!(app, organ_id:)
+      scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: organ_id, aim: 'invite_user')
       scene.check_refresh
       scene.save!
       scene
