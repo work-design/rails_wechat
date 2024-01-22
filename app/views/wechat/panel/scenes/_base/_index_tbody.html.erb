@@ -12,6 +12,7 @@
 <td>
   <p><%= model.aim_i18n %></p>
 </td>
+<td><%= model.organ_id %></td>
 <td>
   <%= link_to({ controller: 'wechat_users', 'user_tags.tag_name': model.match_value }, aria: { label: t('wechat.admin.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
     <i class="fa-solid fa-users"></i>
