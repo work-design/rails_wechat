@@ -39,6 +39,7 @@ module Wechat
       before_validation :init_match_value, if: -> { new_record? && handle }
       after_save_commit :to_qrcode!, if: -> { (saved_changes.keys & ['match_value', 'expire_at']).present? }
       after_save_commit :refresh_when_expired, if: -> { saved_change_to_expire_at? }
+      after_create_commit :clean_when_expired, if: -> { aim_login? }
     end
 
     def sync_from_app
@@ -169,6 +170,10 @@ module Wechat
           tag_id: tag.tag_id.to_s
         }
       }
+    end
+
+    def clean_when_expired
+      SceneCleanJob.set(wait_until: expire_at).perform_later(self)
     end
 
     class_methods do
