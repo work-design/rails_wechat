@@ -27,18 +27,12 @@ module Wechat
 
     def sync_related_task
       if union_wechat_users.present?
-        self.user_id = union_wechat_users.pluck(:user_id).compact[0]
+        self.client_user_id = union_wechat_users.pluck(:user_id).compact[0]
       else
-        self.user_id = wechat_users.pluck(:user_id).compact[0]
+        self.client_user_id = wechat_users.pluck(:user_id).compact[0]
       end
-      client_maintains.each do |maintain|
-        maintain.sync_user_from_client
-      end
-
-      self.class.transaction do
-        self.save
-        client_maintains.each(&:save)
-      end
+      
+      self.save
     end
 
   end
