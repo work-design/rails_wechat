@@ -30,8 +30,8 @@ module Wechat
       scene
     end
 
-    def invite_contact!(app)
-      scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: organ_id, aim: 'invite_contact')
+    def invite_contact!(app, tag_name)
+      scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: organ_id, aim: 'invite_contact', tag_name: tag_name)
       scene.check_refresh
       scene.save
       scene
