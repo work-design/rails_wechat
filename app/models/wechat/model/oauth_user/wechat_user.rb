@@ -119,9 +119,10 @@ module Wechat
       user_tags.update_all(synced: false)
     end
 
-    def init_contact(organ_id)
+    def init_contact(organ_id, member_id)
       init_user
-      contacts.find_by(organ_id: organ_id) || contacts.build(organ_id: organ_id)
+      contact = contacts.find_by(organ_id: organ_id) || contacts.build(organ_id: organ_id)
+      contact.maintains.build(member_id: member_id)
     end
 
     def init_member(organ_id)

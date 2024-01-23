@@ -168,7 +168,7 @@ module Wechat
           wechat_user.init_member(_organ_id)
         elsif body.to_s.start_with? 'invite_contact_'
           self.aim = 'invite_contact'
-          wechat_user.init_contact(_organ_id)
+          wechat_user.init_contact(_organ_id, _handle_id)
         end
 
         self.handle_id = _handle_id

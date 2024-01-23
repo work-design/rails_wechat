@@ -31,7 +31,7 @@ module Wechat
       else
         self.client_user_id = wechat_users.pluck(:user_id).compact[0]
       end
-      
+
       self.save
     end
 
