@@ -159,6 +159,8 @@ module Wechat
       wechat_user || build_wechat_user
       wechat_user.appid = appid
       if ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('invite_')
+        _handle_id, _organ_id, _tag_name = body.sub(/invite_(user|member|contact)_/, '').split('_')
+
         if body.to_s.start_with?('invite_user')
           self.aim = 'invite_user'
         elsif body.to_s.start_with? 'invite_member_'
@@ -168,7 +170,6 @@ module Wechat
           self.aim = 'invite_contact'
           wechat_user.init_contact(_organ_id)
         end
-        _handle_id, _organ_id, _tag_name = body.sub(/invite_(user|member|contact)_/, '').split('_')
 
         self.handle_id = _handle_id
         self.scene_organ_id = _organ_id
