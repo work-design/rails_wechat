@@ -122,6 +122,7 @@ module Wechat
     def login_by_oauth_user(oauth_user, url: url_for(controller: '/home'))
       state = Com::State.find_by(id: params[:state])
       @current_authorized_token = oauth_user.authorized_token
+      @current_user = oauth_user.user
       logger.debug "\e[35m  Login by OauthUser #{oauth_user.id} as user: #{current_user&.id}  \e[0m"
 
       if state
