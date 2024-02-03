@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 8e631d60614a7b2ec550c15b429f562b4cdf0ed0
+  revision: 85ea20811b3f2e2baa375368b199b40dc8b88d91
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: f396cf3baae7d3009590c5d1f1a900d194a1a5d3
+  revision: ee67d20602a168f7be42e6d3058ba4910c620310
   specs:
     rails_com (1.3.0)
       acme-client
@@ -27,7 +27,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: bd3d213bc89a258fde497b5809e11d7b40719a92
+  revision: 988278f0d4666b6441b7c89810105d1f49577e3d
   specs:
     rails_design (0.0.1)
       rails
@@ -206,7 +206,7 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
     minitest (5.21.2)
-    monetize (1.12.0)
+    monetize (1.13.0)
       money (~> 6.12)
     money (6.16.0)
       i18n (>= 0.6.4, <= 2)
@@ -376,7 +376,7 @@ CHECKSUMS
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   mini_portile2 (2.8.5) sha256=7a37db8ae758086c3c3ac3a59c036704d331e965d5e106635e4a42d6e66089ce
   minitest (5.21.2) sha256=7685cdb8db964c7f68fcee974f21b62f0b60aaea2a6c898782e27e720ffebac2
-  monetize (1.12.0) sha256=3f47d6a4fb66349a2628094b14c1941e72037c110ff1b25aa3710e0b6252f79a
+  monetize (1.13.0)
   money (6.16.0) sha256=cf476f5f19188e247ec20f6509cff64dc35d395ee018bad799b1a9ea8bd4754a
   money-rails (1.15.0) sha256=cace7c3af76a0685747f57b96fdb321a4d966294e0a11b51f8e28c3ac08e4903
   mutex_m (0.2.0) sha256=b6ef0c6c842ede846f2ec0ade9e266b1a9dac0bc151682b04835e8ebd54840d5

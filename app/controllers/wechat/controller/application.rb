@@ -8,14 +8,17 @@ module Wechat
     end
 
     def require_user(app = current_oauth_app)
-      wechat_oauth_options = { state: urlsafe_encode64(destroyable: false), port: request.port, protocol: request.protocol }
+      wechat_oauth_options = {
+        port: request.port,
+        protocol: request.protocol
+      }
       wechat_oauth_options.merge! scope: params[:scope] if params[:scope] == 'snsapi_base'
 
       if request.variant.include?(:work_wechat)
         return if current_user && current_corp_user
 
         if app.respond_to?(:oauth2_url)
-          url = app.oauth2_url(**wechat_oauth_options)
+          url = app.oauth2_url(state: urlsafe_encode64(destroyable: false), **wechat_oauth_options)
         end
       elsif request.variant.include?(:mini_program)
         check_jwt_token if params[:auth_jwt_token]
@@ -25,7 +28,7 @@ module Wechat
         return if current_wechat_user && current_user
 
         if app.respond_to?(:oauth2_url)
-          url = app.oauth2_url(**wechat_oauth_options)
+          url = app.oauth2_url(state: urlsafe_encode64(destroyable: false), **wechat_oauth_options)
         end
       elsif app
         return if current_user
