@@ -13,6 +13,9 @@ zh:
     corps:
       login:
         title: 企业微信授权登录中
+    wechat:
+      login:
+        title: 登录
     admin:
       title: 微信公众平台
       home:
