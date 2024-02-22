@@ -1,20 +1,20 @@
 <tr>
-  <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:appid) %></td>
+  <td><%= Wechat::Agency.human_attribute_name(:appid) %></td>
   <td><%= @program_agency.appid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:qrcode_url) %></td>
+  <td><%= Wechat::Agency.human_attribute_name(:qrcode_url) %></td>
   <td><%= image_tag @program_agency.file, class: 'image is-128x128' if @program_agency.file.attached? %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:release_info) %></td>
+  <td><%= Wechat::Agency.human_attribute_name(:release_info) %></td>
   <td><%= simple_format @program_agency.version_info['release_info'] %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:func_infos) %></td>
+  <td><%= Wechat::Agency.human_attribute_name(:func_infos) %></td>
   <td><%= @program_agency.func_infos %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:logo) %></td>
+  <td><%= Wechat::Agency.human_attribute_name(:logo) %></td>
   <td><%= image_tag @program_agency.logo if @program_agency.logo.attached? %></td>
 </tr>

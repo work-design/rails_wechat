@@ -1,5 +1,5 @@
 <tr>
-  <td class="has-text-right"><%= Wechat::Request.human_attribute_name(:wechat_user_id) %></td>
+  <td><%= Wechat::Request.human_attribute_name(:wechat_user_id) %></td>
   <td>
     <% if @request.wechat_user.user %>
       <%= @request.wechat_user.user.name %>
@@ -9,10 +9,10 @@
   </td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Request.human_attribute_name(:body) %></td>
+  <td><%= Wechat::Request.human_attribute_name(:body) %></td>
   <td><%= simple_format @request.body %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Request.human_attribute_name(:reply_body) %></td>
+  <td><%= Wechat::Request.human_attribute_name(:reply_body) %></td>
   <td><%= simple_format @request.reply_body %></td>
 </tr>

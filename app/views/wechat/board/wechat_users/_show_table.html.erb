@@ -1,16 +1,16 @@
 <tr>
-  <td class="has-text-right"><%= Auth::OauthUser.human_attribute_name(:uid) %></td>
+  <td><%= Auth::OauthUser.human_attribute_name(:uid) %></td>
   <td><%= @wechat_user.uid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Auth::OauthUser.human_attribute_name(:appid) %></td>
+  <td><%= Auth::OauthUser.human_attribute_name(:appid) %></td>
   <td><%= @wechat_user.appid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Auth::OauthUser.human_attribute_name(:appid) %></td>
+  <td><%= Auth::OauthUser.human_attribute_name(:appid) %></td>
   <td><%= @wechat_user.app&.name || @wechat_user.agency&.name %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Auth::OauthUser.human_attribute_name(:identity) %></td>
+  <td><%= Auth::OauthUser.human_attribute_name(:identity) %></td>
   <td><%= @wechat_user.identity %></td>
 </tr>

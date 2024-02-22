@@ -1,20 +1,20 @@
 <tr>
-  <td class="has-text-right"><%= Wechat::WechatUser.human_attribute_name(:name) %></td>
+  <td><%= Wechat::WechatUser.human_attribute_name(:name) %></td>
   <td><%= @wechat_user.name %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::WechatUser.human_attribute_name(:uid) %></td>
+  <td><%= Wechat::WechatUser.human_attribute_name(:uid) %></td>
   <td><%= @wechat_user.uid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::WechatUser.human_attribute_name(:unionid) %></td>
+  <td><%= Wechat::WechatUser.human_attribute_name(:unionid) %></td>
   <td><%= @wechat_user.unionid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::WechatUser.human_attribute_name(:account) %></td>
+  <td><%= Wechat::WechatUser.human_attribute_name(:account) %></td>
   <td><%= @wechat_user.account&.identity %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::WechatUser.human_attribute_name(:user) %></td>
+  <td><%= Wechat::WechatUser.human_attribute_name(:user) %></td>
   <td><%= @wechat_user.user&.id %></td>
 </tr>

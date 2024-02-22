@@ -1,24 +1,24 @@
 <tr>
-  <td class="has-text-right"><%= Wechat::CorpUser.human_attribute_name(:userid) %></td>
+  <td><%= Wechat::CorpUser.human_attribute_name(:userid) %></td>
   <td><%= @corp_user.userid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::CorpUser.human_attribute_name(:corpid) %></td>
+  <td><%= Wechat::CorpUser.human_attribute_name(:corpid) %></td>
   <td><%= @corp_user.corpid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::CorpUser.human_attribute_name(:identity) %></td>
+  <td><%= Wechat::CorpUser.human_attribute_name(:identity) %></td>
   <td><%= @corp_user.identity %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::CorpUser.human_attribute_name(:open_userid) %></td>
+  <td><%= Wechat::CorpUser.human_attribute_name(:open_userid) %></td>
   <td><%= @corp_user.open_userid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::CorpUser.human_attribute_name(:device_id) %></td>
+  <td><%= Wechat::CorpUser.human_attribute_name(:device_id) %></td>
   <td><%= @corp_user.device_id %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::CorpUser.human_attribute_name(:created_at) %></td>
+  <td><%= Wechat::CorpUser.human_attribute_name(:created_at) %></td>
   <td><time data-controller="time"><%= @corp_user.created_at.to_fs(:iso8601) %></time></td>
 </tr>

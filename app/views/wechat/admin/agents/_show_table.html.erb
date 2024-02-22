@@ -1,24 +1,24 @@
 <tr>
-  <td class="has-text-right"><%= Wechat::Agent.human_attribute_name(:corpid) %></td>
+  <td><%= Wechat::Agent.human_attribute_name(:corpid) %></td>
   <td><%= @agent.corpid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Agent.human_attribute_name(:secret) %></td>
+  <td><%= Wechat::Agent.human_attribute_name(:secret) %></td>
   <td><%= @agent.secret %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Agent.human_attribute_name(:agentid) %></td>
+  <td><%= Wechat::Agent.human_attribute_name(:agentid) %></td>
   <td><%= @agent.agentid %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Agent.human_attribute_name(:encoding_aes_key) %></td>
+  <td><%= Wechat::Agent.human_attribute_name(:encoding_aes_key) %></td>
   <td><%= @agent.encoding_aes_key %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Agent.human_attribute_name(:token) %></td>
+  <td><%= Wechat::Agent.human_attribute_name(:token) %></td>
   <td><%= @agent.token %></td>
 </tr>
 <tr>
-  <td class="has-text-right"><%= Wechat::Agent.human_attribute_name(:created_at) %></td>
+  <td><%= Wechat::Agent.human_attribute_name(:created_at) %></td>
   <td><time data-controller="time"><%= @agent.created_at.to_fs(:iso8601) %></time></td>
 </tr>
