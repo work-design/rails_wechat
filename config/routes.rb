@@ -67,7 +67,7 @@ Rails.application.routes.draw do
           post :info
         end
       end
-      resources :apps, only: [:show] do
+      resources :apps, only: [:show], param: :appid do
         member do
           get :login
           post '' => :create

@@ -9,7 +9,7 @@ module Wechat
     end
 
     def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
-      url_options.with_defaults! controller: 'wechat/apps', action: 'login', id: id, host: self.oauth_domain.presence || domain
+      url_options.with_defaults! controller: 'wechat/apps', action: 'login', appid: appid, host: self.oauth_domain.presence || domain
       h = {
         appid: appid,
         redirect_uri: Rails.application.routes.url_for(**url_options),

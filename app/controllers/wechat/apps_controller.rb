@@ -60,7 +60,7 @@ module Wechat
 
     private
     def set_app
-      @app = App.enabled.find params[:id]
+      @app = App.enabled.find_by appid: params[:appid]
     end
 
     def verify_signature
