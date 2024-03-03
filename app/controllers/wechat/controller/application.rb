@@ -132,7 +132,7 @@ module Wechat
         state.update user_id: oauth_user.user_id, auth_token: oauth_user.auth_token, destroyable: true
         render 'state_visit', layout: 'raw', locals: { state: state }
       else
-        render 'visit', layout: 'raw', locals: { url: url_for(controller: '/home', auth_jwt_token: oauth_user.auth_jwt_token) }
+        redirect_to url_for(controller: '/home', auth_jwt_token: oauth_user.auth_jwt_token), allow_other_host: true
       end
     end
 
