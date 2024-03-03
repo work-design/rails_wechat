@@ -35,6 +35,7 @@ module Wechat
         :encrypt_mode,
         :inviting,
         :domain,
+        :oauth_domain,
         :weapp_id,
         :debug
       )
