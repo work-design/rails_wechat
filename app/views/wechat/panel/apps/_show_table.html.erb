@@ -3,8 +3,8 @@
   <td><%= @app.type_i18n %></td>
 </tr>
 <tr>
-  <td><%= Wechat::App.human_attribute_name(:platform_id) %></td>
-  <td><%= @app.platform.name if @app.platform %></td>
+  <td><%= Wechat::App.human_attribute_name(:platform_appid) %></td>
+  <td><%= @app.platform_appid %></td>
 </tr>
 <tr>
   <td><%= Wechat::App.human_attribute_name(:logo) %></td>

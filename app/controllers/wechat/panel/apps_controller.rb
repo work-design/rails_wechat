@@ -37,6 +37,7 @@ module Wechat
         :domain,
         :oauth_domain,
         :weapp_id,
+        :platform_appid,
         :debug
       )
     end

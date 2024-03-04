@@ -12,6 +12,7 @@ module Wechat
     included do
       attribute :type, :string
       attribute :appid, :string
+      attribute :platform_appid, :string
       attribute :refresh_token, :string
       attribute :func_infos, :string, array: true
       attribute :nick_name, :string

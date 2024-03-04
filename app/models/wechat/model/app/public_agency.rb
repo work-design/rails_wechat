@@ -36,14 +36,14 @@ module Wechat
     end
 
     def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
-      url_options.with_defaults! controller: 'wechat/agencies', action: 'login', appid: appid, host: platform.domain
+      url_options.with_defaults! controller: 'wechat/agencies', action: 'login', appid: appid, host: oauth_domain.presence || platform.domain
       h = {
         appid: appid,
         redirect_uri: Rails.application.routes.url_for(**url_options),
         response_type: 'code',
         scope: scope,
         state: state,
-        component_appid: platform.appid
+        component_appid: platform_appid
       }
       logger.debug "\e[35m  Agency Oauth2: #{h}  \e[0m"
       "https://open.weixin.qq.com/connect/oauth2/authorize?#{h.to_query}#wechat_redirect"

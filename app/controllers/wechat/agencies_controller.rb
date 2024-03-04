@@ -17,7 +17,7 @@ module Wechat
 
     private
     def set_agency
-      @agency = Agency.find params[:id]
+      @agency = Agency.find_by appid: params[:appid]
     end
 
   end
