@@ -3,8 +3,12 @@
   <td><%= @app.type_i18n %></td>
 </tr>
 <tr>
-  <td><%= Wechat::App.human_attribute_name(:qrcode) %></td>
-  <td><%= image_tag @app.qrcode.url, class: 'image' if @app.qrcode.attached? %></td>
+  <td><%= Wechat::App.human_attribute_name(:platform_id) %></td>
+  <td><%= @app.platform.name if @app.platform %></td>
+</tr>
+<tr>
+  <td><%= Wechat::App.human_attribute_name(:logo) %></td>
+  <td><%= image_tag @app.logo.url, class: 'image' if @app.logo.attached? %></td>
 </tr>
 <tr>
   <td><%= Wechat::App.human_attribute_name(:enabled) %></td>
