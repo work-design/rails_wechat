@@ -80,7 +80,7 @@ Rails.application.routes.draw do
           post '' => :create
         end
       end
-      resources :agencies, only: [:show] do
+      resources :agencies, only: [:show], param: :appid do
         member do
           get :login
           get :callback
