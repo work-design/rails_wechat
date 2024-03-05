@@ -36,7 +36,16 @@ module Wechat
     end
 
     def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
-      url_options.with_defaults! controller: 'wechat/agencies', action: 'login', appid: appid, host: oauth_domain.presence || platform.domain
+      url_options.with_defaults!(
+        controller: 'wechat/agencies',
+        action: 'login',
+        appid: appid,
+        host: oauth_domain.presence || platform.domain
+      )
+      if Rails.configuration.x.appid
+        url_options.merge! auth_appid: Rails.configuration.x.appid
+      end
+
       h = {
         appid: appid,
         redirect_uri: Rails.application.routes.url_for(**url_options),
