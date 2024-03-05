@@ -101,6 +101,10 @@ module Wechat
       ) if domain.present?
     end
 
+    def openable?
+      platform || secret.present?
+    end
+
     def oauth2_qrcode_url(**host_options)
       q = {
         appid: appid,
