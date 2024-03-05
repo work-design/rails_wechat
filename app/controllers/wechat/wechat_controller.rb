@@ -44,6 +44,7 @@ module Wechat
       end
 
       if js_app
+        options = js_app.js_config(session[:enter_url])
         render json: {
           debug: js_app.debug,
           apis: [
@@ -54,7 +55,7 @@ module Wechat
             'updateTimelineShareData', 'updateAppMessageShareData'
           ],
           open_tags: ['wx-open-subscribe'],
-          **js_app.js_config(session[:enter_url])
+          **options
         }
       else
         render json: {}

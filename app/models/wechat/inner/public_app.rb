@@ -61,6 +61,7 @@ module Wechat
       js_hash
     rescue => e
       logger.debug e.message
+      {}
     end
 
     def update_open_appid!
