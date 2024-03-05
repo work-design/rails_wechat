@@ -133,7 +133,7 @@ module Wechat
         state.update user_id: oauth_user.user_id, auth_token: oauth_user.auth_token, destroyable: true
         render 'state_visit', layout: 'raw', locals: { state: state }
       elsif current_authorized_token.auth_app
-        redirect_to url_for(controller: '/home', auth_jwt_token: @current_authorized_token.generate_jwt_token, state: params[:state]), allow_other_host: true
+        redirect_to url_for(controller: '/home', host: current_authorized_token.auth_app.host, auth_jwt_token: @current_authorized_token.generate_jwt_token, state: params[:state]), allow_other_host: true
       else
         redirect_to url
       end
