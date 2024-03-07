@@ -30,7 +30,7 @@ module Wechat
         if app.respond_to?(:oauth2_url)
           url = app.oauth2_url(state: urlsafe_encode64(destroyable: false), **wechat_oauth_options)
         end
-      elsif app
+      elsif app&.openable?
         return if current_user
 
         if request.variant.exclude?(:phone)
