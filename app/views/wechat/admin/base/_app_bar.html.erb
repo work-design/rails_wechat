@@ -2,7 +2,7 @@
   <%= @app.name %>
 </h2>
 
-<div class="tabs">
+<div class="tabs mb-3">
   <ul>
     <li class="<%= active_helper(products: ['show', 'edit'], active: 'is-active') %>">
       <%= link_to t('.apps.show.title'), { controller: 'apps', action: 'show', appid: @app.appid } %>
