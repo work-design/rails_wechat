@@ -121,7 +121,7 @@ module Wechat
 
     def init_contact(organ_id, member_id)
       init_user
-      contact = contacts.find_by(organ_id: organ_id) || contacts.build(organ_id: organ_id)
+      contact = contacts.find_or_initialize_by(organ_id: organ_id, client_user_id: user_id)
       contact.maintains.build(member_id: member_id)
     end
 
