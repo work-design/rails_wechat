@@ -11,6 +11,7 @@ module Wechat
       attribute :corp_full_name, :string
       attribute :external_type, :string
       attribute :unionid, :string, index: true
+      attribute :wechat_openid, :string, index: true
 
       has_many :union_wechat_users, class_name: 'Wechat::WechatUser', primary_key: :unionid, foreign_key: :unionid
       has_many :corp_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :external_userid, foreign_key: :external_userid

@@ -22,7 +22,7 @@ module Wechat
 
       has_many :members, class_name: 'Org::Member', primary_key: :uid, foreign_key: :wechat_openid
       has_many :organs, -> { order(id: :asc) }, class_name: 'Org::Organ', through: :members
-      has_many :contacts, class_name: 'Crm::Contact', primary_key: :unionid, foreign_key: :unionid
+      has_many :contacts, class_name: 'Crm::Contact', primary_key: :uid, foreign_key: :wechat_openid
 
       has_many :requests, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
       has_many :user_tags, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
@@ -121,7 +121,8 @@ module Wechat
 
     def init_contact(organ_id, member_id)
       init_user
-      contact = contacts.find_or_initialize_by(organ_id: organ_id, client_user_id: user_id)
+      contact = contacts.find_or_initialize_by(organ_id: organ_id)
+      contact.client_user = user
       contact.maintains.build(member_id: member_id)
     end
 
