@@ -1,4 +1,4 @@
-<div class="navbar-item has-dropdown is-hoverable is-hidden-touch">
+<div class="navbar-item has-dropdown is-hoverable display-none-touch">
   <div class="navbar-link">
     <%= image_tag current_organ.logo if current_organ && current_organ.logo.attached? %>
     <span><%= current_organ.present? ? current_organ.name : t('.title') %></span>
