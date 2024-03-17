@@ -1,9 +1,8 @@
-<div class="weui-panel is-borderless">
-  <div data-controller="mini-program" data-mini-program-pt-class="pt-0" class="weui-panel__hd as-bar">
-    <%= link_to({ controller: 'auth/my/home' }, state: 'return', class: 'px-4') do %>
-      <i class="fa-solid fa-lg fa-fw-1 fa-angle-left"></i>
-    <% end %>
-    <span class="weui-title"><%= t('.title') %></span>
-    <i style="width: 3rem"></i>
-  </div>
+<div data-controller="mini-program" data-mini-program-pt-class="pt-0" class="box as-bar">
+  <%= link_to({ controller: 'auth/my/home' }, state: 'return', class: 'px-4') do %>
+    <i class="fa-solid fa-lg fa-fw-1 fa-angle-left"></i>
+  <% end %>
+  <span class="weui-title"><%= t('.title') %></span>
+  <i class="px-4"></i>
 </div>
+
