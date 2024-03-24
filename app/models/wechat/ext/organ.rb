@@ -12,6 +12,7 @@ module Wechat
 
       has_many :apps, class_name: 'Wechat::App'
       has_many :corps, class_name: 'Wechat::Corp'
+      has_many :payees, class_name: 'Wechat::Payee'
 
       validates :limit_wechat_menu, inclusion: { in: [0, 1, 2, 3] }
     end
