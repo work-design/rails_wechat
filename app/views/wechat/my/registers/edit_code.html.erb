@@ -1,9 +1,9 @@
 <%= render 'top_bar' %>
 
-<div class="weui-form-wrap">
+<div class="box flex-grow-1 mx-3">
 <%= form_with theme: 'weui', model: @register, url: { action: 'update' } do |f| %>
   <%= render 'error_messages', target: f.object %>
-  <div class="weui-form__control-area">
+  <div class="form-fields">
     <div class="weui-cells__group weui-cells__group_form">
       <div class="weui-cells__title">开通公众号 / 专用邮箱</div>
       <div class="weui-cells weui-cells_form">
