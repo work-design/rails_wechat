@@ -1,7 +1,7 @@
 <tr id="tr_<%= model.id %>" data-controller="show" data-action="mouseenter->show#show mouseleave->show#hide">
   <%= yield %>
   <td>
-    <div data-show-target="item" style="visibility: hidden">
+    <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ controller: 'maintains', corp_id: model.id }, aria: { label: t('wechat.panel.maintains.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-users-line has-text-success"></i>
       <% end %>
@@ -12,7 +12,7 @@
         <i class="fa-solid fa-message has-text-success"></i>
       <% end %>
     </div>
-    <div data-show-target="item" style="visibility: hidden">
+    <div data-show-target="item" class="visibility-hidden">
       <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info has-text-info"></i>
       <% end %>

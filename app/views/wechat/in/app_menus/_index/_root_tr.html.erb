@@ -1,7 +1,7 @@
 <tr id="tr_<%= model.id %>" data-depth="10" data-controller="tree show" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="<%= 'has-background-white-ter' %>">
   <%= yield %>
   <td>
-    <div data-show-target="item" style="visibility: hidden">
+    <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ controller: 'menus', action: 'new', menu_root_id: model.id, appid: @app.appid }, data: { turbo_frame: 'modal' }, class: 'button is-small is-link') do %>
         <i class="fa-solid fa-plus"></i>
         <span><% t('.new.title') %></span>

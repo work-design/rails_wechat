@@ -1,7 +1,7 @@
 <tr id="tr_<%= model.id %>" data-depth="10" data-controller="show tree" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="has-background-light">
   <%= yield %>
   <td>
-    <div data-show-target="item" style="visibility: hidden">
+    <div data-show-target="item" class="visibility-hidden">
       <%= button_to({ controller: 'menu_roots', action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-pencil has-text-info"></i>
       <% end %>
