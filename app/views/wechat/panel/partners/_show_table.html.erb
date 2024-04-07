@@ -1,28 +1,28 @@
-<tr>
-  <td><%= Wechat::Partner.human_attribute_name(:mch_id) %></td>
-  <td><%= @partner.mch_id %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Partner.human_attribute_name(:appid) %></td>
-  <td><%= @partner.appid %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Partner.human_attribute_name(:key) %></td>
-  <td><%= @partner.key %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Partner.human_attribute_name(:key_v3) %></td>
-  <td><%= @partner.key_v3 %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Partner.human_attribute_name(:serial_no) %></td>
-  <td><%= @partner.serial_no %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Partner.human_attribute_name(:apiclient_cert) %></td>
-  <td><%= @partner.apiclient_cert.to_s.truncate(20) %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Partner.human_attribute_name(:apiclient_key) %></td>
-  <td><%= @partner.apiclient_key.to_s.truncate(20) %></td>
-</tr>
+<div>
+  <dt><%= Wechat::Partner.human_attribute_name(:mch_id) %></dt>
+  <dd><%= @partner.mch_id %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Partner.human_attribute_name(:appid) %></dt>
+  <dd><%= @partner.appid %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Partner.human_attribute_name(:key) %></dt>
+  <dd><%= @partner.key %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Partner.human_attribute_name(:key_v3) %></dt>
+  <dd><%= @partner.key_v3 %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Partner.human_attribute_name(:serial_no) %></dt>
+  <dd><%= @partner.serial_no %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Partner.human_attribute_name(:apiclient_cert) %></dt>
+  <dd><%= @partner.apiclient_cert.to_s.truncate(20) %></dt>
+</div>
+<div>
+  <dt><%= Wechat::Partner.human_attribute_name(:apiclient_key) %></dt>
+  <dd><%= @partner.apiclient_key.to_s.truncate(20) %></dt>
+</div>

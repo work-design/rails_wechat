@@ -1,44 +1,44 @@
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:type) %></td>
-  <td><%= @app.type_i18n %></td>
-</tr>
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:platform_appid) %></td>
-  <td><%= @app.platform_appid %></td>
-</tr>
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:logo) %></td>
-  <td><%= image_tag @app.logo.url, class: 'image' if @app.logo.attached? %></td>
-</tr>
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:enabled) %></td>
-  <td><%= @app.enabled %></td>
-</tr>
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:appid) %></td>
-  <td><%= @app.appid %></td>
-</tr>
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:secret) %></td>
-  <td><%= @app.secret %></td>
-</tr>
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:encrypt_mode) %></td>
-  <td><%= @app.encrypt_mode %></td>
-</tr>
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:encoding_aes_key) %></td>
-  <td><%= @app.encoding_aes_key %></td>
-</tr>
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:token) %></td>
-  <td><%= @app.token %></td>
-</tr>
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:debug) %></td>
-  <td><%= @app.debug %></td>
-</tr>
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:created_at) %></td>
-  <td><time data-controller="time"><%= @app.created_at.to_fs(:iso8601) %></time></td>
-</tr>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:type) %></dt>
+  <dd><%= @app.type_i18n %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:platform_appid) %></dt>
+  <dd><%= @app.platform_appid %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:logo) %></dt>
+  <dt><%= image_tag @app.logo.url, class: 'image' if @app.logo.attached? %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:enabled) %></dt>
+  <dd><%= @app.enabled %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:appid) %></dt>
+  <dd><%= @app.appid %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:secret) %></dt>
+  <dd><%= @app.secret %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:encrypt_mode) %></dt>
+  <dd><%= @app.encrypt_mode %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:encoding_aes_key) %></dt>
+  <dd><%= @app.encoding_aes_key %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:token) %></dt>
+  <dd><%= @app.token %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:debug) %></dt>
+  <dd><%= @app.debug %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:created_at) %></dt>
+  <dd><time data-controller="time"><%= @app.created_at.to_fs(:iso8601) %></time></dd>
+</div>

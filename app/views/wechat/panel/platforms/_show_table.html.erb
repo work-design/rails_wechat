@@ -1,12 +1,12 @@
-<tr>
-  <td><%= Wechat::Platform.human_attribute_name(:name) %></td>
-  <td><%= @platform.name %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Platform.human_attribute_name(:appid) %></td>
-  <td><%= @platform.appid %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Platform.human_attribute_name(:secret) %></td>
-  <td><%= @platform.secret %></td>
-</tr>
+<div>
+  <dt><%= Wechat::Platform.human_attribute_name(:name) %></dt>
+  <dd><%= @platform.name %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Platform.human_attribute_name(:appid) %></dt>
+  <dd><%= @platform.appid %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Platform.human_attribute_name(:secret) %></dt>
+  <dd><%= @platform.secret %></dd>
+</div>

@@ -1,12 +1,12 @@
-<tr>
-  <td><%= Wechat::Developer.human_attribute_name(:name) %></td>
-  <td><%= @developer.name %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Developer.human_attribute_name(:token) %></td>
-  <td><%= @developer.token %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Developer.human_attribute_name(:encoding_aes_key) %></td>
-  <td><%= @developer.encoding_aes_key %></td>
-</tr>
+<div>
+  <dt><%= Wechat::Developer.human_attribute_name(:name) %></dt>
+  <dd><%= @developer.name %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Developer.human_attribute_name(:token) %></dt>
+  <dd><%= @developer.token %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Developer.human_attribute_name(:encoding_aes_key) %></dt>
+  <dd><%= @developer.encoding_aes_key %></dd>
+</div>

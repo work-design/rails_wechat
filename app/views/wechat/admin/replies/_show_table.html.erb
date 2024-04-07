@@ -1,12 +1,12 @@
-<tr>
-  <td><%= Wechat::Reply.human_attribute_name(:type) %></td>
-  <td><%= @reply.type_i18n %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Reply.human_attribute_name(:value) %></td>
-  <td><%= @reply.value %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Reply.human_attribute_name(:body) %></td>
-  <td><%= @reply.body %></td>
-</tr>
+<div>
+  <dt><%= Wechat::Reply.human_attribute_name(:type) %></dt>
+  <dd><%= @reply.type_i18n %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Reply.human_attribute_name(:value) %></dt>
+  <dd><%= @reply.value %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Reply.human_attribute_name(:body) %></dt>
+  <dd><%= @reply.body %></dd>
+</div>

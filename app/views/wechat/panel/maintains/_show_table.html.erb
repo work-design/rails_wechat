@@ -1,20 +1,20 @@
-<tr>
-  <td><%= Crm::Maintain.human_attribute_name(:userid) %></td>
-  <td><%= @maintain.external_userid %></td>
-</tr>
-<tr>
-  <td><%= Crm::Maintain.human_attribute_name(:name) %></td>
-  <td><%= @maintain.name %></td>
-</tr>
-<tr>
-  <td><%= Crm::Maintain.human_attribute_name(:remark) %></td>
-  <td><%= @maintain.remark %></td>
-</tr>
-<tr>
-  <td><%= Crm::Maintain.human_attribute_name(:gender) %></td>
-  <td><%= @maintain.client.gender_i18n %></td>
-</tr>
-<tr>
-  <td><%= Crm::Maintain.human_attribute_name(:add_way) %></td>
-  <td><%= @maintain.add_way_i18n %></td>
-</tr>
+<div>
+  <dt><%= Crm::Maintain.human_attribute_name(:userid) %></dt>
+  <dd><%= @maintain.external_userid %></dd>
+</div>
+<div>
+  <dt><%= Crm::Maintain.human_attribute_name(:name) %></dt>
+  <dd><%= @maintain.name %></dd>
+</div>
+<div>
+  <dt><%= Crm::Maintain.human_attribute_name(:remark) %></dt>
+  <dd><%= @maintain.remark %></dd>
+</div>
+<div>
+  <dt><%= Crm::Maintain.human_attribute_name(:gender) %></dt>
+  <dd><%= @maintain.client.gender_i18n %></dd>
+</div>
+<div>
+  <dt><%= Crm::Maintain.human_attribute_name(:add_way) %></dt>
+  <dd><%= @maintain.add_way_i18n %></dd>
+</div>

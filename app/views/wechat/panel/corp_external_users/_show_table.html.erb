@@ -1,24 +1,24 @@
-<tr>
-  <td><%= Auth::OauthUser.human_attribute_name(:type) %></td>
-  <td><%= @oauth_user.type_i18n %></td>
-</tr>
-<tr>
-  <td><%= Auth::OauthUser.human_attribute_name(:name) %></td>
-  <td><%= @oauth_user.name %></td>
-</tr>
-<tr>
-  <td><%= Auth::OauthUser.human_attribute_name(:avatar_url) %></td>
-  <td><%= image_tag @oauth_user.avatar_url if @oauth_user.avatar_url.present? %></td>
-</tr>
-<tr>
-  <td><%= Auth::OauthUser.human_attribute_name(:uid) %></td>
-  <td><%= @oauth_user.uid %></td>
-</tr>
-<tr>
-  <td><%= Auth::OauthUser.human_attribute_name(:unionid) %></td>
-  <td><%= @oauth_user.unionid %></td>
-</tr>
-<tr>
-  <td><%= Auth::OauthUser.human_attribute_name(:remark) %></td>
-  <td><%= @oauth_user.remark %></td>
-</tr>
+<div>
+  <dt><%= Auth::OauthUser.human_attribute_name(:type) %></dt>
+  <dd><%= @oauth_user.type_i18n %></dd>
+</div>
+<div>
+  <dt><%= Auth::OauthUser.human_attribute_name(:name) %></dt>
+  <dd><%= @oauth_user.name %></dd>
+</div>
+<div>
+  <dt><%= Auth::OauthUser.human_attribute_name(:avatar_url) %></dt>
+  <dt><%= image_tag @oauth_user.avatar_url if @oauth_user.avatar_url.present? %></dd>
+</div>
+<div>
+  <dt><%= Auth::OauthUser.human_attribute_name(:uid) %></dt>
+  <dd><%= @oauth_user.uid %></dd>
+</div>
+<div>
+  <dt><%= Auth::OauthUser.human_attribute_name(:unionid) %></dt>
+  <dd><%= @oauth_user.unionid %></dd>
+</div>
+<div>
+  <dt><%= Auth::OauthUser.human_attribute_name(:remark) %></dt>
+  <dd><%= @oauth_user.remark %></dd>
+</div>

@@ -1,32 +1,32 @@
-<tr>
-  <td><%= Wechat::Register.human_attribute_name(:email) %></td>
-  <td><%= @register.email %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Register.human_attribute_name(:email_code) %></td>
-  <td><%= @register.email_code %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Register.human_attribute_name(:id_name) %></td>
-  <td><%= @register.id_name %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Register.human_attribute_name(:id_number) %></td>
-  <td><%= @register.id_number %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Register.human_attribute_name(:qrcode) %></td>
-  <td><%= image_tag @register.qrcode if @register.qrcode.attached? %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Register.human_attribute_name(:organ_name) %></td>
-  <td><%= @register.organ_name %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Register.human_attribute_name(:organ_code) %></td>
-  <td><%= @register.organ_code %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Register.human_attribute_name(:personal_wechat) %></td>
-  <td><%= @register.personal_wechat %></td>
-</tr>
+<div>
+  <dt><%= Wechat::Register.human_attribute_name(:email) %></dt>
+  <dd><%= @register.email %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Register.human_attribute_name(:email_code) %></dt>
+  <dd><%= @register.email_code %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Register.human_attribute_name(:id_name) %></dt>
+  <dd><%= @register.id_name %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Register.human_attribute_name(:id_number) %></dt>
+  <dd><%= @register.id_number %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Register.human_attribute_name(:qrcode) %></dt>
+  <dt><%= image_tag @register.qrcode if @register.qrcode.attached? %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Register.human_attribute_name(:organ_name) %></dt>
+  <dd><%= @register.organ_name %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Register.human_attribute_name(:organ_code) %></dt>
+  <dd><%= @register.organ_code %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Register.human_attribute_name(:personal_wechat) %></dt>
+  <dd><%= @register.personal_wechat %></dd>
+</div>

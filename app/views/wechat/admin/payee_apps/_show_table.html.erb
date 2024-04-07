@@ -1,8 +1,8 @@
-<tr>
-  <td><%= Wechat::Payee.human_attribute_name(:name) %></td>
-  <td><%= @payee_app.payee.name %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Payee.human_attribute_name(:mch_id) %></td>
-  <td><%= @payee_app.payee.mch_id %></td>
-</tr>
+<div>
+  <dt><%= Wechat::Payee.human_attribute_name(:name) %></dt>
+  <dd><%= @payee_app.payee.name %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Payee.human_attribute_name(:mch_id) %></dt>
+  <dd><%= @payee_app.payee.mch_id %></dd>
+</div>

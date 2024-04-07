@@ -1,12 +1,12 @@
-<tr>
-  <td><%= Wechat::Payee.human_attribute_name(:name) %></td>
-  <td><%= @payee_domain.payee.name %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Payee.human_attribute_name(:mch_id) %></td>
-  <td><%= @payee_domain.payee.mch_id %></td>
-</tr>
-<tr>
-  <td><%= Wechat::PayeeDomain.human_attribute_name(:domain) %></td>
-  <td><%= @payee_domain.domain %></td>
-</tr>
+<div>
+  <dt><%= Wechat::Payee.human_attribute_name(:name) %></dt>
+  <dd><%= @payee_domain.payee.name %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Payee.human_attribute_name(:mch_id) %></dt>
+  <dd><%= @payee_domain.payee.mch_id %></dd>
+</div>
+<div>
+  <dt><%= Wechat::PayeeDomain.human_attribute_name(:domain) %></dt>
+  <dd><%= @payee_domain.domain %></dd>
+</div>

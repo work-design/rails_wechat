@@ -1,12 +1,12 @@
-<tr>
-  <td><%= Wechat::Category.human_attribute_name(:id) %></td>
-  <td><%= @category.id %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Category.human_attribute_name(:name) %></td>
-  <td><%= @category.name %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Category.human_attribute_name(:level) %></td>
-  <td><%= @category.level %></td>
-</tr>
+<div>
+  <dt><%= Wechat::Category.human_attribute_name(:id) %></dt>
+  <dd><%= @category.id %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Category.human_attribute_name(:name) %></dt>
+  <dd><%= @category.name %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Category.human_attribute_name(:level) %></dt>
+  <dd><%= @category.level %></dd>
+</div>

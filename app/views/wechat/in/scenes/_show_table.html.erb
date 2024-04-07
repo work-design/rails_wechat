@@ -1,14 +1,14 @@
-<tr>
-  <td><%= Wechat::Scene.human_attribute_name(:match_value) %></td>
-  <td><%= @scene.match_value %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Scene.human_attribute_name(:qrcode_file) %></td>
-  <td>
+<div>
+  <dt><%= Wechat::Scene.human_attribute_name(:match_value) %></dt>
+  <dd><%= @scene.match_value %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Scene.human_attribute_name(:qrcode_file) %></dt>
+  <dd>
     <% if @app.is_a?(Wechat::ProgramApp) %>
       <%= image_tag @scene.qrcode_url, class: 'image' if @scene.qrcode_url.present? %>
     <% else %>
       <%= image_tag @scene.qrcode_data_url, class: 'image' if @scene.qrcode_data_url.present? %>
     <% end %>
-  </td>
-</tr>
+  </dd>
+</div>

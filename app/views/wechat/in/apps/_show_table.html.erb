@@ -1,8 +1,8 @@
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:type) %></td>
-  <td><%= @app.type_i18n %></td>
-</tr>
-<tr>
-  <td><%= Wechat::App.human_attribute_name(:name) %></td>
-  <td><%= @app.name %></td>
-</tr>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:type) %></dt>
+  <dd><%= @app.type_i18n %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:name) %></dt>
+  <dd><%= @app.name %></dd>
+</div>

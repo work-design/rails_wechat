@@ -1,27 +1,27 @@
-<tr>
-  <td><%= Wechat::Response.human_attribute_name(:match_value) %></td>
-  <td><%= @response.match_value %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Response.human_attribute_name(:contain) %></td>
-  <td>
+<div>
+  <dt><%= Wechat::Response.human_attribute_name(:match_value) %></dt>
+  <dd><%= @response.match_value %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Response.human_attribute_name(:contain) %></dt>
+  <dd>
     <%= form_with theme: nil, model: @response, url: { action: 'update' }, data: { controller: 'input' } do |f| %>
       <%= f.check_box :contain, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
       <label data-action="click->input#check"></label>
     <% end %>
-  </td>
-</tr>
-<tr>
-  <td><%= Wechat::Response.human_attribute_name(:request_type) %></td>
-  <td>
+  </dd>
+</div>
+<div>
+  <dt><%= Wechat::Response.human_attribute_name(:request_type) %></dt>
+  <dd>
     <% @response.request_types.each do |request_type| %>
       <p><%= Wechat::Request.enum_i18n(:type, request_type) %></p>
     <% end %>
-  </td>
-</tr>
-<tr>
-  <td><%= Wechat::Response.human_attribute_name(:reply_id) %></td>
-  <td>
+  </dd>
+</div>
+<div>
+  <dt><%= Wechat::Response.human_attribute_name(:reply_id) %></dt>
+  <dd>
   <% if @response.reply %>
     <turbo-frame id="reply">
       <span><%= @response.reply.type_i18n %></span>
@@ -31,5 +31,5 @@
     </turbo-frame>
     <p><%= @response.reply.value %></p>
   <% end %>
-  </td>
-</tr>
+  </dd>
+</div>

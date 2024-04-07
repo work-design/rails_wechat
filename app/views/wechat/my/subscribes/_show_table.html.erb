@@ -1,12 +1,12 @@
-<tr>
-  <td><%= Wechat::Subscribe.human_attribute_name(:template) %></td>
-  <td><%= @subscribe.template %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Subscribe.human_attribute_name(:status) %></td>
-  <td><%= @subscribe.status %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Subscribe.human_attribute_name(:sending_at) %></td>
-  <td><%= @subscribe.sending_at %></td>
-</tr>
+<div>
+  <dt><%= Wechat::Subscribe.human_attribute_name(:template) %></dt>
+  <dd><%= @subscribe.template %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Subscribe.human_attribute_name(:status) %></dt>
+  <dd><%= @subscribe.status %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Subscribe.human_attribute_name(:sending_at) %></dt>
+  <dd><%= @subscribe.sending_at %></dd>
+</div>

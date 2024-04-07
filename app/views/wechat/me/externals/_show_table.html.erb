@@ -1,16 +1,16 @@
-<tr>
-  <td><%= Wechat::External.human_attribute_name(:name) %></td>
-  <td><%= @external.name %></td>
-</tr>
-<tr>
-  <td><%= Wechat::External.human_attribute_name(:state) %></td>
-  <td><%= @external.state %></td>
-</tr>
-<tr>
-  <td><%= Wechat::External.human_attribute_name(:add_way) %></td>
-  <td><%= @external.add_way_i18n %></td>
-</tr>
-<tr>
-  <td><%= Wechat::External.human_attribute_name(:gender) %></td>
-  <td><%= @external.gender_i18n %></td>
-</tr>
+<div>
+  <dt><%= Wechat::External.human_attribute_name(:name) %></dt>
+  <dd><%= @external.name %></dd>
+</div>
+<div>
+  <dt><%= Wechat::External.human_attribute_name(:state) %></dt>
+  <dd><%= @external.state %></dd>
+</div>
+<div>
+  <dt><%= Wechat::External.human_attribute_name(:add_way) %></dt>
+  <dd><%= @external.add_way_i18n %></dd>
+</div>
+<div>
+  <dt><%= Wechat::External.human_attribute_name(:gender) %></dt>
+  <dd><%= @external.gender_i18n %></dd>
+</div>

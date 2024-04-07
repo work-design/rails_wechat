@@ -1,12 +1,12 @@
-<tr>
-  <td><%= Org::Organ.human_attribute_name(:name) %></td>
-  <td><%= @organ.name %></td>
-</tr>
-<tr>
-  <td><%= Org::Organ.human_attribute_name(:limit_wechat_menu) %></td>
-  <td><%= @organ.limit_wechat_menu %></td>
-</tr>
-<tr>
-  <td><%= Org::Organ.human_attribute_name(:appid) %></td>
-  <td><%= @organ.appid %></td>
-</tr>
+<div>
+  <dt><%= Org::Organ.human_attribute_name(:name) %></dt>
+  <dd><%= @organ.name %></dd>
+</div>
+<div>
+  <dt><%= Org::Organ.human_attribute_name(:limit_wechat_menu) %></dt>
+  <dd><%= @organ.limit_wechat_menu %></dd>
+</div>
+<div>
+  <dt><%= Org::Organ.human_attribute_name(:appid) %></dt>
+  <dd><%= @organ.appid %></dd>
+</div>

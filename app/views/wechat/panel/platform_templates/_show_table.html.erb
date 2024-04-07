@@ -1,12 +1,12 @@
-<tr>
-  <td><%= Wechat::PlatformTemplate.human_attribute_name(:template_id) %></td>
-  <td><%= @platform_template.template_id %></td>
-</tr>
-<tr>
-  <td><%= Wechat::PlatformTemplate.human_attribute_name(:user_version) %></td>
-  <td><%= @platform_template.user_version %></td>
-</tr>
-<tr>
-  <td><%= Wechat::PlatformTemplate.human_attribute_name(:audit_status) %></td>
-  <td><%= @platform_template.audit_status %></td>
-</tr>
+<div>
+  <dt><%= Wechat::PlatformTemplate.human_attribute_name(:template_id) %></dt>
+  <dd><%= @platform_template.template_id %></dd>
+</div>
+<div>
+  <dt><%= Wechat::PlatformTemplate.human_attribute_name(:user_version) %></dt>
+  <dd><%= @platform_template.user_version %></dd>
+</div>
+<div>
+  <dt><%= Wechat::PlatformTemplate.human_attribute_name(:audit_status) %></dt>
+  <dd><%= @platform_template.audit_status %></dd>
+</div>

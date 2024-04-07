@@ -1,12 +1,12 @@
-<tr>
-  <td><%= Wechat::Tag.human_attribute_name(:name) %></td>
-  <td><%= @tag.name %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Tag.human_attribute_name(:tag_id) %></td>
-  <td><%= @tag.tag_id %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Tag.human_attribute_name(:count) %></td>
-  <td><%= @tag.count %></td>
-</tr>
+<div>
+  <dt><%= Wechat::Tag.human_attribute_name(:name) %></dt>
+  <dd><%= @tag.name %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Tag.human_attribute_name(:tag_id) %></dt>
+  <dd><%= @tag.tag_id %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Tag.human_attribute_name(:count) %></dt>
+  <dd><%= @tag.count %></dd>
+</div>

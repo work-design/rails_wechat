@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 1da6ff1f1d53004638ee9a9f6b7e9724672e0743
+  revision: 37cf71994ea86edb9fa8b294012371e8e25dcce4
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 5de36110a0e1f7ae2313a96bc343ccb1b4ae4552
+  revision: c814f1bbdcc39cd3cbd339622c532997a14923cb
   specs:
     rails_com (1.3.0)
       acme-client
@@ -27,28 +27,28 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 67cd1c0dce563c0e177e3bc90b0e23e10caab52c
+  revision: f203bbde39ae7e096132d7c3353cdba61d46322d
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_extend.git
-  revision: 489d4fde05a7058a5b5a31be6ac3e6f9b0ed2d28
+  revision: e287e014bc3dd030708985ecde9b701afc987269
   specs:
     rails_extend (1.0.1)
       rails (>= 5.0)
 
 GIT
   remote: https://github.com/work-design/rails_notice.git
-  revision: a466aaab62c1e54710aee3bb857eac3731dedea5
+  revision: 15109c5001b1c890e9cc448a1b047baca4ccc32b
   specs:
     rails_notice (1.0.3)
       rails_extend
 
 GIT
   remote: https://github.com/work-design/rails_org.git
-  revision: 96fb883b61e7a0416a8bf6f80a9610834c355dd6
+  revision: 7ffe06820b1e719364d1fa60099f46cb58542f02
   specs:
     rails_org (0.0.1)
       rails_com (~> 1.2)
@@ -224,7 +224,7 @@ GEM
       net-protocol
     net-protocol (0.2.2)
       timeout
-    net-smtp (0.4.0.1)
+    net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.0)
     nokogiri (1.16.3)
@@ -382,7 +382,7 @@ CHECKSUMS
   net-imap (0.4.10) sha256=5275758f4da3735e43f670c5e4db19695c6f7c2493ea0c5e14c23008b890c77e
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
   net-protocol (0.2.2) sha256=aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
-  net-smtp (0.4.0.1) sha256=098d28fab9d9bc280a2cfada77692cdca89c83c6789bdbb8d8429f97f1bf5a33
+  net-smtp (0.5.0)
   nio4r (2.7.0) sha256=9586a685eca8246d6406e712a525e705d15bb88f709d78fc3f141e864df97276
   nokogiri (1.16.3) sha256=498aa253ccd5b89a0fa5c4c82b346d22176fc865f4a12ef8da642064d1d3e248
   pg (1.5.6) sha256=4bc3ad2438825eea68457373555e3fd4ea1a82027b8a6be98ef57c0d57292b1c

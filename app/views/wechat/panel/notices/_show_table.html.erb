@@ -1,20 +1,20 @@
-<tr>
-  <td><%= Wechat::Notice.human_attribute_name(:id) %></td>
-  <td><%= @notice.id %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Notice.human_attribute_name(:template_id) %></td>
-  <td><%= @notice.template_id %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Notice.human_attribute_name(:open_id) %></td>
-  <td><%= @notice.open_id %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Notice.human_attribute_name(:data) %></td>
-  <td><%= simple_format @notice.data %></td>
-</tr>
-<tr>
-  <td><%= Wechat::Notice.human_attribute_name(:result) %></td>
-  <td><%= simple_format @notice.result %></td>
-</tr>
+<div>
+  <dt><%= Wechat::Notice.human_attribute_name(:id) %></dt>
+  <dd><%= @notice.id %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Notice.human_attribute_name(:template_id) %></dt>
+  <dd><%= @notice.template_id %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Notice.human_attribute_name(:open_id) %></dt>
+  <dd><%= @notice.open_id %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Notice.human_attribute_name(:data) %></dt>
+  <dt><%= simple_format @notice.data %></dd>
+</div>
+<div>
+  <dt><%= Wechat::Notice.human_attribute_name(:result) %></dt>
+  <dt><%= simple_format @notice.result %></dd>
+</div>

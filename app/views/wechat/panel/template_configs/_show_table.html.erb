@@ -1,15 +1,15 @@
-<tr>
-  <td><%= Wechat::TemplateConfig.human_attribute_name(:title) %></td>
-  <td><%= @template_config.title %></td>
-</tr>
-<tr>
-  <td><%= Wechat::TemplateConfig.human_attribute_name(:tid) %></td>
-  <td><%= @template_config.tid %></td>
-</tr>
-<tr>
-  <td><%= Wechat::TemplateConfig.human_attribute_name(:template_key_words) %></td>
-  <td>
-    <table class="ui very basic table">
+<div>
+  <dt><%= Wechat::TemplateConfig.human_attribute_name(:title) %></dt>
+  <dd><%= @template_config.title %></dd>
+</div>
+<div>
+  <dt><%= Wechat::TemplateConfig.human_attribute_name(:tid) %></dt>
+  <dd><%= @template_config.tid %></dd>
+</div>
+<div>
+  <dt><%= Wechat::TemplateConfig.human_attribute_name(:template_key_words) %></dt>
+  <dd>
+    <table class="table">
     <% @template_config.template_key_words.each do |template_key_word| %>
       <tr>
         <td><%= template_key_word.kid %></td>
@@ -20,9 +20,9 @@
       </tr>
     <% end %>
     </table>
-  </td>
-</tr>
-<tr>
-  <td><%= Wechat::TemplateConfig.human_attribute_name(:description) %></td>
-  <td><%= @template_config.description %></td>
-</tr>
+  </dd>
+</div>
+<div>
+  <dt><%= Wechat::TemplateConfig.human_attribute_name(:description) %></dt>
+  <dd><%= @template_config.description %></dd>
+</div>
