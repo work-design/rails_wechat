@@ -1,12 +1,12 @@
-<div class="weui-media-box weui-media-box_appmsg">
-  <div class="weui-media-box__hd">
+<div class="media">
+  <div class="media-left">
     <% if request.wechat_user.avatar_url.present? %>
-      <%= image_tag request.wechat_user.avatar_url, class: 'weui-media-box__thumb' %>
+      <%= image_tag request.wechat_user.avatar_url, class: 'image is-64x64' %>
     <% else %>
-      <%= image_tag 'avatar.png', class: 'weui-media-box__thumb' %>
+      <%= image_tag 'avatar.png', class: 'image is-64x64' %>
     <% end %>
   </div>
-  <div class="weui-media-box__bd">
+  <div class="media-content">
     <h4 class="weui-media-box__title">
       <span><%= request.wechat_user.name %></span>
       <span class="weui-badge"><%= request.type_i18n %></span>
