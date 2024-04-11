@@ -64,7 +64,7 @@ module Wechat
         component_appid: platform.appid,
         appid: appid,
         copy_wx_verify: 1,
-        redirect_uri: Rails.application.routes.url_for(controller: 'wechat/agencies', action: 'callback', id: appid, host: platform.domain)
+        redirect_uri: Rails.application.routes.url_for(controller: 'wechat/agencies', action: 'callback', appid: appid, host: platform.domain)
       }.to_query
       url.to_s
     end
