@@ -15,7 +15,7 @@
   <div class="weui-panel__bd">
     <div class="weui-cells">
       <div
-        class="weui-cell weui-cell_active weui-cell_access"
+        class="media"
         data-controller="mask wx-share"
         data-mask-id-value="mask"
         data-wx-share-title-value="分享有礼"
@@ -24,8 +24,10 @@
         data-wx-share-image-value="<%= current_organ.logo.url || image_url('logo.png') %>"
         data-action="click->mask#show click->wx-share#ready"
       >
-        <div class="weui-cell__bd weui-cell_primary">分享好友/发个朋友圈</div>
-        <div class="weui-cell__ft"></div>
+        <div class="media-content">分享好友/发个朋友圈</div>
+        <div class="media-right">
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
       </div>
     </div>
   </div>

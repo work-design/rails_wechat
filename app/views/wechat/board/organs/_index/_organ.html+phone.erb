@@ -1,4 +1,6 @@
-<%= link_to({ controller: '/me/home', host: organ.host, auth_token: current_authorized_token.id }, class: 'weui-cell weui-cell_access') do %>
-  <div class="weui-cell__bd"><%= organ.name %></div>
-  <div class="weui-cell__ft"></div>
+<%= link_to({ controller: '/me/home', host: organ.host, auth_token: current_authorized_token.id }, class: 'media') do %>
+  <div class="media-content"><%= organ.name %></div>
+  <div class="media-right">
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
 <% end %>
