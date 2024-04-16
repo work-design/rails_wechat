@@ -2,25 +2,29 @@
   <%= yield %>
   <td>
     <div data-show-target="item" class="visibility-hidden">
-      <%= link_to({ controller: 'scenes', agency_id: model.id }, aria: { label: t('wechat.panel.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-qrcode"></i>
-      <% end %>
-    </div>
-    <div data-show-target="item" class="visibility-hidden">
-      <%= button_to({ action: 'qrcode', id: model.id }, aria: { label: t('wechat.panel.program_agencies.qrcode.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-qrcode has-text-primary"></i>
-      <% end if model.is_a?(Wechat::ProgramAgency) %>
-      <%= button_to({ action: 'templates', id: model.id }, aria: { label: t('wechat.panel.program_agencies.templates.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-paperclip has-text-info"></i>
-      <% end %>
       <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info has-text-info"></i>
       <% end %>
-      <%= button_to({ controller: 'agencies', action: 'organ', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-building has-text-link"></i>
-      <% end %>
       <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-pencil has-text-link"></i>
+      <% end %>
+    </div>
+    <div data-show-target="item" class="visibility-hidden">
+      <%= link_to({ controller: 'scenes', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-qrcode"></i>
+        <span class="pl-1"><%= t('.scenes.index.title') %></span>
+      <% end %>
+      <%= button_to({ action: 'qrcode', id: model.id }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-qrcode has-text-primary"></i>
+        <span class="pl-1"><%= t('.program_agencies.qrcode.title') %></span>
+      <% end if model.is_a?(Wechat::ProgramAgency) %>
+      <%= button_to({ action: 'templates', id: model.id }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-paperclip has-text-info"></i>
+        <span class="pl-1"><%= t('.program_agencies.templates.title') %></span>
+      <% end %>
+      <%= button_to({ controller: 'agencies', action: 'organ', id: model.id }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-building has-text-link"></i>
+        <span class="pl-1"><%= t('.agencies.organ.title') %></span>
       <% end %>
     </div>
   </td>

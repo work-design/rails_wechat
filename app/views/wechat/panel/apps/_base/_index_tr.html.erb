@@ -8,7 +8,7 @@
       <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-pencil has-text-link"></i>
       <% end %>
-      <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.confirm') }, class: 'button is-small is-rounded is-light') do %>
+      <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-trash has-text-danger"></i>
       <% end %>
     </div>
