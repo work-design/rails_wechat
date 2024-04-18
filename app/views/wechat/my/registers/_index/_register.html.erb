@@ -22,7 +22,7 @@
     <%= link_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'weui-form-preview__btn weui-form-preview__btn_default') do %>
       <i class="fa-solid fa-pencil"></i>
     <% end %>
-    <%= link_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.confirm') }, class: 'weui-form-preview__btn weui-form-preview__btn_default') do %>
+    <%= link_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.destroy.confirm') }, class: 'weui-form-preview__btn weui-form-preview__btn_default') do %>
       <i class="fa-solid fa-trash"></i>
     <% end %>
     <%= link_to({ action: 'edit_code', id: model.id }, aria: { label: t('.edit.title') }, class: 'weui-form-preview__btn weui-form-preview__btn_default') do %>
