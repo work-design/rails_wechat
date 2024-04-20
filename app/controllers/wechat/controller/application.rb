@@ -55,7 +55,7 @@ module Wechat
       if request.variant.include?(:work_wechat)
         @current_oauth_app = current_organ.corps.where.not(agentid: nil).take
       else
-        @current_oauth_app = current_organ&.app
+        @current_oauth_app = current_organ&.app || current_provider_app
       end
 
       logger.debug "\e[35m  Current Oauth App: #{@current_oauth_app&.base_class_name}/#{@current_oauth_app&.id}  \e[0m"
