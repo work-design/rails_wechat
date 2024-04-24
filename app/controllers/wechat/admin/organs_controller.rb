@@ -4,9 +4,6 @@ module Wechat
     before_action :set_apps, only: [:edit, :update]
     before_action :set_agencies, only: [:edit, :update]
 
-    def show
-    end
-
     private
     def set_organ
       @organ = current_organ
