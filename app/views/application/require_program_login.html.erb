@@ -3,7 +3,7 @@
   data-mini-program-direct-value="true"
   data-mini-program-launch-value="true"
   data-mini-program-url-value="/pages/login/index"
-  data-mini-program-data-value="<%= { path: path, state: state, auth_appid: Rails.configuration.x.appid.presence }.to_json %>"
+  data-mini-program-data-value="<%= { path: path, state: state, auth_appid: Rails.configuration.x.appid.presence }.compact.to_json %>"
   style="height: 100%;display: flex;justify-content: center;align-items: center"
 >
   <p style="color: darkgray">登录信息失效，等待授权</p>
