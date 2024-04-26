@@ -2,29 +2,6 @@
   <%= yield %>
   <td>
     <div data-show-target="item" class="visibility-hidden">
-      <%= link_to model.auth_url, aria: { label: '测试授权' }, target: '_blank', class: 'button is-small is-rounded is-light' do %>
-        <i class="fa-solid fa-vial has-text-success"></i>
-      <% end if model.auth_url %>
-      <%= link_to({ controller: 'agencies', platform_id: model.id }, aria: { label: t('wechat.panel.agencies.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-door-open has-text-warning"></i>
-      <% end %>
-      <%= link_to({ controller: 'program_agencies', platform_id: model.id }, aria: { label: t('wechat.panel.program_agencies.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-door-open has-text-success"></i>
-      <% end %>
-      <%= link_to({ controller: 'receives', platform_id: model.id }, aria: { label: t('wechat.panel.receives.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-message"></i>
-      <% end %>
-      <%= link_to({ controller: 'platform_templates', platform_id: model.id }, aria: { label: t('wechat.panel.platform_templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-paperclip"></i>
-      <% end %>
-      <%= link_to({ action: 'agency', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-pencil has-text-info"></i>
-      <% end %>
-    </div>
-    <div data-show-target="item" class="visibility-hidden">
-      <%= button_to({ action: 'info', id: model.id }, aria: { label: t('wechat.panel.platforms.info.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-cogs has-text-primary"></i>
-      <% end %>
       <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-circle-info has-text-info"></i>
       <% end %>
@@ -34,6 +11,36 @@
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.destroy.confirm') } }) do %>
         <i class="fa-solid fa-trash has-text-danger"></i>
       <% end %>
+    </div>
+    <div data-show-target="item" class="visibility-hidden">
+      <%= link_to({ controller: 'receives', platform_id: model.id }, aria: { label: t('wechat.panel.receives.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-message"></i>
+      <% end %>
+      <%= link_to({ controller: 'platform_templates', platform_id: model.id }, aria: { label: t('wechat.panel.platform_templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-paperclip"></i>
+      <% end %>
+      <%= button_to({ action: 'agency', id: model.id }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-pencil has-text-info"></i>
+        <span class="pl-1"><%= t('.agency.title') %></span>
+      <% end %>
+      <%= button_to({ action: 'info', id: model.id }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-cogs has-text-primary"></i>
+        <span class="pl-1"><%= t('.info.title') %></span>
+      <% end %>
+    </div>
+    <div data-show-target="item" class="visibility-hidden">
+      <%= link_to({ controller: 'agencies', platform_id: model.id }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-door-open has-text-warning"></i>
+        <span class="pl-1"><%= t('.agencies.index.title') %></span>
+      <% end %>
+      <%= link_to({ controller: 'program_agencies', platform_id: model.id }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-door-open has-text-success"></i>
+        <span class="pl-1"><%= t('.program_agencies.index.title') %></span>
+      <% end %>
+      <%= link_to model.auth_url, target: '_blank', class: 'button is-small is-rounded is-light' do %>
+        <i class="fa-solid fa-vial has-text-success"></i>
+        <span class="pl-1">测试授权</span>
+      <% end if model.auth_url %>
     </div>
   </td>
 </tr>
