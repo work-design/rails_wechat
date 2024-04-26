@@ -28,6 +28,10 @@ module Wechat
       @program_agency.commit(platform_template)
     end
 
+    def qrcode
+      @program_agency.get_qrcode unless @program_agency.qrcode.attached?
+    end
+
     def submit
       @program_agency.submit_audit!
     end
