@@ -158,7 +158,10 @@ module Wechat
     end
 
     def set_choose_address
-      api.apply_privacy_interface('wx.chooseAddress', '用于电商配送')
+      api.apply_privacy_interface(
+        'wx.chooseAddress',
+        '用于外卖商品的自营配送'
+      )
     end
 
     def submittable?
