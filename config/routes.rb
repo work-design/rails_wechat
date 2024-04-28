@@ -243,7 +243,7 @@ Rails.application.routes.draw do
               post :search_organs
             end
             member do
-              get :organ
+              match :organ, via: [:get, :post]
             end
             resources :payee_domains
             resources :payee_apps

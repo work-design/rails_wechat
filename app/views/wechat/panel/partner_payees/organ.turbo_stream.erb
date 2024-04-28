@@ -1,4 +1,4 @@
-<%= turbo_frame_tagged 'modal', data: { title: t('.title') } do %>
+<%= turbo_frame.append 'body', layout: 'modal' do %>
   <%= form_with model: @partner_payee, url: { action: 'update' } do |f| %>
     <%= render 'error_messages', target: f.object %>
     <div class="field is-horizontal">

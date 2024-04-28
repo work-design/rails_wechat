@@ -13,14 +13,17 @@
       <% end %>
     </div>
     <div data-show-target="item" class="visibility-hidden">
-      <%= link_to({ controller: 'payee_apps', partner_payee_id: model.id }, aria: { label: t('wechat.admin.payee_apps.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'payee_apps', partner_payee_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-brands fa-amazon-pay"></i>
+        <span class="pl-1"><%= t('.payee_apps.index.title') %></span>
       <% end %>
-      <%= link_to({ controller: 'payee_domains', partner_payee_id: model.id }, aria: { label: t('wechat.admin.payee_domains.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'payee_domains', partner_payee_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-globe"></i>
+        <span class="pl-1"><%= t('.payee_domains.index.title') %></span>
       <% end %>
-      <%= link_to({ action: 'organ', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= button_to({ action: 'organ', id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-building has-text-link"></i>
+        <span class="pl-1"><%= t('.organ.title') %></span>
       <% end %>
     </div>
   </td>
