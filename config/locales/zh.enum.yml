@@ -51,6 +51,11 @@ zh:
           Wechat::TextReply: 文字
           Wechat::ImageReply: 图片
           Wechat::SuccessReply: 成功
+      wechat/notice:
+        type:
+          Wechat::PublicNotice: 公众号通知
+          Wechat::ProgramNotice: 小程序通知
+          Wechat::WorkNotice: 企业微信通知
       wechat/app:
         type:
           Wechat::Agency: 代运营
