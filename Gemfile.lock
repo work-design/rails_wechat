@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 4deba0790447069fa81dfa3392f5fc5188c9062d
+  revision: 495808144943f2a3a450681f1c60ae92476db037
   specs:
     rails_com (1.3.0)
       acme-client
@@ -22,33 +22,25 @@ GIT
       money-rails (~> 1.15)
       net-http
       rails (~> 7.0)
-      rails_extend
       turbo-rails
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 6293d81a9444bf7b12e3c082ac4338bc74ccf043
+  revision: e0e230f4587a7be62ce3dc6b18e2591e591b8973
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
-  remote: https://github.com/work-design/rails_extend.git
-  revision: be896fc15e7854089cb97343e25b8d93212e6893
-  specs:
-    rails_extend (1.0.1)
-      rails (>= 5.0)
-
-GIT
   remote: https://github.com/work-design/rails_notice.git
-  revision: 84543f2781021eb7c9cf4f0abeaa46c5a62cc653
+  revision: dd5112574772fe04467fae6b4117ab61ff146923
   specs:
     rails_notice (1.0.3)
-      rails_extend
+      rails_com
 
 GIT
   remote: https://github.com/work-design/rails_org.git
-  revision: a2620ab55d46ddad457fc41e56559ba5f73d8e71
+  revision: df15b69006cc2d622797ea0c0deb06cce24bcaec
   specs:
     rails_org (0.0.1)
       rails_com (~> 1.2)
@@ -59,7 +51,7 @@ PATH
     rails_wechat (0.1.2)
       http-form_data (~> 2.3)
       httpx (~> 0.18)
-      rails_extend
+      rails_com
       rqrcode
 
 GEM
@@ -320,7 +312,6 @@ DEPENDENCIES
   rails_auth!
   rails_com!
   rails_design!
-  rails_extend!
   rails_notice!
   rails_org!
   rails_wechat!
@@ -400,7 +391,6 @@ CHECKSUMS
   rails_auth (1.2.0)
   rails_com (1.3.0)
   rails_design (0.0.1)
-  rails_extend (1.0.1)
   rails_notice (1.0.3)
   rails_org (0.0.1)
   rails_wechat (0.1.2)

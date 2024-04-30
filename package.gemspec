@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
     'README.md'
   ]
 
-  s.add_dependency 'rails_extend'
+  s.add_dependency 'rails_com'
   s.add_dependency 'rqrcode'
   s.add_dependency 'httpx', '~> 0.18'
   s.add_dependency 'http-form_data', '~> 2.3'
