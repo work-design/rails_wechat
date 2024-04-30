@@ -3,11 +3,11 @@
     <%= image_tag model.square_logo_url, class: 'image is-32x32' if model.square_logo_url.present? %>
     <span><%= model.name %></span>
   </div>
-  <p class="has-text-grey"><%= model.corpid %></p>
+  <p class="color-grey"><%= model.corpid %></p>
 </td>
 <td>
   <%= link_to({ controller: '/admin/home', host: model.organ.host, auth_token: current_authorized_token.id }, aria: { label: t('admin.home.index.title') }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fa-solid fa-hand-point-right has-text-success"></i>
+    <i class="fa-solid fa-hand-point-right color-success"></i>
     <span class="pl-1"><%= model.organ_id %></span>
   <% end if model.organ %>
 </td>

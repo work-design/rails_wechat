@@ -3,16 +3,16 @@
   <td>
     <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ controller: 'externals', userid: model.userid }, aria: { label: t('wechat.panel.externals.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-users-line has-text-info"></i>
+        <i class="fa-solid fa-users-line color-info"></i>
       <% end %>
       <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-circle-info has-text-info"></i>
+        <i class="fa-solid fa-circle-info color-info"></i>
       <% end %>
       <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-pencil has-text-link"></i>
+        <i class="fa-solid fa-pencil color-link"></i>
       <% end %>
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-trash has-text-danger"></i>
+        <i class="fa-solid fa-trash color-danger"></i>
       <% end %>
     </div>
   </td>

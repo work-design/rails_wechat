@@ -14,11 +14,11 @@
         <span class="tag is-success">邀请成功</span>
       <% end %>
     </h4>
-    <p class="size-7 pt-1 has-text-grey">
+    <p class="size-7 pt-1 color-grey">
       <span><%= request.aim_i18n %></span>
       <time data-controller="time" data-format="human"><%= request.wechat_user.created_at.to_fs(:iso8601) %></time>
     </p>
-    <p class="size-7 pt-1 has-text-grey">
+    <p class="size-7 pt-1 color-grey">
       <span>扫码时间：</span>
       <time data-controller="time" data-format="human"><%= request.created_at.to_fs(:iso8601) %></time>
     </p>

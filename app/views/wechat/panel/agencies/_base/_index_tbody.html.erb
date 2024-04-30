@@ -3,11 +3,11 @@
     <%= image_tag model.head_img, class: 'image is-24x24' if model.head_img %>
     <span><%= model.nick_name %></span>
     <% if [model.platform.public_agency_id].include?(model.id) %>
-      <i class="fa-solid fa-shield has-text-success"></i>
+      <i class="fa-solid fa-shield color-success"></i>
     <% end %>
   </p>
-  <p class="has-text-grey"><%= model.appid %></p>
-  <p class="has-text-grey"><%= model.domain %></p>
+  <p class="color-grey"><%= model.appid %></p>
+  <p class="color-grey"><%= model.domain %></p>
 </td>
 <td>
   <p><%= model.disabled_func_infos.join(',') %></p>

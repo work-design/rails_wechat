@@ -2,7 +2,7 @@
   <%= yield %>
   <td>
     <%= button_to({ action: 'commit', id: @program_agency.id, platform_template_id: model.id }, aria: { label: t('wechat.panel.program_agencies.commit.title') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-upload has-text-danger"></i>
+      <i class="fa-solid fa-upload color-danger"></i>
     <% end %>
   </td>
 </tr>

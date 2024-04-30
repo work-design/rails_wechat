@@ -29,10 +29,10 @@
 </td>
 <td>
 <% if @response.reply_id == model.id %>
-  <i class="fa-solid fa-check has-text-success"></i>
+  <i class="fa-solid fa-check color-success"></i>
 <% else %>
   <%= button_to({ action: 'update_reply', id: @response.id }, method: :patch, params: { reply_id: model.id }) do %>
-    <i class="fa-solid fa-check-double has-text-success"></i>
+    <i class="fa-solid fa-check-double color-success"></i>
   <% end %>
 <% end %>
 </td>

@@ -3,11 +3,11 @@
     <span><%= model.title %></span>
     <span class="tag"><%= model.template_type_i18n %></span>
   </p>
-  <p class="has-text-grey"><%= model.template_id %></p>
+  <p class="color-grey"><%= model.template_id %></p>
 </td>
 <td>
   <p><%= model.content %></p>
-  <p class="has-text-grey"><p><%= model.example %></p></p>
+  <p class="color-grey"><p><%= model.example %></p></p>
 </td>
 <td>
   <%= form_with theme: nil, model: model, url: { action: 'destroy', id: model.id }, method: :delete, data: { controller: 'input' } do |f| %>

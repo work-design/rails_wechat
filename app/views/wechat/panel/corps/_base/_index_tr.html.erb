@@ -3,27 +3,27 @@
   <td>
     <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ controller: 'maintains', corp_id: model.id }, aria: { label: t('wechat.panel.maintains.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-users-line has-text-success"></i>
+        <i class="fa-solid fa-users-line color-success"></i>
       <% end %>
       <%= link_to({ controller: 'corp_users', corp_id: model.id }, aria: { label: t('wechat.panel.corp_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-users has-text-info"></i>
+        <i class="fa-solid fa-users color-info"></i>
       <% end %>
       <%= link_to({ controller: 'suite_receives', suite_id: model.suite_id, **model.receive_filter }, aria: { label: t('wechat.panel.suite_receives.index.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-message has-text-success"></i>
+        <i class="fa-solid fa-message color-success"></i>
       <% end %>
     </div>
     <div data-show-target="item" class="visibility-hidden">
       <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-circle-info has-text-info"></i>
+        <i class="fa-solid fa-circle-info color-info"></i>
       <% end %>
       <%= link_to({ action: 'organ', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-building has-text-link"></i>
+        <i class="fa-solid fa-building color-link"></i>
       <% end %>
       <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-pencil has-text-link"></i>
+        <i class="fa-solid fa-pencil color-link"></i>
       <% end %>
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-trash has-text-danger"></i>
+        <i class="fa-solid fa-trash color-danger"></i>
       <% end %>
     </div>
   </td>

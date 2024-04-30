@@ -6,7 +6,7 @@
   <div class="navbar-dropdown is-right">
   <% current_user.accounts.each do |account| %>
     <div class="navbar-item">
-      <span class="size-7 has-text-grey"><%= account.identity %></span>
+      <span class="size-7 color-grey"><%= account.identity %></span>
     </div>
     <div class="navbar-divider"></div>
     <% account.members.includes(organ: :organ_domains).each do |member| %>
