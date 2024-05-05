@@ -165,7 +165,9 @@ module Wechat
     end
 
     def submittable?
-      version_info.dig('release_info', 'release_time') < version_info.dig('exp_info', 'exp_time')
+      r1 = version_info.dig('release_info', 'release_time').to_time
+      r2 = version_info.dig('exp_info', 'exp_time').to_time
+      r1 && r2 && r1 < r2
     end
 
     def experienceable?
