@@ -171,7 +171,7 @@ module Wechat
     end
 
     def experienceable?
-      audit_status.nil? && submittable?
+      (audit_status.nil? || audit_status_rejected?) && submittable?
     end
 
     def releasable?

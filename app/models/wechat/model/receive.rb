@@ -100,7 +100,11 @@ module Wechat
     def check_app
       return unless app
       app.user_name = message_hash['ToUserName']
-      app.audit_status = 'success' if ['weapp_audit_success'].include?(info_type)
+      if ['weapp_audit_success'].include?(info_type)
+        app.audit_status = 'success'
+      elsif ['weapp_audit_fail'].include?(info_type)
+        app.audit_status = 'rejected'
+      end
       app.save
     end
 
