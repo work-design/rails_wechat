@@ -1,28 +1,20 @@
 <div>
-  <dt><%= Wechat::Receive.human_attribute_name(:corp_id) %></dt>
-  <dd><%= @receive.corp_id %></dd>
+  <dt><%= Wechat::Receive.human_attribute_name(:appid) %></dt>
+  <dd><%= @receive.appid %></dd>
 </div>
 <div>
-  <dt><%= Wechat::Receive.human_attribute_name(:user_id) %></dt>
-  <dd><%= @receive.user_id %></dd>
+  <dt><%= Wechat::Receive.human_attribute_name(:open_id) %></dt>
+  <dd><%= @receive.open_id %></dd>
 </div>
 <div>
-  <dt><%= Wechat::Receive.human_attribute_name(:agent_id) %></dt>
-  <dd><%= @receive.agent_id %></dd>
+  <dt><%= Wechat::Receive.human_attribute_name(:msg_type) %></dt>
+  <dd><%= @receive.msg_type %></dd>
 </div>
 <div>
-  <dt><%= Wechat::Receive.human_attribute_name(:event) %></dt>
-  <dd><%= @receive.event %></dd>
-</div>
-<div>
-  <dt><%= Wechat::Receive.human_attribute_name(:event_key) %></dt>
-  <dd><%= @receive.event_key %></dd>
-</div>
-<div>
-  <dt><%= Wechat::Receive.human_attribute_name(:content) %></dt>
-  <dd><%= @receive.content %></dd>
+  <dt><%= Wechat::Receive.human_attribute_name(:info_type) %></dt>
+  <dd><%= @receive.info_type %></dd>
 </div>
 <div>
   <dt><%= Wechat::Receive.human_attribute_name(:message_hash) %></dt>
-  <dd><%= @receive.message_hash %></dd>
+  <dd><%= simple_format @receive.message_hash %></dd>
 </div>
