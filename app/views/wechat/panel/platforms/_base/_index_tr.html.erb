@@ -13,11 +13,13 @@
       <% end %>
     </div>
     <div data-show-target="item" class="visibility-hidden">
-      <%= link_to({ controller: 'receives', platform_id: model.id }, aria: { label: t('wechat.panel.receives.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'receives', platform_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-message"></i>
+        <span class="ml-1"><%= t('.receives.index.title') %></span>
       <% end %>
-      <%= link_to({ controller: 'platform_templates', platform_id: model.id }, aria: { label: t('wechat.panel.platform_templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'platform_templates', platform_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-paperclip"></i>
+        <span class="ml-1"><%= t('.platform_templates.index.title') %></span>
       <% end %>
       <%= button_to({ action: 'agency', id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-pencil color-info"></i>
