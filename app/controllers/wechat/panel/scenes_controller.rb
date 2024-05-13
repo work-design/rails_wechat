@@ -26,12 +26,11 @@ module Wechat
     end
 
     def scene_params
-      p = params.fetch(:scene, {}).permit(
+      params.fetch(:scene, {}).permit(
         :match_value,
         :env_version,
         :expire_seconds
       )
-      p.merge! default_form_params
     end
 
   end
