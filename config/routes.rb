@@ -54,6 +54,7 @@ Rails.application.routes.draw do
       controller :wechat do
         post :auth
         post :js
+        post :launch
         post :agent_js
         get :login
         get :friend

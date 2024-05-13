@@ -35,6 +35,10 @@ module Wechat
       render :login
     end
 
+    def launch
+      head :ok
+    end
+
     def js
       session[:enter_url] = params[:url] if params[:url].present?
       if params[:appid].present?
