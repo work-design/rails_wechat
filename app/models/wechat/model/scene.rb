@@ -110,7 +110,7 @@ module Wechat
 
     def get_wxa_qrcode
       options = { env_version: env_version }
-      r = app.api.get_wxacode_unlimit(program_query.to_query, **options)
+      r = app.api.get_wxacode_unlimit(program_query, **options)
       begin
         self.qrcode.attach io: r, filename: "#{match_value}"
       rescue => e
@@ -119,9 +119,7 @@ module Wechat
     end
 
     def program_query
-      {
-        path: match_value
-      }
+      "#{path}=#{match_value}"
     end
 
     def get_program_qrcode
