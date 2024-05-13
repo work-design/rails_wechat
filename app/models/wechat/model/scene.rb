@@ -119,7 +119,7 @@ module Wechat
     end
 
     def program_query
-      "#{path}=#{match_value}"
+      "path=#{match_value}"
     end
 
     def get_program_qrcode
