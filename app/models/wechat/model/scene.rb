@@ -114,9 +114,8 @@ module Wechat
       begin
         self.qrcode.attach io: r, filename: "#{match_value}"
       rescue => e
-      ensure
-        r
       end
+      r
     end
 
     def program_query
