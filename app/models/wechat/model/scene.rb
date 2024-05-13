@@ -12,6 +12,12 @@ module Wechat
       attribute :appid, :string, index: true
       attribute :menu_id, :string
 
+      enum env_version: {
+        release: 'release',
+        trial: 'trial',
+        develop: 'develop'
+      }, _default: 'release', _prefix: true
+
       enum aim: {
         login: 'login',
         invite_user: 'invite_user',
@@ -103,7 +109,8 @@ module Wechat
     end
 
     def get_wxa_qrcode
-      r = app.api.get_wxacode_unlimit(program_query.to_query)
+      options = { env_version: env_version }
+      r = app.api.get_wxacode_unlimit(program_query.to_query, **options)
       self.qrcode.attach io: r, filename: "#{match_value}"
       r
     end
