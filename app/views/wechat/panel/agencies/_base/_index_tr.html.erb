@@ -2,6 +2,17 @@
   <%= yield %>
   <td>
     <div data-show-target="item" class="visibility-hidden">
+      <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-circle-info color-info"></i>
+      <% end %>
+      <%= button_to({ action: 'organ', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-building color-link"></i>
+      <% end %>
+      <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-pencil color-link"></i>
+      <% end %>
+    </div>
+    <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ controller: 'requests', agency_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-comments"></i>
       <% end %>
@@ -17,19 +28,8 @@
       <%= link_to({ controller: 'templates', agency_id: model.id }, aria: { label: t('wechat.panel.templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-inbox"></i>
       <% end %>
-    </div>
-    <div data-show-target="item" class="visibility-hidden">
       <%= link_to model.fast_url, aria: { label: '快速注册' }, target: '_blank', class: 'button is-small is-rounded is-light' do %>
         <i class="fa-solid fa-bolt color-success"></i>
-      <% end %>
-      <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-circle-info color-info"></i>
-      <% end %>
-      <%= link_to({ action: 'organ', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-building color-link"></i>
-      <% end %>
-      <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-pencil color-link"></i>
       <% end %>
     </div>
   </td>
