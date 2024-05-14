@@ -165,6 +165,10 @@ module Wechat
     end
 
     def submittable?
+      release_version = version_info.dig('release_info', 'release_version')
+      exp_version = version_info.dig('release_info', 'exp_version')
+      return true if exp_version != release_version
+
       r1 = version_info.dig('release_info', 'release_time')&.to_time
       r2 = version_info.dig('exp_info', 'exp_time')&.to_time
       r1 && r2 && r1 < r2
