@@ -27,7 +27,7 @@
     <%= button_to({ action: 'submit', id: model.id }, class: 'button is-small is-rounded is-light') do %>
       <i class="fa-solid fa-upload color-danger"></i>
       <span class="ml-1"><%= t('.submit.title') %></span>
-    <% end if model.experienceable? %>
+    <% end if model.submittable? %>
   </div>
 <% end %>
 </td>
