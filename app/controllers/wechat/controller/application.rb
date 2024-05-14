@@ -95,7 +95,7 @@ module Wechat
       if request.variant.include?(:mini_program)
         current_organ.apps.program.take
       else
-        current_organ.apps.public.take
+        current_organ.apps.official.take
       end
 
       logger.debug "\e[35m  Current Organ App: #{@current_organ_app&.id}  \e[0m"
