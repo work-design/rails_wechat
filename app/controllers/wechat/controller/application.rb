@@ -90,6 +90,18 @@ module Wechat
       @current_wechat_app
     end
 
+    def current_organ_app
+      return @current_organ_app if defined? @current_organ_app
+      if request.variant.include?(:mini_program)
+        current_organ.apps.program.take
+      else
+        current_organ.apps.public.take
+      end
+
+      logger.debug "\e[35m  Current Organ App: #{@current_organ_app&.id}  \e[0m"
+      @current_organ_app
+    end
+
     def current_payee
       return @current_payee if defined?(@current_payee)
       @current_payee = current_organ_domain.payees.take || current_organ.payees.take

@@ -71,6 +71,8 @@ module Wechat
       scope :enabled, -> { where(enabled: true) }
       scope :inviting, -> { where(inviting: true) }
       scope :global,  -> { where(global: true) }
+      scope :public, -> { where(type: ['Wechat::PublicApp', 'Wechat::PublicAgency']) }
+      scope :program, -> { where(type: ['Wechat::ProgramApp', 'Wechat::ProgramAgency']) }
 
       validates :appid, presence: true, uniqueness: true
 
