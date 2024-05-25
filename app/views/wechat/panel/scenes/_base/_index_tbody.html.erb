@@ -1,7 +1,9 @@
 <td>
   <p>
     <span><%= model.match_value %></span>
-    <span class="tag"><%= model.handle_type_i18n %></span>
+    <% if model.handle_type %>
+      <span class="tag"><%= model.handle_type_i18n %></span>
+    <% end %>
   </p>
   <p><%= model.qrcode_url %></p>
 </td>
