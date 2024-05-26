@@ -14,7 +14,7 @@ module Wechat
       attribute :wechat_openid, :string, index: true
 
       has_many :union_wechat_users, class_name: 'Wechat::WechatUser', primary_key: :unionid, foreign_key: :unionid
-      has_many :corp_external_users, class_name: 'Wechat::CorpExternalUser', primary_key: :external_userid, foreign_key: :external_userid
+      has_many :corp_external_users, -> { where.not(external_userid: nil) }, class_name: 'Wechat::CorpExternalUser', primary_key: :external_userid, foreign_key: :external_userid
       has_many :wechat_users, class_name: 'Wechat::WechatUser', through: :corp_external_users
       has_many :users, class_name: 'Auth::User', through: :wechat_users
       has_many :wechat_members, class_name: 'Org::Member', through: :wechat_users
