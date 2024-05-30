@@ -38,12 +38,6 @@ zh:
           title: 支付设置
         edit_cert:
           title: 支付证书
-      payee_domains:
-        index:
-          title: 域名设置
-      payee_apps:
-        index:
-          title: 支付设置
       receivers:
         index:
           title: 接收者
@@ -202,6 +196,12 @@ zh:
           title: 签约商户
         organ:
           title: 关联企业
+      payee_apps:
+        index:
+          title: 支付设置
+      payee_domains:
+        index:
+          title: 域名设置
       registers:
         index:
           title: 公众号申请
