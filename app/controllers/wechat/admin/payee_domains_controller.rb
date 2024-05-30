@@ -1,9 +1,5 @@
 module Wechat
-  class Admin::PayeeDomainsController < Admin::BaseController
-    before_action :set_payee
-    before_action :set_payee_domain, only: [:show, :edit, :update, :destroy, :actions]
-    before_action :set_new_payee_domain, only: [:new, :create]
-    before_action :set_apps, only: [:new, :create, :edit, :update]
+  class Admin::PayeeDomainsController < Panel::PayeeDomainsController
 
     def index
       q_params = {}
@@ -13,25 +9,7 @@ module Wechat
 
     private
     def set_payee
-      @payee = Payee.find params[:payee_id]
-    end
-
-    def set_payee_domain
-      @payee_domain = @payee.payee_domains.find params[:id]
-    end
-
-    def set_new_payee_domain
-      @payee_domain = @payee.payee_domains.build(payee_domain_params)
-    end
-
-    def set_apps
-      @apps = App.default_where(default_params)
-    end
-
-    def payee_domain_params
-      params.fetch(:payee_domain, {}).permit(
-        :domain
-      )
+      @payee = Payee.default_where(default_params).find params[:payee_id]
     end
   end
 end
