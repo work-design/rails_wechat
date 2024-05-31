@@ -253,6 +253,9 @@ Rails.application.routes.draw do
       end
 
       namespace :in, defaults: { namespace: 'in' } do
+        controller :home do
+          get :index
+        end
         resources :apps do
           resources :scenes do
             member do
