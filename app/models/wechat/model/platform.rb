@@ -59,7 +59,7 @@ module Wechat
     def sync_templates
       r = api.templates
       rs = r['template_list'].map do |item|
-        t = platform_templates.find_or_initialize_by(template_id: item['template_id'])
+        t = platform_templates.find(&->(i){ i.template_id == item['template_id'] }) || platform_templates.build(template_id: item['template_id'])
         t.assign_attributes item.slice('user_version', 'user_desc', 'audit_status')
         t.created_at = Time.at(item['create_time'])
         t
