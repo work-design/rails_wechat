@@ -65,7 +65,7 @@ module Wechat
         t
       end
       template_ids = r['template_list'].map(&->(i){ i['template_id'] })
-      platform_templates.select(&->(i){ template_ids.exclude?(i.id) }).each do |pt|
+      platform_templates.select(&->(i){ template_ids.exclude?(i.template_id) }).each do |pt|
         pt.mark_for_destruction
       end
       self.save
