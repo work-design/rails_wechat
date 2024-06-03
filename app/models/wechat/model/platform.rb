@@ -22,7 +22,7 @@ module Wechat
       has_many :auths
       has_many :platform_tickets, primary_key: :appid, foreign_key: :appid
       has_many :receives, dependent: :nullify
-      has_many :platform_templates
+      has_many :platform_templates, autosave: true
 
       before_validation :init_token, if: -> { token.blank? }
       before_validation :init_aes_key, if: -> { encoding_aes_key.blank? }
