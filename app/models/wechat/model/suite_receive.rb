@@ -25,7 +25,7 @@ module Wechat
       enum :msg_format, {
         json: 'json',
         xml: 'xml'
-      }, _default: 'xml'
+      }, default: 'xml'
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       after_save :sync_suite_ticket, if: -> { ['suite_ticket'].include?(info_type) && saved_change_to_info_type? }

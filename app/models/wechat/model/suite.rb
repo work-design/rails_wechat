@@ -21,7 +21,7 @@ module Wechat
       enum :kind, {
         develop: 'develop',
         install: 'install'
-      }, _default: 'develop', _prefix: true
+      }, default: 'develop', prefix: true
 
       belongs_to :provider, foreign_key: :corp_id, primary_key: :corp_id
 

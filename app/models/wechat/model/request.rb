@@ -17,14 +17,14 @@ module Wechat
       attribute :reply_encrypt, :json, default: {}
       attribute :handle_id, :integer
 
-      enum aim: {
+      enum :aim, {
         login: 'login',
         invite_user: 'invite_user',
         invite_member: 'invite_member',
         invite_contact: 'invite_contact',
         prepayment: 'prepayment',  # 钱包充值场景
         unknown: 'unknown'
-      }, _default: 'unknown', _prefix: true
+      }, default: 'unknown', prefix: true
 
       belongs_to :scene_organ, class_name: 'Org::Organ', optional: true
 

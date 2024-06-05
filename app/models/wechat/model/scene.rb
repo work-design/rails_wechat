@@ -16,16 +16,16 @@ module Wechat
         release: 'release',
         trial: 'trial',
         develop: 'develop'
-      }, _default: 'release', _prefix: true
+      }, default: 'release', prefix: true
 
-      enum aim: {
+      enum :aim, {
         login: 'login',
         invite_user: 'invite_user',
         invite_member: 'invite_member',
         invite_contact: 'invite_contact',
         prepayment: 'prepayment',  # 钱包充值场景
         unknown: 'unknown'
-      }, _default: 'unknown', _prefix: true
+      }, default: 'unknown', prefix: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 

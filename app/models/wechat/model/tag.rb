@@ -13,7 +13,7 @@ module Wechat
       enum :kind, {
         normal: 'normal',
         inviting: 'inviting'
-      }, _default: 'normal'
+      }, default: 'normal'
 
       belongs_to :tagging, polymorphic: true, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true

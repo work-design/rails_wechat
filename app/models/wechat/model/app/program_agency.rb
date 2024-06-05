@@ -14,7 +14,7 @@ module Wechat
         verifying: 2,
         regretted: 3,
         verify_later: 4
-      }, _prefix: true
+      }, prefix: true
 
       belongs_to :platform_template, optional: true
     end

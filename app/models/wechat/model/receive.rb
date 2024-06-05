@@ -53,7 +53,7 @@ module Wechat
       enum :msg_format, {
         json: 'json',
         xml: 'xml'
-      }, _default: 'xml'
+      }, default: 'xml'
 
       has_one :request
 
