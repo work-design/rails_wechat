@@ -9,12 +9,12 @@ module Wechat
       attribute :custom_relation, :string
       attribute :res, :json
 
-      enum receiver_type: {
+      enum :receiver_type, {
         merchant_id: 'merchant_id',  # 户号（mch_id或者sub_mch_id）
         personal_openid: 'personal_openid' # 个人openid
       }
 
-      enum relation_type: {
+      enum :relation_type, {
         store: 'store', # 门店
         staff: 'staff', # 员工
         store_owner: 'store_owner', # 店主

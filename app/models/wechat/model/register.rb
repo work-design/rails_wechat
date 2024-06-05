@@ -25,7 +25,7 @@ module Wechat
       has_one_attached :bind_qrcode
       has_one_attached :qrcode
 
-      enum state: {
+      enum :state, {
         init: 'init',
         doing: 'doing',
         done: 'done'

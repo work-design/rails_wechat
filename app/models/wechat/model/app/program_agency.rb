@@ -8,7 +8,7 @@ module Wechat
       attribute :auditid, :integer
       attribute :version_info, :json, default: {}
 
-      enum audit_status: {
+      enum :audit_status, {
         success: 0,
         rejected: 1,
         verifying: 2,

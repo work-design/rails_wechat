@@ -18,7 +18,7 @@ module Wechat
       attribute :redirect_controller, :string
       attribute :redirect_action, :string, default: 'index', comment: '默认跳转'
 
-      enum kind: {
+      enum :kind, {
         develop: 'develop',
         install: 'install'
       }, _default: 'develop', _prefix: true

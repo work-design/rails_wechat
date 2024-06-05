@@ -10,7 +10,7 @@ module Wechat
       attribute :user_tags_count, :integer, default: 0
       attribute :tag_id, :integer
 
-      enum kind: {
+      enum :kind, {
         normal: 'normal',
         inviting: 'inviting'
       }, _default: 'normal'

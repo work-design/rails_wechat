@@ -6,7 +6,7 @@ module Wechat
       attribute :appid, :string, index: true
       attribute :value, :string
 
-      enum key: {
+      enum :key, {
         service_url: 'service_url',
         service_corp: 'service_corp'
       }

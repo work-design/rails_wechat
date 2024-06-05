@@ -9,7 +9,7 @@ module Wechat
       attribute :user_desc, :string
       attribute :template_id, :integer
 
-      enum audit_status: [
+      enum :audit_status, [
         :init,
         :verifying,
         :rejected,

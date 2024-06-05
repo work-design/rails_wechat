@@ -9,7 +9,7 @@ module Wechat
       attribute :pending_id, :string
       attribute :corpid, :string, index: true
 
-      enum subject_type: {
+      enum :subject_type, {
         oneself: '0',
         provider: '1'
       }

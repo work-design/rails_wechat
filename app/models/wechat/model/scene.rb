@@ -12,7 +12,7 @@ module Wechat
       attribute :appid, :string, index: true
       attribute :menu_id, :string
 
-      enum env_version: {
+      enum :env_version, {
         release: 'release',
         trial: 'trial',
         develop: 'develop'

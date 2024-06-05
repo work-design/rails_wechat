@@ -23,7 +23,7 @@ module Wechat
       attribute :department, :integer, array: []
       attribute :follows_count, :integer, default: 0
 
-      enum gender: {
+      enum :gender, {
         male: '1',
         female: '2',
         unknown: '0'

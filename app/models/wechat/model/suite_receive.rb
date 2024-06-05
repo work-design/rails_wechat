@@ -22,7 +22,7 @@ module Wechat
       belongs_to :corp, ->(o) { where(suite_id: o.suiteid) }, foreign_key: :auth_corp_id, primary_key: :corpid, optional: true
       belongs_to :corp_user, ->(o) { where(o.filter_hash) }, foreign_key: :user_id, primary_key: :userid, optional: true
 
-      enum msg_format: {
+      enum :msg_format, {
         json: 'json',
         xml: 'xml'
       }, _default: 'xml'
