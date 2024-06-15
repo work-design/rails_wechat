@@ -1,6 +1,6 @@
 module Wechat
   class ProgramUsersController < BaseController
-    before_action :set_app, only: [:create]
+    before_action :set_app, only: [:create, :mobile]
     before_action :set_wechat_program_user, only: [:info, :mobile]
     skip_before_action :verify_authenticity_token if whether_filter(:verify_authenticity_token)
 
@@ -33,10 +33,8 @@ module Wechat
 
     def mobile
       if @program_user && @program_user.get_phone_number!(session_params)
-        headers['Authorization'] = @program_user.auth_token
-        render json: { auth_token: @program_user.auth_token, program_user: @program_user.as_json(methods: [:skip_auth, :only_auth]), user: @program_user.user }
+        render json: { url: @app.webview_url }
       else
-        current_authorized_token&.destroy  # 触发重新授权逻辑
         render :mobile_err, locals: { model: @program_user }, status: :unprocessable_entity
       end
     end
@@ -47,7 +45,7 @@ module Wechat
       @program_user.extra = userinfo_params.slice(:gender, :language, :city, :province, :country)
       @program_user.save
 
-      render json: { program_user: @program_user.as_json(only: [:id, :identity, :name, :avatar_url]) }
+      render json: { url: url }
     end
 
     private
@@ -60,7 +58,7 @@ module Wechat
     end
 
     def session_params
-      params.fetch(:detail, {}).permit(
+      params.permit(
         :code,
         :encryptedData,
         :iv
