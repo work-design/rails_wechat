@@ -12,7 +12,7 @@ module Wechat
       headers['Authorization'] = @program_user.auth_token
       r = {
         auth_token: @program_user.auth_token,
-        program_user: @program_user.as_json(only: [:name, :avatar_url]),
+        program_user: @program_user.as_json(only: [:name, :avatar_url, :uid, :unionid]),
         user: @program_user.user.as_json(only: [:name], methods: [:avatar_url])
       }
       if params[:state].present?
@@ -21,10 +21,10 @@ module Wechat
           state.destroyable = true
           state.save
           r.merge! url: state.url(auth_token: @program_user.auth_token)
-        else
+        elsif @app.respond_to? :webview_url
           r.merge! url: @app.webview_url(auth_jwt_token: @program_user.auth_jwt_token)
         end
-      else
+      elsif @app.respond_to? :webview_url
         r.merge! url: @app.webview_url(auth_token: @program_user.auth_token)
       end
 
@@ -33,7 +33,9 @@ module Wechat
 
     def mobile
       if @program_user && @program_user.get_phone_number!(session_params)
-        render json: { url: @app.webview_url }
+        r = {}
+        r.merge! url: @app.webview_url if @app.respond_to? :webview_url
+        render json: r
       else
         render :mobile_err, locals: { model: @program_user }, status: :unprocessable_entity
       end
