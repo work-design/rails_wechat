@@ -12,7 +12,7 @@ module Wechat
       headers['Authorization'] = @program_user.auth_token
       r = {
         auth_token: @program_user.auth_token,
-        program_user: @program_user.as_json(only: [:name, :avatar_url, :uid, :unionid]),
+        program_user: @program_user.as_json(only: [:name, :avatar_url, :uid, :unionid, :identity]),
         user: @program_user.user.as_json(only: [:name], methods: [:avatar_url])
       }
       if params[:state].present?

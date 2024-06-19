@@ -30,11 +30,16 @@ module Wechat
       has_many :notices, ->(o) { where(appid: o.appid) }, primary_key: :uid, foreign_key: :open_id
       has_many :corp_external_users, ->(o) { where(uid: o.uid) }, primary_key: :unionid, foreign_key: :unionid
 
+      before_validation :sync_organ, if: -> { appid.present? && appid_changed? }
       after_save :sync_to_org_members, if: -> { saved_change_to_identity? }
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :prune_user_tags, if: -> { unsubscribe_at.present? && saved_change_to_unsubscribe_at? }
       after_save_commit :sync_user_info_later, if: -> { scope == 'snsapi_userinfo' && saved_change_to_scope? }
       after_save_commit :init_corp_external_user, if: -> { unionid.present? && saved_change_to_unionid? }
+    end
+
+    def sync_organ
+      self.organ_id = app.organ_id if app
     end
 
     def api

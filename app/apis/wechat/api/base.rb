@@ -65,7 +65,13 @@ module Wechat::Api
     end
 
     def parse_response(response)
-      raise "Request get fail, response status #{response.status}" if response.status != 200
+      if response.respond_to?(:status)
+        if response.status != 200
+          raise "Request get fail, response status #{response}"
+        end
+      else
+        binding.b
+      end
       content_type = response.content_type.mime_type
 
       if content_type =~ /image|audio|video/
@@ -77,6 +83,7 @@ module Wechat::Api
       elsif content_type =~ /html|xml/
         data = Hash.from_xml(response.body.to_s)
       elsif content_type =~ /json/
+        Rails.logger.debug "----------#{response.body.to_s}"
         data = response.json
       else
         data = JSON.parse(response.body.to_s)
