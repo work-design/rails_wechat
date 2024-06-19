@@ -31,9 +31,12 @@ module Wechat
 
     def mobile
       if @program_user && @program_user.get_phone_number!(session_params)
-        r = {}
+        @result = {
+          auth_token: @program_user.auth_token,
+          program_user: @program_user.as_json(only: [:name, :avatar_url, :uid, :unionid, :identity]),
+          user: @program_user.user.as_json(only: [:name], methods: [:avatar_url])
+        }
         r.merge! url: @app.webview_url if @app.respond_to? :webview_url
-        render json: r
       else
         render :mobile_err, locals: { model: @program_user }, status: :unprocessable_entity
       end
