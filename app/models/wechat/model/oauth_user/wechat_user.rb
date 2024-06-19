@@ -35,7 +35,7 @@ module Wechat
       after_save_commit :sync_remark_later, if: -> { saved_change_to_remark? }
       after_save_commit :prune_user_tags, if: -> { unsubscribe_at.present? && saved_change_to_unsubscribe_at? }
       after_save_commit :sync_user_info_later, if: -> { scope == 'snsapi_userinfo' && saved_change_to_scope? }
-      after_save_commit :init_corp_external_user, if: -> { unionid.present? && saved_change_to_unionid? }
+      after_save_commit :init_corp_external_user, if: -> { unionid.present? && saved_change_to_unionid? } if defined? RailsCrm
     end
 
     def sync_organ
