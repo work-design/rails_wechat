@@ -10,7 +10,7 @@ module Wechat
       @program_user.auth_appid = params[:auth_appid]
 
       headers['Authorization'] = @program_user.auth_token
-      r = {
+      @result = {
         auth_token: @program_user.auth_token,
         program_user: @program_user.as_json(only: [:name, :avatar_url, :uid, :unionid, :identity]),
         user: @program_user.user.as_json(only: [:name], methods: [:avatar_url])
@@ -20,15 +20,13 @@ module Wechat
         if state
           state.destroyable = true
           state.save
-          r.merge! url: state.url(auth_token: @program_user.auth_token)
+          @result.merge! url: state.url(auth_token: @program_user.auth_token)
         elsif @app.respond_to? :webview_url
-          r.merge! url: @app.webview_url(auth_jwt_token: @program_user.auth_jwt_token)
+          @result.merge! url: @app.webview_url(auth_jwt_token: @program_user.auth_jwt_token)
         end
       elsif @app.respond_to? :webview_url
-        r.merge! url: @app.webview_url(auth_token: @program_user.auth_token)
+        @result.merge! url: @app.webview_url(auth_token: @program_user.auth_token)
       end
-
-      render json: r
     end
 
     def mobile

@@ -22,7 +22,7 @@ module Wechat
 
       has_many :members, class_name: 'Org::Member', primary_key: :uid, foreign_key: :wechat_openid
       has_many :organs, -> { order(id: :asc) }, class_name: 'Org::Organ', through: :members
-      has_many :contacts, ->{ where.not(unionid: nil) }, class_name: 'Crm::Contact', primary_key: :unionid, foreign_key: :unionid
+      has_many :contacts, ->{ where.not(unionid: nil) }, class_name: 'Crm::Contact', primary_key: :unionid, foreign_key: :unionid if defined? RailsCrm
 
       has_many :requests, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
       has_many :user_tags, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
