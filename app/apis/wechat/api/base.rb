@@ -70,7 +70,7 @@ module Wechat::Api
           raise "Request get fail, response status #{response}"
         end
       else
-        binding.b
+        
       end
       content_type = response.content_type.mime_type
 

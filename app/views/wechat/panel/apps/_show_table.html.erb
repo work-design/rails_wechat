@@ -8,7 +8,7 @@
 </div>
 <div>
   <dt><%= Wechat::App.human_attribute_name(:logo) %></dt>
-  <dt><%= image_tag @app.logo.url, class: 'image' if @app.logo.attached? %></dd>
+  <dd><%= image_tag @app.logo.url, class: 'image' if @app.logo.attached? %></dd>
 </div>
 <div>
   <dt><%= Wechat::App.human_attribute_name(:enabled) %></dt>
