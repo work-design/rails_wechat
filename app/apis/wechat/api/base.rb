@@ -70,7 +70,7 @@ module Wechat::Api
           raise "Request get fail, response status #{response}"
         end
       else
-        
+
       end
       content_type = response.content_type.mime_type
 
