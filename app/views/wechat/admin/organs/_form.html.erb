@@ -1,5 +1,5 @@
 <% if @agencies.present? %>
-  <%= f.collection_select :appid, @agencies, :appid, :name %>
+  <%= f.collection_select :appid, @agencies, :appid, :name, include_blank: true %>
 <% else %>
-  <%= f.collection_select :appid, @apps, :appid, :name %>
+  <%= f.collection_select :appid, @apps, :appid, :name, include_blank: true %>
 <% end %>
