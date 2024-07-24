@@ -13,7 +13,7 @@ module Wechat
       has_many :menus, -> { order(position: :asc) }, primary_key: :menu_root_id, foreign_key: :menu_root_id
       has_many :menu_apps, -> { order(position: :asc) }
 
-      acts_as_list scope: [:menu_root_id, :appid]
+      positioned on: [:menu_root_id, :appid]
     end
 
     def app_menus(_)

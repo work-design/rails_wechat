@@ -14,7 +14,7 @@ module Wechat
 
       belongs_to :template_config
 
-      acts_as_list
+      positioned
     end
 
   end

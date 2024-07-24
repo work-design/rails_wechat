@@ -15,7 +15,7 @@ module Wechat
       belongs_to :scene, optional: true
       belongs_to :tag, optional: true
 
-      acts_as_list scope: [:menu_id, :menu_root_id, :appid]
+      positioned on: [:menu_id, :menu_root_id, :appid]
 
       before_validation :sync_menu_root, if: -> { menu_id_changed? }
     end

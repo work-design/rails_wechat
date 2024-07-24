@@ -9,11 +9,10 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 65334cc10eb7ca44eb2fbf9172598474d4f96e6a
+  revision: 0e2da4f7bce57843d48202ace8589b7b28689d18
   specs:
     rails_com (1.3.0)
       acme-client
-      acts_as_list (>= 1.0)
       closure_tree (>= 7.3)
       default_where (~> 2.2)
       http-form_data (~> 2.3)
@@ -24,12 +23,13 @@ GIT
       net-http
       net-pop
       ostruct
+      positioning
       rails (~> 7.0)
       turbo-rails
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 3f00e3bb8260a96fdaa759bdcc04be7a5eedc4f8
+  revision: b07611b93e23477e9a05fa9c137e791ccd785b8b
   specs:
     rails_design (0.0.1)
       rails
@@ -135,9 +135,6 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
-    acts_as_list (1.2.2)
-      activerecord (>= 6.1)
-      activesupport (>= 6.1)
     base64 (0.2.0)
     bcrypt (3.1.20)
     bigdecimal (3.1.8)
@@ -228,6 +225,9 @@ GEM
       racc (~> 1.4)
     ostruct (0.6.0)
     pg (1.5.6)
+    positioning (0.2.3)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
     propshaft (0.9.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -335,7 +335,6 @@ CHECKSUMS
   activerecord (7.1.3.4) sha256=784eeca4d6f23391d445552d6675a47c594555361c3b042108d29f0c7b9230f2
   activestorage (7.1.3.4) sha256=f2020ea0a77e105e480a9a15251c91d615eecb4b28a1a80968d6fb6a5dcb0a2e
   activesupport (7.1.3.4) sha256=455bbc43d82e5ba20daa25f0888b80c9f7e2d80ca0cc96cea3e6acfec3e40309
-  acts_as_list (1.2.2) sha256=4682e8155bce84966656e1a14873ef1ae35e4a7f38993610a84011328c937f49
   base64 (0.2.0) sha256=0f25e9b21a02a0cc0cea8ef92b2041035d39350946e8789c562b2d1a3da01507
   bcrypt (3.1.20) sha256=8410f8c7b3ed54a3c00cd2456bf13917d695117f033218e2483b2e40b0784099
   bigdecimal (3.1.8) sha256=a89467ed5a44f8ae01824af49cbc575871fa078332e8f77ea425725c1ffe27be
@@ -384,6 +383,7 @@ CHECKSUMS
   nokogiri (1.16.6) sha256=935fe4dd67d4377f4a05002acb1ffbadbcae265ea8e7869fc40e3a8121f3e1ef
   ostruct (0.6.0) sha256=3b1736c99f4d985de36bde1155be5e22aaf6e564b30ff9bd481e2ef7c2d9ba85
   pg (1.5.6) sha256=4bc3ad2438825eea68457373555e3fd4ea1a82027b8a6be98ef57c0d57292b1c
+  positioning (0.2.3)
   propshaft (0.9.0) sha256=fe1d2e6368b1147f4de844a58bcd90a0d9d7bd2930aaf225c84d31c068346091
   psych (5.1.2) sha256=337322f58fc2bf24827d2b9bd5ab595f6a72971867d151bb39980060ea40a368
   puma (6.4.2) sha256=3eb41999d00733280be3faeb00d610331b6965a537a8cd3d905f316c38575b44
