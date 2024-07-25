@@ -43,12 +43,12 @@ module Wechat
     end
 
     def info
-      @program_user.name = userinfo_params[:nickName]
-      @program_user.avatar_url = userinfo_params[:avatarUrl]
-      @program_user.extra = userinfo_params.slice(:gender, :language, :city, :province, :country)
-      @program_user.save
-
-      render json: { url: url }
+      if userinfo_params.present?
+        @program_user.name = userinfo_params[:nickName]
+        @program_user.avatar_url = userinfo_params[:avatarUrl]
+        @program_user.extra = userinfo_params.slice(:gender, :language, :city, :province, :country)
+        @program_user.save
+      end
     end
 
     private
@@ -73,7 +73,7 @@ module Wechat
     end
 
     def userinfo_params
-      params.require(:userInfo).permit(
+      params.fetch(:userInfo, {}).permit(
         :nickName,
         :gender,
         :language,

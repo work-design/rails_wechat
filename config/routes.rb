@@ -65,7 +65,7 @@ Rails.application.routes.draw do
       resources :program_users do
         collection do
           post :mobile
-          post :info
+          match :info, via: [:get, :post]
         end
       end
       resources :apps, only: [:show], param: :appid do
