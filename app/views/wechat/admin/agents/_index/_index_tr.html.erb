@@ -14,16 +14,16 @@
         <i class="fa-solid fa-cog"></i>
       <% end %>
       <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-circle-info color-info"></i>
+        <i class="fa-solid fa-circle-info text-info"></i>
       <% end %>
       <%= link_to({ action: 'edit_confirm', id: model.id }, aria: { label: t('wechat.admin.agents.edit_confirm.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-file color-info"></i>
+        <i class="fa-solid fa-file text-info"></i>
       <% end %>
       <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-pencil color-link"></i>
+        <i class="fa-solid fa-pencil text-link"></i>
       <% end %>
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-trash color-danger"></i>
+        <i class="fa-solid fa-trash text-danger"></i>
       <% end %>
     </div>
   </td>

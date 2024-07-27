@@ -1,14 +1,14 @@
 <% menu_disable = @app.menu_disables.find(&->(i){ i.menu_id == model.id }) %>
-<tr id="tr_<%= model.id %>" data-depth="0" data-controller="tree show" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="<%= 'has-background-white-ter' %>">
+<tr id="tr_<%= model.id %>" data-depth="0" data-controller="tree show" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="<%= 'background-white-ter' %>">
   <%= yield %>
   <td>
     <% if menu_disable %>
       <%= button_to({ controller: 'menu_disables', action: 'destroy', menu_id: model.id, id: menu_disable.id }, method: :delete, aria: { label: '添加' }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-xmark color-danger"></i>
+        <i class="fa-solid fa-xmark text-danger"></i>
       <% end %>
     <% else %>
       <%= button_to({ controller: 'menu_disables', action: 'create', menu_id: model.id }, aria: { label: t('.destroy.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-check color-success"></i>
+        <i class="fa-solid fa-check text-success"></i>
       <% end %>
     <% end %>
     <%= button_to({ controller: 'menu_apps', action: 'new', menu_id: model.id }, class: 'button is-small is-link') do %>

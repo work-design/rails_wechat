@@ -3,10 +3,10 @@
   <td>
     <div data-show-target="item" class="visibility-hidden">
       <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-pencil color-link"></i>
+        <i class="fa-solid fa-pencil text-link"></i>
       <% end %>
       <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.destroy.confirm') } }) do %>
-        <i class="fa-solid fa-trash color-danger"></i>
+        <i class="fa-solid fa-trash text-danger"></i>
       <% end %>
     </div>
   </td>

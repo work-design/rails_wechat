@@ -3,29 +3,29 @@
     <%= image_tag model.head_img, class: 'image is-24x24' if model.head_img %>
     <span><%= model.nick_name %></span>
     <% if [model.platform.program_agency_id].include?(model.id) %>
-      <i class="fa-solid fa-shield color-success"></i>
+      <i class="fa-solid fa-shield text-success"></i>
     <% end %>
   </p>
-  <p class="color-grey"><%= model.appid %></p>
-  <p class="color-grey"><%= model.domain %></p>
+  <p class="text-grey"><%= model.appid %></p>
+  <p class="text-grey"><%= model.domain %></p>
 </td>
 <td>
   <p><%= model.principal_name %></p>
   <p><%= model.user_name %></p>
   <p><%= model.alias_name %></p>
-  <p class="color-grey"><%= model.disabled_func_infos.join(',') %></p>
+  <p class="text-grey"><%= model.disabled_func_infos.join(',') %></p>
 </td>
 <td>
 <% if model.version_info.is_a?(Hash) %>
   <div>
     <span><%= model.version_info.dig('release_info', 'release_version') %></span>
-    <time data-controller="time" class="color-grey"><%= model.version_info.dig('release_info', 'release_time') %></time>
+    <time data-controller="time" class="text-grey"><%= model.version_info.dig('release_info', 'release_time') %></time>
   </div>
   <div class="mt-1">
     <span><%= model.version_info.dig('exp_info', 'exp_version') %></span>
-    <time data-controller="time" class="color-grey"><%= model.version_info.dig('exp_info', 'exp_time') %></time>
+    <time data-controller="time" class="text-grey"><%= model.version_info.dig('exp_info', 'exp_time') %></time>
     <%= button_to({ action: 'submit', id: model.id }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-upload color-danger"></i>
+      <i class="fa-solid fa-upload text-danger"></i>
       <span class="ml-1"><%= t('.submit.title') %></span>
     <% end if model.submittable? %>
   </div>
@@ -34,7 +34,7 @@
 <td>
   <span><%= model.audit_status_i18n %></span>
   <%= button_to({ action: 'release', id: model.id }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fa-solid fa-cloud-arrow-up color-success"></i>
+    <i class="fa-solid fa-cloud-arrow-up text-success"></i>
     <span class="ml-1"><%= t('.release.title') %></span>
   <% end if model.releasable? %>
 </td>

@@ -1,6 +1,6 @@
 <%= render layout: 'show_layout' do %>
   <tr>
-    <td class="has-text-right"><%= Wechat::Agency.human_attribute_name(:qrcode) %></td>
+    <td class="text-right"><%= Wechat::Agency.human_attribute_name(:qrcode) %></td>
     <td><%= image_tag @program_agency.qrcode, class: 'image is-128x128' if @program_agency.qrcode.attached? %></td>
   </tr>
 <% end %>

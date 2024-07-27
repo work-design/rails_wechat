@@ -1,12 +1,12 @@
-<tr id="tr_<%= model.id %>" data-depth="10" data-controller="show tree" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="has-background-light">
+<tr id="tr_<%= model.id %>" data-depth="10" data-controller="show tree" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="background-light">
   <%= yield %>
   <td>
     <div data-show-target="item" class="visibility-hidden">
       <%= button_to({ controller: 'menu_roots', action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-        <i class="fa-solid fa-pencil color-info"></i>
+        <i class="fa-solid fa-pencil text-info"></i>
       <% end %>
       <%= button_to({ controller: 'menu_roots', action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.destroy.confirm') } }) do %>
-        <i class="fa-solid fa-trash color-danger"></i>
+        <i class="fa-solid fa-trash text-danger"></i>
       <% end %>
     </div>
   </td>

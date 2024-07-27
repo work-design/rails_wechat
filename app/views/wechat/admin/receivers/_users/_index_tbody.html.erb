@@ -1,12 +1,12 @@
 <td>
   <p><%= model.name %></p>
-  <p class="color-grey"><%= model.uid %></p>
+  <p class="text-grey"><%= model.uid %></p>
 </td>
 <td>
   <% model.user_tags.each do |user_tag| %>
     <span class="tag is-success">
       <span><%= user_tag.tag.name %></span>
-      <%= button_to({ controller: 'user_tags', action: 'destroy', id: user_tag.id }, method: :delete, data: { turbo_confirm: t('.destroy.confirm') }, class: 'delete is-small color-grey') do %>
+      <%= button_to({ controller: 'user_tags', action: 'destroy', id: user_tag.id }, method: :delete, data: { turbo_confirm: t('.destroy.confirm') }, class: 'delete is-small text-grey') do %>
       <% end %>
     </span>
   <% end %>

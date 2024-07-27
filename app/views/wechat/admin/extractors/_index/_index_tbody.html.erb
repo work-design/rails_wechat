@@ -1,7 +1,7 @@
 <td><%= model.name %></td>
 <td>
-  <p class="color-success"><%= model.prefix.inspect if model.prefix %></p>
-  <p class="color-danger"><%= model.suffix.inspect if model.suffix %></p>
+  <p class="text-success"><%= model.prefix.inspect if model.prefix %></p>
+  <p class="text-danger"><%= model.suffix.inspect if model.suffix %></p>
 </td>
 <td>
   <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
@@ -14,8 +14,8 @@
   <p><%= model.finish_at.to_fs(:time) if model.finish_at %></p>
 </td>
 <td>
-  <p class="color-success"><%= model.valid_response %></p>
-  <p class="color-danger"><%= model.invalid_response %></p>
+  <p class="text-success"><%= model.valid_response %></p>
+  <p class="text-danger"><%= model.invalid_response %></p>
 </td>
 <td>
   <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>

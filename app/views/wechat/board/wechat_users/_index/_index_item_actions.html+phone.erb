@@ -4,10 +4,10 @@
   </div>
   <div class="media-right as-x">
     <% if current_authorized_token.uid == model.uid %>
-      <i class="fa-solid fa-check color-success"></i>
+      <i class="fa-solid fa-check text-success"></i>
     <% end %>
     <%= button_to({ action: 'actions', id: model.id }, class: 'button is-borderless') do %>
-      <i class="fa-solid fa-lg fa-ellipsis-h color-grey"></i>
+      <i class="fa-solid fa-lg fa-ellipsis-h text-grey"></i>
     <% end %>
   </div>
 </div>

@@ -7,7 +7,7 @@
 </td>
 <td>
   <p><%= model.account&.identity %></p>
-  <p class="color-grey"><%= model.uid %></p>
+  <p class="text-grey"><%= model.uid %></p>
 </td>
 <td>
   <%= button_to({ controller: 'auth/board/oauth_users', action: 'destroy', id: model.id }, method: :delete, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-warning') do %>
