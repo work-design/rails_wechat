@@ -1,7 +1,10 @@
 <dl class="as-show">
   <div>
     <dt><%= Wechat::App.human_attribute_name(:url) %></dt>
-    <dd><%= @app.url %></dd>
+    <dd data-controller="clipboard">
+      <span data-clipboard-target="source"><%= @app.url %></span>
+      <button data-action="clipboard#copyInner" class="button is-small is-success">Copy</button>
+    </dd>
   </div>
   <div>
     <dt><%= Wechat::App.human_attribute_name(:token) %></dt>
