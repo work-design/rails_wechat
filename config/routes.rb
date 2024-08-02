@@ -286,7 +286,7 @@ Rails.application.routes.draw do
         resource :organ, only: [:show, :edit, :update]
         resources :apps, param: :appid do
           member do
-            get :info
+            match :info, via: [:get, :post]
           end
           concerns :appable
         end

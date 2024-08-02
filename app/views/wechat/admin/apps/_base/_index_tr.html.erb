@@ -25,8 +25,9 @@
       <% end %>
     </div>
     <div data-show-target="item" class="mt-1 visibility-hidden">
-      <%= link_to({ action: 'info', appid: model.appid }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= button_to({ action: 'info', appid: model.appid }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-cog"></i>
+        <span class="ml-1"><%= t('.info.title') %></span>
       <% end %>
       <%= link_to({ controller: 'app_configs', app_appid: model.appid }, aria: { label: t('wechat.admin.app_configs.index.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-cogs"></i>

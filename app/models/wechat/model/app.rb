@@ -98,7 +98,7 @@ module Wechat
       Rails.application.routes.url_for(
         controller: 'wechat/apps',
         action: 'show',
-        id: self.id,
+        appid: self.appid,
         host: domain
       ) if domain.present?
     end
