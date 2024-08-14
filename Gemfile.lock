@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 89667fe1a800a6131052819ded6750eefc09bab7
+  revision: 65be2c993d405f69cdbd27ebb83563e2317d310c
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 6b1abb280fafcb1152f199d6e511f8d1fad9cdf1
+  revision: f015115e362c666e8272f191eff755039bfa04ff
   specs:
     rails_com (1.3.0)
       acme-client
@@ -25,25 +25,26 @@ GIT
       ostruct
       positioning
       rails (~> 7.0)
+      solid_queue
       turbo-rails
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 28c323a70629142ec003b46b8bc7ae954547b575
+  revision: 345b1dc3495ac9082dbca78308aa673ab163a9c3
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_notice.git
-  revision: 193cf9ead844a2b6c1fcad2bd5c5e1ea0679a822
+  revision: 8de901ff8bb67af3b5de11f291aac81be569b455
   specs:
     rails_notice (1.0.3)
       rails_com
 
 GIT
   remote: https://github.com/work-design/rails_org.git
-  revision: 06a18fa7f09d257d43b2ede9a818fbce42bf885e
+  revision: f11fc99c36c1c82a3c855a14f5c2105e9997f5d7
   specs:
     rails_org (0.0.1)
       rails_com
@@ -154,13 +155,18 @@ GEM
       activerecord (>= 4.0.0)
     drb (2.2.1)
     erubi (1.13.0)
-    faraday (2.10.0)
+    et-orbi (1.2.11)
+      tzinfo
+    faraday (2.10.1)
       faraday-net_http (>= 2.0, < 3.2)
       logger
     faraday-net_http (3.1.1)
       net-http
     faraday-retry (2.2.1)
       faraday (~> 2.0)
+    fugit (1.11.0)
+      et-orbi (~> 1, >= 1.2.11)
+      raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
     http-2 (1.0.1)
@@ -225,7 +231,7 @@ GEM
       racc (~> 1.4)
     ostruct (0.6.0)
     pg (1.5.6)
-    positioning (0.2.3)
+    positioning (0.2.5)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
     propshaft (0.9.0)
@@ -237,6 +243,7 @@ GEM
       stringio
     puma (6.4.2)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.8.0)
     rack (3.1.7)
     rack-session (2.0.0)
@@ -287,6 +294,12 @@ GEM
     rqrcode_core (1.2.0)
     sdoc (2.6.1)
       rdoc (>= 5.0)
+    solid_queue (0.4.1)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      concurrent-ruby (>= 1.3.1)
+      fugit (~> 1.11.0)
+      railties (>= 7.1)
     stringio (3.1.1)
     thor (1.3.1)
     timeout (0.4.1)
@@ -349,9 +362,11 @@ CHECKSUMS
   default_where (2.2.0) sha256=77f54769256ad5d961c44a6dd88d8d485a1c4487a549d2c178da9101f6fed0a0
   drb (2.2.1) sha256=e9d472bf785f558b96b25358bae115646da0dbfd45107ad858b0bc0d935cb340
   erubi (1.13.0) sha256=fca61b47daefd865d0fb50d168634f27ad40181867445badf6427c459c33cd62
-  faraday (2.10.0) sha256=1a3e6c02acc511fc334d799521f1013e449bde38aa2dceb3af71e8030519bda9
+  et-orbi (1.2.11)
+  faraday (2.10.1)
   faraday-net_http (3.1.1)
   faraday-retry (2.2.1) sha256=4146fed14549c0580bf14591fca419a40717de0dd24f267a8ec2d9a728677608
+  fugit (1.11.0)
   globalid (1.2.1) sha256=70bf76711871f843dbba72beb8613229a49429d1866828476f9c9d6ccc327ce9
   http-2 (1.0.1)
   http-form_data (2.3.0) sha256=cc4eeb1361d9876821e31d7b1cf0b68f1cf874b201d27903480479d86448a5f3
@@ -383,10 +398,11 @@ CHECKSUMS
   nokogiri (1.16.6) sha256=935fe4dd67d4377f4a05002acb1ffbadbcae265ea8e7869fc40e3a8121f3e1ef
   ostruct (0.6.0) sha256=3b1736c99f4d985de36bde1155be5e22aaf6e564b30ff9bd481e2ef7c2d9ba85
   pg (1.5.6) sha256=4bc3ad2438825eea68457373555e3fd4ea1a82027b8a6be98ef57c0d57292b1c
-  positioning (0.2.3)
+  positioning (0.2.5)
   propshaft (0.9.0) sha256=fe1d2e6368b1147f4de844a58bcd90a0d9d7bd2930aaf225c84d31c068346091
   psych (5.1.2) sha256=337322f58fc2bf24827d2b9bd5ab595f6a72971867d151bb39980060ea40a368
   puma (6.4.2) sha256=3eb41999d00733280be3faeb00d610331b6965a537a8cd3d905f316c38575b44
+  raabro (1.4.0)
   racc (1.8.0) sha256=09349a65c37c4fe710a435f25c9f1652e39f29ad6b1fa08d4a8d30c0553d3a08
   rack (3.1.7) sha256=0e9982db4ea9013326788ca2a7f48e32a4e746765e7c3512d424ef0dd22ae58b
   rack-session (2.0.0) sha256=db04b2063e180369192a9046b4559af311990af38c6a93d4c600cee4eb6d4e81
@@ -409,6 +425,7 @@ CHECKSUMS
   rqrcode (2.2.0) sha256=23eea88bb44c7ee6d6cab9354d08c287f7ebcdc6112e1fe7bcc2d010d1ffefc1
   rqrcode_core (1.2.0) sha256=cf4989dc82d24e2877984738c4ee569308625fed2a810960f1b02d68d0308d1a
   sdoc (2.6.1) sha256=d78305be6fe9f81cb93787c24f8c2d47e418c2f1de2e7ff75c032d465fe3c5f8
+  solid_queue (0.4.1)
   stringio (3.1.1) sha256=53456e14175c594e0e8eb2206a1be33f3974d4fe21c131e628908b05c8c2ae1e
   thor (1.3.1) sha256=fa7e3471d4f6a27138e3d9c9b0d4daac9c3d7383927667ae83e9ab42ae7401ef
   timeout (0.4.1) sha256=6f1f4edd4bca28cffa59501733a94215407c6960bd2107331f0280d4abdebb9a
