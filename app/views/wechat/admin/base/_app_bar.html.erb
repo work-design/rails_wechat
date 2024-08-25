@@ -2,13 +2,28 @@
   <%= @app.name %>
 </h2>
 
-<div class="tabs mb-3">
+<div class="tabs is-centered mb-3">
   <ul>
     <li class="<%= active_helper(products: ['show', 'edit'], active: 'is-active') %>">
       <%= link_to t('.apps.show.title'), { controller: 'apps', action: 'show', appid: @app.appid } %>
     </li>
     <li class="<%= active_helper(controllers: 'requests', active: 'is-active') %>">
       <%= link_to t('.requests.index.title'), { controller: 'requests', app_appid: @app.appid } %>
+    </li>
+    <li class="<%= active_helper(controllers: 'responses', active: 'is-active') %>">
+      <%= link_to t('.responses.index.title'), { controller: 'responses', app_appid: @app.appid } %>
+    </li>
+    <li class="<%= active_helper(controllers: 'scenes', active: 'is-active') %>">
+      <%= link_to t('.scenes.index.title'), { controller: 'scenes', app_appid: @app.appid } %>
+    </li>
+    <li class="<%= active_helper(controllers: 'tags', active: 'is-active') %>">
+      <%= link_to t('.tags.index.title'), { controller: 'tags', app_appid: @app.appid } %>
+    </li>
+    <li class="<%= active_helper(controllers: 'wechat_users', active: 'is-active') %>">
+      <%= link_to t('.wechat_users.index.title'), { controller: 'wechat_users', app_appid: @app.appid } %>
+    </li>
+    <li class="<%= active_helper(controllers: 'user_tags', active: 'is-active') %>">
+      <%= link_to t('.user_tags.index.title'), { controller: 'user_tags', app_appid: @app.appid } %>
     </li>
   </ul>
 </div>

@@ -3,7 +3,7 @@
 <%= render 'index_actions' %>
 
 <%= render layout: 'index_table' do %>
-  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @tags, as: :model %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @responses, as: :model %>
 <% end %>
 
-<%= paginate @tags %>
+<%= paginate @responses %>
