@@ -14,7 +14,7 @@
     <%= f.check_box :shared, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
     <label data-action="click->input#check"></label>
   <% end %>
-  <%= form_with theme: nil, model: model, scope: :app, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+  <%= form_with theme: nil, model: model, scope: :app, url: { action: 'update', id: model.id }, data: { controller: 'input' }, class: 'mt-2' do |f| %>
     <%= f.check_box :global, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
     <label data-action="click->input#check"></label>
   <% end %>
