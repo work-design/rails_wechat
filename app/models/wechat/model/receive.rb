@@ -58,6 +58,7 @@ module Wechat
       has_one :request
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
+      before_save :extract_message_hash, if: -> { message_hash_changed? }
       before_create :parse_content
       after_create_commit :check_app
     end
@@ -74,11 +75,13 @@ module Wechat
       else
         self.message_hash = JSON.parse(content)
       end
+    end
+
+    def extract_message_hash
       self.info_type = message_hash['Event']
       self.open_id = message_hash['FromUserName']
       self.msg_type = message_hash['MsgType']
       self.msg_id = message_hash['MsgId']
-      self.message_hash
     end
 
     def compute_type
