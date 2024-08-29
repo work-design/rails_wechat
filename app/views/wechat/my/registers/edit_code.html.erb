@@ -1,5 +1,3 @@
-<%= render 'top_bar' %>
-
 <div class="box flex-grow-1 mx-3">
 <%= form_with theme: 'weui', model: @register, url: { action: 'update' } do |f| %>
   <%= render 'error_messages', target: f.object %>
