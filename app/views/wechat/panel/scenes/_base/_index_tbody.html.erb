@@ -9,7 +9,7 @@
 </td>
 <td>
   <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
-  <p><time data-controller="time" class="<%= model.expire_at && model.expire_at < Time.current ? 'color-danger' : 'color-success' %>"><%= model.expire_at&.to_fs(:iso8601) %></time></p>
+  <p><time data-controller="time" class="<%= model.expire_at && model.expire_at < Time.current ? 'text-danger' : 'text-success' %>"><%= model.expire_at&.to_fs(:iso8601) %></time></p>
 </td>
 <td>
   <p class="text-primary"><%= model.env_version_i18n %></p>
