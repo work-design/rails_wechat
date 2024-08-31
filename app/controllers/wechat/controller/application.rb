@@ -18,17 +18,17 @@ module Wechat
         return if current_user && current_corp_user
 
         if app.respond_to?(:oauth2_url)
-          url = app.oauth2_url(state: urlsafe_encode64(destroyable: false), **wechat_oauth_options)
+          url = app.oauth2_url(state: state_enter(destroyable: false), **wechat_oauth_options)
         end
       elsif request.variant.include?(:mini_program)
         check_jwt_token if params[:auth_jwt_token]
         return if current_wechat_user && current_user
-        render 'require_program_login', layout: 'raw', locals: { path: 'state_return', state: urlsafe_encode64(destroyable: false) }, status: :unauthorized and return
+        render 'require_program_login', layout: 'raw', locals: { path: 'state_return', state: state_enter(destroyable: false) }, status: :unauthorized and return
       elsif request.variant.include?(:wechat) && app
         return if current_wechat_user && current_user
 
         if app.respond_to?(:oauth2_url)
-          url = app.oauth2_url(state: urlsafe_encode64(destroyable: false), **wechat_oauth_options)
+          url = app.oauth2_url(state: state_enter(destroyable: false), **wechat_oauth_options)
         end
       elsif app&.openable?
         return if current_user

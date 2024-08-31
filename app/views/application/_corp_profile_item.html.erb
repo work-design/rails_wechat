@@ -1,4 +1,4 @@
-<%= link_to({ controller: 'auth/my/home' }, text: true, state: 'enter', class: 'media') do %>
+<%= link_to({ controller: 'auth/my/home' }, text: true, class: 'media') do %>
   <div class="media-left">
   <% if current_member&.avatar.present? %>
     <%= image_tag current_member.avatar, class: 'image is-64x64 is-radius' %>
