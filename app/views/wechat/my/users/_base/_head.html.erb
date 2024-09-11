@@ -34,7 +34,13 @@
 </div>
 <% end %>
 
-<div class="weui-navbar mt-4 mx-3">
-  <%= link_to '邀请记录', { action: 'invite_qrcode' }, class: active_helper(action: 'invite_qrcode', item: 'weui-navbar__item size-7', active: 'weui-navbar__item weui-bar__item_on size-7') %>
-  <%= link_to '邀请有礼', { action: 'gift' }, class: active_helper(action: 'gift', item: 'weui-navbar__item size-7', active: 'weui-navbar__item weui-bar__item_on size-7') %>
+<div class="tabs is-centered mt-4 mx-3">
+  <ul>
+    <li class="<%= active_helper(action: 'invite_qrcode', item: 'size-7', active: 'is-active size-7') %>">
+      <%= link_to '邀请记录', { action: 'invite_qrcode' } %>
+    </li>
+    <li class="<%= active_helper(action: 'gift', item: 'size-7', active: 'is-active size-7') %>">
+      <%= link_to '邀请有礼', { action: 'gift' } %>
+    </li>
+  </ul>
 </div>

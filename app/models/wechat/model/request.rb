@@ -159,27 +159,10 @@ module Wechat
       wechat_user || build_wechat_user
       wechat_user.appid = appid
       if ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('invite_')
-        _handle_id, _organ_id, _tag_name = body.sub(/invite_(user|member|contact)_/, '').split('_')
-
-        if body.to_s.start_with?('invite_user')
-          self.aim = 'invite_user'
-        elsif body.to_s.start_with? 'invite_member_'
-          self.aim = 'invite_member'
-          wechat_user.init_member(_organ_id)
-        elsif body.to_s.start_with? 'invite_contact_'
-          self.aim = 'invite_contact'
-          wechat_user.init_contact(_organ_id, _handle_id)
-        end
-
-        self.handle_id = _handle_id
-        self.scene_organ_id = _organ_id
-        self.tag_name = _tag_name
+        invite_user!
+      elsif ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('session_')
+        login_user!
       end
-      if ['subscribe'].include?(event)
-        wechat_user.unsubscribe_at = nil
-      end
-
-      wechat_user.save
     end
 
     def sync_to_tag
@@ -187,7 +170,26 @@ module Wechat
       user_tag || build_user_tag
     end
 
-    def login_user
+    def invite_user!
+      _handle_id, _organ_id, _tag_name = body.sub(/invite_(user|member|contact)_/, '').split('_')
+
+      if body.to_s.start_with?('invite_user_')
+        self.aim = 'invite_user'
+      elsif body.to_s.start_with? 'invite_member_'
+        self.aim = 'invite_member'
+        wechat_user.init_member(_organ_id)
+      elsif body.to_s.start_with? 'invite_contact_'
+        self.aim = 'invite_contact'
+        wechat_user.init_contact(_organ_id, _handle_id)
+      end
+
+      self.handle_id = _handle_id
+      self.scene_organ_id = _organ_id
+      self.tag_name = _tag_name
+      wechat_user.save
+    end
+
+    def login_user!
       session_str, url = body.split('@')
       session = session_str.delete_prefix!('session_')
 
