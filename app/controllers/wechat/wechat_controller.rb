@@ -1,6 +1,7 @@
 module Wechat
   class WechatController < BaseController
     skip_before_action :verify_authenticity_token if whether_filter(:verify_authenticity_token)
+    before_action :clear_auth_token, only: [:login]
     layout 'auth/base', only: [:login]
 
     def auth
@@ -101,6 +102,11 @@ module Wechat
       logger.debug "\e[35m  Login by oauth user as user: #{oauth_user.user_id}  \e[0m"
       @current_oauth_user = oauth_user
       @current_user = oauth_user.user
+    end
+
+    def clear_auth_token
+      @current_authorized_token = nil
+      session.delete :auth_token
     end
 
   end
