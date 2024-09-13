@@ -7,6 +7,9 @@
     <% end %>
   </p>
   <p class="text-grey"><%= model.appid %></p>
+</td>
+<td>
+  <p><%= model.computed_webview_domain %></p>
   <% if model.organ %>
     <p class="text-grey"><%= link_to model.domain, { controller: 'org/panel/organ_domains', organ_id: model.organ_id } %></p>
   <% end %>
