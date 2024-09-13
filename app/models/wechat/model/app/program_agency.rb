@@ -7,6 +7,7 @@ module Wechat
     included do
       attribute :auditid, :integer
       attribute :version_info, :json, default: {}
+      attribute :webview_domain_registered, :string, array: true, default: []
 
       enum :audit_status, {
         success: 0,
@@ -54,7 +55,10 @@ module Wechat
         webviewdomain: [URI::HTTPS.build(host: computed_webview_domain).to_s]
       }
       api.webview_domain_directly(**h)
-      api.webview_domain(**h)
+      r = api.webview_domain(**h)
+      if r['errcode'] == 0
+        self.update webview_domain_registered: r['webviewdomain']
+      end
     end
 
     def set_domain(action: 'set')
