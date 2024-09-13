@@ -7,7 +7,9 @@
     <% end %>
   </p>
   <p class="text-grey"><%= model.appid %></p>
-  <p class="text-grey"><%= model.domain %></p>
+  <% if model.organ %>
+    <p class="text-grey"><%= link_to model.domain, { controller: 'org/panel/organ_domains', organ_id: model.organ_id } %></p>
+  <% end %>
 </td>
 <td>
   <p><%= model.principal_name %></p>
