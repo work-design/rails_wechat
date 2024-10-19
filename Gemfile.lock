@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/work-design/rails_auth.git
-  revision: 6ad308ff2cdfde8a51ed9491bf49a7edb0840375
+  revision: 3f6192080109f76ccdd153e885da9f64934a5211
   specs:
     rails_auth (1.2.0)
       bcrypt (~> 3.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 99200f357959bc3d038141edb2c6a399f6fa42cd
+  revision: fd99e04d837f3abfbd4adf976b196a2ee3658320
   specs:
     rails_com (1.3.0)
       acme-client
@@ -24,27 +24,29 @@ GIT
       net-pop
       ostruct
       positioning
-      rails (~> 7.0)
+      rails
+      reline
+      solid_cache
       solid_queue
       turbo-rails
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: dbc2bf1e5b1a0ea84db5149700802d97f7a390a6
+  revision: 9fb6e5ce7f75a02ac0c5629ad237f61003fa6e15
   specs:
     rails_design (0.0.1)
       rails
 
 GIT
   remote: https://github.com/work-design/rails_notice.git
-  revision: f572ee47bf7bd77b5e84b1cf2a8832e10053c5d8
+  revision: 391c30fd3d70480c73a9ec10002581879a3b0e3f
   specs:
     rails_notice (1.0.3)
       rails_com
 
 GIT
   remote: https://github.com/work-design/rails_org.git
-  revision: fde776a155b9bbe709d86aa5798028558a6acb15
+  revision: e3019650460ffd72a4e5ed273aed3d954e1fd3e4
   specs:
     rails_org (0.0.1)
       rails_com
@@ -59,7 +61,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    acme-client (2.0.18)
+    acme-client (2.0.19)
+      base64 (~> 0.2.0)
       faraday (>= 1.0, < 3.0.0)
       faraday-retry (>= 1.0, < 3.0.0)
     actioncable (7.2.1)
@@ -153,8 +156,9 @@ GEM
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
-    faraday (2.11.0)
+    faraday (2.12.0)
       faraday-net_http (>= 2.0, < 3.4)
+      json
       logger
     faraday-net_http (3.3.0)
       net-http
@@ -175,6 +179,7 @@ GEM
     irb (1.14.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
+    json (2.7.2)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -212,7 +217,7 @@ GEM
     mutex_m (0.2.0)
     net-http (0.4.1)
       uri
-    net-imap (0.4.16)
+    net-imap (0.4.17)
       date
       net-protocol
     net-pop (0.1.2)
@@ -227,7 +232,7 @@ GEM
       racc (~> 1.4)
     ostruct (0.6.0)
     pg (1.5.7)
-    positioning (0.2.6)
+    positioning (0.3.0)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
     propshaft (0.9.1)
@@ -291,7 +296,11 @@ GEM
     sdoc (2.6.1)
       rdoc (>= 5.0)
     securerandom (0.3.1)
-    solid_queue (0.8.2)
+    solid_cache (1.0.6)
+      activejob (>= 7.2)
+      activerecord (>= 7.2)
+      railties (>= 7.2)
+    solid_queue (1.0.0)
       activejob (>= 7.1)
       activerecord (>= 7.1)
       concurrent-ruby (>= 1.3.1)
@@ -301,9 +310,8 @@ GEM
     stringio (3.1.1)
     thor (1.3.1)
     timeout (0.4.1)
-    turbo-rails (2.0.7)
+    turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
-      activejob (>= 6.0.0)
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -335,7 +343,7 @@ DEPENDENCIES
   sdoc
 
 CHECKSUMS
-  acme-client (2.0.18) sha256=3feab341926ffc16eb65babe51ba4dad8180c13e21e774871344e0b3502ef275
+  acme-client (2.0.19)
   actioncable (7.2.1) sha256=b409c96b0acc90abe6aa8fd9656eaff0980c1b36c9e22b8f7c490a46eafc2204
   actionmailbox (7.2.1) sha256=09c20d0bcb769a6521d22cb8987e2d1d8335b58610957a6c615c85e6743adf89
   actionmailer (7.2.1) sha256=e4853a32c84105066e64d900ee1025ef075893ee3c51de3a3bc59a6e09586e56
@@ -362,7 +370,7 @@ CHECKSUMS
   drb (2.2.1) sha256=e9d472bf785f558b96b25358bae115646da0dbfd45107ad858b0bc0d935cb340
   erubi (1.13.0) sha256=fca61b47daefd865d0fb50d168634f27ad40181867445badf6427c459c33cd62
   et-orbi (1.2.11) sha256=d26e868cc21db88280a9ec1a50aa3da5d267eb9b2037ba7b831d6c2731f5df64
-  faraday (2.11.0)
+  faraday (2.12.0)
   faraday-net_http (3.3.0)
   faraday-retry (2.2.1) sha256=4146fed14549c0580bf14591fca419a40717de0dd24f267a8ec2d9a728677608
   fugit (1.11.1) sha256=e89485e7be22226d8e9c6da411664d0660284b4b1c08cacb540f505907869868
@@ -373,6 +381,7 @@ CHECKSUMS
   i18n (1.14.5) sha256=26dcbc05e364b57e27ab430148b3377bc413987d34cc042336271d8f42e9d1b9
   io-console (0.7.2) sha256=f0dccff252f877a4f60d04a4dc6b442b185ebffb4b320ab69212a92b48a7a221
   irb (1.14.0) sha256=53d805013bbd194874b8c13a56aca6aebcd11dd79166d88724f8a434fedde615
+  json (2.7.2)
   kaminari (1.2.2) sha256=c4076ff9adccc6109408333f87b5c4abbda5e39dc464bd4c66d06d9f73442a3e
   kaminari-actionview (1.2.2) sha256=1330f6fc8b59a4a4ef6a549ff8a224797289ebf7a3a503e8c1652535287cc909
   kaminari-activerecord (1.2.2) sha256=0dd3a67bab356a356f36b3b7236bcb81cef313095365befe8e98057dd2472430
@@ -389,7 +398,7 @@ CHECKSUMS
   money-rails (1.15.0) sha256=cace7c3af76a0685747f57b96fdb321a4d966294e0a11b51f8e28c3ac08e4903
   mutex_m (0.2.0) sha256=b6ef0c6c842ede846f2ec0ade9e266b1a9dac0bc151682b04835e8ebd54840d5
   net-http (0.4.1) sha256=a96efc5ea18bcb9715e24dda4159d10f67ff0345c8a980d04630028055b2c282
-  net-imap (0.4.16)
+  net-imap (0.4.17)
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
   net-protocol (0.2.2) sha256=aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
   net-smtp (0.5.0) sha256=5fc0415e6ea1cc0b3dfea7270438ec22b278ca8d524986a3ae4e5ae8d087b42a
@@ -397,7 +406,7 @@ CHECKSUMS
   nokogiri (1.16.7) sha256=f819cbfdfb0a7b19c9c52c6f2ca63df0e58a6125f4f139707b586b9511d7fe95
   ostruct (0.6.0) sha256=3b1736c99f4d985de36bde1155be5e22aaf6e564b30ff9bd481e2ef7c2d9ba85
   pg (1.5.7) sha256=07a7d86e5aac8b964a0288076a7a7c699c27b25c9b40b001726f6eb03ed13427
-  positioning (0.2.6) sha256=db8d4229d326c4ae4ac35bd4ce2d1c687142d9a55da3ad8fcf8ab2d2c98f339b
+  positioning (0.3.0)
   propshaft (0.9.1) sha256=995fe8e7346a87d8e22708da41a3a9dddc2181b28364348303b642962267ea17
   psych (5.1.2) sha256=337322f58fc2bf24827d2b9bd5ab595f6a72971867d151bb39980060ea40a368
   puma (6.4.2) sha256=3eb41999d00733280be3faeb00d610331b6965a537a8cd3d905f316c38575b44
@@ -425,11 +434,12 @@ CHECKSUMS
   rqrcode_core (1.2.0) sha256=cf4989dc82d24e2877984738c4ee569308625fed2a810960f1b02d68d0308d1a
   sdoc (2.6.1) sha256=d78305be6fe9f81cb93787c24f8c2d47e418c2f1de2e7ff75c032d465fe3c5f8
   securerandom (0.3.1) sha256=98f0450c0ea46d2f9a4b6db4f391dbd83dc08049592eada155739f40e0341bde
-  solid_queue (0.8.2)
+  solid_cache (1.0.6)
+  solid_queue (1.0.0)
   stringio (3.1.1) sha256=53456e14175c594e0e8eb2206a1be33f3974d4fe21c131e628908b05c8c2ae1e
   thor (1.3.1) sha256=fa7e3471d4f6a27138e3d9c9b0d4daac9c3d7383927667ae83e9ab42ae7401ef
   timeout (0.4.1) sha256=6f1f4edd4bca28cffa59501733a94215407c6960bd2107331f0280d4abdebb9a
-  turbo-rails (2.0.7)
+  turbo-rails (2.0.11)
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   uri (0.13.1)
   useragent (0.16.10) sha256=1794380d9ea5c087d687bbfe14752f81839293f238c1132ef05c9344f09e65bb
