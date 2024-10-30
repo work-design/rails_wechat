@@ -62,7 +62,7 @@ module WxPay::Api
       }
 
       r.merge! signature: WxPay::Sign::Rsa.generate(method, path, params, key: @mch.apiclient_key, **r)
-      r = r.map(&->(k,v){ "#{k}=\"#{v}\"" }).join(',')
+      r = r.map(&->(k, v){ "#{k}=\"#{v}\"" }).join(',')
 
       headers.merge!(
         'Wechatpay-Serial': @mch.platform_serial_no,
