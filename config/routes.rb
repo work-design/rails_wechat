@@ -236,7 +236,7 @@ Rails.application.routes.draw do
         resources :developers
         resources :partners do
           member do
-            get 'cert' => :edit_cert
+            post :edit_cert
             patch 'cert' => :update_cert
           end
           resources :partner_payees do

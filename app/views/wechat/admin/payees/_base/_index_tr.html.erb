@@ -15,15 +15,15 @@
     <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ controller: 'payee_apps', payee_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-brands fa-amazon-pay"></i>
-        <span class="pl-1"><%= t('.payee_apps.index.title') %></span>
+        <span class="ml-1"><%= t('.payee_apps.index.title') %></span>
       <% end %>
       <%= link_to({ controller: 'payee_domains', payee_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-globe"></i>
-        <span class="pl-1"><%= t('.payee_domains.index.title') %></span>
+        <span class="ml-1"><%= t('.payee_domains.index.title') %></span>
       <% end %>
       <%= button_to({ action: 'edit_cert', id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-certificate text-info"></i>
-        <span class="pl-1"><%= t('.edit_cert.title') %></span>
+        <span class="ml-1"><%= t('.edit_cert.title') %></span>
       <% end %>
     </div>
   </td>
