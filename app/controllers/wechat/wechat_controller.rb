@@ -2,7 +2,7 @@ module Wechat
   class WechatController < BaseController
     skip_before_action :verify_authenticity_token if whether_filter(:verify_authenticity_token)
     before_action :clear_auth_token, only: [:login]
-    layout 'auth/base', only: [:login]
+    layout 'auth/base', only: [:login, :admin_login]
 
     def auth
       @wechat_user = WechatUser.find_or_initialize_by(uid: params[:openid])

@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_com.git
-  revision: 5d388538cf46079f5266bf11e5b04074b3d1567e
+  revision: 0fa7c0d29844722f9bc6f84f077b730bd225657f
   specs:
     rails_com (1.3.0)
       acme-client
@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_design.git
-  revision: 85524c785df54eeccd27a63f84a1b34c1693490c
+  revision: c5a97ad0e70f7e9f0c136eb13198b5e0b3c99a90
   specs:
     rails_design (0.0.1)
       rails
@@ -46,7 +46,7 @@ GIT
 
 GIT
   remote: https://github.com/work-design/rails_org.git
-  revision: 5c7b22779b02c2fd7ddcee1e7dfa8968eec4c696
+  revision: e10976a6b89467d6d013019985686f995c24fa85
   specs:
     rails_org (0.0.1)
       rails_com
@@ -171,7 +171,7 @@ GEM
       activesupport (>= 6.1)
     http-2 (1.0.1)
     http-form_data (2.3.0)
-    httpx (1.3.1)
+    httpx (1.3.3)
       http-2 (>= 1.0.0)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
@@ -179,7 +179,7 @@ GEM
     irb (1.14.1)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.7.2)
+    json (2.7.5)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -377,11 +377,11 @@ CHECKSUMS
   globalid (1.2.1) sha256=70bf76711871f843dbba72beb8613229a49429d1866828476f9c9d6ccc327ce9
   http-2 (1.0.1) sha256=635ff7a115e3e16be82c90a56f5ebf6efb47a1d772fe8aefe5ddfb14a123857e
   http-form_data (2.3.0) sha256=cc4eeb1361d9876821e31d7b1cf0b68f1cf874b201d27903480479d86448a5f3
-  httpx (1.3.1) sha256=91a17364e52c9b02f761f3f9fd451a6e53224e9b3a53c178ac8e8414e5adafe6
+  httpx (1.3.3)
   i18n (1.14.6) sha256=dc229a74f5d181f09942dd60ab5d6e667f7392c4ee826f35096db36d1fe3614c
   io-console (0.7.2) sha256=f0dccff252f877a4f60d04a4dc6b442b185ebffb4b320ab69212a92b48a7a221
   irb (1.14.1) sha256=5975003b58d36efaf492380baa982ceedf5aed36967a4d5b40996bc5c66e80f8
-  json (2.7.2) sha256=1898b5cbc81cd36c0fd4d0b7ad2682c39fb07c5ff682fc6265f678f550d4982c
+  json (2.7.5)
   kaminari (1.2.2) sha256=c4076ff9adccc6109408333f87b5c4abbda5e39dc464bd4c66d06d9f73442a3e
   kaminari-actionview (1.2.2) sha256=1330f6fc8b59a4a4ef6a549ff8a224797289ebf7a3a503e8c1652535287cc909
   kaminari-activerecord (1.2.2) sha256=0dd3a67bab356a356f36b3b7236bcb81cef313095365befe8e98057dd2472430
