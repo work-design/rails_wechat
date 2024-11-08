@@ -4,7 +4,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      helper_method :current_wechat_app, :current_js_app, :current_corp_user
+      helper_method :current_wechat_app, :current_js_app, :current_corp_user, :current_wechat_user
     end
 
     def require_user(app = current_oauth_app)
