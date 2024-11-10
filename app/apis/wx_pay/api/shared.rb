@@ -1,10 +1,6 @@
 module WxPay::Api
   module Shared
 
-    def refund_query(out_refund_no)
-      get "/v3/refund/domestic/refunds/#{out_refund_no}", origin: BASE
-    end
-
     def add_receiver(receiver)
       post '/v3/profitsharing/receivers/add', receiver: receiver, origin: BASE
     end
