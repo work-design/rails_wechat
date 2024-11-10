@@ -67,22 +67,6 @@ module WxPay::Api
       get "/v3/refund/domestic/refunds/#{out_refund_no}", origin: BASE
     end
 
-    def add_receiver(receiver)
-      post '/v3/profitsharing/receivers/add', receiver: receiver, origin: BASE
-    end
-
-    def delete_receiver
-      post '/v3/profitsharing/receivers/delete', origin: BASE
-    end
-
-    def profit_share(params = {})
-      post '/v3/profitsharing/orders', params: params, origin: BASE
-    end
-
-    def profit_query(transaction_id)
-      get "/v3/profitsharing/transactions/#{transaction_id}/amounts", origin: BASE
-    end
-
     def pay_micropay(out_trade_no:, auth_code:, body:, total_fee:, spbill_create_ip:)
       opts = {
         nonce_str: SecureRandom.hex,
