@@ -1,21 +1,6 @@
 module WxPay::Api
   module Shared
 
-    def invoke_refund(out_refund_no:, transaction_id:, amount:, **options)
-      post(
-        '/v3/refund/domestic/refunds',
-        transaction_id: transaction_id,
-        out_refund_no: out_refund_no,
-        amount: amount,
-        origin: BASE,
-        **options
-      )
-    end
-
-    def order_query(out_trade_no)
-      get "/v3/pay/transactions/out-trade-no/#{out_trade_no}", origin: BASE
-    end
-
     def refund_query(out_refund_no)
       get "/v3/refund/domestic/refunds/#{out_refund_no}", origin: BASE
     end
