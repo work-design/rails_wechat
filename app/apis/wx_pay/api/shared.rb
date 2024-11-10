@@ -1,20 +1,6 @@
 module WxPay::Api
   module Shared
 
-    def jsapi_order(description:, out_trade_no:, notify_url:, amount:, payer:, **options)
-      post(
-        '/v3/pay/transactions/jsapi',
-        description: description,
-        out_trade_no: out_trade_no,
-        notify_url: notify_url,
-        amount: amount,
-        payer: payer,
-        origin: BASE,
-        **common_payee_params,
-        **options
-      )
-    end
-
     def h5_order(description:, out_trade_no:, notify_url:, amount:, scene_info:, **options)
       post(
         '/v3/pay/transactions/h5',
