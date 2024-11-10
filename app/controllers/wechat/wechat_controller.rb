@@ -27,7 +27,13 @@ module Wechat
     end
 
     def admin_login
-      @scene = current_provider_app.scenes.find_or_initialize_by(match_value: "session_#{session.id}@#{request.base_url}")
+      if request.subdomain == 'admin'
+        app = App.global.take
+      else
+        app = current_provider_app
+      end
+
+      @scene = app.scenes.find_or_initialize_by(match_value: "session_#{session.id}@#{request.base_url}")
       @scene.expire_seconds = 600 # 默认 600 秒有效
       @scene.check_refresh(true)
       @scene.aim = 'login'
