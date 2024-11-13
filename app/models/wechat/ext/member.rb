@@ -23,11 +23,15 @@ module Wechat
       before_save :sync_from_wechat_user, if: -> { wechat_openid.present? && wechat_openid_changed? }
     end
 
-    def invite_member!(app)
-      scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: organ_id, aim: 'invite_member')
-      scene.check_refresh
-      scene.save
-      scene
+    def invite_member!
+      app = organ.provider&.app
+
+      if app
+        scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: organ_id, aim: 'invite_member')
+        scene.check_refresh
+        scene.save
+        scene
+      end
     end
 
     def invite_contact!(app, tag_name)

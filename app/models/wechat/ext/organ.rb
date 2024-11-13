@@ -17,6 +17,17 @@ module Wechat
       validates :limit_wechat_menu, inclusion: { in: [0, 1, 2, 3] }
     end
 
+    def invite_member!
+      app = provider&.app
+
+      if app
+        scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: id, aim: 'invite_member')
+        scene.check_refresh
+        scene.save
+        scene
+      end
+    end
+
     def contact
       return @contact if defined? @contact
       if corp_user
