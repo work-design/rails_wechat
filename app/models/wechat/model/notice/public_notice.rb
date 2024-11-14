@@ -6,6 +6,7 @@ module Wechat
       r = app.api.post 'message/template/send', **message_hash, origin: BASE
       if r['errcode'] == 0
         self.msg_id = r['msgid']
+        self.status = 'sent'
       end
       self.result = r
       self.save

@@ -1,10 +1,11 @@
 module Wechat
   class Panel::NoticesController < Panel::BaseController
+    before_action :set_app
     before_action :set_template
     before_action :set_notice, only: [:show, :edit, :update, :destroy]
 
     def index
-      @notices = @template.notices.includes(:wechat_user).order(id: :desc).page(params[:page])
+      @notices = @template.notices.includes(:wechat_user, :notification).order(id: :desc).page(params[:page])
     end
 
     private

@@ -12,9 +12,9 @@
 </div>
 <div>
   <dt><%= Wechat::Notice.human_attribute_name(:data) %></dt>
-  <dt><%= simple_format @notice.data %></dd>
+  <dd><pre><%= @notice.data.to_format_yaml %></pre></dd>
 </div>
 <div>
   <dt><%= Wechat::Notice.human_attribute_name(:result) %></dt>
-  <dt><%= simple_format @notice.result %></dd>
+  <dd><pre><%= @notice.result.to_format_yaml %></pre></dd>
 </div>

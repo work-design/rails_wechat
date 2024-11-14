@@ -1,12 +1,14 @@
-<td><%= model.notification.title %></td>
-<td><%= model.type_i18n %></td>
+<td>
+  <p><%= model.notification.title %></p>
+  <p><span class="tag"><%= model.type_i18n %></span></p>
+</td>
+<td><pre><%= model.notification.notifiable_detail.to_format_yaml %></pre></td>
 <td>
 <% if model.wechat_user %>
   <%= model.wechat_user.name %>
 <% end %>
 </td>
 <td>
-  <p><%= model.status %></p>
-  <p><%= model.msg_id %></p>
+  <p class="text-grey"><%= model.msg_id %></p>
+  <p class="text-grey"><time data-controller="time" data-format="human"><%= model.created_at.to_fs(:iso8601) %></time></p>
 </td>
-<td><time data-controller="time" data-format="human"><%= model.created_at.to_fs(:iso8601) %></time></td>
