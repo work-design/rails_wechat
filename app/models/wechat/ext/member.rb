@@ -34,11 +34,15 @@ module Wechat
       end
     end
 
-    def invite_contact!(app, tag_name)
-      scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: organ_id, aim: 'invite_contact', tag_name: tag_name)
-      scene.check_refresh
-      scene.save
-      scene
+    def invite_contact!(tag_name)
+      app = organ.provider&.app
+
+      if app
+        scene = scenes.find_or_initialize_by(appid: app.appid, organ_id: organ_id, aim: 'invite_contact', tag_name: tag_name)
+        scene.check_refresh
+        scene.save
+        scene
+      end
     end
 
     def sync_from_wechat_user
