@@ -1,4 +1,4 @@
 <%= button_to({ controller: 'datum/admin/table_lists', action: 'find', data_list_id: 'RequestDailyExport', **params.permit('created_at-gte', 'created_at-lte') }, class: 'button is-small is-link') do %>
   <i class="fa-solid fa-file-excel"></i>
-  <span class="pl-1"><%= t('.export') %></span>
+  <span class="ml-1"><%= t('.export') %></span>
 <% end %>
