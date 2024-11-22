@@ -7,6 +7,7 @@ module Wechat
       attribute :appid, :string, index: true
       attribute :enabled, :boolean, default: true
 
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :payee, foreign_key: :mch_id, primary_key: :mch_id, optional: true
 
@@ -16,7 +17,12 @@ module Wechat
 
       validates :appid, uniqueness: { scope: :mch_id }
 
+      before_validation :sync_organ, if: -> { mch_id_changed? }
       after_update :set_enabled, if: -> { enabled? && saved_change_to_enabled? }
+    end
+
+    def sync_organ
+      self.organ_id = payee.organ_id
     end
 
     def set_enabled
