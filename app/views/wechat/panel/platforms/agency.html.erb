@@ -6,7 +6,7 @@
         <label class="label">公众号示例</label>
       </div>
       <div class="field-body">
-        <div class="panel" data-controller="typer" data-typer-url-value="<%= url_for(controller: 'agencies', action: 'search', platform_id: @platform.id, dom_id: 'public_agencies_content') %>" data-typer-method-value="post">
+        <div class="panel" data-controller="typer" data-typer-url-value="<%= url_for(controller: 'agencies', action: 'search', platform_id: @platform.id, dom_id: 'public_agencies_content') %>">
           <%= f.hidden_field :public_agency_id, data: { typer_target: 'value' } %>
           <div class="control has-icons-left">
             <%= search_field_tag 'name-like', nil, class: 'input', placeholder: '搜索', data: { typer_target: 'input' } %>
@@ -21,7 +21,7 @@
         <label class="label">小程序示例</label>
       </div>
       <div class="field-body">
-        <div class="panel" data-controller="typer" data-typer-url-value="<%= url_for(controller: 'agencies', action: 'search', platform_id: @platform.id, dom_id: 'program_agencies_content') %>" data-typer-method-value="post">
+        <div class="panel" data-controller="typer" data-typer-url-value="<%= url_for(controller: 'agencies', action: 'search', platform_id: @platform.id, dom_id: 'program_agencies_content') %>">
           <%= f.hidden_field :program_agency_id, data: { typer_target: 'value' } %>
           <div class="control has-icons-left">
             <%= search_field_tag 'name-like', nil, class: 'input', placeholder: '搜索', data: { typer_target: 'input' } %>

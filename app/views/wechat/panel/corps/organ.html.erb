@@ -6,7 +6,7 @@
         <label class="label"><%= Wechat::Corp.human_attribute_name(:organ_id) %></label>
       </div>
       <div class="field-body">
-        <div class="panel" data-controller="typer" data-typer-url-value="<%= url_for(action: 'search_organs') %>" data-typer-method-value="post">
+        <div class="panel" data-controller="typer" data-typer-url-value="<%= url_for(action: 'search_organs') %>">
           <%= f.hidden_field :organ_id, data: { typer_target: 'value' } %>
           <div class="control has-icons-left">
             <%= search_field_tag 'name-like', nil, class: 'input', placeholder: '搜索', data: { typer_target: 'input' } %>
