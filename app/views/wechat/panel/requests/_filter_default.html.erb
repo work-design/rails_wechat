@@ -1,6 +1,4 @@
-<div data-switch-target="src" class="buttons are-small">
-  <%= link_to t('.all'), filter_params(except: [:type]), class: active_helper(type: '', active: 'button is-info', item: 'button is-light') %>
-  <% Wechat::Request.options_i18n(:type).each do |text, value| %>
-    <%= link_to text, filter_params(type: value), class: active_helper(type: value, active: 'button is-info', item: 'button is-light') %>
-  <% end %>
-</div>
+<%= link_to t('.all'), filter_params(except: [:type]), class: active_helper(type: '', active: 'button is-info', item: 'button is-light') %>
+<% Wechat::Request.options_i18n(:type).each do |text, value| %>
+  <%= link_to text, filter_params(type: value), class: active_helper(type: value, active: 'button is-info', item: 'button is-light') %>
+<% end %>
