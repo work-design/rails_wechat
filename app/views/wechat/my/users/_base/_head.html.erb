@@ -12,7 +12,7 @@
 
 <% if request.variant.include?(:wechat) && request.variant.exclude?(:mini_program) || Rails.env.local? %>
   <div
-    class="media is-boxed"
+    class="media as-boxed"
     data-controller="mask wx-share"
     data-mask-id-value="mask"
     data-wx-share-title-value="分享有礼"
