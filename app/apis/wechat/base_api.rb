@@ -4,6 +4,7 @@ require 'http/form_data'
 
 module Wechat
   class BaseApi
+    include CommonApi
     attr_reader :app, :client
 
     def initialize(app)
@@ -22,8 +23,8 @@ module Wechat
       with_options = { origin: origin }
       with_options.merge! debug: STDERR, debug_level: 2 if debug
 
-      with_access_token(params) do |with_token_params|
-        response = @client.with_headers(headers).with(with_options).get(path, params: with_token_params)
+      with_access_token(params: params) do
+        response = @client.with_headers(headers).with(with_options).get(path, params: params)
         debug ? response : parse_response(response)
       end
     end
@@ -56,7 +57,7 @@ module Wechat
     end
 
     protected
-    def with_access_token(params = {}, tries = 2)
+    def with_access_token(params: {}, tries: 2)
       app.refresh_access_token unless app.access_token_valid?
       yield params.merge!(access_token: app.access_token)
     rescue Wechat::AccessTokenExpiredError
