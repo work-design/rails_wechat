@@ -1,5 +1,5 @@
-module WxPay::Api
-  class Base
+module WxPay
+  class BaseApi
     include Shared
     AUTH = 'WECHATPAY2-SHA256-RSA2048'
     BASE = 'https://api.mch.weixin.qq.com'

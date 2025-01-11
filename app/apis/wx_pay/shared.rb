@@ -1,4 +1,4 @@
-module WxPay::Api
+module WxPay
   module Shared
 
     def add_receiver(receiver)

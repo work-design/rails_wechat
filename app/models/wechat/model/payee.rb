@@ -35,7 +35,7 @@ module Wechat
 
     def api
       return @api if defined? @api
-      @api = WxPay::Api::Mch.new(payee: self)
+      @api = WxPay::MchApi.new(payee: self)
     end
 
     def sync_cert!
