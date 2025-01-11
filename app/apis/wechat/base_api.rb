@@ -19,17 +19,6 @@ module Wechat
       )
     end
 
-    def post(path, params: {}, headers: {}, origin: nil, debug: nil, **payload)
-      with_options = { origin: origin }
-      with_options.merge! debug: STDERR, debug_level: 2 if debug
-
-      with_access_token(params: params, headers: headers, payload: payload) do
-        params.merge! debug: 1 if debug
-        response = @client.with_headers(headers).with(with_options).post(path, params: params, json: payload)
-        debug ? response : parse_response(response)
-      end
-    end
-
     def post_file(path, file, params: {}, headers: {}, origin: nil, debug: nil, **options)
       with_options = { origin: origin }
       with_options.merge! debug: STDERR, debug_level: 2 if debug
