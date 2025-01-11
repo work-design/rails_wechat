@@ -19,22 +19,6 @@ module Wechat
       )
     end
 
-    def post_file(path, file, params: {}, headers: {}, origin: nil, debug: nil, **options)
-      with_options = { origin: origin }
-      with_options.merge! debug: STDERR, debug_level: 2 if debug
-
-      with_access_token(params) do |with_token_params|
-        form_file = file.is_a?(HTTP::FormData::File) ? file : HTTP::FormData::File.new(file, content_type: options[:content_type])
-        response = @client.plugin(:multipart).with_headers(headers).with(with_options).post(
-          path,
-          params: with_token_params,
-          form: { media: form_file }
-        )
-
-        debug ? response : parse_response(response)
-      end
-    end
-
     protected
     def with_access_token(params: {}, headers: {}, tries: 2)
       app.refresh_access_token unless app.access_token_valid?
