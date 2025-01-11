@@ -5,19 +5,6 @@ require 'http/form_data'
 module Wechat
   class BaseApi
     include CommonApi
-    attr_reader :app, :client
-
-    def initialize(app)
-      @app = app
-      @client = HTTPX.with(
-        ssl: {
-          verify_mode: OpenSSL::SSL::VERIFY_NONE
-        },
-        headers: {
-          'Accept' => 'application/json'
-        }
-      )
-    end
 
     protected
     def with_access_token(params: {}, headers: {}, tries: 2)
