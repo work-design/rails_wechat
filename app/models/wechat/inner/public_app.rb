@@ -14,7 +14,7 @@ module Wechat
 
     def api
       return @api if defined? @api
-      @api = Wechat::Api::Public.new(self)
+      @api = Wechat::PublicApi.new(self)
     end
 
     def sync_menu

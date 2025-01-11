@@ -79,7 +79,7 @@ module Wechat
 
     def api
       return @api if defined? @api
-      @api = Wechat::Api::Suite.new(self)
+      @api = Wechat::SuiteApi.new(self)
     end
 
     def refresh_pre_auth_code

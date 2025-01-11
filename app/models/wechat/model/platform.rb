@@ -38,7 +38,7 @@ module Wechat
 
     def api
       return @api if defined? @api
-      @api = Wechat::Api::Platform.new(self)
+      @api = Wechat::PlatformApi.new(self)
     end
 
     def decrypt(encrypt_data)

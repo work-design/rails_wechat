@@ -44,7 +44,7 @@ module Wechat
 
     def api
       return @api if defined? @api
-      @api = Wechat::Api::User.new(self)
+      @api = Wechat::UserApi.new(self)
     end
 
     def try_match

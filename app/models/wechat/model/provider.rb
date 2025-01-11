@@ -29,7 +29,7 @@ module Wechat
 
     def api
       return @api if defined? @api
-      @api = Wechat::Api::Provider.new(self)
+      @api = Wechat::ProviderApi.new(self)
     end
 
     def refresh_access_token

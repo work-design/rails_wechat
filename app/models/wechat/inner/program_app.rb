@@ -15,7 +15,7 @@ module Wechat
 
     def api
       return @api if defined? @api
-      @api = Wechat::Api::Program.new(self)
+      @api = Wechat::ProgramApi.new(self)
     end
 
     def domain
