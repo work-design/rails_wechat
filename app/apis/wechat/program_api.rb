@@ -2,10 +2,10 @@
 
 module Wechat
   class ProgramApi < BaseApi
-    include Base::Sns
-    include Public::Common
-    include Public::Agency
-    include Public::Material
+    include BaseApi::Sns
+    include PublicApi::Common
+    include PublicApi::Agency
+    include PublicApi::Material
     include Component
     include Sec
     include Wxa
