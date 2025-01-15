@@ -8,8 +8,8 @@ module Wechat
       with_options = { origin: origin }
       with_options.merge! debug: STDERR, debug_level: 2 if debug
 
-      with_component_access_token(params: params) do |with_token_params|
-        response = @client.with_headers(headers).with(with_options).get(path, params: with_token_params)
+      with_component_access_token(params: params) do
+        response = @client.with_headers(headers).with(with_options).get(path, params: params)
         debug ? response : parse_response(response)
       end
     end
@@ -18,9 +18,9 @@ module Wechat
       with_options = { origin: origin }
       with_options.merge! debug: STDERR, debug_level: 2 if debug
 
-      with_component_access_token(params: params) do |with_token_params|
-        with_token_params.merge! debug: 1 if debug
-        response = @client.with_headers(headers).with(with_options).post(path, params: with_token_params, json: payload)
+      with_component_access_token(params: params) do
+        params.merge! debug: 1 if debug
+        response = @client.with_headers(headers).with(with_options).post(path, params: params, json: payload)
         debug ? response : parse_response(response)
       end
     end
