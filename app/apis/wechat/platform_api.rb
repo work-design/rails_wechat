@@ -35,7 +35,7 @@ module Wechat
       retry unless (tries -= 1).zero?
     end
 
-    def with_access_token(params: {}, tries: 2)
+    def with_access_token(params: {}, headers: {}, payload: {}, tries: 2)
       app.refresh_access_token unless app.access_token_valid?
       params.merge!(access_token: app.access_token)
       yield
