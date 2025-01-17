@@ -6,13 +6,20 @@
     <div class="content">
       <strong><%= t('wechat.admin.title') %></strong>
     </div>
-    <div data-empty-target="content">
+    <div>
       <%= link_to({ controller: 'wechat/admin/apps' }, class: 'tag') do %>
         <span><%= t('wechat.admin.apps.index.title') %></span>
       <% end %>
       <%= link_to({ controller: 'wechat/in/apps' }, class: 'tag') do %>
         <span><%= t('wechat.in.apps.index.title') %></span>
       <% end %>
+      <%= link_to t('wechat.admin.agents.index.title'), { controller: 'wechat/admin/agents' }, class: 'tag' %>
+      <%= link_to t('wechat.admin.payees.index.title'), { controller: 'wechat/admin/payees' }, class: 'tag' %>
+      <%= link_to t('wechat.admin.organs.show.title'), { controller: 'wechat/admin/organs', action: 'show' }, class: 'tag' %>
+      <%= link_to t('wechat.admin.members.index.title'), { controller: 'wechat/admin/members' }, class: 'tag' %>
+    </div>
+    <div>
+      <%= link_to t('wechat.in.apps.index.title'), { controller: 'wechat/in/apps' }, class: 'tag' %>
     </div>
   </div>
 </div>

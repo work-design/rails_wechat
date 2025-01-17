@@ -1,24 +1,16 @@
-<div class="<%= active_helper(modules: 'wechat/admin', active: 'menu ex-accordion is-active', item: 'menu ex-accordion is-active') %>" data-controller="menu empty">
-  <a class="menu-label" data-action="menu#toggle">
-    <i class="fa-brands fa-fw fa-weixin"></i>
-    <span><%= t('wechat.admin.title') %></span>
-    <i class="fa-solid dropdown"></i>
-  </a>
-  <div class="menu-list" data-empty-target="content">
-    <%= link_to t('wechat.admin.apps.index.title'), { controller: 'wechat/admin/apps' }, class: active_helper(controllers: 'wechat/admin/apps', active: 'is-active') %>
-    <%= link_to t('wechat.admin.agents.index.title'), { controller: 'wechat/admin/agents' }, class: active_helper(controllers: 'wechat/admin/agents', active: 'is-active') %>
-    <%= link_to t('wechat.admin.payees.index.title'), { controller: 'wechat/admin/payees' }, class: active_helper(controllers: 'wechat/admin/payees', active: 'is-active') %>
-    <%= link_to t('wechat.admin.organs.show.title'), { controller: 'wechat/admin/organs', action: 'show' }, class: active_helper(controllers: ['organs'], active: 'is-active') %>
-    <%= link_to t('wechat.admin.members.index.title'), { controller: 'wechat/admin/members' }, class: active_helper(controllers: ['members'], active: 'is-active') %>
+<div data-controller="menu" class="menu ex-accordion is-active">
+  <div class="menu-label">
+    <div>
+      <i class="fa-brands fa-fw fa-weixin"></i>
+      <span><%= t('wechat.admin.title') %></span>
+    </div>
+    <%= link_to({ controller: 'wechat/admin/home' }, aria: { label: '设置' }) do %>
+      <i class="fa-solid fa-cog"></i>
+    <% end %>
   </div>
-</div>
-<div class="<%= active_helper(modules: 'wechat/in', active: 'menu ex-accordion is-active', item: 'menu ex-accordion is-active') %>" data-controller="menu empty">
-  <a class="menu-label" data-action="menu#toggle">
-    <i class="fa-brands fa-fw fa-weixin"></i>
-    <span><%= t('wechat.in.title') %></span>
-    <i class="fa-solid dropdown"></i>
-  </a>
-  <div class="menu-list" data-empty-target="content">
-    <%= link_to t('wechat.in.apps.index.title'), { controller: 'wechat/in/apps' }, class: active_helper(controllers: ['wechat/in/apps', 'wechat/in/menus', 'wechat/in/scenes', 'wechat/in/wechat_users'], active: 'is-active') %>
+  <div class="menu-list">
+    <%= link_to t('wechat.admin.apps.index.title'), { controller: 'wechat/admin/apps' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'wechat/admin/apps', active: 'is-active') %>
+    <%= link_to t('wechat.admin.agents.index.title'), { controller: 'wechat/admin/agents' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'wechat/admin/agents', active: 'is-active') %>
+    <%= link_to t('wechat.admin.organs.show.title'), { controller: 'wechat/admin/organs', action: 'show' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: ['organs'], active: 'is-active') %>
   </div>
 </div>
