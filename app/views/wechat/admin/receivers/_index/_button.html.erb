@@ -1,10 +1,8 @@
-<div class="buttons are-small mb-0">
-  <%= link_to({ action: 'new', **request.query_parameters.except(:id) }, data: { turbo_frame: 'modal' }, class: 'button is-link') do %>
-    <i class="fa-solid fa-plus"></i>
-    <span class="pl-1"><%= t('.new.title') %></span>
-  <% end %>
-  <%= link_to({ action: 'users', **request.query_parameters.except(:id) }, class: 'button is-info') do %>
-    <i class="fa-solid fa-plus"></i>
-    <span class="pl-1"><%= t('wechat.admin.receivers.users.title') %></span>
-  <% end %>
-</div>
+<%= button_to({ action: 'new', **request.query_parameters.except(:id) }, data: { turbo_frame: 'modal' }, class: 'button is-link') do %>
+  <i class="fa-solid fa-plus"></i>
+  <span class="ml-1"><%= t('.new.title') %></span>
+<% end %>
+<%= link_to({ action: 'users', **request.query_parameters.except(:id) }, class: 'button is-info') do %>
+  <i class="fa-solid fa-plus"></i>
+  <span class="pl-1"><%= t('wechat.admin.receivers.users.title') %></span>
+<% end %>
