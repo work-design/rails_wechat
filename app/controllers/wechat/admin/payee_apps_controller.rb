@@ -1,5 +1,6 @@
 module Wechat
   class Admin::PayeeAppsController < Panel::PayeeAppsController
+    before_action :set_payee
 
     def index
       q_params = {}
