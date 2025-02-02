@@ -23,7 +23,7 @@ module Wechat
       has_many :payee_apps, primary_key: :mch_id, foreign_key: :mch_id, dependent: :destroy
       has_many :payee_domains, primary_key: :mch_id, foreign_key: :mch_id, dependent: :destroy
 
-      validates :mch_id, presence: true, uniqueness: true
+      validates :mch_id, presence: true, uniqueness: { scope: [:organ_id] }
     end
 
     def rsa_encrypt(data)
