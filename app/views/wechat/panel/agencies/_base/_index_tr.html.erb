@@ -13,21 +13,28 @@
       <% end %>
     </div>
     <div data-show-target="item" class="visibility-hidden">
-      <%= link_to({ controller: 'requests', agency_id: model.id }, aria: { label: t('wechat.admin.requests.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'requests', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-comments"></i>
+        <span class="ml-1"><%= t('.requests.index.title') %></span>
       <% end %>
-      <%= link_to({ controller: 'menu_apps', agency_id: model.id }, aria: { label: t('wechat.panel.menu_apps.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'menu_apps', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-bars"></i>
+        <span class="ml-1"><%= t('.menu_apps.index.title') %></span>
       <% end %>
-      <%= link_to({ controller: 'wechat_users', agency_id: model.id }, aria: { label: t('wechat.panel.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'wechat_users', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-users"></i>
+        <span class="ml-1"><%= t('.wechat_users.index.title') %></span>
       <% end %>
-      <%= link_to({ controller: 'scenes', agency_id: model.id }, aria: { label: t('wechat.panel.scenes.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'scenes', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-qrcode"></i>
+        <span class="ml-1"><%= t('.scenes.index.title') %></span>
       <% end %>
-      <%= link_to({ controller: 'templates', agency_id: model.id }, aria: { label: t('wechat.panel.templates.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'templates', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-inbox"></i>
+        <span class="ml-1"><%= t('.templates.index.title') %></span>
       <% end %>
+    </div>
+    <div data-show-target="item" class="visibility-hidden">
       <%= link_to model.fast_url, aria: { label: '快速注册' }, target: '_blank', class: 'button is-small is-rounded is-light' do %>
         <i class="fa-solid fa-bolt text-success"></i>
       <% end %>
