@@ -20,7 +20,7 @@ module Wechat
       attribute :name, :string
       attribute :avatar_url, :string
       attribute :qr_code, :string
-      attribute :department, :integer, array: []
+      attribute :department, :json
       attribute :follows_count, :integer, default: 0
 
       enum :gender, {

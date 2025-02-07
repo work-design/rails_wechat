@@ -14,7 +14,7 @@ module Wechat
       attribute :appid, :string
       attribute :platform_appid, :string
       attribute :refresh_token, :string
-      attribute :func_infos, :string, array: true
+      attribute :func_infos, :json
       attribute :nick_name, :string
       attribute :head_img, :string
       attribute :user_name, :string
