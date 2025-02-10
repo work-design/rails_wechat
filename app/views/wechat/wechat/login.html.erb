@@ -2,7 +2,7 @@
   <div class="panel-heading text-centered">
     <h4>微信登陆</h4>
   </div>
-  <div class="panel-block background-white justify-content-center">
+  <div data-controller="session-channel" class="panel-block background-white justify-content-center">
     <figure>
       <%= image_tag @scene.qrcode_data_url %>
       <figcaption class="text-centered">请使用微信扫描二维码登录</figcaption>
