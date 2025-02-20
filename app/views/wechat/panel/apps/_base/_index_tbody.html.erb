@@ -7,7 +7,6 @@
 </td>
 <td>
   <p><%= model.appid %></p>
-  <p><%= model.domain %></p>
 </td>
 <td>
   <%= form_with theme: nil, model: model, scope: :app, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
