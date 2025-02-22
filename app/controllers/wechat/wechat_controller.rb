@@ -19,7 +19,16 @@ module Wechat
     end
 
     def login
-      @scene = current_oauth_app.scenes.find_or_initialize_by(match_value: "session_#{session.id}@#{request.base_url}")
+      state = Com::State.find_by(id: params[:state])
+      if state
+        state.destroyable = true
+        state.save
+        url = state.url(protocol: request.protocol)
+      else
+        url = request.base_url
+      end
+
+      @scene = current_oauth_app.scenes.find_or_initialize_by(match_value: "session_#{session.id}@#{url}")
       @scene.expire_seconds = 600 # 默认 600 秒有效
       @scene.check_refresh(true)
       @scene.aim = 'login'

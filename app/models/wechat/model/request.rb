@@ -195,7 +195,11 @@ module Wechat
 
       wechat_user.init_user
       wechat_user.save
-      Com::SessionChannel.broadcast_to session, auth_token: wechat_user.auth_token, url: url
+      Com::SessionChannel.broadcast_to(
+        session,
+        auth_token: wechat_user.auth_token,
+        url: url
+      )
     end
 
     def reply_from_rule

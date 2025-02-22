@@ -34,12 +34,11 @@ module Wechat
         return if current_user
 
         if request.variant.exclude?(:phone)
-          url = url_for(controller: '/wechat/wechat', action: 'login', identity: params[:identity])
+          url = url_for(controller: '/wechat/wechat', action: 'login', identity: params[:identity], state: state_enter(destroyable: false).id)
         end
       end
 
       if defined?(url) && url
-        logger.debug "\e[35m  Redirect to: #{url}  \e[0m"
         if request.get?
           redirect_to url, allow_other_host: true and return
         else
