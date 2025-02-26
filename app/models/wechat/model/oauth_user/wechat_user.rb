@@ -8,6 +8,7 @@ module Wechat
       attribute :name, :string
       attribute :avatar_url, :string
       attribute :appid, :string
+      attribute :app_name, :string
       attribute :uid, :string, index: true
       attribute :unionid, :string, index: true
       attribute :access_token, :string
@@ -39,7 +40,10 @@ module Wechat
     end
 
     def sync_organ
-      self.organ_id = app.organ_id if app
+      if app
+        self.organ_id = app.organ_id
+        self.app_name = app.name
+      end
     end
 
     def api
