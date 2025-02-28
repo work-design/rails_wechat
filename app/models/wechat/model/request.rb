@@ -190,8 +190,16 @@ module Wechat
     end
 
     def login_user!
-      session_str, url = body.split('@')
+      session_str, state_id = body.split('@')
       session = session_str.delete_prefix!('session_')
+
+      state = Com::State.find_by(id: state_id)
+      if state
+        state.update destroyable: true
+        url = state.url
+      else
+        url = url_for(controller: 'home')
+      end
 
       wechat_user.init_user
       wechat_user.save
