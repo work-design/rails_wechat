@@ -201,7 +201,10 @@ module Wechat
         state.update destroyable: true
         url = state.url(auth_token: wechat_user.auth_token)
       else
-        url = url_for(controller: 'home', auth_token: wechat_user.auth_token)
+        url = Rails.application.routes.url_for(
+          controller: 'home',
+          auth_token: wechat_user.auth_token
+        )
       end
 
       Com::SessionChannel.broadcast_to(
