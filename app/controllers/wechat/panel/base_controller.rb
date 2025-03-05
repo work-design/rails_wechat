@@ -8,6 +8,7 @@ module Wechat
 
     def set_app
       @app = Agency.find(params[:agency_id])
+      @platform = @app.platform
     end
 
     def set_provider

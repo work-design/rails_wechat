@@ -4,8 +4,8 @@
 
 <div class="tabs mb-3">
   <ul>
-    <li class="<%= active_helper(products: ['show', 'edit'], active: 'is-active') %>">
-      <%= link_to t('.apps.show.title'), { controller: 'apps', action: 'show', platform_id: @app.platform_id, id: @app.id } %>
+    <li class="<%= active_helper(agencies: ['show', 'edit'], active: 'is-active') %>">
+      <%= link_to t('.agencies.show.title'), { controller: 'agencies', action: 'show', platform_id: @app.platform_id, id: @app.id } %>
     </li>
     <li class="<%= active_helper(controllers: 'requests', active: 'is-active') %>">
       <%= link_to t('.requests.index.title'), { controller: 'requests', agency_id: @app.id } %>

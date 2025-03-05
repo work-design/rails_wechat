@@ -1,0 +1,3 @@
+<li><%= link_to t('.apps.index.title'), { controller: 'apps' } %></li>
+<li><%= link_to @app.type_i18n, { controller: 'apps', type: @app.type } %></li>
+<li><%= link_to @app.name, { controller: 'apps', id: @app.id } %></li>
