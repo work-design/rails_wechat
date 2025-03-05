@@ -1,0 +1,12 @@
+<%= render 'app_bar' %>
+
+<dl class="as-show as-boxed">
+  <div>
+    <%= link_to t('.edit.title'), { action: 'edit' }, class: 'button is-small is-link' %>
+  </div>
+  <div>
+    <dt></dt>
+    <dd><%= model.id %></dd>
+  </div>
+  <%= render 'show_table' %>
+</dl>

@@ -4,11 +4,11 @@
 </div>
 <div>
   <dt><%= Wechat::Agency.human_attribute_name(:qrcode_url) %></dt>
-  <dt><%= image_tag @agency.file, class: 'image is-128x128' if @agency.file.attached? %></dd>
+  <dd><%= image_tag @agency.file, class: 'image is-128x128' if @agency.file.attached? %></dd>
 </div>
 <div>
   <dt><%= Wechat::Agency.human_attribute_name(:release_info) %></dt>
-  <dt><%= simple_format @agency.version_info['release_info'] %></dd>
+  <dd><%= simple_format @agency.version_info['release_info'] %></dd>
 </div>
 <div>
   <dt><%= Wechat::Agency.human_attribute_name(:func_infos) %></dt>
@@ -16,5 +16,5 @@
 </div>
 <div>
   <dt><%= Wechat::Agency.human_attribute_name(:logo) %></dt>
-  <dt><%= image_tag @agency.logo if @agency.logo.attached? %></dd>
+  <dd><%= image_tag @agency.logo if @agency.logo.attached? %></dd>
 </div>

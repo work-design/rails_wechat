@@ -1,14 +1,18 @@
-<h2 class="title text-centered">
-  <%= @app.name %>
-</h2>
+<h2 class="title text-centered"><%= @app.name %></h2>
 
-<div class="tabs mb-3">
+<div class="tabs is-centered mb-3">
   <ul>
     <li class="<%= active_helper(agencies: ['show', 'edit'], active: 'is-active') %>">
       <%= link_to t('.agencies.show.title'), { controller: 'agencies', action: 'show', platform_id: @app.platform_id, id: @app.id } %>
     </li>
     <li class="<%= active_helper(controllers: 'requests', active: 'is-active') %>">
       <%= link_to t('.requests.index.title'), { controller: 'requests', agency_id: @app.id } %>
+    </li>
+    <li class="<%= active_helper(controllers: 'wechat_users', active: 'is-active') %>">
+      <%= link_to t('.wechat_users.index.title'), { controller: 'wechat_users', agency_id: @app.id } %>
+    </li>
+    <li class="<%= active_helper(controllers: 'menu_apps', active: 'is-active') %>">
+      <%= link_to t('.menu_apps.index.title'), { controller: 'menu_apps', agency_id: @app.id } %>
     </li>
     <li class="<%= active_helper(controllers: 'templates', active: 'is-active') %>">
       <%= link_to t('.templates.index.title'), { controller: 'templates', agency_id: @app.id } %>
