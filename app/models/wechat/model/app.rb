@@ -14,7 +14,11 @@ module Wechat
       attribute :appid, :string
       attribute :platform_appid, :string
       attribute :refresh_token, :string
-      attribute :func_infos, :json
+      if connection.adapter_name == 'PostgreSQL'
+        attribute :func_infos, :string, array: true
+      else
+        attribute :func_infos, :json
+      end
       attribute :nick_name, :string
       attribute :head_img, :string
       attribute :user_name, :string
