@@ -33,7 +33,7 @@ module Wechat
         app = current_provider_app
       end
 
-      @scene = app.scenes.find_or_initialize_by(match_value: "session_#{session.id}@#{request.base_url}")
+      @scene = app.scenes.find_or_initialize_by(match_value: "session_#{session.id}@#{params[:state]}")
       @scene.expire_seconds = 600 # 默认 600 秒有效
       @scene.check_refresh(true)
       @scene.aim = 'login'
