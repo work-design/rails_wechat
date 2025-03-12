@@ -26,6 +26,15 @@ module Wechat
       @scene.save
     end
 
+    def session
+      auth_token = Auth::AuthorizedToken.find_by(session: session.id)
+      if auth_token
+        render json: { auth_token: auth_token.id }
+      else
+        head :ok
+      end
+    end
+
     def admin_login
       if request.subdomain == 'admin'
         app = App.global.take

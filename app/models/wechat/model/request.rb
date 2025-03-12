@@ -190,11 +190,12 @@ module Wechat
     end
 
     def login_user!
-      wechat_user.init_user
-      wechat_user.save
-
       session_str, state_id = body.split('@')
       session = session_str.delete_prefix!('session_')
+
+      wechat_user.session_id = session
+      wechat_user.init_user
+      wechat_user.save
 
       state = Com::State.find_by(id: state_id)
       if state

@@ -35,7 +35,7 @@ module Wechat
       elsif content_type =~ /html|xml/
         data = Hash.from_xml(response.body.to_s)
       elsif content_type =~ /json/
-        Rails.logger.debug "----------#{response.body.to_s}"
+        Rails.logger.debug "\e[35m  #{response.body.to_s}  \e[0m"
         data = response.json
       else
         data = JSON.parse(response.body.to_s)

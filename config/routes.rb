@@ -57,6 +57,7 @@ Rails.application.routes.draw do
         post :launch
         post :agent_js
         get :login
+        get :session
         get :friend
       end
       scope path: 'qy_wechat', controller: :qy_wechat do
