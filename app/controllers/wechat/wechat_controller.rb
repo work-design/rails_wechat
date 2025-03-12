@@ -27,7 +27,7 @@ module Wechat
     end
 
     def session
-      auth_token = ::Auth::AuthorizedToken.find_by(session: session.id)
+      auth_token = ::Auth::AuthorizedToken.find_by(session_id: "#{session.id}_#{params[:state]}")
       if auth_token
         render json: { auth_token: auth_token.id }
       else

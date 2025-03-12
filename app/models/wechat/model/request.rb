@@ -193,7 +193,6 @@ module Wechat
       session_str, state_id = body.split('@')
       session = session_str.delete_prefix!('session_')
 
-      wechat_user.session_id = session
       wechat_user.init_user
       wechat_user.save
 
@@ -202,6 +201,7 @@ module Wechat
         state.update destroyable: true
         url = state.url(auth_token: wechat_user.auth_token)
       else
+        wechat_user.authorized_token.update session_id: "#{session}_#{state_id}"
         url = Rails.application.routes.url_for(
           controller: 'home',
           auth_token: wechat_user.auth_token
