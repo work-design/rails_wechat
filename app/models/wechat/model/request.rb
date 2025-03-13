@@ -151,10 +151,7 @@ module Wechat
         reply_params(
           title: wechat_user.attributes['name'].present? ? "您好，#{wechat_user.attributes['name']}" : '您好',
           description: desc,
-          url: Rails.application.routes.url_for(
-            controller: 'my/home',
-            host: app&.domain
-          )
+          url: app.oauth2_url
         )
       end
     end
