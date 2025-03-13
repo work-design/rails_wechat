@@ -145,7 +145,18 @@ module Wechat
     end
 
     def reply_for_login
-      Wechat::TextReply.new(value: '登录成功！')
+      if wechat_user.unionid.present?
+        Wechat::TextReply.new(value: '登录成功！')
+      else
+        reply_params(
+          title: wechat_user.attributes['name'].present? ? "您好，#{wechat_user.attributes['name']}" : '您好',
+          description: desc,
+          url: Rails.application.routes.url_for(
+            controller: 'my/home',
+            host: app&.domain
+          )
+        )
+      end
     end
 
     def reply_from_response
