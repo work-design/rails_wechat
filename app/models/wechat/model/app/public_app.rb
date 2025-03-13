@@ -8,8 +8,13 @@ module Wechat
       belongs_to :weapp, class_name: 'ProgramApp', foreign_key: :weapp_id, primary_key: :appid, optional: true
     end
 
-    def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.hex(16), **url_options)
-      url_options.with_defaults! controller: 'wechat/apps', action: 'login', appid: appid, host: self.oauth_domain.presence || domain
+    def oauth2_url(scope: 'snsapi_userinfo', state: SecureRandom.alphanumeric(32), **url_options)
+      url_options.with_defaults!(
+        controller: 'wechat/apps',
+        action: 'login',
+        appid: appid,
+        host: self.oauth_domain.presence || domain
+      )
       h = {
         appid: appid,
         redirect_uri: Rails.application.routes.url_for(**url_options),

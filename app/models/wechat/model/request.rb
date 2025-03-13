@@ -46,7 +46,6 @@ module Wechat
       before_create :check_wechat_user_and_tag
       before_save :sync_to_tag, if: -> { tag_name.present? && tag_name_changed? }
       after_create :get_reply!
-      after_create :login_user!, if: -> { ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('session_') }
     end
 
     def set_body
@@ -145,13 +144,16 @@ module Wechat
     end
 
     def reply_for_login
+      state_id = session_str.delete_prefix!('session_')
+
       if wechat_user.unionid.present?
         Wechat::TextReply.new(value: '登录成功！')
+        wechat_user.login!(state_id)
       else
         reply_params(
           title: '您好，点击链接授权登录',
           description: '点击授权',
-          url: app.oauth2_url
+          url: app.oauth2_url(state: state_id)
         )
       end
     end
@@ -205,28 +207,6 @@ module Wechat
       self.scene_organ_id = _organ_id
       self.tag_name = _tag_name
       wechat_user.save
-    end
-
-    def login_user!
-      session_str, state_id = body.split('@')
-      session = session_str.delete_prefix!('session_')
-
-      state = Com::State.find_by(id: state_id)
-      if state
-        state.update destroyable: true
-        url = state.url(auth_token: wechat_user.auth_token)
-      else
-        wechat_user.authorized_token.update session_id: "#{session}_#{state_id}"
-        url = Rails.application.routes.url_for(
-          controller: 'home',
-          auth_token: wechat_user.auth_token
-        )
-      end
-
-      Com::SessionChannel.broadcast_to(
-        session,
-        url: url
-      )
     end
 
     def reply_from_rule

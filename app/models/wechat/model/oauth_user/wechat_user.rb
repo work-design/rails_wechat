@@ -55,6 +55,19 @@ module Wechat
       app.api.menu_trymatch(uid)
     end
 
+    def login!(state_id)
+      state = Com::State.find_by(id: state_id)
+      if state
+        state.update destroyable: true
+        authorized_token.update session_id: "#{state.session_id}_#{state_id}"
+
+        Com::SessionChannel.broadcast_to(
+          state.session_id,
+          url: state.url(auth_token: auth_token)
+        )
+      end
+    end
+
     def sync_to_org_members
       members.each do |member|
         member.identity = identity
@@ -146,7 +159,7 @@ module Wechat
           contact.client_member ||= members[0]
           contact.save
         end
-      elsif app
+      elsif app&.organ
         corp = Corp.where(organ_id: app.organ.self_and_ancestor_ids).take
         return unless corp
         corp_external_users.present? || corp_external_users.create(corpid: corp.corpid)
