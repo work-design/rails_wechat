@@ -72,6 +72,7 @@ Rails.application.routes.draw do
       resources :apps, only: [:show], param: :appid do
         member do
           get :login
+          get :scan_login
           post '' => :create
           patch :qrcode
         end
