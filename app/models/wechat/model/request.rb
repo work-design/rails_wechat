@@ -149,8 +149,8 @@ module Wechat
         Wechat::TextReply.new(value: '登录成功！')
       else
         reply_params(
-          title: wechat_user.attributes['name'].present? ? "您好，#{wechat_user.attributes['name']}" : '您好',
-          description: desc,
+          title: '您好，点击链接授权登录',
+          description: '点击授权',
           url: app.oauth2_url
         )
       end
