@@ -144,7 +144,7 @@ module Wechat
     end
 
     def reply_for_login
-      state_id = session_str.delete_prefix!('session_')
+      state_id = body.delete_prefix!('session_')
 
       if wechat_user.unionid.present?
         Wechat::TextReply.new(value: '登录成功！')
