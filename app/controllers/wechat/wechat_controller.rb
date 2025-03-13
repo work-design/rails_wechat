@@ -19,7 +19,7 @@ module Wechat
     end
 
     def login
-      @state = params[:state].presence || state_enter(destroyable: false).id
+      @state = params[:state].presence || state_enter(destroyable: false, state_controller: 'home').id
 
       @scene = current_oauth_app.scenes.find_or_initialize_by(match_value: "session_#{@state}")
       @scene.expire_seconds = 600 # 默认 600 秒有效

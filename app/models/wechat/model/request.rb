@@ -153,7 +153,7 @@ module Wechat
         reply_params(
           title: '您好，点击链接授权登录',
           description: '点击授权',
-          url: app.oauth2_url(state: state_id)
+          url: app.oauth2_url(state: state_id, action: 'scan_login')
         )
       end
     end
