@@ -1,7 +1,7 @@
 module Wechat
   class AppsController < BaseController
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
-    before_action :set_app, only: [:show, :create, :login, :bind, :qrcode]
+    before_action :set_app, only: [:show, :create, :login, :scan_login, :bind, :qrcode]
     before_action :set_scene, only: [:login]
     before_action :verify_signature, only: [:show, :create]
 
