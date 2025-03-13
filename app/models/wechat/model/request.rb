@@ -46,6 +46,7 @@ module Wechat
       before_create :check_wechat_user_and_tag
       before_save :sync_to_tag, if: -> { tag_name.present? && tag_name_changed? }
       after_create :get_reply!
+      after_create :login_user!, if: -> { ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('session_') }
     end
 
     def set_body
@@ -77,7 +78,11 @@ module Wechat
     end
 
     def reply_params_detail
-      url = Rails.application.routes.url_for(controller: 'home', action: 'index', host: app.domain)
+      url = Rails.application.routes.url_for(
+        controller: 'home',
+        action: 'index',
+        host: app.domain
+      )
       if wechat_user.attributes['name'].present?
         title = "您好，#{wechat_user.attributes['name']}"
         if wechat_user.user
@@ -139,6 +144,10 @@ module Wechat
       )
     end
 
+    def reply_for_login
+      Wechat::TextReply.new(value: '登录成功！')
+    end
+
     def reply_from_response
       if body.present?
         res = responses.find_by(match_value: body)
@@ -161,7 +170,8 @@ module Wechat
       if ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('invite_')
         invite_user!
       elsif ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('session_')
-        login_user!
+        wechat_user.init_user
+        wechat_user.save
       end
     end
 
@@ -193,9 +203,6 @@ module Wechat
       session_str, state_id = body.split('@')
       session = session_str.delete_prefix!('session_')
 
-      wechat_user.init_user
-      wechat_user.save
-
       state = Com::State.find_by(id: state_id)
       if state
         state.update destroyable: true
@@ -225,12 +232,11 @@ module Wechat
     end
 
     def get_reply!
-      get_reply
-      save
-    end
-
-    def get_reply
-      reply = reply_from_rule || reply_from_response || reply_for_user
+      if ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('session_')
+        reply = reply_for_login
+      else
+        reply = reply_from_rule || reply_from_response || reply_for_user
+      end
 
       if reply.is_a?(Reply)
         self.reply_body = reply.to_wechat
@@ -240,6 +246,7 @@ module Wechat
         self.reply_body = {}
       end
       do_encrypt
+      self.save
     end
 
     def do_encrypt
