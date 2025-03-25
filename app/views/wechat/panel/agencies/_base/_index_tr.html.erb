@@ -11,6 +11,10 @@
       <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-pencil text-link"></i>
       <% end %>
+      <%= link_to model.fast_url, target: '_blank', class: 'button is-small is-rounded is-light' do %>
+        <i class="fa-solid fa-bolt text-success"></i>
+        <span class="ml-1"><%= '快速注册' %></span>
+      <% end %>
     </div>
     <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ controller: 'requests', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
@@ -32,11 +36,6 @@
       <%= link_to({ controller: 'templates', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-inbox"></i>
         <span class="ml-1"><%= t('.templates.index.title') %></span>
-      <% end %>
-    </div>
-    <div data-show-target="item" class="visibility-hidden">
-      <%= link_to model.fast_url, aria: { label: '快速注册' }, target: '_blank', class: 'button is-small is-rounded is-light' do %>
-        <i class="fa-solid fa-bolt text-success"></i>
       <% end %>
     </div>
   </td>
