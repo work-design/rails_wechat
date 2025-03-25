@@ -1,0 +1,7 @@
+<li><%= link_to t('.apps.index.title'), { controller: 'apps', anchor: "tr_#{@app.id}" } %></li>
+<li>
+  <span class="px-3">
+    <span><%= @app.name %></span>
+    <span class="tag is-success"><%= @app.type_i18n %></span>
+  </span>
+</li>
