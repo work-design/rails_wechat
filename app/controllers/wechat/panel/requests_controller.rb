@@ -4,10 +4,8 @@ module Wechat
     before_action :set_request, only: [:show, :update, :destroy]
 
     def index
-      q_params = {
-        type: 'Wechat::TextRequest'
-      }
-      q_params.merge! params.permit('created_at-gte', 'created_at-lte', :type)
+      q_params = {}
+      q_params.merge! params.permit(:type, 'created_at-gte', 'created_at-lte')
       if q_params['created_at-lte']
         q_params['created_at-lte'] = q_params['created_at-lte'].to_time.end_of_day
       end
