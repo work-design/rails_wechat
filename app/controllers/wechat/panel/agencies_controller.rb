@@ -1,7 +1,7 @@
 module Wechat
   class Panel::AgenciesController < Panel::BaseController
     before_action :set_platform
-    before_action :set_agency, only: [:show, :edit, :update, :qrcode, :organ]
+    before_action :set_app, only: [:show, :edit, :update, :qrcode, :organ]
 
     def index
       q_params = {
@@ -25,8 +25,8 @@ module Wechat
       @platform = Platform.find params[:platform_id]
     end
 
-    def set_agency
-      @agency = Agency.find(params[:id])
+    def set_app
+      @app = @platform.apps.find(params[:id])
     end
 
     def agency_params
