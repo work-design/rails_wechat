@@ -17,6 +17,18 @@
         <i class="fa-solid fa-bars text-success"></i>
         <span class="ml-1"><%= t('.menus.index.title') %></span>
       <% end %>
+      <%= link_to({ controller: 'wechat_users', 'user_tags.tag_name': model.match_value }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-users"></i>
+        <span class="ml-1"><%= t('.wechat_users.index.title') %></span>
+      <% end if model.tag %>
+      <%= link_to({ controller: 'wechat_users', user_inviter_id: model.handle_id }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-users"></i>
+        <span class="ml-1"><%= t('.wechat_users.index.title') %></span>
+      <% end if model.handle_type == 'Auth::User' %>
+      <%= link_to({ controller: 'responses', action: 'show', id: model.response.id }, class: 'button is-small is-rounded is-light') do %>
+        <i class="fa-solid fa-reply-all"></i>
+        <span class="ml-1"><%= t('.responses.index.title') %></span>
+      <% end if model.response %>
     </div>
   </td>
 </tr>

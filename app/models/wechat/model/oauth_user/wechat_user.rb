@@ -9,6 +9,7 @@ module Wechat
       attribute :avatar_url, :string
       attribute :appid, :string
       attribute :app_name, :string
+      attribute :scene_tag, :string
       attribute :uid, :string, index: true
       attribute :unionid, :string, index: true
       attribute :access_token, :string

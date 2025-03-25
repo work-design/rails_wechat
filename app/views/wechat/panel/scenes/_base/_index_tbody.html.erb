@@ -16,14 +16,3 @@
   <p><%= model.aim_i18n %></p>
 </td>
 <td><%= model.organ_id %></td>
-<td>
-  <%= link_to({ controller: 'wechat_users', 'user_tags.tag_name': model.match_value }, aria: { label: t('wechat.admin.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fa-solid fa-users"></i>
-  <% end if model.tag && false %>
-  <%= link_to({ controller: 'wechat_users', user_inviter_id: model.handle_id }, aria: { label: t('wechat.admin.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fa-solid fa-users"></i>
-  <% end if model.handle_type == 'Auth::User' %>
-  <%= link_to({ controller: 'responses', action: 'show', id: model.response.id }, aria: { label: t('wechat.admin.responses.index.title') }, class: 'button is-small is-rounded is-light') do %>
-    <i class="fa-solid fa-reply-all"></i>
-  <% end if model.response %>
-</td>
