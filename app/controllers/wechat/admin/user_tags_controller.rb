@@ -1,5 +1,5 @@
 module Wechat
-  class Admin::UserTagsController < Admin::BaseController
-
+  class Admin::UserTagsController < Panel::UserTagsController
+    include Controller::Admin
   end
 end
