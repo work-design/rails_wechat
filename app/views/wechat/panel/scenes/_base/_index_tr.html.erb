@@ -17,10 +17,10 @@
         <i class="fa-solid fa-bars text-success"></i>
         <span class="ml-1"><%= t('.menus.index.title') %></span>
       <% end %>
-      <%= link_to({ controller: 'wechat_users', 'user_tags.tag_name': model.match_value }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'wechat_users', scene_tag: model.match_value }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-users"></i>
         <span class="ml-1"><%= t('.wechat_users.index.title') %></span>
-      <% end if model.tag %>
+      <% end %>
       <%= link_to({ controller: 'wechat_users', user_inviter_id: model.handle_id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-users"></i>
         <span class="ml-1"><%= t('.wechat_users.index.title') %></span>
