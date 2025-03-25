@@ -1,0 +1,8 @@
+<% if params['user_tags.tag_name'] %>
+  <li>
+    <span class="px-3"><%= @tag.name %></span>
+  </li>
+<% end %>
+<% if params[:user_inviter_id] %>
+  <li><%= link_to t('.scenes.index.title'), { controller: 'scenes', handle_type: 'Auth::User', handle_id: params[:user_inviter_id] } %></li>
+<% end %>
