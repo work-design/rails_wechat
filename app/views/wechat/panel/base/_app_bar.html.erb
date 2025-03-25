@@ -8,6 +8,9 @@
     <li class="<%= active_helper(controllers: 'requests', active: 'is-active') %>">
       <%= link_to t('.requests.index.title'), { controller: 'requests', agency_id: @app.id } %>
     </li>
+    <li class="<%= active_helper(controllers: 'scenes', active: 'is-active') %>">
+      <%= link_to t('.scenes.index.title'), { controller: 'scenes', agency_id: @app.id } %>
+    </li>
     <li class="<%= active_helper(controllers: 'wechat_users', active: 'is-active') %>">
       <%= link_to t('.wechat_users.index.title'), { controller: 'wechat_users', agency_id: @app.id } %>
     </li>
