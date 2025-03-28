@@ -1,4 +1,11 @@
 <div class="fixed-grid has-6-cols">
+  <p></p>
+  <div class="grid">
+    <%= link_to({ controller: 'platforms' }, class: 'cell button is-fullwidth') do %>
+      <span><%= t('.platforms.index.title') %></span>
+    <% end %>
+  </div>
+  <p></p>
   <div class="grid">
     <%= link_to({ controller: 'apps' }, class: 'cell button is-fullwidth flex-direction-column') do %>
       <span><%= Wechat::App.count %></span>
@@ -8,6 +15,7 @@
       <span><%= t('.menus.index.title') %></span>
     <% end %>
   </div>
+  <p></p>
   <div class="grid">
     <%= link_to({ controller: 'organs' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('.organs.index.title') %></span>
@@ -24,5 +32,9 @@
     <%= link_to({ controller: 'corp_external_users' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('.corp_external_users.index.title') %></span>
     <% end %>
+  </div>
+  <p></p>
+  <div class="grid">
+
   </div>
 </div>

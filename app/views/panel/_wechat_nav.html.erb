@@ -1,17 +1,14 @@
 <div class="menu ex-accordion is-active">
-  <div class="menu-label">
+  <%= link_to({ controller: 'wechat/panel/home' }, text: true, class: 'menu-label') do %>
     <div>
       <i class="fa-brands fa-fw fa-weixin"></i>
       <span><%= t('wechat.panel.title') %></span>
     </div>
-    <%= link_to({ controller: 'wechat/panel/home' }, aria: { label: '设置' }) do %>
-      <i class="fa-solid fa-cog"></i>
-    <% end %>
-  </div>
+  <% end %>
   <div class="menu-list">
-    <%= link_to t('wechat.panel.registers.index.title'), { controller: 'wechat/panel/registers' }, class: active_helper(controllers: 'registers', active: 'is-active') %>
-    <%= link_to t('wechat.panel.platforms.index.title'), { controller: 'wechat/panel/platforms' }, class: active_helper(controllers: 'platforms', active: 'is-active') %>
-    <%= link_to t('wechat.panel.providers.index.title'), { controller: 'wechat/panel/providers' }, class: active_helper(controllers: ['providers', 'suites', 'corps'], active: 'is-active') %>
-    <%= link_to t('wechat.panel.partners.index.title'), { controller: 'wechat/panel/partners' }, class: active_helper(controllers: ['partners'], active: 'is-active') %>
+    <%= link_to t('.registers.index.title'), { controller: 'wechat/panel/registers' }, class: active_helper(controllers: 'registers', active: 'is-active') %>
+    <%= link_to t('.platforms.index.title'), { controller: 'wechat/panel/platforms' }, class: active_helper(controllers: 'platforms', active: 'is-active') %>
+    <%= link_to t('.providers.index.title'), { controller: 'wechat/panel/providers' }, class: active_helper(controllers: ['providers', 'suites', 'corps'], active: 'is-active') %>
+    <%= link_to t('.partners.index.title'), { controller: 'wechat/panel/partners' }, class: active_helper(controllers: ['partners'], active: 'is-active') %>
   </div>
 </div>
