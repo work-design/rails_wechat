@@ -175,7 +175,7 @@ module Wechat
     end
 
     def check_wechat_user_and_tag
-      if event_key.start_with?('qrscene_')
+      if event_key&.start_with?('qrscene_')
         scene_tag = event_key.delete_prefix('qrscene_')
       else
         scene_tag = nil
