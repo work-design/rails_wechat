@@ -7,6 +7,7 @@ module Wechat
       helper_method :current_wechat_app, :current_js_app, :current_corp_user, :current_wechat_user
     end
 
+    private
     def require_user(app = current_oauth_app)
       wechat_oauth_options = {
         port: request.port,
