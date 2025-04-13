@@ -23,7 +23,7 @@ module Wechat
     end
 
     def js_login(**url_options)
-      url_options.with_defaults! controller: 'wechat/agents', action: 'login', id: id, host: self.domain
+      url_options.with_defaults! controller: 'wechat/agents', action: 'login', id: id, host: self.domain.presence || organ.host
       {
         appid: corpid,
         agentid: agentid,
@@ -33,7 +33,7 @@ module Wechat
     end
 
     def oauth2_url(scope: 'snsapi_privateinfo', state: SecureRandom.hex(16), **url_options)
-      url_options.with_defaults! controller: 'wechat/agents', action: 'login', id: id, host: self.domain
+      url_options.with_defaults! controller: 'wechat/agents', action: 'login', id: id, host: self.domain.presence || organ.host
       h = {
         appid: corpid,
         redirect_uri: Rails.application.routes.url_for(**url_options),
