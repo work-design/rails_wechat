@@ -151,7 +151,7 @@ module Wechat
 
     def init_account
       account || build_account
-      account.confirm = true
+      account.confirmed = true
       account.save
     end
 
