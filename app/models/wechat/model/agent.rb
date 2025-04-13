@@ -3,6 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
     include Inner::Token
     include Inner::JsToken
+    include Inner::Agent
 
     included do
       attribute :inviting, :boolean, default: false, comment: '可邀请加入'
