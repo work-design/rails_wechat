@@ -53,7 +53,7 @@ module Wechat
     def current_oauth_app
       return @current_oauth_app if defined? @current_oauth_app
       if request.variant.include?(:work_wechat)
-        @current_oauth_app = current_organ.corps.where.not(agentid: nil).take
+        @current_oauth_app = current_organ.agents.take
       else
         @current_oauth_app = current_organ&.app || current_provider_app
       end

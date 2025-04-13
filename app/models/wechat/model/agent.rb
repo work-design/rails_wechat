@@ -18,11 +18,9 @@ module Wechat
       has_many :suite_receives, ->(o){ where(agent_id: o.agentid) }, primary_key: :corpid, foreign_key: :corpid
     end
 
-
     def url
       Rails.application.routes.url_for(controller: 'wechat/agents', action: 'create', id: self.id, host: domain) if domain.present?
     end
-
 
     def js_login(**url_options)
       url_options.with_defaults! controller: 'wechat/agents', action: 'login', id: id, host: self.domain
