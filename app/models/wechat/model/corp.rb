@@ -234,14 +234,5 @@ module Wechat
       end
     end
 
-    def get_external_userid(unionid, openid, subject_type: 1)
-      api.external_userid(unionid: unionid, openid: openid, subject_type: subject_type)
-    end
-
-    def api
-      return @api if defined? @api
-      @api = Wechat::WorkApi.new(self)
-    end
-
   end
 end

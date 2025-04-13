@@ -3,6 +3,11 @@
 module Wechat
   module Inner::Agent
 
+    def api
+      return @api if defined? @api
+      @api = WorkApi.new(self)
+    end
+
     def generate_corp_user(code)
       result = api.auth_user(code)
       logger.debug "\e[35m  corp generate user: #{result}  \e[0m"
@@ -17,6 +22,10 @@ module Wechat
       corp_user.save
       logger.debug "\e[35m  err: #{corp_user.error_text}"
       corp_user
+    end
+
+    def get_external_userid(unionid, openid, subject_type: 1)
+      api.external_userid(unionid: unionid, openid: openid, subject_type: subject_type)
     end
 
   end
