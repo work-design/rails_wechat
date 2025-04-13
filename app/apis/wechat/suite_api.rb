@@ -16,7 +16,7 @@ module Wechat
     end
 
     protected
-    def with_access_token(params: {}, tries: 2)
+    def with_access_token(params: {}, headers: {}, payload: {}, tries: 2)
       app.refresh_access_token unless app.access_token_valid?
       yield params.merge!(suite_access_token: app.access_token)
     rescue Wechat::AccessTokenExpiredError
