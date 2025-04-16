@@ -13,8 +13,12 @@ module Wechat
       @app = current_organ.apps.find_by(appid: params[:app_appid])
     end
 
-    def local_prefixes
-      [controller_path, 'wechat/admin/base']
+    class_methods do
+      
+      private
+      def local_prefixes
+        [controller_path, 'wechat/admin/base']
+      end
     end
 
   end
