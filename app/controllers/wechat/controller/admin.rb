@@ -14,7 +14,7 @@ module Wechat
     end
 
     class_methods do
-      
+
       private
       def local_prefixes
         [controller_path, 'wechat/admin/base']
