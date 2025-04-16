@@ -4,7 +4,6 @@ module Wechat
     include Roled::Controller::Admin
 
     included do
-      layout 'admin'
       skip_before_action :require_user if whether_filter(:require_user)
     end
 
