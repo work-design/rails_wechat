@@ -1,8 +1,8 @@
-<td>
+<td class="family-monospace">
   <% if model.wechat_user.user %>
     <%= button_to model.wechat_user.user.name, { controller: 'auth/panel/users', action: 'show', id: model.wechat_user.user.id }, text: true %>
   <% else %>
-    <%= button_to model.wechat_user.name.presence || model.open_id, { controller: 'auth/panel/oauth_users', action: 'show', id: model.wechat_user.id }, text: true, class: 'family-monospace' %>
+    <%= button_to model.wechat_user.name.presence || model.open_id, { controller: 'auth/panel/oauth_users', action: 'show', id: model.wechat_user.id }, text: true %>
   <% end %>
 </td>
 <td><%= model.type_i18n %></td>

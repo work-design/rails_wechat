@@ -1,0 +1,17 @@
+<td>
+  <p>
+    <span><%= model.match_value %></span>
+    <% if model.handle_type %>
+      <span class="tag"><%= model.handle_type_i18n %></span>
+    <% end %>
+  </p>
+  <p class="text-grey family-monospace"><%= model.qrcode_url %></p>
+</td>
+<td>
+  <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
+  <p><time data-controller="time" class="<%= model.expire_at && model.expire_at < Time.current ? 'text-danger' : 'text-success' %>"><%= model.expire_at&.to_fs(:iso8601) %></time></p>
+</td>
+<td>
+  <p class="text-primary"><%= model.env_version_i18n %></p>
+  <p><%= model.aim_i18n %></p>
+</td>
