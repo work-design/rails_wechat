@@ -4,7 +4,7 @@ module Wechat
     include Roled::Controller::Admin
 
     included do
-      layout -> { 'admin' unless turbo_frame_request? }
+      layout -> { turbo_frame_body? ? 'frame' : 'admin' }
       skip_before_action :require_user if whether_filter(:require_user)
     end
 
