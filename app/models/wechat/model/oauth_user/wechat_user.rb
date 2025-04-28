@@ -62,7 +62,7 @@ module Wechat
         state.update destroyable: true
         authorized_token.update session_id: "#{state.session_id}_#{state_id}"
 
-        Com::SessionChannel.broadcast_to(
+        SessionChannel.broadcast_to(
           state.session_id,
           url: state.url(auth_token: auth_token)
         )
