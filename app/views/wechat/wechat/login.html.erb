@@ -1,17 +1,12 @@
-<div class="panel">
-  <div class="panel-heading text-centered">
-    <h4>微信登陆</h4>
+<div class="columns is-gapless is-vcentered mb-0">
+  <div class="column is-relative is-8 display-none-mobile">
+    <div class="hero is-fullheight background-login">
+    </div>
   </div>
-  <div class="panel-block background-white justify-content-center">
-    <figure>
-      <%= image_tag @scene.qrcode_data_url %>
-      <figcaption class="text-centered">请使用微信扫描二维码登录</figcaption>
-    </figure>
-  </div>
-  <div class="panel-block background-white justify-content-center">
-    <%= link_to({ controller: 'auth/sign', action: 'sign', **params.permit(:state) }) do %>
-      <i class="fa-solid fa-user"></i>
-      <span class="text-grey">账号密码登录</span>
-    <% end if defined? RailsAuth %>
+  <div class="column is-4 is-relative">
+    <div class="has-page-centered px-6">
+      <div id="alert"></div>
+      <%= render 'sign_form' %>
+    </div>
   </div>
 </div>
