@@ -1,8 +1,8 @@
 <%= render layout: 'layouts/qy_wechat_head' do %>
   <%= render 'nav_bar' %>
   <div id="alert"></div>
-  <main class="columns is-vcentered background-login">
+  <turbo-frame id="main" refresh="morph" data-turbo-action="advance" class="columns is-vcentered background-login">
     <%= yield %>
-  </main>
+  </turbo-frame>
   <%= render 'footer' %>
 <% end %>
