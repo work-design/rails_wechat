@@ -1,0 +1,7 @@
+<%= render layout: 'layouts/application_head' do %>
+  <%= render 'nav_bar' %>
+  <turbo-frame id="main" refresh="morph" data-turbo-action="advance">
+    <%= yield %>
+  </turbo-frame>
+  <%= render 'footer' %>
+<% end %>
