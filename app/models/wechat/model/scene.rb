@@ -12,6 +12,7 @@ module Wechat
       attribute :appid, :string, index: true
       attribute :menu_id, :string
       attribute :note, :string
+      attribute :state_uuid, :string
 
       enum :env_version, {
         release: 'release',
