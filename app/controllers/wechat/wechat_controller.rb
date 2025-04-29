@@ -49,8 +49,6 @@ module Wechat
       @scene.check_refresh(true)
       @scene.aim = 'login'
       @scene.save
-
-      render :login
     end
 
     def launch
