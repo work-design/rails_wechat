@@ -6,7 +6,7 @@ module Wechat
 
       provider_app = organ.provider&.app || App.global.take
       if provider_app
-        scene = provider_app.scenes.find_or_initialize_by(match_value: session_id)
+        scene = provider_app.scenes.find_or_initialize_by(match_value: "session_#{session_id}")
         scene.expire_seconds = 600 # 默认 600 秒有效
         scene.check_refresh(true)
         scene.aim = 'login'

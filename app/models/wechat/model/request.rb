@@ -34,8 +34,9 @@ module Wechat
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
       has_one :platform, through: :receive
-      has_one :tag, ->(o) { where(name: o.tag_name) }, foreign_key: :appid, primary_key: :appid
-      has_one :user_tag, ->(o) { where(tag_name: o.tag_name, open_id: o.open_id) }, foreign_key: :appid, primary_key: :appid
+      has_one :tag, ->(o) { where(name: o.tag_name) }, primary_key: :appid, foreign_key: :appid
+      has_one :user_tag, ->(o) { where(tag_name: o.tag_name, open_id: o.open_id) }, primary_key: :appid, foreign_key: :appid
+      has_one :scene, primary_key: :body, foreign_key: :match_value
 
       has_many :services, dependent: :nullify
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all, inverse_of: :request  # 解析 request body 内容，主要针对文字
@@ -144,16 +145,14 @@ module Wechat
     end
 
     def reply_for_login
-      state_id = body.delete_prefix!('session_')
-
       if wechat_user.unionid.present?
-        wechat_user.login!(state_id)
+        wechat_user.login!(scene.state_uuid)
         Wechat::TextReply.new(value: '登录成功！')
       else
         reply_params(
           title: '您好，点击链接授权登录',
           description: '点击授权',
-          url: app.oauth2_url(state: state_id, action: 'scan_login')
+          url: app.oauth2_url(state: scene.state_uuid, action: 'scan_login')
         )
       end
     end
