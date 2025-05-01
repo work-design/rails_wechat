@@ -14,7 +14,7 @@ module Wechat
         scene.expire_seconds = 600 # 默认 600 秒有效
         scene.check_refresh(true)
         scene.aim = 'login'
-        scene.state_uuid = params['state']
+        scene.state_uuid = params[:state]
         scene.save
 
         broadcast_to(session_id, data_url: scene.qrcode_data_url)
