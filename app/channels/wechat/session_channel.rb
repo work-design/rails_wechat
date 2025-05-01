@@ -1,9 +1,13 @@
 module Wechat
   class SessionChannel < ApplicationCable::Channel
+    after_subscribe :refresh_qrcode
 
     def subscribed
       stream_from "wechat:session:#{session_id}"
+    end
 
+    private
+    def refresh_qrcode
       provider_app = organ.provider&.app || App.global.take
       if provider_app
         scene = provider_app.scenes.find_or_initialize_by(match_value: "session_#{session_id}")
