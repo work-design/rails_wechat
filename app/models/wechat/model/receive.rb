@@ -59,7 +59,7 @@ module Wechat
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       before_save :extract_message_hash, if: -> { message_hash_changed? }
-      before_create :parse_content
+      before_create :sync_to_request
       after_create_commit :check_app
     end
 
@@ -68,12 +68,12 @@ module Wechat
     end
 
     def decrypt_data
-      content = (platform || app).decrypt(encrypt_data)
+      raw_content = (platform || app).decrypt(encrypt_data)
 
       if self.xml?
-        self.message_hash = Hash.from_xml(content).fetch('xml', {})
+        self.message_hash = Hash.from_xml(raw_content).fetch('xml', {})
       else
-        self.message_hash = JSON.parse(content)
+        self.message_hash = JSON.parse(raw_content)
       end
     end
 
@@ -82,6 +82,13 @@ module Wechat
       self.open_id = message_hash['FromUserName']
       self.msg_type = message_hash['MsgType']
       self.msg_id = message_hash['MsgId']
+
+      case message_hash['MsgType']
+      when 'text'
+        self.content = message_hash['Content']
+      else
+        self.content = message_hash['Content']
+      end
     end
 
     def compute_type
@@ -92,7 +99,7 @@ module Wechat
       end
     end
 
-    def parse_content
+    def sync_to_request
       request || build_request(type: compute_type)
       request.appid = appid
       request.open_id = open_id

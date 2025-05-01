@@ -27,6 +27,7 @@ module Wechat
       has_many :contacts, ->{ where.not(unionid: nil) }, class_name: 'Crm::Contact', primary_key: :unionid, foreign_key: :unionid if defined? RailsCrm
 
       has_many :requests, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
+      has_many :receives, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
       has_many :user_tags, primary_key: :uid, foreign_key: :open_id, dependent: :destroy_async
       has_many :tags, through: :user_tags
       has_many :notices, ->(o) { where(appid: o.appid) }, primary_key: :uid, foreign_key: :open_id
