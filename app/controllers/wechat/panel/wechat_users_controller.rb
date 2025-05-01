@@ -1,7 +1,7 @@
 module Wechat
   class Panel::WechatUsersController < Panel::BaseController
     before_action :set_app
-    before_action :set_wechat_user, only: [:show, :edit, :update, :destroy, :actions]
+    before_action :set_wechat_user, only: [:show, :edit, :update, :destroy, :actions, :chat]
     before_action :set_tag, only: [:index]
     before_action :set_tags, only: [:index]
 

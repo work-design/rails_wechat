@@ -70,6 +70,8 @@ zh:
       wechat_users:
         index:
           title: 微信用户
+        chat:
+          title: 聊天
       extractors:
         index:
           title: 解析回复内容

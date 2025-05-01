@@ -29,7 +29,11 @@ Rails.application.routes.draw do
           post :sync
         end
       end
-      resources :wechat_users
+      resources :wechat_users do
+        member do
+          get :chat
+        end
+      end
       resources :user_tags
       resources :templates do
         collection do
