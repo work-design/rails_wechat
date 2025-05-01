@@ -17,7 +17,7 @@
       <p><%= model.content %></p>
     </div>
     <div class="media-right">
-      <% if @wechat_user.app.head_img %>
+      <% if @wechat_user.app.head_img.present? %>
         <%= image_tag @wechat_user.app.head_img, class: 'image is-32x32' %>
       <% else %>
         <%= image_tag 'logo.png', class: 'image is-32x32' %>
