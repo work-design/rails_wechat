@@ -12,7 +12,7 @@ module Wechat
         scene.aim = 'login'
         scene.save
 
-        broadcast_to(session_id, scene.qrcode_data_url)
+        broadcast_to(session_id, data_url: scene.qrcode_data_url)
       end
     end
 

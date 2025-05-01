@@ -5,9 +5,9 @@
   <div class="panel-block background-white justify-content-center">
     <figure>
       <% if @scene %>
-        <%= image_tag @scene.qrcode_data_url %>
+        <%= image_tag @scene.qrcode_data_url, id: 'login_qrcode' %>
       <% else %>
-        <%= image_tag svg_data_url('placeholder.svg') %>
+        <%= image_tag svg_data_url('placeholder.svg'), id: 'login_qrcode' %>
       <% end %>
       <figcaption class="text-centered">请使用微信扫描二维码登录</figcaption>
     </figure>
