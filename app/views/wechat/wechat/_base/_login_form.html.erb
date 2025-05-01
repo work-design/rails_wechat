@@ -11,8 +11,8 @@
       <% end %>
       <figcaption class="text-centered">请使用微信扫描二维码登录</figcaption>
     </figure>
-    <p data-controller="count-down">
-      <span id="login_remaining" data-count-down-target="count"><%= @scene.remaining_seconds %></span>
+    <p id="login_count_down" data-controller="count-down">
+      <span data-count-down-target="count"><%= @scene.remaining_seconds %></span>
       <span>秒后过期</span>
     </p>
   </div>
