@@ -3,7 +3,7 @@ module Wechat
     after_subscribe :refresh_qrcode
 
     def subscribed
-      stream_from "wechat:session:#{session_id}:#{params[:state]}"
+      stream_from "wechat:session:#{session_id}"
     end
 
     private
