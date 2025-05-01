@@ -1,7 +1,7 @@
 module Wechat
   class Panel::WechatUsersController < Panel::BaseController
     before_action :set_app
-    before_action :set_wechat_user, only: [:show, :edit, :update, :destroy, :actions, :chat]
+    before_action :set_wechat_user, only: [:show, :edit, :update, :destroy, :actions, :chat, :message]
     before_action :set_tag, only: [:index]
     before_action :set_tags, only: [:index]
 
@@ -18,6 +18,10 @@ module Wechat
 
     def chat
       @messages = @wechat_user.messages.order(id: :desc).page(params[:page])
+    end
+
+    def message
+      @wechat_user.msg_send(params[:content])
     end
 
     private

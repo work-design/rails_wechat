@@ -1,3 +1,7 @@
 <div class="box">
   <%= render partial: 'message', collection: @messages.reverse, as: :model %>
 </div>
+<%= form_with url: { action: 'message' } do |f| %>
+  <%= f.text_field :content %>
+  <%= f.submit %>
+<% end %>

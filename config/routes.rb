@@ -32,6 +32,8 @@ Rails.application.routes.draw do
       resources :wechat_users do
         member do
           get :chat
+          post :message
+          post :typing
         end
       end
       resources :user_tags
