@@ -1,0 +1,27 @@
+<% if model.type == 'Wechat::Receive' %>
+  <div class="media is-fit">
+    <div class="media-left">
+    <% if @wechat_user.avatar_url %>
+      <%= image_tag @wechat_user.avatar_url, class: 'image is-32x32' %>
+    <% else %>
+      <%= image_tag 'avatar.png', class: 'image is-32x32' %>
+    <% end %>
+    </div>
+    <div class="media-content">
+      <p><%= model.content %></p>
+    </div>
+  </div>
+<% else %>
+  <div class="media is-fit">
+    <div class="media-content">
+      <p><%= model.content %></p>
+    </div>
+    <div class="media-right">
+      <% if @wechat_user.avatar_url %>
+        <%= image_tag @wechat_user.avatar_url, class: 'image is-32x32' %>
+      <% else %>
+        <%= image_tag 'avatar.png', class: 'image is-32x32' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
