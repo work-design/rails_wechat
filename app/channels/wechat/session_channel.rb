@@ -11,6 +11,8 @@ module Wechat
         scene.check_refresh(true)
         scene.aim = 'login'
         scene.save
+
+        broadcast_to(session_id, scene.qrcode_data_url)
       end
     end
 
