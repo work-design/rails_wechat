@@ -41,6 +41,8 @@ module Wechat
       has_many :menus, -> { roots }, through: :menu_apps
       has_many :requests, ->(o) { where(type: ['Wechat::ScanRequest', 'Wechat::SubscribeRequest'], aim: o.aim, handle_id: o.handle_id, scene_organ_id: o.organ_id) }, primary_key: :appid, foreign_key: :appid
 
+      scope :expired, -> { where(expire_at: ..Time.current) }
+
       has_one_attached :qrcode
 
       before_validation :sync_from_app, if: -> { organ_id.blank? && appid.present? && appid_changed? }
