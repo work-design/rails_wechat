@@ -4,7 +4,11 @@
   </div>
   <div class="panel-block background-white justify-content-center">
     <figure>
-      <%= image_tag @scene.qrcode_data_url %>
+      <% if @scene %>
+        <%= image_tag @scene.qrcode_data_url %>
+      <% else %>
+        <div data-controller="image"></div>
+      <% end %>
       <figcaption class="text-centered">请使用微信扫描二维码登录</figcaption>
     </figure>
   </div>
