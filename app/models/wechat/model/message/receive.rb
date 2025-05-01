@@ -1,5 +1,5 @@
 module Wechat
-  module Model::Receive
+  module Model::Message::Receive
     # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html
     MSG_TYPE = {
       'text' => 'Wechat::TextRequest',
@@ -37,6 +37,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
+      attribute :type, :string
       attribute :appid, :string, index: true
       attribute :open_id, :string, index: true
       attribute :msg_id, :string
@@ -61,10 +62,6 @@ module Wechat
       before_save :extract_message_hash, if: -> { message_hash_changed? }
       before_create :sync_to_request
       after_create_commit :check_app
-    end
-
-    def app_name
-      app.name
     end
 
     def decrypt_data
