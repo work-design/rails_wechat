@@ -37,6 +37,8 @@ module Wechat
       if @scene
         @scene.state_uuid = params[:state].presence || state_enter(destroyable: false).id
         @scene.save
+      else
+        @svg = Rails.application.assets.resolver.read('placeholder.svg')
       end
     end
 

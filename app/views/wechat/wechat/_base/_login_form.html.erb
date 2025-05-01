@@ -7,7 +7,7 @@
       <% if @scene %>
         <%= image_tag @scene.qrcode_data_url %>
       <% else %>
-        <div data-controller="image"></div>
+        <%= image_tag svg_data_url('placeholder.svg') %>
       <% end %>
       <figcaption class="text-centered">请使用微信扫描二维码登录</figcaption>
     </figure>
