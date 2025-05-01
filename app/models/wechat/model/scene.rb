@@ -144,6 +144,10 @@ module Wechat
       expire_at && expire_at < time
     end
 
+    def remaining_seconds(now = Time.current)
+      (expire_at - now).to_i
+    end
+
     def refresh_when_expired
       SceneCleanJob.set(wait_until: expire_at).perform_later(self)
     end

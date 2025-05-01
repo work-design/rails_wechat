@@ -17,7 +17,11 @@ module Wechat
         scene.state_uuid = params[:state]
         scene.save
 
-        broadcast_to(session_id, data_url: scene.qrcode_data_url)
+        broadcast_to(
+          session_id,
+          remaining: scene.remaining_seconds,
+          data_url: scene.qrcode_data_url
+        )
       end
     end
 
