@@ -17,20 +17,7 @@ module Wechat
       end
     end
 
-    def login
-      @scene = current_oauth_app.scenes.find_by(match_value: "session_#{session.id}")
-      @scene.state_uuid = params[:state].presence || state_enter(destroyable: false, state_controller: 'home', state_action: 'index').id
-      @scene.save
-    end
 
-    def token
-      auth_token = ::Auth::AuthorizedToken.find_by(session_id: "#{session.id}_#{params[:state]}")
-      if auth_token
-        render json: { auth_token: auth_token.id }
-      else
-        head :ok
-      end
-    end
 
     def admin_login
       if request.subdomain == 'admin'
