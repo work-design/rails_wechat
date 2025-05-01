@@ -1,7 +1,15 @@
 <div class="box">
   <%= render partial: 'message', collection: @messages.reverse, as: :model %>
 </div>
-<%= form_with url: { action: 'message' } do |f| %>
-  <%= f.text_field :content %>
-  <%= f.submit %>
+<%= form_with theme: nil, url: { action: 'message' }, class: 'box' do |f| %>
+  <div class="field">
+    <%= f.text_area :content, class: 'textarea is-borderless' %>
+  </div>
+  <div class="has-block-right">
+    <%= button_tag class: 'button' do %>
+      <span class="icon">
+        <i class="fa-solid fa-xl fa-paper-plane"></i>
+      </span>
+    <% end %>
+  </div>
 <% end %>

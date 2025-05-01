@@ -12,16 +12,18 @@
     </div>
   </div>
 <% else %>
-  <div class="media is-fit">
-    <div class="media-content">
-      <p><%= model.content %></p>
-    </div>
-    <div class="media-right">
-      <% if @wechat_user.app.head_img.present? %>
-        <%= image_tag @wechat_user.app.head_img, class: 'image is-32x32' %>
-      <% else %>
-        <%= image_tag 'logo.png', class: 'image is-32x32' %>
-      <% end %>
+  <div class="has-block-right">
+    <div class="media is-fit">
+      <div class="media-content">
+        <p><%= model.content %></p>
+      </div>
+      <div class="media-right">
+        <% if @wechat_user.app.head_img.present? %>
+          <%= image_tag @wechat_user.app.head_img, class: 'image is-32x32' %>
+        <% else %>
+          <%= image_tag 'logo.png', class: 'image is-32x32' %>
+        <% end %>
+      </div>
     </div>
   </div>
 <% end %>
