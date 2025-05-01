@@ -167,12 +167,6 @@ module Wechat
       res.invoke_effect(self) if res
     end
 
-    # Typing
-    # CancelTyping
-    def typing(command = 'Typing')
-      app.api.message_custom_typing(wechat_user.uid, command)
-    end
-
     def check_wechat_user_and_tag
       if event_key&.start_with?('qrscene_')
         scene_tag = event_key.delete_prefix('qrscene_')

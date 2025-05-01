@@ -62,6 +62,16 @@ module Wechat
       app.api.message_custom_typing(uid, command)
     end
 
+    def msg_send(command = 'Typing')
+      app.api.message_custom_send(
+        touser: uid,
+        msgtype: 'text',
+        text: {
+          content: command
+        }
+      )
+    end
+
     def login!(state_id)
       state = Com::State.find_by(id: state_id)
       if state
