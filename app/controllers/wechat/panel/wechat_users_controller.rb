@@ -16,6 +16,10 @@ module Wechat
       @tags = @app.tags
     end
 
+    def chat
+      @messages = @wechat_user.messages.order(id: :desc).page(params[:page])
+    end
+
     private
     def set_wechat_user
       @wechat_user = @app.wechat_users.find params[:id]
