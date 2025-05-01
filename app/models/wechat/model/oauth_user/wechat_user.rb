@@ -56,6 +56,12 @@ module Wechat
       app.api.menu_trymatch(uid)
     end
 
+    # Typing
+    # CancelTyping
+    def typing(command = 'Typing')
+      app.api.message_custom_typing(uid, command)
+    end
+
     def login!(state_id)
       state = Com::State.find_by(id: state_id)
       if state
