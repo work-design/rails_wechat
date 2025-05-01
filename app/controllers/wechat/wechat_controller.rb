@@ -17,7 +17,11 @@ module Wechat
       end
     end
 
-
+    def user_login
+      @scene = current_oauth_app.scenes.find_by(match_value: "session_#{session.id}")
+      @scene.state_uuid = params[:state].presence || state_enter(destroyable: false, state_controller: 'home', state_action: 'index').id
+      @scene.save
+    end
 
     def admin_login
       if request.subdomain == 'admin'
