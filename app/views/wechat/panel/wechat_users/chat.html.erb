@@ -1,6 +1,7 @@
-<div class="box">
-  <%= render partial: 'message', collection: @messages.reverse, as: :model %>
+<div id="chat_box" class="box">
+  <%= render partial: 'message', collection: @messages.reverse, as: :model, locals: { wechat_user: @wechat_user } %>
 </div>
+<%= turbo_stream_from @wechat_user %>
 <%= form_with theme: nil, url: { action: 'message' }, class: 'box' do |f| %>
   <div class="field">
     <%= f.text_area :content, class: 'textarea is-borderless' %>

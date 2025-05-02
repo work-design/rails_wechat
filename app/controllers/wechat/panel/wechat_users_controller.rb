@@ -17,11 +17,11 @@ module Wechat
     end
 
     def chat
-      @messages = @wechat_user.messages.order(id: :desc).page(params[:page])
+      @messages = @wechat_user.messages.order(id: :desc).page(params[:page]).per(10)
     end
 
     def message
-      @wechat_user.msg_send(params[:content])
+      @message_send = @wechat_user.msg_send(params[:content])
     end
 
     private
