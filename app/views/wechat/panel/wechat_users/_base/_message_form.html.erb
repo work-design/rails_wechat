@@ -1,6 +1,6 @@
 <%= form_with theme: nil, url: { action: 'message' }, id: 'chat_form', class: 'box' do |f| %>
   <div class="field">
-    <%= f.text_area :content, class: 'textarea is-borderless' %>
+    <%= f.text_area :content, autofocus: true, class: 'textarea is-borderless' %>
   </div>
   <div class="has-block-right">
     <%= button_tag class: 'button' do %>
