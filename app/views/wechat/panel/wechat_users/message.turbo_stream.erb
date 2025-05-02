@@ -1,1 +1,2 @@
 <%= turbo_stream.append 'chat_box', partial: 'message', locals: { model: @message_send } %>
+<%= turbo_stream.replace 'chat_form', partial: 'message_form' %>
