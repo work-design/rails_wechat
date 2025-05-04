@@ -3,7 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      after_create_commit :send_message
+      after_create_commit :send_message, :auto_reply
     end
 
     def send_message
@@ -14,6 +14,22 @@ module Wechat
         partial: 'wechat/panel/wechat_users/_base/message',
         locals: { model: receive, wechat_user: wechat_user }
       )
+    end
+
+    def auto_reply
+      if wechat_user.auto_reply
+        app = Kimi::App.first
+        content = app.chat(self.body)
+        msg_send = wechat_user.msg_send(content)
+
+        Turbo::StreamsChannel.broadcast_action_to(
+          wechat_user,
+          action: :append,
+          target: 'chat_box',
+          partial: 'wechat/panel/wechat_users/_base/message',
+          locals: { model: msg_send, wechat_user: wechat_user }
+        )
+      end
     end
 
     def set_body

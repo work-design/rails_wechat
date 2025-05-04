@@ -43,6 +43,7 @@ module Wechat
       params.fetch(:wechat_user, {}).permit(
         :name,
         :remark,
+        :auto_reply,
         tag_ids: []
       )
     end
