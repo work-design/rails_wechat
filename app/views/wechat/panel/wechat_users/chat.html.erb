@@ -1,3 +1,5 @@
+<%= render 'app_bar' %>
+
 <div id="chat_box" class="box">
   <%= render partial: 'message', collection: @messages.reverse, as: :model, locals: { wechat_user: @wechat_user } %>
 </div>

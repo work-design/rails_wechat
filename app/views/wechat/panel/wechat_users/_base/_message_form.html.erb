@@ -10,3 +10,10 @@
     <% end %>
   </div>
 <% end %>
+
+<div>
+  <%= form_with theme: nil, model: @wechat_user, url: { action: 'update', id: @wechat_user.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :auto_reply, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
+    <label data-action="click->input#check">AI 自动回复</label>
+  <% end %>
+</div>
