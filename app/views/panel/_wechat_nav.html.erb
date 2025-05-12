@@ -1,14 +1,14 @@
-<div class="menu ex-accordion is-active">
-  <%= link_to({ controller: 'wechat/panel/home' }, text: true, class: 'menu-label') do %>
+<div class="menu-list">
+  <%= link_to({ controller: 'wechat/panel/home' }, text: true, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'menu-item') do %>
     <div>
       <i class="fa-brands fa-fw fa-weixin"></i>
       <span><%= t('wechat.panel.title') %></span>
     </div>
   <% end %>
-  <div class="menu-list">
-    <%= link_to t('wechat.panel.registers.index.title'), { controller: 'wechat/panel/registers' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'registers', active: 'is-active') %>
-    <%= link_to t('wechat.panel.platforms.index.title'), { controller: 'wechat/panel/platforms' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'platforms', active: 'is-active') %>
-    <%= link_to t('wechat.panel.providers.index.title'), { controller: 'wechat/panel/providers' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: ['providers', 'suites', 'corps'], active: 'is-active') %>
-    <%= link_to t('wechat.panel.partners.index.title'), { controller: 'wechat/panel/partners' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: ['partners'], active: 'is-active') %>
+  <div class="menu-list pl-3">
+    <%= link_to t('wechat.panel.registers.index.title'), { controller: 'wechat/panel/registers' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'registers', item: 'menu-item', active: 'menu-item is-active') %>
+    <%= link_to t('wechat.panel.platforms.index.title'), { controller: 'wechat/panel/platforms' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'platforms', item: 'menu-item', active: 'menu-item is-active') %>
+    <%= link_to t('wechat.panel.providers.index.title'), { controller: 'wechat/panel/providers' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: ['providers', 'suites', 'corps'], item: 'menu-item', active: 'menu-item is-active') %>
+    <%= link_to t('wechat.panel.partners.index.title'), { controller: 'wechat/panel/partners' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: ['partners'], item: 'menu-item', active: 'menu-item is-active') %>
   </div>
 </div>
