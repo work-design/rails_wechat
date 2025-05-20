@@ -17,7 +17,7 @@
         <i class="fa-solid fa-building text-primary"></i>
         <span class="pl-1"><%= t('.partner_payees.index.title') %></span>
       <% end %>
-      <%= link_to({ action: 'edit_cert', id: model.id }, class: 'button is-small is-rounded is-light') do %>
+      <%= button_to({ action: 'edit_cert', id: model.id }, class: 'button is-small is-rounded is-light') do %>
         <i class="fa-solid fa-certificate"></i>
         <span class="pl-1"><%= t('.edit_cert.title') %></span>
       <% end %>
