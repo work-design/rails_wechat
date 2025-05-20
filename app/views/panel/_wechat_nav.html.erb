@@ -1,11 +1,9 @@
 <div class="menu-list">
   <%= link_to({ controller: 'wechat/panel/home' }, text: true, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'menu-item') do %>
-    <div>
-      <i class="fa-brands fa-fw fa-weixin"></i>
-      <span><%= t('wechat.panel.title') %></span>
-    </div>
+    <i class="fa-brands fa-fw fa-weixin"></i>
+    <strong><%= t('wechat.panel.title') %></strong>
   <% end %>
-  <div class="menu-list pl-3">
+  <div class="pl-4">
     <%= link_to t('wechat.panel.registers.index.title'), { controller: 'wechat/panel/registers' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'registers', item: 'menu-item', active: 'menu-item is-active') %>
     <%= link_to t('wechat.panel.platforms.index.title'), { controller: 'wechat/panel/platforms' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: 'platforms', item: 'menu-item', active: 'menu-item is-active') %>
     <%= link_to t('wechat.panel.providers.index.title'), { controller: 'wechat/panel/providers' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: active_helper(controllers: ['providers', 'suites', 'corps'], item: 'menu-item', active: 'menu-item is-active') %>
