@@ -35,7 +35,7 @@ module Wechat
     end
 
     def to_wechat1
-      if reply_encrypt.present?
+      if encrypt_mode
         reply_encrypt.to_xml(
           root: 'xml',
           children: 'item',
@@ -43,19 +43,6 @@ module Wechat
           skip_types: true)
       else
         to_xml
-      end
-    end
-
-    def to_xml
-      if reply_body.blank?
-        'success'
-      else
-        reply_body.to_xml(
-          root: 'xml',
-          children: 'item',
-          skip_instruct: true,
-          skip_types: true
-        )
       end
     end
 
@@ -69,11 +56,24 @@ module Wechat
       r
     end
 
+    def to_xml
+      if reply_body.blank?
+        'success'
+      else
+        to_wechat.to_xml(
+          root: 'xml',
+          children: 'item',
+          skip_instruct: true,
+          skip_types: true
+        )
+      end
+    end
+
     def real_app
       platform || app
     end
 
-    def do_encrypt
+    def reply_encrypt
       return self.reply_body unless real_app.encrypt_mode
       return if self.reply_body.blank?
 
