@@ -76,7 +76,9 @@ module Wechat
     def do_encrypt
       return self.reply_body unless real_app.encrypt_mode
       return if self.reply_body.blank?
-      encrypt = Base64.strict_encode64(Wechat::Cipher.encrypt(Wechat::Cipher.pack(to_xml, real_app.appid), real_app.encoding_aes_key))
+
+      x = Wechat::Cipher.encrypt(Wechat::Cipher.pack(to_xml, real_app.appid), real_app.encoding_aes_key)
+      encrypt = Base64.strict_encode64(x)
       msg_sign = Wechat::Signature.hexdigest(real_app.token, created_at.to_i, nonce, encrypt)
 
       {
