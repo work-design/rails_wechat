@@ -36,13 +36,9 @@ module Wechat
 
     def to_wechat1
       if encrypt_mode
-        reply_encrypt.to_xml(
-          root: 'xml',
-          children: 'item',
-          skip_instruct: true,
-          skip_types: true)
+        reply_encrypt
       else
-        to_xml
+        to_wechat
       end
     end
 
@@ -73,10 +69,11 @@ module Wechat
       platform || app
     end
 
-    def reply_encrypt
-      return self.reply_body unless real_app.encrypt_mode
-      return if self.reply_body.blank?
+    def encrypt_mode
+      real_app.encrypt_mode
+    end
 
+    def reply_encrypt
       x = Wechat::Cipher.encrypt(Wechat::Cipher.pack(to_xml, real_app.appid), real_app.encoding_aes_key)
       encrypt = Base64.strict_encode64(x)
       msg_sign = Wechat::Signature.hexdigest(real_app.token, created_at.to_i, nonce, encrypt)
