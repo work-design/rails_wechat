@@ -46,7 +46,6 @@ module Wechat
       before_validation :set_body, if: -> { receive.present? }
       before_create :check_wechat_user_and_tag
       before_save :sync_to_tag, if: -> { tag_name.present? && tag_name_changed? }
-      after_create :get_reply!
     end
 
     def set_body
@@ -74,7 +73,7 @@ module Wechat
           }
         ]
       }
-      Wechat::NewsReply.new(r)
+      NewsReply.new(r)
     end
 
     def reply_params_detail
@@ -147,7 +146,7 @@ module Wechat
     def reply_for_login
       if wechat_user.unionid.present?
         wechat_user.login!(scene.state_uuid)
-        Wechat::TextReply.new(value: '登录成功！')
+        TextReply.new(value: '登录成功！')
       else
         reply_params(
           title: '您好，点击链接授权登录',
@@ -217,73 +216,11 @@ module Wechat
       filtered[1][:proc].call(self) if filtered.present?
     end
 
-    def get_reply!
+    def to_reply
       if ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('session_')
-        reply = reply_for_login
+        reply_for_login
       else
-        reply = reply_from_rule || reply_from_response || reply_for_user
-      end
-
-      if reply.is_a?(Reply)
-        self.reply_body = reply.to_wechat
-        self.reply_body.merge!(ToUserName: open_id)
-        self.reply_body.merge!(FromUserName: app&.user_name.presence)
-      else
-        self.reply_body = {}
-      end
-      do_encrypt
-      self.save
-    end
-
-    def do_encrypt
-      if platform
-        token = platform.token
-        encoding_aes_key = platform.encoding_aes_key
-        encrypt_appid = platform.appid
-      elsif app.encrypt_mode
-        token = app.token
-        encoding_aes_key = app.encoding_aes_key
-        encrypt_appid = appid
-      else
-        return self.reply_body
-      end
-      return if self.reply_body.blank?
-
-      nonce = SecureRandom.hex(10)
-      encrypt = Base64.strict_encode64(Wechat::Cipher.encrypt(Wechat::Cipher.pack(to_xml, encrypt_appid), encoding_aes_key))
-      timestamp = reply_body['CreateTime']
-      msg_sign = Wechat::Signature.hexdigest(token, timestamp, nonce, encrypt)
-
-      self.reply_encrypt = {
-        Encrypt: encrypt,
-        MsgSignature: msg_sign,
-        TimeStamp: timestamp,
-        Nonce: nonce
-      }
-    end
-
-    def to_wechat
-      if reply_encrypt.present?
-        reply_encrypt.to_xml(
-          root: 'xml',
-          children: 'item',
-          skip_instruct: true,
-          skip_types: true)
-      else
-        to_xml
-      end
-    end
-
-    def to_xml
-      if reply_body.blank?
-        'success'
-      else
-        reply_body.to_xml(
-          root: 'xml',
-          children: 'item',
-          skip_instruct: true,
-          skip_types: true
-        )
+        reply_from_rule || reply_from_response || reply_for_user
       end
     end
 

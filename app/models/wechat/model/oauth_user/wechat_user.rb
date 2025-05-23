@@ -66,10 +66,7 @@ module Wechat
     end
 
     def msg_send(msg)
-      self.message_sends.create(
-        appid: appid,
-        content: msg
-      )
+
     end
 
     def login!(state_id)

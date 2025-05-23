@@ -18,7 +18,7 @@ module Wechat
 
     def auto_reply
       if wechat_user.auto_reply && defined? Kimi
-        app = Kimi::App.first
+        app = OneAi::App.first
         content = app.chat(self.body)
         msg_send = wechat_user.msg_send(content)
 
