@@ -34,11 +34,11 @@ module Wechat
       {}
     end
 
-    def to_wechat1
+    def to_wechat_xml
       if encrypt_mode
-        reply_encrypt
+        to_xml(reply_encrypt)
       else
-        to_wechat
+        to_xml(to_wechat)
       end
     end
 
@@ -52,11 +52,11 @@ module Wechat
       r
     end
 
-    def to_xml
+    def to_xml(reply_body)
       if reply_body.blank?
         'success'
       else
-        to_wechat.to_xml(
+        reply_body.to_xml(
           root: 'xml',
           children: 'item',
           skip_instruct: true,

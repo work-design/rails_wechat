@@ -27,9 +27,7 @@ module Wechat
       @receive.save
 
       reply = @receive.request.to_reply
-
-
-      render plain: reply.to_wechat
+      render plain: reply.to_wechat_xml
     end
 
     def login
