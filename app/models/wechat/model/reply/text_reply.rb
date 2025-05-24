@@ -3,7 +3,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      after_create_commit :msg_send
+      after_create_commit :msg_send, :add_to_log
     end
 
     def msg_type
@@ -18,20 +18,19 @@ module Wechat
     end
 
     def msg_send
-      r = app.api.message_custom_send(
+      app.api.message_custom_send(
         touser: open_id,
         msgtype: msg_type,
         text: {
-          content: content
+          content: value
         }
       )
-      logger.debug r
     end
 
     def add_to_log
       self.message_sends.create(
         appid: appid,
-        content: msg
+        content: value
       )
     end
 

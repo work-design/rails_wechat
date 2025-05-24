@@ -18,6 +18,7 @@ module Wechat
       belongs_to :platform, optional: true
       belongs_to :messaging, polymorphic: true, optional: true
       belongs_to :request, optional: true
+      belongs_to :message_send, optional: true
 
       has_one_attached :media
     end

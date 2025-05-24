@@ -17,17 +17,17 @@ module Wechat
     end
 
     def auto_reply
-      if wechat_user.auto_reply && defined? Kimi
+      if wechat_user.auto_reply && defined? OneAi
         app = OneAi::App.first
         content = app.chat(self.body)
-        msg_send = wechat_user.msg_send(content)
+        text_reply = create_text_reply(value: content)
 
         Turbo::StreamsChannel.broadcast_action_to(
           wechat_user,
           action: :append,
           target: 'chat_box',
           partial: 'wechat/panel/wechat_users/_base/message',
-          locals: { model: msg_send, wechat_user: wechat_user }
+          locals: { model: text_reply, wechat_user: wechat_user }
         )
       end
     end
