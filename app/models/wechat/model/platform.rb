@@ -1,13 +1,13 @@
 module Wechat
   module Model::Platform
     extend ActiveSupport::Concern
+    include Inner::Cipher
 
     included do
       attribute :name, :string
       attribute :appid, :string
       attribute :secret, :string
       attribute :token, :string
-      attribute :encoding_aes_key, :string
       attribute :verify_ticket, :string
       attribute :access_token, :string
       attribute :access_token_expires_at, :datetime
@@ -32,22 +32,9 @@ module Wechat
       self.token = SecureRandom.hex
     end
 
-    def init_aes_key
-      self.encoding_aes_key = SecureRandom.alphanumeric(43)
-    end
-
     def api
       return @api if defined? @api
       @api = Wechat::PlatformApi.new(self)
-    end
-
-    def decrypt(encrypt_data)
-      Wechat::Cipher.decrypt(encrypt_data, encoding_aes_key)
-    end
-
-    def encrypt(data)
-      x = Wechat::Cipher.encrypt(Wechat::Cipher.pack(data, appid), encoding_aes_key)
-      Base64.strict_encode64(x)
     end
 
     def refresh_pre_auth_code

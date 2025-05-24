@@ -8,6 +8,7 @@ module Wechat
     extend ActiveSupport::Concern
     include Inner::Token
     include Inner::JsToken
+    include Inner::Cipher
 
     included do
       attribute :type, :string
@@ -36,7 +37,6 @@ module Wechat
       attribute :secret, :string
       attribute :token, :string
       attribute :encrypt_mode, :boolean, default: true
-      attribute :encoding_aes_key, :string
       attribute :url_link, :string
       attribute :debug, :boolean, default: false
       attribute :open_appid, :string
@@ -86,21 +86,8 @@ module Wechat
       after_save_commit :sync_to_storage, if: -> { saved_change_to_qrcode_url? }
     end
 
-    def decrypt(encrypt_data)
-      Wechat::Cipher.decrypt(encrypt_data, encoding_aes_key)
-    end
-
-    def encrypt(data)
-      x = Wechat::Cipher.encrypt(Wechat::Cipher.pack(data, appid), encoding_aes_key)
-      Base64.strict_encode64(x)
-    end
-
     def init_token
       self.token = SecureRandom.hex
-    end
-
-    def init_aes_key
-      self.encoding_aes_key = SecureRandom.alphanumeric(43)
     end
 
     def url
