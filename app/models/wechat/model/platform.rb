@@ -45,6 +45,11 @@ module Wechat
       Wechat::Cipher.decrypt(encrypt_data, encoding_aes_key)
     end
 
+    def encrypt(data)
+      x = Wechat::Cipher.encrypt(Wechat::Cipher.pack(data, appid), encoding_aes_key)
+      Base64.strict_encode64(x)
+    end
+
     def refresh_pre_auth_code
       token_hash = api.create_preauthcode
       if token_hash.is_a?(Hash) && token_hash['pre_auth_code']

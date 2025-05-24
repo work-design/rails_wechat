@@ -63,8 +63,7 @@ module Wechat
     end
 
     def reply_encrypt
-      x = Wechat::Cipher.encrypt(Wechat::Cipher.pack(to_xml(reply_body), real_app.appid), real_app.encoding_aes_key)
-      encrypt = Base64.strict_encode64(x)
+      encrypt = real_app.encrypt(to_xml(reply_body))
       msg_sign = Wechat::Signature.hexdigest(real_app.token, created_at.to_i, nonce, encrypt)
 
       {

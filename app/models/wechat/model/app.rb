@@ -90,6 +90,11 @@ module Wechat
       Wechat::Cipher.decrypt(encrypt_data, encoding_aes_key)
     end
 
+    def encrypt(data)
+      x = Wechat::Cipher.encrypt(Wechat::Cipher.pack(data, appid), encoding_aes_key)
+      Base64.strict_encode64(x)
+    end
+
     def init_token
       self.token = SecureRandom.hex
     end
