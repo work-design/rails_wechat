@@ -38,11 +38,11 @@ module Wechat
       if encrypt_mode
         to_xml(reply_encrypt)
       else
-        to_xml(to_wechat)
+        to_xml(reply_body)
       end
     end
 
-    def to_wechat
+    def reply_body
       r = {
         CreateTime: created_at.to_i,
         ToUserName: open_id
@@ -74,7 +74,7 @@ module Wechat
     end
 
     def reply_encrypt
-      x = Wechat::Cipher.encrypt(Wechat::Cipher.pack(to_xml, real_app.appid), real_app.encoding_aes_key)
+      x = Wechat::Cipher.encrypt(Wechat::Cipher.pack(to_xml(reply_body), real_app.appid), real_app.encoding_aes_key)
       encrypt = Base64.strict_encode64(x)
       msg_sign = Wechat::Signature.hexdigest(real_app.token, created_at.to_i, nonce, encrypt)
 
