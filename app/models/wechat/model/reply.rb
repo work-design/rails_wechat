@@ -53,19 +53,6 @@ module Wechat
       r
     end
 
-    def to_xml(reply_body)
-      if reply_body.blank?
-        'success'
-      else
-        reply_body.to_xml(
-          root: 'xml',
-          children: 'item',
-          skip_instruct: true,
-          skip_types: true
-        )
-      end
-    end
-
     def real_app
       platform || app
     end
@@ -85,6 +72,19 @@ module Wechat
         TimeStamp: created_at.to_i,
         Nonce: nonce
       }
+    end
+
+    def to_xml(reply_body)
+      if reply_body.blank?
+        'success'
+      else
+        reply_body.to_xml(
+          root: 'xml',
+          children: 'item',
+          skip_instruct: true,
+          skip_types: true
+        )
+      end
     end
 
   end
