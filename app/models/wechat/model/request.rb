@@ -39,6 +39,7 @@ module Wechat
       has_one :reply, ->(o) { where(platform_id: o.platform_id) }
       has_one :text_reply, ->(o) { where(platform_id: o.platform_id) }
       has_one :news_reply, ->(o) { where(platform_id: o.platform_id) }
+      has_one :empty_reply
 
       has_many :services, dependent: :nullify
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all, inverse_of: :request  # 解析 request body 内容，主要针对文字
@@ -224,8 +225,13 @@ module Wechat
       else
         reply_from_rule || reply_from_response || reply_for_user
       end
-      self.reply_body = reply.reply_body
-      self.save
+
+      if reply
+        self.reply_body = reply.reply_body
+        self.save
+      else
+        reply = empty_reply.build
+      end
       reply
     end
 
