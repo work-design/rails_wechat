@@ -37,7 +37,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      has_one :request, ->{ where(platform_id: platform_id) }
+      has_one :request, ->(o) { where(platform_id: o.platform_id) }
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       before_save :extract_message_hash, if: -> { message_hash_changed? }
