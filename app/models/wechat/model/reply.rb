@@ -15,6 +15,7 @@ module Wechat
       attribute :created_at, :datetime, default: Time.current
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
+      belongs_to :platform, optional: true
       belongs_to :messaging, polymorphic: true, optional: true
       belongs_to :request, optional: true
 
@@ -70,7 +71,7 @@ module Wechat
     end
 
     def encrypt_mode
-      real_app.encrypt_mode
+      platform.present? || app.encrypt_mode
     end
 
     def reply_encrypt

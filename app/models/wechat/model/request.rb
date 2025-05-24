@@ -14,6 +14,7 @@ module Wechat
       attribute :open_id, :string, index: true
       attribute :userid, :string, index: true
       attribute :handle_id, :integer
+      attribute :reply_body, :json
 
       enum :aim, {
         login: 'login',
@@ -27,14 +28,17 @@ module Wechat
       belongs_to :scene_organ, class_name: 'Org::Organ', optional: true
 
       belongs_to :receive
+      belongs_to :platform, optional: true
       belongs_to :wechat_user, foreign_key: :open_id, primary_key: :uid, optional: true
       belongs_to :corp_user, ->(o) { where(corp_id: o.appid) }, foreign_key: :userid, primary_key: :user_id, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
-      has_one :platform, through: :receive
       has_one :tag, ->(o) { where(name: o.tag_name) }, primary_key: :appid, foreign_key: :appid
       has_one :user_tag, ->(o) { where(tag_name: o.tag_name, open_id: o.open_id) }, primary_key: :appid, foreign_key: :appid
       has_one :scene, primary_key: :body, foreign_key: :match_value
+      has_one :reply, ->{ where(platform_id: platform_id) }
+      has_one :text_reply, ->{ where(platform_id: platform_id) }
+      has_one :news_reply, ->{ where(platform_id: platform_id) }
 
       has_many :services, dependent: :nullify
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all, inverse_of: :request  # 解析 request body 内容，主要针对文字
@@ -71,7 +75,7 @@ module Wechat
           }
         ]
       }
-      NewsReply.new(r)
+      news_reply.build(r)
     end
 
     def reply_params_detail
@@ -144,7 +148,7 @@ module Wechat
     def reply_for_login
       if wechat_user.unionid.present?
         wechat_user.login!(scene.state_uuid)
-        TextReply.new(value: '登录成功！')
+        text_reply.build(value: '登录成功！')
       else
         reply_params(
           title: '您好，点击链接授权登录',
@@ -214,12 +218,15 @@ module Wechat
       filtered[1][:proc].call(self) if filtered.present?
     end
 
-    def to_reply
-      if ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('session_')
+    def to_reply!
+      reply = if ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('session_')
         reply_for_login
       else
         reply_from_rule || reply_from_response || reply_for_user
       end
+      self.reply_body = reply.reply_body
+      self.save
+      reply
     end
 
   end

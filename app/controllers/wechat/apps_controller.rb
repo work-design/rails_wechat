@@ -26,7 +26,7 @@ module Wechat
       end
       @receive.save
 
-      reply = @receive.request.to_reply
+      reply = @receive.request.to_reply!
       render plain: reply.to_wechat_xml
     end
 
