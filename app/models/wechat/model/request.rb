@@ -76,7 +76,7 @@ module Wechat
           }
         ]
       }
-      news_reply.build(r)
+      build_news_reply(r)
     end
 
     def reply_params_detail
@@ -149,7 +149,7 @@ module Wechat
     def reply_for_login
       if wechat_user.unionid.present?
         wechat_user.login!(scene.state_uuid)
-        text_reply.build(value: '登录成功！')
+        build_text_reply(value: '登录成功！')
       else
         reply_params(
           title: '您好，点击链接授权登录',
@@ -230,7 +230,7 @@ module Wechat
         self.reply_body = reply.reply_body
         self.save
       else
-        reply = empty_reply.build
+        reply = build_empty_reply
       end
       reply
     end
