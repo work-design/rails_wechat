@@ -18,7 +18,6 @@ module Wechat
       attribute :agency_oauth, :boolean, default: false
       attribute :unsubscribe_at, :datetime
       attribute :scope, :string
-      attribute :auto_reply, :boolean, default: true
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
       belongs_to :agency, foreign_key: :appid, primary_key: :appid, optional: true
@@ -63,10 +62,6 @@ module Wechat
     # CancelTyping
     def typing(command = 'Typing')
       app.api.message_custom_typing(uid, command)
-    end
-
-    def msg_send(msg)
-
     end
 
     def login!(state_id)

@@ -6,6 +6,7 @@ if defined? RailsAuth
 else
   class WechatUser < ApplicationRecord
     include Model::OauthUser::WechatUser
+    include OneAi::Ext::Reply if defined? OneAi
   end
 end
 end
