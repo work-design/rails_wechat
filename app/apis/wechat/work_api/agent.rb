@@ -16,11 +16,11 @@ class Wechat::WorkApi
     end
 
     def agent_ticket(**options)
-      get 'ticket/get', params: { type: 'agent_config' }, origin: BASE, **options
+      get 'ticket/get', origin: BASE, type: 'agent_config', **options
     end
 
     def agent(agentid)
-      get 'agent/get', params: { agentid: agentid }, origin: BASE
+      get 'agent/get', origin: BASE, agentid: agentid
     end
 
     def checkin(useridlist, starttime = Time.current.beginning_of_day, endtime = Time.current.end_of_day, opencheckindatatype = 3)

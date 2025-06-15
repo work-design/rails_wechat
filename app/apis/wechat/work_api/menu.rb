@@ -3,11 +3,11 @@ class Wechat::WorkApi
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
     def menu
-      get 'menu/get', params: { agentid: @agentid }, origin: BASE
+      get 'menu/get', origin: BASE, agentid: @agentid
     end
 
     def menu_delete
-      get 'menu/delete', params: { agentid: @agentid }, origin: BASE
+      get 'menu/delete', origin: BASE, agentid: @agentid
     end
 
     def menu_create(menu)
@@ -24,7 +24,7 @@ class Wechat::WorkApi
     end
 
     def material(media_id)
-      get 'material/get', params: { media_id: media_id, agentid: @agentid }, as: :file, origin: BASE
+      get 'material/get', as: :file, origin: BASE, media_id: media_id, agentid: @agentid
     end
 
     def material_add(type, file)
@@ -32,7 +32,7 @@ class Wechat::WorkApi
     end
 
     def material_delete(media_id)
-      get 'material/del', params: { media_id: media_id, agentid: @agentid }, origin: BASE
+      get 'material/del', origin: BASE, media_id: media_id, agentid: @agentid
     end
 
     def message_send(userid, message)
