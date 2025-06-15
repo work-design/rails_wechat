@@ -9,15 +9,15 @@ class Wechat::BaseApi
         code: code,
         grant_type: 'authorization_code'
       }
-      get 'oauth2/access_token', params: params, origin: BASE
+      get 'oauth2/access_token', origin: BASE, **params
     end
 
     def web_auth_access_token(web_access_token, openid)
-      get 'auth', params: { access_token: web_access_token, openid: openid }, origin: BASE
+      get 'auth', origin: BASE, access_token: web_access_token, openid: openid
     end
 
     def web_userinfo(web_access_token, openid, lang = 'zh_CN')
-      get 'userinfo', params: { access_token: web_access_token, openid: openid, lang: lang }, origin: BASE
+      get 'userinfo', origin: BASE, access_token: web_access_token, openid: openid, lang: lang
     end
 
     # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html
@@ -29,7 +29,7 @@ class Wechat::BaseApi
         grant_type: 'authorization_code'
       }
 
-      get 'jscode2session', params: params, origin: BASE
+      get 'jscode2session', origin: BASE, **params
     end
 
   end

@@ -14,12 +14,12 @@ class Wechat::ProgramApi
     end
 
     def pub_templates
-      r = get 'newtmpl/getpubtemplatetitles', origin: BASE
+      get 'newtmpl/getpubtemplatetitles', origin: BASE
     end
 
     # https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.getPubTemplateKeyWordsById.html
     def template_key_words(tid)
-      r = get 'newtmpl/getpubtemplatekeywords', params: { tid: tid }, origin: BASE
+      r = get 'newtmpl/getpubtemplatekeywords', origin: BASE, tid: tid
       if r['errcode'] == 0
         r['data']
       else
@@ -32,7 +32,7 @@ class Wechat::ProgramApi
     end
 
     def del_template(template_id)
-      post 'newtmpl/deltemplate', params: { priTmplId: template_id }, origin: BASE
+      post 'newtmpl/deltemplate', origin: BASE, priTmplId: template_id
     end
 
   end

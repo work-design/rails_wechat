@@ -14,7 +14,7 @@ class Wechat::PublicApi
     end
 
     def jsapi_ticket
-      get 'ticket/getticket', params: { type: 'jsapi' }, origin: BASE
+      get 'ticket/getticket', origin: BASE, type: 'jsapi'
     end
 
     # see: https://developers.weixin.qq.com/doc/offiaccount/Message_Management/API_Call_Limits.html

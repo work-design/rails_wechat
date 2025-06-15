@@ -3,11 +3,11 @@ class Wechat::PublicApi
     BASE = 'https://api.weixin.qq.com/cgi-bin/'
 
     def media(media_id)
-      get 'media/get', params: { media_id: media_id }, as: :file, origin: BASE
+      get 'media/get', origin: BASE, as: :file, media_id: media_id
     end
 
     def media_hq(media_id)
-      get 'media/get/jssdk', params: { media_id: media_id }, as: :file, origin: BASE
+      get 'media/get/jssdk', origin: BASE, media_id: media_id, as: :file
     end
 
     def media_create(file, type = 'image')

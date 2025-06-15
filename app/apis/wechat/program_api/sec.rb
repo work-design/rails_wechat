@@ -14,7 +14,8 @@ class Wechat::ProgramApi
         shipping_list: shipping_list,
         upload_time: upload_time,
         payer: { openid: openid },
-        **options)
+        **options
+      )
     end
 
     def get_order(transaction_id)
