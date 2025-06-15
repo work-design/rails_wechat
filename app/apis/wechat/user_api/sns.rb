@@ -3,7 +3,7 @@ class Wechat::UserApi
     BASE = 'https://api.weixin.qq.com/sns/'
 
     def userinfo(openid)
-      get 'userinfo', params: { openid: openid }, origin: BASE
+      get 'userinfo', origin: BASE, openid: openid
     end
 
     def refresh_token(refresh_token)

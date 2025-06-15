@@ -15,7 +15,7 @@ class Wechat::PublicApi
     end
 
     def material(media_id)
-      get 'material/get', params: { media_id: media_id }, as: :file, origin: BASE
+      get 'material/get', media_id: media_id, origin: BASE
     end
 
     def material_count

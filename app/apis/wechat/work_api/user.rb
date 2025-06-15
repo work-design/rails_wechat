@@ -3,7 +3,7 @@ class Wechat::WorkApi
     BASE = 'https://qyapi.weixin.qq.com/cgi-bin/'
 
     def auth_user(code)
-      get 'auth/getuserinfo', params: { code: code }, origin: BASE
+      get 'auth/getuserinfo', origin: BASE, code: code
     end
 
     def convert_to_openid(userid)
@@ -19,7 +19,7 @@ class Wechat::WorkApi
     end
 
     def user_auth_success(userid)
-      get 'user/authsucc', params: { userid: userid }, origin: BASE
+      get 'user/authsucc', origin: BASE, userid: userid
     end
 
     ## 成员管理
@@ -30,7 +30,7 @@ class Wechat::WorkApi
 
     # 读取成员
     def user(userid)
-      get 'user/get', params: { userid: userid }, origin: BASE
+      get 'user/get', origin: BASE, userid: userid
     end
 
     # 更新成员
@@ -40,7 +40,7 @@ class Wechat::WorkApi
 
     # 删除成员
     def user_delete(userid)
-      get 'user/delete', params: { userid: userid }, origin: BASE
+      get 'user/delete', origin: BASE, userid: userid
     end
 
     # 批量删除成员
@@ -49,15 +49,15 @@ class Wechat::WorkApi
     end
 
     def batch_job_result(jobid)
-      get 'batch/getresult', params: { jobid: jobid }, origin: BASE
+      get 'batch/getresult', origin: BASE, jobid: jobid
     end
 
     def batch_replaceparty(media_id)
-      post 'batch/replaceparty', media_id: media_id, origin: BASE
+      post 'batch/replaceparty', origin: BASE, media_id: media_id
     end
 
     def batch_syncuser(media_id)
-      post 'batch/syncuser', media_id: media_id, origin: BASE
+      post 'batch/syncuser', origin: BASE, media_id: media_id
     end
 
     def batch_replaceuser(media_id)
@@ -69,7 +69,7 @@ class Wechat::WorkApi
     end
 
     def department_delete(departmentid)
-      get 'department/delete', params: { id: departmentid }, origin: BASE
+      get 'department/delete', origin: BASE, id: departmentid
     end
 
     def department_update(departmentid, name = nil, parentid = nil, order = nil)
@@ -78,18 +78,18 @@ class Wechat::WorkApi
 
     def department(id = nil)
       if id.present?
-        get 'department/list', params: { id: id }, origin: BASE
+        get 'department/list', origin: BASE, id: id
       else
         get 'department/list', origin: BASE
       end
     end
 
     def user_simplelist(department_id, fetch_child = 0, status = 0)
-      get 'user/simplelist', params: { department_id: department_id, fetch_child: fetch_child, status: status }, origin: BASE
+      get 'user/simplelist', origin: BASE, department_id: department_id, fetch_child: fetch_child, status: status
     end
 
     def user_list(department_id, fetch_child = 0, status = 0)
-      get 'user/list', params: { department_id: department_id, fetch_child: fetch_child, status: status }, origin: BASE
+      get 'user/list', origin: BASE, department_id: department_id, fetch_child: fetch_child, status: status
     end
 
     def tag_create(tagname, tagid = nil)
@@ -101,7 +101,7 @@ class Wechat::WorkApi
     end
 
     def tag_delete(tagid)
-      get 'tag/delete', params: { tagid: tagid }, origin: BASE
+      get 'tag/delete', origin: BASE, tagid: tagid
     end
 
     def tags
@@ -109,7 +109,7 @@ class Wechat::WorkApi
     end
 
     def tag(tagid)
-      get 'tag/get', params: { tagid: tagid }, origin: BASE
+      get 'tag/get', origin: BASE, tagid: tagid
     end
 
     def tag_add_user(tagid, userids = nil, departmentids = nil)
