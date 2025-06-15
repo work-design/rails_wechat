@@ -24,7 +24,7 @@ class Wechat::WorkApi
     end
 
     def material(media_id)
-      get 'material/get', as: :file, origin: BASE, media_id: media_id, agentid: @agentid
+      get 'material/get', origin: BASE, media_id: media_id, agentid: @agentid
     end
 
     def material_add(type, file)
