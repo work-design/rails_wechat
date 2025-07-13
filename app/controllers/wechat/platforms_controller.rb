@@ -35,8 +35,8 @@ module Wechat
       @receive.encrypt_data = r['Encrypt']
       @receive.save
 
-      reply = @receive.request.to_reply
-      render plain: reply&.to_wechat || 'SUCCESS'
+      reply = @receive.request.to_reply!
+      render plain: reply.to_wechat_xml || 'SUCCESS'
     end
 
     private
