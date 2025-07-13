@@ -17,7 +17,7 @@ module Wechat
     end
 
     def auto_reply
-      if wechat_user.auto_reply && defined? OneAi
+      if wechat_user.respond_to?(:auto_reply) && wechat_user.auto_reply && defined? OneAi
         app = OneAi::App.first
         content = app.chat(self.body)
         text_reply = create_text_reply(value: content)
