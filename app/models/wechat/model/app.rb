@@ -185,6 +185,7 @@ module Wechat
     end
 
     def disabled_func_infos
+      []
     end
 
     def generate_wechat_user(code)
