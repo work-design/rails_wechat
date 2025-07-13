@@ -193,8 +193,8 @@ Rails.application.routes.draw do
         end
         resources :platforms do
           member do
-            get :agency
-            match :info, via: [:get, :post]
+            post :agency
+            post :info
           end
           resources :program_agencies do
             member do
