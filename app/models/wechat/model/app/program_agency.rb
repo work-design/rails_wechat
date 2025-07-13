@@ -134,6 +134,10 @@ module Wechat
       r
     end
 
+    #{
+    #             privacy_key: 'Address',
+    #             privacy_text: '用于电商配送'
+    #           },
     def set_privacy
       api.set_privacy(
         owner_setting: {
@@ -144,10 +148,6 @@ module Wechat
           {
             privacy_key: 'UserInfo',
             privacy_text: '用于个人中心身份确认'
-          },
-          {
-            privacy_key: 'Address',
-            privacy_text: '用于电商配送'
           },
           {
             privacy_key: 'PhoneNumber',
