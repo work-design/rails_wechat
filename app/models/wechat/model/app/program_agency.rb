@@ -113,7 +113,8 @@ module Wechat
             second_id: cate['second'],
             second_class: cate['second_name']
           }
-        ]
+        ],
+        privacy_api_not_use: true
       )
       logger.debug "\e[35m  Submit Audit: #{r}  \e[0m"
 
@@ -134,10 +135,6 @@ module Wechat
       r
     end
 
-    #{
-    #             privacy_key: 'Address',
-    #             privacy_text: '用于电商配送'
-    #           },
     def set_privacy
       api.set_privacy(
         owner_setting: {
@@ -148,6 +145,10 @@ module Wechat
           {
             privacy_key: 'UserInfo',
             privacy_text: '用于个人中心身份确认'
+          },
+          {
+            privacy_key: 'Address',
+            privacy_text: '用于电商配送'
           },
           {
             privacy_key: 'PhoneNumber',
