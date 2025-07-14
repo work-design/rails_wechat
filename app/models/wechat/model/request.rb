@@ -181,6 +181,8 @@ module Wechat
       elsif ['SCAN', 'subscribe'].include?(event) && body.to_s.start_with?('session_')
         wechat_user.init_user
         wechat_user.save
+      else
+        wechat_user.save
       end
     end
 
