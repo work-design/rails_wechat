@@ -55,7 +55,7 @@ module Wechat
     end
 
     def encrypt_mode
-      platform.present? || app.encrypt_mode
+      platform || app.platform || app.encrypt_mode
     end
 
     def reply_encrypt
