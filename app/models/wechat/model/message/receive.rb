@@ -37,7 +37,7 @@ module Wechat
     extend ActiveSupport::Concern
 
     included do
-      has_one :request, ->(o) { where(platform_id: o.platform_id) }
+      has_one :request
 
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       before_save :extract_message_hash, if: -> { message_hash_changed? }
@@ -80,9 +80,11 @@ module Wechat
     def sync_to_request
       request || build_request(type: compute_type)
       request.appid = appid
+      request.platform_id = platform_id
       request.open_id = open_id
       request.msg_type = msg_type
       request.raw_body = message_hash.except('ToUserName', 'FromUserName', 'CreateTime', 'MsgType')
+      request
     end
 
     def check_app
