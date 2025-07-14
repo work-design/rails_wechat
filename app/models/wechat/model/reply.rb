@@ -54,15 +54,12 @@ module Wechat
       r
     end
 
-    def real_app
-      platform || app.platform || app
-    end
-
     def encrypt_mode
       platform.present? || app.encrypt_mode
     end
 
     def reply_encrypt
+      real_app = platform || app.platform || app
       encrypt = real_app.encrypt(to_xml(reply_body))
       msg_sign = Wechat::Signature.hexdigest(real_app.token, created_at.to_i, nonce, encrypt)
 
