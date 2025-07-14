@@ -37,6 +37,7 @@ module Wechat
 
       reply = @receive.request.to_reply!
       reply.open_id = @receive.open_id
+      logger.debug "\e[35m  the reply is#{reply.id}  \e[0m"
       render plain: reply.to_wechat_xml || 'SUCCESS'
     end
 
