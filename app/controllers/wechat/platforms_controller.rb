@@ -36,6 +36,7 @@ module Wechat
       @receive.save
 
       reply = @receive.request.to_reply!
+      reply.open_id = @receive.open_id
       render plain: reply.to_wechat_xml || 'SUCCESS'
     end
 
