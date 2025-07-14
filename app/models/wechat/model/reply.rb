@@ -55,7 +55,7 @@ module Wechat
     end
 
     def real_app
-      platform || app
+      platform || app.platform || app
     end
 
     def encrypt_mode
