@@ -28,7 +28,7 @@ module Wechat
     end
 
     def add_to_log
-      self.message_sends.create(
+      self.create_message_send(
         appid: appid,
         content: value
       )
