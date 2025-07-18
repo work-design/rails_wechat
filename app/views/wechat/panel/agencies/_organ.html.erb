@@ -1,8 +1,8 @@
-<%= form_with model: @agency, scope: :agency, url: { action: 'update' } do |f| %>
+<%= form_with model: @app, scope: :agency, url: { action: 'update' } do |f| %>
   <%= render 'error_messages', target: f.object %>
   <div class="field is-horizontal">
     <div class="field-label is-normal">
-      <label class="label"><%= Wechat::Agency.human_attribute_name(:organ_id) %></label>
+      <label class="label"><%= Wechat::App.human_attribute_name(:organ_id) %></label>
     </div>
     <div class="field-body">
       <div class="panel" data-controller="typer" data-typer-url-value="<%= url_for(action: 'search_organs') %>">
