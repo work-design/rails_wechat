@@ -11,7 +11,7 @@ module Wechat
         wechat_user,
         action: :append,
         target: 'chat_box',
-        partial: 'wechat/panel/wechat_users/_base/message',
+        partial: 'wechat/panel/wechat_users/message',
         locals: { model: receive, wechat_user: wechat_user }
       )
     end
@@ -26,7 +26,7 @@ module Wechat
           wechat_user,
           action: :append,
           target: 'chat_box',
-          partial: 'wechat/panel/wechat_users/_base/message',
+          partial: 'wechat/panel/wechat_users/message',
           locals: { model: text_reply, wechat_user: wechat_user }
         )
       end
