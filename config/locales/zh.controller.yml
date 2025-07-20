@@ -114,6 +114,8 @@ zh:
       agencies:
         index:
           title: 授权公众号
+        organ:
+          title: 关联企业
       program_agencies:
         index:
           title: 授权小程序
