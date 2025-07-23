@@ -1,5 +1,5 @@
 <tr id="tr_<%= model.id %>">
-  <%= yield %>
+
   <td>
   <% if @select_uids.include?(model.uid) %>
     <%= button_to({ action: 'destroy_openid', uid: model.uid }, method: :delete, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-small is-danger') do %>
@@ -13,4 +13,4 @@
     <% end %>
   <% end %>
   </td>
-</tr>
+

@@ -1,5 +1,5 @@
-<tr id="tr_<%= model.id %>" data-controller="show" data-action="mouseenter->show#show mouseleave->show#hide">
-  <%= yield %>
+
+
   <td>
     <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ controller: 'follows', corp_user_id: model.id }, aria: { label: t('wechat.admin.follows.index.title') }, class: 'button is-small is-rounded is-light') do %>
@@ -14,4 +14,4 @@
       <% end %>
     </div>
   </td>
-</tr>
+

@@ -1,5 +1,5 @@
-<tr id="tr_<%= model.id %>" data-controller="show" data-action="mouseenter->show#show mouseleave->show#hide">
-  <%= yield %>
+
+
   <td>
     <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ action: 'apps', id: model.id }, aria: { label: t('wechat.panel.template_configs.apps.title') }, class: 'button is-small is-rounded is-light') do %>
@@ -19,4 +19,4 @@
       <% end %>
     </div>
   </td>
-</tr>
+

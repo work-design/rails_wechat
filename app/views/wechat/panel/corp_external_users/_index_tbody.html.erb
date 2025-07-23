@@ -19,3 +19,13 @@
   <p><%= model.pending_id %></p>
 </td>
 <td><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></td>
+<td>
+  <div data-show-target="item" class="visibility-hidden">
+    <%= link_to({ action: 'show', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-circle-info text-info"></i>
+    <% end %>
+    <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-pencil text-link"></i>
+    <% end %>
+  </div>
+</td>

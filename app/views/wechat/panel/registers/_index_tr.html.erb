@@ -1,5 +1,5 @@
-<tr id="tr_<%= model.id %>" data-controller="show" data-action="mouseenter->show#show mouseleave->show#hide">
-  <%= yield %>
+
+
   <td>
     <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ action: 'edit_assign', id: model.id }, aria: { label: '分配' }, class: 'button is-small is-rounded is-light') do %>
@@ -22,4 +22,4 @@
       <% end %>
     </div>
   </td>
-</tr>
+
