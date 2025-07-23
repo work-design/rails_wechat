@@ -6,3 +6,4 @@
   <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
 </td>
 <td><%= simple_format model.message_hash %></td>
+<td><%= render partial: 'index_tr_actions', locals: { model: model } %></td>

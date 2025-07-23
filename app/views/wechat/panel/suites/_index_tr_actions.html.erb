@@ -1,9 +1,10 @@
-<td><%= model.name %></td>
-<td><%= model.corp_id %></td>
 <td>
   <div data-show-target="item" class="visibility-hidden">
-    <%= link_to({ controller: 'suites', provider_id: model.id }, aria: { label: t('wechat.panel.suites.index.title') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-folder text-info"></i>
+    <%= link_to({ controller: 'corps', suite_id: model.id }, aria: { label: t('wechat.panel.corps.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-building text-danger"></i>
+    <% end %>
+    <%= link_to({ controller: 'suite_receives', suite_id: model.suite_id }, aria: { label: t('wechat.panel.suite_receives.index.title') }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-message text-success"></i>
     <% end %>
     <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
       <i class="fa-solid fa-circle-info text-info"></i>

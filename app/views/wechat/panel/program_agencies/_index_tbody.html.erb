@@ -43,3 +43,4 @@
     <span class="ml-1"><%= t('.release.title') %></span>
   <% end if model.releasable? %>
 </td>
+<td><%= render partial: 'index_tr_actions', locals: { model: model } %></td>

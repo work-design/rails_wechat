@@ -7,3 +7,13 @@
     <span class="pl-1"><%= model.user_tags_count %></span>
   <% end %>
 </td>
+<td>
+  <div data-show-target="item" class="visibility-hidden">
+    <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-pencil"></i>
+    <% end %>
+    <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.destroy.confirm') } }) do %>
+      <i class="fa-solid fa-trash"></i>
+    <% end %>
+  </div>
+</td>

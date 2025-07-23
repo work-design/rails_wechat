@@ -1,3 +1,30 @@
 <td><%= model.name %></td>
 <td><%= model.mch_id %></td>
 <td><%= model.organ&.name %></td>
+<td>
+  <div data-show-target="item" class="visibility-hidden">
+    <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-circle-info text-info"></i>
+    <% end %>
+    <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-pencil text-link"></i>
+    <% end %>
+    <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.destroy.confirm') } }) do %>
+      <i class="fa-solid fa-trash text-danger"></i>
+    <% end %>
+  </div>
+  <div data-show-target="item" class="visibility-hidden">
+    <%= link_to({ controller: 'payee_apps', partner_payee_id: model.id }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-brands fa-amazon-pay"></i>
+      <span class="pl-1"><%= t('.payee_apps.index.title') %></span>
+    <% end %>
+    <%= link_to({ controller: 'payee_domains', partner_payee_id: model.id }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-globe"></i>
+      <span class="pl-1"><%= t('.payee_domains.index.title') %></span>
+    <% end %>
+    <%= button_to({ action: 'organ', id: model.id }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-building text-link"></i>
+      <span class="pl-1"><%= t('.organ.title') %></span>
+    <% end %>
+  </div>
+</td>

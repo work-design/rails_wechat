@@ -29,3 +29,22 @@
   <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
   <p><time data-controller="time"><%= model.unsubscribe_at&.to_fs(:iso8601) %></time></p>
 </td>
+<td>
+  <div data-show-target="item" class="visibility-hidden">
+    <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-circle-info text-info"></i>
+    <% end %>
+    <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-pencil text-link"></i>
+    <% end %>
+    <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, form: { data: { turbo_confirm: t('.destroy.confirm') } }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-trash text-danger"></i>
+    <% end %>
+  </div>
+  <div data-show-target="item" class="visibility-hidden">
+    <%= link_to({ action: 'chat', id: model.id }, class: 'button is-small is-rounded is-light') do %>
+      <i class="fa-solid fa-inbox text-info"></i>
+      <span class="ml-1"><%= t('.chat.title') %></span>
+    <% end %>
+  </div>
+</td>

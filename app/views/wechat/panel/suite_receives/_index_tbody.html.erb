@@ -11,3 +11,4 @@
   <p><%= model.event_key %></p>
 </td>
 <td><%= simple_format model.message_hash %></td>
+<td><%= render partial: 'index_tr_actions', locals: { model: model } %></td>
