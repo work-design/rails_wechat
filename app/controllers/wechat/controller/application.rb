@@ -116,10 +116,10 @@ module Wechat
 
     def current_wechat_user
       return @current_wechat_user if defined?(@current_wechat_user)
-      @current_wechat_user = current_authorized_token&.oauth_user
+      @current_wechat_user = Current.session&.oauth_user
       if @current_wechat_user
         if request.variant.include?(:mini_program) && current_user
-          appid = request.user_agent&.scan(RegexpUtil.between('miniProgram/', '$')).presence || request.referer&.scan(RegexpUtil.between('servicewechat.com/', '/')).presence || current_authorized_token.appid
+          appid = request.user_agent&.scan(RegexpUtil.between('miniProgram/', '$')).presence || request.referer&.scan(RegexpUtil.between('servicewechat.com/', '/')).presence || Current.session.appid
           @current_wechat_user.same_oauth_users.where(appid: appid).take
         elsif request.variant.include?(:wechat) && current_user
           wechat_appids = (PublicApp.global + PublicApp.default_where(default_ancestors_params)).pluck(:appid).uniq
@@ -131,9 +131,9 @@ module Wechat
     end
 
     def current_corp_user
-      return unless current_authorized_token
+      return unless Current.session
       return @current_corp_user if defined? @current_corp_user
-      @current_corp_user = current_authorized_token.corp_user
+      @current_corp_user = Current.session.corp_user
 
       logger.debug "\e[35m  Login as Corp User: #{@current_corp_user&.id}  \e[0m"
       @current_corp_user
@@ -142,15 +142,15 @@ module Wechat
     def login_by_oauth_user(oauth_user, url: url_for(controller: '/home'))
       state = Com::State.find_by(id: params[:state])
       oauth_user.auth_appid = params[:auth_appid]
-      @current_authorized_token = oauth_user.authorized_token
+      Current.session = oauth_user.session
       @current_user = oauth_user.user
       logger.debug "\e[35m  Login by OauthUser #{oauth_user.id} as user: #{current_user&.id}  \e[0m"
 
       if state
         state.update user_id: oauth_user.user_id, auth_token: oauth_user.auth_token, destroyable: true
         render 'state_visit', layout: 'raw', locals: { state: state }
-      elsif current_authorized_token.auth_app
-        redirect_to url_for(controller: '/home', host: current_authorized_token.auth_app.host, auth_jwt_token: @current_authorized_token.generate_jwt_token, state: params[:state]), allow_other_host: true
+      elsif Current.session.auth_app
+        redirect_to url_for(controller: '/home', host: Current.session.auth_app.host, auth_jwt_token: Current.session.generate_jwt_token, state: params[:state]), allow_other_host: true
       else
         redirect_to url
       end
@@ -158,12 +158,12 @@ module Wechat
 
     def login_by_corp_user(corp_user, url: url_for(controller: '/home'))
       state = Com::State.find_by(id: params[:state])
-      @current_authorized_token = corp_user.authorized_token
+      Current.session = corp_user.session
 
       logger.debug "\e[35m  Login by CorpUser #{corp_user.id}  \e[0m"
 
       if state
-        render 'state_visit', layout: 'raw', locals: { state: state, auth_token: current_authorized_token.id }
+        render 'state_visit', layout: 'raw', locals: { state: state, auth_token: Current.session.id }
       else
         render 'visit', layout: 'raw', locals: { url: url }
       end

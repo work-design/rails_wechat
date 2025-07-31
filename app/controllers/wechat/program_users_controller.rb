@@ -57,8 +57,8 @@ module Wechat
     end
 
     def set_wechat_program_user
-      if current_authorized_token
-        @program_user = current_authorized_token.oauth_user
+      if Current.session
+        @program_user = Current.session.oauth_user
       else
         head :unauthorized
       end

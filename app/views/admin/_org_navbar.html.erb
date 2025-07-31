@@ -11,11 +11,11 @@
     <div class="navbar-divider"></div>
     <% account.members.includes(organ: :organ_domains).each do |member| %>
       <% if current_organ.self_and_ancestor_ids.include?(member.organ_id) %>
-        <%= link_to({ controller: '/admin/home', auth_token: current_authorized_token.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item is-active') do %>
+        <%= link_to({ controller: '/admin/home', auth_token: Current.session.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item is-active') do %>
           <span><%= member.organ.name %></span>
         <% end %>
       <% else %>
-        <%= link_to({ controller: '/admin/home', auth_token: current_authorized_token.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item') do %>
+        <%= link_to({ controller: '/admin/home', auth_token: Current.session.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item') do %>
           <span><%= member.organ.name %></span>
         <% end %>
       <% end %>
@@ -26,11 +26,11 @@
     <div class="navbar-divider"></div>
     <% oauth_user.members.includes(organ: :organ_domains).each do |member| %>
       <% if current_organ.self_and_ancestor_ids.include?(member.organ_id) %>
-        <%= link_to({ controller: '/admin/home', auth_token: current_authorized_token.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item is-active') do %>
+        <%= link_to({ controller: '/admin/home', auth_token: Current.session.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item is-active') do %>
           <span><%= member.organ.name %></span>
         <% end %>
       <% else %>
-        <%= link_to({ controller: '/admin/home', auth_token: current_authorized_token.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item') do %>
+        <%= link_to({ controller: '/admin/home', auth_token: Current.session.id, **member.organ.admin_url_options(request) }, text: true, class: 'navbar-item') do %>
           <span><%= member.organ.name %></span>
         <% end %>
       <% end %>

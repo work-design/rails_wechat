@@ -109,8 +109,7 @@ module Wechat
     end
 
     def clear_auth_token
-      @current_authorized_token = nil
-      session.delete :auth_token
+      Current.session.destroy
     end
 
   end
