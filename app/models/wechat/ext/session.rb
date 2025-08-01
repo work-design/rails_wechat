@@ -1,5 +1,5 @@
 module Wechat
-  module Ext::AuthorizedToken
+  module Ext::Session
     extend ActiveSupport::Concern
 
     included do
