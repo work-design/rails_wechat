@@ -1,5 +1,5 @@
 <%= button_to({ action: 'destroy' }, method: :delete, class: 'text-danger', form: { data: { turbo_confirm: t('.destroy.confirm') }, class: 'cell weui-actionsheet__cell_warn' }) do %>
-  <i class="fa-solid fa-trash"></i>
+  <%= svg_tag 'trash', class: 'icon' %>
   <span><%= t('.destroy.title') %></span>
 <% end %>
 <%= button_to({ action: 'edit' }, class: 'cell') do %>
@@ -7,6 +7,6 @@
   <span><%= t('.edit.title') %></span>
 <% end %>
 <%= link_to({ action: 'show' }, class: 'cell') do %>
-  <i class="fa-solid fa-circle-info"></i>
+  <%= svg_tag 'circle-info', class: 'icon text-info' %>
   <span><%= t('.show.title') %></span>
 <% end %>

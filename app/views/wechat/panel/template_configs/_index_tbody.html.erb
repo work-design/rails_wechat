@@ -15,20 +15,20 @@
 </td>
 <td>
   <div data-show-target="item" class="visibility-hidden">
-    <%= link_to({ action: 'apps', id: model.id }, aria: { label: t('wechat.panel.template_configs.apps.title') }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ action: 'apps', id: model.id }, aria: { label: t('wechat.panel.template_configs.apps.title') }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-shapes text-success"></i>
     <% end %>
-    <%= link_to({ controller: 'template_key_words', template_config_id: model.id }, aria: { label: t('wechat.panel.template_key_words.index.title') }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ controller: 'template_key_words', template_config_id: model.id }, aria: { label: t('wechat.panel.template_key_words.index.title') }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-gears text-primary"></i>
     <% end %>
-    <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-circle-info text-info"></i>
+    <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'circle-info', class: 'icon text-info' %>
     <% end %>
-    <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-pencil text-link"></i>
+    <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'pencil', class: 'icon text-link' %>
     <% end %>
-    <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, form: { data: { turbo_confirm: t('.destroy.confirm') } }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-trash text-danger"></i>
+    <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, form: { data: { turbo_confirm: t('.destroy.confirm') } }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'trash', class: 'icon text-danger' %>
     <% end %>
   </div>
 </td>

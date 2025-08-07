@@ -1,7 +1,7 @@
 
 
   <td>
-    <%= button_to({ action: 'commit', id: @program_agency.id, platform_template_id: model.id }, aria: { label: t('wechat.panel.program_agencies.commit.title') }, class: 'button is-small is-rounded is-light') do %>
+    <%= button_to({ action: 'commit', id: @program_agency.id, platform_template_id: model.id }, aria: { label: t('wechat.panel.program_agencies.commit.title') }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-upload text-danger"></i>
     <% end %>
   </td>

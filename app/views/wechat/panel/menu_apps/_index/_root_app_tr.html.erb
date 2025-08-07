@@ -1,8 +1,8 @@
 <tr id="tr_<%= model.id %>" data-depth="10" data-controller="tree show" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="<%= 'background-white-ter' %>">
   <%= yield %>
   <td>
-    <%= link_to({ controller: 'menu_root_apps', action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-pencil text-link"></i>
+    <%= link_to({ controller: 'menu_root_apps', action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'pencil', class: 'icon text-link' %>
     <% end %>
   </td>
 </tr>

@@ -8,7 +8,7 @@
 </td>
 <td></td>
 <td>
-  <%= link_to({ controller: 'wechat_users', scene_id: model.id }, aria: { label: t('wechat.in.wechat_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
+  <%= link_to({ controller: 'wechat_users', scene_id: model.id }, aria: { label: t('wechat.in.wechat_users.index.title') }, class: 'button is-small is-borderless') do %>
     <i class="fa-solid fa-users"></i>
     <span class="pl-1"><%= model.tag.user_tags.size %></span>
   <% end if model.tag %>

@@ -25,7 +25,7 @@
   <% if @response.reply %>
     <turbo-frame id="reply">
       <span><%= @response.reply.type_i18n %></span>
-      <%= link_to({ action: 'edit_reply', id: @response.id }, data: { turbo_frame: 'reply' }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ action: 'edit_reply', id: @response.id }, data: { turbo_frame: 'reply' }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
         <i class="fa-solid fa-pencil"></i>
       <% end %>
     </turbo-frame>

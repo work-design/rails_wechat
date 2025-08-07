@@ -8,28 +8,28 @@
 </td>
 <td>
   <div data-show-target="item" class="visibility-hidden">
-    <%= link_to({ controller: 'corp_users', agent_id: model.id }, aria: { label: t('wechat.admin.corp_users.index.title') }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ controller: 'corp_users', agent_id: model.id }, aria: { label: t('wechat.admin.corp_users.index.title') }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-building-user"></i>
     <% end %>
-    <%= link_to({ controller: 'suite_receives', agent_id: model.id }, aria: { label: t('wechat.admin.suite_receives.index.title') }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ controller: 'suite_receives', agent_id: model.id }, aria: { label: t('wechat.admin.suite_receives.index.title') }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-message"></i>
     <% end %>
   </div>
   <div data-show-target="item" class="mt-1 visibility-hidden">
-    <%= button_to({ action: 'info', id: model.id }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-rounded is-light') do %>
+    <%= button_to({ action: 'info', id: model.id }, aria: { label: t('wechat.admin.apps.info.title') }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-cog"></i>
     <% end %>
-    <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-circle-info text-info"></i>
+    <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'circle-info', class: 'icon text-info' %>
     <% end %>
-    <%= link_to({ action: 'edit_confirm', id: model.id }, aria: { label: t('wechat.admin.agents.edit_confirm.title') }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ action: 'edit_confirm', id: model.id }, aria: { label: t('wechat.admin.agents.edit_confirm.title') }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-file text-info"></i>
     <% end %>
-    <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-pencil text-link"></i>
+    <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'pencil', class: 'icon text-link' %>
     <% end %>
-    <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-trash text-danger"></i>
+    <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'trash', class: 'icon text-danger' %>
     <% end %>
   </div>
 </td>

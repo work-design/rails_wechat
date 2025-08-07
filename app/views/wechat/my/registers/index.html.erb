@@ -18,14 +18,14 @@
       <td><%= register.id_name %></td>
       <td><%= register.id_number %></td>
       <td>
-        <%= link_to my_register_path(register), aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fa-solid fa-circle-info"></i>
+        <%= link_to my_register_path(register), aria: { label: t('.show.title') }, class: 'button is-small is-borderless' do %>
+          <%= svg_tag 'circle-info', class: 'icon text-info' %>
         <% end %>
-        <%= link_to edit_my_register_path(register), aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light' do %>
+        <%= link_to edit_my_register_path(register), aria: { label: t('.edit.title') }, class: 'button is-small is-borderless' do %>
           <i class="fa-solid fa-pencil"></i>
         <% end %>
-        <%= link_to my_register_path(register), method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-small is-rounded is-light' do %>
-          <i class="fa-solid fa-trash"></i>
+        <%= link_to my_register_path(register), method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-small is-borderless' do %>
+          <%= svg_tag 'trash', class: 'icon' %>
         <% end %>
       </td>
     </tr>

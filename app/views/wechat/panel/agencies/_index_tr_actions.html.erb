@@ -1,37 +1,37 @@
 <td>
   <div data-show-target="item" class="visibility-hidden">
-    <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-circle-info text-info"></i>
+    <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'circle-info', class: 'icon text-info' %>
     <% end %>
-    <%= button_to({ action: 'organ', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
+    <%= button_to({ action: 'organ', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-building text-link"></i>
     <% end %>
-    <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
-      <i class="fa-solid fa-pencil text-link"></i>
+    <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'pencil', class: 'icon text-link' %>
     <% end %>
-    <%= link_to model.fast_url, target: '_blank', class: 'button is-small is-rounded is-light' do %>
+    <%= link_to model.fast_url, target: '_blank', class: 'button is-small is-borderless' do %>
       <i class="fa-solid fa-bolt text-success"></i>
       <span class="ml-1"><%= '快速注册' %></span>
     <% end %>
   </div>
   <div data-show-target="item" class="visibility-hidden">
-    <%= link_to({ controller: 'requests', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ controller: 'requests', agency_id: model.id }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-comments"></i>
       <span class="ml-1"><%= t('.requests.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'menu_apps', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ controller: 'menu_apps', agency_id: model.id }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-bars"></i>
       <span class="ml-1"><%= t('.menu_apps.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'wechat_users', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ controller: 'wechat_users', agency_id: model.id }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-users"></i>
       <span class="ml-1"><%= t('.wechat_users.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'scenes', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ controller: 'scenes', agency_id: model.id }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-qrcode"></i>
       <span class="ml-1"><%= t('.scenes.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'templates', agency_id: model.id }, class: 'button is-small is-rounded is-light') do %>
+    <%= link_to({ controller: 'templates', agency_id: model.id }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-inbox"></i>
       <span class="ml-1"><%= t('.templates.index.title') %></span>
     <% end %>

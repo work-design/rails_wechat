@@ -2,7 +2,7 @@
   <%= yield %>
   <td>
     <div data-show-target="item" class="visibility-hidden">
-      <%= link_to({ controller: 'menu_roots', action: 'new', position: model.position }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= link_to({ controller: 'menu_roots', action: 'new', position: model.position }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
         <i class="fa-solid fa-pencil text-info"></i>
       <% end %>
     </div>

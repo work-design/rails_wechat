@@ -29,7 +29,7 @@
   <div class="mt-1">
     <span><%= model.version_info.dig('exp_info', 'exp_version') %></span>
     <time data-controller="time" class="text-grey"><%= model.version_info.dig('exp_info', 'exp_time') %></time>
-    <%= button_to({ action: 'submit', id: model.id }, class: 'button is-small is-rounded is-light') do %>
+    <%= button_to({ action: 'submit', id: model.id }, class: 'button is-small is-borderless') do %>
       <i class="fa-solid fa-upload text-danger"></i>
       <span class="ml-1"><%= t('.submit.title') %></span>
     <% end if model.submittable? %>
@@ -38,7 +38,7 @@
 </td>
 <td>
   <span><%= model.audit_status_i18n %></span>
-  <%= button_to({ action: 'release', id: model.id }, class: 'button is-small is-rounded is-light') do %>
+  <%= button_to({ action: 'release', id: model.id }, class: 'button is-small is-borderless') do %>
     <i class="fa-solid fa-cloud-arrow-up text-success"></i>
     <span class="ml-1"><%= t('.release.title') %></span>
   <% end if model.releasable? %>

@@ -6,7 +6,7 @@
   <p class="text-grey"><%= model.corpid %></p>
 </td>
 <td>
-  <%= link_to({ controller: '/admin/home', host: model.organ.host, auth_token: Current.session.id }, aria: { label: t('admin.home.index.title') }, class: 'button is-small is-rounded is-light') do %>
+  <%= link_to({ controller: '/admin/home', host: model.organ.host, auth_token: Current.session.id }, aria: { label: t('admin.home.index.title') }, class: 'button is-small is-borderless') do %>
     <i class="fa-solid fa-hand-point-right text-success"></i>
     <span class="pl-1"><%= model.organ_id %></span>
   <% end if model.organ %>

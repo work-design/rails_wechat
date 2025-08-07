@@ -2,11 +2,11 @@
   <%= yield %>
   <td>
     <div data-show-target="item" class="visibility-hidden">
-      <%= button_to({ controller: 'menu_roots', action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= button_to({ controller: 'menu_roots', action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
         <i class="fa-solid fa-pencil text-info"></i>
       <% end %>
-      <%= button_to({ controller: 'menu_roots', action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-rounded is-light', form: { data: { turbo_confirm: t('.destroy.confirm') } }) do %>
-        <i class="fa-solid fa-trash text-danger"></i>
+      <%= button_to({ controller: 'menu_roots', action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-borderless', form: { data: { turbo_confirm: t('.destroy.confirm') } }) do %>
+        <%= svg_tag 'trash', class: 'icon text-danger' %>
       <% end %>
     </div>
   </td>

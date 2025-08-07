@@ -3,11 +3,11 @@
   <%= yield %>
   <td>
     <% if menu_disable %>
-      <%= button_to({ controller: 'menu_disables', action: 'destroy', menu_id: model.id, id: menu_disable.id }, method: :delete, aria: { label: '添加' }, class: 'button is-small is-rounded is-light') do %>
+      <%= button_to({ controller: 'menu_disables', action: 'destroy', menu_id: model.id, id: menu_disable.id }, method: :delete, aria: { label: '添加' }, class: 'button is-small is-borderless') do %>
         <i class="fa-solid fa-xmark text-danger"></i>
       <% end %>
     <% else %>
-      <%= button_to({ controller: 'menu_disables', action: 'create', menu_id: model.id }, aria: { label: t('.destroy.title') }, class: 'button is-small is-rounded is-light') do %>
+      <%= button_to({ controller: 'menu_disables', action: 'create', menu_id: model.id }, aria: { label: t('.destroy.title') }, class: 'button is-small is-borderless') do %>
         <i class="fa-solid fa-check text-success"></i>
       <% end %>
     <% end %>
