@@ -1,44 +1,44 @@
 <div class="fixed-grid has-6-cols">
   <p></p>
   <div class="grid">
-    <%= link_to({ controller: 'wechat/panel/platforms' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'cell button is-fullwidth') do %>
+    <%= link_to({ controller: 'wechat/panel/platforms' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('wechat.panel.platforms.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'wechat/panel/registers' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'cell button is-fullwidth') do %>
+    <%= link_to({ controller: 'wechat/panel/registers' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('wechat.panel.registers.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'wechat/panel/partners' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'cell button is-fullwidth') do %>
+    <%= link_to({ controller: 'wechat/panel/partners' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('wechat.panel.partners.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'wechat/panel/providers' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'cell button is-fullwidth') do %>
+    <%= link_to({ controller: 'wechat/panel/providers' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('wechat.panel.providers.index.title') %></span>
     <% end %>
   </div>
   <p></p>
   <div class="grid">
-    <%= link_to({ controller: 'wechat/panel/apps' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'cell button is-fullwidth flex-direction-column') do %>
+    <%= link_to({ controller: 'wechat/panel/apps' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth flex-direction-column') do %>
       <span><%= Wechat::App.count %></span>
       <span><%= t('wechat.panel.apps.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'wechat/panel/menus' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'cell button is-fullwidth') do %>
+    <%= link_to({ controller: 'wechat/panel/menus' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('wechat.panel.menus.index.title') %></span>
     <% end %>
   </div>
   <p></p>
   <div class="grid">
-    <%= link_to({ controller: 'wechat/panel/organs' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'cell button is-fullwidth') do %>
+    <%= link_to({ controller: 'wechat/panel/organs' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('wechat.panel.organs.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'wechat/panel/template_configs' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'cell button is-fullwidth') do %>
+    <%= link_to({ controller: 'wechat/panel/template_configs' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('wechat.panel.template_configs.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'wechat/panel/categories' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'cell button is-fullwidth') do %>
+    <%= link_to({ controller: 'wechat/panel/categories' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('wechat.panel.categories.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'wechat/panel/contacts' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'cell button is-fullwidth') do %>
+    <%= link_to({ controller: 'wechat/panel/contacts' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('wechat.panel.contacts.index.title') %></span>
     <% end %>
-    <%= link_to({ controller: 'wechat/panel/corp_external_users' }, data: { turbo_frame: 'body', action: 'menu#enter' }, class: 'cell button is-fullwidth') do %>
+    <%= link_to({ controller: 'wechat/panel/corp_external_users' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
       <span><%= t('wechat.panel.corp_external_users.index.title') %></span>
     <% end %>
   </div>
