@@ -13,10 +13,10 @@
   <% end %>
 </div>
 <div class="grid">
-  <%= link_to({ controller: 'wechat/admin/agents' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: active_helper(controllers: 'wechat/admin/agents', item: 'menu-item', active: 'menu-item is-active')) do %>
+  <%= link_to({ controller: 'wechat/admin/agents' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: active_helper(controllers: 'wechat/admin/agents', item: 'cell button is-fullwidth', active: 'cell button is-fullwidth is-active')) do %>
     <span><%= t('wechat.admin.agents.index.title') %></span>
   <% end %>
-  <%= link_to({ controller: 'wechat/admin/organs', action: 'show' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: active_helper(controllers: ['organs'], item: 'menu-item', active: 'menu-item is-active')) do %>
+  <%= link_to({ controller: 'wechat/admin/organs', action: 'show' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: active_helper(controllers: ['organs'], item: 'cell button is-fullwidth', active: 'cell button is-fullwidth is-active')) do %>
     <span><%= t('wechat.admin.organs.show.title') %></span>
   <% end %>
 </div>
