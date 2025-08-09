@@ -1,0 +1,22 @@
+<div class="grid">
+  <%= link_to({ controller: 'wechat/admin/members', action: 'wechat' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
+    <span><%= t('wechat.admin.members.index.title') %></span>
+  <% end %>
+  <%= link_to({ controller: 'wechat/admin/payees' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
+    <span><%= t('wechat.admin.payees.index.title') %></span>
+  <% end %>
+  <%= link_to({ controller: 'wechat/admin/apps' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
+    <span><%= t('wechat.admin.apps.index.title') %></span>
+  <% end %>
+  <%= link_to({ controller: 'wechat/in/apps' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
+    <span><%= t('wechat.in.apps.index.title') %></span>
+  <% end %>
+</div>
+<div class="grid">
+  <%= link_to({ controller: 'wechat/admin/agents' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: active_helper(controllers: 'wechat/admin/agents', item: 'menu-item', active: 'menu-item is-active')) do %>
+    <span><%= t('wechat.admin.agents.index.title') %></span>
+  <% end %>
+  <%= link_to({ controller: 'wechat/admin/organs', action: 'show' }, data: { turbo_frame: 'body', action: 'menu-popup#enter' }, class: active_helper(controllers: ['organs'], item: 'menu-item', active: 'menu-item is-active')) do %>
+    <span><%= t('wechat.admin.organs.show.title') %></span>
+  <% end %>
+</div>
