@@ -2,9 +2,15 @@
 
 <div class="tabs is-centered mb-3">
   <ul>
-    <li class="<%= active_helper(agencies: ['show', 'edit'], active: 'is-active') %>">
-      <%= link_to t('.agencies.show.title'), { controller: 'agencies', action: 'show', platform_id: @app.platform_id, id: @app.id } %>
-    </li>
+    <% if @app.platform_id %>
+      <li class="<%= active_helper(agencies: ['show', 'edit'], active: 'is-active') %>">
+        <%= link_to t('.agencies.show.title'), { controller: 'agencies', action: 'show', platform_id: @app.platform_id, id: @app.id } %>
+      </li>
+    <% else %>
+      <li class="<%= active_helper(agencies: ['show', 'edit'], active: 'is-active') %>">
+        <%= link_to t('.apps.show.title'), { controller: 'apps', action: 'show' id: @app.id } %>
+      </li>
+    <% end %>
     <li class="<%= active_helper(controllers: 'requests', active: 'is-active') %>">
       <%= link_to t('.requests.index.title'), { controller: 'requests', app_id: @app.id } %>
     </li>

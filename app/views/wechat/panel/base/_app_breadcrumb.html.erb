@@ -1,9 +1,13 @@
-<li><%= link_to t('.platforms.index.title'), { controller: 'platforms', anchor: "tr_#{params[:platform_id]}" } %></li>
-<li><span class="mx-3"><%= @platform.name %></span></li>
+<% if @platform %>
+  <li><%= link_to t('.platforms.index.title'), { controller: 'platforms', anchor: "tr_#{params[:platform_id]}" } %></li>
+  <li><span class="mx-3"><%= @platform.name %></span></li>
+<% else %>
+  <li><%= link_to t('.apps.index.title'), { controller: 'apps' } %></li>
+<% end %>
 <li>
   <% if @app.is_a?(Wechat::ProgramAgency) %>
     <%= link_to t('.program_agencies.index.title'), { controller: 'program_agencies', platform_id: @app.platform_id, anchor: "tr_#{@app.id}" } %>
-  <% else %>
+  <% elsif @app.platform_id.present? %>
     <%= link_to t('.agencies.index.title'), { controller: 'agencies', platform_id: @app.platform_id, anchor: "tr_#{@app.id}" } %>
   <% end %>
 </li>
