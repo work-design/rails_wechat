@@ -1,2 +1,8 @@
+regular:
+  - door-open
+  - gears
+  - message
+  - paperclip
+  - vial
 brands:
   - weixin
