@@ -2,8 +2,8 @@
 <li><span class="mx-3"><%= @platform.name %></span></li>
 <li>
   <% if @app.is_a?(Wechat::ProgramAgency) %>
-    <%= link_to t('.program_agencies.index.title'), { controller: 'program_agencies', anchor: "tr_#{@app.id}" } %>
+    <%= link_to t('.program_agencies.index.title'), { controller: 'program_agencies', platform_id: @app.platform_id, anchor: "tr_#{@app.id}" } %>
   <% else %>
-    <%= link_to t('.agencies.index.title'), { controller: 'agencies', anchor: "tr_#{@app.id}" } %>
+    <%= link_to t('.agencies.index.title'), { controller: 'agencies', platform_id: @app.platform_id, anchor: "tr_#{@app.id}" } %>
   <% end %>
 </li>
