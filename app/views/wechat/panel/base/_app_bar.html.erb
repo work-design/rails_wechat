@@ -8,7 +8,7 @@
       </li>
     <% else %>
       <li class="<%= active_helper(agencies: ['show', 'edit'], active: 'is-active') %>">
-        <%= link_to t('.apps.show.title'), { controller: 'apps', action: 'show' id: @app.id } %>
+        <%= link_to t('.apps.show.title'), { controller: 'apps', action: 'show', id: @app.id } %>
       </li>
     <% end %>
     <li class="<%= active_helper(controllers: 'requests', active: 'is-active') %>">
