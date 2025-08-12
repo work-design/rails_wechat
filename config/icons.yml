@@ -1,4 +1,6 @@
 regular:
+  - bolt
+  - building
   - door-open
   - gears
   - message
