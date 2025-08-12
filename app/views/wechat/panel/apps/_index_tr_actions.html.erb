@@ -8,11 +8,6 @@
   <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
     <%= svg_tag 'pencil', class: 'icon text-link' %>
   <% end %>
-  <%= link_to model.fast_url, target: '_blank', class: 'button is-small is-borderless' do %>
-    <i class="fa-solid fa-bolt text-success"></i>
-    <%= svg_tag 'bolt' %>
-    <span class="ml-1"><%= '快速注册' %></span>
-  <% end %>
 </div>
 <div data-show-target="item" class="visibility-hidden">
   <%= link_to({ controller: 'requests', app_id: model.id }, class: 'button is-small is-borderless') do %>

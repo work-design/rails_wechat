@@ -1,10 +1,14 @@
 regular:
+  - bars
   - bolt
   - building
+  - comments
   - door-open
   - gears
+  - inbox
   - message
   - paperclip
+  - qrcode
   - vial
 brands:
   - weixin
