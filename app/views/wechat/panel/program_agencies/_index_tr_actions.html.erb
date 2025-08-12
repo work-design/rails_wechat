@@ -7,7 +7,7 @@
   <% end %>
 </div>
 <div data-show-target="item" class="visibility-hidden">
-  <%= link_to({ controller: 'scenes', agency_id: model.id }, class: 'button is-small is-borderless') do %>
+  <%= link_to({ controller: 'scenes', app_id: model.id }, class: 'button is-small is-borderless') do %>
     <%= svg_tag 'qrcode' %>
     <span class="ml-1"><%= t('.scenes.index.title') %></span>
   <% end %>

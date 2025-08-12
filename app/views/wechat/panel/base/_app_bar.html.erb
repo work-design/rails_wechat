@@ -6,19 +6,19 @@
       <%= link_to t('.agencies.show.title'), { controller: 'agencies', action: 'show', platform_id: @app.platform_id, id: @app.id } %>
     </li>
     <li class="<%= active_helper(controllers: 'requests', active: 'is-active') %>">
-      <%= link_to t('.requests.index.title'), { controller: 'requests', agency_id: @app.id } %>
+      <%= link_to t('.requests.index.title'), { controller: 'requests', app_id: @app.id } %>
     </li>
     <li class="<%= active_helper(controllers: 'scenes', active: 'is-active') %>">
-      <%= link_to t('.scenes.index.title'), { controller: 'scenes', agency_id: @app.id } %>
+      <%= link_to t('.scenes.index.title'), { controller: 'scenes', app_id: @app.id } %>
     </li>
     <li class="<%= active_helper(controllers: 'wechat_users', active: 'is-active') %>">
-      <%= link_to t('.wechat_users.index.title'), { controller: 'wechat_users', agency_id: @app.id } %>
+      <%= link_to t('.wechat_users.index.title'), { controller: 'wechat_users', app_id: @app.id } %>
     </li>
     <li class="<%= active_helper(controllers: 'menu_apps', active: 'is-active') %>">
-      <%= link_to t('.menu_apps.index.title'), { controller: 'menu_apps', agency_id: @app.id } %>
+      <%= link_to t('.menu_apps.index.title'), { controller: 'menu_apps', app_id: @app.id } %>
     </li>
     <li class="<%= active_helper(controllers: 'templates', active: 'is-active') %>">
-      <%= link_to t('.templates.index.title'), { controller: 'templates', agency_id: @app.id } %>
+      <%= link_to t('.templates.index.title'), { controller: 'templates', app_id: @app.id } %>
     </li>
   </ul>
 </div>
