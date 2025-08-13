@@ -10,7 +10,7 @@
           <% end %>
         <% end %>
         <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-borderless', form: { data: { turbo_confirm: t('.destroy.confirm') } }) do %>
-          <%= svg_tag 'trash', class: 'icon' %>
+          <%= svg_tag 'trash' %>
         <% end %>
       <% end %>
     </div>
