@@ -2,13 +2,16 @@ regular:
   - bars
   - bolt
   - building
+  - certificate
   - comments
   - door-open
   - gears
+  - globe
   - inbox
   - message
   - paperclip
   - qrcode
   - vial
 brands:
+  - amazon-pay
   - weixin
