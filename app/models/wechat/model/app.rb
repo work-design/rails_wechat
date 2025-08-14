@@ -189,7 +189,7 @@ module Wechat
     end
 
     def generate_wechat_user(code)
-      result = api.oauth2_access_token(code)
+      result = platform.api.oauth2_access_token(code, appid)
       logger.debug "\e[35m  Agency generate User: #{result}  \e[0m"
 
       wechat_user = WechatUser.find_or_initialize_by(uid: result['openid'])
