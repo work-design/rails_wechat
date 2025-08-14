@@ -19,7 +19,7 @@
     <% end %>
   </div>
   <div class="panel-block background-white justify-content-center">
-    <%= link_to({ controller: 'auth/sign', action: 'sign', **params.permit(:state) }) do %>
+    <%= link_to({ controller: 'auth/sessions', action: 'new', **params.permit(:state) }) do %>
       <i class="fa-solid fa-user"></i>
       <span class="text-grey">账号密码登录</span>
     <% end if defined? RailsAuth %>
