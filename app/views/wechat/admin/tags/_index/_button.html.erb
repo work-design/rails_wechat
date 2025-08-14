@@ -1,5 +1,5 @@
 <%= button_to({ action: 'new' }, class: 'button is-link') do %>
-  <i class="fa-solid fa-plus"></i>
+  <%= svg_tag 'plus' %>
   <span class="ml-1"><%= t('.new.title') %></span>
 <% end %>
 <%= button_to({ action: 'sync' }, class: 'button is-primary') do %>

@@ -17,7 +17,7 @@
 <tr>
   <td colspan="5">
     <%= button_to({ action: 'new', menu_root_id: model.id }, class: 'pl-4') do %>
-      <i class="fa-solid fa-plus"></i>
+      <%= svg_tag 'plus' %>
       <span><% t('.new.title') %></span>
     <% end %>
   </td>

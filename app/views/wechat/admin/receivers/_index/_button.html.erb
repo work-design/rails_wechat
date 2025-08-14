@@ -1,8 +1,8 @@
 <%= button_to({ action: 'new', **request.query_parameters.except(:id) }, data: { turbo_frame: 'modal' }, class: 'button is-link') do %>
-  <i class="fa-solid fa-plus"></i>
+  <%= svg_tag 'plus' %>
   <span class="ml-1"><%= t('.new.title') %></span>
 <% end %>
 <%= link_to({ action: 'users', **request.query_parameters.except(:id) }, class: 'button is-info') do %>
-  <i class="fa-solid fa-plus"></i>
+  <%= svg_tag 'plus' %>
   <span class="ml-1"><%= t('wechat.admin.receivers.users.title') %></span>
 <% end %>

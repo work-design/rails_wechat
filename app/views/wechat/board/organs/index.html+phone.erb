@@ -8,7 +8,7 @@
   <div class="weui-panel__bd">
   <% Roled::OrganRole.visible.each do |role| %>
     <%= link_to({ controller: 'organs', action: 'new', role_id: role.id, **params.permit(:corp_id) }, class: 'media') do %>
-      <i class="fa-solid fa-plus"></i>
+      <%= svg_tag 'plus' %>
       <span class="pl-1"><%= role.name %></span>
     <% end %>
   <% end %>

@@ -19,7 +19,7 @@
     <article class="media">
       <div class="content">
         <%= link_to({ action: 'add', id: model.id }, data: { turbo_frame: 'modal' }) do %>
-          <i class="fa-solid fa-plus"></i><span><%= t('.add') %></span>
+          <%= svg_tag 'plus' %><span><%= t('.add') %></span>
         <% end %>
       </div>
     </article>

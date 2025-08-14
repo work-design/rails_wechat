@@ -9,7 +9,7 @@
 <% if @registers.blank? %>
 <div class="box">
   <%= link_to({ action: 'new' }, class: 'weui-btn_cell weui-btn_cell-primary') do %>
-    <span class="weui-btn_cell__icon"><i class="fa-solid fa-plus"></i></span>
+    <span class="weui-btn_cell__icon"><%= svg_tag 'plus' %></span>
     <span><%= t('.new.title') %></span>
   <% end %>
 </div>

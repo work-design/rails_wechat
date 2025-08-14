@@ -1,7 +1,7 @@
 <td><strong><%= model.name %></strong></td>
 <td colspan="2">
   <%= link_to({ action: 'new', menu_root_id: model.id }, data: { turbo_frame: 'modal' }, class: 'button is-small is-link') do %>
-    <i class="fa-solid fa-plus"></i>
+    <%= svg_tag 'plus' %>
     <span><% t('.new.title') %></span>
   <% end %>
 </td>

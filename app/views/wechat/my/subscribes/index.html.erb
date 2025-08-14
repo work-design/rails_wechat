@@ -10,7 +10,7 @@
       <th><%= Wechat::Subscribed.human_attribute_name(:sending_at) %></th>
       <th>
         <%= link_to new_my_subscribe_path, class: 'button is-link is-small' do %>
-          <i class="fa-solid fa-plus"></i><%= t('.new.title') %>
+          <%= svg_tag 'plus' %><%= t('.new.title') %>
         <% end %>
       </th>
     </tr>

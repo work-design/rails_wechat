@@ -3,7 +3,7 @@
   <td>
     <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ controller: 'menu_root_apps', action: 'new' }, data: { turbo_frame: 'modal' }, class: 'button is-small is-outlined is-link') do %>
-        <i class="fa-solid fa-plus"></i>
+        <%= svg_tag 'plus' %>
         <span class="pl-1"><%= t('wechat.panel.menu_root_apps.new.title') %></span>
       <% end %>
     </div>
