@@ -1,4 +1,4 @@
-<h1 class="title is-3 text-centered mb-4">微信登陆</h1>
+<h1 class="title is-3 text-centered text-primary mb-4">微信登陆</h1>
 <figure class="text-centered">
   <% if @scene %>
     <%= image_tag @scene.qrcode_data_url, id: 'login_qrcode' %>
@@ -7,11 +7,13 @@
   <% end %>
   <figcaption>请使用微信扫描二维码登录</figcaption>
 </figure>
-<p id="login_count_down" data-controller="count-down" class="<%= @scene.present? ? 'display-block' : 'display-none' %>">
+<p id="login_count_down" data-controller="count-down" class="<%= @scene.present? ? 'display-block text-centered' : 'display-none text-centered' %>">
   <span data-count-down-target="count"><%= @scene&.remaining_seconds %></span>
   <span>秒后过期</span>
 </p>
-<%= link_to({ controller: 'auth/sessions', action: 'new', **params.permit(:state) }) do %>
-  <i class="fa-solid fa-user"></i>
-  <span class="text-grey">账号密码登录</span>
-<% end if defined? RailsAuth %>
+<p class="text-centered">
+  <%= link_to({ controller: 'auth/sessions', action: 'new', **params.permit(:state) }) do %>
+    <%= svg_tag 'user' %>
+    <span class="text-grey">账号密码登录</span>
+  <% end %>
+</p>
