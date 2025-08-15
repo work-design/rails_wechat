@@ -68,7 +68,7 @@ module Wechat
       state = Com::State.find_by(id: state_id)
       if state
         state.update destroyable: true
-        authorized_token.update session_id: "#{state.session_id}_#{state_id}"
+        session.update session_id: "#{state.session_id}_#{state_id}"
 
         SessionChannel.broadcast_to(
           state.session_id,

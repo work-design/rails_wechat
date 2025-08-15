@@ -147,7 +147,18 @@ module Wechat
 
     def reply_for_login
       if wechat_user.unionid.present?
-        wechat_user.login!(scene.state_uuid)
+        if scene.state_uuid
+          wechat_user.login!(scene.state_uuid)
+        else
+          session_id = body.delete_prefix('session_')
+          SessionChannel.broadcast_to(
+            session_id,
+            url: Rails.application.routes.url_for(
+              controller: 'home',
+              auth_token: wechat_user.auth_token
+            )
+          )
+        end
         build_text_reply(value: '登录成功！')
       else
         reply_params(
