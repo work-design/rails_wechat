@@ -3,6 +3,6 @@
   <span class="ml-1"><%= t('.new.title') %></span>
 <% end %>
 <%= button_to({ action: 'sync' }, class: 'button is-primary') do %>
-  <i class="fa-solid fa-sync-alt"></i>
+  <%= svg_tag 'rotate' %>
   <span class="ml-1"><%= t('.sync.title') %></span>
 <% end %>

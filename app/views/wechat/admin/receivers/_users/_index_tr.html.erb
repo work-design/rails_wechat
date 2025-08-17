@@ -3,8 +3,8 @@
   <td>
   <% if @select_uids.include?(model.uid) %>
     <%= button_to({ action: 'destroy_openid', uid: model.uid }, method: :delete, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-small is-danger') do %>
-      <i class="fa-solid fa-times"></i>
-      <span class="pl-1"><%= t('.destroy.title') %></span>
+      <%= svg_tag 'xmark' %>
+      <span class="ml-1"><%= t('.destroy.title') %></span>
     <% end %>
   <% else %>
     <%= link_to({ action: 'new_openid', 'receiver[account]': model.uid }, data: { turbo_frame: 'modal' }, class: 'button is-small is-success') do %>

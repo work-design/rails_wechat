@@ -11,8 +11,8 @@
   <span class="tag is-success">已开通</span>
 <% else %>
   <%= button_to({ action: 'sync' }, params: { appid: model.appid }, class: 'button is-small is-rounded is-danger') do %>
-    <i class="fa-solid fa-rotate"></i>
-    <span class="pl-1">开通</span>
+    <%= svg_tag 'rotate' %>
+    <span class="ml-1">开通</span>
   <% end %>
 <% end %>
 </td>
