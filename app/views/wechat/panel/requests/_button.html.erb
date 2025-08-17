@@ -1,4 +1,4 @@
-<%= button_to({ controller: 'datum/admin/table_lists', action: 'find', data_list_id: 'RequestDailyExport', **params.permit('created_at-gte', 'created_at-lte') }, class: 'button is-link') do %>
+<%= button_to({ controller: 'datum/admin/table_lists', action: 'find', data_list_id: 'RequestDailyExport', **params.permit('created_at-gte', 'created_at-lte') }, class: 'button is-rounded is-primary') do %>
   <i class="fa-solid fa-file-excel"></i>
   <span class="ml-1"><%= t('.export') %></span>
 <% end %>
