@@ -1,6 +1,6 @@
 <div class="box as-bar">
   <%= link_to({ controller: '/my/home' }, class: 'px-4') do %>
-    <i class="fa-solid fa-lg fa-fw-1 fa-angle-left"></i>
+    <%= svg_tag 'angle-left' %>
   <% end %>
   <div class="weui-title"><%= t('wechat.my.users.invite_qrcode.title') %></div>
   <i class="px-5"></i>

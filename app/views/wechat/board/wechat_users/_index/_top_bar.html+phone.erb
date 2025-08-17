@@ -1,6 +1,6 @@
 <div class="box as-bar">
   <%= link_to({ controller: 'auth/my/home' }, class: 'px-4') do %>
-    <i class="fa-solid fa-lg fa-fw-1 fa-angle-left"></i>
+    <%= svg_tag 'angle-left' %>
   <% end %>
   <span class="weui-title"><%= t('.title') %></span>
   <i class="px-5"></i>
