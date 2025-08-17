@@ -26,7 +26,7 @@ module Wechat
         return if current_user && Current.session&.oauth_user
         render 'require_program_login', layout: 'raw', locals: { state: state_enter(destroyable: false).id }, status: :unauthorized and return
       elsif request.variant.include?(:wechat) && app
-        return if current_wechat_user && current_user
+        return if current_user && Current.session.oauth_user
 
         if app.respond_to?(:oauth2_url)
           url = app.oauth2_url(state: state_enter(destroyable: false).id, **wechat_oauth_options)
