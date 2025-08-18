@@ -1,0 +1,2 @@
+<%= turbo_stream.after "tr_#{params[:menu_root_id]}", partial: 'index_tbody', layout: 'index_tr', locals: { model: model } %>
+<%= turbo_stream.remove 'modal' %>

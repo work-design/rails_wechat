@@ -1,5 +1,13 @@
 <td><strong><%= model.name %></strong></td>
-<td colspan="2">
-
-</td>
+<td colspan="2"></td>
 <td><strong class="text-success"><%= model.position %></strong></td>
+<td>
+  <div data-show-target="item" class="visibility-hidden">
+    <%= button_to({ controller: 'menu_roots', action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'pencil' %>
+    <% end %>
+    <%= button_to({ controller: 'menu_roots', action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-borderless', form: { data: { turbo_confirm: t('.destroy.confirm') } }) do %>
+      <%= svg_tag 'trash' %>
+    <% end %>
+  </div>
+</td>
