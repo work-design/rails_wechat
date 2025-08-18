@@ -1,9 +1,9 @@
 <td>
   <span style="display: inline-block"></span>
   <% if model.menus.size > 0 %>
-    <i class="fa-solid fa-fw fa-caret-down" style="cursor: pointer" data-action="click->tree#collapse"></i>
+    <%= svg_tag 'caret-down', data: { action: 'click->tree#collapse' }, class: 'icon is-small clickable' %>
   <% else %>
-    <i class="fa-solid fa-fw fa-minus"></i>
+    <%= svg_tag 'minus' %>
   <% end %>
   <span><%= model.name %></span>
 </td>
