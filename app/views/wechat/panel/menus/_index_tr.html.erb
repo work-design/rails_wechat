@@ -1,14 +1,9 @@
-<tr id="tr_<%= model.menu_root_id %>_<%= model.id %>" data-depth="0" data-controller="show tree" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide">
-
-  <td>
-    <div data-show-target="item" class="visibility-hidden">
-      <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
-        <%= svg_tag 'pencil', class: 'icon text-link' %>
-      <% end %>
-      <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-borderless', form: { data: { turbo_confirm: t('.destroy.confirm') } }) do %>
-        <%= svg_tag 'trash', class: 'icon text-danger' %>
-      <% end %>
-    </div>
-  </td>
-
+<tr
+  id="tr_<%= model.menu_root_id %>_<%= model.id %>"
+  data-depth="0"
+  data-controller="show tree"
+  data-tree-target="item"
+  data-action="mouseenter->show#show mouseleave->show#hide"
+>
+  <%= yield %>
 </tr>
