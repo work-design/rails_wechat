@@ -165,6 +165,9 @@ zh:
       menu_apps:
         index:
           title: 公众号菜单
+      menu_roots:
+        new:
+          title: 新增基础菜单
       menu_root_apps:
         new:
           title: 自定义主菜单
