@@ -312,7 +312,7 @@ Rails.application.routes.draw do
       end
       resources :payees do
         member do
-          get 'cert' => :edit_cert
+          match 'cert' => :edit_cert, via: [:get, :post]
           patch 'cert' => :update_cert
         end
         resources :payee_domains
