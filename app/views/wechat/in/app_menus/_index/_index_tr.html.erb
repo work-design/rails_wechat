@@ -6,7 +6,7 @@
         <% if model.type == 'Wechat::ParentMenu' %>
         <% else %>
           <%= link_to({ action: 'edit', id: model.id }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
-            <i class="fa-solid fa-pencil"></i>
+            <%= svg_tag 'pencil' %>
           <% end %>
         <% end %>
         <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-borderless', form: { data: { turbo_confirm: t('.destroy.confirm') } }) do %>

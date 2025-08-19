@@ -1,12 +1,5 @@
 <tr id="tr_<%= model.id %>" data-depth="10" data-controller="show tree" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide">
   <%= yield %>
-  <td>
-    <div data-show-target="item" class="visibility-hidden">
-      <%= link_to({ controller: 'menu_roots', action: 'new', position: model.position }, data: { turbo_frame: 'modal' }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
-        <i class="fa-solid fa-pencil text-info"></i>
-      <% end %>
-    </div>
-  </td>
 </tr>
 <% model.organ_menus.where(organ_id: [current_organ.id, nil]).each do |child| %>
   <%= render partial: 'index_tbody', layout: 'index_tr', locals: { model: child } %>

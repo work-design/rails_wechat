@@ -20,7 +20,7 @@
   </div>
   <div class="weui-form-preview__ft">
     <%= link_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'weui-form-preview__btn weui-form-preview__btn_default') do %>
-      <i class="fa-solid fa-pencil"></i>
+      <%= svg_tag 'pencil' %>
     <% end %>
     <%= link_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.destroy.confirm') }, class: 'weui-form-preview__btn weui-form-preview__btn_default') do %>
       <%= svg_tag 'trash' %>

@@ -3,7 +3,7 @@
   <span><%= t('.destroy.title') %></span>
 <% end %>
 <%= button_to({ action: 'edit' }, class: 'cell') do %>
-  <i class="fa-solid fa-pencil"></i>
+  <%= svg_tag 'pencil' %>
   <span><%= t('.edit.title') %></span>
 <% end %>
 <%= link_to({ action: 'show' }, class: 'cell') do %>

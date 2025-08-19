@@ -26,7 +26,7 @@
     <turbo-frame id="reply">
       <span><%= @response.reply.type_i18n %></span>
       <%= link_to({ action: 'edit_reply', id: @response.id }, data: { turbo_frame: 'reply' }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
-        <i class="fa-solid fa-pencil"></i>
+        <%= svg_tag 'pencil' %>
       <% end %>
     </turbo-frame>
     <p><%= @response.reply.value %></p>

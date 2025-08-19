@@ -12,6 +12,7 @@ regular:
   - inbox
   - message
   - paperclip
+  - pencil
   - qrcode
   - vial
 brands:

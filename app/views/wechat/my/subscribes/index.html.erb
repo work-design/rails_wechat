@@ -26,7 +26,7 @@
           <%= svg_tag 'circle-info', class: 'icon text-info' %>
         <% end %>
         <%= link_to edit_my_subscribe_path(subscribe), aria: { label: t('.edit.title') }, class: 'button is-small is-borderless' do %>
-          <i class="fa-solid fa-pencil"></i>
+          <%= svg_tag 'pencil' %>
         <% end %>
         <%= link_to my_subscribe_path(subscribe), method: :delete, aria: { label: t('.destroy.title') }, data: { turbo_confirm: t('.destroy.confirm') }, class: 'button is-small is-borderless' do %>
           <%= svg_tag 'trash' %>
