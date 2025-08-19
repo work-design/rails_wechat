@@ -3,6 +3,7 @@ regular:
   - bolt
   - building
   - certificate
+  - check
   - credit-card
   - comments
   - door-open

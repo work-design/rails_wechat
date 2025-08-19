@@ -8,7 +8,7 @@
       <% end %>
     <% else %>
       <%= button_to({ controller: 'menu_disables', action: 'create', menu_id: model.id }, aria: { label: t('.destroy.title') }, class: 'button is-small is-borderless') do %>
-        <i class="fa-solid fa-check text-success"></i>
+        <%= svg_tag 'check', class: 'icon is-small text-success' %>
       <% end %>
     <% end %>
     <%= button_to({ controller: 'menu_apps', action: 'new', menu_id: model.id }, class: 'button is-small is-link') do %>

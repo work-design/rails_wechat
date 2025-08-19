@@ -29,7 +29,7 @@
 </td>
 <td>
 <% if @response.reply_id == model.id %>
-  <i class="fa-solid fa-check text-success"></i>
+  <%= svg_tag 'check', class: 'icon is-small text-success' %>
 <% else %>
   <%= button_to({ action: 'update_reply', id: @response.id }, method: :patch, params: { reply_id: model.id }) do %>
     <i class="fa-solid fa-check-double text-success"></i>
