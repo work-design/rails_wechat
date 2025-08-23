@@ -15,6 +15,7 @@ regular:
   - paperclip
   - pencil
   - qrcode
+  - reply-all
   - user-tag
   - users
   - vial
