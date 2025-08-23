@@ -19,33 +19,33 @@
     <span class="ml-1"><%= t('.requests.index.title') %></span>
   <% end %>
   <%= link_to({ controller: 'tags', app_appid: model.appid }, class: 'button is-small is-borderless') do %>
-    <i class="fa-solid fa-user-tag"></i>
+    <%= svg_tag 'user-tag' %>
     <span class="ml-1"><%= t('.tags.index.title') %></span>
   <% end %>
   <%= link_to({ controller: 'wechat_users', app_appid: model.appid }, class: 'button is-small is-borderless') do %>
-    <i class="fa-solid fa-users"></i>
+    <%= svg_tag 'users' %>
     <span class="ml-1"><%= t('.wechat_users.index.title') %></span>
   <% end %>
   <%= link_to({ controller: 'scenes', app_appid: model.appid }, class: 'button is-small is-borderless') do %>
-    <i class="fa-solid fa-qrcode"></i>
+    <%= svg_tag 'qrcode' %>
     <span class="ml-1"><%= t('.scenes.index.title') %></span>
   <% end %>
 </div>
 <div data-show-target="item" class="visibility-hidden">
   <%= link_to({ controller: 'menu_apps', app_appid: model.appid }, class: 'button is-small is-borderless') do %>
-    <i class="fa-solid fa-bars"></i>
+    <%= svg_tag 'bars' %>
     <span class="ml-1"><%= t('.menu_apps.index.title') %></span>
   <% end %>
   <%= link_to({ controller: 'responses', app_appid: model.appid }, class: 'button is-small is-borderless') do %>
-    <i class="fa-solid fa-reply-all"></i>
+    <%= svg_tag 'reply-all' %>
     <span class="ml-1"><%= t('.responses.index.title') %></span>
   <% end %>
   <%= link_to({ controller: 'templates', app_appid: model.appid }, class: 'button is-small is-borderless') do %>
-    <i class="fa-solid fa-inbox"></i>
+    <%= svg_tag 'inbox' %>
     <span class="ml-1"><%= t('.templates.index.title') %></span>
   <% end %>
   <%= link_to({ controller: 'app_configs', app_appid: model.appid }, class: 'button is-small is-borderless') do %>
-    <i class="fa-solid fa-cogs"></i>
+    <%= svg_tag 'gears' %>
     <span class="ml-1"><%= t('.app_configs.index.title') %></span>
   <% end %>
 </div>
