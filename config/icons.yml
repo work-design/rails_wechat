@@ -8,14 +8,17 @@ regular:
   - credit-card
   - comments
   - door-open
+  - folder
   - gears
   - globe
   - inbox
   - message
+  - paper-plane
   - paperclip
   - pencil
   - qrcode
   - reply-all
+  - shapes
   - user-tag
   - users
   - vial

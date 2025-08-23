@@ -16,10 +16,10 @@
 <td>
   <div data-show-target="item" class="visibility-hidden">
     <%= link_to({ action: 'apps', id: model.id }, aria: { label: t('wechat.panel.template_configs.apps.title') }, class: 'button is-small is-borderless') do %>
-      <i class="fa-solid fa-shapes text-success"></i>
+      <%= svg_tag 'shapes' %>
     <% end %>
     <%= link_to({ controller: 'template_key_words', template_config_id: model.id }, aria: { label: t('wechat.panel.template_key_words.index.title') }, class: 'button is-small is-borderless') do %>
-      <i class="fa-solid fa-gears text-primary"></i>
+      <%= svg_tag 'gears' %>
     <% end %>
     <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-borderless') do %>
       <%= svg_tag 'circle-info', class: 'icon text-info' %>

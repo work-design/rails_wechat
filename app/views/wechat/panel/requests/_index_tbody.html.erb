@@ -32,7 +32,7 @@
       <%= svg_tag 'trash', class: 'icon text-danger' %>
     <% end %>
     <%= link_to({ controller: 'wechat_users', action: 'chat', id: model.wechat_user.id }, class: 'button is-small is-borderless') do %>
-      <i class="fa-solid fa-inbox text-info"></i>
+      <%= svg_tag 'inbox' %>
       <span class="ml-1"><%= t('.wechat_users.chat.title') %></span>
     <% end %>
   </div>

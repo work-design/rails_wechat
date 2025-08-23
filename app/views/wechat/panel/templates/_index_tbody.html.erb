@@ -29,7 +29,7 @@
   </div>
   <div data-show-target="item" class="visibility-hidden">
     <%= link_to({ controller: 'notices', template_id: model.id }, class: 'button is-small is-borderless') do %>
-      <i class="fa-solid fa-inbox text-info"></i>
+      <%= svg_tag 'inbox' %>
       <span class="ml-1"><%= t('.notices.index.title') %></span>
     <% end %>
   </div>
