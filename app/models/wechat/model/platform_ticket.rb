@@ -17,6 +17,13 @@ module Wechat
       before_save :parsed_data, if: -> { ticket_data_changed? }
       after_create_commit :update_platform_ticket, if: -> { platform.present? }
       after_create_commit :clean_last_later, if: -> { ['component_verify_ticket'].include?(info_type) }
+      after_create_commit :disable_app, if: -> { ['unauthorized'].include?(info_type) }
+    end
+
+    def disable_app
+      app = App.find_by appid: message_hash['AuthorizerAppid']
+      app.enabled = false
+      app.save
     end
 
     def parsed_data
