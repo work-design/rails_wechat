@@ -8,6 +8,7 @@ regular:
   - credit-card
   - comments
   - door-open
+  - eye
   - folder
   - gears
   - globe
@@ -19,6 +20,7 @@ regular:
   - qrcode
   - reply-all
   - shapes
+  - trash
   - user-tag
   - users
   - vial
