@@ -40,6 +40,7 @@ module Wechat
       has_one :text_reply, ->(o) { where(open_id: o.open_id, appid: o.appid, platform_id: o.platform_id) }
       has_one :news_reply, ->(o) { where(open_id: o.open_id, appid: o.appid, platform_id: o.platform_id) }
       has_one :empty_reply, ->(o) { where(open_id: o.open_id, appid: o.appid, platform_id: o.platform_id) }
+      has_one :success_reply, ->(o) { where(open_id: o.open_id, appid: o.appid, platform_id: o.platform_id) }
 
       has_many :services, dependent: :nullify
       has_many :extractions, -> { order(id: :asc) }, dependent: :delete_all, inverse_of: :request  # 解析 request body 内容，主要针对文字

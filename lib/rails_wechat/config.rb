@@ -41,7 +41,8 @@ module RailsWechat
         auth.request = request
         auth.testcase = true
         auth.save
-        Wechat::SuccessReply.new
+
+        request.build_success_reply
       }
     }
   end
