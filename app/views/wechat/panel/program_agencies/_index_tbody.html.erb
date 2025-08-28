@@ -30,7 +30,7 @@
     <span><%= model.version_info.dig('exp_info', 'exp_version') %></span>
     <time data-controller="time" class="text-grey"><%= model.version_info.dig('exp_info', 'exp_time') %></time>
     <%= button_to({ action: 'submit', id: model.id }, class: 'button is-small is-borderless') do %>
-      <i class="fa-solid fa-upload text-danger"></i>
+      <%= svg_tag 'upload' %>
       <span class="ml-1"><%= t('.submit.title') %></span>
     <% end if model.submittable? %>
   </div>

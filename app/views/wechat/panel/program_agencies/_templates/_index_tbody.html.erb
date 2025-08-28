@@ -3,3 +3,8 @@
   <p><%= model.user_version %></p>
 </td>
 <td><%= model.audit_status_i18n %></td>
+<td>
+  <%= button_to({ action: 'commit', id: @program_agency.id, platform_template_id: model.id }, aria: { label: t('.program_agencies.commit.title') }, class: 'button is-small is-borderless') do %>
+    <%= svg_tag 'upload' %>
+  <% end %>
+</td>
