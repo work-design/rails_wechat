@@ -1,4 +1,4 @@
-<%= button_to({ action: 'sync' }, class: 'button is-info') do %>
-  <i class="fa-solid fa-sync"></i>
+<%= button_to({ action: 'sync' }, class: 'button is-rounded is-info') do %>
+  <%= svg_tag 'rotate' %>
   <span class="ml-1"><%= t('.follows.sync.title') %></span>
 <% end %>
