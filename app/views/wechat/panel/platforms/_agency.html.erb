@@ -9,7 +9,7 @@
         <%= f.hidden_field :public_agency_id, data: { typer_target: 'value' } %>
         <div class="control has-icons-left">
           <%= search_field_tag 'name-like', nil, class: 'input', placeholder: '搜索', data: { typer_target: 'input' } %>
-          <span class="icon is-left"><i class="fa-solid fa-search"></i></span>
+          <%= svg_tag 'magnifying-glass' %>
         </div>
         <div class="panel" id="public_agencies_content"></div>
       </div>
@@ -24,7 +24,7 @@
         <%= f.hidden_field :program_agency_id, data: { typer_target: 'value' } %>
         <div class="control has-icons-left">
           <%= search_field_tag 'name-like', nil, class: 'input', placeholder: '搜索', data: { typer_target: 'input' } %>
-          <span class="icon is-left"><i class="fa-solid fa-search"></i></span>
+          <%= svg_tag 'magnifying-glass' %>
         </div>
         <div class="panel" id="program_agencies_content"></div>
       </div>
