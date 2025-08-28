@@ -10,7 +10,7 @@
     </div>
     <div class="panel-block background-white justify-content-center">
       <%= link_to({ controller: 'auth/sign', action: 'sign' }) do %>
-        <i class="fa-solid fa-user"></i>
+        <%= svg_tag 'user' %>
         <span class="text-grey">账号密码登录</span>
       <% end if defined? RailsAuth %>
     </div>
