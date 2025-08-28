@@ -4,7 +4,7 @@
     <div data-show-target="item" class="visibility-hidden">
       <%= link_to({ controller: 'menus', action: 'new', menu_root_id: model.id, appid: @app.appid }, data: { turbo_frame: 'modal' }, class: 'button is-small is-link') do %>
         <%= svg_tag 'plus' %>
-        <span><% t('.new.title') %></span>
+        <span class="ml-1"><%= t('.new.title') %></span>
       <% end %>
     </div>
   </td>

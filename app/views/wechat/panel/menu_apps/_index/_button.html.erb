@@ -1,4 +1,4 @@
 <%= button_to({ action: 'sync', appid: params[:appid] }, method: :post, class: 'button is-rounded is-primary') do %>
   <%= svg_tag 'rotate' %>
-  <span class="ml-1"><% t('.sync.title') %></span>
+  <span class="ml-1"><%= t('.sync.title') %></span>
 <% end %>
