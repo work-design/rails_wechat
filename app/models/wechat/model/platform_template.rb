@@ -8,6 +8,7 @@ module Wechat
       attribute :user_version, :string
       attribute :user_desc, :string
       attribute :template_id, :integer
+      attribute :audit_status, :integer
 
       enum :audit_status, [
         :init,
