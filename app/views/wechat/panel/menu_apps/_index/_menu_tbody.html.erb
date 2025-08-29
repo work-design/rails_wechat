@@ -12,3 +12,18 @@
   <span class="text-grey"><%= model.position %></span>
 </td>
 <td></td>
+<td>
+  <% if menu_disable %>
+    <%= button_to({ controller: 'menu_disables', action: 'destroy', menu_id: model.id, id: menu_disable.id }, method: :delete, aria: { label: '添加' }, class: 'button is-small is-borderless') do %>
+      <i class="fa-solid fa-xmark text-danger"></i>
+    <% end %>
+  <% else %>
+    <%= button_to({ controller: 'menu_disables', action: 'create', menu_id: model.id }, aria: { label: t('.destroy.title') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'check', class: 'icon is-small text-success' %>
+    <% end %>
+  <% end %>
+  <%= button_to({ controller: 'menu_apps', action: 'new', menu_id: model.id }, class: 'button is-small is-link') do %>
+    <%= svg_tag 'plus' %>
+    <span class="ml-1"><%= t('.new.title') %></span>
+  <% end %>
+</td>

@@ -2,3 +2,15 @@
 <td></td>
 <td><strong class="text-success"><%= model.position %></strong></td>
 <td></td>
+<td>
+  <div data-show-target="item" class="visibility-hidden">
+    <%= button_to({ controller: 'menu_root_apps', action: 'new', menu_root_id: model.id }, class: 'button is-small is-link') do %>
+      <%= svg_tag 'plus' %>
+      <span class="ml-1"><%= t('.new.title') %></span>
+    <% end %>
+    <%= button_to({ action: 'new', menu_root_id: model.id }, class: 'button is-small is-success') do %>
+      <%= svg_tag 'plus' %>
+      <span class="ml-1"><%= t('.new.title') %></span>
+    <% end %>
+  </div>
+</td>
