@@ -4,8 +4,7 @@
   data-mini-program-launch-value="true"
   data-mini-program-url-value="/pages/login/index"
   data-mini-program-data-value="<%= { state: state, auth_appid: Rails.configuration.x.appid.presence }.compact.to_json %>"
-  class="has-column-centered"
-  style="height: 100%"
+  class="has-page-centered"
 >
   <p style="color: darkgray">登录信息失效，等待授权</p>
   <p><%= state %></p>
