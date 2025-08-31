@@ -8,6 +8,7 @@ module Wechat
       attribute :auditid, :integer
       attribute :version_info, :json, default: {}
       attribute :webview_domain_registered, :json, default: []
+      attribute :audit_status, :integer
 
       enum :audit_status, {
         success: 0,
