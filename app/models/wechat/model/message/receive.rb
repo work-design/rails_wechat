@@ -42,7 +42,7 @@ module Wechat
       before_save :decrypt_data, if: -> { encrypt_data_changed? && encrypt_data.present? }
       before_save :extract_message_hash, if: -> { message_hash_changed? }
       before_create :sync_to_request
-      after_create_commit :check_app, if: -> { ['weapp_audit_success', 'weapp_audit_fail'].include?(info_app) }
+      after_create_commit :check_app, if: -> { ['weapp_audit_success', 'weapp_audit_fail'].include?(info_type) }
     end
 
     def decrypt_data
