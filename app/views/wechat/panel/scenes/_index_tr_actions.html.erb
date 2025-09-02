@@ -16,11 +16,11 @@
       <span class="ml-1"><%= t('.menus.index.title') %></span>
     <% end %>
     <%= link_to({ controller: 'wechat_users', scene_tag: model.match_value }, class: 'button is-small is-borderless') do %>
-      <i class="fa-solid fa-users"></i>
+      <%= svg_tag 'users' %>
       <span class="ml-1"><%= t('.wechat_users.index.title') %></span>
     <% end %>
     <%= link_to({ controller: 'wechat_users', user_inviter_id: model.handle_id }, class: 'button is-small is-borderless') do %>
-      <i class="fa-solid fa-users"></i>
+      <%= svg_tag 'users' %>
       <span class="ml-1"><%= t('.wechat_users.index.title') %></span>
     <% end if model.handle_type == 'Auth::User' %>
     <%= link_to({ controller: 'responses', action: 'show', id: model.response.id }, class: 'button is-small is-borderless') do %>
