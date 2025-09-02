@@ -8,7 +8,7 @@
 <th>
   <%= Wechat::Response.human_attribute_name(:reply_id) %>
   <%= link_to({ controller: 'replies' }, aria: { label: t('wechat.admin.replies.index.title') }) do %>
-    <i class="fa-solid fa-cog"></i>
+    <%= svg_tag 'gear' %>
   <% end %>
 </th>
 <th></th>
