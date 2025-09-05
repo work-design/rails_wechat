@@ -220,5 +220,16 @@ module Wechat
       end
     end
 
+    def plugin_apply
+      r = api.plugin_apply('wxcdcb0fa80cf4c2c9')
+    end
+
+    def prepare
+      set_webview_domain
+      set_domain
+      set_privacy
+      plugin_apply
+    end
+
   end
 end

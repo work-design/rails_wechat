@@ -141,5 +141,9 @@ class Wechat::ProgramApi
       post 'setnickname', nick_name: nick_name, origin: BASE, **options
     end
 
+    def plugin_apply(plugin_appid, reason: '申请插件使用', **options)
+      post 'plugin', action: 'apply', plugin_appid: plugin_appid, reason: reason, origin: BASE, **options
+    end
+
   end
 end
