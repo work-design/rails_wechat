@@ -37,10 +37,14 @@
 <% end %>
 </td>
 <td>
-  <span><%= model.audit_status_i18n %></span>
-  <%= button_to({ action: 'release', id: model.id }, class: 'button is-small is-borderless') do %>
-    <i class="fa-solid fa-cloud-arrow-up text-success"></i>
-    <span class="ml-1"><%= t('.release.title') %></span>
-  <% end if model.releasable? %>
+  <div><%= model.audit_status_i18n %></div>
+  <% if model.releasable? %>
+  <div class="mt-1">
+    <%= button_to({ action: 'release', id: model.id }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'cloud-arrow-up' %>
+      <span class="ml-1"><%= t('.release.title') %></span>
+    <% end %>
+  </div>
+  <% end %>
 </td>
 <td><%= render partial: 'index_tr_actions', locals: { model: model } %></td>
