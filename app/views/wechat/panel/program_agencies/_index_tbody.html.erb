@@ -3,7 +3,7 @@
     <%= image_tag model.head_img, class: 'image is-24x24' if model.head_img %>
     <span><%= model.nick_name %></span>
     <% if [model.platform.program_agency_id].include?(model.id) %>
-      <i class="fa-solid fa-shield text-success"></i>
+      <%= svg_tag 'shield' %>
     <% end %>
   </p>
   <p class="text-grey"><%= model.appid %></p>
