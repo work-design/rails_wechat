@@ -1,6 +1,6 @@
 <td>
-  <i class="fa-solid fa-qrcode"></i>
-  <span class="pl-1"><%= model.match_value %></span>
+  <%= svg_tag 'qrcode' %>
+  <span class="ml-1"><%= model.match_value %></span>
 </td>
 <td>
   <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
