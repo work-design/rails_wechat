@@ -28,7 +28,7 @@ module Wechat
 
     def generate_wechat_user(code)
       info = api.jscode2session(code)
-      logger.debug "\e[35m  Program Generate User: #{info}  \e[0m"
+      logger.debug "\e[35m  Program Generate User: #{info}, Code: #{code}  \e[0m"
 
       program_user = ProgramUser.find_or_initialize_by(uid: info['openid'])
       program_user.appid = appid
