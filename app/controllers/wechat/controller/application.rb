@@ -79,7 +79,7 @@ module Wechat
       if request.variant.include?(:work_wechat)
         @current_js_app = current_corp_user&.corp
       else
-        @current_js_app = current_organ&.app || current_organ&.provider&.app
+        @current_js_app = current_organ&.app || current_organ&.provider&.app || App.global.take
       end
 
       logger.debug "\e[35m  Current Js App: #{@current_js_app&.id}  \e[0m"
