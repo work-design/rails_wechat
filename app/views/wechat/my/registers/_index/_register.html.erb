@@ -26,7 +26,7 @@
       <%= svg_tag 'trash' %>
     <% end %>
     <%= link_to({ action: 'edit_code', id: model.id }, aria: { label: t('.edit.title') }, class: 'weui-form-preview__btn weui-form-preview__btn_default') do %>
-      <i class="fa-solid fa-mobile-alt"></i>
+      <%= svg_tag 'mobile' %>
     <% end unless model.mobile_code %>
   </div>
 </div>
