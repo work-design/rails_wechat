@@ -30,7 +30,9 @@ module RailsWechat
     config.rules.c1 = {
       msg_type: 'text',
       body: 'TESTCOMPONENT_MSG_TYPE_TEXT',
-      proc: ->(request) { Wechat::TextReply.new(value: 'TESTCOMPONENT_MSG_TYPE_TEXT_callback') }
+      proc: ->(request) {
+        request.build_text_reply(value: 'TESTCOMPONENT_MSG_TYPE_TEXT_callback')
+      }
     }
     config.rules.c2 = {
       msg_type: 'text',
