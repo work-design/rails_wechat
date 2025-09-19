@@ -7,6 +7,7 @@ module Wechat
     include PublicApi::Agency
     include PublicApi::Material
     include Component
+    include Custom
     include Sec
     include Wxa
     include Wxaapi
