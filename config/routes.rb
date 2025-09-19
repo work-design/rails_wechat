@@ -306,8 +306,12 @@ Rails.application.routes.draw do
         end
       end
       resources :registers do
+        collection do
+          get :new_license
+        end
         member do
           match :edit_code, via: [:get, :post]
+          get :edit_license
         end
       end
       resources :payees do

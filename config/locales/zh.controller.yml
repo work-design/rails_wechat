@@ -81,6 +81,11 @@ zh:
       organs:
         show:
           title: 企业微信
+      registers:
+        index:
+          title: 微信代申请
+        new_license:
+          title: 营业执照
       members:
         index:
           title: 职工
@@ -241,9 +246,6 @@ zh:
           test: 测试
     my:
       title: 微信公众号
-      registers:
-        index:
-          title: 公众号申请
       users:
         invite_qrcode:
           title: 邀请二维码
