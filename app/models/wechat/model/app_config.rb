@@ -13,6 +13,8 @@ module Wechat
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
 
+      normalizes :value, with: -> (value) { value.strip }
+
       after_create_commit :service_corp, if: -> { key == 'service_corp' }
     end
 
