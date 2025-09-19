@@ -1,7 +1,7 @@
 module Wechat
   class Admin::RegistersController < Admin::BaseController
     before_action :set_register, only: [:show, :edit, :edit_code, :update, :destroy]
-    before_action :set_new_register, only: [:new, :create]
+    before_action :set_new_register, only: [:new, :new_license, :create]
 
     def index
       @registers = current_user.registers

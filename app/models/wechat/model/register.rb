@@ -24,6 +24,7 @@ module Wechat
 
       has_one_attached :bind_qrcode
       has_one_attached :qrcode
+      has_one_attached :license # 营业执照
 
       enum :state, {
         init: 'init',
