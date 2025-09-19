@@ -1,18 +1,24 @@
 <div class="box p-0">
-  <div class="media as-list">
+  <%= link_to({ action: 'new' }, class: 'media as-list') do %>
     <div class="media-left">
       <%= svg_tag 'circle-1' %>
     </div>
     <div class="media-content">
-      <span>dddd</span>
+      <span>营业执照</span>
     </div>
-  </div>
+    <div class="media-right text-grey">
+      <%= svg_tag 'chevron-right' %>
+    </div>
+  <% end %>
   <div class="media as-list">
     <div class="media-left">
       <%= svg_tag 'circle-2' %>
     </div>
     <div class="media-content">
-      dddd2
+      <span>经营者证件</span>
+    </div>
+    <div class="media-right text-grey">
+      <%= svg_tag 'chevron-right' %>
     </div>
   </div>
 </div>
