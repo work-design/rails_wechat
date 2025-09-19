@@ -1,0 +1,6 @@
+<% if @registers.blank? %>
+  <%= button_to({ action: 'new' }, class: 'button is-fullwidth mx-0', form: { class: 'is-fullwidth' }) do %>
+    <%= svg_tag 'plus' %>
+    <span><%= t('.new.title') %></span>
+  <% end %>
+<% end %>

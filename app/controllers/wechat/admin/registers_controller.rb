@@ -1,5 +1,5 @@
 module Wechat
-  class My::RegistersController < My::BaseController
+  class Admin::RegistersController < Admin::BaseController
     before_action :set_register, only: [:show, :edit, :edit_code, :update, :destroy]
     before_action :set_new_register, only: [:new, :create]
 
@@ -19,12 +19,11 @@ module Wechat
 
     private
     def set_new_register
-      @register = current_user.registers.build(register_params)
-      @register.mobile ||= current_account.identity if current_account.is_a?(::Auth::MobileAccount)
+      @register = Register.build(register_params)
     end
 
     def set_register
-      @register = Register.find(params[:id])
+      @register = Register.default_where(default_params).find(params[:id])
     end
 
     def register_params

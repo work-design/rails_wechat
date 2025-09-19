@@ -1,0 +1,9 @@
+<% @registers.each do |register| %>
+  <% if register.done? %>
+    <%= render partial: 'register_done', locals: { model: register } %>
+  <% else %>
+    <%= render partial: 'register', locals: { model: register } %>
+  <% end %>
+<% end %>
+
+

@@ -138,11 +138,6 @@ Rails.application.routes.draw do
         end
       end
       resources :subscribeds
-      resources :registers do
-        member do
-          match :edit_code, via: [:get, :post]
-        end
-      end
       resources :medias
     end
 
@@ -308,6 +303,11 @@ Rails.application.routes.draw do
       resources :menus do
         member do
           get :edit_parent
+        end
+      end
+      resources :registers do
+        member do
+          match :edit_code, via: [:get, :post]
         end
       end
       resources :payees do
