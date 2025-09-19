@@ -17,7 +17,7 @@ module Wechat
     end
 
     def bind_work
-      app.api.work_bind(service_corp)
+      app.api.work_bind(value)
     end
 
   end
