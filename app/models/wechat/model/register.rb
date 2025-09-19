@@ -20,8 +20,6 @@ module Wechat
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
-      validates :mobile, presence: true, uniqueness: true
-
       has_one_attached :bind_qrcode
       has_one_attached :qrcode
       has_one_attached :license # 营业执照

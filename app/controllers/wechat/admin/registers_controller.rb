@@ -31,7 +31,8 @@ module Wechat
         :id_name,
         :id_number,
         :mobile,
-        :mobile_code
+        :mobile_code,
+        :license
       )
       p.merge! default_form_params
     end
