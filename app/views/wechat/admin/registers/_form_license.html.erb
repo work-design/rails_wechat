@@ -1,1 +1,1 @@
-<%= f.file_field :license %>
+<%= render partial: 'com/attachments/file_upload', locals: { f: f, target: f.object.license } %>
