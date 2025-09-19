@@ -1,6 +1,6 @@
 class Wechat::ProgramApi
   module Custom
-    BASE = 'https://api.weixin.qq.com/cgi-bin/customservice/'
+    BASE = 'https://api.weixin.qq.com/customservice/'
 
     def work_bind(corpid, **options)
       post 'work/bind', corpid: corpid, **options, origin: BASE
