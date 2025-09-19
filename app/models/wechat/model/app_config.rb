@@ -12,6 +12,12 @@ module Wechat
       }
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
+
+      after_create_commit :service_corp, if: -> { key == 'service_corp' }
+    end
+
+    def bind_work
+      app.api.work_bind(service_corp)
     end
 
   end
