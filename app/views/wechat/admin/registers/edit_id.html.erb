@@ -1,0 +1,5 @@
+<%= form_with theme: 'weui', model: @register, url: { action: 'update' } do |f| %>
+  <%= render partial: 'com/attachments/list_edit', locals: { f: f, target: f.object.id_avatar } %>
+  <%= render partial: 'com/attachments/list_edit', locals: { f: f, target: f.object.id_badge } %>
+  <%= f.submit %>
+<% end %>

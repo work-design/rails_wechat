@@ -1,4 +1,4 @@
 <%= form_with theme: 'weui', model: @register, url: { action: 'update' } do |f| %>
-  <%= render partial: 'form_license', locals: { f: f } %>
+  <%= render partial: 'com/attachments/list_edit', locals: { f: f, target: f.object.license } %>
   <%= f.submit %>
 <% end %>

@@ -23,6 +23,8 @@ module Wechat
       has_one_attached :bind_qrcode
       has_one_attached :qrcode
       has_one_attached :license # 营业执照
+      has_one_attached :id_avatar # 身份证头像
+      has_one_attached :id_badge # 身份证国徽
 
       enum :state, {
         init: 'init',

@@ -289,6 +289,7 @@ Rails.application.routes.draw do
         member do
           match :edit_code, via: [:get, :post]
           get :edit_license
+          get :edit_id
         end
       end
       resources :apps, param: :appid do

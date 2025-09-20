@@ -84,8 +84,10 @@ zh:
       registers:
         index:
           title: 微信代申请
-        new_license:
+        edit_license:
           title: 营业执照
+        edit_id:
+          title: 法人身份证
       members:
         index:
           title: 职工
