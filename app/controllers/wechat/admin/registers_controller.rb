@@ -1,16 +1,12 @@
 module Wechat
   class Admin::RegistersController < Admin::BaseController
-    before_action :set_register, only: [:show, :edit, :edit_code, :update, :destroy]
-    before_action :set_new_register, only: [:new, :new_license, :create]
+    before_action :set_register, only: [:show, :edit, :edit_code, :edit_license, :update, :destroy]
 
-    def index
-      @registers = current_user.registers
-
-      if @registers.blank?
-        set_new_register
+    def show
+      if @register.new_record?
         render :new
       else
-        render 'index'
+        render :show
       end
     end
 
@@ -18,12 +14,8 @@ module Wechat
     end
 
     private
-    def set_new_register
-      @register = Register.build(register_params)
-    end
-
     def set_register
-      @register = Register.default_where(default_params).find(params[:id])
+      @register = Register.default_where(default_params).take || Register.build(register_params)
     end
 
     def register_params

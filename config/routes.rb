@@ -285,6 +285,12 @@ Rails.application.routes.draw do
     namespace :admin, defaults: { namespace: 'admin' } do
       root 'home#index'
       resource :organ, only: [:show, :edit, :update]
+      resource :register do
+        member do
+          match :edit_code, via: [:get, :post]
+          get :edit_license
+        end
+      end
       resources :apps, param: :appid do
         member do
           match :info, via: [:get, :post]
@@ -303,15 +309,6 @@ Rails.application.routes.draw do
       resources :menus do
         member do
           get :edit_parent
-        end
-      end
-      resources :registers do
-        collection do
-          get :new_license
-        end
-        member do
-          match :edit_code, via: [:get, :post]
-          get :edit_license
         end
       end
       resources :payees do

@@ -1,0 +1,9 @@
+<% if @register.done? %>
+  <dl class="as-show as-boxed">
+    <%= render partial: 'register_done', locals: { model: @register } %>
+  </dl>
+<% else %>
+  <dl class="as-show as-boxed">
+    <%= render partial: 'register', locals: { model: @register } %>
+  </dl>
+<% end %>
