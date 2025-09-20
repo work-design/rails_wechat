@@ -88,6 +88,8 @@ zh:
           title: 营业执照
         edit_id:
           title: 法人身份证
+        edit_bank:
+          title: 法人银行卡/对公账户
       members:
         index:
           title: 职工

@@ -290,6 +290,7 @@ Rails.application.routes.draw do
           match :edit_code, via: [:get, :post]
           get :edit_license
           get :edit_id
+          get :edit_bank
         end
       end
       resources :apps, param: :appid do

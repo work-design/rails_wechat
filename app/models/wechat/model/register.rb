@@ -14,6 +14,7 @@ module Wechat
       attribute :personal_wechat, :string
       attribute :organ_name, :string
       attribute :organ_code, :string
+      attribute :bank_number, :string
 
       belongs_to :user, optional: true
       belongs_to :organ, class_name: 'Wechat::Organ', optional: true
@@ -25,6 +26,7 @@ module Wechat
       has_one_attached :license # 营业执照
       has_one_attached :id_avatar # 身份证头像
       has_one_attached :id_badge # 身份证国徽
+      has_one_attached :bank_card # 银行卡
 
       enum :state, {
         init: 'init',

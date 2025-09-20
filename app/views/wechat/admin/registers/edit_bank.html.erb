@@ -1,0 +1,9 @@
+<%= form_with theme: 'weui', model: @register, url: { action: 'update' } do |f| %>
+  <div>
+    <strong>银行卡照片</strong>
+    <span class="size-7 text-grey">（包含银行卡号等）</span>
+  </div>
+  <%= render partial: 'com/attachments/list_edit', locals: { f: f, target: f.object.bank_card } %>
+  <%= f.text_field :bank_number %>
+  <%= f.submit %>
+<% end %>
