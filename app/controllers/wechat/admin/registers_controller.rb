@@ -1,6 +1,6 @@
 module Wechat
   class Admin::RegistersController < Admin::BaseController
-    before_action :set_register, only: [:show, :edit, :edit_code, :edit_license, :update, :destroy]
+    before_action :set_register
 
     def show
       if @register.new_record?
