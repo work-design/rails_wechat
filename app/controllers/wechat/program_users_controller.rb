@@ -36,7 +36,7 @@ module Wechat
           program_user: @program_user.as_json(only: [:name, :avatar_url, :uid, :unionid, :identity]),
           user: @program_user.user.as_json(only: [:name], methods: [:avatar_url])
         }
-        r.merge! url: @app.webview_url if @app.respond_to? :webview_url
+        @result.merge! url: @app.webview_url if @app.respond_to? :webview_url
       else
         render :mobile_err, locals: { model: @program_user }, status: :unprocessable_entity
       end
