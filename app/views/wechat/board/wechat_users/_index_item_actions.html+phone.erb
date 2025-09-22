@@ -1,4 +1,4 @@
-<div class="media">
+<div id="tr_<%= model.id %>" class="media">
   <div class="media-content">
     <%= yield %>
   </div>
@@ -7,7 +7,7 @@
       <%= svg_tag 'check', class: 'icon is-small text-success' %>
     <% end %>
     <%= button_to({ action: 'actions', id: model.id }, class: 'button is-borderless') do %>
-      <i class="fa-solid fa-lg fa-ellipsis-h text-grey"></i>
+      <%= svg_tag 'ellipsis-vertical' %>
     <% end %>
   </div>
 </div>
