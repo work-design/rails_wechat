@@ -1,12 +1,12 @@
-<%= button_to({ action: 'destroy' }, method: :delete, class: 'text-danger', form: { data: { turbo_confirm: t('.destroy.confirm') }, class: 'cell weui-actionsheet__cell_warn' }) do %>
+<%= button_to({ action: 'destroy' }, method: :delete, class: 'text-danger', form: { data: { turbo_confirm: t('.destroy.confirm'), class: 'cell' }, class: 'has-column-centered' }) do %>
   <%= svg_tag 'trash' %>
   <span><%= t('.destroy.title') %></span>
 <% end %>
-<%= button_to({ action: 'edit' }, class: 'cell') do %>
+<%= button_to({ action: 'edit' }, class: 'cell has-column-centered') do %>
   <%= svg_tag 'pencil' %>
   <span><%= t('.edit.title') %></span>
 <% end %>
-<%= link_to({ action: 'show' }, class: 'cell') do %>
-  <%= svg_tag 'eye', class: 'icon text-info' %>
+<%= link_to({ action: 'show' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'eye' %>
   <span><%= t('.show.title') %></span>
 <% end %>
