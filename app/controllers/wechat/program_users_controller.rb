@@ -57,6 +57,7 @@ module Wechat
     end
 
     def set_wechat_program_user
+      resume_session
       if Current.session
         @program_user = Current.session.oauth_user
       else
