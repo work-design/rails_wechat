@@ -2,9 +2,14 @@
   <div class="media-content">
     <%= yield %>
   </div>
-  <div class="media-right as-x">
+  <div class="media-right">
     <% if Current.session.uid == model.uid %>
-      <%= svg_tag 'check', class: 'icon is-small text-success' %>
+      <div class="tags has-addons">
+        <span class="tag">
+          <%= svg_tag 'check', class: 'icon is-small text-success' %>
+        </span>
+        <span class="tag is-success">当前登录</span>
+      </div>
     <% end %>
     <%= button_to({ action: 'actions', id: model.id }, class: 'button is-borderless') do %>
       <%= svg_tag 'ellipsis-vertical' %>
