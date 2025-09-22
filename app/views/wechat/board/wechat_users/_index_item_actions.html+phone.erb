@@ -2,11 +2,11 @@
   <div class="media-content">
     <%= yield %>
   </div>
-  <div class="media-right">
+  <div class="media-right has-block-centered">
     <% if Current.session.uid == model.uid %>
-      <div class="tags has-addons">
+      <div class="tags has-addons mb-0">
         <span class="tag">
-          <%= svg_tag 'check', class: 'icon is-small text-success' %>
+          <%= svg_tag 'check', class: 'icon is-small' %>
         </span>
         <span class="tag is-success">当前登录</span>
       </div>
