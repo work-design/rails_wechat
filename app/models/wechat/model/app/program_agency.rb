@@ -57,8 +57,7 @@ module Wechat
           URI::HTTPS.build(host: computed_webview_domain).to_s,
           URI::HTTPS.build(host: domain).to_s,
           URI::HTTPS.build(host: Rails.application.routes.default_url_options[:host]).to_s,
-          URI::HTTPS.build(host: "org.#{Rails.application.routes.default_url_options[:host]}").to_s,
-          Rails.application.credentials.kf
+          URI::HTTPS.build(host: "org.#{Rails.application.routes.default_url_options[:host]}").to_s
         ].uniq.compact
       }
       api.webview_domain_directly(**h)
