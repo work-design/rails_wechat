@@ -4,18 +4,14 @@ module Wechat
 
     included do
       attribute :appid, :string, index: true
-      attribute :value, :string
-
-      enum :key, {
-        service_url: 'service_url',
-        service_corp: 'service_corp'
-      }
+      attribute :service_url, :string
+      attribute :service_corp, :string
 
       belongs_to :app, foreign_key: :appid, primary_key: :appid
 
-      normalizes :value, with: -> (value) { value.strip }
+      normalizes :service_url, :service_corp, with: -> (value) { value.strip }
 
-      after_create_commit :service_corp, if: -> { key == 'service_corp' }
+      after_create_commit :bind_work, if: -> { service_corp_changed? }
     end
 
     def bind_work
