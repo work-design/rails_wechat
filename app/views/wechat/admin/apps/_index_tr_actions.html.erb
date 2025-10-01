@@ -3,6 +3,10 @@
     <%= svg_tag 'gears' %>
     <span class="ml-1"><%= t('.info.title') %></span>
   <% end %>
+  <%= button_to({ action: 'service', appid: model.appid }, class: 'button is-small is-borderless') do %>
+    <%= svg_tag 'gears' %>
+    <span class="ml-1"><%= t('.service.title') %></span>
+  <% end %>
   <%= button_to({ action: 'show', appid: model.appid }, aria: { label: t('.show.title') }, class: 'button is-small is-borderless') do %>
     <%= svg_tag 'eye', class: 'icon text-info' %>
   <% end %>
@@ -43,9 +47,5 @@
   <%= link_to({ controller: 'templates', app_appid: model.appid }, class: 'button is-small is-borderless') do %>
     <%= svg_tag 'inbox' %>
     <span class="ml-1"><%= t('.templates.index.title') %></span>
-  <% end %>
-  <%= link_to({ controller: 'app_configs', app_appid: model.appid }, class: 'button is-small is-borderless') do %>
-    <%= svg_tag 'gears' %>
-    <span class="ml-1"><%= t('.app_configs.index.title') %></span>
   <% end %>
 </div>

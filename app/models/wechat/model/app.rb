@@ -42,6 +42,8 @@ module Wechat
       attribute :open_appid, :string
       attribute :oauth_domain, :string
       attribute :webview_domain, :string
+      attribute :service_url, :string
+      attribute :service_corp, :string
 
       encrypts :secret
 
@@ -78,11 +80,14 @@ module Wechat
       scope :official, -> { where(type: ['Wechat::PublicApp', 'Wechat::PublicAgency']) }
       scope :program, -> { where(type: ['Wechat::ProgramApp', 'Wechat::ProgramAgency']) }
 
+      normalizes :service_url, :service_corp, with: -> (value) { value.strip }
+
       validates :appid, presence: true, uniqueness: true
 
       before_validation :init_token, if: -> { token.blank? }
       before_validation :init_aes_key, if: -> { encrypt_mode && encoding_aes_key.blank? }
       after_create_commit :store_info_later
+      after_create_commit :bind_work, if: -> { service_corp_changed? }
       after_save_commit :sync_to_storage, if: -> { saved_change_to_qrcode_url? }
     end
 
@@ -244,6 +249,10 @@ module Wechat
 
     def upload_desc
       api.modify_desc("#{organ.name}官方小程序")
+    end
+
+    def bind_work
+      api.work_bind(service_corp)
     end
 
   end

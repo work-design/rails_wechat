@@ -52,7 +52,6 @@ Rails.application.routes.draw do
       resources :menu_disables, only: [:create, :destroy]
     end
     resources :menu_root_apps
-    resources :app_configs
   end
 
   namespace :wechat, defaults: { business: 'wechat' } do
@@ -296,6 +295,7 @@ Rails.application.routes.draw do
       resources :apps, param: :appid do
         member do
           match :info, via: [:get, :post]
+          match :service, via: [:get, :post]
         end
         concerns :appable
       end

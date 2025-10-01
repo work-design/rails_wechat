@@ -1,7 +1,10 @@
 module Wechat
   class Admin::AppsController < Panel::AppsController
     include Controller::Admin
-    before_action :set_app, only: [:show, :info, :edit, :update, :destroy, :actions]
+    before_action :set_app, only: [
+      :show, :edit, :update, :destroy, :actions,
+      :info, :service
+    ]
 
     def index
       q_params = {}
@@ -27,9 +30,6 @@ module Wechat
       end
     end
 
-    def info
-    end
-
     private
     def set_app
       @app = App.default_where(default_params).find_by(appid: params[:appid])
@@ -49,7 +49,9 @@ module Wechat
         :secret,
         :encrypt_mode,
         :domain,
-        :weapp_id
+        :weapp_id,
+        :service_url,
+        :service_corp
       )
       p.merge! default_form_params
     end

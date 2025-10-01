@@ -27,6 +27,14 @@
   <dd><%= @app.token %></dd>
 </div>
 <div>
+  <dt><%= Wechat::App.human_attribute_name(:service_corp) %></dt>
+  <dd><%= @app.service_corp %></dd>
+</div>
+<div>
+  <dt><%= Wechat::App.human_attribute_name(:service_url) %></dt>
+  <dd><%= @app.service_url %></dd>
+</div>
+<div>
   <dt><%= Wechat::App.human_attribute_name(:created_at) %></dt>
   <dd><time data-controller="time"><%= @app.created_at.to_fs(:iso8601) %></time></dd>
 </div>

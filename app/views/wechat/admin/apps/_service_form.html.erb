@@ -1,0 +1,8 @@
+<%= form_with theme: 'modal', model: @app, scope: 'app', url: { action: 'update' } do |f| %>
+  <%= render 'modal_header' %>
+  <section class="modal-card-body">
+    <%= f.text_field :service_corp %>
+    <%= f.text_field :service_url %>
+  </section>
+  <%= f.submit %>
+<% end %>

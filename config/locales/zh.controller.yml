@@ -26,6 +26,8 @@ zh:
           title: 我的公众号
         info:
           title: 配置参数
+        service:
+          title: 配置客服
       agents:
         index:
           title: 我的企业微信
