@@ -1,7 +1,7 @@
 module Wechat
   class AppsController < BaseController
     skip_before_action :verify_authenticity_token, raise: false if whether_filter(:verify_authenticity_token)
-    before_action :set_app, only: [:show, :create, :login, :scan_login, :config, :bind, :qrcode]
+    before_action :set_app, only: [:show, :create, :login, :scan_login, :configs, :bind, :qrcode]
     before_action :set_scene, only: [:login]
     before_action :verify_signature, only: [:show, :create]
 
@@ -69,7 +69,7 @@ module Wechat
       end
     end
 
-    def config
+    def configs
       r = @app.attributes.slice('service_url', 'service_corp')
       r.merge! share_logo: @app.organ.share_logo.url if @app.organ.share_logo.attached?
       render json: r
@@ -77,7 +77,7 @@ module Wechat
 
     private
     def set_app
-      @app = App.find_by appid: params[:appid]
+      @app = App.enabled.find_by appid: params[:appid]
     end
 
     def verify_signature

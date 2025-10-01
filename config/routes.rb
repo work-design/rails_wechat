@@ -76,7 +76,7 @@ Rails.application.routes.draw do
       member do
         get :login
         get :scan_login
-        get :config
+        get :configs
         post '' => :create
         patch :qrcode
       end
