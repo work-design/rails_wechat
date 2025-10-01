@@ -71,7 +71,7 @@ module Wechat
 
     def config
       r = @app.attributes.slice('service_url', 'service_corp')
-      r.merge! share_logo: @app.organ.share_logo.url
+      r.merge! share_logo: @app.organ.share_logo.url if @app.organ.share_logo.attached?
       render json: r
     end
 
