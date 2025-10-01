@@ -70,7 +70,6 @@ module Wechat
     end
 
     def config
-      @app = App.enabled.find_by appid: params[:appid]
       r = @app.attributes.slice('service_url', 'service_corp')
       r.merge! share_logo: @app.organ.share_logo.url if @app.organ.share_logo.attached?
       render json: r
@@ -78,7 +77,7 @@ module Wechat
 
     private
     def set_app
-      @app = App.enabled.find_by appid: params[:appid]
+      @app = App.find_by appid: params[:appid]
     end
 
     def verify_signature
