@@ -76,6 +76,7 @@ Rails.application.routes.draw do
       member do
         get :login
         get :scan_login
+        get :config
         post '' => :create
         patch :qrcode
       end
@@ -122,7 +123,6 @@ Rails.application.routes.draw do
         post :notify
       end
     end
-    resources :app_configs, only: [:index]
 
     namespace :me, defaults: { namespace: 'me' } do
       resource :corp_users
