@@ -78,7 +78,7 @@ module Wechat
         uploaddomain: [URI::HTTPS.build(host: domain).to_s],
         downloaddomain: [
           URI::HTTPS.build(host: domain).to_s,
-          'https://images.one.work'
+          URI::HTTPS.build(host: ENV['HOST']).to_s
         ],
         udpdomain: [URI::Generic.build(host: domain, scheme: 'udp').to_s],
         tcpdomain: [URI::Generic.build(host: domain, scheme: 'tcp').to_s]
