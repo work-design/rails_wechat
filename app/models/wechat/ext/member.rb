@@ -5,7 +5,7 @@ module Wechat
 
     included do
       attribute :corp_userid, :string
-      attribute :wechat_openid, :string
+      attribute :wechat_openid, :string, default: ''
 
       belongs_to :member_inviter, class_name: 'Org::Member', optional: true
       belongs_to :wechat_user, class_name: 'Wechat::WechatUser', foreign_key: :wechat_openid, primary_key: :uid, optional: true
@@ -14,7 +14,7 @@ module Wechat
       has_many :wechat_users, class_name: 'Wechat::WechatUser', through: :account, source: :oauth_users
       has_many :program_users, class_name: 'Wechat::ProgramUser', through: :account, source: :oauth_users
       has_many :medias, class_name: 'Wechat::Media'
-      has_many :subscribes, -> { where(sending_at: nil).order(id: :asc) }, class_name: 'Wechat::Subscribe', through: :program_users
+      has_many :subscribes, -> { where(sending_at: nil) }, class_name: 'Wechat::Subscribe', through: :program_users
       has_many :scenes, as: :handle, class_name: 'Wechat::Scene'
 
       scope :wechat, -> { where.not(wechat_openid: [nil, '']) }
