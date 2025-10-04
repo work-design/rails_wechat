@@ -3,11 +3,11 @@
     <strong>人像面照片</strong>
     <span class="size-7 text-grey">（包含姓名、公民身份证号码等）</span>
   </div>
-  <%= render partial: 'com/attachments/list_edit', locals: { f: f, target: f.object.id_avatar } %>
+  <%= render partial: 'com/attachments/list_edit', locals: { target: f.object.id_avatar, f: f } %>
   <div>
     <strong>国徽面照片</strong>
     <span class="size-7 text-grey">（包含签发机关、有效期限）</span>
   </div>
-  <%= render partial: 'com/attachments/list_edit', locals: { f: f, target: f.object.id_badge } %>
+  <%= render partial: 'com/attachments/list_edit', locals: { target: f.object.id_badge, f: f } %>
   <%= f.submit %>
 <% end %>
