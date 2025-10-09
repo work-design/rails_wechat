@@ -1,5 +1,5 @@
 <%= form_with model: @register, url: admin_register_path(@register) do |f| %>
   <%= render 'error_messages', target: @register %>
-  <%= f.file_field :qrcode %>
+  <%= render 'com/attachments/list_field', target: f.object.qrcode, f: f %>
   <%= f.submit %>
 <% end %>

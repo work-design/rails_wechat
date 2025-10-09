@@ -1,2 +1,2 @@
-<%= f.file_field :logo %>
+<%= render 'com/attachments/list_field', target: f.object.logo, f: f %>
 <%= f.text_field :webview_domain %>
