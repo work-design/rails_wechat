@@ -116,7 +116,7 @@ module Wechat
 
     def current_wechat_user
       return @current_wechat_user if defined?(@current_wechat_user)
-      @current_wechat_user = Current.session&.oauth_user
+      @current_wechat_user = Current.session&.wechat_user
       if @current_wechat_user
         if request.variant.include?(:mini_program) && current_user
           appid = request.user_agent&.scan(RegexpUtil.between('miniProgram/', '$')).presence || request.referer&.scan(RegexpUtil.between('servicewechat.com/', '/')).presence || Current.session.appid
