@@ -1,5 +1,5 @@
 <% menu_disable = @app.menu_disables.find(&->(i){ i.menu_id == model.id }) %>
-<tr id="tr_<%= model.id %>" data-depth="0" data-controller="tree show" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="<%= 'background-white-ter' %>">
+<tr id="tr_<%= model.id %>" data-depth="0" data-controller="tree show" data-tree-target="item" class="<%= 'background-white-ter' %>">
   <%= yield %>
 </tr>
 <% model.menu_apps.where(appid: @app.appid).each do |menu_app| %>

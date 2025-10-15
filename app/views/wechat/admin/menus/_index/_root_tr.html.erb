@@ -1,4 +1,4 @@
-<tr id="tr_<%= model.id %>" data-depth="10" data-controller="show tree" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide">
+<tr id="tr_<%= model.id %>" data-depth="10" data-controller="show tree" data-tree-target="item">
   <%= yield %>
 </tr>
 <% model.organ_menus.where(organ_id: [current_organ.id, nil]).each do |child| %>

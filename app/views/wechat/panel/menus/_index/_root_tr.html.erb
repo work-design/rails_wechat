@@ -1,4 +1,4 @@
-<tr id="tr_<%= model.id %>" data-depth="10" data-controller="show tree" data-tree-target="item" data-action="mouseenter->show#show mouseleave->show#hide" class="background-light">
+<tr id="tr_<%= model.id %>" data-depth="10" data-controller="show tree" data-tree-target="item" class="background-light">
   <%= yield %>
 </tr>
 <% model.menus.each do |child| %>
