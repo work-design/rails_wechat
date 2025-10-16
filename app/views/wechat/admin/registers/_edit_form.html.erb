@@ -1,4 +1,4 @@
-<%= form_with theme: 'weui', model: @register, url: { action: 'update' } do |f| %>
+<%= form_with theme: 'default_phone', model: @register, url: { action: 'update' } do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
   <%= f.submit nil, wrap: { all: nil } %>
 <% end %>
