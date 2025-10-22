@@ -108,8 +108,7 @@ module Wechat
 
     def current_payee
       return @current_payee if defined?(@current_payee)
-      @current_payee = (current_organ_domain && current_organ_domain.payees.take) ||
-        current_organ.payees.take
+      @current_payee = (current_organ_domain && current_organ_domain.payees.take) || current_organ.payees.take
       logger.debug "\e[35m  Current Payee: #{@current_payee&.id}  \e[0m"
       @current_payee
     end
