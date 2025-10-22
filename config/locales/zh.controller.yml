@@ -153,6 +153,8 @@ zh:
       platform_templates:
         index:
           title: 小程序模版
+        sync:
+          title: 同步模板
       providers:
         index:
           title: 企业微信服务商
