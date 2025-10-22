@@ -72,7 +72,8 @@ module Wechat
         action: action,
         requestdomain: [
           URI::HTTPS.build(host: computed_webview_domain).to_s,
-          URI::HTTPS.build(host: domain).to_s
+          URI::HTTPS.build(host: domain).to_s,
+          URI::HTTPS.build(host: Rails.application.routes.default_url_options[:host]).to_s
         ],
         wsrequestdomain: [URI::WSS.build(host: domain).to_s],
         uploaddomain: [URI::HTTPS.build(host: domain).to_s],
