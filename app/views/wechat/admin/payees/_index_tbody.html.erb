@@ -1,30 +1,3 @@
 <td><%= model.name %></td>
 <td><%= model.type_i18n %></td>
 <td><%= model.mch_id %></td>
-<td>
-  <div data-show-target="item" class="visibility-hidden">
-    <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-borderless') do %>
-      <%= svg_tag 'eye', class: 'icon text-info' %>
-    <% end %>
-    <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
-      <%= svg_tag 'pencil', class: 'icon text-link' %>
-    <% end %>
-    <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, form: { data: { turbo_confirm: t('.destroy.confirm') } }, class: 'button is-small is-borderless') do %>
-      <%= svg_tag 'trash', class: 'icon text-danger' %>
-    <% end %>
-  </div>
-  <div data-show-target="item" class="visibility-hidden">
-    <%= link_to({ controller: 'payee_apps', payee_id: model.id }, class: 'button is-small is-borderless') do %>
-      <%= svg_tag 'amazon-pay', kind: 'brands' %>
-      <span class="ml-1"><%= t('.payee_apps.index.title') %></span>
-    <% end %>
-    <%= link_to({ controller: 'payee_domains', payee_id: model.id }, class: 'button is-small is-borderless') do %>
-      <%= svg_tag 'globe' %>
-      <span class="ml-1"><%= t('.payee_domains.index.title') %></span>
-    <% end %>
-    <%= button_to({ action: 'edit_cert', id: model.id }, class: 'button is-small is-borderless') do %>
-      <%= svg_tag 'certificate' %>
-      <span class="ml-1"><%= t('.edit_cert.title') %></span>
-    <% end %>
-  </div>
-</td>
