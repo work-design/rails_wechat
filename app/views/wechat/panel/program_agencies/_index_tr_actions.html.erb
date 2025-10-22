@@ -1,26 +1,28 @@
-<div data-show-target="item" class="visibility-hidden">
-  <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-borderless') do %>
-    <%= svg_tag 'eye', class: 'icon text-info' %>
-  <% end %>
-  <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
-    <%= svg_tag 'pencil', class: 'icon text-link' %>
-  <% end %>
-</div>
-<div data-show-target="item" class="visibility-hidden">
-  <%= link_to({ controller: 'scenes', app_id: model.id }, class: 'button is-small is-borderless') do %>
-    <%= svg_tag 'qrcode' %>
-    <span class="ml-1"><%= t('.scenes.index.title') %></span>
-  <% end %>
-  <%= button_to({ action: 'qrcode', id: model.id }, class: 'button is-small is-borderless') do %>
-    <%= svg_tag 'qrcode' %>
-    <span class="ml-1"><%= t('.program_agencies.qrcode.title') %></span>
-  <% end if model.is_a?(Wechat::ProgramAgency) %>
-  <%= button_to({ action: 'templates', id: model.id }, class: 'button is-small is-borderless') do %>
-    <%= svg_tag 'paperclip' %>
-    <span class="ml-1"><%= t('.program_agencies.templates.title') %></span>
-  <% end %>
-  <%= button_to({ controller: 'agencies', action: 'organ', id: model.id }, class: 'button is-small is-borderless') do %>
-    <%= svg_tag 'building' %>
-    <span class="ml-1"><%= t('.agencies.organ.title') %></span>
-  <% end %>
-</div>
+<td>
+  <div data-show-target="item" class="visibility-hidden">
+    <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'eye', class: 'icon text-info' %>
+    <% end %>
+    <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'pencil', class: 'icon text-link' %>
+    <% end %>
+  </div>
+  <div data-show-target="item" class="visibility-hidden">
+    <%= link_to({ controller: 'scenes', app_id: model.id }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'qrcode' %>
+      <span class="ml-1"><%= t('.scenes.index.title') %></span>
+    <% end %>
+    <%= button_to({ action: 'qrcode', id: model.id }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'qrcode' %>
+      <span class="ml-1"><%= t('.program_agencies.qrcode.title') %></span>
+    <% end if model.is_a?(Wechat::ProgramAgency) %>
+    <%= button_to({ action: 'templates', id: model.id }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'paperclip' %>
+      <span class="ml-1"><%= t('.program_agencies.templates.title') %></span>
+    <% end %>
+    <%= button_to({ controller: 'agencies', action: 'organ', id: model.id }, class: 'button is-small is-borderless') do %>
+      <%= svg_tag 'building' %>
+      <span class="ml-1"><%= t('.agencies.organ.title') %></span>
+    <% end %>
+  </div>
+</td>
