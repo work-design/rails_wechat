@@ -154,10 +154,7 @@ module Wechat
           session_id = body.delete_prefix('session_')
           SessionChannel.broadcast_to(
             session_id,
-            url: Rails.application.routes.url_for(
-              controller: 'home',
-              auth_token: wechat_user.auth_token
-            )
+            url: Rails.application.routes.url_for(controller: 'home', auth_token: wechat_user.auth_token)
           )
         end
         build_text_reply(value: '登录成功！')
@@ -165,7 +162,7 @@ module Wechat
         reply_params(
           title: '您好，点击链接授权登录',
           description: '点击授权',
-          url: app.oauth2_url(state: scene.state_uuid, controller: 'wechat/apps', action: 'scan_login')
+          url: app.oauth2_url(controller: 'wechat/apps', action: 'scan_login', state: scene.state_uuid)
         )
       end
     end
