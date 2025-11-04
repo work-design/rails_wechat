@@ -2,10 +2,6 @@ module Wechat
   module Model::Reply::TextReply
     extend ActiveSupport::Concern
 
-    included do
-      after_create_commit :msg_send, :add_to_log
-    end
-
     def msg_type
       'text'
     end
