@@ -12,7 +12,7 @@ module Wechat
       if provider_app
         scene = provider_app.scenes.find_or_initialize_by(match_value: "session_#{session_id}")
         scene.expire_seconds = 600 # 默认 600 秒有效
-        scene.check_refresh(true)
+        scene.check_refresh
         scene.aim = 'login'
         scene.state_uuid = params[:state] if params[:state].present?
         scene.save

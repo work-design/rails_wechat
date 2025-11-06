@@ -21,7 +21,7 @@ module Wechat
       @scene = current_oauth_app.scenes.find_by(match_value: "session_#{session.id}")
 
       if @scene
-        @scene.check_refresh
+        @scene.check_refresh(Time.current + 4)
         @scene.state_uuid = params[:state].presence || state_enter(destroyable: false, state_controller: 'home', state_action: 'index').id
         @scene.save
       end

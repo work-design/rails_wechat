@@ -152,9 +152,9 @@ module Wechat
       SceneCleanJob.set(wait_until: expire_at).perform_later(self)
     end
 
-    def check_refresh(now = false)
-      if expired? || now
-        self.expire_at = Time.current + expire_seconds
+    def check_refresh(time: Time.current, force: false)
+      if expired?(time) || force
+        self.expire_at = time + expire_seconds
       end
     end
 

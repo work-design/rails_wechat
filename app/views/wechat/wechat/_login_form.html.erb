@@ -11,6 +11,7 @@
   id="login_count_down"
   data-controller="count-down"
   data-count-down-reload-value="true"
+  data-count-down-base-value="3"
   class="<%= @scene.present? ? 'display-block text-centered' : 'display-none text-centered' %>"
 >
   <span data-count-down-target="count"><%= @scene&.remaining_seconds %></span>
