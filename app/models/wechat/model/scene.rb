@@ -129,7 +129,6 @@ module Wechat
 
     def get_program_qrcode
       if expire_seconds
-        self.expire_at = Time.current + expire_seconds
         expire = { is_expire: true, expire_type: 0, expire_time: expire_at.to_i }
       else
         expire = { is_expire: false }
@@ -153,7 +152,7 @@ module Wechat
     end
 
     def check_refresh(now: Time.current, force: false)
-      if expired?(now) || force
+      if expired?(now) || force || expire_at.blank?
         self.expire_at = now + expire_seconds
       end
     end
