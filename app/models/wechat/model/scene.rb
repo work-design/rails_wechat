@@ -140,8 +140,8 @@ module Wechat
       r
     end
 
-    def expired?(time = Time.current)
-      expire_at && expire_at < time
+    def expired?(now = Time.current)
+      expire_at && expire_at < now
     end
 
     def remaining_seconds(now = Time.current)
@@ -152,9 +152,9 @@ module Wechat
       SceneCleanJob.set(wait_until: expire_at).perform_later(self)
     end
 
-    def check_refresh(time: Time.current, force: false)
-      if expired?(time) || force
-        self.expire_at = time + expire_seconds
+    def check_refresh(now: Time.current, force: false)
+      if expired?(now) || force
+        self.expire_at = now + expire_seconds
       end
     end
 
