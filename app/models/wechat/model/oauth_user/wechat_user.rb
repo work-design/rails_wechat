@@ -70,7 +70,7 @@ module Wechat
         state.update destroyable: true
         session.update session_id: "#{state.session_id}_#{state_id}"
 
-        SessionChannel.broadcast_to(
+        SessionLoginChannel.broadcast_to(
           state.session_id,
           url: state.url(auth_token: auth_token)
         )

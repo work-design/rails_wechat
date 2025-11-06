@@ -152,7 +152,7 @@ module Wechat
           wechat_user.login!(scene.state_uuid)
         else
           session_id = body.delete_prefix('session_')
-          SessionChannel.broadcast_to(
+          SessionLoginChannel.broadcast_to(
             session_id,
             url: Rails.application.routes.url_for(controller: 'home', auth_token: wechat_user.auth_token)
           )

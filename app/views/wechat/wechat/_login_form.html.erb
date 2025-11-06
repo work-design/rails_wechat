@@ -1,9 +1,9 @@
 <h1 class="title is-3 text-centered text-primary mb-4">微信登陆</h1>
 <figure class="text-centered">
   <% if @scene %>
-    <%= image_tag @scene.qrcode_data_url, id: 'login_qrcode' %>
+    <%= image_tag @scene.qrcode_data_url, data: { controller: 'session-login-channel' }, id: 'login_qrcode' %>
   <% else %>
-    <%= image_tag svg_data_url('placeholder.svg'), id: 'login_qrcode' %>
+    <%= image_tag svg_data_url('placeholder.svg'), data: { controller: 'session-channel' }, id: 'login_qrcode' %>
   <% end %>
   <figcaption>请使用微信扫描二维码登录</figcaption>
 </figure>
