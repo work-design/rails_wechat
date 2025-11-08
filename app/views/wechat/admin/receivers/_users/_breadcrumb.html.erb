@@ -1,10 +1,6 @@
-<div class="breadcrumb has-succeeds-separator">
-  <ul>
-    <li><%= link_to t('wechat.admin.apps.index.title'), { controller: 'apps', anchor: "tr_#{@app.id}" } %></li>
-    <li><span class="px-3"><%= @app.type_i18n %></span></li>
-    <li><span class="px-3"><%= @app.name %></span></li>
-    <li><%= link_to t('wechat.admin.payee_apps.index.title'), { controller: 'payee_apps', anchor: "tr_#{@payee_app.id}" } %></li>
-    <li><span class="px-3"><%= @payee_app.payee.name %></span></li>
-    <li class="is-active"><%= t('.title') %></li>
-  </ul>
-</div>
+<li><%= link_to t('wechat.admin.apps.index.title'), { controller: 'apps', anchor: "tr_#{@app.id}" } %></li>
+<li><span class="px-3"><%= @app.type_i18n %></span></li>
+<li><span class="px-3"><%= @app.name %></span></li>
+<li><%= link_to t('wechat.admin.payee_apps.index.title'), { controller: 'payee_apps', anchor: "tr_#{@payee_app.id}" } %></li>
+<li><span class="px-3"><%= @payee_app.payee.name %></span></li>
+<li class="is-active"><%= t('.title') %></li>

@@ -1,9 +1,5 @@
-<div class="breadcrumb has-succeeds-separator">
-  <ul>
-    <li><%= link_to t('wechat.admin.agents.index.title'), { controller: 'agents' } %></li>
-    <li><span class="px-3"><%= @corp_user.agent.name %></span></li>
-    <li><%= link_to t('wechat.admin.corp_users.index.title'), { controller: 'corp_users', anchor: "tr_#{@corp_user.id}" } %></li>
-    <li><span class="px-3"><%= @corp_user.userid %></span></li>
-    <li class="is-active"><%= t('.title') %></li>
-  </ul>
-</div>
+<li><%= link_to t('wechat.admin.agents.index.title'), { controller: 'agents' } %></li>
+<li><span class="px-3"><%= @corp_user.agent.name %></span></li>
+<li><%= link_to t('wechat.admin.corp_users.index.title'), { controller: 'corp_users', anchor: "tr_#{@corp_user.id}" } %></li>
+<li><span class="px-3"><%= @corp_user.userid %></span></li>
+<li class="is-active"><%= t('.title') %></li>
