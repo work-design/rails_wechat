@@ -10,15 +10,13 @@
 <td>
 <% app_menu = @scene.menu_apps.find(&->(i){ i.menu_id == model.id }) %>
 <% if app_menu %>
-  <%= form_with theme: nil, url: { action: 'destroy', id: app_menu.id }, method: :delete, data: { controller: 'input' } do |f| %>
-    <%= f.check_box :disabled, checked: true, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
-    <label data-action="click->input#check"></label>
+  <%= form_with theme: 'switch', url: { action: 'destroy', id: app_menu.id }, method: :delete, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :disabled, checked: true, data: { action: 'input#submit' }, id: nil %>
   <% end %>
 <% else %>
-  <%= form_with theme: nil, scope: :app_menu, url: { action: 'create' }, data: { controller: 'input' } do |f| %>
+  <%= form_with theme: 'switch', scope: :app_menu, url: { action: 'create' }, data: { controller: 'input' } do |f| %>
     <%= f.hidden_field :menu_id, value: model.id %>
-    <%= f.check_box :disabled, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
-    <label data-action="click->input#check"></label>
+    <%= f.check_box :disabled, data: { action: 'input#submit' }, id: nil %>
   <% end %>
 <% end %>
 </td>

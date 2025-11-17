@@ -20,9 +20,8 @@
   <p><%= model.identity %></p>
 </td>
 <td>
-  <%= form_with theme: nil, model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
-    <%= f.check_box :auto_reply, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
-    <label data-action="click->input#check"></label>
+  <%= form_with theme: 'switch', model: model, url: { action: 'update', id: model.id }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :auto_reply, data: { action: 'input#submit' }, id: nil %>
   <% end %>
 </td>
 <td>

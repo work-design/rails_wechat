@@ -5,9 +5,8 @@
 <div>
   <dt><%= Wechat::Response.human_attribute_name(:contain) %></dt>
   <dd>
-    <%= form_with theme: nil, model: @response, url: { action: 'update' }, data: { controller: 'input' } do |f| %>
-      <%= f.check_box :contain, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
-      <label data-action="click->input#check"></label>
+    <%= form_with theme: 'switch', model: @response, url: { action: 'update' }, data: { controller: 'input' } do |f| %>
+      <%= f.check_box :contain, data: { action: 'input#submit' }, id: nil %>
     <% end %>
   </dd>
 </div>

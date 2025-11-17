@@ -10,9 +10,8 @@
   <p class="text-grey"><p><%= model.example %></p></p>
 </td>
 <td>
-  <%= form_with theme: nil, model: model, url: { action: 'destroy', id: model.id }, method: :delete, data: { controller: 'input' } do |f| %>
-    <%= f.check_box '', checked: true, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
-    <label data-action="click->input#check"></label>
+  <%= form_with theme: 'switch', model: model, url: { action: 'destroy', id: model.id }, method: :delete, data: { controller: 'input' } do |f| %>
+    <%= f.check_box '', checked: true, data: { action: 'input#submit' }, id: nil %>
   <% end %>
 </td>
 <td>

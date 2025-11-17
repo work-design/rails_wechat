@@ -6,15 +6,13 @@
   <p><%= model.appid %></p>
 </td>
 <td>
-  <%= form_with theme: nil, model: model, scope: :app, url: { action: 'update', appid: model.appid }, data: { controller: 'input' } do |f| %>
-    <%= f.check_box :encrypt_mode, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
-    <label data-action="click->input#check"></label>
+  <%= form_with theme: 'switch', model: model, scope: :app, url: { action: 'update', appid: model.appid }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :encrypt_mode, data: { action: 'input#submit' }, id: nil %>
   <% end %>
 </td>
 <td>
-  <%= form_with theme: nil, model: model, scope: :app, url: { action: 'update', appid: model.appid }, data: { controller: 'input' } do |f| %>
-    <%= f.check_box :enabled, data: { input_target: 'checkbox' }, id: nil, class: 'switch is-rounded' %>
-    <label data-action="click->input#check"></label>
+  <%= form_with theme: 'switch', model: model, scope: :app, url: { action: 'update', appid: model.appid }, data: { controller: 'input' } do |f| %>
+    <%= f.check_box :enabled, data: { action: 'input#submit' }, id: nil %>
   <% end %>
 </td>
 <td>
