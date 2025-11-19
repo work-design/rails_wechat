@@ -68,10 +68,11 @@ module Wechat
     end
 
     def set_domain(action: 'set')
+      domain = organ.host
+
       h = {
         action: action,
         requestdomain: [
-          URI::HTTPS.build(host: computed_webview_domain).to_s,
           URI::HTTPS.build(host: domain).to_s,
           URI::HTTPS.build(host: Rails.application.routes.default_url_options[:host]).to_s
         ],
