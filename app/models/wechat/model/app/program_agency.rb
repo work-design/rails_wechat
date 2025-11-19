@@ -68,22 +68,20 @@ module Wechat
     end
 
     def set_domain(action: 'set')
-      domain = organ.host
-
       h = {
         action: action,
         requestdomain: [
-          URI::HTTPS.build(host: domain).to_s,
+          URI::HTTPS.build(host: organ_domain).to_s,
           URI::HTTPS.build(host: Rails.application.routes.default_url_options[:host]).to_s
         ],
-        wsrequestdomain: [URI::WSS.build(host: domain).to_s],
-        uploaddomain: [URI::HTTPS.build(host: domain).to_s],
+        wsrequestdomain: [URI::WSS.build(host: organ_domain).to_s],
+        uploaddomain: [URI::HTTPS.build(host: organ_domain).to_s],
         downloaddomain: [
-          URI::HTTPS.build(host: domain).to_s,
+          URI::HTTPS.build(host: organ_domain).to_s,
           URI::HTTPS.build(host: ENV['HOST']).to_s
         ],
-        udpdomain: [URI::Generic.build(host: domain, scheme: 'udp').to_s],
-        tcpdomain: [URI::Generic.build(host: domain, scheme: 'tcp').to_s]
+        udpdomain: [URI::Generic.build(host: organ_domain, scheme: 'udp').to_s],
+        tcpdomain: [URI::Generic.build(host: organ_domain, scheme: 'tcp').to_s]
       }
       api.modify_domain_directly(**h)
       api.modify_domain(**h)
@@ -93,12 +91,17 @@ module Wechat
       {
         extAppid: appid,
         ext: {
-          host: URI::HTTPS.build(host: domain).to_s,
-          auth_host: URI::HTTPS.build(host: domain).to_s,
+          host: URI::HTTPS.build(host: organ_domain).to_s,
+          auth_host: URI::HTTPS.build(host: organ_domain).to_s,
           webview_host: URI::HTTPS.build(host: computed_webview_domain).to_s,
           path: mp_domain&.redirect_path.presence || organ.redirect_path
         }
       }
+    end
+
+    def organ_domain
+      return @organ_domain if defined? @organ_domain
+      @organ_domain = organ.host
     end
 
     def commit(platform_template_id)
