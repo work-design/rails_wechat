@@ -24,8 +24,7 @@ module Wechat
     end
 
     def commit
-      platform_template = @platform.platform_templates.find params[:platform_template_id]
-      @program_agency.commit(platform_template)
+      @program_agency.commit(params[:platform_template_id])
     end
 
     def qrcode

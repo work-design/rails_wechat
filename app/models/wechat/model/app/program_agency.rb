@@ -100,7 +100,8 @@ module Wechat
       }
     end
 
-    def commit(platform_template)
+    def commit(platform_template_id)
+      platform_template = PlatformTemplate.find platform_template_id
       r = api.commit(
         template_id: platform_template.template_id,
         user_version: platform_template.user_version,
