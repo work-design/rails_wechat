@@ -29,7 +29,7 @@ module Wechat
 
       belongs_to :receive
       belongs_to :platform, optional: true
-      has_one :wechat_user, foreign_key: :uid, primary_key: :open_id, optional: true
+      has_one :wechat_user, foreign_key: :uid, primary_key: :open_id
       belongs_to :corp_user, ->(o) { where(corp_id: o.appid) }, foreign_key: :userid, primary_key: :user_id, optional: true
       belongs_to :app, foreign_key: :appid, primary_key: :appid, optional: true
 
