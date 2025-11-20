@@ -91,6 +91,10 @@ module Wechat
       after_save_commit :sync_to_storage, if: -> { saved_change_to_qrcode_url? }
     end
 
+    def name_with_type
+      "#{name}（#{type_i18n}）"
+    end
+
     def init_token
       self.token = SecureRandom.hex
     end
