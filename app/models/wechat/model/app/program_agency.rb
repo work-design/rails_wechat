@@ -67,13 +67,14 @@ module Wechat
       end
     end
 
-    def set_domain(action: 'set')
+    def set_domain(action: 'set', extra: [])
       h = {
         action: action,
         requestdomain: [
           URI::HTTPS.build(host: organ_domain).to_s,
           URI::HTTPS.build(host: "*.org.#{Rails.application.routes.default_url_options[:host]}").to_s,
-          URI::HTTPS.build(host: Rails.application.routes.default_url_options[:host]).to_s
+          URI::HTTPS.build(host: Rails.application.routes.default_url_options[:host]).to_s,
+          *extra
         ],
         wsrequestdomain: [URI::WSS.build(host: organ_domain).to_s],
         uploaddomain: [URI::HTTPS.build(host: organ_domain).to_s],
