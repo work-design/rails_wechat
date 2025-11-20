@@ -4,6 +4,7 @@
     <span class="size-7 text-grey">（包含银行卡号等）</span>
   </div>
   <%= render partial: 'com/attachments/list_edit', locals: { target: f.object.bank_card, f: f } %>
+  <%= f.text_field :bank_name %>
   <%= f.text_field :bank_number %>
   <%= f.submit %>
 <% end %>

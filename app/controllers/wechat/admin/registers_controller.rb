@@ -24,7 +24,11 @@ module Wechat
         :id_number,
         :mobile,
         :mobile_code,
-        :license
+        :license,
+        :id_avatar,
+        :id_badge,
+        :bank_name,
+        :bank_number
       )
       p.merge! default_form_params
     end

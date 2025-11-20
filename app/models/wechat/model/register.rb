@@ -15,6 +15,7 @@ module Wechat
       attribute :organ_name, :string
       attribute :organ_code, :string
       attribute :bank_number, :string
+      attribute :bank_name, :string
 
       belongs_to :user, optional: true
       belongs_to :organ, class_name: 'Wechat::Organ', optional: true

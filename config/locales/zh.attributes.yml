@@ -28,6 +28,7 @@ zh:
         qrcode: 关注二维码
         state: 状态
         email: 登陆邮箱
+        bank_name: 开户行
         bank_number: 银行卡号
       wechat/request:
         wechat_user_id: 微信用户

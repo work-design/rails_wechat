@@ -2,3 +2,11 @@
   <%= render partial: 'com/attachments/list_edit', locals: { target: f.object.license, f: f } %>
   <%= f.submit %>
 <% end %>
+
+<% if @register.license.attached? %>
+  <div class="flex-grow-1 has-column-centered">
+    <%= link_to({ action: 'edit_id' }, class: 'button is-fullwidth is-primary') do %>
+      <span><%= t('.edit_id.title') %></span>
+    <% end %>
+  </div>
+<% end %>
