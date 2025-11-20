@@ -72,6 +72,7 @@ module Wechat
         action: action,
         requestdomain: [
           URI::HTTPS.build(host: organ_domain).to_s,
+          URI::HTTPS.build(host: "org.#{Rails.application.routes.default_url_options[:host]}").to_s,
           URI::HTTPS.build(host: Rails.application.routes.default_url_options[:host]).to_s
         ],
         wsrequestdomain: [URI::WSS.build(host: organ_domain).to_s],
