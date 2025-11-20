@@ -25,7 +25,11 @@ module Wechat
     end
 
     def set_apps
-      @apps = App.where(organ_id: [@payee.organ_id, @payee.organ.provider_id]).where.not(appid: @payee.payee_apps.pluck(:appid))
+      organ_ids = [@payee.organ_id]
+      organ_ids << @payee.organ.provider_id if @payee.organ
+      organ_ids.compact!
+
+      @apps = App.where(organ_id: organ_ids).where.not(appid: @payee.payee_apps.pluck(:appid))
     end
 
     def payee_app_params

@@ -19,12 +19,12 @@
       <span class="pl-1"><%= t('.payee_apps.index.title') %></span>
     <% end %>
     <%= link_to({ controller: 'payee_domains', partner_payee_id: model.id }, class: 'button is-small is-borderless') do %>
-      <i class="fa-solid fa-globe"></i>
-      <span class="pl-1"><%= t('.payee_domains.index.title') %></span>
+      <%= svg_tag 'globe' %>
+      <span><%= t('.payee_domains.index.title') %></span>
     <% end %>
     <%= button_to({ action: 'organ', id: model.id }, class: 'button is-small is-borderless') do %>
-      <i class="fa-solid fa-building text-link"></i>
-      <span class="pl-1"><%= t('.organ.title') %></span>
+      <%= svg_tag 'building' %>
+      <span><%= t('.organ.title') %></span>
     <% end %>
   </div>
 </td>
