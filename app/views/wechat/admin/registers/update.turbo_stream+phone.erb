@@ -1,10 +1,10 @@
-<% if @register.license.blank? %>
+<% if @register.column_needed?(:license) %>
   <%= render partial: 'visit', locals: { url: url_for(action: 'edit_license') } %>
-<% elsif @register.id_needed? %>
+<% elsif @register.column_needed?(:license, [:id_avatar, :id_badge]) %>
   <%= render partial: 'visit', locals: { url: url_for(action: 'edit_id') } %>
-<% elsif @register.all_had? && @register.need_bank? %>
+<% elsif @register.column_needed?(:license, [:id_avatar, :id_badge], [:bank_name, :bank_number]) %>
   <%= render partial: 'visit', locals: { url: url_for(action: 'edit_bank') } %>
-<% elsif @register.need_contact? %>
+<% elsif @register.column_needed?(:license, [:id_avatar, :id_badge], [:bank_name, :bank_number], [:mobile, :email]) %>
   <%= render partial: 'visit', locals: { url: url_for(action: 'edit_contact') } %>
 <% else %>
   <%= render partial: 'visit', locals: { url: url_for(action: 'show') } %>
