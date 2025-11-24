@@ -45,4 +45,15 @@
       <%= svg_tag 'chevron-right' %>
     </div>
   <% end %>
+  <%= link_to({ action: 'edit_contact' }, skip: !@register.need_contact?, class: 'media as-list') do %>
+    <div class="media-left">
+      <%= svg_tag 'circle-4' %>
+    </div>
+    <div class="media-content">
+      <span>邮箱/手机号</span>
+    </div>
+    <div class="media-right text-grey">
+      <%= svg_tag 'chevron-right' %>
+    </div>
+  <% end %>
 </div>
