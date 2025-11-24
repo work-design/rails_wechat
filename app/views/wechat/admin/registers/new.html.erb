@@ -48,7 +48,7 @@
       </div>
     </div>
   <% end %>
-  <% if @register.id_avatar.attached? && @register.id_badge.attached? %>
+  <% if @register.need_bank? %>
     <%= link_to({ action: 'edit_bank' }, class: 'media as-list') do %>
       <div class="media-left">
         <%= svg_tag 'circle-3' %>

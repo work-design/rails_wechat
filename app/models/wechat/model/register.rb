@@ -5,6 +5,7 @@ module Wechat
     included do
       attribute :id_name, :string
       attribute :id_number, :string
+      attribute :email, :string
       attribute :email_code, :string
       attribute :state, :string, default: 'init'
       attribute :appid, :string
@@ -45,6 +46,22 @@ module Wechat
 
     def init_password
       self.password = SecureRandom.urlsafe_base64
+    end
+
+    def id_needed?
+      license.attached? && (id_avatar.blank? || id_badge.blank?)
+    end
+
+    def all_had?
+      license.attached? && id_avatar.attached? && id_badge.attached?
+    end
+
+    def need_bank?
+      bank_number.blank? || bank_name.blank?
+    end
+
+    def need_contact?
+      all_had? && bank_number.present? && bank_name.present? && (email.blank? || mobile.blank?)
     end
 
     def time

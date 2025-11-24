@@ -290,6 +290,7 @@ Rails.application.routes.draw do
           get :edit_license
           get :edit_id
           get :edit_bank
+          get :edit_contact
         end
       end
       resources :apps, param: :appid do
