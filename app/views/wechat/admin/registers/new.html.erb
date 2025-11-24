@@ -23,32 +23,18 @@
       <%= svg_tag 'chevron-right' %>
     </div>
   <% end %>
-  <% if @register.license.attached? %>
-    <%= link_to({ action: 'edit_id' }, class: 'media as-list') do %>
-      <div class="media-left">
-        <%= svg_tag 'circle-2' %>
-      </div>
-      <div class="media-content">
-        <span>经营者证件</span>
-      </div>
-      <div class="media-right text-grey">
-        <%= svg_tag 'chevron-right' %>
-      </div>
-    <% end %>
-  <% else %>
-    <div class="media as-list">
-      <div class="media-left">
-        <%= svg_tag 'circle-2' %>
-      </div>
-      <div class="media-content">
-        <span>经营者证件</span>
-      </div>
-      <div class="media-right text-grey">
-        <%= svg_tag 'chevron-right' %>
-      </div>
+
+  <%= link_to({ action: 'edit_id' }, skip: !@register.all_had?, class: 'media as-list') do %>
+    <div class="media-left">
+      <%= svg_tag 'circle-2' %>
+    </div>
+    <div class="media-content">
+      <span>经营者证件</span>
+    </div>
+    <div class="media-right text-grey">
+      <%= svg_tag 'chevron-right' %>
     </div>
   <% end %>
- 
   <%= link_to({ action: 'edit_bank' }, skip: !@register.need_bank?, class: 'media as-list') do %>
     <div class="media-left">
       <%= svg_tag 'circle-3' %>
