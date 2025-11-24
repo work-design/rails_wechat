@@ -23,7 +23,7 @@
       <%= svg_tag 'chevron-right' %>
     </div>
   <% end %>
-  <%= link_to({ action: 'edit_id' }, skip: @register.column_had?(:license), class: 'media as-list') do %>
+  <%= link_to({ action: 'edit_id' }, skip: @register.column_needed?(:license), class: 'media as-list') do %>
     <div class="media-left">
       <%= svg_tag 'circle-2' %>
     </div>
@@ -34,7 +34,7 @@
       <%= svg_tag 'chevron-right' %>
     </div>
   <% end %>
-  <%= link_to({ action: 'edit_bank' }, skip: @register.column_had?(:license, :id_avatar, :id_badge), class: 'media as-list') do %>
+  <%= link_to({ action: 'edit_bank' }, skip: @register.column_needed?(:license, :id_avatar, :id_badge), class: 'media as-list') do %>
     <div class="media-left">
       <%= svg_tag 'circle-3' %>
     </div>
@@ -45,7 +45,7 @@
       <%= svg_tag 'chevron-right' %>
     </div>
   <% end %>
-  <%= link_to({ action: 'edit_contact' }, skip: @register.column_had?(:license, :id_avatar, :id_badge, :bank_name, :bank_number), class: 'media as-list') do %>
+  <%= link_to({ action: 'edit_contact' }, skip: @register.column_needed?(:license, :id_avatar, :id_badge, :bank_name, :bank_number), class: 'media as-list') do %>
     <div class="media-left">
       <%= svg_tag 'circle-4' %>
     </div>
