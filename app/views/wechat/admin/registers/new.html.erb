@@ -48,29 +48,16 @@
       </div>
     </div>
   <% end %>
-  <% if @register.need_bank? %>
-    <%= link_to({ action: 'edit_bank' }, class: 'media as-list') do %>
-      <div class="media-left">
-        <%= svg_tag 'circle-3' %>
-      </div>
-      <div class="media-content">
-        <span>法人银行卡/对公账户</span>
-      </div>
-      <div class="media-right text-grey">
-        <%= svg_tag 'chevron-right' %>
-      </div>
-    <% end %>
-  <% else %>
-    <div class="media as-list">
-      <div class="media-left">
-        <%= svg_tag 'circle-3' %>
-      </div>
-      <div class="media-content">
-        <span>法人银行卡/对公账户</span>
-      </div>
-      <div class="media-right text-grey">
-        <%= svg_tag 'chevron-right' %>
-      </div>
+ 
+  <%= link_to({ action: 'edit_bank' }, skip: !@register.need_bank?, class: 'media as-list') do %>
+    <div class="media-left">
+      <%= svg_tag 'circle-3' %>
+    </div>
+    <div class="media-content">
+      <span>法人银行卡/对公账户</span>
+    </div>
+    <div class="media-right text-grey">
+      <%= svg_tag 'chevron-right' %>
     </div>
   <% end %>
 </div>
