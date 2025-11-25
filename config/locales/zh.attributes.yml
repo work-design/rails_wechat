@@ -20,6 +20,9 @@ zh:
       wechat/register:
         id_name: 真实姓名
         id_number: 身份证号
+        license: 营业执照
+        id_avatar: 身份证人像面
+        id_badge: 身份证国徽面
         verify_status: 验证结果
         email_code: 邮件验证码
         mobile: 手机号
