@@ -1,28 +1,28 @@
 <div>
   <dt><%= Wechat::Register.human_attribute_name(:license) %></dt>
-  <dd><%= image_tag model.license, class: 'image is-64x64' %></dd>
+  <dd><%= image_tag @register.license, class: 'image is-64x64' %></dd>
 </div>
 <div>
   <dt><%= Wechat::Register.human_attribute_name(:id_avatar) %></dt>
-  <dd><%= image_tag model.id_avatar, class: 'image is-64x64' %></dd>
+  <dd><%= image_tag @register.id_avatar, class: 'image is-64x64' %></dd>
 </div>
 <div>
   <dt><%= Wechat::Register.human_attribute_name(:id_badge) %></dt>
-  <dd><%= image_tag model.id_badge, class: 'image is-64x64' %></dd>
+  <dd><%= image_tag @register.id_badge, class: 'image is-64x64' %></dd>
 </div>
 <div>
   <dt><%= Wechat::Register.human_attribute_name(:bank_name) %></dt>
-  <dd><%= model.bank_name %></dd>
+  <dd><%= @register.bank_name %></dd>
 </div>
 <div>
   <dt><%= Wechat::Register.human_attribute_name(:bank_number) %></dt>
-  <dd><%= model.bank_number %></dd>
+  <dd><%= @register.bank_number %></dd>
 </div>
 <div>
   <dt><%= Wechat::Register.human_attribute_name(:mobile) %></dt>
-  <dd><%= model.mobile %></dd>
+  <dd><%= @register.mobile %></dd>
 </div>
 <div>
   <dt><%= Wechat::Register.human_attribute_name(:email) %></dt>
-  <dd><%= model.email %></dd>
+  <dd><%= @register.email %></dd>
 </div>
