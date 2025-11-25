@@ -23,7 +23,7 @@ module Wechat
         :id_name,
         :id_number,
         :mobile,
-        :mobile_code,
+        :email,
         :license,
         :id_avatar,
         :id_badge,
