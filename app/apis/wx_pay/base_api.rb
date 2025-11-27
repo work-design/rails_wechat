@@ -11,7 +11,8 @@ module WxPay
           verify_mode: OpenSSL::SSL::VERIFY_NONE
         },
         headers: {
-          'Accept' => 'application/json'
+          'Accept' => 'application/json',
+          'Accept-Encoding' => 'identity'
         }
       )
     end
