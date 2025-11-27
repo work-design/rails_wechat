@@ -28,7 +28,7 @@ module WxPay
 
     def post(path, origin: nil, params: {}, headers: {}, debug: nil, **payload)
       with_options = { origin: origin }
-      with_options.merge! debug: Rails.logger.instance_values['logdev'].dev, debug_level: 2 if debug
+      with_options.merge! debug: STDERR, debug_level: 2 if debug
 
       with_common_headers('POST', path, params: payload, headers: headers) do |signed_headers|
         response = @client.with_headers(signed_headers).with(with_options).post(path, params: params, json: payload)
