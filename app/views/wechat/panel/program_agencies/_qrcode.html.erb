@@ -1,4 +1,4 @@
-<%= render layout: 'show_layout' do %>
+<%= render layout: 'show_layout', locals: { model: @program_agency } do %>
   <tr>
     <td class="text-right"><%= Wechat::Agency.human_attribute_name(:qrcode) %></td>
     <td><%= image_tag @program_agency.qrcode, class: 'image is-128x128' if @program_agency.qrcode.attached? %></td>
